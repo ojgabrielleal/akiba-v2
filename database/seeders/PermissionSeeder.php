@@ -20,16 +20,16 @@ class PermissionSeeder extends Seeder
             | Accessos as páginas Gerais
             |--------------------------------------------------------------------------
             */
-            ['name' => 'dashboard.view', 'label' => 'Acessar página dashboard do painel'],
-            ['name' => 'warning.view', 'label' => 'Acessar página avisos do sistema'],
-            ['name' => 'post.view', 'label' => 'Acessar página matérias do sistema'],
-            ['name' => 'broadcast.view', 'label' => 'Acessar página locução do sistema'],
-            ['name' => 'radio.view', 'label' => 'Acessar página rádio do sistema'],
-            ['name' => 'podcast.view', 'label' => 'Acessar página podcasts do sistema'],
-            ['name' => 'marketing.view', 'label' => 'Acessar página marketing do sistema'],
-            ['name' => 'media.view', 'label' => 'Acessar página mídias do sistema'],
-            ['name' => 'administration.view', 'label' => 'Acessar página administração do sistema'],
-            ['name' => 'log.view', 'label' => 'Acessar página logs do sistema'],
+            ['name' => 'dashboard.view', 'label' => 'Visualizar página dashboard'],
+            ['name' => 'warning.view', 'label' => 'Visualizar página avisos'],
+            ['name' => 'post.view', 'label' => 'Visualizar página matérias'],
+            ['name' => 'broadcast.view', 'label' => 'Visualizar página locução'],
+            ['name' => 'radio.view', 'label' => 'Visualizar página rádio'],
+            ['name' => 'podcast.view', 'label' => 'Visualizar página podcasts'],
+            ['name' => 'marketing.view', 'label' => 'Visualizar página marketing'],
+            ['name' => 'media.view', 'label' => 'Visualizar página mídias'],
+            ['name' => 'administration.view', 'label' => 'Visualizar página administração'],
+            ['name' => 'log.view', 'label' => 'Visualizar página logs'],
             
             /*
             |--------------------------------------------------------------------------
@@ -109,6 +109,14 @@ class PermissionSeeder extends Seeder
             */
             ['name' => 'broadcast.start', 'label' => 'Iniciar programa'],
             ['name' => 'broadcast.finish', 'label' => 'Encerrar programa'],
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Pedidos musicais
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'songrequest.list', 'label' => 'Listas pedidos musicais'],
             ['name' => 'songrequest.reproduce', 'label' => 'Atender pedido musical'],
             ['name' => 'songrequest.cancel', 'label' => 'Cancelar pedido musical'],
             ['name' => 'songrequest.toggle', 'label' => 'Habilitar ou desabilitar pedidos musicais'],
