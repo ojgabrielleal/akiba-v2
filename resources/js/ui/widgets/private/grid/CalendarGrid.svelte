@@ -57,7 +57,7 @@
                             {'bg-purple-mystic': item.type === 'live'},
                             {'bg-red-crimson': item.type === 'video'},
                             {'bg-green-forest': item.type === 'podcast'},
-                            {'bg-neutral-honeycream': item.type === 'activity'},
+                            {'bg-neutral-honeycream': item.has_activity},
                         ]}>
                             <div class="flex events-center">
                                 <div class={["w-full font-noto-sans text-2xl text-center uppercase", 

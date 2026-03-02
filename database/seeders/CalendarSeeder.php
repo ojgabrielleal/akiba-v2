@@ -35,7 +35,6 @@ class CalendarSeeder extends Seeder
                 ->for(User::factory()->create(), 'responsible')
                 ->for($confirmation, 'activity')
                 ->create([
-                    'type' => 'activity',
                     'has_activity' => true,
                 ]);
         }
