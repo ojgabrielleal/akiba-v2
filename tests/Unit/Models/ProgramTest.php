@@ -81,22 +81,4 @@ class ProgramTest extends TestCase
         $this->assertTrue($activePrograms->contains($activeProgram));
         $this->assertFalse($activePrograms->contains($inactiveProgram));
     }
-
-    public function testScopeAllowsAllReturnProgramas(): void
-    {
-        $user = User::factory()->create();
-
-        $allprograms = Program::factory()
-            ->for($user, 'host')
-            ->create(['allows_all' => true]);
-
-        $privateprograms = Program::factory()
-            ->for($user, 'host')
-            ->create(['allows_all' => false]);
-
-        $programs = Program::allowsAll()->get();
-
-        $this->assertTrue($programs->contains($allprograms));
-        $this->assertFalse($programs->contains($privateprograms));
-    }
 }

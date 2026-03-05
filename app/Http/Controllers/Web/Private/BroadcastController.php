@@ -17,7 +17,6 @@ use App\Http\Resources\SongRequestIndexResource;
 
 use App\Services\External\DiscordWebhookService;
 use App\Traits\HasFlashMessages;
-use Illuminate\Support\Facades\Log;
 
 class BroadcastController extends Controller
 {
@@ -37,7 +36,7 @@ class BroadcastController extends Controller
             Program::active()
                 ->where(function ($q) {
                     $q->where('user_id', request()->user()->id)
-                        ->orWhere('allows_all', true);
+                        ->orWhere('type', 'free');
                 })
                 ->get()
         );
@@ -69,7 +68,7 @@ class BroadcastController extends Controller
             'song_requests_total' => false,
         ]);
 
-        if($program->allows_all){
+        if($program->type === 'free'){
             $program->update([
                 'user_id' => request()->user()->id
             ]);

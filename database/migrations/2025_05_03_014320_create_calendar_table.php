@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean('has_activity')->default(false);
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('activity_id')->nullable()->constrained('activities')->cascadeOnDelete();
-            $table->time('time');
+            $table->time('hour');
             $table->date('date');
             $table->enum('type', ['show', 'live', 'video', 'podcast']);
             $table->string('content');

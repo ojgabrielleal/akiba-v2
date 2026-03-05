@@ -18,7 +18,7 @@ class ProgramScheduleFactory extends Factory
     {
         return [
             'day' => fake()->randomElement([0, 1, 2, 3, 4, 5, 6]),
-            'time' => fake()->time(),
+            'hour' => fake()->time(),
         ];
     }
 }

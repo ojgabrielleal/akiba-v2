@@ -80,7 +80,6 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         width: 16.25rem;
-        padding: 0.75rem 2.75rem 0.875rem 1rem;
         font-size: 1rem;
         color: #333;
         border-radius: 0.5rem;
@@ -93,8 +92,6 @@
 
     select:focus {
         outline: none;
-        border-color: #2563eb;
-        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
     }
 
     select:disabled {

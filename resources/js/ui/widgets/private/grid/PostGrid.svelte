@@ -18,10 +18,10 @@
 {#if posts}
     <Section {title}>
         <div class="gap-6 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5">
-            {#if posts.data.length > 0}
+            {#if posts.data.lenght > 0}
                 {#each posts.data as item}
                     {@const showButtonUpdate = permissions.show_button_update || (permissions.show_button_update_own && item.author.uuid === user.uuid)}
-                    <article class={["w-full h-[14rem] rounded-lg p-4 relative", 
+                    <article class={["w-full h-56 rounded-lg p-4 relative", 
                         {'bg-blue-skywave': item.type === 'published'},
                         {'bg-orange-amber': item.type === 'revision'},
                         {'bg-green-forest': item.type === 'draft'},
@@ -47,7 +47,7 @@
                     </article>
                 {/each}
             {:else}
-                <article class="w-full h-[14rem] rounded-lg p-4 relative bg-blue-cerulean opacity-50">
+                <article class="w-full h-56 rounded-lg p-4 relative bg-blue-cerulean opacity-50">
                     <div class="font-noto-sans text-lg text-neutral-aurora line-clamp-5 uppercase">
                         Meu bem esse pessoal da akiba são um bando de preguiçosos! Cade as postagens?
                     </div>

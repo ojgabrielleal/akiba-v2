@@ -1,7 +1,7 @@
 <script>
     import { router, page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";    
-    import { Offcanvas } from "@/ui/components/private";
+    import { Modal } from "@/ui/components/private";
     import { PollsForm } from "@/ui/widgets/private/form"
 
     $: ({ screenPermissions, polls } = $page.props);
@@ -31,7 +31,7 @@
 <Section title="Enquetes">
     {#if screenPermissions.create_poll}
         <div class="flex justify-center">
-            <Offcanvas>
+            <Modal>
                 <div class="cursor-pointer text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber" slot="action" >
                     Criar enquete
                 </div>
@@ -41,7 +41,7 @@
                 <div slot="content" let:close>
                     <PollsForm close={close}/>
                 </div>
-            </Offcanvas>
+            </Modal>
         </div>
     {/if}
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-10">
@@ -84,7 +84,7 @@
                         </button>
                         <div class="flex gap-3">
                             {#if item.actions.edit}
-                                <Offcanvas>
+                                <Modal>
                                     <div aria-label="Editar" class="cursor-pointer" slot="action" >
                                         <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
                                     </div>
@@ -94,7 +94,7 @@
                                     <div slot="content" let:close>
                                         <PollsForm pollId={item.id} close={close}/>
                                     </div>
-                                </Offcanvas>
+                                </Modal>
                             {/if}
                             {#if item.actions.deactivate}
                                 <button on:click={()=>deactivatePoll(item.id)} type="button" class="cursor-pointer" aria-label="Desativar">

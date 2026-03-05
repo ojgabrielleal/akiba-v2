@@ -81,7 +81,7 @@
                             id="name"
                             type="text"
                             name="name"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.name}
                             required
                         />
@@ -94,7 +94,7 @@
                             id="nickname"
                             type="text"
                             name="nickname"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.nickname} 
                             required                       
                         />
@@ -106,7 +106,7 @@
                         <select
                             id="gender"
                             name="gender"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.gender}
                             required
                         >
@@ -122,7 +122,7 @@
                             id="birthday"
                             type="date"
                             name="birthday"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.birthday}
                             required
                         />
@@ -137,7 +137,7 @@
                             id="city"
                             type="text"
                             name="city"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.city}   
                             required                     
                         />
@@ -150,7 +150,7 @@
                             id="state"
                             type="text"
                             name="state"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.state}    
                             required                    
                         />
@@ -163,7 +163,7 @@
                             id="country"
                             type="text"
                             name="country"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             defaultValue="Brasil"
                             bind:value={$form.country}  
                             required                      
@@ -178,7 +178,7 @@
             <select 
                 name="social" 
                 id="social" 
-                class="w-full lg:w-96 h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                class="w-full lg:w-96 h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                 bind:value={selectedNewExternalLink} 
             >
                 {#each socialJson as item}
@@ -199,11 +199,11 @@
                         id={item.name}
                         type="url"
                         name={item.name}
-                        class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4 pr-14"
+                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4 pr-14"
                         bind:value={item.url}
                         required
                     />
-                    <button on:click={() => removeExternalLink(index)} type="button" class="cursor-pointer absolute right-2 top-[3.5rem] transform -translate-y-1/2 bg-red-500 p-2 rounded-md">
+                    <button on:click={() => removeExternalLink(index)} type="button" class="cursor-pointer absolute right-2 top-14 transform -translate-y-1/2 bg-red-500 p-2 rounded-md">
                         <img src="/svg/default/trash.svg" class="w-4 filter-neutral-aurora" alt="Remover">
                     </button>
                 </div>
@@ -233,7 +233,7 @@
                     <select
                         id={item.id}
                         name={item.id}
-                        class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                         bind:value={item.content}
                         required
                     >
@@ -253,7 +253,7 @@
                     <select
                         id={item.id}
                         name={item.id}
-                        class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                         bind:value={item.content}
                         required
                     >

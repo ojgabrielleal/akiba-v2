@@ -16,11 +16,12 @@ class ProgramSchedule extends Model
         'uuid',
         'program_id',
         'day',
-        'time',
+        'hour',
     ];
     
     protected $casts = [
-        'day' => 'integer'
+        'day' => 'integer',
+        'hour' => 'datetime'
     ];
     
     protected $hidden = [

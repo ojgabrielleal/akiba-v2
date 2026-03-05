@@ -17,7 +17,7 @@ class CalendarFactory extends Factory
     public function definition(): array
     {
         return [
-            'time' => fake()->time(),
+            'hour' => fake()->time(),
             'date' => fake()->dateTimeBetween(now()->startOfWeek(), now()->endOfWeek())->format('Y-m-d'),
             'type' => fake()->randomElement(['show', 'live', 'video', 'podcast']),
             'content' => fake()->word()

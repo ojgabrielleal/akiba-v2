@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProgramIndexResource extends JsonResource
+class UserIndexResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,9 @@ class ProgramIndexResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
-            'image' => $this->image,
-            'type' => $this->type,
+            'nickname' => $this->nickname,
+            'avatar' => $this->avatar,
+            'gender' => $this->gender
         ];
     }
 }

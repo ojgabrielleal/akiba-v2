@@ -18,12 +18,11 @@ class Program extends Model
         'user_id',
         'name',
         'image',
-        'allows_all',
+        'type'
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
-        'allows_all' => 'boolean'
     ];
 
     protected $hidden = [
@@ -51,11 +50,6 @@ class Program extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
-    }
-
-    public function scopeAllowsAll($query)
-    {
-        return $query->where('allows_all', true);
     }
 
     /**

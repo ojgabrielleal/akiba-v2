@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProgramIndexResource extends JsonResource
+class ShowIndexResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,6 @@ class ProgramIndexResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            'uuid' => $this->uuid,
-            'name' => $this->name,
-            'image' => $this->image,
-            'type' => $this->type,
-        ];
+        return parent::toArray($request);
     }
 }

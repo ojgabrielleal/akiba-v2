@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
             $table->integer('day');
-            $table->time('time');
+            $table->time('hour');
             $table->timestamps();
         });
     }

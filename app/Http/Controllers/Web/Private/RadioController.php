@@ -6,31 +6,46 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use App\Traits\HasFlashMessages;
-use App\Services\Process\ImageService;
-
-use App\Models\Program;
+use App\Models\User;
 use App\Models\Music;
+use App\Models\Program;
 use App\Models\ProgramSchedule;
 use App\Models\ListenerMonth;
+
+use App\Http\Resources\UserIndexResource;
+use App\Http\Resources\ProgramIndexResource;
+
+use App\Services\Process\ImageProcessService;
+use App\Traits\HasFlashMessages;
+use Illuminate\Support\Facades\Log;
 
 class RadioController extends Controller
 {
     use HasFlashMessages;
 
-    private ImageService $image;
+    private ImageProcessService $image;
     private $render = 'private/Radio';
 
-    public function __construct(ImageService $image)
+    public function __construct(ImageProcessService $image)
     {
         $this->image = $image;
     }
 
+
+    public function indexStreamers()
+    {
+        return UserIndexResource::collection(
+            User::get()
+        );
+    }
+
     public function indexPrograms()
     {
-        return Program::with(['host', 'schedules'])
-            ->active()
-            ->get();
+        return ProgramIndexResource::collection(
+            Program::with(['host', 'schedules'])
+                ->active()
+                ->get()
+        );
     }
 
     public function indexSchedules()
@@ -68,6 +83,30 @@ class RadioController extends Controller
         ]);
     }
 
+    public function updateProgram(Request $request, Program $program)
+    {
+        $program->fill([
+            'name' => $request->input('name', $program->name),
+            'image' => $this->image->store('shows', $request->input('image'), 'public', $program->image),
+            'allows_all' => $request->input('allows_all', $program->allows_all),
+        ]);
+
+        if ($program->isDirty()) {
+            $program->save();
+        }
+
+        if ($request->has('schedules')) {
+            foreach ($request->input('schedules') as $schedule) {
+                $program->schedules()->where('id', $schedule['id'])->update([
+                    'day' => $schedule['day'],
+                    'hour' => $schedule['hour'],
+                ]);
+            }
+        }
+
+        return $this->flashMessage('update');
+    }
+
     public function updateMusicRanking(Request $request, Music $music)
     {
         $music->update([
@@ -91,59 +130,42 @@ class RadioController extends Controller
             'favorite_program' => $found->favorite_program,
             'requests_count' => $found->count,
         ]);
-        
+
         return $this->flashMessage('save');
     }
 
     public function createProgram(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:programs,name',
+            'name' => 'required',
             'image' => 'required',
+            'type' => 'required',
         ]);
+
+        Log::info($request->all());
+
+        $user = User::where('uuid', $request->input('user'))->first();
 
         $program = Program::create([
-            'user_id' => request()->user()->id,
+            'user_id' => $request->input('type') === 'private'
+                ? $user->id
+                : $request->user()->id,
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'image' => $this->image->store('shows', $request->input('image'), 'public'),
-            'allows_all' => $request->input('allows_all', false),
+            'image' => $this->image->store('shows', $request->file('image'), 'public'),
+            'type' => $request->input('type'),
         ]);
 
-        if($request->has('schedules')) {
-            foreach($request->input('schedules') as $schedule) {
+        if ($request->input('type') === 'private') {
+            foreach ($request->input('schedules') as $schedule) {
                 $program->schedules()->create([
                     'day' => $schedule['day'],
-                    'time' => $schedule['time'],
+                    'hour' => $schedule['hour'],
                 ]);
             }
         }
 
         return $this->flashMessage('save');
-    }
-
-    public function updateProgram(Request $request, Program $program)
-    {
-        $program->fill([
-            'name' => $request->input('name', $program->name),
-            'image' => $this->image->store('shows', $request->input('image'), 'public', $program->image),
-            'allows_all' => $request->input('allows_all', $program->allows_all),
-        ]);
-
-        if($program->isDirty()) {
-            $program->save();
-        }
-
-        if($request->has('schedules')){
-            foreach($request->input('schedules') as $schedule) {
-                $program->schedules()->where('id', $schedule['id'])->update([
-                    'day' => $schedule['day'],
-                    'time' => $schedule['time'],
-                ]);
-            }
-        }
-
-        return $this->flashMessage('update');
     }
 
     public function deactivateProgram(Program $program)
@@ -173,7 +195,7 @@ class RadioController extends Controller
     {
         return Inertia::render($this->render, [
             "programs" => $this->indexPrograms(),
-            "schedules" => $this->indexSchedules(),
+            "streamers" => $this->indexStreamers(),
             "musicRanking" => $this->indexMusicRanking(),
             "listenerMonth" => $this->indexListenerMonth(),
         ]);

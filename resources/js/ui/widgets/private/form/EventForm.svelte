@@ -64,7 +64,7 @@
                     name="image" 
                     src={$form.image} 
                     oninput={event => $form.image = event.target.files[0]} 
-                    required={event ? false : true}
+                    required={!event}
                 />
             </div>
             <div class="mb-3">
@@ -76,7 +76,7 @@
                         id="title"
                         type="text"
                         name="title"
-                        class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                         bind:value={$form.title}
                         required
                     />
@@ -90,7 +90,7 @@
                         viewobject="object-cover"
                         src={$form.cover}  
                         oninput={event => $form.cover = event.target.files[0]} 
-                        required={event ? false : true}
+                        required={!event}
                     />
                 </div>
                 <div class="mb-8">
@@ -100,12 +100,12 @@
                     <Wysiwyg 
                         name="content" 
                         bind:value={$form.content} 
-                        required={true}
+                        required
                     />
                 </div>
             </div>
         </div>
-        <div class="w-full xl:w-[80rem] 2xl:w-[85rem] ml-auto">
+        <div class="w-full xl:w-7xl 2xl:w-340 ml-auto">
             <div class="gap-3 grid grid-cols-1 xl:grid-cols-2 xl:gap-10">
                 <div>
                     <div class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center">
@@ -116,7 +116,7 @@
                             id="local"
                             type="text"
                             name="local"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.address}
                             required
                         />
@@ -131,7 +131,7 @@
                             id="datas"
                             type="text"
                             name="datas"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.dates}
                             required
                         />

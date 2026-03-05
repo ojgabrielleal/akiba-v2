@@ -3,7 +3,7 @@ export { default as PostForm } from './PostForm.svelte'
 export { default as ReviewForm } from './ReviewForm.svelte'
 export { default as EventForm } from './EventForm.svelte'
 export { default as BroadcastForm } from "./BroadcastForm.svelte"
-export { default as ShowsForm } from "./ShowsForm.svelte"
+export { default as ProgramForm } from "./ProgramForm.svelte"
 export { default as ListenerMonthForm } from "./ListenerMonthForm.svelte"
 export { default as PodcastsForm } from "./PodcastsForm.svelte"
 export { default as MarketingForm } from "./MarketingForm.svelte"

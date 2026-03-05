@@ -18,7 +18,7 @@ class Calendar extends Model
         'has_activity',
         'user_id',
         'activity_id',
-        'time',
+        'hour',
         'date',
         'category',
         'content',
@@ -28,7 +28,7 @@ class Calendar extends Model
         'is_active' => 'boolean',
         'has_activity' => 'boolean',
         'date' => 'date:Y-m-d',
-        'time' => 'date:h:i',
+        'hour' => 'date:h:i',
     ];
 
     protected $hidden = [

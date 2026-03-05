@@ -105,7 +105,7 @@
                         height="13rem"
                         name="summary"
                         bind:value={$form.summary}
-                        required={true}
+                        required
                     />
                 </div>
             </div>
@@ -119,7 +119,7 @@
                     height="25rem"
                     name="description"
                     bind:value={$form.description}
-                    required={true}
+                    required
                 />
             </div>
             <div>

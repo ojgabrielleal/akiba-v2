@@ -13,7 +13,7 @@ class CalendarIndexResource extends JsonResource
             'uuid' => $this->uuid,
             'has_activity' => $this->has_activity,
             'title' => $this->title,
-            'time' => $this->time->format('H:m'),
+            'hour' => $this->hour->format('H:m'),
             'date' => $this->date->format('Y-m-d'),
             'content' => $this->content,
             'category' => $this->category,

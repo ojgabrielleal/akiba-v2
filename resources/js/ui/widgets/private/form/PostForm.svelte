@@ -111,7 +111,7 @@
                     <Wysiwyg 
                         name="content" 
                         bind:value={$form.content} 
-                        required={true}
+                        required
                     />
                 </div>
             </div>
@@ -125,7 +125,7 @@
                     <select
                         id="categories"
                         name="categories"
-                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg"
+                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg pl-4 "
                         bind:value={$form.categories[0].name}
                     >
                         {#each tag as tag}
@@ -140,7 +140,7 @@
                     <select
                         id="categories"
                         name="categories"
-                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg"
+                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg pl-4 "
                         bind:value={$form.categories[1].name}
                     >
                         {#each tag as item}

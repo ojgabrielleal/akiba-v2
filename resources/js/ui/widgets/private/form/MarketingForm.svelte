@@ -41,7 +41,7 @@
             standard="w-full h-[10rem] rounded-lg"
             src={$form.image}
             oninput={event => $form.image = event.target.files[0]}
-            required={true}
+            required
         />
     </div>
     <div class="mb-4">

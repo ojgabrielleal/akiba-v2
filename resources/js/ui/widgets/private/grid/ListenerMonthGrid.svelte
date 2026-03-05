@@ -1,7 +1,7 @@
 <script>
     import { page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
-    import { Offcanvas } from "@/ui/components/private";
+    import { Modal } from "@/ui/components/private";
     import { ListenerMonthForm } from "@/ui/widgets/private/form";
 
     $: ({ listenerMonthRegistered } = $page.props);
@@ -50,7 +50,7 @@
                 </div>
                 <image src={listenerMonthRegistered?.image ?? "/img/default/defaultAvatarFull.webp"} alt="Imagem do ouvinte" class="w-[9rem] h-[9rem] bg-gray-600 rounded-lg"/>
             </div>
-            <Offcanvas>
+            <Modal>
                 <div class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic" slot="action">
                     Atualizar ouvinte
                 </div>
@@ -60,7 +60,7 @@
                 <div slot="content" let:close>
                     <ListenerMonthForm {close}/>
                 </div>
-            </Offcanvas>
+            </Modal>
         </div>
     </article>
 </Section>

@@ -91,7 +91,7 @@
                     name="image" 
                     src={$form.image} 
                     oninput={event => $form.image = event.target.files[0]} 
-                    required={review ? false : true}
+                    required={!review}
                 />        
             </div>
             <div>
@@ -128,7 +128,7 @@
                         viewobject="object-cover"
                         src={$form.cover} 
                         oninput={event => $form.cover = event.target.files[0]} 
-                        required={review ? false : true}
+                        required={!review}
                     />   
                 </div>
                 <div>
@@ -141,14 +141,14 @@
                                 <div class="relative">
                                     <button 
                                         type="button" 
-                                        on:click={()=>{
-                                            $form.review.uuid = item.uuid
-                                            $form.review.content = item.content; 
-                                        }}
                                         class={["py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer", 
                                             {'bg-orange-amber text-neutral-aurora' : item.uuid === $form.review.uuid},
                                             {'bg-neutral-aurora text-orange-amber' : item.uuid !== $form.review.uuid}
                                         ]}
+                                        on:click={()=>{
+                                            $form.review.uuid = item.uuid
+                                            $form.review.content = item.content; 
+                                        }}
                                     >
                                         {item.author.nickname}
                                     </button>
