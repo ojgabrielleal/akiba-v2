@@ -14,7 +14,7 @@ class Onair extends Model
 
     protected $fillable = [
         'uuid',
-        'is_live',
+        'in_air',
         'program_id',
         'program_type',
         'phrase',
@@ -26,7 +26,7 @@ class Onair extends Model
 
     protected $casts = [
         'allows_song_requests' => 'boolean',
-        'is_live' => 'boolean'
+        'in_air' => 'boolean'
     ];
 
     protected $hidden = [
@@ -53,7 +53,7 @@ class Onair extends Model
      */
     public function scopeLive($query)
     {
-        return $query->where('is_live', true);
+        return $query->where('in_air', true);
     }
 
     /**

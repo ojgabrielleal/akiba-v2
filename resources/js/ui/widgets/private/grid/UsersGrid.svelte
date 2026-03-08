@@ -1,7 +1,7 @@
 <script>
     import { page, router } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";   
-    import { Modal } from "@/ui/components/private";
+    import { Offcanvas } from "@/ui/components/private";
     import { UserForm, UserSecurityForm } from "@/ui/widgets/private/form"
 
     $: ({ users } = $page.props);
@@ -12,7 +12,7 @@
 </script>
 
 <div class="flex justify-center gap-5 mb-5">
-    <Modal>
+    <Offcanvas>
         <div class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" slot="action">
             Cadastrar membro
         </div>
@@ -22,7 +22,7 @@
         <div slot="content" let:close>
             <UserForm {close}/>
         </div>
-    </Modal>
+    </Offcanvas>
     <span class="border-l border-neutral-aurora/30"></span>
     <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase">
         Agendar Atividade
@@ -46,7 +46,7 @@
                         {item.highest_role}
                     </dt>
                     <dd class="flex flex-wrap lg:flex-nowrap gap-2">
-                        <Modal>
+                        <Offcanvas>
                             <div aria-label="Definir permissões" class="w-[2rem] h-[2rem] bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer" slot="action">
                                 <img src="/svg/default/crown.svg" alt="" aria-hidden="true" class="w-4 filter-blue-indigo" loading="lazy"/>
                             </div>
@@ -56,7 +56,7 @@
                             <div slot="content" let:close>
                                 <UserSecurityForm close={close} userId={item.id}/>
                             </div>
-                        </Modal>
+                        </Offcanvas>
                         <a href={`/painel/profile/${item.slug}`} aria-label="Editar perfil" class="w-[2rem] h-[2rem] bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
                             <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-4 filter-blue-indigo" loading="lazy"/>
                         </a>

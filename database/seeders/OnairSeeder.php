@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use App\Models\User;
-use App\Models\AutoDJ;
+use App\Models\Automatic;
 use App\Models\Program;
 use App\Models\Onair;
 
@@ -18,7 +18,7 @@ class OnairSeeder extends Seeder
     public function run(): void
     {
 
-        $auto = AutoDJ::factory()
+        $auto = Automatic::factory()
             ->for(User::factory()->create(), 'host')
             ->create();
 
@@ -29,14 +29,14 @@ class OnairSeeder extends Seeder
         Onair::factory()
             ->for($auto, 'program')
             ->create([
-                'is_live' => true,
-                'type' => 'auto'
+                'in_air' => true,
+                'type' => 'automatic'
             ]);
 
         Onair::factory()
             ->for($program, 'program')
             ->create([
-                'is_live' => false,
+                'in_air' => false,
                 'type' => 'live'
             ]);
     }

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ActivitySeeder::class,
-            AutoDJSeeder::class,
+            AutomaticSeeder::class,
             CalendarSeeder::class,
             EventSeeder::class,
             ListenerMonthSeeder::class,

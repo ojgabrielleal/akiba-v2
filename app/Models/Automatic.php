@@ -6,21 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class AutoDJ extends Model
+class Automatic extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'autodj';
+    protected $table = 'automatic';
 
     protected $fillable = [
         'uuid',
+        'is_default',
         'user_id',
         'name',
         'image',
+        'phrases',
+    ];
+
+    protected $cast = [
+        'is_default' => 'boolean',
+        'phrases' => 'array'
     ];
 
     protected $hidden = [
-        'user_id',
+        'user_id'
     ];
 
     /**
@@ -42,18 +49,13 @@ class AutoDJ extends Model
      * (hasOne, hasMany, belongsTo, belongsToMany, etc.).
      */
 
-    public function onair()
-    {
-        return $this->morphMany(Onair::class, 'program');
-    }
-
     public function host()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function phrases()
+    public function onair()
     {
-        return $this->hasMany(AutoDJPhrase::class, 'autodj_id');
+        return $this->morphMany(Onair::class, 'program');
     }
 }

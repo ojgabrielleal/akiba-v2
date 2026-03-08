@@ -1,7 +1,7 @@
 <script>
     import { page, router} from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
-    import { Modal } from "@/ui/components/private";
+    import { Offcanvas } from "@/ui/components/private";
     import { MarketingForm } from "@/ui/widgets/private/form";
 
     $: ({ permissions, repositories } = $page.props);
@@ -13,7 +13,7 @@
 
 {#if !permissions.view_all}
     <div class="flex justify-center mt-5 mb-15">
-        <Modal>
+        <Offcanvas>
             <div class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" slot="action" >
                 Upar conteúdo
             </div>
@@ -23,7 +23,7 @@
             <div slot="content" let:close>
                 <MarketingForm close={close}/>
             </div>
-        </Modal>
+        </Offcanvas>
     </div>
 {/if}
 
@@ -103,7 +103,7 @@
 {#if permissions.view_all}
     <Section title="Todos os conteúdos">
         <div class="flex justify-center mt-5 mb-15">
-            <Modal>
+            <Offcanvas>
                 <div class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" slot="action" >
                     Upar conteúdo
                 </div>
@@ -113,7 +113,7 @@
                 <div slot="content" let:close>
                     <MarketingForm close={close}/>
                 </div>
-            </Modal>
+            </Offcanvas>
         </div>
         <div class="mb-[5rem] grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-x-4 gap-y-20">
                 {#if repositories?.all.length > 0}
@@ -126,7 +126,7 @@
                                 </div>
                             </a>
                             <div class="absolute -bottom-9 right-0 flex flex-row gap-4">
-                                <Modal>
+                                <Offcanvas>
                                     <div class="cursor-pointer" slot="action" >
                                         <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
                                     </div>
@@ -136,7 +136,7 @@
                                     <div slot="content" let:close>
                                         <MarketingForm repositoryId={item.id} close={close}/>
                                     </div>
-                                </Modal>
+                                </Offcanvas>
                                 <button onclick={()=>deleteRepository(item.id)} class="cursor-pointer">
                                     <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-5 filter-red-crimson" loading="lazy"/>
                                 </button>

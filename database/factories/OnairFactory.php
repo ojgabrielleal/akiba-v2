@@ -17,9 +17,9 @@ class OnairFactory extends Factory
     public function definition(): array
     {
         return [
-            'is_live' => true,
+            'in_air' => true,
             'phrase' => fake()->sentence(),
-            'type' => fake()->randomElement(['auto', 'playlist', 'record', 'live']),
+            'type' => fake()->randomElement(['automatic', 'live', 'scheduled']),
             'image' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
             'allows_song_requests' => true,
             'song_requests_total' => fake()->randomNumber()

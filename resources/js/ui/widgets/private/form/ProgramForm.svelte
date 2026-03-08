@@ -1,8 +1,9 @@
 <script>
     export let close = () => {};
-    export let showId = null;
+    export let identifier;
 
-    import { useForm, page } from "@inertiajs/svelte";
+    import axios from "axios";
+    import { useForm, page, router } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
 
     $: ({ program, streamers } = $page.props);
@@ -15,11 +16,24 @@
         type: null,
         schedules: [],
     });
+    
+    $: if(identifier){
+        axios.get(`/painel/radio/program/${identifier}`)
+        .then((response)=>{
+            const data = response.data.data;
+
+            $form._method = "PATCH";
+            $form.user = data.host.uuid;
+            $form.name = data.name;
+            $form.image = data.image;
+            $form.type = data.type;
+            $form.schedules = data.schedules;
+        })
+    }
 
     const submit = () => {   
-        let url = program ? `/painel/radio/update/show/${showId}` : '/painel/radio/program'
+        let url = identifier ? `/painel/radio/update/show/${showId}` : '/painel/radio/program'
 
-        console.log($form.data)
         $form.post(url, {
             onSuccess: () => close(),
         });
@@ -161,13 +175,11 @@
             </div>
         {/each}
     {/if}
-    <div class="flex justify-center">
-        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
-            {#if showId}
-                Atualizar
-            {:else}
-                Cadastrar
-            {/if}
-        </button>
-    </div>
+    <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+        {#if identifier}
+            Atualizar
+        {:else}
+            Cadastrar
+        {/if}
+    </button>
 </form>

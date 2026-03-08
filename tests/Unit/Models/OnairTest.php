@@ -46,13 +46,13 @@ class OnairTest extends TestCase
         $liveOnair = Onair::factory()
             ->for($program, 'program')
             ->create([
-                'is_live' => true,
+                'in_air' => true,
             ]);
 
         $notLiveOnair = Onair::factory()
             ->for($program, 'program')
             ->create([
-                'is_live' => false,
+                'in_air' => false,
             ]);
 
         $onairs = Onair::live()->get();

@@ -61,7 +61,7 @@ class HomeProvisoryController extends Controller
             $image = $request->input('anime.image');
 
             // Atualiza total de pedidos no onair ativo
-            $onair = Onair::where('is_live', true)->first();
+            $onair = Onair::where('in_air', true)->first();
             if ($onair) {
                 $onair->update([
                     'song_requests_total' => $onair->song_requests_total + 1,
@@ -108,7 +108,7 @@ class HomeProvisoryController extends Controller
             $musica = $radio['musica_atual'] ?? null;
             $capa = $radio['capa_musica'] ?? null;
 
-            $onair = Onair::with('program.user')->where('is_live', true)->get();
+            $onair = Onair::with('program.user')->where('in_air', true)->get();
             $onair->musica = [
                 'musica_atual' => $musica,
                 'capa_musica' => $capa

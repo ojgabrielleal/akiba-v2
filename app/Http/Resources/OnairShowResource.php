@@ -16,6 +16,11 @@ class OnairShowResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
+            'phrase' => $this->phrase,
+            'type' => $this->type,
+            'image' => $this->image,
+            'allows_song_requests' => $this->allows_song_requests,
+            'song_requests_total' => $this->song_requests_total,
             'program' => [
                 'uuid' => $this->program->uuid,
                 'name' => $this->program->name,
@@ -25,14 +30,9 @@ class OnairShowResource extends JsonResource
                     'name' => $this->program->host->name,
                     'nickname' => $this->program->host->nickname,
                     'avatar' => $this->program->host->avatar,
-                    'gender' => $this->program->host->gender
-                ]
+                    'gender' => $this->program->host->gender,
+                ],
             ],
-            'phrase' => $this->phrase,
-            'type' => $this->type,
-            'image' => $this->image,
-            'allows_song_requests' => $this->allows_song_requests,
-            'song_requests_total' => $this->song_requests_total
         ];
     }
 }

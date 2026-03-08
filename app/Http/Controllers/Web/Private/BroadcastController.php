@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 use App\Models\Onair;
 use App\Models\Program;
-use App\Models\AutoDJ;
+use App\Models\Automatic;
 use App\Models\SongRequest;
 
 use App\Http\Resources\OnairShowResource;
@@ -17,6 +17,7 @@ use App\Http\Resources\SongRequestIndexResource;
 
 use App\Services\External\DiscordWebhookService;
 use App\Traits\HasFlashMessages;
+use Illuminate\Support\Facades\Log;
 
 class BroadcastController extends Controller
 {
@@ -53,7 +54,9 @@ class BroadcastController extends Controller
 
     public function showOnair()
     {
-        return new OnairShowResource(Onair::live()->with('program.host')->first());
+        return new OnairShowResource(
+            Onair::live()->with('program.host')->first()
+        );
     }
 
     public function startBroadcast(Request $request, Program $program)
@@ -64,11 +67,11 @@ class BroadcastController extends Controller
         ]);
 
         Onair::live()->first()->update([
-            'is_live' => false,
+            'in_air' => false,
             'song_requests_total' => false,
         ]);
 
-        if($program->type === 'free'){
+        if ($program->type === 'free') {
             $program->update([
                 'user_id' => request()->user()->id
             ]);
@@ -89,16 +92,17 @@ class BroadcastController extends Controller
     {
         $onair = Onair::live()->first();
         $onair->update([
-            'is_live' => false,
+            'in_air' => false,
             'allows_song_requests' => false,
         ]);
 
-        $autodj = AutoDJ::with('phrases')->first();
-        $phrase = $autodj->phrases->random();
-        $autodj->onair()->create([
-            'type' => 'auto',
-            'phrase' => $phrase->phrase,
-            'image' => $phrase->image,
+        $auto = Automatic::where('is_default', true)->first();
+        $selected = collect(json_decode($auto->phrases))->random();
+
+        $auto->onair()->create([
+            'type'   => 'automatic',
+            'phrase' => $selected->phrase,
+            'image'  => $selected->image,
         ]);
 
         SongRequest::where('onair_id', $onair->id)

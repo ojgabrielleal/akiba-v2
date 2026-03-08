@@ -12,7 +12,6 @@
         'show_button_update': hasPermission('post.update'),
         'show_button_update_own': hasPermission('post.update.own'),
     }
-
 </script>
 
 {#if posts}

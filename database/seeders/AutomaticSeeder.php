@@ -6,19 +6,19 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use App\Models\User;
-use App\Models\AutoDJ;
-use App\Models\AutoDJPhrase;
+use App\Models\Automatic;
 
-class AutoDJSeeder extends Seeder
+class AutomaticSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        AutoDJ::factory()
+        Automatic::factory()
             ->for(User::factory()->create(), 'host')
-            ->has(AutoDJPhrase::factory(), 'phrases')
-            ->create();
+            ->create([
+                'is_default' => true,
+            ]);
     }
 }

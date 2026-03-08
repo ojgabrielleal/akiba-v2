@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('autodj_phrases', function (Blueprint $table) {
+        Schema::create('automatic', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('autodj_id')->constrained('autodj')->cascadeOnDelete();
+            $table->boolean('is_default')->default(false);
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('name')->unique();
             $table->string('image')->nullable();
-            $table->string('phrase');
+            $table->json('phrases');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('autodj_phrases');
+        Schema::dropIfExists('automatic');
     }
 };

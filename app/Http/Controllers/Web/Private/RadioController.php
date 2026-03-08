@@ -14,6 +14,7 @@ use App\Models\ListenerMonth;
 
 use App\Http\Resources\UserIndexResource;
 use App\Http\Resources\ProgramIndexResource;
+use App\Http\Resources\ProgramShowResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
@@ -78,9 +79,7 @@ class RadioController extends Controller
 
     public function showProgram(Program $program)
     {
-        return Inertia::render($this->render, [
-            'program' => $program->load('host', 'schedules'),
-        ]);
+        return new ProgramShowResource($program->load('host', 'schedules'));
     }
 
     public function updateProgram(Request $request, Program $program)

@@ -70,7 +70,7 @@ Route::prefix('painel')->group(function () {
             Route::prefix('program')->group(function () {
                 Route::post('', 'createProgram');
                 Route::patch('{program}', 'updateProgram');
-                Route::get('{program}', 'showProgram');
+                Route::get('{program:uuid}', 'showProgram');
                 Route::delete('{program}', 'deactivateProgram');
             });
             Route::prefix('ranking-music')->group(function () {
