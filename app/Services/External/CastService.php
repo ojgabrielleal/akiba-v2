@@ -10,7 +10,7 @@ class CastService
     public function data()
     {
         try {
-            $url = config('services.radio.metadata');
+            $url = env('CAST_METADATA');
             $response = Http::timeout(5)->withOptions([
                 'verify' => false,
             ])->get($url);

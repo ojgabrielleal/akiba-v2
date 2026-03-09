@@ -1,26 +1,24 @@
 <script>
     import { onMount } from "svelte";
     import { page } from "@inertiajs/svelte";
-    import toast, { Toaster } from "svelte-hot-french-toast"
+    import toast, { Toaster } from "svelte-hot-french-toast";
     import { Navbar } from "@/ui/widgets/private/navbar";
-    import { RadioMetrics } from "@/ui/widgets/private/metrics";
+    import { CastMetrics } from "@/ui/widgets/private/metrics";
 
-    $: ({ 
-        flash,
-    } = $page.props);
+    $: ({ flash } = $page.props);
 
-    $: if(flash?.message){
+    $: if (flash?.message) {
         toast(flash.message, {
-            icon: flash.icon
+            icon: flash.icon,
         });
     }
-    
-    onMount(()=>{
+
+    onMount(() => {
         document.body.style.backgroundColor = "var(--color-blue-indigo)";
     });
 </script>
 
-<Toaster/>
+<Toaster />
 <header class="mb-15 lg:pt-10">
     <Navbar />
 </header>
@@ -30,6 +28,6 @@
 <footer>
     <div class="h-[5rem]"></div>
     <div class="w-full fixed bottom-0">
-        <RadioMetrics />
+        <CastMetrics />
     </div>
 </footer>
