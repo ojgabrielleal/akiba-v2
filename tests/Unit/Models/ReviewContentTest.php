@@ -1,0 +1,32 @@
+<?php
+
+namespace Tests\Unit\Models;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+use App\Models\ReviewContent;
+use App\Models\User;
+use App\Models\Review;
+
+class ReviewContentTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     * Tests from ReviewContent model relationships.
+     */
+    public function testAuthorRelationshipReturnsUser(): void
+    {
+        $user = User::factory()->create();
+
+        $review = Review::factory()->create();
+
+        $reviewContent = ReviewContent::factory()
+            ->for($user, 'author')
+            ->create(['review_id' => $review->id]);
+
+        $this->assertInstanceOf(User::class, $reviewContent->author);
+        $this->assertTrue($reviewContent->author->is($user));
+    }
+}

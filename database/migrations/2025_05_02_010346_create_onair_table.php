@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->boolean('in_air')->default(true);
             $table->morphs('program');
-            $table->string('image')->nullable();
+            $table->string('icon')->nullable();
             $table->string('phrase');
             $table->enum('type', ['automatic', 'live', 'scheduled']);
             $table->boolean('allows_song_requests')->default(false);

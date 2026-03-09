@@ -1,0 +1,92 @@
+﻿PHPUnit 11.5.20 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.4.18
+Configuration: C:\Developer\akiba-v2\phpunit.xml
+
+eveeveE.......................................E............             53 / 53 (100%)
+
+Time: 00:01.215, Memory: 50.00 MB
+
+There were 2 errors:
+
+1) Tests\Unit\Models\ActivityParticipantsTest::testConfirmerRelationshipReturnsUser
+Illuminate\Database\QueryException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: activities.user_id (Connection: sqlite, SQL: insert into "activities" ("title", "content", "limit", "allows_confirmations", "uuid", "updated_at", "created_at") values (ea, Hic voluptatem quas qui. Consectetur sed labore architecto. Doloremque ipsum iure voluptate saepe consequatur sapiente eum. Qui maxime repellendus et eveniet asperiores., 2026-03-14, 1, 019cd4dc-5b77-70ab-88eb-6b2568f57b8d, 2026-03-09 23:08:57, 2026-03-09 23:08:57))
+
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:822
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:776
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:557
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:521
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\Processor.php:32
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:3785
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2204
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1408
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1373
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1212
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:351
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:271
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:346
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:302
+C:\Developer\akiba-v2\tests\Unit\Models\ActivityParticipantsTest.php:22
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: activities.user_id
+
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:568
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:809
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:776
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:557
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:521
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\Processor.php:32
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:3785
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2204
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1408
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1373
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1212
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:351
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:271
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:346
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:302
+C:\Developer\akiba-v2\tests\Unit\Models\ActivityParticipantsTest.php:22
+
+2) Tests\Unit\Models\SongRequestTest::testOnairRelationshipReturnsOnair
+Illuminate\Database\QueryException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: songs_requests.music_id (Connection: sqlite, SQL: insert into "songs_requests" ("was_reproduced", "was_canceled", "ip", "name", "address", "message", "onair_id", "uuid", "updated_at", "created_at") values (0, 0, 36.214.120.98, hhauck, 61941 Noemie Plaza
+South Moniquemouth, NE 33713, Laborum ratione aut quae aut., 1, 019cd4dc-5e29-7327-b230-47a5c58c4118, 2026-03-09 23:08:57, 2026-03-09 23:08:57))
+
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:822
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:776
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:557
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:521
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\Processor.php:32
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:3785
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2204
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1408
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1373
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1212
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:351
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:271
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:346
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:302
+C:\Developer\akiba-v2\tests\Unit\Models\SongRequestTest.php:30
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: songs_requests.music_id
+
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:568
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:809
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:776
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:557
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Connection.php:521
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\Processor.php:32
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:3785
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2204
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1408
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1373
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1212
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:351
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:271
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:346
+C:\Developer\akiba-v2\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:302
+C:\Developer\akiba-v2\tests\Unit\Models\SongRequestTest.php:30
+
+ERRORS!
+Tests: 53, Assertions: 85, Errors: 2.

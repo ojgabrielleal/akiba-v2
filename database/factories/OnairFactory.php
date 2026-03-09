@@ -20,7 +20,7 @@ class OnairFactory extends Factory
             'in_air' => true,
             'phrase' => fake()->sentence(),
             'type' => fake()->randomElement(['automatic', 'live', 'scheduled']),
-            'image' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
+            'icon' => '/img/locution/icons/aoba.webp',
             'allows_song_requests' => true,
             'song_requests_total' => fake()->randomNumber()
         ];
