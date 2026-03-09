@@ -5,7 +5,7 @@ namespace App\Services\External;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class StreamingService
+class CastService
 {
     public function data()
     {

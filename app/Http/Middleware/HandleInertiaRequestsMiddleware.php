@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
-use App\Services\External\StreamingService;
+use App\Services\External\CastService;
 
 use App\Traits\ResolvesUserLogged;
 
@@ -36,7 +36,9 @@ class HandleInertiaRequestsMiddleware extends Middleware
     {
         return array_merge(parent::share($request), [
             'user' => fn() => $this->getUserLogged(),
-            'streaming' => fn() => (new StreamingService())->data(),
+            'streaming' => fn() => (
+                new CastService()
+            )->data(),
             'flash' => fn() => [
                 'icon' => session('flash.icon'),
                 'message' => session('flash.message'),

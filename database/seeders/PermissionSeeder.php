@@ -23,7 +23,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'dashboard.view', 'label' => 'Visualizar página dashboard'],
             ['name' => 'warning.view', 'label' => 'Visualizar página avisos'],
             ['name' => 'post.view', 'label' => 'Visualizar página matérias'],
-            ['name' => 'broadcast.view', 'label' => 'Visualizar página locução'],
+            ['name' => 'locution.view', 'label' => 'Visualizar página locução'],
             ['name' => 'radio.view', 'label' => 'Visualizar página rádio'],
             ['name' => 'podcast.view', 'label' => 'Visualizar página podcasts'],
             ['name' => 'marketing.view', 'label' => 'Visualizar página marketing'],
@@ -107,8 +107,8 @@ class PermissionSeeder extends Seeder
             | Locução
             |--------------------------------------------------------------------------
             */
-            ['name' => 'broadcast.start', 'label' => 'Iniciar programa'],
-            ['name' => 'broadcast.finish', 'label' => 'Encerrar programa'],
+            ['name' => 'locution.start', 'label' => 'Iniciar programa'],
+            ['name' => 'locution.finish', 'label' => 'Encerrar programa'],
 
 
             /*

@@ -2,12 +2,12 @@
     import { useForm, page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
-    import avatarJson from "@/data/broadcast/avatar.json";
+    import avatarJson from "@/data/locution/avatar.json";
 
     $: ({ programs } = $page.props);
 
     let permissions = {
-        show_button_start_broadcast: hasPermission('broadcast.start'),
+        show_button_start_locution: hasPermission('locution.start'),
         show_carrousel_programs: hasPermission('program.list')
     }
 
@@ -18,7 +18,7 @@
     });
     
     const submit = () => {
-        $form.post(`/painel/locucao/broadcast/start/${$form.program}`);
+        $form.post(`/painel/locucao/locution/start/${$form.program}`);
     }
 </script>
 
@@ -63,7 +63,7 @@
                 {/each}
             </div>
         </div>
-        {#if permissions.show_button_start_broadcast}
+        {#if permissions.show_button_start_locution}
             <div class="flex justify-end">
                 <button type="submit" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-green-forest rounded-xl text-green-forest text-xl font-bold font-noto-sans italic uppercase">
                     Iniciar

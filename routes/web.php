@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Private\LoginController;
 use App\Http\Controllers\Web\Private\AdmsController;
-use App\Http\Controllers\Web\Private\BroadcastController;
+use App\Http\Controllers\Web\Private\LocutionController;
 use App\Http\Controllers\Web\Private\DashboardController;
 use App\Http\Controllers\Web\Private\PostController;
 use App\Http\Controllers\Web\Private\ReviewController;
@@ -54,10 +54,10 @@ Route::prefix('painel')->group(function () {
             Route::patch('{event:uuid}', 'updateEvent');
             Route::get('{event:uuid}', 'showEvent');
         });
-        Route::prefix('locucao')->controller(BroadcastController::class)->group(function () {
-            Route::prefix('broadcast')->group(function () {
-                Route::post('start/{program:uuid}', 'startBroadcast');
-                Route::patch('finish', 'finishBroadcast');
+        Route::prefix('locucao')->controller(LocutionController::class)->group(function () {
+            Route::prefix('locution')->group(function () {
+                Route::post('start/{program:uuid}', 'startLocution');
+                Route::patch('finish', 'finishLocution');
             });
             Route::prefix('songrequest')->group(function () {
                 Route::patch('{songRequest:uuid}/played', 'markSongRequestAsPlayed');

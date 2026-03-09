@@ -19,12 +19,12 @@ use App\Services\External\DiscordWebhookService;
 use App\Traits\HasFlashMessages;
 use Illuminate\Support\Facades\Log;
 
-class BroadcastController extends Controller
+class LocutionController extends Controller
 {
     use HasFlashMessages;
 
     private DiscordWebhookService $discord;
-    private $render = 'private/Broadcast';
+    private $render = 'private/Locution';
 
     public function __construct(DiscordWebhookService $discord)
     {
@@ -59,7 +59,7 @@ class BroadcastController extends Controller
         );
     }
 
-    public function startBroadcast(Request $request, Program $program)
+    public function startLocution(Request $request, Program $program)
     {
         $request->validate([
             'phrase' => 'required',
@@ -88,7 +88,7 @@ class BroadcastController extends Controller
         return $this->flashMessage('start');
     }
 
-    public function finishBroadcast()
+    public function finishLocution()
     {
         $onair = Onair::live()->first();
         $onair->update([

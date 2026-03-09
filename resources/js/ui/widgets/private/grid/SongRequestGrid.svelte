@@ -6,7 +6,7 @@
     $: ({ onair, songrequests } = $page.props);
     
     let permissions = {
-        show_button_finish_broadcast: hasPermission('broadcast.finish'),
+        show_button_finish_locution: hasPermission('locution.finish'),
         show_button_toggle_song_request: hasPermission('songrequest.toggle'),
         show_button_reproduce_song_request: hasPermission('songrequest.reproduce'),
         show_button_cancel_song_request: hasPermission('songrequest.cancel'),
@@ -24,8 +24,8 @@
         router.patch(`/painel/locucao/songrequest/${songrequest}/canceled`)
     }
     
-    const requestFinishBroadcast = () => {
-        router.patch(`/painel/locucao/broadcast/finish`)
+    const requestFinishlocution = () => {
+        router.patch(`/painel/locucao/locution/finish`)
     }
     
     usePoll(60*1000)
@@ -34,8 +34,8 @@
 {#if hasPermission("songrequest.list")}
     <Section title="Pedidos musicais">
         <div id='requests' class="flex flex-col gap-5 lg:relative">
-            {#if permissions.show_button_finish_broadcast}
-                <button on:click={()=>requestFinishBroadcast()} class="cursor-pointer block lg:absolute right-0 w-full lg:w-auto py-2 px-6 border-4 border-solid border-red-crimson rounded-xl text-red-crimson text-xl font-bold font-noto-sans italic uppercase">
+            {#if permissions.show_button_finish_locution}
+                <button on:click={()=>requestFinishlocution()} class="cursor-pointer block lg:absolute right-0 w-full lg:w-auto py-2 px-6 border-4 border-solid border-red-crimson rounded-xl text-red-crimson text-xl font-bold font-noto-sans italic uppercase">
                     Encerrar programa
                 </button>
             {/if}

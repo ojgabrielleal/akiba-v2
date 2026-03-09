@@ -13,8 +13,8 @@
     },
     {
         "name": "Locução",
-        "icon": "/svg/default/broadcast.svg",
-        "permission": "broadcast.view",
+        "icon": "/svg/default/locution.svg",
+        "permission": "locution.view",
         "address": "/painel/locucao"
     },
     {

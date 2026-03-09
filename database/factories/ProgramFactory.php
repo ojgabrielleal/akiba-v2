@@ -19,7 +19,7 @@ class ProgramFactory extends Factory
         return [
             'is_active' => true,
             'name' => fake()->name(),
-            'image' => '/img/broadcast/default/program.webp',
+            'image' => '/img/locution/default/program.webp',
             'type' => fake()->randomElement(['free', 'private']),
         ];
     }

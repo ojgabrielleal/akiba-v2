@@ -2,7 +2,7 @@
     import { page, router } from "@inertiajs/svelte";
     import { Meta } from "@/config/meta";
     import { Layout } from "@/layouts/private";
-    import { BroadcastForm } from "@/ui/widgets/private/form";
+    import { LocutionForm } from "@/ui/widgets/private/form";
     import { SongRequestGrid } from "@/ui/widgets/private/grid";
 
     $: ({ user, onair } = $page.props);
@@ -18,7 +18,7 @@
         {'opacity-50 pointer-events-none': onair.data.type !== 'automatic'},
         {'opacity-none pointer-events-auto': onair.data.type === 'automatic'}
     ]}>
-        <BroadcastForm/>
+        <LocutionForm/>
     </div>
     {#if onair.data.type === 'live'}
         <SongRequestGrid/>
@@ -29,7 +29,7 @@
     <section transition:fade={{duration: 500}} class="fixed inset-0 flex items-center justify-center p-2 lg:p-0 z-50 bg-black/20 backdrop-blur-lg">
         <div class="w-sm p-6 rounded-xl bg-neutral-aurora">
             <div class="flex justify-center">
-                <img src="/img/broadcast/default/blocked.gif" alt="Bloqueador de tela" class="w-50 h-50 object-cover rounded-full" loading="lazy"/>
+                <img src="/img/locution/default/blocked.gif" alt="Bloqueador de tela" class="w-50 h-50 object-cover rounded-full" loading="lazy"/>
             </div>
             <div class="mt-6 mb-4 bg-red-crimson p-3 rounded-xl text-center text-neutral-aurora font-noto-sans font-bold uppercase">
                 PARE! Tem gente ao vivo!

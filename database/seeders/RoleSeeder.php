@@ -29,7 +29,7 @@ class RoleSeeder extends Seeder
                 'weight' => 900,
             ],
             [
-                'name' => 'broadcaster',
+                'name' => 'locutioner',
                 'label' => 'Locutor',
                 'description' => 'Gerencia transmissões ao vivo e interage com o público durante as programações.',
                 'weight' => 800,
