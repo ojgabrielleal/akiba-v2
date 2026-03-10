@@ -30,7 +30,9 @@
     }
     
     const submit = () => {
-        let url = review ? `/painel/reviews/${review?.data.uuid}` : `/painel/reviews`       
+        let url = review ? 
+            `/painel/reviews/${review?.data.uuid}` : 
+            `/painel/reviews`       
 
         $form.post(url, {
             preserveState: review,

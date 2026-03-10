@@ -42,7 +42,9 @@
     }
 
     const submit = (event) => {
-        let url = post ? `/painel/materias/${post.data.uuid}` : '/painel/materias';
+        let url = post ? 
+            `/painel/materias/${post.data.uuid}` : 
+            '/painel/materias';
         
         $form.type = event.submitter.value;
         $form.post(url, {

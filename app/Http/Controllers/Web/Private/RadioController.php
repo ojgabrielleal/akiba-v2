@@ -84,10 +84,13 @@ class RadioController extends Controller
 
     public function updateProgram(Request $request, Program $program)
     {
+        $user = User::where('uuid', $request->input('user'))->first();
+
         $program->fill([
+            'user_id' => $user->id,
             'name' => $request->input('name', $program->name),
-            'image' => $this->image->store('shows', $request->input('image'), 'public', $program->image),
-            'allows_all' => $request->input('allows_all', $program->allows_all),
+            'image' => $this->image->store('programs', $request->file('image'), 'public', $program->image),
+            'type' => $request->input('type', $program->type),
         ]);
 
         if ($program->isDirty()) {
@@ -96,7 +99,7 @@ class RadioController extends Controller
 
         if ($request->has('schedules')) {
             foreach ($request->input('schedules') as $schedule) {
-                $program->schedules()->where('id', $schedule['id'])->update([
+                $program->schedules()->where('uuid', $schedule['uuid'])->update([
                     'day' => $schedule['day'],
                     'hour' => $schedule['hour'],
                 ]);
@@ -151,7 +154,7 @@ class RadioController extends Controller
                 : $request->user()->id,
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'image' => $this->image->store('shows', $request->file('image'), 'public'),
+            'image' => $this->image->store('programs', $request->file('image'), 'public'),
             'type' => $request->input('type'),
         ]);
 

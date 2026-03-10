@@ -19,22 +19,6 @@
     }
 </script>
 
-
-<!--
-<div class="flex justify-center mb-10">
-    <Modal>
-        <div class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic" slot="action" >
-            Cadastrar programa
-        </div>
-        <div slot="title">
-            Novo programa
-        </div>
-        <div slot="content" let:close>
-            <ShowsForm {close}/>
-        </div>
-    </Modal>
-</div>
--->
 <Section {title}>
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-15 mt-10">
         {#each programs.data as program}

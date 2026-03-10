@@ -20,7 +20,10 @@
 </Offcanvas>
 
 <div class="flex justify-center mb-10">
-    <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-neutral-aurora" on:click={()=>offcanvasRef.open()}>
+    <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-neutral-aurora" on:click={()=> { 
+        identifier = null; 
+        offcanvasRef.open()
+    }}>
         Cadastrar programa
     </button>
 </div>

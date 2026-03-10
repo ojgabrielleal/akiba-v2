@@ -69,9 +69,9 @@ Route::prefix('painel')->group(function () {
         Route::prefix('radio')->controller(RadioController::class)->group(function () {
             Route::prefix('program')->group(function () {
                 Route::post('', 'createProgram');
-                Route::patch('{program}', 'updateProgram');
+                Route::patch('{program:uuid}', 'updateProgram');
                 Route::get('{program:uuid}', 'showProgram');
-                Route::delete('{program}', 'deactivateProgram');
+                Route::delete('{program:uuid}', 'deactivateProgram');
             });
             Route::prefix('ranking-music')->group(function () {
                 Route::post('', 'generateMusicRanking');

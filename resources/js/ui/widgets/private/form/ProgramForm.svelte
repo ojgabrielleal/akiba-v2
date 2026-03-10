@@ -32,7 +32,9 @@
     }
 
     const submit = () => {   
-        let url = identifier ? `/painel/radio/update/show/${showId}` : '/painel/radio/program'
+        let url = identifier ? 
+            `/painel/radio/program/${identifier}` : 
+            '/painel/radio/program'
 
         $form.post(url, {
             onSuccess: () => close(),

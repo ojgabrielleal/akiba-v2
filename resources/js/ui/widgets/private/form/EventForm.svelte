@@ -32,7 +32,10 @@
     }
 
     const submit = () => {
-        let url = event ? `/painel/eventos/${event.data.uuid}` : '/painel/eventos';
+        let url = event ? 
+            `/painel/eventos/${event.data.uuid}` : 
+            '/painel/eventos';
+
         $form.post(url, {
             preserveState: event,
             onSuccess: () => {
