@@ -6,7 +6,7 @@
     import { useForm, page, router } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
 
-    $: ({ program, streamers } = $page.props);
+    $: ({ streamers } = $page.props);
 
     let form = useForm({
         _method: "POST",
@@ -37,7 +37,7 @@
             '/painel/radio/program'
 
         $form.post(url, {
-            onSuccess: () => close(),
+            onFinish: () => close(),
         });
     }
 
@@ -60,7 +60,7 @@
             name="image"
             src={$form.image}
             oninput={(event) => ($form.image = event.target.files[0])}
-            required={program}
+            required={identifier}
         />
     </div>
     <div class="mb-4">
