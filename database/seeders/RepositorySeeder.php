@@ -14,6 +14,6 @@ class RepositorySeeder extends Seeder
      */
     public function run(): void
     {
-        Repository::factory()->create();
+        Repository::factory()->count(10)->create();
     }
 }

@@ -15,12 +15,8 @@ class ActivitySeeder extends Seeder
      */
     public function run(): void
     {
-        Activity::factory()
+        Activity::factory()->count(15)
             ->for(User::find(1), 'author')
-            ->create();
-            
-        Activity::factory()
-            ->for(User::factory()->create(), 'author')
             ->create();
     }
 }

@@ -15,12 +15,12 @@ class PodcastSeeder extends Seeder
      */
     public function run(): void
     {
-        Podcast::factory()
+        Podcast::factory()->count(3)
             ->for(User::find(1), 'author')
             ->create();
 
-        Podcast::factory()
-            ->for(User::factory()->create(), 'author')
+        Podcast::factory()->count(7)
+            ->for(User::inRandomOrder()->first(), 'author')
             ->create();
     }
 }

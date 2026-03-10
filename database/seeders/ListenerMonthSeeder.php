@@ -14,6 +14,6 @@ class ListenerMonthSeeder extends Seeder
      */
     public function run(): void
     {
-        ListenerMonth::factory()->create();
+        ListenerMonth::factory()->count(5)->create();
     }
 }

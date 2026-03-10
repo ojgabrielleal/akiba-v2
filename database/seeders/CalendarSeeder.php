@@ -16,23 +16,25 @@ class CalendarSeeder extends Seeder
      */
     public function run(): void
     {
-        Calendar::factory()
-            ->for(User::factory()->create(), 'responsible')
+        Calendar::factory()->count(5)
+            ->for(User::inRandomOrder()->first(), 'responsible')
             ->create();
 
-        Calendar::factory()
+        Calendar::factory()->count(10)
             ->for(User::find(1), 'responsible')
             ->create();
 
         Activity::factory()
             ->for(User::find(1), 'author')
-            ->create();
+            ->create([
+                'allows_confirmations' => true,
+            ]);
         
         $confirmations = Activity::where('allows_confirmations', true)->get();
 
         foreach ($confirmations as $confirmation) {
             Calendar::factory()
-                ->for(User::factory()->create(), 'responsible')
+                ->for(User::inRandomOrder()->first(), 'responsible')
                 ->for($confirmation, 'activity')
                 ->create([
                     'has_activity' => true,

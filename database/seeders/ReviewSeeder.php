@@ -20,13 +20,13 @@ class ReviewSeeder extends Seeder
             ->for(User::find(1), 'author');
 
         $userContent = ReviewContent::factory()
-            ->for(User::factory()->create(), 'author');
+            ->for(User::inRandomOrder()->first(), 'author');
 
-        Review::factory()
+        Review::factory()->count(3)
             ->has($adminContent, 'reviews')
             ->create();
             
-        Review::factory()
+        Review::factory()->count(8)
             ->has($userContent, 'reviews')
             ->create();
     }

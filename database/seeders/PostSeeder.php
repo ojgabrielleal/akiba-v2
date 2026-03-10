@@ -18,18 +18,18 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        Post::factory()
-            ->for(User::factory()->create(), 'author')
-            ->has(PostReference::factory()->count(3), 'references')
-            ->has(PostReaction::factory()->count(3), 'reactions')
-            ->has(PostCategory::factory()->count(3), 'categories')
+        Post::factory()->count(5)
+            ->for(User::find(1), 'author')
+            ->has(PostReference::factory()->count(2), 'references')
+            ->has(PostReaction::factory()->count(5), 'reactions')
+            ->has(PostCategory::factory()->count(2), 'categories')
             ->create();
 
-        Post::factory()
-            ->for(User::find(1), 'author')
-            ->has(PostReference::factory()->count(3), 'references')
+        Post::factory()->count(15)
+            ->for(User::inRandomOrder()->first(), 'author')
+            ->has(PostReference::factory()->count(1), 'references')
             ->has(PostReaction::factory()->count(3), 'reactions')
-            ->has(PostCategory::factory()->count(3), 'categories')
+            ->has(PostCategory::factory()->count(2), 'categories')
             ->create();
     }
 }
