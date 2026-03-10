@@ -1,27 +1,27 @@
-# Melhoria nas Factories e Seeders e Inserção de Dados Realistas
+# Factories and Seeders Improvement and Realistic Data Insertion
 
-**Data:** 09/03/2026
-**Hora:** 21:12 (Horário de Brasília)
-**Módulo Trabalhado:** Database / Factories & Seeders
-**Título:** Atualização de dados estáticos para Faker e criação de registros adicionais
+**Date:** 2026-03-09
+**Time:** 21:12 (Brasília Time)
+**Module:** Database / Factories & Seeders
+**Title:** Updating static data for Faker and creating additional records
 
-## Resumo das Alterações
-1.  **Geração com Faker PHP**
-    *   Revisão das factories do sistema (como `ActivityFactory`, `CalendarFactory`, `EventFactory`, `FrameworkFactory`, etc.).
-    *   Identificação de que os campos estáticos obrigatórios e literais já vinham sendo manipulados por instâncias do `fake()` pelo sistema. Onde fazia sentido alterar string literária para `fake()->word()` ou sentenças correspondentes, o processo foi confirmado.
+## Summary of Changes
+1.  **Faker PHP Generation**
+    *   Reviewed system factories (such as `ActivityFactory`, `CalendarFactory`, `EventFactory`, `FrameworkFactory`, etc.).
+    *   Identified that mandatory and literal static fields were already being handled by `fake()` instances. Where appropriate, literal strings were changed to `fake()->word()` or corresponding sentences.
 
-2.  **Manutenção do Usuário Administrador Principal**
-    *   No `UserSeeder`, o usuário contendo as credenciais `admin` / `admin` e cargo `administrator` foi estritamente mantido para testagem fluída e navegação de avaliação na UI da interface.
+2.  **Primary Administrator Implementation Maintenance**
+    *   In `UserSeeder`, the user with credentials `admin` / `admin` and `administrator` role was strictly maintained for fluid testing and evaluation navigation in the UI.
 
-3.  **Expansão da Geração de Dados (Seeders) e Inserção Administrativa**
-    *   O `UserSeeder` foi refeito para não só gerar o administrador `admin`, mas também gerar mais 3 administradores aleatórios adicionais e dezenas de usuários com roles variadas do sistema, cobrindo o critério solicitado.
-    *   Nos demais seeders (ex: `ProgramSeeder`, `PostSeeder`, `CalendarSeeder`, `ReviewSeeder`, `TaskSeeder`, etc.), foi substituído o limitador unitário (1 por vez). Agora dezenas de instâncias são geradas através do modificador `count(N)`.
-    *   Foi verificado que, antes, os relacionamentos apontavam apenas para instâncias fakes desvinculadas. Agora os relacionamentos utilizam ativamente o usuário administrador (`User::find(1)`) para que este tenha dados gerados para manuseio, o resto é subdividido utilizando buscas aleatórias entre os diversos outros usuários (`User::inRandomOrder()->first()`).
+3.  **Data Generation Expansion (Seeders) and Administrative Insertion**
+    *   `UserSeeder` was refactored to not only generate the `admin` user but also 3 additional random administrators and dozens of users with varied system roles.
+    *   In other seeders (e.g., `ProgramSeeder`, `PostSeeder`, `CalendarSeeder`, `ReviewSeeder`, `TaskSeeder`, etc.), the unit limiter (1 at a time) was replaced. Dozens of instances are now generated using the `count(N)` modifier.
+    *   Relationships previously pointed to detached fake instances. Now, they actively use the administrator user (`User::find(1)`) so it has generated data for manipulation; the rest is distributed using random lookups among other users (`User::inRandomOrder()->first()`).
 
-4.  **Refatoração do OnairSeeder & Relacionamento Polimórfico (Automatic)**
-    *   No `OnairSeeder` atendeu-se inteiramente a regra de ter obrigatoriamente 1 resultado com `in_air` como `true`, apontando a associação `program` para `App\Models\Automatic`.
-    *   Este model instanciado de Automatic foi checado/criado definindo o campo `is_default` restritamente como verdadeiro (`true`).
-    *   Problemas de coerência de chaves (`SongRequestSeeder` puxando IDs literais como `Onair::find(2)`) foram extintos em prol de buscas dinâmicas em loop pelos onairs correntes, prevenindo a quebra de Foreign Keys.
+4.  **OnairSeeder Refactoring & Polymorphic Relationship (Automatic)**
+    *   `OnairSeeder` fully met the requirement of having at least 1 result with `in_air` set to `true`, pointing the `program` association to `App\Models\Automatic`.
+    *   This instantiated Automatic model was set with the `is_default` field strictly as `true`.
+    *   Key coherence issues (`SongRequestSeeder` pulling literal IDs like `Onair::find(2)`) were replaced with dynamic loop lookups through current onairs, preventing Foreign Key breaks.
 
-## Resultado Final
-✅ Comando `php artisan migrate:fresh --seed` finalizado em 100% com dados densamente preenchidos, fidedignos e base testável para a visualização na Interface focando no perfil Admin.
+## Final Result
+✅ Command `php artisan migrate:fresh --seed` finalized 100% with dense, truthful data and a testable base for Interface visualization focusing on the Admin profile.

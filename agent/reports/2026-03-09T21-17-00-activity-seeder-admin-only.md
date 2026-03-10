@@ -1,15 +1,15 @@
-# Correção na Autoria de Atividades
+# Activity Authorship Correction
 
-**Data:** 09/03/2026
-**Hora:** 21:17 (Horário de Brasília)
-**Módulo Trabalhado:** Database / Seeders
-**Título:** Restrição de autores no ActivitySeeder
+**Date:** 2026-03-09
+**Time:** 21:17 (Brasília Time)
+**Module:** Database / Seeders
+**Title:** Authorship restriction in ActivitySeeder
 
-## Resumo das Alterações
-1.  **Restrição Administrativa em Activities**
-    *   No `ActivitySeeder`, a geração dinâmica de autores aleatórios `User::inRandomOrder()->first()` para a model `Activity` foi removida.
-    *   Foi consolidado a criação de múltiplas instâncias (15 registros) sendo todas apontadas estritamente para o usuário administrador principal (`User::find(1)`) por meio da diretiva `for()`.
-    *   Isso garante que, a partir de agora, as atividades do painel preenchidas no seeding estejam unicamente correlacionadas à conta admin, atendendo aos novos critérios estipulados de visualização e manipulação de relatórios e painéis apenas pelo administrador.
+## Summary of Changes
+1.  **Administrative Restriction in Activities**
+    *   In `ActivitySeeder`, dynamic generation of random authors (`User::inRandomOrder()->first()`) for the `Activity` model was removed.
+    *   Multiple instances (15 records) were consolidated, all strictly pointed to the primary administrator user (`User::find(1)`) via the `for()` directive.
+    *   This ensures that dashboard activities filled during seeding are uniquely correlated to the admin account, meeting new criteria for dashboard visualization and report manipulation solely by the administrator.
 
-## Resultado Final
-✅ Nenhuma atividade extra será preenchida simulando outros usuários no banco de dados. Comando `php artisan migrate:fresh --seed` deverá gerar atividades puramente como admin.
+## Final Result
+✅ No extra activities will be filled simulating other users in the database. The `php artisan migrate:fresh --seed` command will generate activities purely for the admin.

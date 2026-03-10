@@ -1,32 +1,32 @@
 ---
-title: Remoção de Comentários em Português
+title: Portuguese Comments Removal
 date: 2026-03-10
-description: Guia e relatório sobre a varredura e remoção de comentários em português em todo o projeto para padronização internacional.
+description: Guide and report on scanning and removing Portuguese comments throughout the project for international standardization.
 ---
 
-# Relatório de Limpeza: Remoção de Comentários em Português
+# Cleanup Report: Portuguese Comments Removal
 
-**Objetivo:** Padronizar a base de código removendo comentários escritos em português, mantendo apenas o código funcional e strings de interface/log destinadas ao usuário final ou integrações externas (Discord).
+**Objective:** Standardize the codebase by removing comments written in Portuguese, keeping only functional code and interface/log strings intended for the end-user or external integrations (Discord).
 
-## Ações Realizadas
+## Actions Taken
 
-### 1. Varredura do Projeto
-Foi realizada uma busca global (grep) utilizando expressões regulares para identificar caracteres especiais da língua portuguesa (`áéíóúâêîôûàèìòùãẽĩõũç`) dentro de blocos de comentário (`//`, `/*`, `*`).
+### 1. Project Scan
+A global search (grep) was performed using regular expressions to identify special characters from the Portuguese language (`áéíóúâêîôûàèìòùãẽĩõũç`) within comment blocks (`//`, `/*`, `*`).
 
-### 2. Limpeza de Arquivos
-Os seguintes arquivos foram identificados e limpos:
+### 2. File Cleanup
+The following files were identified and cleaned:
 
-*   **`app/Http/Controllers/Web/Public/HomeProvisoryController.php`**: Removidos comentários sobre tratamento de strings de música, extração de artistas e lógica de banco de dados.
-*   **`database/seeders/UserSeeder.php`**: Removidos comentários que descreviam a criação de administradores e usuários comuns.
-*   **`database/seeders/OnairSeeder.php`**: Removidos comentários sobre regras de negócios para registros "In Air".
-*   **`resources/js/app.js`**: Removidos comentários sobre registro de Service Worker e montagem da aplicação Svelte.
+*   **`app/Http/Controllers/Web/Public/HomeProvisoryController.php`**: Removed comments regarding song string handling, artist extraction, and database logic.
+*   **`database/seeders/UserSeeder.php`**: Removed comments describing the creation of administrators and regular users.
+*   **`database/seeders/OnairSeeder.php`**: Removed comments regarding business rules for "In Air" records.
+*   **`resources/js/app.js`**: Removed comments regarding Service Worker registration and Svelte application mounting.
 
-## Considerações de Preservação
-Para garantir que a aplicação não perdesse funcionalidade ou contexto para o usuário final, os seguintes itens **NÃO** foram removidos:
+## Preservation Considerations
+To ensure the application did not lose functionality or context for the end-user, the following items were **NOT** removed:
 
-*   **Mensagens para Discord**: Conteúdo de webhooks que notificam transmissões ao vivo.
-*   **Exceções e Erros**: Mensagens de erro lançadas em `Exceptions` (ex: "Nenhuma música foi selecionada").
-*   **Logs de Interface**: Mensagens que aparecem especificamente para o usuário no frontend ou logs operacionais de sistema que descrevem estados em português.
+*   **Discord Messages**: Content of webhooks notifying live streams.
+*   **Exceptions and Errors**: Error messages thrown in `Exceptions` (e.g., "Nenhuma música foi selecionada").
+*   **Interface Logs**: Messages appearing specifically for the user on the frontend or operational system logs describing states in Portuguese.
 
-## Resultado Final
-O código agora apresenta uma estética mais limpa e profissional, removendo redundâncias de explicação na língua nativa que podem ser interpretadas diretamente pela leitura do código limpo (Clean Code).
+## Final Result
+The code now presents a cleaner and more professional aesthetic, removing redundant native-language explanations that can be interpreted directly by reading the code (Clean Code).
