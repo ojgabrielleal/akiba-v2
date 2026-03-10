@@ -44,7 +44,7 @@
     const addSchedule = () => {
         $form.schedules = [
             ...$form.schedules,
-            { hour: null, day: null }
+            { uuid: null, hour: null, day: null }
         ]
     }
 

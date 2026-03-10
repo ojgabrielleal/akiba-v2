@@ -98,11 +98,19 @@ class RadioController extends Controller
         }
 
         if ($request->has('schedules')) {
-            foreach ($request->input('schedules') as $schedule) {
-                $program->schedules()->where('uuid', $schedule['uuid'])->update([
-                    'day' => $schedule['day'],
-                    'hour' => $schedule['hour'],
-                ]);
+            $schedules = collect($request->input('schedules'));
+
+            $uuidsToKeep = $schedules->pluck('uuid')->filter()->toArray();
+            $program->schedules()->whereNotIn('uuid', $uuidsToKeep)->delete();
+
+            foreach ($schedules as $schedule) {
+                $program->schedules()->updateOrCreate(
+                    ['uuid' => $schedule['uuid'] ?? null],
+                    [
+                        'day'  => $schedule['day'],
+                        'hour' => $schedule['hour'],
+                    ]
+                );
             }
         }
 

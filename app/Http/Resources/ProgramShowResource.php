@@ -27,6 +27,7 @@ class ProgramShowResource extends JsonResource
                 'gender' => $this->host->gender
             ],
             'schedules' => $this->schedules->map(fn($item) => [
+                'uuid' => $item->uuid,
                 'hour' => $item->hour->format('H:i'),
                 'day' => $item->day,
             ])

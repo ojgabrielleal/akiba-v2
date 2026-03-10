@@ -1,7 +1,7 @@
 <script>
     export let title;
 
-    import { page } from "@inertiajs/svelte";
+    import { router, page } from "@inertiajs/svelte";
     import { Offcanvas, Section } from "@/ui/components/private/";
     import { ProgramForm } from "@/ui/widgets/private/form";
     import { scrollx, hasPermission } from "@/utils";
@@ -10,8 +10,11 @@
 
     let offcanvasRef;
     let identifier;
-</script>
 
+    const requestDeactivateProgram = (program) => {
+        router.delete(`/painel/radio/program/${program}`)
+    }
+</script>
 
 <Offcanvas bind:this={offcanvasRef} title={identifier ? 'Atualizar programa' : 'Cadastrar programa'}>
     <div slot="content" let:close>
@@ -42,7 +45,7 @@
                         }}>
                             <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-blue-skywave" loading="lazy"/>
                         </button>
-                        <button>
+                        <button class="cursor-pointer" aria-label="desativar programa" on:click={()=>requestDeactivateProgram(item.uuid)}>
                             <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-red-crimson" loading="lazy"/>
                         </button>
                     </div>
