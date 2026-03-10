@@ -11,16 +11,16 @@ class ProgramFactory extends Factory
 {
     /**
      * Define the model's default state.
-    *
-    * @return array<string, mixed>
-    */
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
             'is_active' => true,
             'name' => fake()->name(),
             'image' => '/img/locution/default/program.webp',
-            'type' => fake()->randomElement(['free', 'private']),
+            'type' => 'free',
         ];
     }
 }

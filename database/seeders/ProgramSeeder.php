@@ -16,14 +16,23 @@ class ProgramSeeder extends Seeder
      */
     public function run(): void
     {
+        // Private programs with schedules
         Program::factory()->count(2)
+            ->state(['type' => 'private'])
             ->for(User::find(1), 'host')
             ->has(ProgramSchedule::factory()->count(2), 'schedules')
-            ->create();        
+            ->create();
 
-        Program::factory()->count(5)
+        Program::factory()->count(3)
+            ->state(['type' => 'private'])
             ->for(User::inRandomOrder()->first(), 'host')
             ->has(ProgramSchedule::factory()->count(2), 'schedules')
+            ->create();
+
+        // Free programs without schedules
+        Program::factory()->count(4)
+            ->state(['type' => 'free'])
+            ->for(User::inRandomOrder()->first(), 'host')
             ->create();
     }
 }
