@@ -4,6 +4,10 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use App\Models\Post;
+use App\Models\PostCategory;
+use App\Models\PostReference;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
  */
@@ -31,15 +35,15 @@ class PostFactory extends Factory
      */
     public function configure(): static
     {
-        return $this->afterCreating(function (\App\Models\Post $post) {
+        return $this->afterCreating(function (Post $post) {
             $categoriesCount = $post->categories()->count();
             if ($categoriesCount < 3) {
-                $post->categories()->saveMany(\App\Models\PostCategory::factory()->count(3 - $categoriesCount)->make());
+                $post->categories()->saveMany(PostCategory::factory()->count(3 - $categoriesCount)->make());
             }
 
             $referencesCount = $post->references()->count();
             if ($referencesCount < 3) {
-                $post->references()->saveMany(\App\Models\PostReference::factory()->count(3 - $referencesCount)->make());
+                $post->references()->saveMany(PostReference::factory()->count(3 - $referencesCount)->make());
             }
         });
     }

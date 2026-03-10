@@ -27,7 +27,6 @@ class OnairSeeder extends Seeder
                 ]);
         }
 
-        // Obrigatório que tenha pelo menos um com in_air verdadeiro apontando para Automatic com is_default verdadeiro
         Onair::factory()
             ->for($autoDefault, 'program')
             ->create([
@@ -35,7 +34,6 @@ class OnairSeeder extends Seeder
                 'type' => 'automatic'
             ]);
 
-        // Outros registros Onair
         $program = Program::factory()
             ->for(User::inRandomOrder()->first(), 'host')
             ->create();
@@ -46,7 +44,7 @@ class OnairSeeder extends Seeder
                 'in_air' => false,
                 'type' => 'live'
             ]);
-            
+
         Onair::factory()->count(5)
             ->for($program, 'program')
             ->create([

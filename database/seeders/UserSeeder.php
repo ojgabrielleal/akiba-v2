@@ -17,7 +17,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Administrador padrão para acesso
         User::factory()
             ->has(UserPreference::factory(), 'preferences')
             ->has(UserSocial::factory(), 'socials')
@@ -30,14 +29,12 @@ class UserSeeder extends Seeder
                 'gender' => 'female',
             ]);
 
-        // Outros administradores gerados aleatoriamente
         User::factory(3)
             ->has(UserPreference::factory(), 'preferences')
             ->has(UserSocial::factory(), 'socials')
             ->hasAttached(Role::where('name', 'administrator')->first(), [], 'roles')
             ->create();
 
-        // Vários outros usuários com papéis aleatórios ou normais
         $roles = Role::where('name', '!=', 'administrator')->get();
         if ($roles->count() > 0) {
             foreach ($roles as $role) {
