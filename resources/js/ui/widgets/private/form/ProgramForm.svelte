@@ -60,7 +60,7 @@
             name="image"
             src={$form.image}
             oninput={(event) => ($form.image = event.target.files[0])}
-            required={identifier}
+            required={!identifier}
         />
     </div>
     <div class="mb-4">

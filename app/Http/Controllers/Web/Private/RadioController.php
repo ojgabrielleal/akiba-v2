@@ -138,12 +138,6 @@ class RadioController extends Controller
 
     public function createProgram(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'image' => 'required',
-            'type' => 'required',
-        ]);
-
         Log::info($request->all());
 
         $user = User::where('uuid', $request->input('user'))->first();

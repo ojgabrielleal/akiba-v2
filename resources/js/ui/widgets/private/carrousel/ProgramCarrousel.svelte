@@ -13,7 +13,7 @@
 </script>
 
 
-<Offcanvas bind:this={offcanvasRef}>
+<Offcanvas bind:this={offcanvasRef} title={identifier ? 'Atualizar programa' : 'Cadastrar programa'}>
     <div slot="content" let:close>
         <ProgramForm {identifier} {close}/>
     </div>
