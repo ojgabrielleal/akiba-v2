@@ -25,4 +25,22 @@ class PostFactory extends Factory
             'type' => fake()->randomElement(['published', 'revision', 'draft'])
         ];
     }
+
+    /**
+     * Configure the model factory.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (\App\Models\Post $post) {
+            $categoriesCount = $post->categories()->count();
+            if ($categoriesCount < 3) {
+                $post->categories()->saveMany(\App\Models\PostCategory::factory()->count(3 - $categoriesCount)->make());
+            }
+
+            $referencesCount = $post->references()->count();
+            if ($referencesCount < 3) {
+                $post->references()->saveMany(\App\Models\PostReference::factory()->count(3 - $referencesCount)->make());
+            }
+        });
+    }
 }
