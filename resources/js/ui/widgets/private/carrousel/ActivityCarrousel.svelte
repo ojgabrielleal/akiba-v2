@@ -6,6 +6,8 @@
     import { scrollx, hasPermission } from "@/utils";
 
     $: ({ user, activities } = $page.props);
+
+    $: console.log(activities);
     
     let permissions = {
         'show_button_participate': hasPermission('activity.participate'),
@@ -22,7 +24,7 @@
         <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap" on:wheel={scrollx} role="group">
             {#if activities.data.length > 0}
                 {#each activities.data as item}  
-                    {@const showButtonParticipate = permissions.show_button_participate && !item.confirmations.some(conf => conf.confirmer.uuid === user.uuid)}
+                    {@const showButtonParticipate = permissions.show_button_participate && !item.confirmations.some(conf => conf.uuid === user.uuid)}
                     <article class={['w-100 h-50 lg:w-116 shrink-0 rounded-lg p-4 relative',
                         {'bg-neutral-honeycream': item.allows_confirmations},
                         {'bg-blue-skywave': !item.allows_confirmations}
@@ -43,8 +45,8 @@
                             <div class="flex gap-2 absolute bottom-3 left-4">
                                 {#each item.confirmations as item}
                                     <img
-                                        src={item.confirmer.avatar}
-                                        alt={item.confirmer.nickname}
+                                        src={item.avatar}
+                                        alt={item.nickname}
                                         class="w-10 h-10 rounded-full bg-neutral-aurora object-cover object-top"
                                         loading="lazy"
                                     />

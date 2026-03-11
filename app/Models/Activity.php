@@ -67,7 +67,7 @@ class Activity extends Model
 
     public function confirmations()
     {
-        return $this->hasMany(ActivityParticipants::class, 'activity_id');
+        return $this->belongsToMany(User::class, 'activity_pivot', 'activity_id', 'user_id');
     }
 
 }

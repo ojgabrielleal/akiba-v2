@@ -34,24 +34,4 @@ class UserFactory extends Factory
             'bibliography' => fake()->paragraph(),
         ];
     }
-
-    /**
-     * State: male
-     */
-    public function male(): static
-    {
-        return $this->state([
-            'gender' => 'male',
-        ]);
-    }
-
-    /**
-     * State: female
-     */
-    public function female(): static
-    {
-        return $this->state([
-            'gender' => 'female',
-        ]);
-    }
 }

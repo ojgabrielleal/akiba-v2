@@ -33,14 +33,15 @@ class PostTest extends TestCase
     public function testReferencesRelationshipReturnsPostReferences(): void
     {
         $user = User::factory()->create();
-        $reference = PostReference::factory()->count(3);
+        $reference = PostReference::factory()->count(2);
 
         $post = Post::factory()
             ->for($user, 'author')
             ->has($reference, 'references')
             ->create();
 
-        $this->assertCount(3, $post->references);
+        $this->assertCount(2, $post->references);
+        $this->assertGreaterThanOrEqual(2, $post->references->count());
         $this->assertContainsOnlyInstancesOf(
             PostReference::class,
             $post->references
@@ -67,14 +68,15 @@ class PostTest extends TestCase
     public function testCategoriesRelationshipReturnsPostCategories(): void
     {
         $user = User::factory()->create();
-        $category = PostCategory::factory()->count(3);
+        $category = PostCategory::factory()->count(2);
 
         $post = Post::factory()
             ->for($user, 'author')
             ->has($category, 'categories')
             ->create();
 
-        $this->assertCount(3, $post->categories);
+        $this->assertCount(2, $post->categories);
+        $this->assertGreaterThanOrEqual(2, $post->categories->count());
         $this->assertContainsOnlyInstancesOf(
             PostCategory::class,
             $post->categories

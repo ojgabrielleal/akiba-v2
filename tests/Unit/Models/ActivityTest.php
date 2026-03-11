@@ -8,7 +8,6 @@ use Tests\TestCase;
 
 use App\Models\User;
 use App\Models\Activity;
-use App\Models\ActivityParticipants;
 
 class ActivityTest extends TestCase
 {
@@ -19,28 +18,30 @@ class ActivityTest extends TestCase
      */
     public function testAuthorRelationshipReturnsUser(): void
     {
-        $user = User::factory()->create();
+        $role = \App\Models\Role::factory()->create(['name' => 'administrator']);
+        $user = User::factory()->hasAttached($role, [], 'roles')->create();
 
         $activity = Activity::factory()
             ->for($user, 'author')
             ->create();
 
         $this->assertTrue($activity->author->is($user));
+        $this->assertTrue($activity->author->roles->contains($role));
     }
 
     public function testConfirmerRelationshipReturnsUsers(): void
     {
         $user = User::factory()->create();
-        $confirmers = ActivityParticipants::factory()->for($user, 'confirmer')->count(5);
+        $confirmers = User::factory(5);
 
         $activity = Activity::factory()
             ->for($user, 'author')
-            ->has($confirmers, 'confirmations')
+            ->hasAttached($confirmers, fn() => ['uuid' => (string) \Illuminate\Support\Str::uuid()], 'confirmations')
             ->create();
 
         $this->assertCount(5, $activity->confirmations);
         $this->assertContainsOnlyInstancesOf(
-            ActivityParticipants::class,
+            User::class,
             $activity->confirmations
         );
     }

@@ -23,13 +23,10 @@ class ActivityIndexResource extends JsonResource
 
             ],
             'confirmations' => $this->confirmations->map(fn($item) => [
-                'uuid' => $item->uuid,
-                'confirmer' => [
-                    'uuid' => $item->confirmer->uuid,
-                    'name' => $item->confirmer->name,
-                    'nickname' => $item->confirmer->nickname,
-                    'avatar' => $item->confirmer->avatar,
-                ],
+                    'uuid' => $item->uuid,
+                    'name' => $item->name,
+                    'nickname' => $item->nickname,
+                    'avatar' => $item->avatar,
             ]),
         ];
     }

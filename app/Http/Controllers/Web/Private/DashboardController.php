@@ -28,7 +28,7 @@ class DashboardController extends Controller
     {
         return ActivityIndexResource::collection(
             Activity::valid()
-                ->with(['author', 'confirmations.confirmer'])
+                ->with(['author', 'confirmations'])
                 ->limit(10)
                 ->get()
         );
@@ -67,10 +67,7 @@ class DashboardController extends Controller
 
     public function confirmActivityParticipant(Activity $activity)
     {
-        $activity->confirmations()->create([
-            'user_id' => request()->user()->id
-        ]);
-
+        $activity->confirmations()->attach(request()->user()->id);
         return $this->flashMessage('participate');
     }
 

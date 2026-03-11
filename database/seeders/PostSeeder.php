@@ -18,18 +18,22 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
+        $admin = User::whereHas('roles', function ($query) {
+            $query->where('name', 'administrator');
+        })->first();
+
         Post::factory()->count(5)
-            ->for(User::find(1), 'author')
-            ->has(PostReference::factory()->count(3), 'references')
+            ->for($admin, 'author')
+            ->has(PostReference::factory()->count(2), 'references')
             ->has(PostReaction::factory()->count(5), 'reactions')
-            ->has(PostCategory::factory()->count(3), 'categories')
+            ->has(PostCategory::factory()->count(2), 'categories')
             ->create();
 
         Post::factory()->count(15)
             ->for(User::inRandomOrder()->first(), 'author')
-            ->has(PostReference::factory()->count(3), 'references')
+            ->has(PostReference::factory()->count(2), 'references')
             ->has(PostReaction::factory()->count(3), 'reactions')
-            ->has(PostCategory::factory()->count(3), 'categories')
+            ->has(PostCategory::factory()->count(2), 'categories')
             ->create();
     }
 }
