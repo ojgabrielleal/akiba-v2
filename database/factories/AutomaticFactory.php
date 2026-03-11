@@ -17,7 +17,6 @@ class AutomaticFactory extends Factory
     public function definition(): array
     {
         return [
-            'is_default' => false,
             'name' => fake()->word(),
             'image' => '/img/onair/default/program.webp',
             'phrases' => collect([
