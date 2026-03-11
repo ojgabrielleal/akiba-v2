@@ -21,12 +21,7 @@ class CalendarFactory extends Factory
             'date' => fake()->dateTimeBetween(
                 now()->startOfWeek(), now()->endOfWeek()
             )->format('Y-m-d'),
-            'type' => fake()->randomElement([
-'show', 
-'live', 
-'video', 
-'podcast'
-]),
+            'type' => fake()->randomElement(['show', 'live', 'video', 'podcast']),
             'content' => fake()->word()
         ];
     }
