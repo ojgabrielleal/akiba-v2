@@ -26,7 +26,11 @@ class PostFactory extends Factory
             'title' => fake()->text(),
             'content' => fake()->paragraph(),
             'cover' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
-            'type' => fake()->randomElement(['published', 'revision', 'draft'])
+            'type' => fake()->randomElement([
+                'published', 
+                'revision', 
+                'draft'
+            ])
         ];
     }
 }

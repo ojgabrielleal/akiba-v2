@@ -17,7 +17,10 @@ class MusicFactory extends Factory
     public function definition(): array
     {
         return [
-            'type' => fake()->randomElement(['OP', 'ED']),
+            'type' => fake()->randomElement([
+                'OP', 
+                'ED'
+            ]),
             'production' => fake()->word(),
             'image' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
             'artist' => fake()->name(),

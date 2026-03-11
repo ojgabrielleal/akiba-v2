@@ -17,7 +17,6 @@ class PollFactory extends Factory
     public function definition(): array
     {
         return [
-            'is_active' => true,
             'question' => fake()->sentence(),
         ];
     }

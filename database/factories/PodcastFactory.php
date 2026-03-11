@@ -17,7 +17,6 @@ class PodcastFactory extends Factory
     public function definition(): array
     {
         return [
-            'is_active' => true,
             'title' => fake()->word(),
             'image' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
             'season' => fake()->randomNumber(),
