@@ -18,15 +18,17 @@ class SongRequestSeeder extends Seeder
      */
     public function run(): void
     {
-        $onairs = Onair::inRandomOrder()->take(3)->get();
+        $onairs = Onair::inRandomOrder()->take(5)->get();
+        $music = Music::inRandomOrder()->first();
+
         if ($onairs->isEmpty()) {
             return;
         }
 
         foreach ($onairs as $onair) {
-            SongRequest::factory()->count(10)
+            SongRequest::factory(5)
                 ->for($onair, 'onair')
-                ->for(Music::inRandomOrder()->first() ?? Music::factory()->create(), 'music')
+                ->for($music, 'music')
                 ->create();
         }
     }

@@ -18,41 +18,45 @@ class SongRequestTest extends TestCase
     /**
      * Tests from SongRequest model relationships.
      */
-    public function testOnairRelationshipReturnsOnair(): void
+    public function testOnairRelationship(): void
     {
         $user = User::factory()->create();
-        $program = Program::factory()->create(['user_id' => $user->id]);
-        $onair = Onair::factory()->create([
-            'program_id' => $program->id,
-            'program_type' => get_class($program)
-        ]);
-
         $music = Music::factory()->create();
+
+        $program = Program::factory()
+            ->for($user, 'host')
+            ->create();
+
+        $onair = Onair::factory()
+            ->for($program, 'program')
+            ->create();
+
 
         $songRequest = SongRequest::factory()
             ->for($onair, 'onair')
-            ->create(['music_id' => $music->id]);
+            ->for($music, 'music')
+            ->create();
 
-        $this->assertInstanceOf(Onair::class, $songRequest->onair);
         $this->assertTrue($songRequest->onair->is($onair));
     }
 
-    public function testMusicRelationshipReturnsMusic(): void
+    public function testMusicRelationship(): void
     {
         $music = Music::factory()->create();
-
         $user = User::factory()->create();
-        $program = Program::factory()->create(['user_id' => $user->id]);
-        $onair = Onair::factory()->create([
-            'program_id' => $program->id,
-            'program_type' => get_class($program)
-        ]);
+
+        $program = Program::factory()
+            ->for($user, 'host')
+            ->create();
+
+        $onair = Onair::factory()
+            ->for($program, 'program')
+            ->create();
 
         $songRequest = SongRequest::factory()
             ->for($music, 'music')
             ->create(['onair_id' => $onair->id]);
 
-        $this->assertInstanceOf(Music::class, $songRequest->music);
         $this->assertTrue($songRequest->music->is($music));
     }
 }

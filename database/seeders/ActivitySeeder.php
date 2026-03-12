@@ -15,11 +15,9 @@ class ActivitySeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::whereHas('roles', function ($query) {
-            $query->where('name', 'administrator');
-        })->first();
+        $admin = User::find(1);
 
-        Activity::factory()->count(15)
+        Activity::factory(5)
             ->for($admin, 'author')
             ->create();
     }

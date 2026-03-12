@@ -16,15 +16,15 @@ class ReviewContentTest extends TestCase
     /**
      * Tests from ReviewContent model relationships.
      */
-    public function testAuthorRelationshipReturnsUser(): void
+    public function testAuthorRelationship(): void
     {
         $user = User::factory()->create();
-
         $review = Review::factory()->create();
 
         $reviewContent = ReviewContent::factory()
             ->for($user, 'author')
-            ->create(['review_id' => $review->id]);
+            ->for($review, 'review')
+            ->create();
 
         $this->assertInstanceOf(User::class, $reviewContent->author);
         $this->assertTrue($reviewContent->author->is($user));

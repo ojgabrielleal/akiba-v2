@@ -1,4 +1,4 @@
-s<?php
+<?php
 
 namespace Tests\Unit\Models;
 
@@ -16,17 +16,15 @@ class RoleTest extends TestCase
     /**
      * Tests from Role model relationships.
      */
-    public function testPermissionsRelationshipReturnsPermissions(): void
+    public function testPermissionsRelationship(): void
     {
-        $permission = Permission::factory()->count(3);
+        $permission = Permission::factory(3);
+
         $role = Role::factory()
-            ->hasAttached($permission, [], 'permissions')
+            ->has($permission, 'permissions')
             ->create();
 
         $this->assertCount(3, $role->permissions);
-        $this->assertContainsOnlyInstancesOf(
-            Permission::class,
-            $role->permissions
-        );
+        $this->assertContainsOnlyInstancesOf(Permission::class, $role->permissions);
     }
 }

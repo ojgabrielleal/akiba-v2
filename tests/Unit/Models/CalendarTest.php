@@ -17,7 +17,7 @@ class CalendarTest extends TestCase
     /**
      * Tests from Calendar model relationships.
      */
-    public function testResponsibleRelationshipReturnsUser(): void
+    public function testResponsibleRelationship(): void
     {
         $user = User::factory()->create();
 
@@ -28,7 +28,7 @@ class CalendarTest extends TestCase
         $this->assertTrue($calendar->responsible->is($user));
     }
 
-    public function testActivityRelationshipReturnsActivity(): void
+    public function testActivityRelationship(): void
     {
         $user = User::factory()->create();
 
@@ -49,7 +49,7 @@ class CalendarTest extends TestCase
     /**
     * Tests from Calendar model scopes.
     */
-    public function testActiveScopeReturnsOnlyActiveCalendars(): void
+    public function testActiveScope(): void
     {
         $user = User::factory()->create();
 

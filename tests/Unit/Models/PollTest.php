@@ -16,31 +16,32 @@ class PollTest extends TestCase
     /**
      * Tests from Poll model relationships.
      */
-    public function testOptionsRelationshipReturnsPollOptions(): void
+    public function testOptionsRelationship(): void
     {
-        $options = PollOption::factory()->count(3);
+        $options = PollOption::factory(3);
 
         $poll = Poll::factory()
             ->has($options, 'options')
             ->create();
 
         $this->assertCount(3, $poll->options);
-        $this->assertContainsOnlyInstancesOf(
-            PollOption::class,
-            $poll->options
-        );
+        $this->assertContainsOnlyInstancesOf(PollOption::class, $poll->options);
     }
 
     /**
      * Tests from Poll model scopes.
      */
-    public function testScopeActiveReturnsOnlyActivePolls(): void
+    public function testActiveScope(): void
     {
         $activePoll = Poll::factory()
-            ->create(['is_active' => true]);
+            ->create([
+                'is_active' => true
+            ]); 
 
         $inactivePoll = Poll::factory()
-            ->create(['is_active' => false]);
+            ->create([
+                'is_active' => false
+            ]);
 
         $polls = Poll::active()->get();
 

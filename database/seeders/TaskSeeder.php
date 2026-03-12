@@ -15,18 +15,23 @@ class TaskSeeder extends Seeder
      */
     public function run(): void
     {
-        Task::factory()->count(5)
-            ->for(User::inRandomOrder()->first(), 'responsible')
+        $user = User::inRandomOrder()->first();
+        $admin = User::find(1);
+
+        Task::factory(5)
+            ->for($user, 'responsible')
             ->create();
 
-        Task::factory()->count(5)
-            ->for(User::find(1), 'responsible')
+        Task::factory(5)
+            ->for($admin, 'responsible')
             ->create();
 
-        Task::factory()->count(2)
-            ->for(User::find(1), 'responsible')
+        Task::factory(5)
+            ->for($admin, 'responsible')
             ->create([
-                'dead_line' => fn() => fake()->dateTimeBetween(now()->startOfWeek(), now()->endOfWeek())->format('Y-m-d')
+                'dead_line' => fn() => fake()->dateTimeBetween(
+                    now()->startOfWeek(), now()->endOfWeek()
+                )->format('Y-m-d')
             ]);
     }
 }

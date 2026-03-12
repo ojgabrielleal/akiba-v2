@@ -5,6 +5,7 @@ namespace Tests\Unit\Models;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Carbon\Carbon;
 
 use App\Models\User;
 use App\Models\Task;
@@ -16,7 +17,7 @@ class TaskTest extends TestCase
     /**
      * Tests from Task model relationships.
      */
-    public function testResponsibleRelationshipReturnsUser(): void
+    public function testResponsibleRelationship(): void
     {
         $user = User::factory()->create();
 
@@ -30,17 +31,21 @@ class TaskTest extends TestCase
     /**
      * Tests from Task model scopes.
      */
-    public function testScopeActiveReturnsOnlyActiveTasks(): void
+    public function testActiveScope(): void
     {
         $user = User::factory()->create();
 
         $activeTask = Task::factory()
             ->for($user, 'responsible')
-            ->create(['is_active' => true]);
+            ->create([
+                'is_active' => true
+            ]);
 
         $inactiveTask = Task::factory()
             ->for($user, 'responsible')
-            ->create(['is_active' => false]);
+            ->create([
+                'is_active' => false
+            ]);
 
         $activeTasks = Task::active()->get();
 
@@ -48,17 +53,21 @@ class TaskTest extends TestCase
         $this->assertFalse($activeTasks->contains($inactiveTask));
     }
 
-    public function testScopeIncompletedReturnsOnlyIncompletedTasks(): void
+    public function testIncompletedScope(): void
     {
         $user = User::factory()->create();
 
         $incompletedTask = Task::factory()
             ->for($user, 'responsible')
-            ->create(['is_completed' => false]);
+            ->create([
+                'is_completed' => false
+            ]);
 
         $completedTask = Task::factory()
             ->for($user, 'responsible')
-            ->create(['is_completed' => true]);
+            ->create([
+                'is_completed' => true
+            ]);
 
         $incompletedTasks = Task::incompleted()->get();
 
@@ -66,7 +75,7 @@ class TaskTest extends TestCase
         $this->assertFalse($incompletedTasks->contains($completedTask));
     }
 
-    public function testScopeMineReturnsOnlyTasksOfAuthenticatedUser(): void
+    public function testMineScope(): void
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -93,41 +102,48 @@ class TaskTest extends TestCase
      */
     public function testAttributeIsOverReturnsCorrectValue(): void
     {
-        $today = \Carbon\Carbon::parse('2026-01-20');
-        \Carbon\Carbon::setTestNow($today);
+        $today = Carbon::parse('2026-01-20');
+
+        Carbon::setTestNow($today);
 
         $user = User::factory()->create();
 
-        $overTask = Task::factory()->for($user, 'responsible')->create([
-            'dead_line' => '2026-01-15',
-            'is_completed' => false
-        ]);
+        $overTask = Task::factory()
+            ->for($user, 'responsible')
+            ->create([
+                'dead_line' => '2026-01-15',
+                'is_completed' => false
+            ]);
 
-        $farTask = Task::factory()->for($user, 'responsible')->create([
-            'dead_line' => '2026-01-30',
-            'is_completed' => false
-        ]);
+        $farTask = Task::factory()
+            ->for($user, 'responsible')
+            ->create([
+                'dead_line' => '2026-01-30',
+                'is_completed' => false
+            ]);
 
-        $this->assertTrue($overTask->is_over, 'Tarefa tem que ser dada como vencida.');
-        $this->assertFalse($farTask->is_over, 'Tarefa tem que ser dada como não vencida');
+        $this->assertTrue($overTask->is_over);
+        $this->assertFalse($farTask->is_over);
 
-        \Carbon\Carbon::setTestNow();
+        Carbon::setTestNow();
     }
 
     public function testAttributeIsDueReturnsCorrectValue(): void
     {
-        $today = \Carbon\Carbon::parse('2026-01-20');
-        \Carbon\Carbon::setTestNow($today);
+        $today = Carbon::parse('2026-01-20');
+
+        Carbon::setTestNow($today);
 
         $user = User::factory()->create();
 
-        $dueTask = Task::factory()->for($user, 'responsible')->create([
-            'dead_line' => '2026-01-25',
-            'is_completed' => false
-        ]);
+        $dueTask = Task::factory()
+            ->for($user, 'responsible')
+            ->create([
+                'dead_line' => '2026-01-25',
+                'is_completed' => false
+            ]);
 
-        $this->assertTrue($dueTask->is_due, 'Tarefa vai vencer dentro dos próximos 7 dias.');
-
-        \Carbon\Carbon::setTestNow();
+        $this->assertTrue($dueTask->is_due);
+        Carbon::setTestNow();
     }
 }

@@ -15,12 +15,15 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
-        Event::factory()->count(3)
-            ->for(User::find(1), 'author')
+        $admin = User::find(1);
+        $user = User::inRandomOrder()->first();
+        
+        Event::factory(5)
+            ->for($admin, 'author')
             ->create();
 
-        Event::factory()->count(5)
-            ->for(User::inRandomOrder()->first(), 'author')
+        Event::factory(5)
+            ->for($user, 'author')
             ->create();
     }
 }

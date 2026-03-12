@@ -17,7 +17,7 @@ class OnairTest extends TestCase
     /**
      * Tests from Onair model relationships.
      */
-    public function testProgramRelationshipReturnsProgram(): void
+    public function testProgramRelationship(): void
     {
         $user = User::factory()->create();
 
@@ -35,7 +35,7 @@ class OnairTest extends TestCase
     /**
      * Tests from Onair model scopes.
      */
-    public function testScopeLiveReturnsOnlyLiveOnairs(): void
+    public function testLiveScope(): void
     {
         $user = User::factory()->create();
 

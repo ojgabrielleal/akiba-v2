@@ -16,7 +16,7 @@ class EventTest extends TestCase
     /**
      * Tests from Event model relationships.
      */
-    public function testAuthorRelationshipReturnsUser(): void
+    public function testAuthorRelationship(): void
     {
         $user = User::factory()->create();
 
@@ -30,7 +30,7 @@ class EventTest extends TestCase
     /**
      * Tests from Event model scopes.
      */
-    public function testActiveScopeReturnsOnlyActiveEvents(): void
+    public function testActiveScope(): void
     {
         $user = User::factory()->create();
 
@@ -51,7 +51,7 @@ class EventTest extends TestCase
     /**
      * Tests from Event model mutators.
      */
-    public function testTitleMutatorSetsSlugCorrectly(): void
+    public function testTitleMutator(): void
     {
         $user = User::factory()->create();
 

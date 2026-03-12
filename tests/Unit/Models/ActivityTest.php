@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 use App\Models\User;
 use App\Models\Activity;
+use App\Models\Role;
 
 class ActivityTest extends TestCase
 {
@@ -16,49 +17,46 @@ class ActivityTest extends TestCase
     /**
      * Tests from Activity model relationships.
      */
-    public function testAuthorRelationshipReturnsUser(): void
+    public function testAuthorRelationship(): void
     {
-        $role = \App\Models\Role::factory()->create(['name' => 'administrator']);
-        $user = User::factory()->hasAttached($role, [], 'roles')->create();
+        $role = Role::factory()->create(['name' => 'administrator']);
+        $admin = User::factory()->hasAttached($role, [], 'roles')->create();
 
         $activity = Activity::factory()
-            ->for($user, 'author')
+            ->for($admin, 'author')
             ->create();
 
-        $this->assertTrue($activity->author->is($user));
-        $this->assertTrue($activity->author->roles->contains($role));
+        $this->assertTrue($activity->author->is($admin));
     }
 
-    public function testConfirmerRelationshipReturnsUsers(): void
+    public function testConfirmerRelationship(): void
     {
-        $user = User::factory()->create();
-        $confirmers = User::factory(5);
+        $role = Role::factory()->create(['name' => 'administrator']);
+        $admin = User::factory()->hasAttached($role, [], 'roles')->create();
 
         $activity = Activity::factory()
-            ->for($user, 'author')
-            ->hasAttached($confirmers, fn() => ['uuid' => (string) \Illuminate\Support\Str::uuid()], 'confirmations')
+            ->for($admin, 'author')
+            ->hasAttached(User::factory(5), [], 'confirmations')
             ->create();
 
         $this->assertCount(5, $activity->confirmations);
-        $this->assertContainsOnlyInstancesOf(
-            User::class,
-            $activity->confirmations
-        );
+        $this->assertContainsOnlyInstancesOf(User::class, $activity->confirmations);
     }
 
     /**
      * Tests from Activity model scopes.
      */
-    public function testScopeValidReturnsOnlyValidActivities(): void
+    public function testValidScope(): void
     {
-        $user = User::factory()->create();
+        $role = Role::factory()->create(['name' => 'administrator']);
+        $admin = User::factory()->hasAttached($role, [], 'roles')->create();
 
         $expiredActivity = Activity::factory()
-            ->for($user, 'author')
+            ->for($admin, 'author')
             ->create(['limit' => now()->subDays(3)]);
 
         $validActivity = Activity::factory()
-            ->for($user, 'author')
+            ->for($admin, 'author')
             ->create(['limit' => now()->addDays(3)]);
 
         $activities = Activity::valid()->get();

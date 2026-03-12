@@ -15,8 +15,8 @@ class PollSeeder extends Seeder
      */
     public function run(): void
     {
-        Poll::factory()->count(5)
-            ->has(PollOption::factory()->count(3), 'options')
+        Poll::factory(5)
+            ->has(PollOption::factory(4), 'options')
             ->create();
     }
 }

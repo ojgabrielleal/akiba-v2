@@ -17,7 +17,7 @@ class ReviewTest extends TestCase
     /**
      * Tests from Review model relationships.
      */
-    public function testReviewsRelationshipReturnsReviewContents(): void
+    public function testReviewsRelationship(): void
     {
         $user = User::factory()->create();
 
@@ -37,7 +37,7 @@ class ReviewTest extends TestCase
     /**
      * Tests from Post model mutators.
      */
-    public function testTitleMutatorSetsSlugCorrectly(): void
+    public function testTitleMutator(): void
     {
         $user = User::factory()->create();
 

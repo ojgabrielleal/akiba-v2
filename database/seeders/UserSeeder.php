@@ -29,26 +29,10 @@ class UserSeeder extends Seeder
                 'gender' => 'female',
             ]);
 
-        User::factory(3)
+        User::factory(5)
             ->has(UserPreference::factory(), 'preferences')
             ->has(UserSocial::factory(), 'socials')
-            ->hasAttached(Role::where('name', 'administrator')->first(), [], 'roles')
+            ->hasAttached(Role::where('name', 'user')->first(), [], 'roles')
             ->create();
-
-        $roles = Role::where('name', '!=', 'administrator')->get();
-        if ($roles->count() > 0) {
-            foreach ($roles as $role) {
-                User::factory(10)
-                    ->has(UserPreference::factory(), 'preferences')
-                    ->has(UserSocial::factory(), 'socials')
-                    ->hasAttached($role, [], 'roles')
-                    ->create();
-            }
-        } else {
-            User::factory(20)
-                ->has(UserPreference::factory(), 'preferences')
-                ->has(UserSocial::factory(), 'socials')
-                ->create();
-        }
     }
 }

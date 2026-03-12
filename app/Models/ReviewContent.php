@@ -42,6 +42,11 @@ class ReviewContent extends Model
      * Use these methods to access related data via Eloquent relationships
      * (hasOne, hasMany, belongsTo, belongsToMany, etc.).
      */
+    public function review()
+    {
+        return $this->belongsTo(Review::class, 'review_id');
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');

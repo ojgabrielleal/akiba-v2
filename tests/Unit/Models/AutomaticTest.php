@@ -17,9 +17,10 @@ class AutomaticTest extends TestCase
     /**
      * Tests from Automatic model relationships.
      */
-    public function testAuthorRelationshipReturnsUser(): void
+    public function testAuthorRelationship(): void
     {
         $user = User::factory()->create();
+
         $auto = Automatic::factory()
             ->for($user, 'host')
             ->create();
@@ -27,7 +28,7 @@ class AutomaticTest extends TestCase
         $this->assertTrue($auto->host->is($user));
     }
 
-    public function testOnairRelationshipReturnsOnair(): void
+    public function testOnairRelationship(): void
     {
         $user = User::factory()->create();
 

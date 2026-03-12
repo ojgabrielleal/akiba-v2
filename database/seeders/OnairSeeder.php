@@ -17,39 +17,34 @@ class OnairSeeder extends Seeder
      */
     public function run(): void
     {
-        $autoDefault = Automatic::where('is_default', true)->first();
+        $admin = User::find(1);
+        $user = User::inRandomOrder()->first();
 
-        if (!$autoDefault) {
-            $autoDefault = Automatic::factory()
-                ->for(User::find(1) ?? User::factory()->create(), 'host')
+        $auto = Automatic::where('is_default', true)->first();
+
+        if (!$auto) {
+            $auto = Automatic::factory()
+                ->for($admin ?? $user, 'host')
                 ->create([
                     'is_default' => true,
                 ]);
         }
 
         Onair::factory()
-            ->for($autoDefault, 'program')
+            ->for($auto, 'program')
             ->create([
-                'in_air' => true,
                 'type' => 'automatic'
             ]);
 
         $program = Program::factory()
-            ->for(User::inRandomOrder()->first(), 'host')
+            ->for($user, 'host')
             ->create();
 
-        Onair::factory()->count(5)
+        Onair::factory(5)
             ->for($program, 'program')
             ->create([
                 'in_air' => false,
                 'type' => 'live'
-            ]);
-
-        Onair::factory()->count(5)
-            ->for($program, 'program')
-            ->create([
-                'in_air' => false,
-                'type' => 'scheduled'
             ]);
     }
 }

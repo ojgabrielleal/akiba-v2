@@ -15,10 +15,16 @@ class AutomaticSeeder extends Seeder
      */
     public function run(): void
     {
+        $user = User::inRandomOrder()->first();
+        
         Automatic::factory()
-            ->for(User::factory()->create(), 'host')
+            ->for($user, 'host')
             ->create([
                 'is_default' => true,
             ]);
+
+        Automatic::factory(5)
+            ->for($user, 'host')
+            ->create();
     }
 }

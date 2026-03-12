@@ -14,10 +14,15 @@ class MusicTest extends TestCase
     /**
      * Tests from Music model scopes.
      */
-    public function testScopeRankingReturnsOnlyRankedMusics(): void
+    public function testScopeRanking(): void
     {
-        $rankedMusic = Music::factory()->create(['in_ranking' => true]);
-        $notRankedMusic = Music::factory()->create(['in_ranking' => false]);
+        $rankedMusic = Music::factory()->create([
+            'in_ranking' => true
+        ]);
+
+        $notRankedMusic = Music::factory()->create([
+            'in_ranking' => false
+        ]);
 
         $musics = Music::ranking()->get();
 

@@ -16,10 +16,13 @@ class ProgramScheduleTest extends TestCase
     /**
      * Tests from ProgramSchedule model relationships.
      */
-    public function testProgramRelationshipReturnsProgram(): void
+    public function testProgramRelationship(): void
     {
         $user = User::factory()->create();
-        $program = Program::factory()->create(['user_id' => $user->id]);
+
+        $program = Program::factory()
+            ->for($user, 'host')
+            ->create();
 
         $schedule = ProgramSchedule::factory()
             ->for($program, 'program')

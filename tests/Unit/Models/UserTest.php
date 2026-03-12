@@ -18,7 +18,7 @@ class UserTest extends TestCase
     /**
      * Tests from User model relationships.
      */
-    public function testPreferencesRelationshipReturnsUserPreferences(): void
+    public function testPreferencesRelationship(): void
     {
         $preference = UserPreference::factory();
 
@@ -26,13 +26,10 @@ class UserTest extends TestCase
             ->has($preference, 'preferences')
             ->create();
 
-        $this->assertContainsOnlyInstancesOf(
-            UserPreference::class,
-             $user->preferences
-        );
+        $this->assertContainsOnlyInstancesOf(UserPreference::class, $user->preferences);
     }
 
-    public function testSocialsRelationshipReturnsUserSocials(): void
+    public function testSocialsRelationship(): void
     {
         $social = UserSocial::factory();
 
@@ -40,13 +37,10 @@ class UserTest extends TestCase
             ->has($social, 'socials')
             ->create();
 
-        $this->assertContainsOnlyInstancesOf(
-            UserSocial::class,
-            $user->socials
-        );
+        $this->assertContainsOnlyInstancesOf(UserSocial::class, $user->socials);
     }
 
-    public function testRolesRelationshipReturnsRoles(): void
+    public function testRolesRelationship(): void
     {
         $role = Role::factory();
         
@@ -54,19 +48,23 @@ class UserTest extends TestCase
             ->hasAttached($role, [], 'roles')
             ->create();
 
-        $this->assertContainsOnlyInstancesOf(
-            Role::class,
-            $user->roles
-        );
+        $this->assertContainsOnlyInstancesOf(Role::class, $user->roles);
     }
 
     /**
      * Tests from User model scopes.
      */
-    public function testScopeActiveReturnsOnlyActiveUsers(): void
+    public function testActiveScope(): void
     {
-        $activeUser = User::factory()->create(['is_active' => true]);
-        $inactiveUser = User::factory()->create(['is_active' => false]);
+        $activeUser = User::factory()
+            ->create([
+                'is_active' => true
+            ]);
+
+        $inactiveUser = User::factory()
+            ->create([
+                'is_active' => false
+            ]);
 
         $users = User::active()->get();
 
@@ -77,7 +75,7 @@ class UserTest extends TestCase
     /**
      * Tests from User model mutators.
      */
-    public function testUsernameMutatorSetsSlugCorrectly(): void
+    public function testUsernameMutator(): void
     {
         $user = User::factory()->create(
             ['nickname' => 'sample-review-title']

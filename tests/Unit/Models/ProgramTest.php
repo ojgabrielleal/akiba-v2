@@ -18,7 +18,7 @@ class ProgramTest extends TestCase
     /**
      * Tests from Program model relationships.
      */
-    public function testHostRelationshipReturnsUser(): void
+    public function testHostRelationship(): void
     {
         $user = User::factory()->create();
 
@@ -29,10 +29,10 @@ class ProgramTest extends TestCase
         $this->assertTrue($program->host->is($user));
     }
 
-    public function testSchedulesRelationshipReturnsProgramSchedules(): void
+    public function testSchedulesRelationship(): void
     {
         $user = User::factory()->create();
-        $schedules = ProgramSchedule::factory()->count(3);
+        $schedules = ProgramSchedule::factory(3);
 
         $program = Program::factory()
             ->for($user, 'host')
@@ -40,13 +40,10 @@ class ProgramTest extends TestCase
             ->create();
 
         $this->assertCount(3, $program->schedules);
-        $this->assertContainsOnlyInstancesOf(
-            ProgramSchedule::class,
-            $program->schedules
-        );
+        $this->assertContainsOnlyInstancesOf(ProgramSchedule::class, $program->schedules);
     }
 
-    public function testOnairRelationshipReturnsOnair(): void
+    public function testOnairRelationship(): void
     {
         $user = User::factory()->create();
 
@@ -64,7 +61,7 @@ class ProgramTest extends TestCase
     /**
      * Tests from Program model scopes.
      */
-    public function testScopeActiveReturnsOnlyActivePrograms(): void
+    public function testActiveScope(): void
     {
         $user = User::factory()->create();
 

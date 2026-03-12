@@ -15,13 +15,13 @@ class RepositoryTest extends TestCase
     /**
      * Tests from Repository model scopes.
      */
-    public function testScopeActiveReturnsOnlyActivePrograms(): void
+    public function testActiveScope(): void
     {
         $activeRepository = Repository::factory()
-                ->create(['is_active' => true]);
+            ->create(['is_active' => true]);
 
         $inactiveRepository = Repository::factory()
-                ->create(['is_active' => false]);
+            ->create(['is_active' => false]);
 
         $activeRepositories = Repository::active()->get();
 

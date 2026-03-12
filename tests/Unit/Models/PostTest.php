@@ -19,7 +19,7 @@ class PostTest extends TestCase
     /**
      * Tests from Post model relationships.
      */
-    public function testAuthorRelationshipReturnsUser(): void
+    public function testAuthorRelationship(): void
     {
         $user = User::factory()->create();
 
@@ -30,10 +30,10 @@ class PostTest extends TestCase
         $this->assertTrue($post->author->is($user));
     }
 
-    public function testReferencesRelationshipReturnsPostReferences(): void
+    public function testReferencesRelationship(): void
     {
         $user = User::factory()->create();
-        $reference = PostReference::factory()->count(2);
+        $reference = PostReference::factory(2);
 
         $post = Post::factory()
             ->for($user, 'author')
@@ -41,17 +41,13 @@ class PostTest extends TestCase
             ->create();
 
         $this->assertCount(2, $post->references);
-        $this->assertGreaterThanOrEqual(2, $post->references->count());
-        $this->assertContainsOnlyInstancesOf(
-            PostReference::class,
-            $post->references
-        );
+        $this->assertContainsOnlyInstancesOf(PostReference::class, $post->references);
     }
 
-    public function testReactionsRelationshipReturnsPostReactions(): void
+    public function testReactionsRelationship(): void
     {
         $user = User::factory()->create();
-        $reaction = PostReaction::factory()->count(3);
+        $reaction = PostReaction::factory(3);
 
         $post = Post::factory()
             ->for($user, 'author')
@@ -59,16 +55,13 @@ class PostTest extends TestCase
             ->create();
 
         $this->assertCount(3, $post->reactions);
-        $this->assertContainsOnlyInstancesOf(
-            PostReaction::class,
-            $post->reactions
-        );
+        $this->assertContainsOnlyInstancesOf(PostReaction::class, $post->reactions);
     }
 
-    public function testCategoriesRelationshipReturnsPostCategories(): void
+    public function testCategoriesRelationship(): void
     {
         $user = User::factory()->create();
-        $category = PostCategory::factory()->count(2);
+        $category = PostCategory::factory(2);
 
         $post = Post::factory()
             ->for($user, 'author')
@@ -76,17 +69,13 @@ class PostTest extends TestCase
             ->create();
 
         $this->assertCount(2, $post->categories);
-        $this->assertGreaterThanOrEqual(2, $post->categories->count());
-        $this->assertContainsOnlyInstancesOf(
-            PostCategory::class,
-            $post->categories
-        );
+        $this->assertContainsOnlyInstancesOf(PostCategory::class, $post->categories);
     }
 
     /**
      * Tests from Post model scopes.
      */
-    public function testScopeActiveReturnsOnlyActivePosts(): void
+    public function testActiveScope(): void
     {
         $user = User::factory()->create();
 
@@ -106,7 +95,7 @@ class PostTest extends TestCase
         $this->assertFalse($activePosts->contains($inactivePost));
     }
 
-    public function testScopePublishedReturnsOnlyPublishedPosts(): void
+    public function testPublishedScope(): void
     {
         $user = User::factory()->create();
 
@@ -126,7 +115,7 @@ class PostTest extends TestCase
         $this->assertFalse($publishedPosts->contains($draftPost));
     }
 
-    public function testScopeMineReturnsOnlyPostsOfAuthenticatedUser(): void
+    public function testMineScope(): void
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -152,7 +141,7 @@ class PostTest extends TestCase
     /**
      * Tests from Post model mutators.
      */
-    public function testTitleMutatorSetsSlugCorrectly(): void
+    public function testTitleMutator(): void
     {
         $user = User::factory()->create();
 
