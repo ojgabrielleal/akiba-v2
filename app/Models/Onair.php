@@ -66,4 +66,9 @@ class Onair extends Model
     {
         return $this->morphTo();
     }
+
+    public function songRequests()
+    {
+        return $this->hasMany(SongRequest::class, 'onair_id');
+    }
 }

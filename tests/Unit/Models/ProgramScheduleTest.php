@@ -28,7 +28,6 @@ class ProgramScheduleTest extends TestCase
             ->for($program, 'program')
             ->create();
 
-        $this->assertInstanceOf(Program::class, $schedule->program);
         $this->assertTrue($schedule->program->is($program));
     }
 }

@@ -47,14 +47,14 @@ class PostTest extends TestCase
     public function testReactionsRelationship(): void
     {
         $user = User::factory()->create();
-        $reaction = PostReaction::factory(3);
+        $reaction = PostReaction::factory(2);
 
         $post = Post::factory()
             ->for($user, 'author')
             ->has($reaction, 'reactions')
             ->create();
 
-        $this->assertCount(3, $post->reactions);
+        $this->assertCount(2, $post->reactions);
         $this->assertContainsOnlyInstancesOf(PostReaction::class, $post->reactions);
     }
 

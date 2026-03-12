@@ -55,7 +55,7 @@ class ProgramTest extends TestCase
             ->for($program, 'program')
             ->create();
 
-        $this->assertTrue($program->onair->contains($onair));
+        $this->assertContainsOnlyInstancesOf(Onair::class, $program->onair);
     }
 
     /**

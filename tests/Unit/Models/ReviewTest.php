@@ -32,7 +32,7 @@ class ReviewTest extends TestCase
     }
 
     /**
-     * Tests from Post model attributes.
+     * Tests from Review model attributes.
      */
     public function testSlugAttribute(): void
     {

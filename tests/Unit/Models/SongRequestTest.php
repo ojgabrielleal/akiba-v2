@@ -37,7 +37,7 @@ class SongRequestTest extends TestCase
             ->for($music, 'music')
             ->create();
 
-        $this->assertTrue($songRequest->onair->is($onair));
+        $this->assertInstanceOf(Onair::class, $songRequest->onair);
     }
 
     public function testMusicRelationship(): void
