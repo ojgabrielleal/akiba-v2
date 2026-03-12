@@ -70,4 +70,9 @@ class Activity extends Model
         return $this->belongsToMany(User::class, 'activity_pivot', 'activity_id', 'user_id');
     }
 
+    public function calendars()
+    {
+        return $this->hasMany(Calendar::class, 'activity_id');
+    }
+
 }

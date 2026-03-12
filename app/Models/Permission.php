@@ -29,4 +29,9 @@ class Permission extends Model
     {
         return ['uuid'];
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'permissions_pivot', 'permission_id', 'role_id');
+    }
 }

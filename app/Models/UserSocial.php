@@ -34,4 +34,9 @@ class UserSocial extends Model
     {
         return ['uuid'];
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

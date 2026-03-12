@@ -46,4 +46,9 @@ class Role extends Model
     {
         return $this->belongsToMany(Permission::class, 'permissions_pivot', 'role_id', 'permission_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'roles_pivot', 'role_id', 'user_id');
+    }
 }

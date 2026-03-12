@@ -33,4 +33,9 @@ class PostReaction extends Model
     {
         return ['uuid'];
     }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_id');
+    }
 }

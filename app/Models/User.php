@@ -96,4 +96,49 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'roles_pivot', 'user_id', 'role_id');
     }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class, 'user_id');
+    }
+
+    public function automatic()
+    {
+        return $this->hasMany(Automatic::class, 'user_id');
+    }
+
+    public function calendars()
+    {
+        return $this->hasMany(Calendar::class, 'user_id');
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'user_id');
+    }
+
+    public function programs()
+    {
+        return $this->hasMany(Program::class, 'user_id');
+    }
+
+    public function podcasts()
+    {
+        return $this->hasMany(Podcast::class, 'user_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(ReviewContent::class, 'user_id');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'user_id');
+    }
 }
