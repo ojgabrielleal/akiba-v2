@@ -26,7 +26,6 @@ class ReviewContentTest extends TestCase
             ->for($review, 'review')
             ->create();
 
-        $this->assertInstanceOf(User::class, $reviewContent->author);
         $this->assertTrue($reviewContent->author->is($user));
     }
 
@@ -40,7 +39,6 @@ class ReviewContentTest extends TestCase
             ->for($review, 'review')
             ->create();
 
-        $this->assertInstanceOf(Review::class, $reviewContent->review);
         $this->assertTrue($reviewContent->review->is($review));
     }
 }

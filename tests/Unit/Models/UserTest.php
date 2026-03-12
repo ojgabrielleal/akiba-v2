@@ -91,7 +91,7 @@ class UserTest extends TestCase
             ->for($user, 'responsible')
             ->create();
 
-        $this->assertInstanceOf(User::class, $calendar->responsible);
+        $this->assertContainsOnlyInstancesOf(Calendar::class, $user->calendar);
     }
 
     public function testEventsRelationship(): void

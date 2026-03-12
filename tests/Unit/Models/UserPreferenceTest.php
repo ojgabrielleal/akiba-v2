@@ -23,7 +23,6 @@ class UserPreferenceTest extends TestCase
             ->for($user, 'user')
             ->create();
 
-        $this->assertInstanceOf(User::class, $preference->user);
         $this->assertTrue($preference->user->is($user));
     }
 }

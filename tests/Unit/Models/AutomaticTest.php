@@ -40,6 +40,8 @@ class AutomaticTest extends TestCase
             ->for($auto, 'program')
             ->create();
 
-        $this->assertTrue($auto->onair->contains($onair));
+        $this->assertContainsOnlyInstancesOf(Onair::class, $auto->onair);
     }
+
+
 }

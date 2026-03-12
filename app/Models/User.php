@@ -107,7 +107,7 @@ class User extends Authenticatable
         return $this->hasMany(Automatic::class, 'user_id');
     }
 
-    public function calendars()
+    public function calendar()
     {
         return $this->hasMany(Calendar::class, 'user_id');
     }

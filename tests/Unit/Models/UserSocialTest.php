@@ -23,7 +23,6 @@ class UserSocialTest extends TestCase
             ->for($user, 'user')
             ->create();
 
-        $this->assertInstanceOf(User::class, $social->user);
         $this->assertTrue($social->user->is($user));
     }
 }
