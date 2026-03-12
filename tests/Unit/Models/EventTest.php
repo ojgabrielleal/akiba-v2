@@ -49,9 +49,9 @@ class EventTest extends TestCase
     }
 
     /**
-     * Tests from Event model mutators.
+     * Tests from Event model attributes.
      */
-    public function testTitleMutator(): void
+    public function testSlugAttribute(): void
     {
         $user = User::factory()->create();
 

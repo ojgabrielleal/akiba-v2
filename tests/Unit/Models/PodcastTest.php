@@ -49,9 +49,9 @@ class PodcastTest extends TestCase
     }
 
     /**
-     * Tests from Podcast model mutators.
+     * Tests from Podcast model attributes.
      */
-    public function testTitleMutator(): void
+    public function testSlugAttribute(): void
     {
         $user = User::factory()->create();
 

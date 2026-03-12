@@ -29,4 +29,18 @@ class ReviewContentTest extends TestCase
         $this->assertInstanceOf(User::class, $reviewContent->author);
         $this->assertTrue($reviewContent->author->is($user));
     }
+
+    public function testReviewRelationship(): void
+    {
+        $user = User::factory()->create();
+        $review = Review::factory()->create();
+
+        $reviewContent = ReviewContent::factory()
+            ->for($user, 'author')
+            ->for($review, 'review')
+            ->create();
+
+        $this->assertInstanceOf(Review::class, $reviewContent->review);
+        $this->assertTrue($reviewContent->review->is($review));
+    }
 }

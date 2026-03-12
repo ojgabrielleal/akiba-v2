@@ -9,6 +9,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Activity;
 use App\Models\Role;
+use App\Models\Calendar;
 
 class ActivityTest extends TestCase
 {
@@ -41,6 +42,22 @@ class ActivityTest extends TestCase
 
         $this->assertCount(5, $activity->confirmations);
         $this->assertContainsOnlyInstancesOf(User::class, $activity->confirmations);
+    }
+
+    public function testCalendarRelationship(): void
+    {
+        $role = Role::factory()->create(['name' => 'administrator']);
+        $admin = User::factory()->hasAttached($role, [], 'roles')->create();
+
+        $user = User::factory()->create();
+
+        $activity = Activity::factory()
+            ->for($admin, 'author')
+            ->has(Calendar::factory()->for($user, 'responsible'))
+            ->create();
+
+        $this->assertTrue($activity->calendar->responsible->is($user));
+        $this->assertInstanceOf(Calendar::class, $activity->calendar);
     }
 
     /**

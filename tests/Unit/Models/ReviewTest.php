@@ -28,16 +28,13 @@ class ReviewTest extends TestCase
             ->has($reviews, 'reviews')
             ->create();
 
-        $this->assertContainsOnlyInstancesOf(
-            ReviewContent::class,
-            $review->reviews
-        );
+        $this->assertContainsOnlyInstancesOf(ReviewContent::class, $review->reviews);
     }
 
     /**
-     * Tests from Post model mutators.
+     * Tests from Post model attributes.
      */
-    public function testTitleMutator(): void
+    public function testSlugAttribute(): void
     {
         $user = User::factory()->create();
 

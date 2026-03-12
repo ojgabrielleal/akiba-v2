@@ -120,7 +120,7 @@ class PostTest extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         $otherUser = User::factory()->create();
-        
+
         $myPost = Post::factory()
             ->for($user, 'author')
             ->create();
@@ -139,9 +139,9 @@ class PostTest extends TestCase
 
 
     /**
-     * Tests from Post model mutators.
+     * Tests from Post model attributes.
      */
-    public function testTitleMutator(): void
+    public function testSlugAttribute(): void
     {
         $user = User::factory()->create();
 

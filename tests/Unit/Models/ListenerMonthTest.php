@@ -17,9 +17,9 @@ class ListenerMonthTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Tests from Event model static methods.
+     * Tests from ListenerMonth model static methods.
      */
-    public function testMethodMostActiveListener(): void
+    public function testMostActiveListenerMethod(): void
     {
         $user = User::factory()->create();
 

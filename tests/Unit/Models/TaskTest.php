@@ -100,7 +100,7 @@ class TaskTest extends TestCase
     /**
      * Tests from Task model attributes.
      */
-    public function testAttributeIsOverReturnsCorrectValue(): void
+    public function testIsOverAttribute(): void
     {
         $today = Carbon::parse('2026-01-20');
 
@@ -128,7 +128,7 @@ class TaskTest extends TestCase
         Carbon::setTestNow();
     }
 
-    public function testAttributeIsDueReturnsCorrectValue(): void
+    public function testIsDueAttribute(): void
     {
         $today = Carbon::parse('2026-01-20');
 
