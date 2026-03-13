@@ -30,27 +30,30 @@
         Cadastrar programa
     </button>
 </div>
-<Section {title}>
-    <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap mt-5" on:wheel|nonpassive={scrollx} role="group">
-        {#if programs.data.length > 0}
-            {#each programs.data as item}
-                <div class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
-                    <div>
-                         <img src={item.image} alt="" aria-hidden="true" loading="lazy" class='w-60 transition duration-300 ease-in-out'>
+
+{#if programs}
+    <Section {title} styles="mb-15">
+        <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap mt-5" on:wheel|nonpassive={scrollx} role="group">
+            {#if programs.data.length > 0}
+                {#each programs.data as item}
+                    <div class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+                        <div>
+                            <img src={item.image} alt="" aria-hidden="true" loading="lazy" class='w-60 transition duration-300 ease-in-out'>
+                        </div>
+                        <div class="flex flex-col gap-5">
+                            <button class="cursor-pointer" aria-label="atualizar programa" on:click={()=> {
+                                identifier = item.uuid;
+                                offcanvasRef.open();
+                            }}>
+                                <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-blue-skywave" loading="lazy"/>
+                            </button>
+                            <button class="cursor-pointer" aria-label="desativar programa" on:click={()=>requestDeactivateProgram(item.uuid)}>
+                                <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-red-crimson" loading="lazy"/>
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-5">
-                        <button class="cursor-pointer" aria-label="atualizar programa" on:click={()=> {
-                            identifier = item.uuid;
-                            offcanvasRef.open();
-                        }}>
-                            <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-blue-skywave" loading="lazy"/>
-                        </button>
-                        <button class="cursor-pointer" aria-label="desativar programa" on:click={()=>requestDeactivateProgram(item.uuid)}>
-                            <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-red-crimson" loading="lazy"/>
-                        </button>
-                    </div>
-                </div>
-            {/each}
-        {/if}
-    </div>
-</Section>
+                {/each}
+            {/if}
+        </div>
+    </Section>
+{/if}

@@ -49,12 +49,6 @@ class RadioController extends Controller
         );
     }
 
-    public function indexSchedules()
-    {
-        return ProgramSchedule::with('program')
-            ->get();
-    }
-
     public function indexMusicRanking()
     {
         return Music::ranking()
