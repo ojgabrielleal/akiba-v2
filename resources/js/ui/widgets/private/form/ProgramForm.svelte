@@ -78,7 +78,7 @@
     </div>
     <div class="mb-4">
         <div class="text-md text-gray-700 font-noto-sans mb-2">
-            Este programa estará disponível para todos os locutores?
+            Este programa estará disponível para todos?
         </div>
         <div class="flex items-center gap-2 mb-1">
             <input
