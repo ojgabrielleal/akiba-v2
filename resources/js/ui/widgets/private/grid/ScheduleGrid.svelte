@@ -4,9 +4,7 @@
     import { page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";    
 
-    $: ({ programs } = $page.props);
-
-    $: console.log(programs);
+    $: ({ schedules } = $page.props);
 
     let days = {
         0: "Domingo",
@@ -21,7 +19,7 @@
 
 <Section {title}>
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-15 mt-10">
-        {#each programs.data as program}
+        {#each schedules.data as program}
             {#if program.type === 'private'}
                 <article class="w-full">
                     <div>

@@ -10,7 +10,7 @@
     <ProgramCarrousel title="Programas cadastrados"/>
     <ScheduleGrid title="Grade de programação"/>
     <!--
-        <RankingGrid/>
+    <RankingGrid/>
         <ListenerMonthGrid/>
     -->
 </Layout>

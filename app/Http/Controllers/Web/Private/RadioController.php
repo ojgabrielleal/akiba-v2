@@ -32,7 +32,6 @@ class RadioController extends Controller
         $this->image = $image;
     }
 
-
     public function indexStreamers()
     {
         return UserIndexResource::collection(
@@ -44,6 +43,16 @@ class RadioController extends Controller
     {
         return ProgramIndexResource::collection(
             Program::with(['host', 'schedules'])
+                ->active()
+                ->get()
+        );
+    }
+
+    public function indexSchedules()
+    {
+        return ProgramIndexResource::collection(
+            Program::with(['host', 'schedules'])
+                ->where('type', 'private')
                 ->active()
                 ->get()
         );
@@ -193,6 +202,7 @@ class RadioController extends Controller
     {
         return Inertia::render($this->render, [
             "programs" => $this->indexPrograms(),
+            "schedules" => $this->indexSchedules(),
             "streamers" => $this->indexStreamers(),
             "musicRanking" => $this->indexMusicRanking(),
             "listenerMonth" => $this->indexListenerMonth(),

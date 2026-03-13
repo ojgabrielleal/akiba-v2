@@ -132,6 +132,13 @@ class PermissionSeeder extends Seeder
             ['name' => 'program.update', 'label' => 'Atualizar programa'],
             ['name' => 'program.deactivate', 'label' => 'Desativar programa'],
 
+            /*
+            |--------------------------------------------------------------------------
+            | Horários dos programas
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'program.schedule.list', 'label' => 'Listar horários'],
+
         ];
         
         foreach($permissions as $item){
