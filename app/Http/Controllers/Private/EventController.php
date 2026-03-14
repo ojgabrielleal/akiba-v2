@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Private;
+namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,8 +8,8 @@ use Inertia\Inertia;
 
 use App\Models\Event;
 
-use App\Http\Resources\EventIndexResource;
-use App\Http\Resources\EventShowResource;
+use App\Http\Resources\Private\EventIndexResource;
+use App\Http\Resources\Private\EventShowResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;

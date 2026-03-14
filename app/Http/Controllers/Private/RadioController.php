@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Private;
+namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,9 +12,9 @@ use App\Models\Program;
 use App\Models\ProgramSchedule;
 use App\Models\ListenerMonth;
 
-use App\Http\Resources\UserIndexResource;
-use App\Http\Resources\ProgramIndexResource;
-use App\Http\Resources\ProgramShowResource;
+use App\Http\Resources\Private\UserIndexResource;
+use App\Http\Resources\Private\ProgramIndexResource;
+use App\Http\Resources\Private\ProgramShowResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;

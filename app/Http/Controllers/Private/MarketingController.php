@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Private;
+namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class MarketingController extends Controller
     public function indexRepositories()
     {
         return Repository::active()
-                ->get();
+            ->get();
     }
 
     public function showRepository(Repository $repository)
@@ -35,7 +35,7 @@ class MarketingController extends Controller
             'repository' => $repository,
         ]);
     }
-    
+
     public function createRepository(Request $request)
     {
         $request->validate([
@@ -64,7 +64,7 @@ class MarketingController extends Controller
             'category' => $request->input('category', $repository->category),
         ]);
 
-        if($repository->isDirty()){
+        if ($repository->isDirty()) {
             $repository->save();
         }
 

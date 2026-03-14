@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Private;
+namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,8 +8,8 @@ use Inertia\Inertia;
 
 use App\Models\Review;
 
-use App\Http\Resources\ReviewIndexResource;
-use App\Http\Resources\ReviewShowResource;
+use App\Http\Resources\Private\ReviewIndexResource;
+use App\Http\Resources\Private\ReviewShowResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;

@@ -1,26 +1,19 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Private;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EventIndexResource extends JsonResource
+class ActivityIndexResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
             'uuid' => $this->uuid,
-            'slug' => $this->slug,
-            'cover' => $this->cover,
+            'allows_confirmations' => $this->allows_confirmations,
             'title' => $this->title,
-            'dates' => $this->dates,
-            'address' => $this->address,
+            'content' => $this->content,
             'author' => [
                 'uuid' => $this->author->uuid,
                 'name' => $this->author->name,
@@ -28,7 +21,13 @@ class EventIndexResource extends JsonResource
                 'avatar' => $this->author->avatar,
                 'gender' => $this->author->gender
 
-            ]
+            ],
+            'confirmations' => $this->confirmations->map(fn($item) => [
+                'uuid' => $item->uuid,
+                'name' => $item->name,
+                'nickname' => $item->nickname,
+                'avatar' => $item->avatar,
+            ]),
         ];
     }
 }

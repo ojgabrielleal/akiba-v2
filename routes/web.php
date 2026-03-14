@@ -2,18 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Web\Private\LoginController;
-use App\Http\Controllers\Web\Private\AdmsController;
-use App\Http\Controllers\Web\Private\LocutionController;
-use App\Http\Controllers\Web\Private\DashboardController;
-use App\Http\Controllers\Web\Private\PostController;
-use App\Http\Controllers\Web\Private\ReviewController;
-use App\Http\Controllers\Web\Private\EventController;
-use App\Http\Controllers\Web\Private\RadioController;
-use App\Http\Controllers\Web\Private\PodcastsController;
-use App\Http\Controllers\Web\Private\MarketingController;
-use App\Http\Controllers\Web\Private\MediasController;
-use App\Http\Controllers\Web\Private\ProfileController;
+use App\Http\Controllers\Private\LoginController;
+use App\Http\Controllers\Private\AdmsController;
+use App\Http\Controllers\Private\LocutionController;
+use App\Http\Controllers\Private\DashboardController;
+use App\Http\Controllers\Private\PostController;
+use App\Http\Controllers\Private\ReviewController;
+use App\Http\Controllers\Private\EventController;
+use App\Http\Controllers\Private\RadioController;
+use App\Http\Controllers\Private\PodcastsController;
+use App\Http\Controllers\Private\MarketingController;
+use App\Http\Controllers\Private\MediasController;
+use App\Http\Controllers\Private\ProfileController;
 
 /*
 |--------------------------------------------------------------------------

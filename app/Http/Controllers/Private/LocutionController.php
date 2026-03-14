@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Private;
+namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,9 +11,9 @@ use App\Models\Program;
 use App\Models\Automatic;
 use App\Models\SongRequest;
 
-use App\Http\Resources\OnairShowResource;
-use App\Http\Resources\ProgramIndexResource;
-use App\Http\Resources\SongRequestIndexResource;
+use App\Http\Resources\Private\OnairShowResource;
+use App\Http\Resources\Private\ProgramIndexResource;
+use App\Http\Resources\Private\SongRequestIndexResource;
 
 use App\Services\External\DiscordWebhookService;
 use App\Traits\HasFlashMessages;

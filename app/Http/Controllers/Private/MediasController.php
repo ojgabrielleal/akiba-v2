@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Private;
+namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,7 +49,7 @@ class MediasController extends Controller
         $request->validate([
             'question' => 'required|unique:polls,question',
             'option_one' => 'required',
-            'option_two' => 'required', 
+            'option_two' => 'required',
             'option_three' => 'required',
             'option_four' => 'required'
         ]);
@@ -73,13 +73,13 @@ class MediasController extends Controller
 
         return $this->flashMessage('save');
     }
-    
+
     public function updatePoll(Request $request, Poll $poll)
     {
         $request->validate([
             'question' => 'required',
             'option_one' => 'required',
-            'option_two' => 'required', 
+            'option_two' => 'required',
             'option_three' => 'required',
             'option_four' => 'required'
         ]);
@@ -104,10 +104,10 @@ class MediasController extends Controller
                 ]);
             }
         }
-     
+
         return $this->flashMessage('update');
     }
-    
+
     public function deactivatePoll(Poll $poll)
     {
         $poll->update([

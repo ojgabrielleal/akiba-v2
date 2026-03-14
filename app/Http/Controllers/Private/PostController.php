@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Private;
+namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,8 +8,8 @@ use Inertia\Inertia;
 
 use App\Models\Post;
 
-use App\Http\Resources\PostIndexResource;
-use App\Http\Resources\PostShowResource;
+use App\Http\Resources\Private\PostIndexResource;
+use App\Http\Resources\Private\PostShowResource;
 
 use App\Services\Process\ImageProcessService;
 

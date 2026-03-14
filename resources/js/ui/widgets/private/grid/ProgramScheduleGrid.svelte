@@ -17,10 +17,10 @@
     }
 </script>
 
-<Section {title}>
-    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-15 mt-10">
-        {#each schedules.data as program}
-            {#if program.type === 'private'}
+{#if schedules}
+    <Section {title}>
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-15 mt-10">
+            {#each schedules.data as program}
                 <article class="w-full">
                     <div>
                         <img class="w-40 mb-3" src={program.image} alt={program.name} loading="lazy"/>
@@ -43,7 +43,7 @@
                         {/each}
                     </div>
                 </article>
-            {/if}
-        {/each}
-    </div>
-</Section>
+            {/each}
+        </div>
+    </Section>
+{/if}

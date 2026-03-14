@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Private;
+namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
@@ -11,10 +11,10 @@ use App\Models\Post;
 use App\Models\Task;
 use App\Models\Calendar;
 
-use App\Http\Resources\ActivityIndexResource;
-use App\Http\Resources\TaskIndexResource;
-use App\Http\Resources\PostIndexResource;
-use App\Http\Resources\CalendarIndexResource;
+use App\Http\Resources\Private\ActivityIndexResource;
+use App\Http\Resources\Private\TaskIndexResource;
+use App\Http\Resources\Private\PostIndexResource;
+use App\Http\Resources\Private\CalendarIndexResource;
 
 use App\Traits\HasFlashMessages;
 

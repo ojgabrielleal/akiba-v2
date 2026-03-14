@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Private;
+namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -26,8 +26,8 @@ class PodcastsController extends Controller
     public function indexPodcasts()
     {
         return Podcast::active()
-                ->with('author')
-                ->paginate(10);
+            ->with('author')
+            ->paginate(10);
     }
 
     public function showPodcast(Podcast $podcast)
@@ -75,7 +75,7 @@ class PodcastsController extends Controller
             'audio' => $request->input('audio', $podcast->audio),
         ]);
 
-        if($podcast->isDirty()) {
+        if ($podcast->isDirty()) {
             $podcast->save();
         }
 
