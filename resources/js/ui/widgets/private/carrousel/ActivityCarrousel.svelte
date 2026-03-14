@@ -6,8 +6,6 @@
     import { scrollx, hasPermission } from "@/utils";
 
     $: ({ user, activities } = $page.props);
-
-    $: console.log(activities);
     
     let permissions = {
         'show_button_participate': hasPermission('activity.participate'),
