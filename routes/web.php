@@ -73,9 +73,9 @@ Route::prefix('painel')->group(function () {
                 Route::get('{program:uuid}', 'showProgram');
                 Route::delete('{program:uuid}', 'deactivateProgram');
             });
-            Route::prefix('ranking-music')->group(function () {
+            Route::prefix('music-ranking')->group(function () {
                 Route::post('', 'generateMusicRanking');
-                Route::patch('{music}', 'updateMusicRanking');
+                Route::patch('{music:uuid}', 'updateMusicRanking');
             });
             Route::prefix('listener-month')->group(function () {
                 Route::post('', 'createListenerMonth');

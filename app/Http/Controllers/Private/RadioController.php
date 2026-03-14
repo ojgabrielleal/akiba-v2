@@ -15,6 +15,7 @@ use App\Models\ListenerMonth;
 use App\Http\Resources\Private\UserIndexResource;
 use App\Http\Resources\Private\ProgramIndexResource;
 use App\Http\Resources\Private\ProgramShowResource;
+use App\Http\Resources\Private\MusicIndexResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
@@ -60,10 +61,11 @@ class RadioController extends Controller
 
     public function indexMusicRanking()
     {
-        return Music::ranking()
-            ->orderBy('song_requests_total', 'desc')
-            ->limit(3)
-            ->get();
+        return MusicIndexResource::collection(
+            Music::orderBy('song_requests_total', 'desc')
+                ->limit(3)
+                ->get() 
+        );
     }
 
     public function indexListenerMonth()
@@ -195,7 +197,7 @@ class RadioController extends Controller
             $music->update(['in_ranking' => true]);
         });
 
-        return $this->flashMessage('save');
+        return $this->flashMessage('update');
     }
 
     public function render()
@@ -204,7 +206,7 @@ class RadioController extends Controller
             "programs" => $this->indexPrograms(),
             "schedules" => $this->indexSchedules(),
             "streamers" => $this->indexStreamers(),
-            "musicRanking" => $this->indexMusicRanking(),
+            "ranking" => $this->indexMusicRanking(),
             "listenerMonth" => $this->indexListenerMonth(),
         ]);
     }
