@@ -139,6 +139,21 @@ class PermissionSeeder extends Seeder
             */
             ['name' => 'program.schedule.list', 'label' => 'Listar horários'],
 
+            /*
+            |--------------------------------------------------------------------------
+            | Músicas
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'music.update', 'label' => 'Atualizar música'],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Ranking de músicas
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'music.ranking.list', 'label' => 'Listar ranking de músicas'],
+            ['name' => 'music.ranking.set', 'label' => 'Definir ranking de músicas'],
+
         ];
         
         foreach($permissions as $item){

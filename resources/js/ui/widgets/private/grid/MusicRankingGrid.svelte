@@ -4,8 +4,14 @@
     import { page, router } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
     import { Preview } from "@/ui/components/private";
+    import { hasPermission } from "@/utils";
 
     $: ({ ranking } = $page.props);
+
+    let permissions = {
+        'show_button_update': hasPermission('music.ranking.update'),
+        'show_button_set': hasPermission('music.ranking.set'),
+    }
 
     const submit = (event, uuid) => {
         const formData = new FormData();
@@ -27,14 +33,22 @@
     <div class="flex flex-col gap-5">
         {#if ranking.data.length >= 3}
             {#each ranking.data as item, index}
-                <article class="flex flex-wrap lg:flex-nowrap items-center gap-5">
+                <article class="mb-5 flex flex-wrap lg:flex-nowrap items-center gap-5">
                     <div class="flex items-center gap-5">
-                        <Preview 
-                            standard="w-[6rem] h-[6rem] rounded-lg" 
-                            view="w-[6rem] h-[6rem]" 
-                            src={item.ranking.image} 
-                            oninput={(event) => (submit(event, item.uuid))}
-                        />
+                        {#if permissions.show_button_update}
+                            <Preview 
+                                standard="w-24 h-24 rounded-lg" 
+                                view="w-24 h-24" 
+                                src={item.ranking.image} 
+                                oninput={(event) => (submit(event, item.uuid))}
+                            />
+                        {:else}
+                            <img 
+                                class="w-24 h-24 rounded-lg" 
+                                src={item.ranking.image}
+                                alt={item.name}
+                            />
+                        {/if}
                         <strong class="text-neutral-aurora text-6xl font-noto-sans font-bold uppercase italic">
                             #{index + 1}
                         </strong>
@@ -80,9 +94,11 @@
             </article>
         {/if}
     </div>
-    <div class="flex justify-end mt-7" >
-        <button on:click={()=>setRanking()} disabled={ranking.length < 3} class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic disabled:opacity-50 disabled:pointer-events-none">
-            Atualizar ranking
-        </button>
-    </div>
+    {#if permissions.show_button_set}
+        <div class="flex justify-end mt-7" >
+            <button on:click={()=>setRanking()} disabled={ranking.length < 3} class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic disabled:opacity-50 disabled:pointer-events-none">
+                Atualizar ranking
+            </button>
+        </div>
+    {/if}
 </Section>

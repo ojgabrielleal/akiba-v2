@@ -48,7 +48,7 @@
                 <div class="text-orange-amber font-bold italic text-sm uppercase font-noto-sans block">
                     Imagem do ouvinte
                 </div>
-                <image src={listenerMonthRegistered?.image ?? "/img/default/defaultAvatarFull.webp"} alt="Imagem do ouvinte" class="w-[9rem] h-[9rem] bg-gray-600 rounded-lg"/>
+                <image src={listenerMonthRegistered?.image ?? "/img/default/defaultAvatarFull.webp"} alt="Imagem do ouvinte" class="w-36 h-36 bg-gray-600 rounded-lg"/>
             </div>
             <Offcanvas>
                 <div class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic" slot="action">
