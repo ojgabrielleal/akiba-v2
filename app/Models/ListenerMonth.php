@@ -21,7 +21,7 @@ class ListenerMonth extends Model
         'avatar',
         'address',
         'favorite_program',
-        'requests_count',
+        'requests_total',
     ];
 
     /**
@@ -49,20 +49,23 @@ class ListenerMonth extends Model
     public static function mostActiveListenerOfCurrentMonth()
     {
         $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth   = Carbon::now()->endOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
 
-        return DB::select('
-            SELECT songs_requests.name AS listener_name,
+        $result = DB::select('
+            SELECT ANY_VALUE(songs_requests.uuid) AS uuid,
+                songs_requests.name AS name,
                 songs_requests.address AS address,
-                COUNT(*) AS total_requests,
+                COUNT(*) AS requests_total,
                 programs.name AS favorite_program
             FROM songs_requests
             JOIN onair ON songs_requests.onair_id = onair.id
             JOIN programs ON onair.program_id = programs.id
             WHERE songs_requests.created_at BETWEEN ? AND ?
-            GROUP BY songs_requests.name, programs.name
-            ORDER BY total_requests DESC
+            GROUP BY songs_requests.name, programs.name, songs_requests.address
+            ORDER BY requests_total DESC
             LIMIT 1
         ', [$startOfMonth, $endOfMonth]);
+
+        return $result[0] ?? null;
     }
 }

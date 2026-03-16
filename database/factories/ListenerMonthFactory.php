@@ -21,7 +21,7 @@ class ListenerMonthFactory extends Factory
             'avatar' => '/img/default/avatar.webp',
             'address' => fake()->address(),
             'favorite_program' => fake()->name(),
-            'requests_count' => fake()->randomNumber(),
+            'requests_total' => fake()->randomNumber(),
         ];
     }
 }

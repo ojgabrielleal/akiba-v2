@@ -154,6 +154,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'music.ranking.list', 'label' => 'Listar ranking de músicas'],
             ['name' => 'music.ranking.set', 'label' => 'Definir ranking de músicas'],
 
+            /*
+            |--------------------------------------------------------------------------
+            | Ouvinte do mês
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'listener.month.view', 'label' => 'Visualizar ouvinte do mês'],
+            ['name' => 'listener.month.set', 'label' => 'Definir ouvinte do mês'],
+
         ];
         
         foreach($permissions as $item){

@@ -2,30 +2,36 @@
     export let close = () => {};
 
     import { onMount } from 'svelte';
-    import { useForm, page } from "@inertiajs/svelte";
+    import { useForm } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
-
-    $: ({ listenerMonthFound } = $page.props);
-
+    import axios from 'axios';
+    
     let form = useForm({
-        image: null,
-        listener: null,
+        avatar: null,
+        name: null,
         address: null,
-        favorite_show: null,
+        favorite_program: null,
         requests_total: null,
     });
 
     onMount(()=>{
-        if(listenerMonthFound){
-            $form.listener = listenerMonthFound.listener,
+        axios.get('/painel/radio/listener-month/found')
+        .then((response)=>{
+            const listenerMonthFound = response.data.data;
+
+            $form.name = listenerMonthFound.name,
             $form.address = listenerMonthFound.address,
-            $form.favorite_show = listenerMonthFound.favorite_show,
-            $form.requests_total = listenerMonthFound.total
-        }
-    })
+            $form.favorite_program = listenerMonthFound.favorite_program,
+            $form.requests_total = listenerMonthFound.requests_total
+        })
+        .catch(()=>{
+            console.error('Error when find listener month');
+            close();
+        })
+    });
 
     const submit = () => {
-        $form.post('/painel/radio/create/listener/month', {
+        $form.post('/painel/radio/listener-month', {
             onSuccess: () => close()
         })
     }
@@ -35,8 +41,8 @@
     <div class="mb-4">
         <Preview
             standard="w-full h-[10rem] rounded-lg"
-            name="image"
-            oninput={(event) => ($form.image = event.target.files[0])}
+            name="avatar"
+            oninput={(event) => ($form.avatar = event.target.files[0])}
             required
         />
     </div>
@@ -48,8 +54,8 @@
             id="listener"
             type="text"
             name="listener"
-            class="w-full h-[2.5rem] bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400 disabled:bg-gray-200"
-            bind:value={$form.listener}
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400 disabled:bg-gray-200"
+            bind:value={$form.name}
             disabled
         />
     </div>
@@ -61,7 +67,7 @@
             id="address"
             type="text"
             name="address"
-            class="w-full h-[2.5rem] bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400 disabled:bg-gray-200"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400 disabled:bg-gray-200"
             bind:value={$form.address}
             disabled
         />
@@ -74,8 +80,8 @@
             id="favorite_show"
             type="text"
             name="favorite_show"
-            class="w-full h-[2.5rem] bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400 disabled:bg-gray-200"
-            bind:value={$form.favorite_show}
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400 disabled:bg-gray-200"
+            bind:value={$form.favorite_program}
             disabled
         />
     </div>
@@ -87,7 +93,7 @@
             id="requests_total"
             type="text"
             name="requests_total"
-            class="w-full h-[2.5rem] bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400 disabled:bg-gray-200"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400 disabled:bg-gray-200"
             bind:value={$form.requests_total}
             disabled
         />

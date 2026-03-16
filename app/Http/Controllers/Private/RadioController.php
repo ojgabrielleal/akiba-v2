@@ -9,17 +9,17 @@ use Inertia\Inertia;
 use App\Models\User;
 use App\Models\Music;
 use App\Models\Program;
-use App\Models\ProgramSchedule;
 use App\Models\ListenerMonth;
 
 use App\Http\Resources\Private\UserIndexResource;
 use App\Http\Resources\Private\ProgramIndexResource;
 use App\Http\Resources\Private\ProgramShowResource;
 use App\Http\Resources\Private\MusicIndexResource;
+use App\Http\Resources\Private\ListenerMonthShowResource;
+use App\Http\Resources\Private\ListenerMonthFoundShowResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
-use Illuminate\Support\Facades\Log;
 
 class RadioController extends Controller
 {
@@ -64,22 +64,22 @@ class RadioController extends Controller
         return MusicIndexResource::collection(
             Music::orderBy('song_requests_total', 'desc')
                 ->limit(3)
-                ->get() 
+                ->get()
         );
     }
 
-    public function indexListenerMonth()
+    public function showListenerMonth()
     {
-        return ListenerMonth::first();
+        return new ListenerMonthShowResource(
+            ListenerMonth::first()
+        );
     }
 
     public function showListenerMonthFound()
     {
-        $found = ListenerMonth::mostActiveListenerOfCurrentMonth();
-
-        return Inertia::render($this->render, [
-            'listenerMonthFound' => $found,
-        ]);
+        return new ListenerMonthFoundShowResource(
+            ListenerMonth::mostActiveListenerOfCurrentMonth()
+        );
     }
 
     public function showProgram(Program $program)
@@ -112,7 +112,7 @@ class RadioController extends Controller
                 $program->schedules()->updateOrCreate(
                     ['uuid' => $schedule['uuid'] ?? null],
                     [
-                        'day'  => $schedule['day'],
+                        'day' => $schedule['day'],
                         'hour' => $schedule['hour'],
                     ]
                 );
@@ -134,16 +134,16 @@ class RadioController extends Controller
     public function createListenerMonth(Request $request)
     {
         $request->validate([
-            'image' => 'required',
+            'avatar' => 'required',
         ]);
 
         $found = ListenerMonth::mostActiveListenerOfCurrentMonth();
         ListenerMonth::updateOrCreate(['id' => 1], [
-            'image' => $this->image->store('listener-month', $request->file('image'), 'public'),
-            'listener' => $found->listener,
+            'avatar' => $this->image->store('listener-month', $request->file('avatar'), 'public'),
+            'name' => $found->name,
             'address' => $found->address,
             'favorite_program' => $found->favorite_program,
-            'requests_count' => $found->count,
+            'requests_total' => $found->requests_total,
         ]);
 
         return $this->flashMessage('save');
@@ -151,8 +151,6 @@ class RadioController extends Controller
 
     public function createProgram(Request $request)
     {
-        Log::info($request->all());
-
         $user = User::where('uuid', $request->input('user'))->first();
 
         $program = Program::create([
@@ -206,8 +204,8 @@ class RadioController extends Controller
             "programs" => $this->indexPrograms(),
             "schedules" => $this->indexSchedules(),
             "streamers" => $this->indexStreamers(),
-            "ranking" => $this->indexMusicRanking(),
-            "listenerMonth" => $this->indexListenerMonth(),
+            "musicranking" => $this->indexMusicRanking(),
+            "listenermonth" => $this->showListenerMonth(),
         ]);
     }
 }

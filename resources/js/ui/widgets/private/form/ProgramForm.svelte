@@ -29,6 +29,10 @@
             $form.type = data.type;
             $form.schedules = data.schedules;
         })
+        .catch(()=>{
+            console.error('Error when find program selected');
+            close();
+        })
     }
 
     const submit = () => {   
