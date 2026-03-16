@@ -11,7 +11,7 @@
     let permissions = {
         show_button_create_program: hasPermission('program.create'),
         show_button_update_program: hasPermission('program.update'),
-        show_button_delete_program: hasPermission('program.delete'),
+        show_button_delete_program: hasPermission('program.deactivate'),
     }
 
     let offcanvasRef;

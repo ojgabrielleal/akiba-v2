@@ -26,7 +26,7 @@
             <div class="bg-blue-skywave p-4 text-neutral-aurora font-bold italic uppercase">
                 {title}
             </div>
-            <div class="pl-5 pr-8 pt-8 h-[calc(100vh-4rem)] overflow-y-auto">
+            <div class="pl-5 pr-8 pt-8 h-[calc(100vh-6rem)] overflow-y-auto">
                 <slot name="content" {close}/>
             </div>
         </div>
