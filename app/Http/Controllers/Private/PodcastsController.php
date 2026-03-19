@@ -6,34 +6,40 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use App\Traits\HasFlashMessages;
-use App\Services\Process\ImageService;
-
 use App\Models\Podcast;
+
+use App\Http\Resources\Private\PodcastIndexResource;
+use App\Http\Resources\Private\PodcastShowResource;
+
+use App\Services\Process\ImageProcessService;
+use App\Traits\HasFlashMessages;
 
 class PodcastsController extends Controller
 {
     use HasFlashMessages;
 
-    private ImageService $image;
-    private $render = 'private/Podcasts';
+    private ImageProcessService $image;
+    private $render = 'private/Podcast';
 
-    public function __construct(ImageService $image)
+    public function __construct(ImageProcessService $image)
     {
         $this->image = $image;
     }
 
     public function indexPodcasts()
     {
-        return Podcast::active()
-            ->with('author')
-            ->paginate(10);
+        return PodcastIndexResource::collection(
+            Podcast::active()
+                ->with('author')
+                ->paginate(10)
+        );
     }
 
     public function showPodcast(Podcast $podcast)
     {
         return Inertia::render($this->render, [
-            'podcast' => $podcast->load('author'),
+            'podcasts' => $this->indexPodcasts(),
+            'podcast' => new PodcastShowResource($podcast->load('author')),
         ]);
     }
 

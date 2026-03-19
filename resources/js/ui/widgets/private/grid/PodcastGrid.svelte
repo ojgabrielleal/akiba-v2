@@ -1,17 +1,24 @@
 <script>
     import { router, page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
+    import { hasPermission } from "@/utils";
 
     $: ({ podcasts } = $page.props);
 
-     const deactivatePodcast = (id) => {
-        router.delete(`/painel/podcasts/deactivate/${id}`);
+    let permissions = {
+        'show_update_button': hasPermission('podcast.update'),
+        'show_delete_button': hasPermission('podcast.deactivate'),
+    }
+
+    const requestDeactivatePodcast = (podcast) => {
+        router.delete(`/painel/podcasts/${podcast}`);
     }
 </script>
 
-<Section title="Todos os podcasts">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-y-10 lg:gap-x-5">
-            {#if podcasts.data?.length > 0}
+{#if podcasts}
+    <Section title="Todos os podcasts">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-y-10 lg:gap-x-5">
+            {#if podcasts.data.length > 0}
                 {#each podcasts.data as item}
                     <article>
                         <div class="aspect-square">
@@ -22,13 +29,13 @@
                                 S{item.season}-EP{item.episode}
                             </dt>
                             <dd class="flex items-center gap-3">
-                                {#if item.actions.editable}
-                                    <a href={`/painel/podcasts/${item.slug}`} aria-label="Editar">
+                                {#if permissions.show_update_button}
+                                    <a href={`/painel/podcasts/${item.uuid}`} aria-label="Editar">
                                         <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
                                     </a>
                                 {/if}
-                                {#if item.actions.deactivate}
-                                    <button on:click={()=>deactivatePodcast(item.id)} class="cursor-pointer" aria-label="Desativar">
+                                {#if permissions.show_delete_button}
+                                    <button on:click={()=>requestDeactivatePodcast(item.uuid)} class="cursor-pointer" aria-label="Desativar">
                                         <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-5 filter-red-crimson" loading="lazy"/>
                                     </button>
                                 {/if}
@@ -66,3 +73,4 @@
             {/if}
         {/if}
     </Section>
+{/if}

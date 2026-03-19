@@ -86,9 +86,9 @@ Route::prefix('painel')->group(function () {
         Route::prefix('podcasts')->controller(PodcastsController::class)->group(function () {
             Route::get('', 'render')->name('painel.podcasts');
             Route::post('', 'createPodcast');
-            Route::patch('{podcast}', 'updatePodcast');
-            Route::delete('{podcast}', 'deactivatePodcast');
-            Route::get('{podcast:slug}', 'showPodcast');
+            Route::patch('{podcast:uuid}', 'updatePodcast');
+            Route::delete('{podcast:uuid}', 'deactivatePodcast');
+            Route::get('{podcast:uuid}', 'showPodcast');
         });
         Route::prefix('marketing')->controller(MarketingController::class)->group(function () {
             Route::prefix('repository')->group(function () {

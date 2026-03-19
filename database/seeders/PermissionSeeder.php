@@ -162,6 +162,17 @@ class PermissionSeeder extends Seeder
             ['name' => 'listener.month.view', 'label' => 'Visualizar ouvinte do mês'],
             ['name' => 'listener.month.set', 'label' => 'Definir ouvinte do mês'],
 
+            /*
+            |--------------------------------------------------------------------------
+            | Podcasts
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'podcast.list', 'label' => 'Listar podcasts'],
+            ['name' => 'podcast.view', 'label' => 'Visualizar podcast'],
+            ['name' => 'podcast.create', 'label' => 'Criar podcast'],
+            ['name' => 'podcast.update', 'label' => 'Atualizar podcast'],
+            ['name' => 'podcast.deactivate', 'label' => 'Desativar podcast'],
+
         ];
         
         foreach($permissions as $item){

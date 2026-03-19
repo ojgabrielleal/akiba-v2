@@ -5,7 +5,7 @@ export { default as EventForm } from './EventForm.svelte'
 export { default as LocutionForm } from "./LocutionForm.svelte"
 export { default as ProgramForm } from "./ProgramForm.svelte"
 export { default as ListenerMonthForm } from "./ListenerMonthForm.svelte"
-export { default as PodcastsForm } from "./PodcastsForm.svelte"
+export { default as PodcastForm } from "./PodcastForm.svelte"
 export { default as MarketingForm } from "./MarketingForm.svelte"
 export { default as PollsForm } from "./PollsForm.svelte"
 export { default as ProfileForm } from "./ProfileForm.svelte"

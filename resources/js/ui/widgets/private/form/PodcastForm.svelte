@@ -3,8 +3,14 @@
     import { useForm, page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
     import { Preview, Wysiwyg } from "@/ui/components/private";
+    import { hasPermission } from "@/utils";
 
     $: ({ podcast } = $page.props);
+
+    let permissions = {
+        show_button_create: hasPermission('podcast.create'),
+        show_button_update: hasPermission('podcast.update'),
+    }
 
     let form = useForm({
         _method: null,
@@ -17,21 +23,20 @@
         audio: null,
     });
 
-    onMount(()=>{
-        if(podcast){
-            $form._method = "PUT";
-            $form.image = podcast.image,
-            $form.season = podcast.season, 
-            $form.episode = podcast.episode,
-            $form.title = podcast.title,
-            $form.summary = podcast.summary,
-            $form.description = podcast.description,
-            $form.audio = podcast.audio
-        }
-    })
+    $: if(podcast){
+        $form._method = "PATCH";
+        $form.image = podcast.data.image,
+        $form.season = podcast.data.season, 
+        $form.episode = podcast.data.episode,
+        $form.title = podcast.data.title,
+        $form.summary = podcast.data.summary,
+        $form.description = podcast.data.description,
+        $form.audio = podcast.data.audio
+    }
 
     const submit = () => {
-        let url = podcast ? `/painel/podcasts/update/${podcast.id}` : '/painel/podcasts/create/'
+        let url = podcast ? `/painel/podcasts/${podcast.data.uuid}` : '/painel/podcasts'
+
         $form.post(url, {
             preserveState: podcast,
             onSuccess: () => {
@@ -52,7 +57,7 @@
                 <Preview  
                     src={$form.image} 
                     oninput={event => $form.image = event.target.files[0]} 
-                    required={podcast ? false : true}
+                    required={!podcast}
                 />
             </div>
             <div class="flex flex-col gap-8">
@@ -65,7 +70,7 @@
                             id="season"
                             type="number"
                             name="season"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.season}
                             required
                         />                  
@@ -78,7 +83,7 @@
                             id="episode"
                             type="number"
                             name="episode"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.episode}
                             required
                         />                  
@@ -91,7 +96,7 @@
                             id="title"
                             type="text"
                             name="title"
-                            class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.title}
                             required
                         />                  
@@ -130,20 +135,18 @@
                     id="audio"
                     type="url"
                     name="audio"
-                    class="w-full h-[3rem] bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                    class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                     bind:value={$form.audio}
                     required
                 /> 
             </div>
         </div>
-        <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10">
-            <button type="submit" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
-                {#if podcast}
-                    Atualizar
-                {:else}
-                    Publicar 
-                {/if}
-            </button>
-        </div>
+        {#if permissions.show_button_create || permissions.show_button_update}
+            <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10">
+                <button type="submit" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
+                    {podcast ? "Atualizar podcast" : "Publicar podcast"}
+                </button>
+            </div>
+        {/if}
     </form>
 </Section>

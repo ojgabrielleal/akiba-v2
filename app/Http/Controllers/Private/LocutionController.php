@@ -17,7 +17,6 @@ use App\Http\Resources\Private\SongRequestIndexResource;
 
 use App\Services\External\DiscordWebhookService;
 use App\Traits\HasFlashMessages;
-use Illuminate\Support\Facades\Log;
 
 class LocutionController extends Controller
 {
