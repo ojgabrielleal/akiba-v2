@@ -106,7 +106,10 @@
 
 <Section title="Todos os conteúdos">
     <div class="flex justify-center mt-5 mb-15">
-        <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" onclick={()=> offCanvasRef.open()}>
+        <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" onclick={()=> {
+            offCanvasRef.open();
+            itemIdentifier = null 
+        }}>
             Upar conteúdo
         </button>
     </div>
