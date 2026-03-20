@@ -7,7 +7,7 @@
     $: ({ repositories } = $page.props);
 
     let offCanvasRef;
-    let identifier;
+    let itemIdentifier;
 
     let tutorials;
     let packages;
@@ -24,9 +24,9 @@
     }
 </script>
 
-<Offcanvas bind:this={offCanvasRef} title={identifier ? 'Atualizar arquivo' : 'Cadastrar arquivo'}>
+<Offcanvas bind:this={offCanvasRef} title={itemIdentifier ? 'Atualizar arquivo' : 'Cadastrar arquivo'}>
     <div slot="content" let:close>
-        <MarketingForm {identifier} {close}/>
+        <MarketingForm {itemIdentifier} {close}/>
     </div>
 </Offcanvas>
 
@@ -124,7 +124,7 @@
                         <div class="absolute -bottom-9 right-0 flex flex-row gap-4">
                             <button class="cursor-pointer" aria-label="editar" onclick={()=> {
                                 offCanvasRef.open();
-                                identifier = item.uuid;
+                                itemIdentifier = item.uuid;
                             }}>
                                 <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
                             </button>
