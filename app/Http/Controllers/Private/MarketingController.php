@@ -6,27 +6,31 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use App\Traits\HasFlashMessages;
-use App\Services\Process\ImageService;
-
 use App\Models\Repository;
+
+use App\Http\Resources\Private\RepositoryIndexResource;
+
+use App\Services\Process\ImageProcessService;
+use App\Traits\HasFlashMessages;
 
 class MarketingController extends Controller
 {
     use HasFlashMessages;
 
-    private ImageService $image;
+    private ImageProcessService $image;
     private $render = 'private/Marketing';
 
-    public function __construct(ImageService $image)
+    public function __construct(ImageProcessService $image)
     {
         $this->image = $image;
     }
 
     public function indexRepositories()
     {
-        return Repository::active()
-            ->get();
+        return RepositoryIndexResource::collection(
+            Repository::active()
+                ->get()
+        );
     }
 
     public function showRepository(Repository $repository)
@@ -78,7 +82,7 @@ class MarketingController extends Controller
         ]);
 
         return $this->flashMessage('deactivate');
-    }
+}
 
     public function render()
     {
