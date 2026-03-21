@@ -16,7 +16,7 @@ class MediaController extends Controller
 {
     use HasFlashMessages;
 
-    private $render = 'private/Medias';
+    private $render = 'private/Media';
 
     public function indexPolls()
     {
