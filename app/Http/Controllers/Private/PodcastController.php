@@ -14,7 +14,7 @@ use App\Http\Resources\Private\PodcastShowResource;
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
 
-class PodcastsController extends Controller
+class PodcastController extends Controller
 {
     use HasFlashMessages;
 

@@ -10,9 +10,9 @@ use App\Http\Controllers\Private\PostController;
 use App\Http\Controllers\Private\ReviewController;
 use App\Http\Controllers\Private\EventController;
 use App\Http\Controllers\Private\RadioController;
-use App\Http\Controllers\Private\PodcastsController;
+use App\Http\Controllers\Private\PodcastController;
 use App\Http\Controllers\Private\RepositoryController;
-use App\Http\Controllers\Private\MediasController;
+use App\Http\Controllers\Private\MediaController;
 use App\Http\Controllers\Private\ProfileController;
 
 /*
@@ -83,7 +83,7 @@ Route::prefix('painel')->group(function () {
             });
             Route::get('', 'render')->name('painel.radio');
         });
-        Route::prefix('podcasts')->controller(PodcastsController::class)->group(function () {
+        Route::prefix('podcasts')->controller(PodcastController::class)->group(function () {
             Route::get('', 'render')->name('painel.podcasts');
             Route::post('', 'createPodcast');
             Route::patch('{podcast:uuid}', 'updatePodcast');
@@ -99,7 +99,7 @@ Route::prefix('painel')->group(function () {
             });
             Route::get('', 'render')->name('painel.marketing');
         });
-        Route::prefix('medias')->controller(MediasController::class)->group(function () {
+        Route::prefix('medias')->controller(MediaController::class)->group(function () {
             Route::prefix('event')->group(function () {
                 Route::delete('{event}', 'deactivateEvent');
             });

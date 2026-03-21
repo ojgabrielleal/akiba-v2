@@ -12,7 +12,7 @@ use App\Models\Event;
 use App\Models\Poll;
 use App\Models\PollOption;
 
-class MediasController extends Controller
+class MediaController extends Controller
 {
     use HasFlashMessages;
 
