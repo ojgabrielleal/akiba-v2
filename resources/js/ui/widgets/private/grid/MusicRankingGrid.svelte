@@ -33,7 +33,7 @@
         <div class="flex flex-col gap-5">
             {#if musicranking.data.length >= 3}
                 {#each musicranking.data as item, index}
-                    <article class="mb-5 flex flex-wrap lg:flex-nowrap items-center gap-5">
+                    <article class="flex flex-wrap lg:flex-nowrap items-center gap-5">
                         <div class="flex items-center gap-5">
                             {#if permissions.show_button_update}
                                 <Preview 
@@ -95,7 +95,7 @@
             {/if}
         </div>
         {#if musicranking.data.length >= 3 && permissions.show_button_set}
-            <div class="flex justify-end mt-7" >
+            <div class="flex justify-end mt-5" >
                 <button on:click={()=>setRanking()} class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic disabled:opacity-50 disabled:pointer-events-none">
                     Atualizar ranking
                 </button>
