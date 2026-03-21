@@ -15,23 +15,23 @@
     }
 
     let offcanvasRef;
-    let itemIdentifier;
+    let identifier;
 
     const requestDeactivateProgram = (program) => {
         router.delete(`/painel/radio/program/${program}`)
     }
 </script>
 
-<Offcanvas bind:this={offcanvasRef} title={itemIdentifier ? 'Atualizar programa' : 'Cadastrar programa'}>
+<Offcanvas bind:this={offcanvasRef} title={identifier ? 'Atualizar programa' : 'Cadastrar programa'}>
     <div slot="content" let:close>
-        <ProgramForm {itemIdentifier} {close}/>
+        <ProgramForm {identifier} {close}/>
     </div>
 </Offcanvas>
 
 {#if permissions.show_button_create_program}
     <div class="flex justify-center mb-10">
         <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-neutral-aurora" on:click={()=> { 
-            itemIdentifier = null; 
+            identifier = null; 
             offcanvasRef.open()
         }}>
             Cadastrar programa
@@ -51,7 +51,7 @@
                         <div class="flex flex-col gap-5">
                             {#if permissions.show_button_update_program}
                                 <button class="cursor-pointer" aria-label="atualizar programa" on:click={()=> {
-                                    itemIdentifier = item.uuid;
+                                    identifier = item.uuid;
                                     offcanvasRef.open();
                                 }}>
                                     <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-blue-skywave" loading="lazy"/>

@@ -11,7 +11,7 @@ use App\Http\Controllers\Private\ReviewController;
 use App\Http\Controllers\Private\EventController;
 use App\Http\Controllers\Private\RadioController;
 use App\Http\Controllers\Private\PodcastsController;
-use App\Http\Controllers\Private\MarketingController;
+use App\Http\Controllers\Private\RepositoryController;
 use App\Http\Controllers\Private\MediasController;
 use App\Http\Controllers\Private\ProfileController;
 
@@ -90,12 +90,12 @@ Route::prefix('painel')->group(function () {
             Route::delete('{podcast:uuid}', 'deactivatePodcast');
             Route::get('{podcast:uuid}', 'showPodcast');
         });
-        Route::prefix('marketing')->controller(MarketingController::class)->group(function () {
+        Route::prefix('marketing')->controller(RepositoryController::class)->group(function () {
             Route::prefix('repository')->group(function () {
                 Route::post('', 'createRepository');
-                Route::get('{repository}', 'showRepository');
-                Route::patch('{repository}', 'updateRepository');
-                Route::delete('{repository}', 'deactivateRepository');
+                Route::get('{repository:uuid}', 'showRepository');
+                Route::patch('{repository:uuid}', 'updateRepository');
+                Route::delete('{repository:uuid}', 'deactivateRepository');
             });
             Route::get('', 'render')->name('painel.marketing');
         });

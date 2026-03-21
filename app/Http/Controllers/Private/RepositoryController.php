@@ -13,7 +13,7 @@ use App\Http\Resources\Private\RepositoryIndexResource;
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
 
-class MarketingController extends Controller
+class RepositoryController extends Controller
 {
     use HasFlashMessages;
 
@@ -35,25 +35,23 @@ class MarketingController extends Controller
 
     public function showRepository(Repository $repository)
     {
-        return Inertia::render($this->render, [
-            'repository' => $repository,
-        ]);
+        return new RepositoryIndexResource($repository);
     }
 
     public function createRepository(Request $request)
     {
         $request->validate([
             'name' => 'required|unique:repositories,name',
-            'file' => 'required|unique:repositories,file',
+            'url' => 'required|unique:repositories,url',
             'image' => 'required',
-            'category' => 'required',
+            'type' => 'required',
         ]);
 
         Repository::create([
             'name' => $request->input('name'),
-            'file' => $request->input('file'),
-            'image' => $this->image->store('repository', $request->input('image')),
-            'category' => $request->input('category'),
+            'url' => $request->input('url'),
+            'image' => $this->image->store('repository', $request->file('image'), 'public'),
+            'type' => $request->input('type'),
         ]);
 
         return $this->flashMessage('save');
@@ -63,9 +61,9 @@ class MarketingController extends Controller
     {
         $repository->fill([
             'name' => $request->input('name', $repository->name),
-            'file' => $request->input('file', $repository->file),
-            'image' => $this->image->store('repository', $request->input('image'), 'public', $repository->image),
-            'category' => $request->input('category', $repository->category),
+            'url' => $request->input('url', $repository->url),
+            'image' => $this->image->store('repository', $request->file('image'), 'public', $repository->image),
+            'type' => $request->input('type', $repository->type),
         ]);
 
         if ($repository->isDirty()) {
@@ -82,7 +80,7 @@ class MarketingController extends Controller
         ]);
 
         return $this->flashMessage('deactivate');
-}
+    }
 
     public function render()
     {

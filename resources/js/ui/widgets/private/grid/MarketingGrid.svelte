@@ -3,11 +3,17 @@
     import { Section } from "@/ui/components/private/";
     import { Offcanvas } from "@/ui/components/private";
     import { MarketingForm } from "@/ui/widgets/private/form";
+    import { hasPermission } from "@/utils";
 
     $: ({ repositories } = $page.props);
 
+    let permissions = {
+        show_button_create: hasPermission('repository.create'),
+        show_button_deactivate: hasPermission('repository.deactivate')
+    }
+
     let offCanvasRef;
-    let itemIdentifier;
+    let identifier;
 
     let tutorials;
     let packages;
@@ -19,14 +25,14 @@
         softwares = repositories.data.filter(item => item.type === 'software');
     }
 
-    const deleteRepository = (repositoryId) => {
-        router.delete(`/painel/marketing/deactivate/repository/${repositoryId}`);
+    const deleteRepository = (repository) => {
+        router.delete(`/painel/marketing/repository/${repository}`);
     }
 </script>
 
-<Offcanvas bind:this={offCanvasRef} title={itemIdentifier ? 'Atualizar arquivo' : 'Cadastrar arquivo'}>
+<Offcanvas bind:this={offCanvasRef} title={identifier ? 'Atualizar arquivo' : 'Cadastrar arquivo'}>
     <div slot="content" let:close>
-        <MarketingForm {itemIdentifier} {close}/>
+        <MarketingForm {identifier} {close}/>
     </div>
 </Offcanvas>
 
@@ -105,14 +111,16 @@
 {/if}
 
 <Section title="Todos os conteúdos">
-    <div class="flex justify-center mt-5 mb-15">
-        <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" onclick={()=> {
-            offCanvasRef.open();
-            itemIdentifier = null 
-        }}>
-            Upar conteúdo
-        </button>
-    </div>
+    {#if permissions.show_button_create}
+        <div class="flex justify-center mt-5 mb-10">
+            <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" onclick={()=> {
+                offCanvasRef.open();
+                identifier = null 
+            }}>
+                Upar conteúdo
+            </button>
+        </div>
+    {/if}
     {#if repositories}
         <div class="mb-20 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-x-4 gap-y-20">
             {#if repositories.data.length > 0}
@@ -125,15 +133,19 @@
                             </div>
                         </a>
                         <div class="absolute -bottom-9 right-0 flex flex-row gap-4">
-                            <button class="cursor-pointer" aria-label="editar" onclick={()=> {
-                                offCanvasRef.open();
-                                itemIdentifier = item.uuid;
-                            }}>
-                                <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
-                            </button>
-                            <button aria-label="remover" class="cursor-pointer" onclick={()=>deleteRepository(item.id)}>
-                                <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-5 filter-red-crimson" loading="lazy"/>
-                            </button>
+                            {#if permissions.show_button_create}
+                                <button class="cursor-pointer" aria-label="editar" onclick={()=> {
+                                    offCanvasRef.open();
+                                    identifier = item.uuid;
+                                }}>
+                                    <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
+                                </button>
+                            {/if}
+                            {#if permissions.show_button_deactivate}
+                                <button aria-label="remover" class="cursor-pointer" onclick={()=>deleteRepository(item.uuid)}>
+                                    <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-5 filter-red-crimson" loading="lazy"/>
+                                </button>
+                            {/if}
                         </div>
                     </article>
                 {/each}

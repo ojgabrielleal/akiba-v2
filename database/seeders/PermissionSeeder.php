@@ -137,13 +137,15 @@ class PermissionSeeder extends Seeder
             | Horários dos programas
             |--------------------------------------------------------------------------
             */
-            ['name' => 'program.schedule.list', 'label' => 'Listar horários'],
+            ['name' => 'program.schedule.list', 'label' => 'Listar horários de programas'],
+            ['name' => 'program.schedule.change', 'label' => 'Manipular horários de programas'],
 
             /*
             |--------------------------------------------------------------------------
             | Músicas
             |--------------------------------------------------------------------------
             */
+            ['name' => 'music.list', 'label' => 'Listar músicas'],
             ['name' => 'music.update', 'label' => 'Atualizar música'],
 
             /*
@@ -151,7 +153,6 @@ class PermissionSeeder extends Seeder
             | Ranking de músicas
             |--------------------------------------------------------------------------
             */
-            ['name' => 'music.ranking.list', 'label' => 'Listar ranking de músicas'],
             ['name' => 'music.ranking.set', 'label' => 'Definir ranking de músicas'],
 
             /*
@@ -172,6 +173,17 @@ class PermissionSeeder extends Seeder
             ['name' => 'podcast.create', 'label' => 'Criar podcast'],
             ['name' => 'podcast.update', 'label' => 'Atualizar podcast'],
             ['name' => 'podcast.deactivate', 'label' => 'Desativar podcast'],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Repository
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'repository.list', 'label' => 'Listar arquivos no marketing'],
+            ['name' => 'repository.view', 'label' => 'Visualizar arquivo no marketing'],
+            ['name' => 'repository.create', 'label' => 'Criar um arquivo no marketing'],
+            ['name' => 'repository.update', 'label' => 'Atualizar um arquivo no marketing'],
+            ['name' => 'repository.deactivate', 'label' => 'Desativar um arquivo no marketing'],
 
         ];
         
