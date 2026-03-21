@@ -49,16 +49,6 @@ class RadioController extends Controller
         );
     }
 
-    public function indexSchedules()
-    {
-        return ProgramIndexResource::collection(
-            Program::with(['host', 'schedules'])
-                ->where('type', 'private')
-                ->active()
-                ->get()
-        );
-    }
-
     public function indexMusicRanking()
     {
         return MusicIndexResource::collection(
@@ -202,7 +192,6 @@ class RadioController extends Controller
     {
         return Inertia::render($this->render, [
             "programs" => $this->indexPrograms(),
-            "schedules" => $this->indexSchedules(),
             "streamers" => $this->indexStreamers(),
             "musicranking" => $this->indexMusicRanking(),
             "listenermonth" => $this->showListenerMonth(),

@@ -12,7 +12,8 @@
     let permissions = {
         show_button_create: hasPermission('program.create'),
         show_button_update: hasPermission('program.update'),
-        show_schedules_change: hasPermission('program.schedule.change')
+        show_button_create_schedule: hasPermission('program.schedule.create'),
+        show_button_remove_schedule: hasPermission('program.schedule.remove')
     }
 
     let form = useForm({
@@ -145,7 +146,7 @@
                     <div class="absolute right-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
                 </div>
             </div>
-            {#if permissions.show_schedules_change}
+            {#if permissions.show_button_create_schedule}
                 <button on:click={()=>addSchedule()} type="button" class="cursor-pointer mb-2 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans">
                     <img src="/svg/default/plus.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
                     Adicionar horário
@@ -184,7 +185,7 @@
                             bind:value={schedule.hour}
                         />
                     </div>
-                    {#if permissions.show_schedules_change}
+                    {#if permissions.show_button_remove_schedule}
                         <button on:click={() => removeSchedule(index)} type="button" class="cursor-pointer mt-4 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans">
                             <img src="/svg/default/close.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
                             Remover
@@ -194,7 +195,9 @@
             {/each}
         {/if}
     {/if}
-    <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
-        {identifier ? 'Atualizar' : 'Cadastrar'} 
-    </button>
+    {#if permissions.show_button_create && permissions.show_button_update}
+        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+            {identifier ? 'Atualizar' : 'Cadastrar'} 
+        </button>
+    {/if}
 </form>

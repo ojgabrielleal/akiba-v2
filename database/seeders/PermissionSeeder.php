@@ -131,14 +131,9 @@ class PermissionSeeder extends Seeder
             ['name' => 'program.create', 'label' => 'Criar programa'],
             ['name' => 'program.update', 'label' => 'Atualizar programa'],
             ['name' => 'program.deactivate', 'label' => 'Desativar programa'],
-
-            /*
-            |--------------------------------------------------------------------------
-            | Horários dos programas
-            |--------------------------------------------------------------------------
-            */
-            ['name' => 'program.schedule.list', 'label' => 'Listar horários de programas'],
-            ['name' => 'program.schedule.change', 'label' => 'Manipular horários de programas'],
+            ['name' => 'program.schedule.create', 'label' => 'Criar horário para programa'],
+            ['name' => 'program.schedule.update', 'label' => 'Atualizar horário para programa'],
+            ['name' => 'program.schedule.remove', 'label' => 'Remover horário para programa'],
 
             /*
             |--------------------------------------------------------------------------
@@ -147,14 +142,7 @@ class PermissionSeeder extends Seeder
             */
             ['name' => 'music.list', 'label' => 'Listar músicas'],
             ['name' => 'music.update', 'label' => 'Atualizar música'],
-
-            /*
-            |--------------------------------------------------------------------------
-            | Ranking de músicas
-            |--------------------------------------------------------------------------
-            */
             ['name' => 'music.ranking.set', 'label' => 'Definir ranking de músicas'],
-
             /*
             |--------------------------------------------------------------------------
             | Ouvinte do mês
