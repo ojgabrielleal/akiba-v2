@@ -173,6 +173,19 @@ class PermissionSeeder extends Seeder
             ['name' => 'repository.update', 'label' => 'Atualizar um arquivo no marketing'],
             ['name' => 'repository.deactivate', 'label' => 'Desativar um arquivo no marketing'],
 
+            
+            /*
+            |--------------------------------------------------------------------------
+            | Enquetes
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'poll.list', 'label' => 'Listar enquetes'],
+            ['name' => 'poll.view', 'label' => 'Visualizar enquete'],
+            ['name' => 'poll.create', 'label' => 'Criar enquete'],
+            ['name' => 'poll.update', 'label' => 'Atualizar enquete'],
+            ['name' => 'poll.deactivate', 'label' => 'Desativar enquete'],
+            ['name' => 'poll.create.vote', 'label' => 'Criar voto'],
+
         ];
         
         foreach($permissions as $item){
