@@ -1,8 +1,7 @@
 <script>
     export let close = () => {};
-    export let pollId = null;
+    export let identifier;
 
-    import { onMount } from 'svelte';
     import { useForm } from "@inertiajs/svelte";
     import axios from "axios";
 
@@ -14,21 +13,27 @@
         option_four: null 
     });
     
-    onMount(()=>{
-        if(pollId){
-            axios.get(`/painel/medias/get/poll/${pollId}`).then((response) => {
-                $form.question = response.data.question;
-                $form.option_one = response.data.options[0].option
-                $form.option_two = response.data.options[1].option
-                $form.option_three = response.data.options[2].option
-                $form.option_four = response.data.options[3].option
-            });
-        }
-    })
+    if(identifier){
+        axios.get(`/painel/medias/poll/${identifier}`)
+        .then((response) => {
+            const data = response.data.data
+
+            $form.question = data.question;
+            $form.option_one = data.options[0].option
+            $form.option_two = data.options[1].option
+            $form.option_three = data.options[2].option
+            $form.option_four = data.options[3].option
+        });
+    }
     
     const submit = () => {
-        const method = pollId ? 'put' : 'post';
-        let url = pollId ? `/painel/medias/update/poll/${pollId}` : '/painel/medias/create/poll';
+        const method = identifier ? 
+            'patch' : 
+            'post';
+        let url = identifier ? 
+            `/painel/medias/poll/${identifier}` : 
+            '/painel/medias/poll';
+            
         $form[method](url, {
             onSuccess: () => close(),
         });
@@ -45,7 +50,7 @@
             id="question"
             type="text"
             name="question"
-            class="w-full h-[2.5rem] bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
             bind:value={$form.question}
         />
     </div>
@@ -60,7 +65,7 @@
                 name="option_one"
                 type="text"
                 placeholder="Digite a primeira opção"
-                class="w-full h-[2.5rem] bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+                class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
                 bind:value={$form.option_one}
                 required
             />
@@ -74,7 +79,7 @@
                 name="option_two"
                 type="text"
                 placeholder="Digite a segunda opção"
-                class="w-full h-[2.5rem] bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+                class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
                 bind:value={$form.option_two}
                 required
             />
@@ -88,7 +93,7 @@
                 name="option_three"
                 type="text"
                 placeholder="Digite a terceira opção"
-                class="w-full h-[2.5rem] bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+                class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
                 bind:value={$form.option_three}
                 required
             />
@@ -102,14 +107,14 @@
                 name="option_four"
                 type="text"
                 placeholder="Digite a quarta opção"
-                class="w-full h-[2.5rem] bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+                class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
                 bind:value={$form.option_four}
                 required
             />
         </div>
     </div>
     <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
-        {#if pollId}
+        {#if identifier}
             Atualizar
         {:else}
             Cadastrar

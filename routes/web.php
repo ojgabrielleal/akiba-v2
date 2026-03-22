@@ -105,11 +105,11 @@ Route::prefix('painel')->group(function () {
             });
             Route::prefix('poll')->group(function () {
                 Route::post('', 'createPoll');
-                Route::patch('{poll}', 'updatePoll');
-                Route::delete('{poll}', 'deactivatePoll');
-                Route::get('{poll}', 'showPoll');
+                Route::patch('{poll:uuid}', 'updatePoll');
+                Route::delete('{poll:uuid}', 'deactivatePoll');
+                Route::get('{poll:uuid}', 'showPoll');
                 Route::prefix('vote')->group(function () {
-                    Route::post('{pollOption}', 'createVote');
+                    Route::post('{pollOption:uuid}', 'createVote');
                 });
             });
             Route::get('', 'render')->name('painel.medias');

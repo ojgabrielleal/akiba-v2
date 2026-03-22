@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use App\Traits\HasFlashMessages;
-
 use App\Models\Event;
 use App\Models\Poll;
 use App\Models\PollOption;
+
+use App\Http\Resources\Private\PollIndexResource;
+use App\Http\Resources\Private\PollShowResource;
+
+use App\Traits\HasFlashMessages;
 
 class MediaController extends Controller
 {
@@ -20,7 +23,9 @@ class MediaController extends Controller
 
     public function indexPolls()
     {
-        return Poll::active()->get();
+        return PollIndexResource::collection(
+            Poll::active()->get()
+        );
     }
 
     public function indexEvents()
@@ -30,17 +35,12 @@ class MediaController extends Controller
 
     public function showPoll(Poll $poll)
     {
-        return Inertia::render($this->render, [
-            'poll' => $poll,
-        ]);
+        return new PollShowResource($poll);
     }
 
     public function createVote(PollOption $pollOption)
     {
-        $pollOption->update([
-            'votes' => $pollOption->incrementing('votes'),
-        ]);
-
+        $pollOption->increment('votes');
         return $this->flashMessage('save');
     }
 
