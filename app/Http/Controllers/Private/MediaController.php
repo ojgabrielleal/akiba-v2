@@ -111,7 +111,7 @@ class MediaController extends Controller
     public function deactivatePoll(Poll $poll)
     {
         $poll->update([
-            'is_activate' => false,
+            'is_active' => false,
         ]);
 
         return $this->flashMessage('deactivate');
