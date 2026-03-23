@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Private\LoginController;
-use App\Http\Controllers\Private\AdmsController;
+use App\Http\Controllers\Private\AdministrationController;
 use App\Http\Controllers\Private\LocutionController;
 use App\Http\Controllers\Private\DashboardController;
 use App\Http\Controllers\Private\PostController;
@@ -114,15 +114,15 @@ Route::prefix('painel')->group(function () {
             });
             Route::get('', 'render')->name('painel.medias');
         });
-        Route::prefix('adms')->controller(AdmsController::class)->group(function () {
+        Route::prefix('adms')->controller(AdministrationController::class)->group(function () {
             Route::prefix('user')->group(function () {
                 Route::post('', 'createUser');
-                Route::delete('{user}', 'deactivateUser');
+                Route::delete('{user:uuid}', 'deactivateUser');
                 Route::prefix('password')->group(function () {
-                    Route::patch('{user}/update', 'changeUserPassword');
+                    Route::patch('{user:uuid}', 'changeUserPassword');
                 });
                 Route::prefix('roles')->group(function () {
-                    Route::patch('{user}/update', 'changeUserRoles');
+                    Route::patch('{user:uuid}', 'changeUserRoles');
                 });
             });
             Route::get('', 'render')->name('painel.adms');

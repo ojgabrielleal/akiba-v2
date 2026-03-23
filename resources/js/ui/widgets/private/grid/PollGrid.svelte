@@ -39,7 +39,7 @@
 
 </script>
 
-<Offcanvas bind:this={offcanvasRef} title="Enquetes">
+<Offcanvas bind:this={offcanvasRef} title={identifier ? 'Atualizar enquete' : 'Cadastrar enquete'}>
     <div slot="content" let:close>
         <PollForm {identifier} {close}/>
     </div>

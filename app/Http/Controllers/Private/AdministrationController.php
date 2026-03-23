@@ -6,21 +6,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use App\Traits\HasFlashMessages;
-
 use App\Models\User;
 
-class AdmsController extends Controller
+use App\Http\Resources\Private\UserIndexResource;
+
+use App\Traits\HasFlashMessages;
+
+
+class AdministrationController extends Controller
 {
     use HasFlashMessages;
 
-    private $render = 'admin/Adms';
+    private $render = 'private/Administration';
 
     public function indexUsers()
     {
-        return User::active()
-            ->with(['roles'])
-            ->get();
+        return UserIndexResource::collection(
+            User::active()
+                ->with(['roles'])
+                ->get()
+        );
     }
 
     public function createUser(Request $request)

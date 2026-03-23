@@ -19,7 +19,14 @@ class UserIndexResource extends JsonResource
             'name' => $this->name,
             'nickname' => $this->nickname,
             'avatar' => $this->avatar,
-            'gender' => $this->gender
+            'gender' => $this->gender,
+            'roles' => $this->roles->map(fn($item)=>[
+                'uuid' => $item->uuid,
+                'label' => $item->label,
+                'name' => $item->name,
+                'weight' => $item->weight,
+                'description' => $item->description,
+            ])
         ];
     }
 }

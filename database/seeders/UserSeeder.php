@@ -29,10 +29,15 @@ class UserSeeder extends Seeder
                 'gender' => 'female',
             ]);
 
+        $roles = Role::where('name', '!=', 'administrator')->get();
         User::factory(5)
             ->has(UserPreference::factory(), 'preferences')
             ->has(UserSocial::factory(), 'socials')
-            ->hasAttached(Role::where('name', 'user')->first(), [], 'roles')
-            ->create();
+            ->create()
+            ->each(function ($user) use ($roles) {
+                $user->roles()->attach(
+                    $roles->random()->id
+                );
+            });
     }
 }
