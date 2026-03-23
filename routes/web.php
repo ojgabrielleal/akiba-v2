@@ -101,7 +101,7 @@ Route::prefix('painel')->group(function () {
         });
         Route::prefix('medias')->controller(MediaController::class)->group(function () {
             Route::prefix('event')->group(function () {
-                Route::delete('{event}', 'deactivateEvent');
+                Route::delete('{event:uuid}', 'deactivateEvent');
             });
             Route::prefix('poll')->group(function () {
                 Route::post('', 'createPoll');

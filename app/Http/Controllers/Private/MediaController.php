@@ -12,6 +12,7 @@ use App\Models\PollOption;
 
 use App\Http\Resources\Private\PollIndexResource;
 use App\Http\Resources\Private\PollShowResource;
+use App\Http\Resources\Private\EventIndexResource;
 
 use App\Traits\HasFlashMessages;
 
@@ -30,7 +31,9 @@ class MediaController extends Controller
 
     public function indexEvents()
     {
-        return Event::active()->get();
+        return EventIndexResource::collection(
+            Event::active()->paginate(10)
+        );
     }
 
     public function showPoll(Poll $poll)
