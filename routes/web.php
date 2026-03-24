@@ -117,10 +117,9 @@ Route::prefix('painel')->group(function () {
         Route::prefix('adms')->controller(AdministrationController::class)->group(function () {
             Route::prefix('user')->group(function () {
                 Route::post('', 'createUser');
+                Route::get('{user:uuid}', 'showUser');
                 Route::delete('{user:uuid}', 'deactivateUser');
-                Route::prefix('password')->group(function () {
-                    Route::patch('{user:uuid}', 'changeUserPassword');
-                });
+                Route::patch('{user:uuid}', 'updateUserAccess');
                 Route::prefix('roles')->group(function () {
                     Route::patch('{user:uuid}', 'changeUserRoles');
                 });

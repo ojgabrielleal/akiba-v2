@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Private;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ListenerMonthFoundShowResource extends JsonResource
+class RoleIndexResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,10 @@ class ListenerMonthFoundShowResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'name' => $this->name,
-            'address' => $this->address,
-            'favorite_program' => $this->favorite_program,
-            'requests_total' => $this->requests_total,
+            'label' => $this->label, 
+            'name' => $this->name, 
+            'description' => $this->description,
+            'weight' => $this->weight,
         ];
     }
 }

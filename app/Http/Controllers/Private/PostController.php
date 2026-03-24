@@ -8,8 +8,7 @@ use Inertia\Inertia;
 
 use App\Models\Post;
 
-use App\Http\Resources\Private\PostIndexResource;
-use App\Http\Resources\Private\PostShowResource;
+use App\Http\Resources\PostResource;
 
 use App\Services\Process\ImageProcessService;
 
@@ -37,7 +36,7 @@ class PostController extends Controller
         $canListOwn = $user['permissions']->contains('name', 'post.list.own');
 
         if ($canListOwn) {
-            return PostIndexResource::collection(
+            return PostResource::collection(
                 Post::mine()
                     ->with('author')
                     ->latest()
@@ -45,7 +44,7 @@ class PostController extends Controller
             );
         }
 
-        return PostIndexResource::collection(
+        return PostResource::collection(
             Post::with('author')
                 ->latest()
                 ->paginate(10)
@@ -56,7 +55,7 @@ class PostController extends Controller
     {
 
         return Inertia::render($this->render, [
-            'post' => new PostShowResource(
+            'post' => new PostResource(
                 $post->load('categories', 'references', 'author')
             ),
             "posts" => $this->indexPosts(),

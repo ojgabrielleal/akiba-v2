@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Http\Resources\Private;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ReviewIndexResource extends JsonResource
+class TaskResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
             'uuid' => $this->uuid,
-            'slug' => $this->slug,
+            'is_due' => $this->is_due || $this->is_over,
+            'dead_line' => $this->dead_line?->format('d/m'),
             'title' => $this->title,
+            'content' => $this->content,
         ];
     }
 }

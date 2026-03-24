@@ -8,8 +8,7 @@ use Inertia\Inertia;
 
 use App\Models\Event;
 
-use App\Http\Resources\Private\EventIndexResource;
-use App\Http\Resources\Private\EventShowResource;
+use App\Http\Resources\EventResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
@@ -28,7 +27,7 @@ class EventController extends Controller
 
     public function indexEvents()
     {
-        return EventIndexResource::collection(
+        return EventResource::collection(
             Event::active()
                 ->with('author')
                 ->paginate(10)
@@ -38,7 +37,7 @@ class EventController extends Controller
     public function showEvent(Event $event)
     {
         return Inertia::render($this->render, [
-            'event' => new EventShowResource($event->load('author')),
+            'event' => new EventResource($event->load('author')),
             'events' => $this->indexEvents()
         ]);
     }

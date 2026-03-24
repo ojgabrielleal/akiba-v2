@@ -10,9 +10,8 @@ use App\Models\Event;
 use App\Models\Poll;
 use App\Models\PollOption;
 
-use App\Http\Resources\Private\PollIndexResource;
-use App\Http\Resources\Private\PollShowResource;
-use App\Http\Resources\Private\EventIndexResource;
+use App\Http\Resources\PollResource;
+use App\Http\Resources\EventResource;
 
 use App\Traits\HasFlashMessages;
 
@@ -24,21 +23,21 @@ class MediaController extends Controller
 
     public function indexPolls()
     {
-        return PollIndexResource::collection(
+        return PollResource::collection(
             Poll::active()->get()
         );
     }
 
     public function indexEvents()
     {
-        return EventIndexResource::collection(
+        return EventResource::collection(
             Event::active()->paginate(10)
         );
     }
 
     public function showPoll(Poll $poll)
     {
-        return new PollShowResource($poll);
+        return new PollResource($poll);
     }
 
     public function createVote(PollOption $pollOption)

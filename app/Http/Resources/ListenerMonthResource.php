@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Private;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MusicIndexResource extends JsonResource
+class ListenerMonthResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,11 @@ class MusicIndexResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
+            'avatar' => $this->avatar ?? null,
             'name' => $this->name,
-            'type' => $this->type,
-            'production' => $this->production,
-            'artist' => $this->artist,
-            'ranking' => [
-                'image' => $this->image_ranking,
-            ]
+            'address' => $this->address,
+            'favorite_program' => $this->favorite_program,
+            'requests_total' => $this->requests_total,
         ];
     }
 }

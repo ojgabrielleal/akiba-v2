@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 use App\Models\User;
+use App\Models\Role;
 
-use App\Http\Resources\Private\UserIndexResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\RoleIndexResource;
 
 use App\Traits\HasFlashMessages;
-
 
 class AdministrationController extends Controller
 {
@@ -19,13 +20,25 @@ class AdministrationController extends Controller
 
     private $render = 'private/Administration';
 
+    public function indexRoles()
+    {
+        return RoleIndexResource::collection(
+            Role::all()
+        );
+    }
+
     public function indexUsers()
     {
-        return UserIndexResource::collection(
+        return UserResource::collection(
             User::active()
                 ->with(['roles'])
                 ->get()
         );
+    }
+
+    public function showUser(User $user)
+    {
+        return new UserResource($user);
     }
 
     public function createUser(Request $request)
@@ -39,12 +52,8 @@ class AdministrationController extends Controller
             'roles' => 'required'
         ]);
 
-        $avatar = null;
-        if ($request->input('gender') === 'male') {
-            $avatar = '/img/default/users/avatarMale.webp';
-        } else {
-            $avatar = '/img/default/users/avatarFemale.webp';
-        }
+        $roles = Role::whereIn('name', $request->input('roles'))->pluck('id');
+        $avatar = $request->input('gender') === 'male' ? '/img/users/default/avatarMale.webp' : '/img/users/default/avatarFemale.webp';
 
         User::create([
             'username' => $request->input('username'),
@@ -53,7 +62,7 @@ class AdministrationController extends Controller
             'avatar' => $avatar,
             'nickname' => $request->input('nickname'),
             'gender' => $request->input('gender'),
-        ])->roles()->attach($request->input('roles'));
+        ])->roles()->attach($roles);
 
         return $this->flashMessage('save');
     }
@@ -67,35 +76,30 @@ class AdministrationController extends Controller
         return $this->flashMessage('deactivate');
     }
 
-    public function changeUserPassword(Request $request, User $user)
+    public function updateUserAccess(Request $request, User $user)
     {
         $request->validate([
             'password' => 'required',
+            'roles' => 'required|array',
         ]);
+        
+        $roles = Role::whereIn('name', $request->input('roles'))
+            ->pluck('id')
+            ->toArray();
 
         $user->update([
             'password' => $request->input('password'),
         ]);
 
-        return $this->flashMessage('save');
-    }
+        $user->roles()->sync($roles);
 
-    /*
-    * TODO: Verify method to change roles if needed
-    */
-    public function changeUserRoles(Request $request, User $user)
-    {
-        $request->validate([
-            'roles' => 'required|array',
-        ]);
-
-        $user->roles()->sync($request->input('roles'));
         return $this->flashMessage('save');
     }
 
     public function render()
     {
         return Inertia::render($this->render, [
+            'roles' => $this->indexRoles(),
             'users' => $this->indexUsers()
         ]);
     }

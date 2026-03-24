@@ -72,12 +72,12 @@ class PermissionSeeder extends Seeder
             |--------------------------------------------------------------------------
             */
             ['name' => 'post.list', 'label' => 'Listar posts'],
-            ['name' => 'post.list.own', 'label' => 'Listar próprios posts'],
             ['name' => 'post.view', 'label' => 'Visualizar post'],
             ['name' => 'post.create', 'label' => 'Criar post'],
             ['name' => 'post.update', 'label' => 'Atualizar post'],
             ['name' => 'post.update.own', 'label' => 'Atualiza próprio post'],
             ['name' => 'post.deactivate', 'label' => 'Desativar post'],
+            ['name' => 'post.list.own', 'label' => 'Listar próprios posts'],
 
             /*
             |--------------------------------------------------------------------------
@@ -182,9 +182,23 @@ class PermissionSeeder extends Seeder
             ['name' => 'poll.list', 'label' => 'Listar enquetes'],
             ['name' => 'poll.view', 'label' => 'Visualizar enquete'],
             ['name' => 'poll.create', 'label' => 'Criar enquete'],
+            ['name' => 'poll.create.vote', 'label' => 'Criar voto'],
             ['name' => 'poll.update', 'label' => 'Atualizar enquete'],
             ['name' => 'poll.deactivate', 'label' => 'Desativar enquete'],
-            ['name' => 'poll.create.vote', 'label' => 'Criar voto'],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Usuário
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'user.list', 'label' => 'Listar usuários'],
+            ['name' => 'user.view', 'label' => 'Visualizar usuário'],
+            ['name' => 'user.create', 'label' => 'Criar usuário'],
+            ['name' => 'user.update', 'label' => 'Atualizar usuário'],
+            ['name' => 'user.deactivate', 'label' => 'Desativar usuário'],
+            ['name' => 'user.view.own', 'label' => 'Visualizar o próprio usuário'],
+            ['name' => 'user.update.own', 'label' => 'Atualizar o próprio usuário'],
+            ['name' => 'user.access.update', 'label' => 'Atualizar dados de acesso e cargos do usuário']
 
         ];
         

@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 use App\Models\Repository;
 
-use App\Http\Resources\Private\RepositoryIndexResource;
+use App\Http\Resources\RepositoryResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
@@ -27,7 +27,7 @@ class RepositoryController extends Controller
 
     public function indexRepositories()
     {
-        return RepositoryIndexResource::collection(
+        return RepositoryResource::collection(
             Repository::active()
                 ->get()
         );
@@ -35,7 +35,7 @@ class RepositoryController extends Controller
 
     public function showRepository(Repository $repository)
     {
-        return new RepositoryIndexResource($repository);
+        return new RepositoryResource($repository);
     }
 
     public function createRepository(Request $request)

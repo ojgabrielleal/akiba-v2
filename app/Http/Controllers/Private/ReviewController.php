@@ -8,8 +8,7 @@ use Inertia\Inertia;
 
 use App\Models\Review;
 
-use App\Http\Resources\Private\ReviewIndexResource;
-use App\Http\Resources\Private\ReviewShowResource;
+use App\Http\Resources\ReviewResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
@@ -28,7 +27,7 @@ class ReviewController extends Controller
 
     public function indexReviews()
     {
-        return ReviewIndexResource::collection(
+        return ReviewResource::collection(
             Review::with('reviews')->paginate(10)
         );
     }
@@ -37,7 +36,7 @@ class ReviewController extends Controller
     {
         return Inertia::render($this->render, [
             "reviews" => $this->indexReviews(),
-            'review' => new ReviewShowResource(
+            'review' => new ReviewResource(
                 $review->load('reviews.author')
             ),
         ]);

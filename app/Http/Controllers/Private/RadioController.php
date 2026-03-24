@@ -11,12 +11,10 @@ use App\Models\Music;
 use App\Models\Program;
 use App\Models\ListenerMonth;
 
-use App\Http\Resources\Private\UserIndexResource;
-use App\Http\Resources\Private\ProgramIndexResource;
-use App\Http\Resources\Private\ProgramShowResource;
-use App\Http\Resources\Private\MusicIndexResource;
-use App\Http\Resources\Private\ListenerMonthShowResource;
-use App\Http\Resources\Private\ListenerMonthFoundShowResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\ProgramResource;
+use App\Http\Resources\MusicResource;
+use App\Http\Resources\ListenerMonthResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
@@ -35,14 +33,14 @@ class RadioController extends Controller
 
     public function indexStreamers()
     {
-        return UserIndexResource::collection(
+        return UserResource::collection(
             User::get()
         );
     }
 
     public function indexPrograms()
     {
-        return ProgramIndexResource::collection(
+        return ProgramResource::collection(
             Program::with(['host', 'schedules'])
                 ->active()
                 ->get()
@@ -51,7 +49,7 @@ class RadioController extends Controller
 
     public function indexMusicRanking()
     {
-        return MusicIndexResource::collection(
+        return MusicResource::collection(
             Music::orderBy('song_requests_total', 'desc')
                 ->limit(3)
                 ->get()
@@ -60,21 +58,21 @@ class RadioController extends Controller
 
     public function showListenerMonth()
     {
-        return new ListenerMonthShowResource(
+        return new ListenerMonthResource(
             ListenerMonth::first()
         );
     }
 
     public function showListenerMonthFound()
     {
-        return new ListenerMonthFoundShowResource(
+        return new ListenerMonthResource(
             ListenerMonth::mostActiveListenerOfCurrentMonth()
         );
     }
 
     public function showProgram(Program $program)
     {
-        return new ProgramShowResource($program->load('host', 'schedules'));
+        return new ProgramResource($program->load('host', 'schedules'));
     }
 
     public function updateProgram(Request $request, Program $program)

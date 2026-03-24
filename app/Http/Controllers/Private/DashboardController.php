@@ -11,10 +11,10 @@ use App\Models\Post;
 use App\Models\Task;
 use App\Models\Calendar;
 
-use App\Http\Resources\Private\ActivityIndexResource;
-use App\Http\Resources\Private\TaskIndexResource;
-use App\Http\Resources\Private\PostIndexResource;
-use App\Http\Resources\Private\CalendarIndexResource;
+use App\Http\Resources\ActivityResource;
+use App\Http\Resources\TaskResource;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\CalendarResource;
 
 use App\Traits\HasFlashMessages;
 
@@ -26,7 +26,7 @@ class DashboardController extends Controller
 
     public function indexActivities()
     {
-        return ActivityIndexResource::collection(
+        return ActivityResource::collection(
             Activity::valid()
                 ->with(['author', 'confirmations'])
                 ->limit(10)
@@ -36,7 +36,7 @@ class DashboardController extends Controller
 
     public function indexTasks()
     {
-        return TaskIndexResource::collection(
+        return TaskResource::collection(
             Task::active()
                 ->incompleted()
                 ->mine()
@@ -47,7 +47,7 @@ class DashboardController extends Controller
 
     public function indexPosts()
     {
-        return PostIndexResource::collection(
+        return PostResource::collection(
             Post::active()
                 ->published()
                 ->latest()
@@ -58,7 +58,7 @@ class DashboardController extends Controller
 
     public function indexCalendar()
     {
-        return CalendarIndexResource::collection(
+        return CalendarResource::collection(
             Calendar::active()
                 ->with(['activity', 'responsible'])
                 ->get()

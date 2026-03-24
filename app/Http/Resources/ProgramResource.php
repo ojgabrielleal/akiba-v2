@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Private;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Carbon\Carbon;
 
-class ProgramIndexResource extends JsonResource
+class ProgramResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -25,15 +25,13 @@ class ProgramIndexResource extends JsonResource
                 'name' => $this->host->name,
                 'nickname' => $this->host->nickname,
                 'avatar' => $this->host->avatar,
-                'gender' => $this->host->gender,
+                'gender' => $this->host->gender
             ],
-            'schedules' => $this->schedules->map(function ($schedule) {
-                return [
-                    'uuid' => $schedule->uuid,
-                    'day' => $schedule->day,
-                    'hour' => $this->formatHour($schedule->hour),
-                ];
-            })
+            'schedules' => $this->schedules->map(fn($item) => [
+                'uuid' => $item->uuid,
+                'hour' => $this->formatHour($item->hour),
+                'day' => $item->day,
+            ])
         ];
     }
 

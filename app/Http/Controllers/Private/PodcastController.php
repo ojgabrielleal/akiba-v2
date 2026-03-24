@@ -8,8 +8,8 @@ use Inertia\Inertia;
 
 use App\Models\Podcast;
 
-use App\Http\Resources\Private\PodcastIndexResource;
-use App\Http\Resources\Private\PodcastShowResource;
+use App\Http\Resources\PodcastResource;
+use App\Http\Resources\PodcastShowResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
@@ -28,7 +28,7 @@ class PodcastController extends Controller
 
     public function indexPodcasts()
     {
-        return PodcastIndexResource::collection(
+        return PodcastResource::collection(
             Podcast::active()
                 ->with('author')
                 ->paginate(10)

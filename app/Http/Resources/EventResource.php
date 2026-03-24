@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Private;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EventIndexResource extends JsonResource
+class EventResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +18,9 @@ class EventIndexResource extends JsonResource
             'uuid' => $this->uuid,
             'slug' => $this->slug,
             'cover' => $this->cover,
+            'image' => $this->image,
             'title' => $this->title,
+            'content' => $this->content,
             'dates' => $this->dates,
             'address' => $this->address,
             'author' => [
@@ -27,7 +29,6 @@ class EventIndexResource extends JsonResource
                 'nickname' => $this->author->nickname,
                 'avatar' => $this->author->avatar,
                 'gender' => $this->author->gender
-
             ]
         ];
     }

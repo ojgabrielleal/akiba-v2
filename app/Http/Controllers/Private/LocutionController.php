@@ -11,9 +11,9 @@ use App\Models\Program;
 use App\Models\Automatic;
 use App\Models\SongRequest;
 
-use App\Http\Resources\Private\OnairShowResource;
-use App\Http\Resources\Private\ProgramIndexResource;
-use App\Http\Resources\Private\SongRequestIndexResource;
+use App\Http\Resources\OnairResource;
+use App\Http\Resources\ProgramResource;
+use App\Http\Resources\SongRequestResource;
 
 use App\Services\External\DiscordWebhookService;
 use App\Traits\HasFlashMessages;
@@ -32,7 +32,7 @@ class LocutionController extends Controller
 
     public function indexPrograms()
     {
-        return ProgramIndexResource::collection(
+        return ProgramResource::collection(
             Program::active()
                 ->where(function ($q) {
                     $q->where('user_id', request()->user()->id)
@@ -46,14 +46,14 @@ class LocutionController extends Controller
     {
         $onair = Onair::live()->first();
 
-        return SongRequestIndexResource::collection(
+        return SongRequestResource::collection(
             SongRequest::where('onair_id', $onair->id)->get()
         );
     }
 
     public function showOnair()
     {
-        return new OnairShowResource(
+        return new OnairResource(
             Onair::live()->with('program.host')->first()
         );
     }

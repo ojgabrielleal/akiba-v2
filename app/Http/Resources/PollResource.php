@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Private;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PollIndexResource extends JsonResource
+class PollResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

@@ -2,12 +2,19 @@
     import { page, router } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";   
     import { Offcanvas } from "@/ui/components/private";
-    import { UserForm, UserSecurityForm } from "@/ui/widgets/private/form"
+    import { UserForm, UserAccessForm } from "@/ui/widgets/private/form"
+    import { hasPermission } from "@/utils";
 
     $: ({ users } = $page.props);
+
+    let permissions ={
+        'show_button_create': hasPermission('user.create'),
+        'show_button_deactivate': hasPermission('user.deactivate'),
+        'show_button_update_access': hasPermission('user.access.update')
+    }
  
     let offCanvasUserRef;
-    let offCanvasUserSecurityRef;
+    let offCanvasUserAccessRef;
     let identifier;
 
     const requestDeactivateUser = (user) => {
@@ -20,19 +27,21 @@
         <UserForm {close}/>
     </div>
 </Offcanvas>
-<Offcanvas bind:this={offCanvasUserSecurityRef} title="Configurações administrativas">
+<Offcanvas bind:this={offCanvasUserAccessRef} title="Configurações administrativas">
     <div slot="content" let:close>
-        <UserSecurityForm {identifier} {close}/>
+        <UserAccessForm {identifier} {close}/>
     </div>
 </Offcanvas>
 
 <div class="flex justify-center gap-5 mb-5">
-    <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={()=> { 
-        offCanvasUserRef.open()
-    }}>
-        Cadastrar membro
-    </button>
-    <span class="border-l border-neutral-aurora/30"></span>
+    {#if permissions.show_button_create}
+        <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={()=> { 
+            offCanvasUserRef.open()
+        }}>
+            Cadastrar membro
+        </button>
+        <span class="border-l border-neutral-aurora/30"></span>
+    {/if}
     <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase">
         Gerênciar permissões
     </button>
@@ -62,18 +71,22 @@
                             {highestRole.label}
                         </dt>
                         <dd class="flex flex-wrap lg:flex-nowrap gap-2">
-                            <button aria-label="Definir permissões" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"  on:click={()=> { 
-                                identifier = item.uuid;
-                                offCanvasUserSecurityRef.open()
-                            }}>
-                                <img src="/svg/default/crown.svg" alt="" aria-hidden="true" class="w-4 filter-blue-indigo" loading="lazy"/>
-                            </button>
+                            {#if permissions.show_button_update_access}
+                                <button aria-label="Definir permissões" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"  on:click={()=> { 
+                                    identifier = item.uuid;
+                                    offCanvasUserAccessRef.open()
+                                }}>
+                                    <img src="/svg/default/crown.svg" alt="" aria-hidden="true" class="w-4 filter-blue-indigo" loading="lazy"/>
+                                </button>
+                            {/if}
                             <a href={`/painel/profile/${item.uuid}`} aria-label="Editar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
                                 <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-4 filter-blue-indigo" loading="lazy"/>
                             </a>
-                            <button on:click={() => requestDeactivateUser(item.uuid)} aria-label="Desativar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
-                                <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-4 filter-red-crimson" loading="lazy"/>
-                            </button>
+                            {#if permissions.show_button_deactivate}
+                                <button on:click={() => requestDeactivateUser(item.uuid)} aria-label="Desativar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
+                                    <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-4 filter-red-crimson" loading="lazy"/>
+                                </button>
+                            {/if}
                         </dd>
                     </dl>
                 </article>
