@@ -2,7 +2,7 @@
     import { useForm, page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
-    import avatarJson from "@/data/locution/avatar.json";
+    import iconsJson from "@/data/locution/icons.json";
 
     $: ({ programs } = $page.props);
 
@@ -16,11 +16,13 @@
     let form = useForm({
         program: null,
         phrase: null,
-        image: null,
+        icon: null,
     });
     
     const submit = () => {
-        $form.post(`/painel/locucao/locution/start/${$form.program}`);
+        $form.post(`/painel/locucao/locution/start/${$form.program}`, {
+            preserveScroll: true,
+        });
     }
 </script>
 
@@ -55,10 +57,10 @@
                 Escolha um icone
             </div>
             <div class="flex flex-wrap justify-center lg:justify-start gap-30 lg:gap-y-30 lg:gap-x-5 mt-28">
-                {#each avatarJson as item, index}
-                    <button on:click={() => {$form.image = item.url}} type="button" aria-label={`Icon ${index}`}  class={['cursor-pointer w-[9.55rem] h-12 flex justify-end items-end rounded-lg bg-neutral-aurora transition duration-300 ease-in-out', 
-                        {'opacity-50 scale-90' : $form.image === item.url},
-                        {'opacity-100' : $form.image !== item.url }
+                {#each iconsJson as item, index}
+                    <button type="button" aria-label={`Icon ${index}`} on:click={() => {$form.icon = item.url}} class={['cursor-pointer w-[9.55rem] h-12 flex justify-end items-end rounded-lg bg-neutral-aurora transition duration-300 ease-in-out', 
+                        {'opacity-50 scale-90' : $form.icon === item.url},
+                        {'opacity-100' : $form.icon !== item.url }
                     ]}>
                         <img src={item.url} alt="" aria-hidden="true" class="w-34 aspect-square" loading="lazy"/>
                     </button>

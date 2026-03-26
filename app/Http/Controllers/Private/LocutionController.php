@@ -62,7 +62,7 @@ class LocutionController extends Controller
     {
         $request->validate([
             'phrase' => 'required',
-            'image' => 'required'
+            'icon' => 'required'
         ]);
 
         Onair::live()->first()->update([
@@ -79,7 +79,7 @@ class LocutionController extends Controller
         $program->onair()->create([
             'type' => 'live',
             'phrase' => $request->input('phrase'),
-            'image' => $request->input('image'),
+            'icon' => $request->input('icon'),
             'allows_song_requests' => true,
         ]);
 
@@ -121,7 +121,7 @@ class LocutionController extends Controller
         ]);
 
         $songRequest->onair()->increment('song_requests_total');
-        return $this->flashMessage('save');
+        return $this->flashMessage('order_fulfilled');
     }
 
     public function markSongRequestAsCanceled(SongRequest $songRequest)
@@ -131,7 +131,7 @@ class LocutionController extends Controller
         ]);
 
         $songRequest->onair()->decrement('song_requests_total');
-        return $this->flashMessage('save');
+        return $this->flashMessage('order_canceled');
     }
 
 

@@ -44,6 +44,14 @@ trait HasFlashMessages
                 'icon' => '🎊',
                 'message' => 'Finalizado! Nossa, que demora, hein?'
             ],
+            'order_fulfilled' => [
+                'icon' => '🎵',
+                'message' => 'Vamos atender! Que vibe, hein?'
+            ],
+            'order_canceled' => [
+                'icon' => '🚫',
+                'message' => 'Vamos cancelar! Triste, acontece.'
+            ],
         ];
 
         $base = $messages[$action];

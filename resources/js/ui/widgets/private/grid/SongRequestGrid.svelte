@@ -15,15 +15,21 @@
     }
     
     const requestToggleSongRequest = () => {
-        router.patch("/painel/locucao/songrequest/toggle")
+        router.patch("/painel/locucao/songrequest/toggle", {}, {
+            preserveScroll: true,
+        })
     }
     
     const markToReproduced = (songrequest) => {
-        router.patch(`/painel/locucao/songrequest/${songrequest}/played`)
+        router.patch(`/painel/locucao/songrequest/${songrequest}/played`, {}, {
+            preserveScroll: true,
+        })
     }
     
     const markToCanceled = (songrequest) => {
-        router.patch(`/painel/locucao/songrequest/${songrequest}/canceled`)
+        router.patch(`/painel/locucao/songrequest/${songrequest}/canceled`, {}, {
+            preserveScroll: true,
+        })
     }
     
     const requestFinishlocution = () => {
@@ -62,15 +68,19 @@
                     {'bg-red-crimson': item.was_canceled},
                     {'bg-blue-skywave': !item.was_reproduced && !item.was_canceled}
                 ]}>
-                    <div class="w-70 flex items-center gap-1.5 text-neutral-aurora text-[1.2rem] font-noto-sans font-bold italic truncate">
+                    <div class="w-70 flex items-center gap-1.5 text-neutral-aurora text-[1.2rem] font-noto-sans font-bold italic">
                         <img src="/svg/default/profile.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
-                        {item.name}
+                        <span class="truncate">
+                            {item.name}
+                        </span>
                     </div>
-                    <div class="w-70 mt-1 flex gap-1.5 text-neutral-aurora text-[1rem] font-noto-sans truncate">
+                    <div class="w-full mt-1 flex gap-1.5 text-neutral-aurora text-[1rem] font-noto-sans">
                         <img src="/svg/default/gps.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
-                        {item.address}
+                        <span class="truncate">
+                            {item.address}
+                        </span>
                     </div>
-                    <div class="mt-1 flex gap-1.5 text-neutral-aurora text-[1rem] font-noto-sans">
+                    <div class="mt-1.5 flex gap-1.5 text-neutral-aurora text-[1rem] font-noto-sans">
                         <img src="/svg/default/ip.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
                         {item.ip}
                     </div>
@@ -86,14 +96,23 @@
                     <div class="flex flex-wrap xl:flex-nowrap gap-3">
                         <img src={item.music.image} alt={`Capa do anime ${item.music.production}`} class="w-15 h-15 rounded-lg object-cover object-top shrink-0" loading="lazy"/>
                         <div>
-                            <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans truncate text-ellipsis">
-                                Anime: {item.music.production}
+                            <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans">
+                                Anime: 
+                                <span class="truncate">
+                                    {item.music.production}
+                                </span>
                             </div>
-                            <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans truncate text-ellipsis">
-                                Artista: {item.music.artist}
+                            <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans">
+                                Artista: 
+                                <span class="truncate">
+                                    {item.music.artist}
+                                </span>
                             </div>
-                            <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans truncate text-ellipsis">
-                                Música: {item.music.name}
+                            <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans">
+                                Música: 
+                                <span class="truncate">
+                                    {item.music.name}
+                                </span>
                             </div>
                         </div>
                     </div>

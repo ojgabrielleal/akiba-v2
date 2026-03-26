@@ -19,7 +19,7 @@ class Onair extends Model
         'program_type',
         'phrase',
         'type',
-        'image',
+        'icon',
         'allows_song_requests',
         'song_requests_total'
     ];
