@@ -9,7 +9,7 @@
     $: ({ calendar } = $page.props);
     
     let permissions = {
-        'show_button_update': hasPermission('calendar.update'),
+        update: hasPermission('calendar.update'),
     }
     
     let week = [];
@@ -74,7 +74,7 @@
                                 {item.has_activity ? item.activity.title : item.content}
                             </div>
                             <div class="flex justify-between flex-row">
-                                {#if permissions.show_button_update}
+                                {#if permissions.update}
                                     <button aria-label="Editar" class="cursor-pointer">
                                         <img src="/svg/default/edit.svg" alt="" aria-hidden="true" loading="lazy" class={["w-5", 
                                             {'filter sepia': item.has_activity},

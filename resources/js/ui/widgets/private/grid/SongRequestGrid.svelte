@@ -6,10 +6,12 @@
     $: ({ onair, songrequests } = $page.props);
     
     let permissions = {
-        show_button_finish_locution: hasPermission('locution.finish'),
-        show_button_toggle_song_request: hasPermission('songrequest.toggle'),
-        show_button_reproduce_song_request: hasPermission('songrequest.reproduce'),
-        show_button_cancel_song_request: hasPermission('songrequest.cancel'),
+        toggle: hasPermission('songrequest.toggle'),
+        reproduce: hasPermission('songrequest.reproduce'),
+        cancel: hasPermission('songrequest.cancel'),
+        locution: {
+            finish: hasPermission('locution.finish'),
+        }
     }
     
     const requestToggleSongRequest = () => {
@@ -34,12 +36,12 @@
 {#if hasPermission("songrequest.list")}
     <Section title="Pedidos musicais">
         <div id='requests' class="flex flex-col gap-5 lg:relative">
-            {#if permissions.show_button_finish_locution}
+            {#if permissions.locution.finish}
                 <button on:click={()=>requestFinishlocution()} class="cursor-pointer block lg:absolute right-0 w-full lg:w-auto py-2 px-6 border-4 border-solid border-red-crimson rounded-xl text-red-crimson text-xl font-bold font-noto-sans italic uppercase">
                     Encerrar programa
                 </button>
             {/if}
-            {#if permissions.show_button_toggle_song_request}
+            {#if permissions.toggle}
                 <div class="flex justify-center">
                     {#if onair.data.allows_song_requests}
                         <button on:click={() => requestToggleSongRequest()} class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-neutral-honeycream rounded-xl text-neutral-honeycream text-xl font-bold font-noto-sans italic uppercase">
@@ -114,12 +116,12 @@
                         </time>
                         <div class="flex gap-3">
                             {#if !item.was_reproduced && !item.was_canceled}
-                                {#if permissions.show_button_cancel_song_request}
+                                {#if permissions.cancel}
                                     <button on:click={() => markToCanceled(item.uuid)} aria-label="Marcar como cancelado" class="cursor-pointer">
                                         <img src="/svg/default/close.svg" alt="" aria-hidden="true" class="w-6 filter-neutral-aurora" loading="lazy"/>
                                     </button>
                                 {/if}
-                                {#if permissions.show_button_reproduce_song_request}
+                                {#if permissions.reproduce}
                                     <button on:click={() => markToReproduced(item.uuid)} aria-label="Marcar como atendido"class="cursor-pointer">
                                         <img src="/svg/default/like.svg" alt="" aria-hidden="true" class="w-6 filter-neutral-aurora" loading="lazy"/>
                                     </button>

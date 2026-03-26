@@ -9,8 +9,10 @@
     $: ({ user, posts } = $page.props);
 
     let permissions ={
-        'show_button_update': hasPermission('post.update'),
-        'show_button_update_own': hasPermission('post.update.own'),
+        update: hasPermission('post.update'),
+        own: {
+            update: hasPermission('post.update.own')
+        }
     }
 </script>
 
@@ -19,7 +21,7 @@
         <div class="gap-6 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5">
             {#if posts.data.length > 0}
                 {#each posts.data as item}
-                    {@const showButtonUpdate = permissions.show_button_update || (permissions.show_button_update_own && item.author.uuid === user.uuid)}
+                    {@const showButtonUpdate = permissions.show_button_update || (permissions.own.update && item.author.uuid === user.uuid)}
                     <article class={["w-full h-56 rounded-lg p-4 relative", 
                         {'bg-blue-skywave': item.type === 'published'},
                         {'bg-orange-amber': item.type === 'revision'},

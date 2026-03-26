@@ -9,7 +9,7 @@
     $: ({ roles } = $page.props);
 
     let permissions = {
-        'show_button_update_access': hasPermission('user.access.update')
+        update: hasPermission('user.access.update')
     }
 
     let form = useForm({
@@ -87,7 +87,7 @@
             {/if}
         </div>
     </div>
-    {#if permissions.show_button_update_access}
+    {#if permissions.update}
         <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
             Atualizar
         </button>

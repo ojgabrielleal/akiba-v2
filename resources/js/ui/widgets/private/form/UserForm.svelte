@@ -7,7 +7,7 @@
     $: ({ roles } = $page.props);
 
     let permissions ={
-        'show_button_create': hasPermission('user.create'),
+        create: hasPermission('user.create'),
     }
 
     let form = useForm({
@@ -144,7 +144,7 @@
             {/if}
         </div>
     </div>
-    {#if permissions.show_button_create}
+    {#if permissions.create}
         <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
             Cadastrar
         </button>

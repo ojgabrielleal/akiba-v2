@@ -7,8 +7,8 @@
     $: ({ event } = $page.props);
 
     let permissions = {
-        show_button_create: hasPermission('event.create'),
-        show_button_update: hasPermission('event.update'),
+        create: hasPermission('event.create'),
+        update: hasPermission('event.update'),
     }
 
     let form = useForm({
@@ -143,7 +143,7 @@
             </div>
         </div>
         <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10">
-            {#if (permissions.show_button_create || permissions.show_button_update)}
+            {#if (permissions.create || permissions.update)}
                 <button type="submit" value="published" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
                     {event ? 'Atualizar evento' : 'Publicar evento'}
                 </button>

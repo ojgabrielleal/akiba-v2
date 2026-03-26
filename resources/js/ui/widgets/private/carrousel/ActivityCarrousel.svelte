@@ -8,7 +8,7 @@
     $: ({ user, activities } = $page.props);
     
     let permissions = {
-        'show_button_participate': hasPermission('activity.participate'),
+        participate: hasPermission('activity.participate'),
     }
 
     const requestConfirmActivityParticipant = (activity) => {
@@ -21,7 +21,7 @@
         <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap" on:wheel={scrollx} role="group">
             {#if activities.data.length > 0}
                 {#each activities.data as item}  
-                    {@const showButtonParticipate = permissions.show_button_participate && !item.confirmations.some(conf => conf.uuid === user.uuid)}
+                    {@const showButtonParticipate = permissions.participate && !item.confirmations.some(conf => conf.uuid === user.uuid)}
                     <article class={['w-100 h-50 lg:w-116 shrink-0 rounded-lg p-4 relative',
                         {'bg-neutral-honeycream': item.allows_confirmations},
                         {'bg-blue-skywave': !item.allows_confirmations}

@@ -7,8 +7,8 @@
     $: ({ user, review } = $page.props);
 
     let permissions = {
-        show_button_create: hasPermission('review.create'),
-        show_button_update: hasPermission('review.update'),
+        create: hasPermission('review.create'),
+        update: hasPermission('review.update'),
     }
 
     let form = useForm({
@@ -167,7 +167,7 @@
             </div>
         </div>
         <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10">
-            {#if (permissions.show_button_create || permissions.show_button_update)}
+            {#if (permissions.create || permissions.update)}
                 <button type="submit" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
                     {$form.review.uuid ? 'Atualizar review' : 'Publicar review'} 
                 </button>

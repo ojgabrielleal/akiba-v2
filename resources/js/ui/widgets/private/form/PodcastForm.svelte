@@ -8,8 +8,8 @@
     $: ({ podcast } = $page.props);
 
     let permissions = {
-        show_button_create: hasPermission('podcast.create'),
-        show_button_update: hasPermission('podcast.update'),
+        create: hasPermission('podcast.create'),
+        update: hasPermission('podcast.update'),
     }
 
     let form = useForm({
@@ -141,7 +141,7 @@
                 /> 
             </div>
         </div>
-        {#if permissions.show_button_create || permissions.show_button_update}
+        {#if permissions.create || permissions.update}
             <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10">
                 <button type="submit" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
                     {podcast ? "Atualizar podcast" : "Publicar podcast"}

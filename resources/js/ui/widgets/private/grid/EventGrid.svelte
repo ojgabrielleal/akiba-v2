@@ -10,7 +10,7 @@
     $: ({ events } = $page.props);
 
     let permissions ={
-        'show_button_deactivate': hasPermission('event.deactivate'),
+        deactivate: hasPermission('event.deactivate'),
     }
 
     const requestDeactivateEvent = (event) => {
@@ -71,7 +71,7 @@
                                 <a href={`/painel/eventos/${item.uuid}`} type="button" class="cursor-pointer" aria-label="Editar">
                                     <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
                                 </a>
-                                {#if permissions.show_button_deactivate}
+                                {#if permissions.deactivate}
                                     <button on:click={()=>requestDeactivateEvent(item.uuid)} type="button" class="cursor-pointer" aria-label="Desativar">
                                         <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
                                     </button>

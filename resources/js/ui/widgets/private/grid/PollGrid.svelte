@@ -8,10 +8,12 @@
     $: ({ polls } = $page.props);
 
     let permissions = {
-        show_button_create: hasPermission('poll.create'),
-        show_button_update: hasPermission('poll.update'),
-        show_button_deactivate_poll: hasPermission('poll.deactivate'),
-        show_button_create_vote: hasPermission('poll.create.vote')
+        create: hasPermission('poll.create'),
+        update: hasPermission('poll.update'),
+        deactivate: hasPermission('poll.deactivate'),
+        vote: {
+            create: hasPermission('poll.create.vote'),
+        }
     }
 
     let offcanvasRef;
@@ -47,7 +49,7 @@
 
 {#if polls}
     <Section title="Enquetes">
-        {#if permissions.show_button_create || permissions.show_button_update}
+        {#if permissions.create || permissions.update}
             <div class="flex justify-center">
                 <button class="cursor-pointer text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber" on:click={()=> {
                     offcanvasRef.open();
@@ -92,7 +94,7 @@
                             {/each}
                         </div>
                         <div class="flex justify-between">
-                            {#if permissions.show_button_create_vote}
+                            {#if permissions.vote.create}
                                 <button type="submit" class="cursor-pointer text-neutral-aurora text-md font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber disabled:opacity-50" disabled={alreadyVoted}>
                                     Votar
                                 </button>
@@ -106,7 +108,7 @@
                                         <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
                                     </button>
                                 {/if}
-                                {#if permissions.show_button_deactivate_poll}
+                                {#if permissions.deactivate}
                                     <button type="button" class="cursor-pointer" aria-label="Desativar" on:click={()=>requestDeactivatePoll(item.uuid)}>
                                         <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
                                     </button>

@@ -9,9 +9,9 @@
     $: ({ programs } = $page.props);
     
     let permissions = {
-        show_button_create: hasPermission('program.create'),
-        show_button_update: hasPermission('program.update'),
-        show_button_deactivate: hasPermission('program.deactivate'),
+        create: hasPermission('program.create'),
+        update: hasPermission('program.update'),
+        deactivate: hasPermission('program.deactivate'),
     }
 
     let offcanvasRef;
@@ -29,7 +29,7 @@
 </Offcanvas>
 
 {#if programs}
-    {#if permissions.show_button_create}
+    {#if permissions.create}
         <div class="flex justify-center mb-10">
             <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-neutral-aurora" on:click={()=> { 
                 identifier = null; 
@@ -48,7 +48,7 @@
                             <img src={item.image} alt="" aria-hidden="true" loading="lazy" class='w-60 transition duration-300 ease-in-out'>
                         </div>
                         <div class="flex flex-col gap-5">
-                            {#if permissions.show_button_update}
+                            {#if permissions.update}
                                 <button class="cursor-pointer" aria-label="atualizar programa" on:click={()=> {
                                     identifier = item.uuid;
                                     offcanvasRef.open();
@@ -56,7 +56,7 @@
                                     <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-blue-skywave" loading="lazy"/>
                                 </button>
                             {/if}
-                            {#if permissions.show_button_deactivate}
+                            {#if permissions.deactivate}
                                 <button class="cursor-pointer" aria-label="desativar programa" on:click={()=>requestDeactivateProgram(item.uuid)}>
                                     <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-red-crimson" loading="lazy"/>
                                 </button>

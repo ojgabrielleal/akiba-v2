@@ -8,7 +8,7 @@
     $: ({ tasks } = $page.props);
 
     let permissions = {
-        'show_button_complete': hasPermission('task.complete'),
+        completed: hasPermission('task.complete'),
     }
 
     const requestMarkTaskCompleted = (task) => {
@@ -52,7 +52,7 @@
                                 {item.dead_line}
                             </dd>
                         </dl>
-                        {#if permissions.show_button_complete}
+                        {#if permissions.completed}
                             <button 
                                 type="button" 
                                 aria-label="Concluir tarefa" 

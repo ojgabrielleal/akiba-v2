@@ -8,7 +8,7 @@
     $: ({ listenermonth } = $page.props);
 
     let permissions = {
-        'show_button_set': hasPermission('listener.month.set'),
+        set: hasPermission('listener.month.set'),
     }
 
     let offcanvasRef;
@@ -66,7 +66,7 @@
                         <image src={listenermonth.data.avatar ?? "/img/default/defaultAvatarFull.webp"} alt="Imagem do ouvinte" class="w-36 h-36 bg-gray-600 rounded-lg"/>
                     </div>
                 {/if}
-                {#if permissions.show_button_set}
+                {#if permissions.set}
                     <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic" on:click={()=> offcanvasRef.open()}>
                         Atualizar ouvinte
                     </button>

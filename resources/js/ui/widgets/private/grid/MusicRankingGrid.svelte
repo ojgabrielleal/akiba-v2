@@ -9,8 +9,8 @@
     $: ({ musicranking } = $page.props);
 
     let permissions = {
-        'show_button_update': hasPermission('music.ranking.update'),
-        'show_button_set': hasPermission('music.ranking.set'),
+        update: hasPermission('music.ranking.update'),
+        set: hasPermission('music.ranking.set'),
     }
 
     const submit = (event, uuid) => {
@@ -35,7 +35,7 @@
                 {#each musicranking.data as item, index}
                     <article class="flex flex-wrap lg:flex-nowrap items-center gap-5">
                         <div class="flex items-center gap-5">
-                            {#if permissions.show_button_update}
+                            {#if permissions.update}
                                 <Preview 
                                     standard="w-24 h-24 rounded-lg" 
                                     view="w-24 h-24" 
@@ -94,7 +94,7 @@
                 </article>
             {/if}
         </div>
-        {#if musicranking.data.length >= 3 && permissions.show_button_set}
+        {#if musicranking.data.length >= 3 && permissions.set}
             <div class="flex justify-end mt-5" >
                 <button on:click={()=>setRanking()} class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic disabled:opacity-50 disabled:pointer-events-none">
                     Atualizar ranking

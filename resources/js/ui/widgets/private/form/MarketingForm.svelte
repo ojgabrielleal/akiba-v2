@@ -7,8 +7,8 @@
     import { hasPermission } from "@/utils";
 
     let permissions = {
-        show_button_create: hasPermission('repository.create'),
-        show_button_update: hasPermission('repository.update')
+        create: hasPermission('repository.create'),
+        update: hasPermission('repository.update')
     }
 
     let form = useForm({
@@ -99,7 +99,7 @@
             required
         />
     </div>
-    {#if permissions.show_button_create && permissions.show_button_update}
+    {#if permissions.create && permissions.update}
         <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
             {identifier ? 'Atualizar' : 'Cadastrar'}
         </button>

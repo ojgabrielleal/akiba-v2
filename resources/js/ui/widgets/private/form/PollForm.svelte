@@ -7,8 +7,8 @@
     import { hasPermission } from "@/utils";
 
     let permissions = {
-        show_button_create: hasPermission('poll.create'),
-        show_button_update: hasPermission('poll.update'),
+        create: hasPermission('poll.create'),
+        update: hasPermission('poll.update'),
     }
 
     let form = useForm({
@@ -119,7 +119,7 @@
             />
         </div>
     </div>
-    {#if permissions.show_button_create || permissions.show_button_update}
+    {#if permissions.create || permissions.update}
         <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
             {identifier ? 'Atualizar' : 'Cadastrar'}
         </button>

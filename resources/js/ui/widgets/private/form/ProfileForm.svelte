@@ -7,7 +7,7 @@
     $: ({ profile } = $page.props);
 
     let permissions = {
-        show_button_update: hasPermission('user.update'),
+        update: hasPermission('user.update'),
     }
 
     $: form = useForm({
@@ -44,7 +44,6 @@
     }
 </script>
 
-{#if profile}
 <form on:submit|preventDefault={submit}>
     <Section title="O básico">
         <div class="grid grid-cols-1 xl:grid-cols-[15rem_1fr] gap-5 items-center">
@@ -238,7 +237,7 @@
             </div>
         </div>
     </Section>
-    {#if permissions.show_button_update}
+    {#if permissions.update}
         <div class="flex justify-center mt-5 mb-8">
             <button type="submit" value="published" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
                 Atualizar
@@ -246,4 +245,3 @@
         </div>
     {/if}
 </form>
-{/if}

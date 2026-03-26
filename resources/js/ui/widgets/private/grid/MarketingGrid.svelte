@@ -8,8 +8,8 @@
     $: ({ repositories } = $page.props);
 
     let permissions = {
-        show_button_create: hasPermission('repository.create'),
-        show_button_deactivate: hasPermission('repository.deactivate')
+        create: hasPermission('repository.create'),
+        deactivate: hasPermission('repository.deactivate')
     }
 
     let offCanvasRef;
@@ -111,7 +111,7 @@
 {/if}
 
 <Section title="Todos os conteúdos">
-    {#if permissions.show_button_create}
+    {#if permissions.create}
         <div class="flex justify-center mt-5 mb-10">
             <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" onclick={()=> {
                 offCanvasRef.open();
@@ -141,7 +141,7 @@
                                     <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
                                 </button>
                             {/if}
-                            {#if permissions.show_button_deactivate}
+                            {#if permissions.deactivate}
                                 <button aria-label="remover" class="cursor-pointer" onclick={()=>deleteRepository(item.uuid)}>
                                     <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-5 filter-red-crimson" loading="lazy"/>
                                 </button>

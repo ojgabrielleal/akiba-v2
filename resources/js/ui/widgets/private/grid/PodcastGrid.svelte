@@ -6,8 +6,8 @@
     $: ({ podcasts } = $page.props);
 
     let permissions = {
-        'show_update_button': hasPermission('podcast.update'),
-        'show_delete_button': hasPermission('podcast.deactivate'),
+        update: hasPermission('podcast.update'),
+        deactivate: hasPermission('podcast.deactivate'),
     }
 
     const requestDeactivatePodcast = (podcast) => {
@@ -29,12 +29,12 @@
                                 S{item.season}-EP{item.episode}
                             </dt>
                             <dd class="flex items-center gap-3">
-                                {#if permissions.show_update_button}
+                                {#if permissions.update}
                                     <a href={`/painel/podcasts/${item.uuid}`} aria-label="Editar">
                                         <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
                                     </a>
                                 {/if}
-                                {#if permissions.show_delete_button}
+                                {#if permissions.deactivate}
                                     <button on:click={()=>requestDeactivatePodcast(item.uuid)} class="cursor-pointer" aria-label="Desativar">
                                         <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-5 filter-red-crimson" loading="lazy"/>
                                     </button>
