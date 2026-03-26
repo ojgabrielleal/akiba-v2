@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\Role;
 
 use App\Http\Resources\UserResource;
-use App\Http\Resources\RoleIndexResource;
+use App\Http\Resources\RoleResource;
 
 use App\Traits\HasFlashMessages;
 
@@ -22,7 +22,7 @@ class AdministrationController extends Controller
 
     public function indexRoles()
     {
-        return RoleIndexResource::collection(
+        return RoleResource::collection(
             Role::all()
         );
     }
@@ -54,6 +54,24 @@ class AdministrationController extends Controller
 
         $roles = Role::whereIn('name', $request->input('roles'))->pluck('id');
         $avatar = $request->input('gender') === 'male' ? '/img/users/default/avatarMale.webp' : '/img/users/default/avatarFemale.webp';
+    
+        $socials = [
+            ['name' => 'Facebook', 'url' => null],
+            ['name' => 'Instagram', 'url' => null],
+            ['name' => 'Twitter', 'url' => null],
+            ['name' => 'Bluesky', 'url' => null],
+            ['name' => 'Discord', 'url' => null],
+            ['name' => 'YouTube', 'url' => null],
+        ];
+
+        $preferences = [
+            ['is_like' => true, 'content' => null],
+            ['is_like' => true, 'content' => null],
+            ['is_like' => true, 'content' => null],
+            ['is_like' => false, 'content' => null],
+            ['is_like' => false, 'content' => null],
+            ['is_like' => false, 'content' => null],
+        ];
 
         User::create([
             'username' => $request->input('username'),
@@ -62,7 +80,10 @@ class AdministrationController extends Controller
             'avatar' => $avatar,
             'nickname' => $request->input('nickname'),
             'gender' => $request->input('gender'),
-        ])->roles()->attach($roles);
+        ])
+        ->roles()->attach($roles)
+        ->socials()->createMany($socials)
+        ->preferences()->createMany($preferences);
 
         return $this->flashMessage('save');
     }

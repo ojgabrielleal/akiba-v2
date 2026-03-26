@@ -40,7 +40,7 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
         'is_active' => 'boolean',
-        'birthday' => 'date',
+        'birthday' => 'date:Y-m-d',
     ];
 
     protected function nickname(): Attribute

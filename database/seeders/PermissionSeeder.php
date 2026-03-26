@@ -197,7 +197,6 @@ class PermissionSeeder extends Seeder
             ['name' => 'user.update', 'label' => 'Atualizar usuário'],
             ['name' => 'user.deactivate', 'label' => 'Desativar usuário'],
             ['name' => 'user.view.own', 'label' => 'Visualizar o próprio usuário'],
-            ['name' => 'user.update.own', 'label' => 'Atualizar o próprio usuário'],
             ['name' => 'user.access.update', 'label' => 'Atualizar dados de acesso e cargos do usuário']
 
         ];

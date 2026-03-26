@@ -127,8 +127,8 @@ Route::prefix('painel')->group(function () {
             Route::get('', 'render')->name('painel.adms');
         });
         Route::prefix('profile')->controller(ProfileController::class)->group(function () {
-            Route::patch('{profile}', 'updateProfile');
-            Route::get('{profile:slug}', 'render')->name('painel.profile');
+            Route::patch('{user:uuid}', 'updateProfile');
+            Route::get('{user:uuid}', 'render')->name('painel.profile');
         });
     });
 });

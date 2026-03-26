@@ -6,19 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use App\Traits\HasFlashMessages;
-use App\Services\Process\ImageService;
-
 use App\Models\User;
+
+use App\Http\Resources\UserResource;
+
+use App\Services\Process\ImageProcessService;
+use App\Traits\HasFlashMessages;
 
 class ProfileController extends Controller
 {
     use HasFlashMessages;
 
-    private ImageService $image;
+    private ImageProcessService $image;
     private $render = 'private/Profile';
 
-    public function __construct(ImageService $image)
+    public function __construct(ImageProcessService $image)
     {
         $this->image = $image;
     }
@@ -43,7 +45,7 @@ class ProfileController extends Controller
 
         if ($request->filled('socials')) {
             foreach ($request->input('socials') as $social) {
-                $user->socials()->where('id', $social['id'])->update([
+                $user->socials()->where('uuid', $social['uuid'])->update([
                     'name' => $social['name'],
                     'url' => $social['url']
                 ]);
@@ -51,9 +53,9 @@ class ProfileController extends Controller
         }
 
         if ($request->input('preferences')) {
-            foreach ($request->input('preferences') as $preference) {
-                $user->likes()->where('id', $preference['id'])->update([
-                    'category' => $preference['category'],
+            $prefereces = $request->input('preferences');
+            foreach (collect($prefereces['likes'])->merge($prefereces['unlikes']) as $preference) {
+                $user->preferences()->where('uuid', $preference['uuid'])->update([
                     'content' => $preference['content']
                 ]);
             }
@@ -65,7 +67,7 @@ class ProfileController extends Controller
     public function render(User $user)
     {
         return Inertia::render($this->render, [
-            'profile' => $user->load('socials', 'likes')
+            'profile' => new UserResource($user)
         ]);
     }
 }

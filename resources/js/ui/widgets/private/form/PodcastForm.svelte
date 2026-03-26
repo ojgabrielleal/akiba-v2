@@ -49,7 +49,7 @@
 
 <Section title={podcast ? "Editar Podcast" : "Adicionar Podcast"}>
     <form on:submit|preventDefault={submit} class="mt-10">
-        <div class="grid grid-cols-1 xl:grid-cols-[20rem_1fr] gap-8 mb-8">
+        <div class="grid grid-cols-1 xl:grid-cols-[20rem_1fr] items-center gap-8 mb-8">
             <div>
                 <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                     Capa do podcast

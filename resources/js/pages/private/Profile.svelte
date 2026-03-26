@@ -6,7 +6,7 @@
 
      $: ({ profile } = $page.props);
 
-     $: titleAdapted = `Perfil ${profile?.gender === "male" ? "do" : "da"} ${profile?.nickname}`
+     $: titleAdapted = profile ? profile.data.nickname : 'Perfil';
 </script>
 
 <Meta meta={{ title: titleAdapted }} />
