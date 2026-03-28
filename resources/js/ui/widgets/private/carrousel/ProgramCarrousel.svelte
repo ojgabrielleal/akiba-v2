@@ -30,7 +30,7 @@
 
 {#if programs}
     {#if permissions.create}
-        <div class="flex justify-center mb-10">
+        <div class="flex justify-center mb-5">
             <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-neutral-aurora" on:click={()=> { 
                 identifier = null; 
                 offcanvasRef.open()

@@ -8,9 +8,11 @@ use Inertia\Inertia;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Permission;
 
 use App\Http\Resources\UserResource;
 use App\Http\Resources\RoleResource;
+use App\Http\Resources\PermissionResource;
 
 use App\Traits\HasFlashMessages;
 
@@ -27,6 +29,13 @@ class AdministrationController extends Controller
         );
     }
 
+    public function indexPermissions()
+    {
+        return PermissionResource::collection(
+            Permission::all()
+        );
+    }
+
     public function indexUsers()
     {
         return UserResource::collection(
@@ -34,6 +43,11 @@ class AdministrationController extends Controller
                 ->with(['roles'])
                 ->get()
         );
+    }
+
+    public function showRole(Role $role)
+    {
+        return new RoleResource($role);
     }
 
     public function showUser(User $user)
@@ -121,6 +135,7 @@ class AdministrationController extends Controller
     {
         return Inertia::render($this->render, [
             'roles' => $this->indexRoles(),
+            'permissions' => $this->indexPermissions(),
             'users' => $this->indexUsers()
         ]);
     }

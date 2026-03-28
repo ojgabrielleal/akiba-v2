@@ -36,7 +36,7 @@
         const method = identifier ? 
             'patch' : 
             'post';
-        let url = identifier ? 
+        const url = identifier ? 
             `/painel/medias/poll/${identifier}` : 
             '/painel/medias/poll';
             

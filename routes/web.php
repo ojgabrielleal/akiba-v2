@@ -124,6 +124,9 @@ Route::prefix('painel')->group(function () {
                     Route::patch('{user:uuid}', 'changeUserRoles');
                 });
             });
+            Route::prefix('roles')->group(function(){
+                Route::get('{role:uuid}', 'showRole');
+            });
             Route::get('', 'render')->name('painel.adms');
         });
         Route::prefix('profile')->controller(ProfileController::class)->group(function () {

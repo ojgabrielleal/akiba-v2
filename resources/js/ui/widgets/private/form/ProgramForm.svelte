@@ -2,8 +2,8 @@
     export let close = () => {};
     export let identifier;
 
+    import { useForm, page } from "@inertiajs/svelte";
     import axios from "axios";
-    import { useForm, page, router } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
@@ -12,10 +12,6 @@
     let permissions = {
         create: hasPermission('program.tete'),
         update: hasPermission('program.update'),
-        schedules: {
-            create: hasPermission('program.schedule.create'),
-            remove: hasPermission('program.schedule.remove')
-        }
     }
 
     let form = useForm({
@@ -148,12 +144,10 @@
                     <div class="absolute right-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
                 </div>
             </div>
-            {#if permissions.schedules.create}
-                <button on:click={()=>addSchedule()} type="button" class="cursor-pointer mb-2 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans">
-                    <img src="/svg/default/plus.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
-                    Adicionar horário
-                </button>
-            {/if}
+            <button on:click={()=>addSchedule()} type="button" class="cursor-pointer mb-2 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans">
+                <img src="/svg/default/plus.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
+                Adicionar horário
+            </button>
             {#each $form.schedules as schedule, index}
                 <div class="mb-4 border border-gray-400 p-4 rounded-lg">
                     <div class="mb-2">
@@ -187,12 +181,10 @@
                             bind:value={schedule.hour}
                         />
                     </div>
-                    {#if permissions.schedules.remove}
-                        <button on:click={() => removeSchedule(index)} type="button" class="cursor-pointer mt-4 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans">
-                            <img src="/svg/default/close.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
-                            Remover
-                        </button>
-                    {/if}
+                    <button on:click={() => removeSchedule(index)} type="button" class="cursor-pointer mt-4 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans">
+                        <img src="/svg/default/close.svg" alt="" aria-hidden="true" class="w-5 filter-blue-skywave" loading="lazy"/>
+                        Remover
+                    </button>
                 </div>
             {/each}
         {/if}

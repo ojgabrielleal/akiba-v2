@@ -10,5 +10,5 @@
     <ProgramCarrousel title="Programas cadastrados"/>
     <ProgramScheduleGrid title="Grade de programação"/>
     <MusicRankingGrid title="Ranking de música"/>
-    <ListenerMonthGrid/>
+    <ListenerMonthGrid title="Ouvinte do mês"/>
 </Layout>

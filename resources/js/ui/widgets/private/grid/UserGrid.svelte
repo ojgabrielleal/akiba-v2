@@ -1,7 +1,8 @@
 <script>
+    export let title; 
+
     import { page, router } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";   
-    import { Offcanvas } from "@/ui/components/private";
+    import { Section, Offcanvas } from "@/ui/components/private/";   
     import { UserForm, UserAccessForm } from "@/ui/widgets/private/form"
     import { hasPermission } from "@/utils";
 
@@ -10,8 +11,8 @@
     let permissions ={
         create: hasPermission('user.create'),
         deactivate: hasPermission('user.deactivate'),
-        access : {
-            update: hasPermission('user.access.update')
+        authority : {
+            update: hasPermission('user.update.authority')
         }
     }
  
@@ -35,26 +36,22 @@
     </div>
 </Offcanvas>
 
-<div class="flex justify-center gap-5 mb-5">
-    {#if permissions.create}
-        <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={()=> { 
-            offCanvasUserRef.open()
-        }}>
-            Cadastrar membro
-        </button>
-        <span class="border-l border-neutral-aurora/30"></span>
-    {/if}
-    <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase">
-        Gerênciar permissões
-    </button>
-    <span class="border-l border-neutral-aurora/30"></span>
-    <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase">
-        Agendar Atividade
-    </button>
-</div>
-
 {#if users && users.data.length > 0}
-    <Section title="Membros cadastrados">
+    <div class="flex justify-center gap-5 mb-5">
+        {#if permissions.create}
+            <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={()=> { 
+                offCanvasUserRef.open()
+            }}>
+                Cadastrar membro
+            </button>
+            <span class="border-l border-neutral-aurora/30"></span>
+        {/if}
+        <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase">
+            Agendar Atividade
+        </button>
+    </div>
+
+    <Section {title}>
         <div class="mt-18 grid grid-cols-1 lg:grid-cols-4 gap-15 lg:gap-x-5 lg:gap-y-18">
             {#each users.data as item}
                 {@const highestRole = item.roles.reduce((prev, current) => { return prev.weight > current.weight ? prev : current })}
@@ -73,7 +70,7 @@
                             {highestRole.label}
                         </dt>
                         <dd class="flex flex-wrap lg:flex-nowrap gap-2">
-                            {#if permissions.access.update}
+                            {#if permissions.authority.update}
                                 <button aria-label="Definir permissões" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"  on:click={()=> { 
                                     identifier = item.uuid;
                                     offCanvasUserAccessRef.open()
