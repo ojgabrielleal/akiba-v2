@@ -25,7 +25,7 @@ class AdministrationController extends Controller
     public function indexRoles()
     {
         return RoleResource::collection(
-            Role::all()
+            Role::with(['permissions'])->get()
         );
     }
 

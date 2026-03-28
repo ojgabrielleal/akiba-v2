@@ -194,7 +194,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'user.create', 'label' => '[Usuários] Criar'],
             ['name' => 'user.update', 'label' => '[Usuários] Atualizar'],
             ['name' => 'user.deactivate', 'label' => '[Usuários] Desativar'],
-            ['name' => 'user.view.own', 'label' => '[Usuários] Meu Perfil'],
+            ['name' => 'user.view.own', 'label' => '[Usuários] Visualizar perfil próprio'],
             ['name' => 'user.update.authority', 'label' => '[Usuários] Atualizar Acessos/Cargos'],
 
             /*
@@ -206,8 +206,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'role.view', 'label' => '[Cargos] Visualizar'],
             ['name' => 'role.create', 'label' => '[Cargos] Criar'],
             ['name' => 'role.update', 'label' => '[Cargos] Atualizar'],
-            ['name' => 'role.deactivate', 'label' => '[Cargos] Desativar'],
-
+            ['name' => 'role.remove', 'label' => '[Cargos] Remover'],
         ];
 
         foreach ($permissions as $item) {

@@ -11,7 +11,7 @@
         label: null,
         weight: null,
         description: null,
-        permissions: null,
+        permissions: [],
     });
 
     $:if(identifier){
@@ -22,9 +22,11 @@
             $form.label = data.label;
             $form.weight = data.weight;
             $form.description = data.description;
-            $form.permissions = data.permissions;
+            $form.permissions = data.permissions.map((item) => item.uuid);
         });
     }
+
+    $:console.log($form.permissions)
 
     const submit = () => {
         const method = identifier ? 
@@ -79,7 +81,7 @@
             name="description" 
             id="description" 
             rows="3"
-            class="w-full bg-white font-noto-sans text-md rounded-lg outline-none p-4 border border-gray-400"
+            class="w-full bg-white font-noto-sans text-md rounded-lg outline-none py-2 px-4 border border-gray-400"
             bind:value={$form.description}
         ></textarea>
     </div>
@@ -91,18 +93,18 @@
         <select 
             id="permissions"
             name="permissions"
-            class="w-full h-60 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+            class="w-full h-60 bg-white font-noto-sans text-md rounded-lg outline-none py-2 px-4 border border-gray-400"
             bind:value={$form.permissions}
             multiple
         >
             {#each permissions.data as permission}
-                <option value={permission.id}>
+                <option value={permission.uuid}>
                     {permission.label}
                 </option>
             {/each}
         </select>
         <div class="text-sm font-noto-sans text-gray-400 mt-1">
-            Pressione CTRL para selecionar múltiplos
+            Pressione CTRL para manipular as permissões
         </div>
     </div>
     <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
