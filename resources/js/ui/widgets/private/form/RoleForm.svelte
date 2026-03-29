@@ -4,8 +4,14 @@
 
     import { useForm, page } from "@inertiajs/svelte";
     import axios from "axios";
+    import { hasPermission } from "@/utils";
 
     $: ({ permissions } = $page.props);
+
+    let permissions = {
+        create: hasPermission('role.create'),
+        update: hasPermission('role.update'),
+    }
 
     let form = useForm({
         label: null,
@@ -26,8 +32,6 @@
         });
     }
 
-    $:console.log($form.permissions)
-
     const submit = () => {
         const method = identifier ? 
             'patch' : 
@@ -42,7 +46,7 @@
     }
 </script>
 
-<form>
+<form on:submit|preventDefault={submit}>
     <div class="mb-3">
         <label class="text-md text-gray-700 font-noto-sans block mb-1" for="label">
             Nome
@@ -107,7 +111,9 @@
             Pressione CTRL para manipular as permissões
         </div>
     </div>
-    <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+    {#if permissions.create || permissions.update}
+        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
             {identifier ? 'Atualizar' : 'Cadastrar'} 
-    </button>
+        </button>
+    {/if}
 </form>

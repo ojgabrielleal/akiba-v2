@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Private;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 use App\Models\User;
 use App\Models\Role;
@@ -13,6 +14,8 @@ use App\Models\Permission;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\RoleResource;
 use App\Http\Resources\PermissionResource;
+
+use App\Exceptions\RoleHasMembersException;
 
 use App\Traits\HasFlashMessages;
 
@@ -25,7 +28,7 @@ class AdministrationController extends Controller
     public function indexRoles()
     {
         return RoleResource::collection(
-            Role::with(['permissions'])->get()
+            Role::with(['permissions', 'members'])->get()
         );
     }
 
@@ -53,6 +56,31 @@ class AdministrationController extends Controller
     public function showUser(User $user)
     {
         return new UserResource($user);
+    }
+
+    public function createRole(Request $request)
+    {
+        $request->validate([
+            'label'=> 'required|unique:roles,label',
+            'weight'=> 'required',
+            'description'=> 'required',
+            'permissions'=> 'required'
+        ]);
+
+        $role = Role::create([
+            'label' => $request->input('label'),
+            'name' => Str::slug($request->input('label')),
+            'weight' => $request->input('weight'),
+            'description' => $request->input('description'),
+        ]);
+
+        $permissions = Permission::whereIn('uuid', $request->input('permissions'))
+            ->pluck('id')
+            ->toArray();
+
+        $role->permissions()->sync($permissions);
+
+        return $this->flashMessage('save');
     }
 
     public function createUser(Request $request)
@@ -129,6 +157,40 @@ class AdministrationController extends Controller
         $user->roles()->sync($roles);
 
         return $this->flashMessage('save');
+    }
+
+    public function updateRole(Request $request, Role $role)
+    {
+        $role->fill([
+            'label' => $request->input('label'),
+            'name' => Str::slug($request->input('label')),
+            'weight' => $request->input('weight'),
+            'description' => $request->input('description'),
+        ]);
+
+        if($role->isDirty()){
+            $role->save();
+        }
+
+        if($role->permissions()->pluck('uuid')->toArray() != $request->input('permissions')){
+            $permissions = Permission::whereIn('uuid', $request->input('permissions'))
+                ->pluck('id')
+                ->toArray();
+
+            $role->permissions()->sync($permissions);
+        }
+
+        return $this->flashMessage('update');
+    }
+
+    public function removeRole(Role $role)
+    {
+        if($role->members()->count() > 0){
+            throw new RoleHasMembersException();
+        }
+
+        $role->delete();
+        return $this->flashMessage('delete');
     }
 
     public function render()

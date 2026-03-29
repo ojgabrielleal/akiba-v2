@@ -52,10 +52,18 @@ trait HasFlashMessages
                 'icon' => '🚫',
                 'message' => 'Vamos cancelar! Triste, acontece.'
             ],
+            'dependencies' => [
+                'icon' => '⛓️',
+                'message' => 'Tire os vínculos antes! Se não dá ruim...'
+            ],
+            'error' => [
+                'icon' => '❌',
+                'message' => 'Algo deu errado!'
+            ],
         ];
 
-        $base = $messages[$action];
-        $final = $base['message'];
+        $base = $messages[$action] ?? $messages['save'];
+        $final =  $base['message'];
 
         return redirect()->back()->withInput()->with('flash', [
             'icon' => $base['icon'],

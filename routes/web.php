@@ -125,7 +125,10 @@ Route::prefix('painel')->group(function () {
                 });
             });
             Route::prefix('roles')->group(function(){
+                Route::post('', 'createRole');
                 Route::get('{role:uuid}', 'showRole');
+                Route::patch('{role:uuid}', 'updateRole');
+                Route::delete('{role:uuid}', 'removeRole');
             });
             Route::get('', 'render')->name('painel.adms');
         });

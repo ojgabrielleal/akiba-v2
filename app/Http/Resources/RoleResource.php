@@ -20,6 +20,7 @@ class RoleResource extends JsonResource
             'name' => $this->name, 
             'description' => $this->description,
             'weight' => $this->weight,
+            'members_total' => $this->members()->count(),
             'permissions' => $this->permissions->map(fn($item) => [
                 'uuid' => $item->uuid,
                 'label' => $item->label,
