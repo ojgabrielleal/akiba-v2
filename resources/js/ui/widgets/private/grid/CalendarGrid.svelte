@@ -82,12 +82,11 @@
                                         ]} />
                                     </button>
                                 {/if}
-                                <div class={["w-full font-noto-sans text-md text-end", 
-                                    {'text-blue-midnight': item.has_activity},
-                                    {'text-neutral-aurora': !item.has_activity}
-                                ]}>
-                                    {item.responsible.nickname}
-                                </div>
+                                {#if !item.has_activity}
+                                    <div class="w-full font-noto-sans text-md text-end text-neutral-aurora">
+                                        {item.responsible.nickname}
+                                    </div>
+                                {/if}
                             </div>
                         </div>
                     {/each}

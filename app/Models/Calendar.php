@@ -20,7 +20,7 @@ class Calendar extends Model
         'activity_id',
         'hour',
         'date',
-        'category',
+        'type',
         'content',
     ];
 

@@ -130,6 +130,12 @@ Route::prefix('painel')->group(function () {
                 Route::patch('{role:uuid}', 'updateRole');
                 Route::delete('{role:uuid}', 'removeRole');
             });
+            Route::prefix('activity')->group(function () {
+                Route::post('', 'createActivity');
+                Route::get('{activity:uuid}', 'showActivity');
+                Route::patch('{activity:uuid}', 'updateActivity');
+                Route::delete('{activity:uuid}', 'removeActivity');
+            });
             Route::get('', 'render')->name('painel.adms');
         });
         Route::prefix('profile')->controller(ProfileController::class)->group(function () {

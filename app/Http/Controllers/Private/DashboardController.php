@@ -29,7 +29,6 @@ class DashboardController extends Controller
         return ActivityResource::collection(
             Activity::valid()
                 ->with(['author', 'confirmations'])
-                ->limit(10)
                 ->get()
         );
     }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('activity_id')->nullable()->constrained('activities')->cascadeOnDelete();
             $table->time('hour');
             $table->date('date');
-            $table->enum('type', ['show', 'live', 'video', 'podcast']);
+            $table->enum('type', ['show', 'live', 'video', 'podcast', 'other']);
             $table->string('content');
             $table->timestamps();
         });

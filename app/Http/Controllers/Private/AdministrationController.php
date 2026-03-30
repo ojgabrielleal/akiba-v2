@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Activity;
 
 use App\Http\Resources\UserResource;
 use App\Http\Resources\RoleResource;
@@ -61,10 +62,10 @@ class AdministrationController extends Controller
     public function createRole(Request $request)
     {
         $request->validate([
-            'label'=> 'required|unique:roles,label',
-            'weight'=> 'required',
-            'description'=> 'required',
-            'permissions'=> 'required'
+            'label' => 'required|unique:roles,label',
+            'weight' => 'required',
+            'description' => 'required',
+            'permissions' => 'required'
         ]);
 
         $role = Role::create([
@@ -83,6 +84,32 @@ class AdministrationController extends Controller
         return $this->flashMessage('save');
     }
 
+    public function createActivity(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'limit' => 'required',
+            'content' => 'required'
+        ]);
+
+        Activity::create([
+            'user_id' => request()->user()->id,
+            'title' => $request->input('title'),
+            'limit' => $request->input('limit'),
+            'content' => $request->input('content'),
+            'allows_confirmations' => true,
+        ])->calendar()->create([
+            'user_id' => request()->user()->id,
+            'has_activity' => true,
+            'hour' => $request->input('hour'),
+            'date' => $request->input('date'),
+            'content' => $request->input('content'),
+            'type' => 'other',
+        ]);
+
+        return $this->flashMessage('save');
+    }
+
     public function createUser(Request $request)
     {
         $request->validate([
@@ -96,7 +123,7 @@ class AdministrationController extends Controller
 
         $roles = Role::whereIn('name', $request->input('roles'))->pluck('id');
         $avatar = $request->input('gender') === 'male' ? '/img/users/default/avatarMale.webp' : '/img/users/default/avatarFemale.webp';
-    
+
         $socials = [
             ['name' => 'Facebook', 'url' => null],
             ['name' => 'Instagram', 'url' => null],
@@ -123,20 +150,11 @@ class AdministrationController extends Controller
             'nickname' => $request->input('nickname'),
             'gender' => $request->input('gender'),
         ])
-        ->roles()->attach($roles)
-        ->socials()->createMany($socials)
-        ->preferences()->createMany($preferences);
+            ->roles()->attach($roles)
+            ->socials()->createMany($socials)
+            ->preferences()->createMany($preferences);
 
         return $this->flashMessage('save');
-    }
-
-    public function deactivateUser(User $user)
-    {
-        $user->update([
-            'is_active' => false,
-        ]);
-
-        return $this->flashMessage('deactivate');
     }
 
     public function updateUserAccess(Request $request, User $user)
@@ -145,7 +163,7 @@ class AdministrationController extends Controller
             'password' => 'required',
             'roles' => 'required|array',
         ]);
-        
+
         $roles = Role::whereIn('name', $request->input('roles'))
             ->pluck('id')
             ->toArray();
@@ -168,11 +186,11 @@ class AdministrationController extends Controller
             'description' => $request->input('description'),
         ]);
 
-        if($role->isDirty()){
+        if ($role->isDirty()) {
             $role->save();
         }
 
-        if($role->permissions()->pluck('uuid')->toArray() != $request->input('permissions')){
+        if ($role->permissions()->pluck('uuid')->toArray() != $request->input('permissions')) {
             $permissions = Permission::whereIn('uuid', $request->input('permissions'))
                 ->pluck('id')
                 ->toArray();
@@ -183,9 +201,18 @@ class AdministrationController extends Controller
         return $this->flashMessage('update');
     }
 
+    public function deactivateUser(User $user)
+    {
+        $user->update([
+            'is_active' => false,
+        ]);
+
+        return $this->flashMessage('deactivate');
+    }
+
     public function removeRole(Role $role)
     {
-        if($role->members()->count() > 0){
+        if ($role->members()->count() > 0) {
             throw new RoleHasMembersException();
         }
 

@@ -3,7 +3,7 @@
 
     import { page, router } from "@inertiajs/svelte";
     import { Section, Offcanvas } from "@/ui/components/private/";
-    import { UserForm, UserAccessForm } from "@/ui/widgets/private/form";
+    import { UserForm, UserAccessForm, ActivityForm } from "@/ui/widgets/private/form";
     import { hasPermission } from "@/utils";
 
     $: ({ users } = $page.props);
@@ -18,6 +18,7 @@
 
     let offCanvasUserRef;
     let offCanvasUserAccessRef;
+    let offCanvasActivityRef;
     let identifier;
 
     const requestDeactivateUser = (user) => {
@@ -35,6 +36,11 @@
         <UserAccessForm {identifier} {close} />
     </div>
 </Offcanvas>
+<Offcanvas bind:this={offCanvasActivityRef} title="Agendar Atividade">
+    <div slot="content" let:close>
+        <ActivityForm {close} />
+    </div>
+</Offcanvas>
 
 {#if users && users.data.length > 0}
     <div class="flex justify-center gap-5 mb-5">
@@ -46,7 +52,9 @@
             </button>
             <span class="border-l border-neutral-aurora/30"></span>
         {/if}
-        <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase">
+        <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => {
+            offCanvasActivityRef.open();
+        }}>
             Agendar Atividade
         </button>
     </div>

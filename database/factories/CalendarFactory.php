@@ -25,7 +25,8 @@ class CalendarFactory extends Factory
                 'show', 
                 'live', 
                 'video', 
-                'podcast'
+                'podcast',
+                'other'
             ]),
             'content' => fake()->word()
         ];
