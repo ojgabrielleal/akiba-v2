@@ -49,6 +49,7 @@
         $form.type = event.submitter.value;
         $form.post(url, {
             preserveState: post,
+            preserveScroll: true,
             onSuccess: () => {
                 post ? null : $form.reset()
             }

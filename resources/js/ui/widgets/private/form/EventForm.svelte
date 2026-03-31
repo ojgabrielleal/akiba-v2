@@ -38,6 +38,7 @@
 
         $form.post(url, {
             preserveState: event,
+            preserveScroll: true,
             onSuccess: () => {
                 event ? null : $form.reset();
             },

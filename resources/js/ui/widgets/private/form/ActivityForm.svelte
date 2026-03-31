@@ -14,6 +14,19 @@
         content: null,
     });
 
+    $: if(identifier){
+        axios.get(`/painel/adms/activity/${identifier}`)
+            .then((response) => {
+                const data = response.data.data;
+
+                $form.title = data.title;
+                $form.limit = data.limit;
+                $form.hour = data.hour;
+                $form.date = data.date;
+                $form.content = data.content;
+            });
+    }
+
     const submit = () => {
         const method = identifier ? 
             'patch' : 
@@ -23,6 +36,7 @@
             '/painel/adms/activity';
             
         $form[method](url, {
+            preserveScroll: true,
             onSuccess: () => close(),
         });
     }
@@ -71,6 +85,9 @@
                 bind:value={$form.hour}
                 required
             />
+            <div class="text-sm font-noto-sans text-gray-400 mt-1">
+                Hora da atividade
+            </div>
         </div>
         <div class="mb-4">
             <label for="date" class="text-md text-gray-700 font-noto-sans block mb-1">
@@ -84,6 +101,9 @@
                 bind:value={$form.date}
                 required
             />
+            <div class="text-sm font-noto-sans text-gray-400 mt-1">
+                Data da atividade
+            </div>
         </div>
     </div>
     <div class="mb-4">

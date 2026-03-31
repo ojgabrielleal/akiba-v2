@@ -32,6 +32,7 @@
 
     const submit = () => {
         $form.post('/painel/radio/listener-month', {
+            preserveScroll: true,
             onSuccess: () => close()
         })
     }

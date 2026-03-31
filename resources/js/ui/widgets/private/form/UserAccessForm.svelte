@@ -19,6 +19,7 @@
     
     const submit = () => {
         $form.patch(`/painel/adms/user/${identifier}`, {
+            preserveScroll: true,
             onSuccess: () => close()
         });
     }

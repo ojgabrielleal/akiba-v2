@@ -14,7 +14,9 @@
     }
 
     const requestDeactivateEvent = (event) => {
-        router.delete(`/painel/medias/event/${event}`);
+        router.delete(`/painel/medias/event/${event}`, {}, {
+            preserveScroll: true,
+        });
     }
 </script>
 

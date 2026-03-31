@@ -41,6 +41,7 @@
             '/painel/adms/roles';
             
         $form[method](url, {
+            preserveScroll: true,
             onSuccess: () => close(),
         });
     }

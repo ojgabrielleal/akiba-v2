@@ -25,8 +25,10 @@
         softwares = repositories.data.filter(item => item.type === 'software');
     }
 
-    const deleteRepository = (repository) => {
-        router.delete(`/painel/marketing/repository/${repository}`);
+    const requestDeactivateRepository = (repository) => {
+        router.delete(`/painel/marketing/repository/${repository}`, {}, {
+            preserveScroll: true,
+        });
     }
 </script>
 
@@ -142,7 +144,7 @@
                                 </button>
                             {/if}
                             {#if permissions.deactivate}
-                                <button aria-label="remover" class="cursor-pointer" onclick={()=>deleteRepository(item.uuid)}>
+                                <button aria-label="remover" class="cursor-pointer" onclick={()=>requestDeactivateRepository(item.uuid)}>
                                     <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-5 filter-red-crimson" loading="lazy"/>
                                 </button>
                             {/if}

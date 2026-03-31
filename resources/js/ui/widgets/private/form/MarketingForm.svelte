@@ -42,6 +42,7 @@
             '/painel/marketing/repository';
             
         $form.post(url, {
+            preserveScroll: true,
             onSuccess: ()=>close()
         });
     }

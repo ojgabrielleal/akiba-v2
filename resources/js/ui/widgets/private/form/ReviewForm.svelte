@@ -36,6 +36,7 @@
 
         $form.post(url, {
             preserveState: review,
+            preserveScroll: true,
             onSuccess: () => {
                 review ? null : $form.reset();
             },

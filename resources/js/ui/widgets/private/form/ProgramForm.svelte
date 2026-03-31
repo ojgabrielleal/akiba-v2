@@ -47,6 +47,7 @@
             '/painel/radio/program'
 
         $form.post(url, {
+            preserveScroll: true,
             onFinish: () => close(),
         });
     }

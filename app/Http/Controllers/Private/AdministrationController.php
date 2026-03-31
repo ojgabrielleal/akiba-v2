@@ -68,6 +68,11 @@ class AdministrationController extends Controller
         return new UserResource($user);
     }
 
+    public function showActivity(Activity $activity)
+    {
+        return new ActivityResource($activity->load(['author', 'confirmations', 'calendar']));
+    }
+
     public function createRole(Request $request)
     {
         $request->validate([
@@ -112,7 +117,7 @@ class AdministrationController extends Controller
             'has_activity' => true,
             'hour' => $request->input('hour'),
             'date' => $request->input('date'),
-            'content' => $request->input('content'),
+            'content' => $request->input('title'),
             'type' => 'other',
         ]);
 
@@ -206,6 +211,27 @@ class AdministrationController extends Controller
 
             $role->permissions()->sync($permissions);
         }
+
+        return $this->flashMessage('update');
+    }
+
+    public function updateActivity(Request $request, Activity $activity)
+    {
+        $activity->fill([
+            'title' => $request->input('title'),
+            'limit' => $request->input('limit'),
+            'content' => $request->input('content'),
+        ]);
+
+        if ($activity->isDirty()) {
+            $activity->save();
+        }
+
+        $activity->calendar()->update([
+            'hour' => $request->input('hour'),
+            'date' => $request->input('date'),
+            'content' => $request->input('title'),
+        ]);
 
         return $this->flashMessage('update');
     }

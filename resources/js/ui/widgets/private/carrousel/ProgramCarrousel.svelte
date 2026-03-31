@@ -18,7 +18,9 @@
     let identifier;
 
     const requestDeactivateProgram = (program) => {
-        router.delete(`/painel/radio/program/${program}`)
+        router.delete(`/painel/radio/program/${program}`, {}, {
+            preserveScroll: true,
+        });
     }
 </script>
 

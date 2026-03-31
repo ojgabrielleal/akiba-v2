@@ -41,6 +41,7 @@
             '/painel/medias/poll';
             
         $form[method](url, {
+            preserveScroll: true,
             onSuccess: () => close(),
         });
     }

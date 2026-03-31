@@ -27,6 +27,7 @@
         const option = formData.get('option');
 
         router.post(`/painel/medias/poll/vote/${option}`, {}, {
+            preserveScroll: true,
             onSuccess: () => {
                 localStorage.setItem('voted', JSON.stringify(storageVotedPolls));
                 storageVotedPolls.push(item.uuid);
@@ -36,7 +37,9 @@
     }
 
      const requestDeactivatePoll = (poll) => {
-        router.delete(`/painel/medias/poll/${poll}`);
+        router.delete(`/painel/medias/poll/${poll}`, {}, {
+            preserveScroll: true,
+        });
     }
 
 </script>

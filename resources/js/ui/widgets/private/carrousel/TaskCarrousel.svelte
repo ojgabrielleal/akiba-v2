@@ -12,7 +12,9 @@
     }
 
     const requestMarkTaskCompleted = (task) => {
-        router.post(`/painel/dashboard/task/${task}/complete`);
+        router.post(`/painel/dashboard/task/${task}/complete`, {}, {
+            preserveScroll: true,
+        });
     }
 
 </script>

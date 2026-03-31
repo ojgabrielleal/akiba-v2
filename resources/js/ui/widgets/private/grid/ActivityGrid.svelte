@@ -1,14 +1,21 @@
 <script>
     export let title; 
 
-    import { fly } from 'svelte/transition';
-    import { page, router } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
+    import { page } from "@inertiajs/svelte";
+    import { Offcanvas, Section } from "@/ui/components/private/";
+    import { ActivityForm } from "@/ui/widgets/private/form";
 
     $: ({ activities } = $page.props);
 
-    let popoverId = null;
+    let offcanvasRef;
+    let identifier;
 </script>
+
+<Offcanvas bind:this={offcanvasRef} title="Atualizar atividade">
+    <div slot="content" let:close>
+        <ActivityForm {identifier} {close}/>
+    </div>
+</Offcanvas>
 
 <Section {title}>
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 ">
@@ -21,7 +28,7 @@
                     {item.content}
                 </div>        
                 <div class="flex gap-2 absolute bottom-3 left-4 items-center">
-                    {#each item.confirmations.slice(0, 2) as conf}
+                    {#each item.confirmations.slice(0, 3) as conf}
                         <div class="relative group/avatar">
                             <img
                                 src={conf.avatar}
@@ -35,45 +42,33 @@
                             </div>
                         </div>
                     {/each}
-                    <!-- If there are more than 2 confirmations, show a "+" button -->
-                    {#if item.confirmations.length > 2}
-                        <div class="relative">
-                            <button 
-                                type="button" 
-                                class="ml-2 flex items-center justify-center cursor-pointer outline-none"
-                                on:click|stopPropagation={() => popoverId = popoverId === item.id ? null : item.id}
-                            >
+                    {#if item.confirmations.length > 3}
+                        <div class="relative group/popover">
+                            <div class="ml-2 flex items-center justify-center cursor-pointer">
                                 <img src="/svg/default/dots.svg" alt="" aria-hidden="true" class="w-5 filter invert" loading="lazy"/>
-                            </button>
-                            {#if popoverId === item.id}
-                                <div transition:fly={{ y: 5, duration: 200 }} class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-10 pointer-events-auto">
-                                    <div class="p-3 bg-neutral-900/95 backdrop-blur-md rounded-2xl shadow-2xl flex flex-col gap-3 items-center border border-white/10 max-h-80 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
-                                        {#each item.confirmations.slice(2) as rest}
-                                            <div class="flex flex-col items-center gap-1.5 min-w-[56px] shrink-0">
-                                                <div class="relative">
-                                                    <img
-                                                        src={rest.avatar}
-                                                        alt={rest.nickname}
-                                                        class="w-10 h-10 rounded-full bg-neutral-aurora object-cover object-top border-2 border-white/20 shadow-md ring-2 ring-neutral-aurora/20"
-                                                        loading="lazy"
-                                                    />
-                                                </div>
-                                                <span class="text-[10px] text-white/90 font-medium max-w-[64px] truncate text-center">
-                                                    {rest.nickname}
-                                                </span>
-                                            </div>
-                                        {/each}
-                                    </div>
+                            </div>
+                            <div class="invisible group-hover/popover:visible opacity-0 group-hover/popover:opacity-100 translate-y-1 group-hover/popover:translate-y-0 transition-all duration-200 absolute bottom-full left-1/2 -translate-x-1/2 pb-3 z-10 pointer-events-auto">
+                                <div class="p-3 bg-neutral-900/95 backdrop-blur-md rounded-2xl shadow-2xl flex flex-col gap-2 items-center border border-white/10 max-h-80 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
+                                    {#each item.confirmations.slice(3) as rest}
+                                        <span class="text-[11px] text-white/90 font-medium max-w-[80px] truncate text-center">
+                                            {rest.nickname}
+                                        </span>
+                                    {/each}
                                 </div>
-                            {/if}
+                                <div class="absolute top-[calc(100%-12px)] left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-900/95"></div>
+                            </div>
                         </div>
                     {/if}
-                    <!-- If there are more than 2 confirmations, show a "+" button -->
+                    <!-- If there are more than 3 confirmations, show a "+" button -->
                 </div>
                 <button
                     type="button"
                     aria-label="Editar alerta"
                     class="w-8 h-8 absolute bottom-3 right-4 flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
+                    onclick={() => {
+                        identifier = item.uuid;
+                        offcanvasRef.open();
+                    }}
                 >
                     <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-5 filter invert" loading="lazy"/>
                 </button>
@@ -81,5 +76,3 @@
         {/each}
     </div>
 </Section>
-
-<svelte:window on:click={() => popoverId = null} />
