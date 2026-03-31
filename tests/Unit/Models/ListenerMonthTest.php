@@ -42,13 +42,12 @@ class ListenerMonthTest extends TestCase
                 'was_reproduced' => true,
             ]);
 
-        $mostActiveListenerArray = ListenerMonth::mostActiveListenerOfCurrentMonth();
-        $mostActiveListener = $mostActiveListenerArray[0] ?? null;
+        $mostActiveListener = ListenerMonth::mostActiveListenerOfCurrentMonth();
 
         $this->assertNotNull($mostActiveListener);
-        $this->assertEquals('John Doe', $mostActiveListener->listener_name);
+        $this->assertEquals('John Doe', $mostActiveListener->name);
         $this->assertEquals('123 Main St', $mostActiveListener->address ?? '');
         $this->assertEquals($program->name, $mostActiveListener->favorite_program);
-        $this->assertEquals(5, $mostActiveListener->total_requests);
+        $this->assertEquals(5, $mostActiveListener->requests_total);
     }
 }

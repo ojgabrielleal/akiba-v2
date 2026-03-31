@@ -52,7 +52,7 @@ class ListenerMonth extends Model
         $endOfMonth = Carbon::now()->endOfMonth();
 
         $result = DB::select('
-            SELECT ANY_VALUE(songs_requests.uuid) AS uuid,
+            SELECT MIN(songs_requests.uuid) AS uuid,
                 songs_requests.name AS name,
                 songs_requests.address AS address,
                 COUNT(*) AS requests_total,
