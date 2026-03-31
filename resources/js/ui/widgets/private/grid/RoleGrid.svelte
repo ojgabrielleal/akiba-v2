@@ -43,7 +43,7 @@
                 </button>
             </div>
         {/if}
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
             {#if roles.data.length > 0}
                 {#each roles.data as item}
                     <div class="w-full h-50 bg-blue-ocean rounded-lg p-4 relative">

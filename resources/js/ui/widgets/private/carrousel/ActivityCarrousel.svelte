@@ -40,13 +40,19 @@
                         </div>
                         {#if item.allows_confirmations}
                             <div class="flex gap-2 absolute bottom-3 left-4">
-                                {#each item.confirmations as item}
-                                    <img
-                                        src={item.avatar}
-                                        alt={item.nickname}
-                                        class="w-10 h-10 rounded-full bg-neutral-aurora object-cover object-top"
-                                        loading="lazy"
-                                    />
+                                {#each item.confirmations.slice(0, 5) as conf}
+                                    <div class="relative group/avatar">
+                                        <img
+                                            src={conf.avatar}
+                                            alt={conf.nickname}
+                                            class="w-10 h-10 rounded-full bg-neutral-aurora border-2 border-white/10 shadow-sm object-cover object-top hover:scale-105 transition-transform duration-300"
+                                            loading="lazy"
+                                        />
+                                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-neutral-900/90 backdrop-blur-sm text-white text-[10px] font-medium rounded-lg invisible group-hover/avatar:visible opacity-0 group-hover/avatar:opacity-100 transition-all duration-200 whitespace-nowrap z-50 pointer-events-none border border-white/10 shadow-xl">
+                                            {conf.nickname}
+                                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-900/90"></div>
+                                        </div>
+                                    </div>
                                 {/each}
                             </div>
                             {#if showButtonParticipate}

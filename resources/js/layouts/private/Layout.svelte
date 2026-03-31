@@ -26,8 +26,8 @@
     <slot />
 </main>
 <footer>
-    <div class="h-[5rem]"></div>
-    <div class="w-full fixed bottom-0">
+    <div class="h-20"></div>
+    <div class="w-full fixed bottom-0 z-50">
         <CastMetrics />
     </div>
 </footer>
