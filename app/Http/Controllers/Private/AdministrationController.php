@@ -15,6 +15,7 @@ use App\Models\Activity;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\RoleResource;
 use App\Http\Resources\PermissionResource;
+use App\Http\Resources\ActivityResource;
 
 use App\Exceptions\RoleHasMembersException;
 
@@ -25,6 +26,14 @@ class AdministrationController extends Controller
     use HasFlashMessages;
 
     private $render = 'private/Administration';
+
+    public function indexActivities()
+    {
+        return ActivityResource::collection(
+            Activity::with(['author', 'confirmations'])
+                ->get()
+        );
+    }
 
     public function indexRoles()
     {
@@ -225,6 +234,7 @@ class AdministrationController extends Controller
         return Inertia::render($this->render, [
             'roles' => $this->indexRoles(),
             'permissions' => $this->indexPermissions(),
+            'activities' => $this->indexActivities(),
             'users' => $this->indexUsers()
         ]);
     }
