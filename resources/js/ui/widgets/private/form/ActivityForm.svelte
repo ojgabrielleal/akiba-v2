@@ -6,6 +6,11 @@
     import axios from "axios";
     import { hasPermission } from "@/utils";
 
+    let permissions = {
+        'create': hasPermission('activity.create'),
+        'update': hasPermission('activity.update'),
+    }
+
     let form = useForm({
         title: null,
         limit: null,
@@ -119,7 +124,9 @@
             required
         ></textarea>
     </div>
-    <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
-        {identifier ? 'Atualizar' : 'Cadastrar'} 
-    </button>
+    {#if permissions.create || permissions.update}
+        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+            {identifier ? 'Atualizar' : 'Cadastrar'} 
+        </button>
+    {/if}
 </form>

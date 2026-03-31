@@ -14,6 +14,9 @@
         authority: {
             update: hasPermission("user.update.authority"),
         },
+        activity: {
+            create: hasPermission("activity.create"),
+        }
     };
 
     let offCanvasUserRef;
@@ -54,11 +57,13 @@
             </button>
             <span class="border-l border-neutral-aurora/30"></span>
         {/if}
-        <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => {
-            offCanvasActivityRef.open();
-        }}>
-            Agendar Atividade
-        </button>
+        {#if permissions.activity.create}
+            <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => {
+                offCanvasActivityRef.open();
+            }}>
+                Agendar Atividade
+            </button>
+        {/if}
     </div>
 
     <Section {title}>
