@@ -2,8 +2,6 @@
     import { fly } from 'svelte/transition';
     import { onDestroy } from 'svelte';
 
-    export let title = 'Title';
-
     let visible = false;
 
     $: if (typeof document !== 'undefined') {

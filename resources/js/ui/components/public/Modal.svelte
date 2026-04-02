@@ -1,10 +1,21 @@
 <script>
     import { fade } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
+    import { onDestroy } from 'svelte';
 
     let visible = false;
 
-    export const show = () => {
+    $: if (typeof document !== 'undefined') {
+        document.body.style.overflow = visible ? 'hidden' : 'auto';
+    }
+
+    onDestroy(() => {
+        if (typeof document !== 'undefined') {
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    export const open = () => {
         visible = true;
     }
 
@@ -17,16 +28,12 @@
     }
 </script>
 
-<button type="button" on:click={show} aria-label="Abrir modal">
-    <slot name="action" />
-</button>
-
 {#if visible}
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div on:click={close} transition:fade={{ x: '100%', duration: 500, easing: quintOut }} class="modal-active w-screen h-screen fixed inset-0 flex justify-center items-center p-9 bg-[#00000086] z-50">
-    <div on:click={block} class="lg:w-104 bg-neutral-aurora rounded-t-lg rounded-b-md relative">        
-        <div class="w-full h-20 pt-8 px-5 lg:mb-2 bg-cover bg-center rounded-t-md" style="background-image: url('/img/default/playerListenerRequests.webp');">
+    <div on:click={block} class="w-full lg:w-104 bg-neutral-aurora rounded-t-xl rounded-b-xl relative">        
+        <div class="w-full h-20 pt-8 px-5 lg:mb-2 bg-cover bg-center rounded-t-xl" style="background-image: url('/img/player/default/songsRequests.webp');">
             <div class="w-36">
                 <img src="/img/default/logo.webp" alt="logo" loading="lazy">
             </div>

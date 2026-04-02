@@ -1,7 +1,22 @@
 <script>
+    import { page } from "@inertiajs/svelte";
+    import { Modal } from "@/ui/components/public";
+    import { SongRequestForm } from "@/ui/widgets/public/form";
+
+    let modalRef;
+
     export let volume = 0.5;
     export let togglePlayPause = () => {};
+
+    $: ({ onair } = $page.props);
+
 </script>
+
+<Modal bind:this={modalRef}>
+    <div slot="content">
+        <SongRequestForm/>
+    </div>
+</Modal>
 <section class="w-full bg-blue-ocean mb-10">
     <div class="cont-player-main py-4 relative">
         <div class="hidden lg:block absolute -top-7 -left-10 z-10">
@@ -165,9 +180,11 @@
                 </div>
             </div>
         </div>
-        <div class="cursor-pointer w-full py-2 px-1 border border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase">
+        <button aria-label="Faça seu pedido" class="cursor-pointer w-full py-2 px-1 border border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase" on:click={()=>{
+            modalRef.open();
+        }}>
             & Faça seu <strong class="text-orange-amber">Pedido</strong>
-        </div>
+        </button>
     </div>
 </section>
 

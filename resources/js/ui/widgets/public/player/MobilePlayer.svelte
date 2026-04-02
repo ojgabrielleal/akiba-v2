@@ -1,4 +1,8 @@
 <script>
+    import { page } from "@inertiajs/svelte";
+    
+    $: ({ onair } = $page.props);
+
     export let togglePlayPause = () => {};
     export let volume = 0.5;
     export let currentSong = "Takanori Nishikawa - Bright Burning Shout";
