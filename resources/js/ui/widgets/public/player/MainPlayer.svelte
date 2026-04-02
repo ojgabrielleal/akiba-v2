@@ -1,5 +1,6 @@
 <script>
-        export let volume = 0.5;
+    export let volume = 0.5;
+    export let togglePlayPause = () => {};
 </script>
 <section class="w-full bg-blue-ocean mb-10">
     <div class="cont-player-main py-4 relative">
@@ -136,7 +137,7 @@
                             Play
                         </div>
                     </div>
-                    <button on:click={togglePlayPause} class="bg-blue-skywave cursor-pointer w-14 h-14 rounded-full flex justify-center items-center">
+                    <button on:click={togglePlayPause} class="bg-blue-skywave cursor-pointer w-14 h-14 rounded-full flex justify-center items-center active:shadow-[0_0_20px_rgba(0,145,255,0.8)] active:scale-95 transition-all">
                         <img
                             src="/svg/default/play.svg"
                             alt=""
@@ -164,7 +165,7 @@
                 </div>
             </div>
         </div>
-        <div class="cursor-pointer w-full py-2 px-1 border-1 border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase">
+        <div class="cursor-pointer w-full py-2 px-1 border border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase">
             & Faça seu <strong class="text-orange-amber">Pedido</strong>
         </div>
     </div>

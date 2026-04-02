@@ -25,13 +25,13 @@
     </div>
 </header>
 
-<main class="flex flex-col gap-5 lg:gap-15 h-screen">
-    <div class="cont mt-15 lg:mt-25">
+<main class="flex flex-col justify-center items-center gap-5 lg:gap-10 h-screen">
+    <div class="cont mt-25">
         <div class="w-full flex justify-center">
             <img
                 src="/img/default/logoProvisory.webp"
                 alt="Logo"
-                class="w-80 lg:w-110"
+                class="w-80 md:w-100 lg:w-110"
                 loading="lazy"
             />
         </div>

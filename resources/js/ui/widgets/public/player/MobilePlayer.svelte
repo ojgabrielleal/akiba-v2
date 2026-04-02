@@ -10,7 +10,7 @@
 
 <section class="flex flex-col w-full bg-blue-midnight p-6 gap-8 rounded-3xl overflow-hidden relative">
     <!-- Info Card (Glassmorphism) -->
-    <div class="relative z-10 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-5 flex flex-col gap-4 shadow-xl">
+    <div class="relative z-10 bg-neutral-aurora/5 backdrop-blur-xl border border-white/10 rounded-3xl p-5 flex flex-col gap-4 shadow-xl">
         <div class="flex items-center gap-4">
             <div class="w-16 h-16 rounded-xl overflow-hidden border border-white/20 shrink-0">
                 <img
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="w-full h-px bg-white/10"></div>
+        <div class="w-full h-px bg-neutral-aurora/10"></div>
 
         <div class="flex flex-col gap-1">
             <span class="text-orange-amber text-[10px] uppercase font-bold tracking-widest">TOCANDO AGORA</span>
@@ -52,7 +52,7 @@
         <div class="flex items-center justify-center gap-8">
             <!-- Play Button -->
             <button on:click={togglePlayPause} class="w-20 h-20 rounded-full bg-blue-skywave flex items-center justify-center shadow-[0_0_30px_rgba(0,145,255,0.4)] hover:bg-blue-skywave/90 active:scale-95 transition-all group">
-                <div class="bg-white rounded-full p-4 flex items-center justify-center group-hover:scale-105 transition-transform">
+                <div class="bg-neutral-aurora rounded-full p-4 flex items-center justify-center group-hover:scale-105 transition-transform">
                     <img
                         src="/svg/default/play.svg"
                         alt="Play"
@@ -74,7 +74,7 @@
                 max="1"
                 step="0.01"
                 bind:value={volume}
-                class="w-full accent-orange-amber h-1.5 rounded-full bg-white/10 cursor-pointer transition-all hover:bg-white/20"
+                class="w-full accent-orange-amber h-1.5 rounded-full bg-neutral-aurora/10 cursor-pointer transition-all hover:bg-neutral-aurora/20"
             />
         </div>
 
