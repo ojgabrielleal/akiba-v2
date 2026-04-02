@@ -1,6 +1,6 @@
 <script>
     import { Meta } from "@/config/meta";
-    import { MainPlayer } from "@/ui/widgets/public/player";
+    import { MainPlayer, MobilePlayer } from "@/ui/widgets/public/player";
 
     document.body.style.backgroundColor = "var(--color-blue-midnight)";
 </script>
@@ -25,18 +25,25 @@
     </div>
 </header>
 
-<main class="flex flex-col mt-10 justify-center h-screen">
-    <div class="cont mb-15">
+<main class="flex flex-col gap-5 lg:gap-15 h-screen">
+    <div class="cont mt-15 lg:mt-25">
         <div class="w-full flex justify-center">
             <img
                 src="/img/default/logoProvisory.webp"
                 alt="Logo"
-                class="w-120"
+                class="w-80 lg:w-110"
                 loading="lazy"
             />
         </div>
     </div>
-    <MainPlayer />
+    
+    <!-- Player Version Switch -->
+    <div class="hidden lg:block w-full">
+        <MainPlayer />
+    </div>
+    <div class="lg:hidden w-full pb-10">
+        <MobilePlayer />
+    </div>
 </main>
 
 <footer>

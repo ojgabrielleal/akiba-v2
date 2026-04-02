@@ -108,11 +108,11 @@
 
 @layer components {
     .cont {
-        @apply w-full px-10 mx-auto sm:max-w-7xl lg:px-0;
+        @apply w-full px-10 mx-auto sm:max-w-380 lg:px-0;
     }
 
     .cont-player-main {
-        @apply w-full px-10 mx-auto sm:max-w-6xl xl:px-0;
+        @apply w-full px-10 mx-auto sm:max-w-[71.5rem] xl:px-0;
     }
 }
 
