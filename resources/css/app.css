@@ -60,6 +60,7 @@
     from {
         transform: translateX(100%);
     }
+
     to {
         transform: translateX(-100%);
     }
@@ -70,7 +71,7 @@
         transition: 0.3s ease-in-out;
     }
 
-    button:disabled{
+    button:disabled {
         cursor: default !important;
         filter: opacity(50%);
     }
@@ -106,11 +107,11 @@
 }
 
 @layer components {
-    .container {
+    .cont {
         @apply w-full px-10 mx-auto sm:max-w-7xl lg:px-0;
     }
 
-    .container-player {
+    .cont-player-main {
         @apply w-full px-10 mx-auto sm:max-w-6xl xl:px-0;
     }
 }
@@ -140,59 +141,47 @@
 
     .marquee-container::before {
         left: 0;
-        background: linear-gradient(
-            to right,
-            var(--color-blue-ocean),
-            transparent
-        );
+        background: linear-gradient(to right,
+                var(--color-blue-ocean),
+                transparent);
     }
 
     .marquee-container::after {
         right: 0;
-        background: linear-gradient(
-            to left,
-            var(--color-blue-ocean),
-            transparent
-        );
+        background: linear-gradient(to left,
+                var(--color-blue-ocean),
+                transparent);
     }
 
     .filter-neutral-aurora {
-        filter: invert(100%) sepia(75%) saturate(292%) hue-rotate(322deg)
-            brightness(106%) contrast(102%);
+        filter: invert(100%) sepia(75%) saturate(292%) hue-rotate(322deg) brightness(106%) contrast(102%);
     }
 
     .filter-neutral-gray {
-        filter: invert(54%) sepia(12%) saturate(23%) hue-rotate(46deg)
-            brightness(92%) contrast(88%);
+        filter: invert(54%) sepia(12%) saturate(23%) hue-rotate(46deg) brightness(92%) contrast(88%);
     }
 
     .filter-neutral-honeycream {
-        filter: invert(92%) sepia(5%) saturate(2300%) hue-rotate(327deg)
-            brightness(104%) contrast(101%);
+        filter: invert(92%) sepia(5%) saturate(2300%) hue-rotate(327deg) brightness(104%) contrast(101%);
     }
 
     .filter-blue-skywave {
-        filter: invert(53%) sepia(84%) saturate(4530%) hue-rotate(185deg)
-            brightness(99%) contrast(112%);
+        filter: invert(53%) sepia(84%) saturate(4530%) hue-rotate(185deg) brightness(99%) contrast(112%);
     }
 
     .filter-blue-ocean {
-        filter: invert(10%) sepia(55%) saturate(5448%) hue-rotate(224deg)
-            brightness(90%) contrast(109%);
+        filter: invert(10%) sepia(55%) saturate(5448%) hue-rotate(224deg) brightness(90%) contrast(109%);
     }
 
     .filter-blue-indigo {
-        filter: invert(8%) sepia(27%) saturate(5191%) hue-rotate(227deg)
-            brightness(96%) contrast(124%);
+        filter: invert(8%) sepia(27%) saturate(5191%) hue-rotate(227deg) brightness(96%) contrast(124%);
     }
 
     .filter-blue-midnight {
-        filter: invert(5%) sepia(9%) saturate(7430%) hue-rotate(191deg)
-            brightness(102%) contrast(108%);
+        filter: invert(5%) sepia(9%) saturate(7430%) hue-rotate(191deg) brightness(102%) contrast(108%);
     }
 
     .filter-red-crimson {
-        filter: invert(44%) sepia(59%) saturate(4904%) hue-rotate(335deg)
-            brightness(88%) contrast(113%);
+        filter: invert(44%) sepia(59%) saturate(4904%) hue-rotate(335deg) brightness(88%) contrast(113%);
     }
 }

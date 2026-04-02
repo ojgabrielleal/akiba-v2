@@ -22,7 +22,7 @@
 <header class="mb-15 lg:pt-10">
     <Navbar />
 </header>
-<main class="container">
+<main class="cont">
     <slot />
 </main>
 <footer>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Private
 use App\Http\Controllers\Private\LoginController;
 use App\Http\Controllers\Private\AdministrationController;
 use App\Http\Controllers\Private\LocutionController;
@@ -14,6 +15,19 @@ use App\Http\Controllers\Private\PodcastController;
 use App\Http\Controllers\Private\RepositoryController;
 use App\Http\Controllers\Private\MediaController;
 use App\Http\Controllers\Private\ProfileController;
+
+// Provisory
+use App\Http\Controllers\Provisory\HomeController;
+
+
+/*
+|--------------------------------------------------------------------------
+| Private routes
+|--------------------------------------------------------------------------
+*/
+Route::controller(HomeController::class)->group(function () {
+    Route::get('', 'render')->name('home');
+});
 
 /*
 |--------------------------------------------------------------------------
