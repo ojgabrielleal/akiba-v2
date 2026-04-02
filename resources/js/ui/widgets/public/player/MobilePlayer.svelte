@@ -16,14 +16,14 @@
                 <img
                     src={mascotImage}
                     alt="Programa"
-                    class="w-full h-full object-cover object-top"
+                    class="w-full h-full object-cover object-top scale-165"
                 />
             </div>
             <div class="flex flex-col min-w-0">
                 <span class="text-orange-amber text-[10px] uppercase font-bold tracking-widest leading-none mb-1">
                     PROGRAMA
                 </span>
-                <h3 class="text-neutral-aurora text-lg font-bold leading-tight truncate">
+                <h3 class="text-neutral-aurora text-lg font-bold leading-tight uppercase italic truncate">
                     {programName}
                 </h3>
                 <div class="flex flex-wrap items-center gap-2 mt-1">
@@ -84,16 +84,3 @@
         </button>
     </div>
 </section>
-
-<style>
-    /* Custom Slider Appearance */
-    input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        height: 16px;
-        width: 16px;
-        border-radius: 50%;
-        background: var(--color-orange-amber, #f69700);
-        cursor: pointer;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-</style>
