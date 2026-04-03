@@ -1,5 +1,6 @@
 <script>
     import axios from 'axios';
+    import { useForm } from "@inertiajs/svelte";
     import { debounce } from '@/utils';
 
     let activeAnimeDropdown = false;
@@ -8,8 +9,13 @@
     let animesList = [];
     let animeThemesList = [];
 
-    let selectedAnime;
-    let selectedMusic;
+    let form = useForm({
+        name: null,
+        location: null,
+        anime: null,
+        music: null,
+        message: null,
+    })
 
     const getAnimeJikanApi = (value) => {
         if (!value) {
@@ -19,12 +25,14 @@
 
         animesList = [];
         animeThemesList = [];
-        selectedAnime = null;
-        selectedMusic = null;
+
+        $form.anime = null;
+        $form.music = null;
 
         axios.get(`https://api.jikan.moe/v4/anime?q=${value}`)
         .then(response => {
             const filtered  = response.data.data.filter(item => item.type === 'TV');
+
             animesList = filtered.map(item => ({
                 title: item.title,
                 mal_id: item.mal_id,
@@ -45,14 +53,14 @@
             const parseTheme = (themeStr, type) => {
                 const match = themeStr.match(/"([^"]+)"\s*by\s*([^(\n]+)/);
                 
-                let music = match ? match[1] : themeStr;
+                let name = match ? match[1] : themeStr;
                 let artist = match ? match[2].trim() : 'Desconhecido';
 
                 const cleanBrackets = /\s*\([^)]*\)/g;
 
                 return {
                     type: type,
-                    music: music.replace(cleanBrackets, '').trim(),
+                    name: name.replace(cleanBrackets, '').trim(),
                     artist: artist.replace(cleanBrackets, '').trim(),
                 };
             };
@@ -81,7 +89,8 @@
             name="listener"
             class="w-full h-10 bg-white font-noto-sans text-black text-md rounded-lg outline-none pl-4 border border-gray-400"
             placeholder="Ex: Ayasumi"
-            required={true}
+            bind:value={$form.listener}
+            required
         />
         <span class="text-[0.8rem] text-gray-500 font-noto-sans mt-1 block">
             Vale apelido, nome social.. Só pra falar que o pedido é seu!
@@ -98,7 +107,8 @@
             name="address"
             class="w-full h-10 bg-white font-noto-sans text-md text-black rounded-lg outline-none pl-4 border border-gray-400"
             placeholder="Ex: Salto - SP"
-            required={true}
+            bind:value={$form.location}
+            required
         />
         <span class="text-[0.8rem] text-gray-500 font-noto-sans mt-1 block">
             Não está no Brasil? Fala ai a cidade e país que está agora.
@@ -106,7 +116,7 @@
     </div>
     <div class="mb-3 relative">
         <label class="text-md text-gray-700 font-noto-sans block mb-1" for="anime">
-            Selecione um anime
+            Escolha um anime para ouvir a música
         </label>
         <input
             id="anime"
@@ -119,105 +129,85 @@
             on:blur={() => activeAnimeDropdown = false}
         />
         <span class="text-[0.8rem] text-gray-500 font-noto-sans mt-1 block">
-            Selecione o anime para que possamos identificar a obra.
+            Selecione o anime para que possamos buscar as músicas.
         </span>
-        {#if activeAnimeDropdown}
-            {#if animesList.length > 0}
-                <div class="absolute w-full bg-white border border-gray-200 rounded-2xl shadow-xl z-25 max-h-56 overflow-y-auto p-2">
-                    {#each animesList as item, i (item.id || i)}
-                        <button type="button" class="cursor-pointer flex items-center gap-3 w-full p-2 rounded-xl" on:mousedown={() => { 
-                            getAnimeThemesJikanApi(item.mal_id); 
-                            activeAnimeDropdown = false; 
-                            selectedAnime = item;
-                        }}>
-                            <img
-                                src={item.image}
-                                alt={item.title}
-                                class="w-14 h-14 object-cover object-top rounded-lg border border-gray-100 shadow-sm shrink-0"
-                                loading="lazy"
-                            />
-                            <div class="flex flex-col items-start text-left">
-                                <div class="font-noto-sans font-semibold text-gray-900 text-sm line-clamp-1">
-                                    {item.title}
-                                </div>
-                                <div class="font-noto-sans text-gray-500 text-xs">
-                                    {item.year}
-                                </div>
+        {#if activeAnimeDropdown && animesList.length > 0}
+            <div class="absolute w-full bg-white border border-gray-200 rounded-2xl shadow-xl z-25 max-h-56 overflow-y-auto p-2">
+                {#each animesList as item}
+                    <button type="button" class="cursor-pointer flex items-center gap-3 w-full p-2 rounded-xl" on:mousedown={() => { 
+                        $form.anime = item;
+                        activeAnimeDropdown = false; 
+                        getAnimeThemesJikanApi(item.mal_id); 
+                    }}>
+                        <img
+                            src={item.image}
+                            alt={item.title}
+                            class="w-14 h-14 object-cover object-top rounded-lg border border-gray-100 shadow-sm shrink-0"
+                            loading="lazy"
+                        />
+                        <div class="flex flex-col items-start text-left">
+                            <div class="font-noto-sans font-semibold text-gray-900 text-sm line-clamp-1">
+                                {item.title}
                             </div>
-                        </button>
-                    {/each}
-                </div>
-            {:else}
-                <div class="absolute w-full bg-white border border-gray-200 rounded-2xl shadow-xl z-25 p-6">
-                    <div class="flex flex-col items-center justify-center text-center space-y-3">
-                        <div class="bg-pink-50 p-3 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                <path d="M8 11a3 3 0 0 1 3-3"></path>
-                            </svg>
+                            <div class="font-noto-sans text-gray-500 text-xs">
+                                {item.year}
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-gray-900 font-semibold font-noto-sans text-md mb-1">
-                                Busque o anime!
-                            </h3>
-                            <p class="text-gray-500 text-sm font-noto-sans px-4">
-                                Digite o nome do anime acima para que possamos achar e trazer as músicas dele para voce terminar o pedido!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            {/if}
-        {/if}
-    </div>
-    <div class="mb-5 relative">
-        <div class="text-md text-gray-700 font-noto-sans block mb-1">
-            Escolha uma música do anime
-        </div>
-        <button 
-            type="button"
-            class="w-full h-10 flex items-center justify-between bg-white font-noto-sans text-md text-black rounded-lg outline-none px-4 border border-gray-400"
-            on:click={() => activeMusicDropdown = !activeMusicDropdown}
-            on:blur={() => setTimeout(() => activeMusicDropdown = false, 200)}
-        >
-            {#if selectedMusic}
-                <div class="flex flex-col items-start overflow-hidden flex-1 min-w-0">
-                    <span class="text-sm text-gray-900 font-normal truncate w-full text-left">
-                        {selectedMusic.music} - {selectedMusic.artist}
-                    </span>
-                </div>
-            {:else}
-                <div class="flex-1 text-left">
-                    <span class="text-gray-400 italic text-sm">
-                        {selectedAnime ? 'Selecione uma música' : ''}
-                    </span>
-                </div>
-            {/if}
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 shrink-0 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-        </button>
-        {#if activeMusicDropdown && animeThemesList.length > 0}
-            <div class="absolute w-full mt-2 bg-white border border-gray-100 rounded-2xl shadow-2xl z-30 max-h-56 overflow-y-auto">
-                {#each ['OP', 'ED'] as type}
-                    <div class="px-3 py-2 text-[0.6rem] font-bold text-gray-400 uppercase tracking-[0.2em]">{type === 'OP' ? 'Aberturas' : 'Encerramentos'}</div>
-                    {#each animeThemesList.filter(item => item.type === type) as item}
-                        <button type="button" class="w-full flex flex-col items-start gap-0.5 p-3 rounded-xl hover:bg-gray-50 active:bg-pink-50 transition-colors border-b last:border-0 border-gray-50 mb-1" on:mousedown={() => { 
-                            selectedMusic = item; 
-                            activeMusicDropdown = false; 
-                        }} >
-                            <div class="font-noto-sans font-bold text-gray-900 text-sm line-clamp-1 w-full text-left leading-tight">
-                                {item.music}
-                            </div>
-                            <div class="font-noto-sans text-gray-500 text-xs truncate w-full text-left">
-                                {item.artist}
-                            </div>
-                        </button>
-                    {/each}
+                    </button>
                 {/each}
             </div>
         {/if}
     </div>
+    {#if $form.anime}
+        <div class="mb-5 relative">
+            <div class="text-md text-gray-700 font-noto-sans block mb-1">
+                Escolha uma música do anime escolhido
+            </div>
+            <button 
+                type="button"
+                class="w-full h-11 flex items-center justify-between bg-white font-noto-sans text-md text-black rounded-lg outline-none px-4 border border-gray-400"
+                on:click={() => activeMusicDropdown = true}
+                on:blur={() => activeMusicDropdown = false}
+            >
+                {#if $form.music}
+                    <div class="flex flex-col items-start overflow-hidden flex-1 min-w-0">
+                        <span class="text-sm text-gray-900 font-normal truncate w-full text-left">
+                            {$form.music.name} - {$form.music.artist}
+                        </span>
+                    </div>
+                {:else}
+                    <div class="flex-1 text-left">
+                        <span class="text-gray-400 italic text-sm">
+                            Selecione uma música
+                        </span>
+                    </div>
+                {/if}
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 shrink-0 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            {#if activeMusicDropdown && animeThemesList.length > 0}
+                <div class="absolute w-full mt-2 bg-white border border-gray-100 rounded-2xl shadow-2xl z-30 max-h-56 overflow-y-auto">
+                    {#each ['OP', 'ED'] as type}
+                        <div class="px-3 py-2 text-[0.6rem] font-bold text-gray-400 uppercase tracking-[0.2em]">{type === 'OP' ? 'Aberturas' : 'Encerramentos'}</div>
+                        {#each animeThemesList.filter(item => item.type === type) as item}
+                            <button type="button" class="w-full flex flex-col items-start gap-0.5 p-3 rounded-xl hover:bg-gray-50 active:bg-pink-50 transition-colors border-b last:border-0 border-gray-50 mb-1" on:mousedown={() => { 
+                                $form.music = item;
+                                activeMusicDropdown = false; 
+                            }} >
+                                <div class="font-noto-sans font-bold text-gray-900 text-sm line-clamp-1 w-full text-left leading-tight">
+                                    {item.name}
+                                </div>
+                                <div class="font-noto-sans text-gray-500 text-xs truncate w-full text-left">
+                                    {item.artist}
+                                </div>
+                            </button>
+                        {/each}
+                    {/each}
+                </div>
+            {/if}
+        </div>
+    {/if}
     <div class="mb-3">
         <label class="text-md text-gray-700 font-noto-sans block mb-1" for="message">
             Escreva uma mensagem
@@ -234,7 +224,6 @@
             Vamos evitar ofensas! Se pedido pode não tocar por isso.
         </span>
     </div>
-
     <button type="submit" class="cursor-pointer w-full bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
         Enviar
     </button>
