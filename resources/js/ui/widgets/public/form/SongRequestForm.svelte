@@ -176,22 +176,24 @@
         </div>
         <button 
             type="button"
-            class="w-full h-10 bg-white font-noto-sans text-md text-black rounded-lg outline-none pl-4 border border-gray-400"
+            class="w-full h-10 flex items-center justify-between bg-white font-noto-sans text-md text-black rounded-lg outline-none px-4 border border-gray-400"
             on:click={() => activeMusicDropdown = !activeMusicDropdown}
             on:blur={() => setTimeout(() => activeMusicDropdown = false, 200)}
         >
             {#if selectedMusic}
-                <div class="flex flex-col items-start overflow-hidden">
-                    <span class="text-sm text-gray-900 font-semibold truncate w-full text-left">
-                        {selectedMusic.music}
+                <div class="flex flex-col items-start overflow-hidden flex-1 min-w-0">
+                    <span class="text-sm text-gray-900 font-normal truncate w-full text-left">
+                        {selectedMusic.music} - {selectedMusic.artist}
                     </span>
                 </div>
             {:else}
-                <span class="text-gray-400 italic text-sm">
-                    {selectedAnime ? 'Selecione uma música' : null}
-                </span>
+                <div class="flex-1 text-left">
+                    <span class="text-gray-400 italic text-sm">
+                        {selectedAnime ? 'Selecione uma música' : ''}
+                    </span>
+                </div>
             {/if}
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 block float-end" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 shrink-0 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
         </button>
@@ -200,11 +202,10 @@
                 {#each ['OP', 'ED'] as type}
                     <div class="px-3 py-2 text-[0.6rem] font-bold text-gray-400 uppercase tracking-[0.2em]">{type === 'OP' ? 'Aberturas' : 'Encerramentos'}</div>
                     {#each animeThemesList.filter(item => item.type === type) as item}
-                        <button 
-                            type="button"
-                            on:mousedown={() => { selectedMusic = item; activeMusicDropdown = false; }} 
-                            class="w-full flex flex-col items-start gap-0.5 p-3 rounded-xl hover:bg-gray-50 active:bg-pink-50 transition-colors border-b last:border-0 border-gray-50 mb-1"
-                        >
+                        <button type="button" class="w-full flex flex-col items-start gap-0.5 p-3 rounded-xl hover:bg-gray-50 active:bg-pink-50 transition-colors border-b last:border-0 border-gray-50 mb-1" on:mousedown={() => { 
+                            selectedMusic = item; 
+                            activeMusicDropdown = false; 
+                        }} >
                             <div class="font-noto-sans font-bold text-gray-900 text-sm line-clamp-1 w-full text-left leading-tight">
                                 {item.music}
                             </div>
