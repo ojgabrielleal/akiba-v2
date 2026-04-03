@@ -2,14 +2,15 @@
     import { page } from "@inertiajs/svelte";
     import { Modal } from "@/ui/components/public";
     import { SongRequestForm } from "@/ui/widgets/public/form";
+    
+    $: ({ onair } = $page.props);
+
+    $: air = onair.data[0];
 
     let modalRef;
 
     export let volume = 0.5;
     export let togglePlayPause = () => {};
-
-    $: ({ onair } = $page.props);
-
 </script>
 
 <Modal bind:this={modalRef}>
@@ -31,12 +32,14 @@
         <!-- svelte-ignore a11y_distracting_elements -->
         <marquee class="w-5xl flex overflow-x-hidden relative marquee-container">
             <div class="whitespace-nowrap w-full md:w-auto text-neutral-aurora text-3xl font-noto-sans font-bold uppercase italic">
-                <span class="mx-4"> Olá hoje é festa </span>
+                <span class="mx-4"> 
+                    {air.phrase}
+                </span>
             </div>
         </marquee>
         <div class="hidden lg:block absolute bottom-0 -right-4 z-10">
             <img
-                src="/img/locution/icons/animeGirl.webp"
+                src={air.image}
                 alt=""
                 aria-hidden="true"
                 class="w-35"
@@ -60,7 +63,7 @@
         <div class="flex items-center gap-5 mb-15">
             <div class="w-52">
                 <img
-                    src="/img/locution/default/program.webp"
+                    src={air.program.image}
                     alt="Programa"
                     loading="lazy"
                 />
@@ -76,13 +79,23 @@
             </div>
             <div>
                 <div class="text-orange-amber font-noto-sans uppercase">
-                    Com o locutor
+                    {air.program.host.gender === 'male' ? 'Com o locutor' : 'Com a locutora'}
                 </div>
                 <div class="w-full text-neutral-aurora text-3xl font-noto-sans font-bold uppercase italic line-clamp-1">
-                    Neko Kirame
+                    {air.program.host.nickname}
                 </div>
-                <div class="bg-green-forest mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase">
-                    Humano
+                <div class={["mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase", 
+                    {'bg-purple-mystic': air.type === "automatic"},
+                    {'bg-green-forest': air.type === "live"},
+                    {'bg-green-forest': air.type === "scheduled"},
+                ]}>
+                    {#if air.type === "automatic"} 
+                        Robô
+                    {:else if air.type === "live"} 
+                        Humano
+                    {:else} 
+                        Agendado
+                    {/if}
                 </div>
             </div>
             <div class="text-gray-500">
@@ -118,7 +131,7 @@
     <div class="block">
         <div class="w-[20rem]">
             <img
-                src="/img/player/default/akchan.webp"
+                src={air.program.host.avatar}
                 alt=""
                 aria-label="hidden"
                 class="w-full h-full"
@@ -128,18 +141,28 @@
     </div>
     <div class="block">
         <div class="flex flex-col gap-10 px-3">
-            <div class="bg-purple-mystic p-3 flex gap-2 justify-center items-center rounded-md">
+            <div class={["p-3 flex gap-2 justify-center items-center rounded-md", 
+                 {'bg-purple-mystic': air.type === "automatic"},
+                 {'bg-green-forest': air.type === "live"},
+                 {'bg-green-forest': air.type === "scheduled"},
+            ]}>
                 <div>
-                    <img
-                        src="/svg/default/robot.svg"
-                        alt=""
-                        aria-hidden="true"
-                        class="w-15"
-                        loading="lazy"
-                    />
+                    {#if air.type === "automatic"} 
+                        <img src="/svg/default/robot.svg" alt="" aria-hidden="true" class="w-15" loading="lazy"/>
+                    {:else if air.type === "live"} 
+                        <img src="/svg/default/stream.svg" alt="" aria-hidden="true" class="w-15" loading="lazy"/>
+                    {:else} 
+                        <img src="/svg/default/disc.svg" alt="" aria-hidden="true" class="w-15" loading="lazy"/>
+                    {/if}
                 </div>
                 <div class="font-noto-sans font-medium italic uppercase text-center leading-4">
-                    Programação automática
+                    {#if air.type === "automatic"} 
+                        Programação automática
+                    {:else if air.type === "live"} 
+                        Ao vivo
+                    {:else} 
+                        Agendado
+                    {/if}
                 </div>
             </div>
             <div class="w-full flex flex-col gap-2 mb-7">

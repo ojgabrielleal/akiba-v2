@@ -126,9 +126,9 @@
                 <div class="absolute w-full bg-white border border-gray-200 rounded-2xl shadow-xl z-25 max-h-56 overflow-y-auto p-2">
                     {#each animesList as item, i (item.id || i)}
                         <button type="button" class="cursor-pointer flex items-center gap-3 w-full p-2 rounded-xl" on:mousedown={() => { 
-                                getAnimeThemesJikanApi(item.mal_id); 
-                                activeAnimeDropdown = false; 
-                                selectedAnime = item;
+                            getAnimeThemesJikanApi(item.mal_id); 
+                            activeAnimeDropdown = false; 
+                            selectedAnime = item;
                         }}>
                             <img
                                 src={item.image}
@@ -176,15 +176,12 @@
         </div>
         <button 
             type="button"
-            class="w-full h-13 bg-white flex items-center justify-between font-noto-sans text-md text-black rounded-xl outline-none px-4 border border-gray-300"
+            class="w-full h-10 bg-white font-noto-sans text-md text-black rounded-lg outline-none pl-4 border border-gray-400"
             on:click={() => activeMusicDropdown = !activeMusicDropdown}
             on:blur={() => setTimeout(() => activeMusicDropdown = false, 200)}
         >
             {#if selectedMusic}
                 <div class="flex flex-col items-start overflow-hidden">
-                    <span class="text-[0.65rem] font-bold text-blue-skywave uppercase tracking-widest">
-                        {selectedMusic.type === 'OP' ? 'OP' : 'ED'}
-                    </span>
                     <span class="text-sm text-gray-900 font-semibold truncate w-full text-left">
                         {selectedMusic.music}
                     </span>

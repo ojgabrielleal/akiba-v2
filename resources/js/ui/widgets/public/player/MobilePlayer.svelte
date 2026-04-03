@@ -3,13 +3,11 @@
     
     $: ({ onair } = $page.props);
 
+    $: air = onair.data[0];
+
     export let togglePlayPause = () => {};
     export let volume = 0.5;
     export let currentSong = "Takanori Nishikawa - Bright Burning Shout";
-    export let djName = "Neko Kirame";
-    export let programName = "Akiba News";
-    export let djType = "Humano";
-    export let mascotImage = "/img/player/default/akchan.webp";
 </script>
 
 <section class="flex flex-col w-full bg-blue-midnight p-6 gap-8 rounded-3xl overflow-hidden relative">
@@ -18,7 +16,7 @@
         <div class="flex items-center gap-4">
             <div class="w-16 h-16 rounded-xl overflow-hidden border border-white/20 shrink-0">
                 <img
-                    src={mascotImage}
+                    src={air.program.host.avatar}
                     alt="Programa"
                     class="w-full h-full object-cover object-top scale-165"
                 />
@@ -28,14 +26,24 @@
                     PROGRAMA
                 </span>
                 <h3 class="text-neutral-aurora text-lg font-bold leading-tight uppercase italic truncate">
-                    {programName}
+                    {air.program.name}
                 </h3>
                 <div class="flex flex-wrap items-center gap-2 mt-1">
-                    <span class="bg-green-forest text-[9px] px-2 py-0.5 rounded-full text-white font-bold uppercase italic">
-                        {djType}
+                    <span class={["text-[9px] px-2 py-0.5 rounded-full text-white font-bold uppercase italic", 
+                        {'bg-purple-mystic': air.type === "automatic"},
+                        {'bg-green-forest': air.type === "live"},
+                        {'bg-green-forest': air.type === "scheduled"},
+                    ]}>
+                        {#if air.type === "automatic"} 
+                            Robô
+                        {:else if air.type === "live"} 
+                            Humano
+                        {:else} 
+                            Agendado
+                        {/if}
                     </span>
                     <span class="text-neutral-aurora/60 text-xs font-medium italic">
-                        com {djName}
+                        com {air.program.host.nickname}
                     </span>
                 </div>
             </div>

@@ -18,7 +18,7 @@ class AutomaticFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'image' => '/img/onair/default/program.webp',
+            'image' => '/img/locution/default/program.webp',
             'phrases' => collect([
                 [
                     'image' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
