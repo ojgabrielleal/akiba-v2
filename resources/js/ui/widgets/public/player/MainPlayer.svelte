@@ -1,16 +1,15 @@
 <script>
-    import { page } from "@inertiajs/svelte";
+    import { page, usePoll } from "@inertiajs/svelte";
     import { Modal } from "@/ui/components/public";
     import { SongRequestForm } from "@/ui/widgets/public/form";
-    
+    import { player, toggleAudio, setVolume } from "@/store"
+
     $: ({ onair } = $page.props);
 
+    usePoll(30*6000);
     $: air = onair.data[0];
-
+    
     let modalRef;
-
-    export let volume = 0.5;
-    export let togglePlayPause = () => {};
 </script>
 
 <Modal bind:this={modalRef}>
@@ -18,7 +17,7 @@
         <SongRequestForm/>
     </div>
 </Modal>
-<section class="w-full bg-blue-ocean mb-10">
+<section class="w-full bg-blue-ocean mb-5">
     <div class="cont-player-main py-4 relative">
         <div class="hidden lg:block absolute -top-7 -left-10 z-10">
             <img
@@ -58,7 +57,7 @@
     </div>
 </section>
 
-<section class="cont-player-main grid grid-cols-[2fr_1fr_0.5fr] items-center gap-5">
+<section class="cont-player-main grid grid-cols-[2fr_1fr_0.8fr] items-center gap-5">
     <div class="block">
         <div class="flex items-center gap-5 mb-15">
             <div class="w-52">
@@ -109,9 +108,9 @@
             </div>
         </div>
         <div class="flex gap-3 items-end">
-            <div class="w-20">
+            <div class="w-20 shrink-0">
                 <img
-                    src="https://www.clubotaku.org/nijiwp/wp-content/uploads/613.jpg"
+                    src={air.current_song.cover}
                     alt=""
                     aria-hidden="true"
                     class="rounded-lg"
@@ -122,14 +121,14 @@
                 <div class="text-orange-amber font-noto-sans uppercase italic">
                     Tocando agora:
                 </div>
-                <div class="text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic line-clamp-2">
-                    Takanori Nishikawa - Bright Burning Shout
+                <div class="text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic line-clamp-1">
+                    {air.current_song.music}
                 </div>
             </div>
         </div>
     </div>
     <div class="block">
-        <div class="w-[20rem]">
+        <div class="w-76">
             <img
                 src={air.program.host.avatar}
                 alt=""
@@ -165,19 +164,25 @@
                     {/if}
                 </div>
             </div>
-            <div class="w-full flex flex-col gap-2 mb-7">
+            <div class="flex flex-col mb-7">
                 <div class="flex justify-center mb-1">
                     <div>
-                        <div class="ml-3 text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic">
+                        <div class="ml-2 text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic">
                             Dê o
                         </div>
-                        <div class="font-noto-sans font-extrabold uppercase italic text-6xl text-blue-skywave">
-                            Play
+                        <div class={["-mt-4 font-noto-sans font-extrabold uppercase italic text-[3rem]",
+                            {"text-blue-skywave": !$player.playing},
+                            {"text-orange-amber": $player.playing},
+                        ]}>
+                            {$player.playing ? "Pause" : "Start"}
                         </div>
                     </div>
-                    <button on:click={togglePlayPause} class="bg-blue-skywave cursor-pointer w-14 h-14 rounded-full flex justify-center items-center active:shadow-[0_0_20px_rgba(0,145,255,0.8)] active:scale-95 transition-all">
+                    <button on:click={toggleAudio} class={["cursor-pointer shrink-0 w-14 h-14 rounded-full flex justify-center items-center active:shadow-[0_0_20px_rgba(0,145,255,0.8)] active:scale-95 transition-all", 
+                        {"bg-blue-skywave": !$player.playing},
+                        {"bg-orange-amber": $player.playing},
+                    ]}>
                         <img
-                            src="/svg/default/play.svg"
+                            src={$player.playing ? "/svg/default/pause.svg" : "/svg/default/play.svg"}
                             alt=""
                             aria-hidden="true"
                             class="w-5"
@@ -188,7 +193,7 @@
                 <div class="flex flex-col gap-2">
                     <div class="flex justify-between items-center px-1">
                         <span class="text-[10px] text-neutral-aurora/40 font-bold uppercase">Volume</span>
-                        <span class="text-[10px] text-orange-amber font-bold">{Math.round(volume * 100)}%</span>
+                        <span class="text-[10px] text-orange-amber font-bold">{Math.round($player.volume * 100)}%</span>
                     </div>
                     <input
                         id="volume"
@@ -197,14 +202,15 @@
                         min="0"
                         max="1"
                         step="0.01"
-                        bind:value={volume}
+                        value={$player.volume}
+                        on:input={(e) => setVolume(e.target.value)} 
                         class="w-full accent-orange-amber h-1.5 rounded-full bg-white/10 cursor-pointer transition-all hover:bg-white/20"
                     />
                 </div>
             </div>
         </div>
-        <button aria-label="Faça seu pedido" class="cursor-pointer w-full py-2 px-1 border border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase" on:click={()=>{
-            modalRef.open();
+        <button aria-label="Faça seu pedido" class="cursor-pointer w-full py-2 px-1 border border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase disabled:cursor-not-allowed" on:click={() => {
+            modalRef.open()
         }}>
             & Faça seu <strong class="text-orange-amber">Pedido</strong>
         </button>

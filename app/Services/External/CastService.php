@@ -25,7 +25,11 @@ class CastService
             return [
                 'status' => $data['status'] === 'Ligado' ? 'Online' : 'Offline',
                 'listeners' => $data['ouvintes_conectados'],
-                'bitrate' => $data['plano_bitrate']
+                'bitrate' => $data['plano_bitrate'],
+                'current_song' => [
+                    'music' => $data['musica_atual'],
+                    'cover' => $data['capa_musica'],
+                ]
             ];
         } catch (\Throwable $e) {
             Log::error('Radio API error: ' . $e->getMessage());

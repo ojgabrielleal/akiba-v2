@@ -5,6 +5,7 @@ import laravel from "laravel-vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+    envPrefix: ['VITE_', 'CAST_'],
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'),

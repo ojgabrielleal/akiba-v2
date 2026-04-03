@@ -33,6 +33,7 @@ class OnairResource extends JsonResource
                     'gender' => $this->program->host->gender,
                 ],
             ],
+            'current_song' => $this?->current_song,
         ];
     }
 }
