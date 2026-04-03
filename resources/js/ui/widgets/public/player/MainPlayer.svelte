@@ -57,7 +57,7 @@
     </div>
 </section>
 
-<section class="cont-player-main grid grid-cols-[2fr_1fr_0.8fr] items-center gap-5">
+<section class="cont-player-main grid grid-cols-[2fr_1fr_0.9fr] items-center gap-5">
     <div class="block">
         <div class="flex items-center gap-5 mb-15">
             <div class="w-52">
@@ -218,8 +218,7 @@
 </section>
 
 <section class="cont-player-main">
-    <div class="mb-10 flex flex-wrap lg:flex-nowrap gap-5 justify-between">
-        <div class="w-full h-32 bg-neutral-aurora"></div>
-        <div class="w-full h-32 bg-neutral-aurora hidden lg:block"></div>
+    <div class="mb-10 h-35 bg-neutral-aurora">
+        
     </div>
 </section>
