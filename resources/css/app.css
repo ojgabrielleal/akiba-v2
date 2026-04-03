@@ -112,7 +112,7 @@
     }
 
     .cont-player-main {
-        @apply w-full px-10 mx-auto sm:max-w-[68.9rem] xl:px-0;
+        @apply w-full px-10 mx-auto sm:max-w-276 xl:px-0;
     }
 }
 

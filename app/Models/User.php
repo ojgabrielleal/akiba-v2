@@ -9,9 +9,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
+use App\Traits\HasPermissions;
+use App\Traits\HasFlashMessages;
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasUuids;
+    use HasFactory, Notifiable, HasUuids, HasPermissions, HasFlashMessages;
 
     protected $table = 'users';
 

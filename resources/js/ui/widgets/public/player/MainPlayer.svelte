@@ -6,7 +6,7 @@
 
     $: ({ onair } = $page.props);
 
-    usePoll(30*6000);
+    usePoll(30*1000);
     $: air = onair.data[0];
     
     let modalRef;
@@ -78,9 +78,9 @@
             </div>
             <div>
                 <div class="text-orange-amber font-noto-sans uppercase">
-                    {air.program.host.gender === 'male' ? 'Com o locutor' : 'Com a locutora'}
+                    {air.program.host.gender === 'male' ? 'Com o DJ' : 'Com a DJ'}
                 </div>
-                <div class="w-full text-neutral-aurora text-3xl font-noto-sans font-bold uppercase italic line-clamp-1">
+                <div class="w-full text-neutral-aurora text-2xl font-noto-sans font-bold uppercase italic line-clamp-1">
                     {air.program.host.nickname}
                 </div>
                 <div class={["mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase", 
@@ -121,9 +121,10 @@
                 <div class="text-orange-amber font-noto-sans uppercase italic">
                     Tocando agora:
                 </div>
-                <div class="text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic line-clamp-1">
-                    {air.current_song.music}
-                </div>
+                <!-- svelte-ignore a11y_distracting_elements -->
+                <marquee class="text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic line-clamp-1">
+                    {decodeURIComponent(escape(air.current_song.music))}
+                </marquee>
             </div>
         </div>
     </div>
@@ -138,7 +139,7 @@
             />
         </div>
     </div>
-    <div class="block">
+    <div class="block pt-10">
         <div class="flex flex-col gap-10 px-3">
             <div class={["p-3 flex gap-2 justify-center items-center rounded-md", 
                  {'bg-purple-mystic': air.type === "automatic"},
@@ -218,7 +219,12 @@
 </section>
 
 <section class="cont-player-main">
-    <div class="mb-10 h-35 bg-neutral-aurora">
-        
+    <div class="mb-10 grid grid-cols-2 gap-5">
+        <div class="bg-neutral-aurora h-30 rounded-2xl">
+
+        </div>
+        <div class="bg-neutral-aurora h-30 rounded-2xl">
+            
+        </div>
     </div>
 </section>

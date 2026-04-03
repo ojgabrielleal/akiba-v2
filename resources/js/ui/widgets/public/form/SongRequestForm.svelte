@@ -5,15 +5,24 @@
 
     $: ({ onair } = $page.props);
 
-    $: air = onair.data[0];
-    
+    $: air = onair.data[0];    
+    $: success = false;
+
     let form = useForm({
         name: null,
-        location: null,
+        address: null,
         anime: null,
         music: null,
         message: null,
     });
+
+    const submit = () => {
+        $form.post('/song-request', {
+            onSuccess: () => {
+                success = true;
+            }
+        });
+    };
     
     let activeAnimeDropdown = false;
     let activeMusicDropdown = false;
@@ -82,26 +91,35 @@
     const debouncedGetAnimeJikanApi = debounce(getAnimeJikanApi);
 </script>
 
-{#if air.allows_song_request}
-    <form>
+{#if success}
+    <div class="h-100 py-3">
+        <div class="mb-4 text-sm font-noto-sans text-gray-500">
+            💌 Yay! Pedido enviado!
+        </div>
+        <div class="text-sm font-noto-sans text-gray-500">
+            Seu pedido já tá a caminho! {air.program.host.gender === "male" ? "O DJ" : "A DJ"} {air.program.host.nickname} vai ver rapidinho.  
+            Fica por aqui e curte a vibe da programação! ✨🔥
+        </div>
+    </div>
+{:else if air.allows_song_requests}
+    <form on:submit|preventDefault={submit}>
         <div class="mb-3">
-            <label class="text-md text-gray-700 font-noto-sans block mb-1" for="listener">
+            <label class="text-md text-gray-700 font-noto-sans block mb-1" for="name">
                 Como gostaria de ser chamado?
             </label>
             <input
-                id="listener"
+                id="name"
                 type="text"
-                name="listener"
+                name="name"
                 class="w-full h-10 bg-white font-noto-sans text-black text-md rounded-lg outline-none pl-4 border border-gray-400"
                 placeholder="Ex: Ayasumi"
-                bind:value={$form.listener}
+                bind:value={$form.name}
                 required
             />
             <span class="text-[0.8rem] text-gray-500 font-noto-sans mt-1 block">
                 Vale apelido, nome social.. Só pra falar que o pedido é seu!
             </span>
         </div>
-
         <div class="mb-3">
             <label class="text-md text-gray-700 font-noto-sans block mb-1" for="address">
                 Qual é a sua cidade e estado?
@@ -112,7 +130,7 @@
                 name="address"
                 class="w-full h-10 bg-white font-noto-sans text-md text-black rounded-lg outline-none pl-4 border border-gray-400"
                 placeholder="Ex: Salto - SP"
-                bind:value={$form.location}
+                bind:value={$form.address}
                 required
             />
             <span class="text-[0.8rem] text-gray-500 font-noto-sans mt-1 block">
@@ -223,7 +241,8 @@
                 rows="4"
                 class="w-full bg-white font-noto-sans text-md text-black rounded-lg outline-none p-4 border border-gray-400 resize-none"
                 placeholder="Deixe uma mensagem amigavel"
-                required={true}
+                bind:value={$form.message}
+                required
             ></textarea>
             <span class="text-[0.8rem] text-gray-500 font-noto-sans mt-1 block">
                 Vamos evitar ofensas! Se pedido pode não tocar por isso.
@@ -234,14 +253,13 @@
         </button>
     </form>
 {:else}
-    <dl class="h-100 py-3">
-        <dt class="mb-4 text-sm font-noto-sans text-gray-500">
+    <div class="h-100 py-3">
+        <div class="mb-4 text-sm font-noto-sans text-gray-500">
             😭 Ai… não dá pra mandar pedido agora!
-        </dt>
-        <dd class="text-sm font-noto-sans text-gray-500">
+        </div>
+        <div class="text-sm font-noto-sans text-gray-500">
             O programa não tá rolando ou {air.program.host.gender === "male" ? "o DJ" : "a DJ"} {air.program.host.nickname} tá dando uma pausa, tá?  
             Mas relaxa, daqui a pouco você consegue mandar sua música! 💬🎶
-        </dd>
-    </dl>
+        </div>
+    </div>
 {/if}
-    

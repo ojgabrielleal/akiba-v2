@@ -27,6 +27,7 @@ use App\Http\Controllers\Provisory\HomeController;
 */
 Route::controller(HomeController::class)->group(function () {
     Route::get('', 'render')->name('home');
+    Route::post('song-request','createSongRequest');
 });
 
 /*
