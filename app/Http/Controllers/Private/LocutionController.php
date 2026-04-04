@@ -55,8 +55,6 @@ class LocutionController extends Controller
 
         return SongRequestResource::collection(
             SongRequest::where('onair_id', $onair->id)
-                ->where('was_canceled', false)
-                ->where('was_reproduced', false)
                 ->orderBy('created_at', 'asc')
                 ->get()
         );
@@ -133,7 +131,7 @@ class LocutionController extends Controller
 
     public function markSongRequestAsPlayed(SongRequest $songRequest)
     {
-        if (request()->user()->cannot('update', $songRequest)) {
+        if (request()->user()->cannot('reproduce', $songRequest)) {
             return null;
         }
         $songRequest->update([
@@ -146,7 +144,7 @@ class LocutionController extends Controller
 
     public function markSongRequestAsCanceled(SongRequest $songRequest)
     {
-        if (request()->user()->cannot('update', $songRequest)) {
+        if (request()->user()->cannot('cancel', $songRequest)) {
             return null;
         }
         $songRequest->update([
@@ -160,9 +158,10 @@ class LocutionController extends Controller
 
     public function toggleSongRequestBoxStatus()
     {
-        if (request()->user()->cannot('update', SongRequest::class)) {
+        if (request()->user()->cannot('toggle', SongRequest::class)) {
             return null;
         }
+
         $onair = Onair::live()->first();
         $onair->update([
             'allows_song_requests' => !$onair->allows_song_requests,

@@ -15,8 +15,7 @@
     };
 
     const requestToggleSongRequest = () => {
-        router.patch(
-            "/painel/locucao/songrequest/toggle",
+        router.patch("/painel/locucao/songrequest/toggle",
             {},
             {
                 preserveScroll: true,
