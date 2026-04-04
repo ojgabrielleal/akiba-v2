@@ -62,50 +62,32 @@
 
 <Section title={post ? `Atualizar matéria` : "Criar matéria"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
-        <a
-            preserveState={false}
-            href="/painel/materias"
-            class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-        >
+        <a preserveState={false} href="/painel/materias" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
             Matérias
         </a>
-        <a
-            preserveState={false}
-            href="/painel/reviews"
-            class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-        >
+        <a preserveState={false} href="/painel/reviews" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
             Reviews
         </a>
-        <a
-            preserveState={false}
-            href="/painel/eventos"
-            class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-        >
+        <a preserveState={false} href="/painel/eventos" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
             Eventos
         </a>
     </div>
     <form on:submit|preventDefault={submit} class="mt-10 xl:mt-15">
         <div class="grid grid-cols-1 xl:grid-cols-[22rem_1fr] gap-5">
             <div class="mb-3">
-                <div
-                    class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                >
+                <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                     Imagem em destaque
                 </div>
                 <Preview
                     name="image"
                     src={$form.image}
-                    oninput={(event) =>
-                        ($form.image = event.target.files[0])}
+                    oninput={(event) => ($form.image = event.target.files[0])}
                     required={!post}
                 />
             </div>
             <div class="mb-3">
                 <div class="mb-8">
-                    <label
-                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                        for="title"
-                    >
+                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="title">
                         Título
                     </label>
                     <input
@@ -117,26 +99,19 @@
                     />
                 </div>
                 <div class="mb-8">
-                    <label
-                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                        for="cover"
-                    >
+                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="cover">
                         Capa da matéria
                     </label>
                     <Preview
                         name="cover"
                         viewobject="object-cover"
                         src={$form.cover}
-                        oninput={(event) =>
-                            ($form.cover = event.target.files[0])}
+                        oninput={(event) => ($form.cover = event.target.files[0])}
                         required={!post}
                     />
                 </div>
                 <div class="mb-8">
-                    <label
-                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                        for="content"
-                    >
+                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="content">
                         Escreva sua matéria
                     </label>
                     <Wysiwyg
@@ -150,10 +125,7 @@
         <div class="w-full xl:w-7xl 2xl:w-340 ml-auto">
             <div class="gap-2 grid grid-cols-1 md:grid-cols-2 md:gap-10">
                 <div class="mb-8">
-                    <label
-                        class="text-blue-skywave font-bold italic text-lg text-center uppercase font-noto-sans block mb-1"
-                        for="categories"
-                    >
+                    <label class="text-blue-skywave font-bold italic text-lg text-center uppercase font-noto-sans block mb-1" for="categories">
                         Primeira Tag
                     </label>
                     <select
@@ -168,10 +140,7 @@
                     </select>
                 </div>
                 <div class="mb-8">
-                    <label
-                        class="text-blue-skywave font-bold italic text-lg text-center uppercase font-noto-sans block mb-1"
-                        for="categories"
-                    >
+                    <label class="text-blue-skywave font-bold italic text-lg text-center uppercase font-noto-sans block mb-1" for="categories">
                         Segunda Tag
                     </label>
                     <select
@@ -188,18 +157,11 @@
             </div>
             <div class="gap-5 grid grid-cols-1 lg:grid-cols-2 lg:gap-10">
                 <div>
-                    <div
-                        class="text-center text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-1"
-                    >
+                    <div class="text-center text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-1">
                         Primeira fonte de pesquisa
                     </div>
-                    <div
-                        class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center mb-4"
-                    >
-                        <label
-                            class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1"
-                            for="references"
-                        >
+                    <div class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center mb-4">
+                        <label class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1" for="references">
                             Nome:
                         </label>
                         <input
@@ -210,13 +172,8 @@
                             bind:value={$form.references[0].name}
                         />
                     </div>
-                    <div
-                        class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center"
-                    >
-                        <label
-                            class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1"
-                            for="references"
-                        >
+                    <div class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center">
+                        <label class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1" for="references">
                             Link:
                         </label>
                         <input
@@ -229,18 +186,11 @@
                     </div>
                 </div>
                 <div>
-                    <div
-                        class="text-center text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-1"
-                    >
+                    <div class="text-center text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-1">
                         Segunda fonte de pesquisa
                     </div>
-                    <div
-                        class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center mb-4"
-                    >
-                        <label
-                            class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1"
-                            for="references"
-                        >
+                    <div class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center mb-4">
+                        <label class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1" for="references">
                             Nome:
                         </label>
                         <input
@@ -251,13 +201,8 @@
                             bind:value={$form.references[1].name}
                         />
                     </div>
-                    <div
-                        class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center"
-                    >
-                        <label
-                            class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1"
-                            for="references"
-                        >
+                    <div class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center">
+                        <label class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1" for="references">
                             Link:
                         </label>
                         <input
@@ -272,39 +217,23 @@
             </div>
         </div>
         {#if can.create || can.update}
-            <div
-                class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-15"
-            >
-                <button
-                    type="submit"
-                    value="draft"
-                    class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-green-forest rounded-xl text-green-forest text-xl font-bold font-noto-sans italic uppercase"
-                >
-                    {#if post.data.type === "draft"}
+            <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-15">
+                <button type="submit" value="draft" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-green-forest rounded-xl text-green-forest text-xl font-bold font-noto-sans italic uppercase">
+                    {#if post?.data.type === "draft"}
                         Atualizar rascunho
-                    {:else if post.data.type === "revision" || post.data.type === "published"}
+                    {:else if post?.data.type === "revision" || post?.data.type === "published"}
                         Converter para rascunho
                     {:else}
                         Salvar como rascunho
                     {/if}
                 </button>
-                {#if post.data.type !== "revision" && post.data.type !== "published"}
-                    <button
-                        type="submit"
-                        value="revision"
-                        class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase"
-                    >
+                {#if post?.data.type !== "revision" && post?.data.type !== "published"}
+                    <button type="submit" value="revision" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase">
                         Mandar pra revisão
                     </button>
                 {/if}
-                <button
-                    type="submit"
-                    value="published"
-                    class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase"
-                >
-                    {post?.data.type === "published"
-                        ? "Atualizar matéria"
-                        : "Publicar matéria"}
+                <button type="submit" value="published" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
+                    {post?.data.type === "published" ? "Atualizar matéria" : "Publicar matéria"}
                 </button>
             </div>
         {/if}

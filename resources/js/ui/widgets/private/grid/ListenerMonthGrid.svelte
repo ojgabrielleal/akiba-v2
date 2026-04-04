@@ -60,23 +60,20 @@
                 </dl>
             </div>
             <div class="flex gap-5 items-center justify-end">
-                {#if listenermonth.data.avatar}
-                    <div>
-                        <div class="text-orange-amber font-bold italic text-sm uppercase font-noto-sans block">
-                            Imagem do ouvinte
-                        </div>
-                        <image
-                            src={listenermonth.data.avatar ?? "/img/default/avatar.webp"}
-                            alt="Imagem do ouvinte"
-                            class="w-36 h-36 bg-gray-600 rounded-lg"
-                        />
+                <div>
+                    <div class="text-orange-amber font-bold italic text-sm uppercase font-noto-sans block">
+                        Imagem do ouvinte
                     </div>
-                {/if}
+                    <img
+                        src={listenermonth.data.avatar || "https://placehold.co/500x500?text=Rede+Akiba"}
+                        alt="Imagem do ouvinte"
+                        class="w-36 h-36 bg-gray-600 rounded-lg"
+                    />
+                </div>
                 {#if can.set}
-                    <button
-                        class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic"
-                        on:click={() => offcanvasRef.open()}
-                    >
+                    <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic" on:click={() => { 
+                        offcanvasRef.open();
+                    }}>
                         Atualizar ouvinte
                     </button>
                 {/if}
