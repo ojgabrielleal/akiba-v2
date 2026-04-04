@@ -24,10 +24,10 @@
             const data = response.data.data;
 
             $form.question = data.question;
-            $form.option_one = data.options[0].option;
-            $form.option_two = data.options[1].option;
-            $form.option_three = data.options[2].option;
-            $form.option_four = data.options[3].option;
+            $form.option_one = data.options[0]?.option || null;
+            $form.option_two = data.options[1]?.option || null;
+            $form.option_three = data.options[2]?.option || null;
+            $form.option_four = data.options[3]?.option || null;
         });
     }
 

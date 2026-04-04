@@ -33,15 +33,25 @@
         $form.title = post.data.title;
         $form.cover = post.data.cover;
         $form.content = post.data.content;
-        $form.categories = post.data.categories.map(({ uuid, name }) => ({
+
+        const categories = (post.data.categories || []).map(({ uuid, name }) => ({
             uuid,
             name,
         }));
-        $form.references = post.data.references.map(({ uuid, name, url }) => ({
+        while (categories.length < 2) {
+            categories.push({ uuid: null, name: null });
+        }
+        $form.categories = categories;
+
+        const references = (post.data.references || []).map(({ uuid, name, url }) => ({
             uuid,
             name,
             url,
         }));
+        while (references.length < 2) {
+            references.push({ uuid: null, name: null, url: null });
+        }
+        $form.references = references;
     }
 
     const submit = (event) => {

@@ -1,0 +1,23 @@
+{
+  "_vendor-DEI4WXzX.js": {
+    "file": "assets/vendor-DEI4WXzX.js",
+    "name": "vendor"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-CoRSIF9I.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-B-chgsgF.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-DEI4WXzX.js"
+    ],
+    "css": [
+      "assets/app-CHPFJqtd.css"
+    ]
+  }
+}
