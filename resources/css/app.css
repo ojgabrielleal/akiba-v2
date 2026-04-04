@@ -148,9 +148,7 @@
 
     .marquee-container::after {
         right: 0;
-        background: linear-gradient(to left,
-                var(--color-blue-ocean),
-                transparent);
+        background: linear-gradient(to left, var(--color-blue-ocean), transparent);
     }
 
     .filter-neutral-aurora {

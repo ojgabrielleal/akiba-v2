@@ -43,7 +43,7 @@
                 src={air.icon}
                 alt=""
                 aria-hidden="true"
-                class="w-35"
+                class="w-32"
                 loading="lazy"
             />
         </div>
@@ -88,14 +88,14 @@
                 <div class={["mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase", 
                     {'bg-purple-mystic': air.type === "automatic"},
                     {'bg-green-forest': air.type === "live"},
-                    {'bg-green-forest': air.type === "scheduled"},
+                    {'bg-orange-sunset': air.type === "scheduled"},
                 ]}>
                     {#if air.type === "automatic"} 
                         Robô
                     {:else if air.type === "live"} 
                         Humano
                     {:else} 
-                        Agendado
+                        Gravado
                     {/if}
                 </div>
             </div>
@@ -119,12 +119,12 @@
                     loading="lazy"
                 />
             </div>
-            <div>
+            <div class="w-full srink-0">
                 <div class="text-orange-amber font-noto-sans uppercase italic">
                     Tocando agora:
                 </div>
                 <!-- svelte-ignore a11y_distracting_elements -->
-                <marquee class="text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic line-clamp-1">
+                <marquee class="w-full text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic line-clamp-1">
                     {decodeURIComponent(escape(air.current_song.music))}
                 </marquee>
             </div>
@@ -143,27 +143,27 @@
     </div>
     <div class="block pt-10">
         <div class="flex flex-col gap-10 px-3">
-            <div class={["p-3 flex gap-2 justify-center items-center rounded-md", 
+            <div class={["py-3 px-5 flex gap-2  justify-center items-center rounded-md", 
                  {'bg-purple-mystic': air.type === "automatic"},
                  {'bg-green-forest': air.type === "live"},
-                 {'bg-green-forest': air.type === "scheduled"},
+                 {'bg-orange-sunset': air.type === "scheduled"},
             ]}>
                 <div>
                     {#if air.type === "automatic"} 
-                        <img src="/svg/default/robot.svg" alt="" aria-hidden="true" class="w-15" loading="lazy"/>
+                        <img src="/svg/default/robot.svg" alt="" aria-hidden="true" class="w-10" loading="lazy"/>
                     {:else if air.type === "live"} 
-                        <img src="/svg/default/stream.svg" alt="" aria-hidden="true" class="w-15" loading="lazy"/>
+                        <img src="/svg/default/stream.svg" alt="" aria-hidden="true" class="w-10" loading="lazy"/>
                     {:else} 
-                        <img src="/svg/default/disc.svg" alt="" aria-hidden="true" class="w-15" loading="lazy"/>
+                        <img src="/svg/default/disc.svg" alt="" aria-hidden="true" class="w-10" loading="lazy"/>
                     {/if}
                 </div>
                 <div class="font-noto-sans font-medium italic uppercase text-center leading-4">
                     {#if air.type === "automatic"} 
                         Programação automática
                     {:else if air.type === "live"} 
-                        Ao vivo
+                        Programa <br/>ao vivo
                     {:else} 
-                        Agendado
+                        Programa gravado
                     {/if}
                 </div>
             </div>

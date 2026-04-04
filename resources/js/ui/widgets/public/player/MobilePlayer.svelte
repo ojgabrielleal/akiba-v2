@@ -40,14 +40,14 @@
                     <span class={["text-[9px] px-2 py-0.5 rounded-full text-white font-bold uppercase italic", 
                         {'bg-purple-mystic': air.type === "automatic"},
                         {'bg-green-forest': air.type === "live"},
-                        {'bg-green-forest': air.type === "scheduled"},
+                        {'bg-orange-sunset': air.type === "scheduled"},
                     ]}>
                         {#if air.type === "automatic"} 
                             Robô
                         {:else if air.type === "live"} 
                             Humano
                         {:else} 
-                            Agendado
+                            Gravado
                         {/if}
                     </span>
                     <span class="text-neutral-aurora/60 text-xs font-medium italic">
