@@ -12,7 +12,7 @@ class DiscordWebhookService
             return false;
         }
 
-        $webhookUrl = env('DISCORD_STREAM_WEBHOOK');
+        $webhookUrl = config('services.discord.webhook');
 
         if (!$webhookUrl) {
             return false; 

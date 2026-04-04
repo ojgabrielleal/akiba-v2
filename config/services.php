@@ -33,7 +33,11 @@ return [
     ],
 
     'cast' => [
-        'url' => env('CAST_URL'),
-        'metadata' => env('CAST_METADATA'),
+        'url' => env('CAST_URL', 'https://stm3.painelcast.com:7770/stream'),
+        'metadata' => env('CAST_METADATA', 'http://cast.radioamc.com.br/api-json/Vkc1d2FrMHdNVUpRVkRBOStS'),
+    ],
+
+    'discord' => [
+        'webhook' => env('DISCORD_STREAM_WEBHOOK'),
     ],
 ];
