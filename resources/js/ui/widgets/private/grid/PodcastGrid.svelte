@@ -82,7 +82,7 @@
                     <div class="aspect-square">
                         <img
                             class="w-full h-full object-cover object-center rounded-lg"
-                            src="https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder"
+                            src="https://placehold.co/500x500?text=Rede+Akiba"
                             alt=""
                             aria-hidden="true"
                         />

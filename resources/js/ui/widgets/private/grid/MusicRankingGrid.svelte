@@ -48,14 +48,14 @@
                                 <Preview
                                     standard="w-24 h-24 rounded-lg"
                                     view="w-24 h-24"
-                                    src={item.ranking.image}
+                                    src={item.ranking.image ?? "https://placehold.co/500x500?text=Rede+Akiba"}
                                     oninput={(event) =>
                                         submit(event, item.uuid)}
                                 />
                             {:else}
-                                <img
+                                      <img
                                     class="w-24 h-24 rounded-lg"
-                                    src={item.ranking.image}
+                                    src={item.ranking.image ?? "https://placehold.co/500x500?text=Rede+Akiba"}
                                     alt={item.name}
                                 />
                             {/if}

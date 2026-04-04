@@ -172,7 +172,7 @@
                     >
                         <img
                             class="w-full h-65 object-cover aspect-square brightness-50"
-                            src="https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder"
+                            src="https://placehold.co/500x500?text=Rede+Akiba"
                             alt=""
                             aria-hidden="true"
                         />
