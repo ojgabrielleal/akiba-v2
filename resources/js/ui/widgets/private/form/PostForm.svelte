@@ -38,6 +38,7 @@
             uuid,
             name,
         }));
+
         while (categories.length < 2) {
             categories.push({ uuid: null, name: null });
         }
@@ -48,6 +49,7 @@
             name,
             url,
         }));
+
         while (references.length < 2) {
             references.push({ uuid: null, name: null, url: null });
         }
