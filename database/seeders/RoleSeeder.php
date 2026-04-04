@@ -62,18 +62,88 @@ class RoleSeeder extends Seeder
 
         
         foreach($roles as $item){
-            Role::create([
+            $role = Role::create([
                 'name' => $item['name'],
                 'label' => $item['label'],
                 'description' => $item['description'],
                 'weight' => $item['weight'],
             ]);
+
+            // Assign permissions based on role name
+            $this->assignPermissionsToRole($role);
+        }
+    }
+
+    /**
+     * Assign specific permissions to a role.
+     */
+    private function assignPermissionsToRole(Role $role): void
+    {
+        $permissions = [];
+
+        $common = [
+            'dashboard.view', 'warning.view', 'media.view'
+        ];
+
+        $activityTasks = [
+            'activity.list', 'activity.view', 'activity.participate',
+            'task.list', 'task.view', 'task.complete'
+        ];
+
+        $community = [
+            'poll.list', 'poll.view', 'poll.create.vote'
+        ];
+
+        switch ($role->name) {
+            case 'administrator':
+            case 'developer':
+                // All permissions
+                $permissions = Permission::all()->pluck('name')->toArray();
+                break;
+
+            case 'locutioner':
+                $permissions = array_merge($common, $activityTasks, $community, [
+                    'locution.view', 'radio.view', 'locution.start', 'locution.finish',
+                    'songrequest.list', 'songrequest.reproduce', 'songrequest.cancel', 'songrequest.toggle',
+                    'program.list', 'program.view', 'music.list', 'music.update', 'music.set.ranking',
+                    'listener.month.view', 'listener.month.set', 'user.view.own'
+                ]);
+                break;
+
+            case 'writer':
+                $permissions = array_merge($common, $activityTasks, $community, [
+                    'post.view', 'post.list', 'post.create', 'post.update.own', 'post.list.own',
+                    'review.list', 'review.view', 'review.create', 'review.update', 'user.view.own'
+                ]);
+                break;
+
+            case 'social_media':
+                $permissions = array_merge($common, $community, [
+                    'marketing.view', 'post.list', 'post.view', 'post.create', 'post.update',
+                    'event.list', 'event.view', 'event.create', 'event.update',
+                    'poll.create', 'poll.update', 'poll.deactivate'
+                ]);
+                break;
+
+            case 'marketing':
+                $permissions = array_merge($common, [
+                    'marketing.view', 'repository.list', 'repository.view', 'repository.create',
+                    'repository.update', 'repository.deactivate', 'event.list', 'event.view',
+                    'event.create', 'event.update'
+                ]);
+                break;
+
+            case 'podcaster':
+                $permissions = array_merge($common, [
+                    'podcast.view', 'podcast.list', 'podcast.view', 'podcast.create',
+                    'podcast.update', 'podcast.deactivate'
+                ]);
+                break;
         }
 
-        $role = Role::where('name', 'administrator')->first();
-        $permissions = Permission::all();
-        foreach($permissions as $item){
-            $role->permissions()->attach($item->id);
+        if (!empty($permissions)) {
+            $permissionIds = Permission::whereIn('name', $permissions)->pluck('id');
+            $role->permissions()->attach($permissionIds);
         }
     }
 }
