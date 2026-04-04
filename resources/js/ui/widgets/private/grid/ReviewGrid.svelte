@@ -13,7 +13,7 @@
         <div class="gap-6 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5">
             {#if reviews.data.length > 0}
                 {#each reviews.data as item}
-                    <article class='w-full h-[14rem] rounded-lg p-4 relative bg-blue-skywave'>
+                    <article class='w-full h-56 rounded-lg p-4 relative bg-blue-skywave'>
                         <div class="font-noto-sans text-lg text-neutral-aurora line-clamp-5 uppercase">
                             {item.title}
                         </div>
@@ -30,7 +30,7 @@
                     </article>
                 {/each}
             {:else}
-                <article class="w-full h-[14rem] rounded-lg p-4 relative bg-blue-cerulean opacity-50">
+                <article class="w-full h-56 rounded-lg p-4 relative bg-blue-cerulean opacity-50">
                     <div class="font-noto-sans text-lg text-neutral-aurora line-clamp-5 uppercase">
                         Meu bem esse pessoal da akiba são um bando de preguiçosos! Cade as reviews?
                     </div>
