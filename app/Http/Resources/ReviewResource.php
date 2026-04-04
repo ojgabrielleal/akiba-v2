@@ -23,7 +23,7 @@ class ReviewResource extends JsonResource
                     'name' => $item->author->name,
                     'nickname' => $item->author->nickname,
                     'avatar' => $item->author->avatar,
-                    'gender' => $this->author->gender
+                    'gender' => $item->author->gender
                 ],
             ]),
         ];

@@ -68,7 +68,7 @@
                         src={listenermonth.data.avatar || "https://placehold.co/500x500?text=Rede+Akiba"}
                         alt="Imagem do ouvinte"
                         class="w-36 h-36 bg-gray-600 rounded-lg"
-                    />
+                />
                 </div>
                 {#if can.set}
                     <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic" on:click={() => { 
