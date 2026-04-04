@@ -2,61 +2,61 @@
     {
         "name": "Dashboard",
         "icon": "/svg/default/dashboard.svg",
-        "permission": "dashboard.view",
+        "permission": "dashboard.module.view",
         "address": "/painel/dashboard"
     },
     {
         "name": "Materias",
         "icon": "/svg/default/materials.svg",
-        "permission": "post.view",
+        "permission": "post.module.view",
         "address": "/painel/materias"
     },
     {
         "name": "Locução",
         "icon": "/svg/default/locution.svg",
-        "permission": "locution.view",
+        "permission": "locution.module.view",
         "address": "/painel/locucao"
     },
     {
         "name": "Rádio",
         "icon": "/svg/default/radio.svg",
-        "permission": "radio.view",
+        "permission": "radio.module.view",
         "address": "/painel/radio"
     },
     {
         "name": "Podcasts",
         "icon": "/svg/default/podcasts.svg",
-        "permission": "podcast.view",
+        "permission": "podcast.module.view",
         "address": "/painel/podcasts"
     },
     {
         "name": "Marketing",
         "icon": "/svg/default/marketing.svg",
-        "permission": "marketing.view",
+        "permission": "marketing.module.view",
         "address": "/painel/marketing"
     },
     {
         "name": "Mídias",
         "icon": "/svg/default/media.svg",
-        "permission": "media.view",
+        "permission": "media.module.view",
         "address": "/painel/medias"
     },
     {
         "name": "Administração",
         "icon": "/svg/default/adms.svg",
-        "permission": "administration.view",
+        "permission": "administration.module.view",
         "address": "/painel/adms"
     },
     {
         "name": "Logs",
         "icon": "/svg/default/logs.svg",
-        "permission": "log.view",
+        "permission": "log.module.view",
         "address": "/painel/logs"
     },
     {
         "name": "Avisos",
         "icon": "/svg/default/alerts.svg",
-        "permission": "warning.view",
+        "permission": "warning.module.view",
         "address": "/painel/alerts"
     }
 ]
