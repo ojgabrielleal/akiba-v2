@@ -114,9 +114,9 @@ class LocutionController extends Controller
         $selected = collect($auto->phrases)->random();
 
         $auto->onair()->create([
-            'type'   => 'automatic',
+            'type' => 'automatic',
             'phrase' => $selected['phrase'],
-            'icon'  => $selected['image'],
+            'icon' => $selected['image'],
         ]);
 
         SongRequest::where('onair_id', $onair->id)

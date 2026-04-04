@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Traits;
-use Inertia\Inertia;
 
-trait HasFlashMessages
+trait HasFlashMessages  
 {
     public function flashMessage(string $action)
     {
@@ -65,7 +64,7 @@ trait HasFlashMessages
         $base = $messages[$action] ?? $messages['save'];
         $final =  $base['message'];
 
-        return redirect()->back()->withInput()->with('flash', [
+        return redirect()->to(url()->previous())->with('flash', [
             'icon' => $base['icon'],
             'message' => $final,
         ]);
