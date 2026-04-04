@@ -8,10 +8,10 @@
 
     $: ({ permissions } = $page.props);
 
-    let permissions = {
-        create: hasPermission('role.create'),
-        update: hasPermission('role.update'),
-    }
+    let can = {
+        create: hasPermission("role.create"),
+        update: hasPermission("role.update"),
+    };
 
     let form = useForm({
         label: null,
@@ -20,9 +20,8 @@
         permissions: [],
     });
 
-    $:if(identifier){
-        axios.get(`/painel/adms/roles/${identifier}`)
-        .then(function(response){
+    $: if (identifier) {
+        axios.get(`/painel/adms/roles/${identifier}`).then(function (response) {
             const data = response.data.data;
 
             $form.label = data.label;
@@ -33,18 +32,16 @@
     }
 
     const submit = () => {
-        const method = identifier ? 
-            'patch' : 
-            'post';
-        const url = identifier ? 
-            `/painel/adms/roles/${identifier}` : 
-            '/painel/adms/roles';
-            
+        const method = identifier ? "patch" : "post";
+        const url = identifier
+            ? `/painel/adms/roles/${identifier}`
+            : "/painel/adms/roles";
+
         $form[method](url, {
             preserveScroll: true,
             onSuccess: () => close(),
         });
-    }
+    };
 </script>
 
 <form on:submit|preventDefault={submit}>
@@ -52,10 +49,10 @@
         <label class="text-md text-gray-700 font-noto-sans block mb-1" for="label">
             Nome
         </label>
-        <input 
-            type="text" 
-            name="label" 
-            id="label" 
+        <input
+            type="text"
+            name="label"
+            id="label"
             class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
             bind:value={$form.label}
             required
@@ -65,10 +62,10 @@
         <label class="text-md text-gray-700 font-noto-sans block mb-1" for="weight">
             Peso
         </label>
-        <input 
-            type="number" 
-            name="weight" 
-            id="weight" 
+        <input
+            type="number"
+            name="weight"
+            id="weight"
             class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
             bind:value={$form.weight}
             required
@@ -81,21 +78,20 @@
         <label class="text-md text-gray-700 font-noto-sans block mb-1" for="description">
             Descrição
         </label>
-        <textarea 
-            type="text" 
-            name="description" 
-            id="description" 
+        <textarea
+            type="text"
+            name="description"
+            id="description"
             rows="3"
             class="w-full bg-white font-noto-sans text-md rounded-lg outline-none py-2 px-4 border border-gray-400"
             bind:value={$form.description}
         ></textarea>
     </div>
-
     <div class="mb-3">
         <label class="text-md text-gray-700 font-noto-sans block mb-1" for="permissions">
             Permissões
-        </label>        
-        <select 
+        </label>
+        <select
             id="permissions"
             name="permissions"
             class="w-full h-60 bg-white font-noto-sans text-md rounded-lg outline-none py-2 px-4 border border-gray-400"
@@ -112,9 +108,9 @@
             Pressione CTRL para manipular as permissões
         </div>
     </div>
-    {#if permissions.create || permissions.update}
+    {#if can.create || can.update}
         <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
-            {identifier ? 'Atualizar' : 'Cadastrar'} 
+            {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}
 </form>

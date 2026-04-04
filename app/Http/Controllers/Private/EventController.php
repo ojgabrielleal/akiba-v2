@@ -27,6 +27,9 @@ class EventController extends Controller
 
     public function indexEvents()
     {
+        if (request()->user()->cannot('viewAny', Event::class)) {
+            return null;
+        }
         return EventResource::collection(
             Event::active()
                 ->with('author')
@@ -36,6 +39,9 @@ class EventController extends Controller
 
     public function showEvent(Event $event)
     {
+        if (request()->user()->cannot('view', $event)) {
+            return null;
+        }
         return Inertia::render($this->render, [
             'event' => new EventResource($event->load('author')),
             'events' => $this->indexEvents()
@@ -44,6 +50,9 @@ class EventController extends Controller
 
     public function createEvent(Request $request)
     {
+        if ($request->user()->cannot('create', Event::class)) {
+            return null;
+        }
         $request->validate([
             'title' => 'required:events,title',
             'image' => 'required',
@@ -68,6 +77,9 @@ class EventController extends Controller
 
     public function updateEvent(Request $request, Event $event)
     {
+        if ($request->user()->cannot('update', $event)) {
+            return null;
+        }
         $event->fill([
             'image' => $this->image->store('events', $request->file('image'), 'public', $event->image),
             'cover' => $this->image->store('events', $request->file('cover'), 'public', $event->cover),

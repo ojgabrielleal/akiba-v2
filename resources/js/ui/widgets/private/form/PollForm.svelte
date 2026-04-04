@@ -6,51 +6,50 @@
     import axios from "axios";
     import { hasPermission } from "@/utils";
 
-    let permissions = {
-        create: hasPermission('poll.create'),
-        update: hasPermission('poll.update'),
-    }
+    let can = {
+        create: hasPermission("poll.create"),
+        update: hasPermission("poll.update"),
+    };
 
     let form = useForm({
         question: null,
         option_one: null,
-        option_two: null, 
+        option_two: null,
         option_three: null,
-        option_four: null 
+        option_four: null,
     });
-    
-    if(identifier){
-        axios.get(`/painel/medias/poll/${identifier}`)
-        .then((response) => {
-            const data = response.data.data
+
+    if (identifier) {
+        axios.get(`/painel/medias/poll/${identifier}`).then((response) => {
+            const data = response.data.data;
 
             $form.question = data.question;
-            $form.option_one = data.options[0].option
-            $form.option_two = data.options[1].option
-            $form.option_three = data.options[2].option
-            $form.option_four = data.options[3].option
+            $form.option_one = data.options[0].option;
+            $form.option_two = data.options[1].option;
+            $form.option_three = data.options[2].option;
+            $form.option_four = data.options[3].option;
         });
     }
-    
+
     const submit = () => {
-        const method = identifier ? 
-            'patch' : 
-            'post';
-        const url = identifier ? 
-            `/painel/medias/poll/${identifier}` : 
-            '/painel/medias/poll';
-            
+        const method = identifier ? "patch" : "post";
+        const url = identifier
+            ? `/painel/medias/poll/${identifier}`
+            : "/painel/medias/poll";
+
         $form[method](url, {
             preserveScroll: true,
             onSuccess: () => close(),
         });
-    }
-
+    };
 </script>
 
 <form on:submit|preventDefault={submit}>
     <div class="mb-4">
-        <label for="question" class="text-md text-gray-700 font-noto-sans block mb-1">
+        <label
+            for="question"
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+        >
             Pergunta
         </label>
         <input
@@ -64,7 +63,10 @@
 
     <div class="px-4 mb-4 rounded-lg border border-gray-400">
         <div class="mt-5 mb-4">
-            <label for="option_one" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="option_one"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 1º Opção
             </label>
             <input
@@ -78,7 +80,10 @@
             />
         </div>
         <div class="mb-4">
-            <label for="option_two" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="option_two"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 2º Opção
             </label>
             <input
@@ -92,7 +97,10 @@
             />
         </div>
         <div class="mb-4">
-            <label for="option_three" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="option_three"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 3º Opção
             </label>
             <input
@@ -106,7 +114,10 @@
             />
         </div>
         <div class="mb-6">
-            <label for="option_four" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="option_four"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 4º Opção
             </label>
             <input
@@ -120,9 +131,12 @@
             />
         </div>
     </div>
-    {#if permissions.create || permissions.update}
-        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
-            {identifier ? 'Atualizar' : 'Cadastrar'}
+    {#if can.create || can.update}
+        <button
+            type="submit"
+            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase"
+        >
+            {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}
 </form>

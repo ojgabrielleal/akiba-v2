@@ -6,10 +6,10 @@
     import axios from "axios";
     import { hasPermission } from "@/utils";
 
-    let permissions = {
-        'create': hasPermission('activity.create'),
-        'update': hasPermission('activity.update'),
-    }
+    let can = {
+        create: hasPermission("activity.create"),
+        update: hasPermission("activity.update"),
+    };
 
     let form = useForm({
         title: null,
@@ -19,56 +19,59 @@
         content: null,
     });
 
-    $: if(identifier){
-        axios.get(`/painel/adms/activity/${identifier}`)
-            .then((response) => {
-                const data = response.data.data;
+    $: if (identifier) {
+        axios.get(`/painel/adms/activity/${identifier}`).then((response) => {
+            const data = response.data.data;
 
-                $form.title = data.title;
-                $form.limit = data.limit;
-                $form.hour = data.hour;
-                $form.date = data.date;
-                $form.content = data.content;
-            });
+            $form.title = data.title;
+            $form.limit = data.limit;
+            $form.hour = data.hour;
+            $form.date = data.date;
+            $form.content = data.content;
+        });
     }
 
     const submit = () => {
-        const method = identifier ? 
-            'patch' : 
-            'post';
-        const url = identifier ? 
-            `/painel/adms/activity/${identifier}` : 
-            '/painel/adms/activity';
-            
+        const method = identifier ? "patch" : "post";
+        const url = identifier
+            ? `/painel/adms/activity/${identifier}`
+            : "/painel/adms/activity";
+
         $form[method](url, {
             preserveScroll: true,
             onSuccess: () => close(),
         });
-    }
+    };
 </script>
 
 <form on:submit|preventDefault={submit}>
     <div class="mb-4">
-        <label for="title" class="text-md text-gray-700 font-noto-sans block mb-1">
+        <label
+            for="title"
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+        >
             Título
         </label>
-        <input 
-            type="text" 
-            id="title" 
-            name="title" 
+        <input
+            type="text"
+            id="title"
+            name="title"
             class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
             bind:value={$form.title}
             required
         />
     </div>
     <div class="mb-4">
-        <label for="limit" class="text-md text-gray-700 font-noto-sans block mb-1">
+        <label
+            for="limit"
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+        >
             Limite
         </label>
-        <input 
-            type="date" 
-            id="limit" 
-            name="limit" 
+        <input
+            type="date"
+            id="limit"
+            name="limit"
             class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
             bind:value={$form.limit}
             required
@@ -79,13 +82,16 @@
     </div>
     <div class="grid grid-cols-2 gap-3">
         <div class="mb-4">
-            <label for="hour" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="hour"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 Hora
             </label>
-            <input 
-                type="time" 
-                id="hour" 
-                name="hour" 
+            <input
+                type="time"
+                id="hour"
+                name="hour"
                 class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
                 bind:value={$form.hour}
                 required
@@ -95,13 +101,16 @@
             </div>
         </div>
         <div class="mb-4">
-            <label for="date" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="date"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 Data
             </label>
-            <input 
-                type="date" 
-                id="date" 
-                name="date" 
+            <input
+                type="date"
+                id="date"
+                name="date"
                 class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
                 bind:value={$form.date}
                 required
@@ -112,21 +121,27 @@
         </div>
     </div>
     <div class="mb-4">
-        <label for="content" class="text-md text-gray-700 font-noto-sans block mb-1">
+        <label
+            for="content"
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+        >
             Conteúdo
         </label>
-        <textarea 
-            id="content" 
-            name="content" 
+        <textarea
+            id="content"
+            name="content"
             rows="3"
             class="w-full bg-white font-noto-sans text-md rounded-lg outline-none py-2 px-4 border border-gray-400"
             bind:value={$form.content}
             required
         ></textarea>
     </div>
-    {#if permissions.create || permissions.update}
-        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
-            {identifier ? 'Atualizar' : 'Cadastrar'} 
+    {#if can.create || can.update}
+        <button
+            type="submit"
+            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase"
+        >
+            {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}
 </form>

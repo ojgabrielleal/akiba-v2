@@ -29,6 +29,9 @@ class AdministrationController extends Controller
 
     public function indexActivities()
     {
+        if (request()->user()->cannot('viewAny', Activity::class)) {
+            return null;
+        }
         return ActivityResource::collection(
             Activity::with(['author', 'confirmations'])
                 ->get()
@@ -37,6 +40,9 @@ class AdministrationController extends Controller
 
     public function indexRoles()
     {
+        if (request()->user()->cannot('viewAny', Role::class)) {
+            return null;
+        }
         return RoleResource::collection(
             Role::with(['permissions', 'members'])->get()
         );
@@ -44,6 +50,9 @@ class AdministrationController extends Controller
 
     public function indexPermissions()
     {
+        if (request()->user()->cannot('viewAny', Role::class)) {
+            return null;
+        }
         return PermissionResource::collection(
             Permission::all()
         );
@@ -51,6 +60,9 @@ class AdministrationController extends Controller
 
     public function indexUsers()
     {
+        if (request()->user()->cannot('viewAny', User::class)) {
+            return null;
+        }
         return UserResource::collection(
             User::active()
                 ->with(['roles'])
@@ -60,21 +72,34 @@ class AdministrationController extends Controller
 
     public function showRole(Role $role)
     {
+        if (request()->user()->cannot('view', $role)) {
+            return null;
+        }
         return new RoleResource($role);
     }
 
     public function showUser(User $user)
     {
+        if (request()->user()->cannot('view', $user)) {
+            return null;
+        }
         return new UserResource($user);
     }
 
     public function showActivity(Activity $activity)
     {
+        if (request()->user()->cannot('view', $activity)) {
+            return null;
+        }
         return new ActivityResource($activity->load(['author', 'confirmations', 'calendar']));
     }
 
     public function createRole(Request $request)
     {
+        if ($request->user()->cannot('create', Role::class)) {
+            return null;
+        }
+
         $request->validate([
             'label' => 'required|unique:roles,label',
             'weight' => 'required',
@@ -100,6 +125,9 @@ class AdministrationController extends Controller
 
     public function createActivity(Request $request)
     {
+        if ($request->user()->cannot('create', Activity::class)) {
+            return null;
+        }
         $request->validate([
             'title' => 'required',
             'limit' => 'required',
@@ -126,6 +154,9 @@ class AdministrationController extends Controller
 
     public function createUser(Request $request)
     {
+        if ($request->user()->cannot('create', User::class)) {
+            return null;
+        }
         $request->validate([
             'username' => 'required|unique:users,username',
             'password' => 'required',
@@ -156,23 +187,27 @@ class AdministrationController extends Controller
             ['is_like' => false, 'content' => null],
         ];
 
-        User::create([
+        $user = User::create([
             'username' => $request->input('username'),
             'password' => $request->input('password'),
             'name' => $request->input('name'),
             'avatar' => $avatar,
             'nickname' => $request->input('nickname'),
             'gender' => $request->input('gender'),
-        ])
-            ->roles()->attach($roles)
-            ->socials()->createMany($socials)
-            ->preferences()->createMany($preferences);
+        ]);
+
+        $user->roles()->attach($roles);
+        $user->socials()->createMany($socials);
+        $user->preferences()->createMany($preferences);
 
         return $this->flashMessage('save');
     }
 
     public function updateUserAccess(Request $request, User $user)
     {
+        if ($request->user()->cannot('updateAuthority', $user)) {
+            return null;
+        }
         $request->validate([
             'password' => 'required',
             'roles' => 'required|array',
@@ -193,6 +228,9 @@ class AdministrationController extends Controller
 
     public function updateRole(Request $request, Role $role)
     {
+        if ($request->user()->cannot('update', $role)) {
+            return null;
+        }
         $role->fill([
             'label' => $request->input('label'),
             'name' => Str::slug($request->input('label')),
@@ -217,6 +255,9 @@ class AdministrationController extends Controller
 
     public function updateActivity(Request $request, Activity $activity)
     {
+        if ($request->user()->cannot('update', $activity)) {
+            return null;
+        }
         $activity->fill([
             'title' => $request->input('title'),
             'limit' => $request->input('limit'),
@@ -238,6 +279,9 @@ class AdministrationController extends Controller
 
     public function deactivateUser(User $user)
     {
+        if (request()->user()->cannot('delete', $user)) {
+            return null;
+        }
         $user->update([
             'is_active' => false,
         ]);
@@ -247,6 +291,9 @@ class AdministrationController extends Controller
 
     public function removeRole(Role $role)
     {
+        if (request()->user()->cannot('delete', $role)) {
+            return null;
+        }
         if ($role->members()->count() > 0) {
             throw new RoleHasMembersException();
         }

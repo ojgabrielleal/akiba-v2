@@ -33,6 +33,9 @@ class RadioController extends Controller
 
     public function indexStreamers()
     {
+        if (request()->user()->cannot('viewAny', User::class)) {
+            return null;
+        }
         return UserResource::collection(
             User::get()
         );
@@ -40,6 +43,9 @@ class RadioController extends Controller
 
     public function indexPrograms()
     {
+        if (request()->user()->cannot('viewAny', Program::class)) {
+            return null;
+        }
         return ProgramResource::collection(
             Program::with(['host', 'schedules'])
                 ->active()
@@ -49,6 +55,9 @@ class RadioController extends Controller
 
     public function indexMusicRanking()
     {
+        if (request()->user()->cannot('viewAny', Music::class)) {
+            return null;
+        }
         return MusicResource::collection(
             Music::orderBy('song_requests_total', 'desc')
                 ->limit(3)
@@ -58,6 +67,9 @@ class RadioController extends Controller
 
     public function showListenerMonth()
     {
+        if (request()->user()->cannot('listener.month.view')) {
+            return null;
+        }
         return new ListenerMonthResource(
             ListenerMonth::first()
         );
@@ -65,6 +77,9 @@ class RadioController extends Controller
 
     public function showListenerMonthFound()
     {
+        if (request()->user()->cannot('listener.month.view')) {
+            return null;
+        }
         return new ListenerMonthResource(
             ListenerMonth::mostActiveListenerOfCurrentMonth()
         );
@@ -72,11 +87,17 @@ class RadioController extends Controller
 
     public function showProgram(Program $program)
     {
+        if (request()->user()->cannot('view', $program)) {
+            return null;
+        }
         return new ProgramResource($program->load('host', 'schedules'));
     }
 
     public function updateProgram(Request $request, Program $program)
     {
+        if ($request->user()->cannot('update', $program)) {
+            return null;
+        }
         $user = User::where('uuid', $request->input('user'))->first();
 
         $program->fill([
@@ -112,6 +133,9 @@ class RadioController extends Controller
 
     public function updateMusicRanking(Request $request, Music $music)
     {
+        if ($request->user()->cannot('update', $music)) {
+            return null;
+        }
         $music->update([
             'image_ranking' => $this->image->store('musics/ranking', $request->file('image_ranking'), 'public', $music->image_ranking),
         ]);
@@ -121,6 +145,9 @@ class RadioController extends Controller
 
     public function createListenerMonth(Request $request)
     {
+        if ($request->user()->cannot('listener.month.set')) {
+            return null;
+        }
         $request->validate([
             'avatar' => 'required',
         ]);
@@ -139,6 +166,9 @@ class RadioController extends Controller
 
     public function createProgram(Request $request)
     {
+        if ($request->user()->cannot('create', Program::class)) {
+            return null;
+        }
         $user = User::where('uuid', $request->input('user'))->first();
 
         $program = Program::create([
@@ -165,6 +195,9 @@ class RadioController extends Controller
 
     public function deactivateProgram(Program $program)
     {
+        if (request()->user()->cannot('delete', $program)) {
+            return null;
+        }
         $program->update([
             'is_active' => false
         ]);
@@ -174,6 +207,9 @@ class RadioController extends Controller
 
     public function generateMusicRanking()
     {
+        if (request()->user()->cannot('update', Music::class)) {
+            return null;
+        }
         Music::ranking()->update([
             'in_ranking' => false
         ]);

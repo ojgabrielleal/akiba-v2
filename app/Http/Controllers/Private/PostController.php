@@ -29,13 +29,11 @@ class PostController extends Controller
 
     public function indexPosts()
     {
-        /**
-         * TODO: Refactor when implementing policies, move permission logic into the policy. 
-         */
-        $user = $this->getUserLogged();
-        $canListOwn = $user['permissions']->contains('name', 'post.list.own');
+        if (request()->user()->cannot('viewAny', Post::class)) {
+            return null;
+        }
 
-        if ($canListOwn) {
+        if (!request()->user()->hasPermission('post.list')) {
             return PostResource::collection(
                 Post::mine()
                     ->with('author')
@@ -53,6 +51,9 @@ class PostController extends Controller
 
     public function showPost(Post $post)
     {
+        if (request()->user()->cannot('view', $post)) {
+            return null;
+        }
 
         return Inertia::render($this->render, [
             'post' => new PostResource(
@@ -64,6 +65,10 @@ class PostController extends Controller
 
     public function createPost(Request $request)
     {
+        if ($request->user()->cannot('create', Post::class)) {
+            return null;
+        }
+
         $request->validate([
             "type" => 'required',
             "title" => 'required',
@@ -101,6 +106,10 @@ class PostController extends Controller
 
     public function updatePost(Request $request, Post $post)
     {
+        if ($request->user()->cannot('update', $post)) {
+            return null;
+        }
+
         $post->fill([
             'type' => $request->input('type', $post->type),
             'title' => $request->input('title', $post->title),

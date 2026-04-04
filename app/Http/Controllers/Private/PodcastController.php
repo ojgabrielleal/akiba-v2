@@ -28,6 +28,9 @@ class PodcastController extends Controller
 
     public function indexPodcasts()
     {
+        if (request()->user()->cannot('viewAny', Podcast::class)) {
+            return null;
+        }
         return PodcastResource::collection(
             Podcast::active()
                 ->with('author')
@@ -37,6 +40,9 @@ class PodcastController extends Controller
 
     public function showPodcast(Podcast $podcast)
     {
+        if (request()->user()->cannot('view', $podcast)) {
+            return null;
+        }
         return Inertia::render($this->render, [
             'podcasts' => $this->indexPodcasts(),
             'podcast' => new PodcastShowResource($podcast->load('author')),
@@ -45,6 +51,9 @@ class PodcastController extends Controller
 
     public function createPodcast(Request $request)
     {
+        if ($request->user()->cannot('create', Podcast::class)) {
+            return null;
+        }
         $request->validate([
             'image' => 'required',
             'season' => 'required|unique:podcasts,season',
@@ -71,6 +80,9 @@ class PodcastController extends Controller
 
     public function updatePodcast(Request $request, Podcast $podcast)
     {
+        if ($request->user()->cannot('update', $podcast)) {
+            return null;
+        }
         $podcast->fill([
             'image' => $this->image->store('podcasts', $request->file('image'), 'public', $podcast->image),
             'season' => $request->input('season', $podcast->season),
@@ -90,6 +102,9 @@ class PodcastController extends Controller
 
     public function deactivatePodcast(Podcast $podcast)
     {
+        if (request()->user()->cannot('delete', $podcast)) {
+            return null;
+        }
         $podcast->update([
             'is_active' => false,
         ]);

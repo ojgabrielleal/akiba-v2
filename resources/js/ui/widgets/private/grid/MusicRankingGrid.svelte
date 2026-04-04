@@ -8,7 +8,7 @@
 
     $: ({ musicranking } = $page.props);
 
-    let permissions = {
+    let can = {
         update: hasPermission("music.ranking.update"),
         set: hasPermission("music.set.ranking"),
     };
@@ -25,9 +25,13 @@
     };
 
     const setRanking = () => {
-        router.post("/painel/radio/music-ranking", {}, {
-            preserveScroll: true,
-        });
+        router.post(
+            "/painel/radio/music-ranking",
+            {},
+            {
+                preserveScroll: true,
+            },
+        );
     };
 </script>
 
@@ -40,7 +44,7 @@
                         class="flex flex-wrap lg:flex-nowrap items-center gap-5"
                     >
                         <div class="flex items-center gap-5">
-                            {#if permissions.update}
+                            {#if can.update}
                                 <Preview
                                     standard="w-24 h-24 rounded-lg"
                                     view="w-24 h-24"
@@ -125,7 +129,7 @@
                 </article>
             {/if}
         </div>
-        {#if musicranking.data.length >= 3 && permissions.set}
+        {#if musicranking.data.length >= 3 && can.set}
             <div class="flex justify-end mt-5">
                 <button
                     on:click={() => setRanking()}

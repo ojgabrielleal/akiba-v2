@@ -6,10 +6,10 @@
 
     $: ({ user, review } = $page.props);
 
-    let permissions = {
-        create: hasPermission('review.create'),
-        update: hasPermission('review.update'),
-    }
+    let can = {
+        create: hasPermission("review.create"),
+        update: hasPermission("review.update"),
+    };
 
     let form = useForm({
         _method: "POST",
@@ -17,22 +17,22 @@
         title: null,
         sinopse: null,
         cover: null,
-        review: {uuid: null, content: null},
+        review: { uuid: null, content: null },
     });
 
-    $: if(review){
-        $form._method = "PATCH",
-        $form.image = review.data.image,
-        $form.title = review.data.title,
-        $form.sinopse = review.data.sinopse,
-        $form.cover = review.data.cover,
-        $form.review = { uuid: null, content: "" }
+    $: if (review) {
+        ($form._method = "PATCH"),
+            ($form.image = review.data.image),
+            ($form.title = review.data.title),
+            ($form.sinopse = review.data.sinopse),
+            ($form.cover = review.data.cover),
+            ($form.review = { uuid: null, content: "" });
     }
-    
+
     const submit = () => {
-        let url = review ? 
-            `/painel/reviews/${review?.data.uuid}` : 
-            `/painel/reviews`       
+        let url = review
+            ? `/painel/reviews/${review?.data.uuid}`
+            : `/painel/reviews`;
 
         $form.post(url, {
             preserveState: review,
@@ -41,14 +41,20 @@
                 review ? null : $form.reset();
             },
         });
-    }
+    };
 
     const reviews = () => {
-        let verifyExistReview = review?.data.reviews.some((item) => item.author.uuid === user.uuid);
+        let verifyExistReview = review?.data.reviews.some(
+            (item) => item.author.uuid === user.uuid,
+        );
 
-        if(verifyExistReview){
-            let reviewExisting = review.data.reviews.find((item) => item.author.uuid === user.uuid);
-            let reviewRest = review.data.reviews.filter((item) => item.author.uuid !== user.uuid);
+        if (verifyExistReview) {
+            let reviewExisting = review.data.reviews.find(
+                (item) => item.author.uuid === user.uuid,
+            );
+            let reviewRest = review.data.reviews.filter(
+                (item) => item.author.uuid !== user.uuid,
+            );
 
             $form.review.uuid = reviewExisting.uuid;
             $form.review.content = reviewExisting.content;
@@ -57,49 +63,66 @@
 
         let reviewGhost = {
             uuid: null,
-            content: 'Escreva o seu primeiro review',
+            content: "Escreva o seu primeiro review",
             author: {
                 uuid: user.uuid,
                 name: user.name,
                 nickname: user.nickname,
                 avatar: user.avatar,
-            }
-        }
+            },
+        };
 
         $form.review.uuid = reviewGhost.uuid;
         $form.review.content = reviewGhost.content;
         return [reviewGhost, ...review?.data.reviews];
-    }
+    };
 </script>
 
 <Section title={review ? "Atualizar review" : "Criar review"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
-        <a preserveState={false} href="/painel/materias" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <a
+            preserveState={false}
+            href="/painel/materias"
+            class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
+        >
             Matérias
         </a>
-        <a preserveState={false} href="/painel/reviews" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <a
+            preserveState={false}
+            href="/painel/reviews"
+            class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
+        >
             Reviews
         </a>
-        <a preserveState={false} href="/painel/eventos" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <a
+            preserveState={false}
+            href="/painel/eventos"
+            class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
+        >
             Eventos
         </a>
-    </div>        
+    </div>
     <form on:submit|preventDefault={submit} class="mt-10 xl:mt-15">
         <div class="grid grid-cols-1 xl:grid-cols-[22rem_1fr] gap-5">
             <div class="mb-3">
-                <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-2">
+                <div
+                    class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-2"
+                >
                     Imagem em destaque
                 </div>
-                <Preview 
-                    name="image" 
-                    src={$form.image} 
-                    oninput={event => $form.image = event.target.files[0]} 
+                <Preview
+                    name="image"
+                    src={$form.image}
+                    oninput={(event) => ($form.image = event.target.files[0])}
                     required={!review}
-                />        
+                />
             </div>
             <div>
                 <div class="mb-8">
-                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2" for="title">
+                    <label
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2"
+                        for="title"
+                    >
                         Nome do anime
                     </label>
                     <input
@@ -112,7 +135,10 @@
                     />
                 </div>
                 <div class="mb-8">
-                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2" for="sinopse">
+                    <label
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2"
+                        for="sinopse"
+                    >
                         Sinopse do anime
                     </label>
                     <Wysiwyg
@@ -123,34 +149,50 @@
                     />
                 </div>
                 <div class="mb-8">
-                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2" for="cover">
+                    <label
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2"
+                        for="cover"
+                    >
                         Capa do anime
                     </label>
-                    <Preview 
-                        name="cover" 
+                    <Preview
+                        name="cover"
                         viewobject="object-cover"
-                        src={$form.cover} 
-                        oninput={event => $form.cover = event.target.files[0]} 
+                        src={$form.cover}
+                        oninput={(event) =>
+                            ($form.cover = event.target.files[0])}
                         required={!review}
-                    />   
+                    />
                 </div>
                 <div>
-                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2" for="content">
+                    <label
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2"
+                        for="content"
+                    >
                         Escreva sobre o anime
                     </label>
                     {#if review && reviews()}
                         <div class="flex gap-2 mb-4">
                             {#each reviews() as item}
                                 <div class="relative">
-                                    <button 
-                                        type="button" 
-                                        class={["py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer", 
-                                            {'bg-orange-amber text-neutral-aurora' : item.uuid === $form.review.uuid},
-                                            {'bg-neutral-aurora text-orange-amber' : item.uuid !== $form.review.uuid}
+                                    <button
+                                        type="button"
+                                        class={[
+                                            "py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer",
+                                            {
+                                                "bg-orange-amber text-neutral-aurora":
+                                                    item.uuid ===
+                                                    $form.review.uuid,
+                                            },
+                                            {
+                                                "bg-neutral-aurora text-orange-amber":
+                                                    item.uuid !==
+                                                    $form.review.uuid,
+                                            },
                                         ]}
-                                        on:click={()=>{
-                                            $form.review.uuid = item.uuid
-                                            $form.review.content = item.content; 
+                                        on:click={() => {
+                                            $form.review.uuid = item.uuid;
+                                            $form.review.content = item.content;
                                         }}
                                     >
                                         {item.author.nickname}
@@ -159,18 +201,21 @@
                             {/each}
                         </div>
                     {/if}
-                    <Wysiwyg 
-                        name="content" 
+                    <Wysiwyg
+                        name="content"
                         required
-                        bind:value={$form.review.content} 
+                        bind:value={$form.review.content}
                     />
                 </div>
             </div>
         </div>
         <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10">
-            {#if (permissions.create || permissions.update)}
-                <button type="submit" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
-                    {$form.review.uuid ? 'Atualizar review' : 'Publicar review'} 
+            {#if can.create || can.update}
+                <button
+                    type="submit"
+                    class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase"
+                >
+                    {$form.review.uuid ? "Atualizar review" : "Publicar review"}
                 </button>
             {/if}
         </div>

@@ -9,7 +9,7 @@
 
     $: ({ listenermonth } = $page.props);
 
-    let permissions = {
+    let can = {
         set: hasPermission("listener.month.set"),
     };
 
@@ -91,7 +91,7 @@
                         />
                     </div>
                 {/if}
-                {#if permissions.set}
+                {#if can.set}
                     <button
                         class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic"
                         on:click={() => offcanvasRef.open()}

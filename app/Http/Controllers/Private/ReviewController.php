@@ -27,6 +27,9 @@ class ReviewController extends Controller
 
     public function indexReviews()
     {
+        if (request()->user()->cannot('viewAny', Review::class)) {
+            return null;
+        }
         return ReviewResource::collection(
             Review::with('reviews')->paginate(10)
         );
@@ -34,6 +37,9 @@ class ReviewController extends Controller
 
     public function showReview(Review $review)
     {
+        if (request()->user()->cannot('view', $review)) {
+            return null;
+        }
         return Inertia::render($this->render, [
             "reviews" => $this->indexReviews(),
             'review' => new ReviewResource(
@@ -44,6 +50,9 @@ class ReviewController extends Controller
 
     public function createReview(Request $request)
     {
+        if ($request->user()->cannot('create', Review::class)) {
+            return null;
+        }
         $request->validate([
             'title' => 'required',
             'sinopse' => 'required',
@@ -69,6 +78,9 @@ class ReviewController extends Controller
 
     public function updateReview(Request $request, Review $review)
     {
+        if ($request->user()->cannot('update', $review)) {
+            return null;
+        }
         $review->fill([
             'title' => $request->input('title'),
             'sinopse' => $request->input('sinopse'),

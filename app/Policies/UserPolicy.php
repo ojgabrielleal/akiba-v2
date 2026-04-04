@@ -40,7 +40,11 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->hasPermission('user.update');
+        if ($user->hasPermission('user.view') || $user->hasPermission('user.update')) {
+            return true;
+        }
+
+        return $user->hasPermission('user.view.own') && $user->id === $model->id;
     }
 
     /**

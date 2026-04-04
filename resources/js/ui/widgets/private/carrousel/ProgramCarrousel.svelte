@@ -7,60 +7,103 @@
     import { scrollx, hasPermission } from "@/utils";
 
     $: ({ programs } = $page.props);
-    
-    let permissions = {
-        create: hasPermission('program.create'),
-        update: hasPermission('program.update'),
-        deactivate: hasPermission('program.deactivate'),
-    }
+
+    let can = {
+        create: hasPermission("program.create"),
+        update: hasPermission("program.update"),
+        deactivate: hasPermission("program.deactivate"),
+    };
 
     let offcanvasRef;
     let identifier;
 
     const requestDeactivateProgram = (program) => {
-        router.delete(`/painel/radio/program/${program}`, {}, {
-            preserveScroll: true,
-        });
-    }
+        router.delete(
+            `/painel/radio/program/${program}`,
+            {},
+            {
+                preserveScroll: true,
+            },
+        );
+    };
 </script>
 
-<Offcanvas bind:this={offcanvasRef} title={identifier ? 'Atualizar programa' : 'Cadastrar programa'}>
+<Offcanvas
+    bind:this={offcanvasRef}
+    title={identifier ? "Atualizar programa" : "Cadastrar programa"}
+>
     <div slot="content" let:close>
-        <ProgramForm {identifier} {close}/>
+        <ProgramForm {identifier} {close} />
     </div>
 </Offcanvas>
 
 {#if programs}
-    {#if permissions.create}
+    {#if can.create}
         <div class="flex justify-center mb-5">
-            <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-neutral-aurora" on:click={()=> { 
-                identifier = null; 
-                offcanvasRef.open()
-            }}>
+            <button
+                class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-neutral-aurora"
+                on:click={() => {
+                    identifier = null;
+                    offcanvasRef.open();
+                }}
+            >
                 Cadastrar programa
             </button>
         </div>
     {/if}
     <Section {title} styles="mb-15">
-        <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap mt-5" on:wheel|nonpassive={scrollx} role="group">
+        <div
+            class="scroll-x overflow-x-auto flex gap-5 flex-nowrap mt-5"
+            on:wheel|nonpassive={scrollx}
+            role="group"
+        >
             {#if programs.data.length > 0}
                 {#each programs.data as item}
-                    <div class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+                    <div
+                        class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0"
+                    >
                         <div>
-                            <img src={item.image} alt="" aria-hidden="true" loading="lazy" class='w-60 transition duration-300 ease-in-out'>
+                            <img
+                                src={item.image}
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                                class="w-60 transition duration-300 ease-in-out"
+                            />
                         </div>
                         <div class="flex flex-col gap-5">
-                            {#if permissions.update}
-                                <button class="cursor-pointer" aria-label="atualizar programa" on:click={()=> {
-                                    identifier = item.uuid;
-                                    offcanvasRef.open();
-                                }}>
-                                    <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-blue-skywave" loading="lazy"/>
+                            {#if can.update}
+                                <button
+                                    class="cursor-pointer"
+                                    aria-label="atualizar programa"
+                                    on:click={() => {
+                                        identifier = item.uuid;
+                                        offcanvasRef.open();
+                                    }}
+                                >
+                                    <img
+                                        src="/svg/default/edit.svg"
+                                        alt=""
+                                        aria-hidden="true"
+                                        class="w-[1.2rem] filter-blue-skywave"
+                                        loading="lazy"
+                                    />
                                 </button>
                             {/if}
-                            {#if permissions.deactivate}
-                                <button class="cursor-pointer" aria-label="desativar programa" on:click={()=>requestDeactivateProgram(item.uuid)}>
-                                    <img src="/svg/default/trash.svg" alt="" aria-hidden="true" class="w-[1.2rem] filter-red-crimson" loading="lazy"/>
+                            {#if can.deactivate}
+                                <button
+                                    class="cursor-pointer"
+                                    aria-label="desativar programa"
+                                    on:click={() =>
+                                        requestDeactivateProgram(item.uuid)}
+                                >
+                                    <img
+                                        src="/svg/default/trash.svg"
+                                        alt=""
+                                        aria-hidden="true"
+                                        class="w-[1.2rem] filter-red-crimson"
+                                        loading="lazy"
+                                    />
                                 </button>
                             {/if}
                         </div>

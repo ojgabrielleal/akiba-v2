@@ -8,7 +8,7 @@
     let mobilenavbar = false;
 </script>
 
-<nav class="w-full h-[3rem] bg-neutral-aurora hidden items-center justify-center lg:flex">
+<nav class="w-full h-12 bg-neutral-aurora hidden items-center justify-center lg:flex">
     <div class="cont relative">
         <ul class="flex justify-center items-center gap-10">
             {#each navbar as item}
@@ -35,7 +35,7 @@
 </nav>
 
 <!-- Mobile Navbar -->
-<nav class="w-full h-[4rem] bg-neutral-aurora flex items-center justify-between px-10 lg:hidden">
+<nav class="w-full h-16 bg-neutral-aurora flex items-center justify-between px-10 lg:hidden">
     <button on:click={() => (mobilenavbar = !mobilenavbar)} aria-label="Abrir menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"/>

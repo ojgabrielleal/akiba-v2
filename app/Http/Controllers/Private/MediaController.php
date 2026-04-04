@@ -23,6 +23,9 @@ class MediaController extends Controller
 
     public function indexPolls()
     {
+        if (request()->user()->cannot('viewAny', Poll::class)) {
+            return null;
+        }
         return PollResource::collection(
             Poll::active()->get()
         );
@@ -30,6 +33,9 @@ class MediaController extends Controller
 
     public function indexEvents()
     {
+        if (request()->user()->cannot('viewAny', Event::class)) {
+            return null;
+        }
         return EventResource::collection(
             Event::active()->paginate(10)
         );
@@ -37,17 +43,26 @@ class MediaController extends Controller
 
     public function showPoll(Poll $poll)
     {
+        if (request()->user()->cannot('view', $poll)) {
+            return null;
+        }
         return new PollResource($poll);
     }
 
     public function createVote(PollOption $pollOption)
     {
+        if (request()->user()->cannot('update', $pollOption->poll)) {
+            return null;
+        }
         $pollOption->increment('votes');
         return $this->flashMessage('save');
     }
 
     public function createPoll(Request $request)
     {
+        if ($request->user()->cannot('create', Poll::class)) {
+            return null;
+        }
         $request->validate([
             'question' => 'required|unique:polls,question',
             'option_one' => 'required',
@@ -78,6 +93,9 @@ class MediaController extends Controller
 
     public function updatePoll(Request $request, Poll $poll)
     {
+        if ($request->user()->cannot('update', $poll)) {
+            return null;
+        }
         $request->validate([
             'question' => 'required',
             'option_one' => 'required',
@@ -112,6 +130,9 @@ class MediaController extends Controller
 
     public function deactivatePoll(Poll $poll)
     {
+        if (request()->user()->cannot('delete', $poll)) {
+            return null;
+        }
         $poll->update([
             'is_active' => false,
         ]);
@@ -121,6 +142,9 @@ class MediaController extends Controller
 
     public function deactivateEvent(Event $event)
     {
+        if (request()->user()->cannot('delete', $event)) {
+            return null;
+        }
         $event->update([
             'is_active' => false,
         ]);

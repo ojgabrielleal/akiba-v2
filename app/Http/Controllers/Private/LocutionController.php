@@ -32,6 +32,9 @@ class LocutionController extends Controller
 
     public function indexPrograms()
     {
+        if (request()->user()->cannot('viewAny', Program::class)) {
+            return null;
+        }
         return ProgramResource::collection(
             Program::active()
                 ->where(function ($q) {
@@ -44,6 +47,9 @@ class LocutionController extends Controller
 
     public function indexSongRequests()
     {
+        if (request()->user()->cannot('viewAny', SongRequest::class)) {
+            return null;
+        }
         $onair = Onair::live()->first();
 
         return SongRequestResource::collection(
@@ -60,6 +66,9 @@ class LocutionController extends Controller
 
     public function startLocution(Request $request, Program $program)
     {
+        if ($request->user()->cannot('locution.start')) {
+            return null;
+        }
         $request->validate([
             'phrase' => 'required',
             'icon' => 'required'
@@ -89,6 +98,9 @@ class LocutionController extends Controller
 
     public function finishLocution()
     {
+        if (request()->user()->cannot('locution.finish')) {
+            return null;
+        }
         $onair = Onair::live()->first();
         $onair->update([
             'in_air' => false,
@@ -116,6 +128,9 @@ class LocutionController extends Controller
 
     public function markSongRequestAsPlayed(SongRequest $songRequest)
     {
+        if (request()->user()->cannot('update', $songRequest)) {
+            return null;
+        }
         $songRequest->update([
             'was_reproduced' => true,
         ]);
@@ -126,6 +141,9 @@ class LocutionController extends Controller
 
     public function markSongRequestAsCanceled(SongRequest $songRequest)
     {
+        if (request()->user()->cannot('update', $songRequest)) {
+            return null;
+        }
         $songRequest->update([
             'was_canceled' => true,
         ]);
@@ -137,6 +155,9 @@ class LocutionController extends Controller
 
     public function toggleSongRequestBoxStatus()
     {
+        if (request()->user()->cannot('update', SongRequest::class)) {
+            return null;
+        }
         $onair = Onair::live()->first();
         $onair->update([
             'allows_song_requests' => !$onair->allows_song_requests,

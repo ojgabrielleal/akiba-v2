@@ -27,6 +27,10 @@ class ProfileController extends Controller
 
     public function updateProfile(Request $request, User $user)
     {
+        if ($request->user()->cannot('update', $user)) {
+            abort(403, 'Não autorizado.');
+        }
+        
         $user->fill([
             'avatar' =>  $this->image->store('users', $request->file('avatar'), 'public', $user->avatar),
             'name' => $request->input('name', $user->name),
@@ -66,6 +70,10 @@ class ProfileController extends Controller
 
     public function render(User $user)
     {
+        if (request()->user()->cannot('view', $user)) {
+            abort(403, 'Não autorizado.');
+        }
+        
         return Inertia::render($this->render, [
             'profile' => new UserResource($user)
         ]);
