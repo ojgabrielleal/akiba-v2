@@ -20,16 +20,16 @@ class PermissionSeeder extends Seeder
             | Accessos as páginas Gerais
             |--------------------------------------------------------------------------
             */
-            ['name' => 'dashboard.view', 'label' => '[Dashboard] Visualizar página'],
-            ['name' => 'warning.view', 'label' => '[Avisos] Visualizar página'],
-            ['name' => 'post.view', 'label' => '[Matérias] Visualizar página'],
-            ['name' => 'locution.view', 'label' => '[Locução] Visualizar página'],
-            ['name' => 'radio.view', 'label' => '[Rádio] Visualizar página'],
-            ['name' => 'podcast.view', 'label' => '[Podcasts] Visualizar página'],
-            ['name' => 'marketing.view', 'label' => '[Marketing] Visualizar página'],
-            ['name' => 'media.view', 'label' => '[Mídias] Visualizar página'],
-            ['name' => 'administration.view', 'label' => '[Administração] Visualizar página'],
-            ['name' => 'log.view', 'label' => '[Logs] Visualizar página'],
+            ['name' => 'dashboard.view', 'label' => '[Dashboard] Acesso a página'],
+            ['name' => 'warning.view', 'label' => '[Avisos] Acesso a página'],
+            ['name' => 'post.view', 'label' => '[Matérias] Acesso a página'],
+            ['name' => 'locution.view', 'label' => '[Locução] Acesso a página'],
+            ['name' => 'radio.view', 'label' => '[Rádio] Acesso a página'],
+            ['name' => 'podcast.view', 'label' => '[Podcasts] Acesso a página'],
+            ['name' => 'marketing.view', 'label' => '[Marketing] Acesso a página'],
+            ['name' => 'media.view', 'label' => '[Mídias] Acesso a página'],
+            ['name' => 'administration.view', 'label' => '[Administração] Acesso a página'],
+            ['name' => 'log.view', 'label' => '[Logs] Acesso a página'],
 
             /*
             |--------------------------------------------------------------------------
