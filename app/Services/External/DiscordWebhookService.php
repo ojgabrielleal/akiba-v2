@@ -26,12 +26,11 @@ class DiscordWebhookService
             'content' => "🔴 Olá amores da Akiba, PROGRAMA AO VIVO rolando agora!",
             'embeds' => [
                 [
-                    'title' => "Programa AO VIVO: {$program->name}",
+                    'title' => "{$program->name} NO AR!",
                     'description' => "🎧 {$genderTitle} **{$user->nickname}** sentou no estúdio e já está no ar!\n\nOuça agora na Akiba.\n👉 **[Clique aqui para sintonizar na Akiba!](https://akiba.com.br)**",
                     'color' => hexdec("FF6B00"), // Laranja vibrante estilo Akiba
                     'author' => [
                         'name' => "{$user->nickname}",
-                        'icon_url' => $avatarUrl
                     ],
                     'timestamp' => now()->toIso8601String()
                 ]
