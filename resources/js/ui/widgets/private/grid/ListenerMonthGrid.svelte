@@ -31,7 +31,7 @@
                         Nome:
                     </dt>
                     <dd class="block text-neutral-aurora font-noto-sans uppercase">
-                        {listenermonth.data.name || "Aki-Chan"}
+                        {listenermonth.data.name || "Aurora"}
                     </dd>
                 </dl>
                 <dl class="mb-8">
@@ -39,7 +39,7 @@
                         Mora em:
                     </dt>
                     <dd class="block text-neutral-aurora font-noto-sans uppercase">
-                        {listenermonth.data.address || "Shinjuku - Tokyo"}
+                        {listenermonth.data.address || "São Paulo - SP"}
                     </dd>
                 </dl>
                 <dl class="mb-8">
@@ -47,7 +47,7 @@
                         Número de pedidos feitos:
                     </dt>
                     <dd class="block text-neutral-aurora font-noto-sans uppercase">
-                        {listenermonth.data.requests_total || "+8000"}
+                        {listenermonth.data.requests_total || "+500"}
                     </dd>
                 </dl>
                 <dl class="mb-8">
@@ -55,7 +55,7 @@
                         Programa preferido
                     </dt>
                     <dd class="block text-neutral-aurora font-noto-sans uppercase">
-                        {listenermonth.data.favorite_show || "Plantão Ecchi"}
+                        {listenermonth.data.favorite_show || "Akiba Art Online"}
                     </dd>
                 </dl>
             </div>
@@ -68,7 +68,7 @@
                         src={listenermonth.data.avatar || "https://placehold.co/500x500?text=Rede+Akiba"}
                         alt="Imagem do ouvinte"
                         class="w-36 h-36 bg-gray-600 rounded-lg"
-                />
+                    />
                 </div>
                 {#if can.set}
                     <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic" on:click={() => { 

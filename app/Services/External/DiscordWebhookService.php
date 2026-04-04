@@ -20,19 +20,15 @@ class DiscordWebhookService
 
         $genderTitle = $user->gender === 'male' ? 'O DJ' : 'A DJ';
         // A imagem do banco já vem com o prefixo '/storage/' pelo ImageProcessService
-        $coverUrl = $program->image ? asset($program->image) : asset('assets/default-program.png');
         $avatarUrl = $user->avatar ? asset($user->avatar) : asset('assets/default-avatar.png');
 
         $payload = [
-            'content' => "@everyone 🔴 Alô galera, tem gente AO VIVO!",
+            'content' => "🔴 Olá amores da Akiba, PROGRAMA AO VIVO rolando agora!",
             'embeds' => [
                 [
                     'title' => "Programa AO VIVO: {$program->name}",
-                    'description' => "🎧 {$genderTitle} **{$user->nickname}** acabou de sentar na cadeira e já está no ar tocando as melhores!\n\nConecte-se agora para ouvir com a gente.\n👉 **[Clique aqui para sintonizar na Akiba!](https://akiba.com.br)**",
+                    'description' => "🎧 {$genderTitle} **{$user->nickname}** sentou no estúdio e já está no ar!\n\nOuça agora na Akiba.\n👉 **[Clique aqui para sintonizar na Akiba!](https://akiba.com.br)**",
                     'color' => hexdec("FF6B00"), // Laranja vibrante estilo Akiba
-                    'thumbnail' => [
-                        'url' => $coverUrl
-                    ],
                     'author' => [
                         'name' => "{$user->nickname}",
                         'icon_url' => $avatarUrl
