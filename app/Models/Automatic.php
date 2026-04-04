@@ -21,7 +21,7 @@ class Automatic extends Model
         'phrases',
     ];
 
-    protected $cast = [
+    protected $casts = [
         'is_default' => 'boolean',
         'phrases' => 'array'
     ];
