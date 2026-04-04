@@ -16,7 +16,7 @@ class MusicPolicy
         return $user->hasPermission('music.list');
     }
 
-    public function update(User $user, ?Music $music = null): bool
+    public function update(User $user, Music $music): bool
     {
         return $user->hasPermission('music.update');
     }
