@@ -110,7 +110,7 @@
         <div class="flex gap-3 items-end">
             <div class="w-20 shrink-0">
                 <img
-                    src={air?.current_song?.cover}
+                    src={air.current_song.cover || 'https://cdn.vectorstock.com/i/500p/57/71/music-note-icon-set-vector-2855771.jpg'}
                     alt=""
                     aria-hidden="true"
                     class="rounded-lg"
@@ -123,7 +123,7 @@
                 </div>
                 <!-- svelte-ignore a11y_distracting_elements -->
                 <marquee class="w-full text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic line-clamp-1">
-                    {decodeURIComponent(escape(air?.current_song?.music))}
+                    {decodeURIComponent(escape(air.current_song.music || 'Estamos offline'))}
                 </marquee>
             </div>
         </div>
