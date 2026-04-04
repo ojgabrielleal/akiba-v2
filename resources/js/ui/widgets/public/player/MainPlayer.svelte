@@ -8,6 +8,8 @@
 
     usePoll(30*1000);
     $: air = onair.data[0];
+
+    $: console.log(air)
     
     let modalRef;
 </script>
@@ -38,7 +40,7 @@
         </marquee>
         <div class="hidden lg:block absolute bottom-0 -right-4 z-10">
             <img
-                src={air.image}
+                src={air.icon}
                 alt=""
                 aria-hidden="true"
                 class="w-35"
