@@ -10,25 +10,36 @@ class CastService
     public function data()
     {
         try {
-            $url = env('CAST_METADATA');
+            $url = config('services.cast.metadata');
+
+            if (!$url) {
+                Log::warning('Radio API error: CAST_METADATA is not configured in .env');
+                return null;
+            }
+
             $response = Http::timeout(5)->withOptions([
                 'verify' => false,
             ])->get($url);
             
             if ($response->failed()) {
-                Log::warning('Radio API returned error status');
+                Log::warning('Radio API returned error status: ' . $response->status());
                 return null;
             }
 
             $data = $response->json();
 
+            if (!isset($data['status'])) {
+                Log::warning('Radio API returned unexpected data format');
+                return null;
+            }
+
             return [
-                'status' => $data['status'] === 'Ligado' ? 'Online' : 'Offline',
-                'listeners' => $data['ouvintes_conectados'],
-                'bitrate' => $data['plano_bitrate'],
+                'status' => ($data['status'] ?? null) === 'Ligado' ? 'Online' : 'Offline',
+                'listeners' => $data['ouvintes_conectados'] ?? 0,
+                'bitrate' => $data['plano_bitrate'] ?? 'N/A',
                 'current_song' => [
-                    'music' => $data['musica_atual'],
-                    'cover' => $data['capa_musica'],
+                    'music' => $data['musica_atual'] ?? 'Desconhecido',
+                    'cover' => $data['capa_musica'] ?? null,
                 ]
             ];
         } catch (\Throwable $e) {

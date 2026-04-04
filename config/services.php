@@ -31,4 +31,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+
+    'cast' => [
+        'url' => env('CAST_URL'),
+        'metadata' => env('CAST_METADATA'),
+    ],
 ];

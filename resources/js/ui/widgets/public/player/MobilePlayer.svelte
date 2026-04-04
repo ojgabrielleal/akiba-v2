@@ -62,7 +62,7 @@
         <div class="flex flex-col gap-1">
             <span class="text-orange-amber text-[10px] uppercase font-bold tracking-widest">TOCANDO AGORA</span>
             <p class="text-neutral-aurora text-base font-bold italic line-clamp-2 leading-tight">
-                {air.current_song.music}
+                {air?.current_song?.music}
             </p>
         </div>
     </div>
