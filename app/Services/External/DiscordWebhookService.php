@@ -23,7 +23,7 @@ class DiscordWebhookService
         $avatarUrl = $user->avatar ? asset($user->avatar) : asset('assets/default-avatar.png');
 
         $payload = [
-            'content' => "Olá otakus amados!\n\n🔴 **PROGRAMA AO VIVO rolando agora!**",
+            'content' => "@everyone Olá otakus queridos!\n\n🔴 **PROGRAMA AO VIVO rolando agora!**",
             'embeds' => [
                 [
                     'title' => "{$program->name} NO AR!",
