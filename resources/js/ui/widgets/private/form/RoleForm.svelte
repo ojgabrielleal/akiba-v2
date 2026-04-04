@@ -100,7 +100,7 @@
         >
             {#each permissions.data as permission}
                 <option value={permission.uuid}>
-                    {permission.label}
+                    {permission.name}
                 </option>
             {/each}
         </select>

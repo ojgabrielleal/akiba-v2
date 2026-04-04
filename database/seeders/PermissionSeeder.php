@@ -20,16 +20,16 @@ class PermissionSeeder extends Seeder
             | Accessos as páginas Gerais
             |--------------------------------------------------------------------------
             */
-            ['name' => 'dashboard.view', 'label' => '[Dashboard] Acesso a página'],
-            ['name' => 'warning.view', 'label' => '[Avisos] Acesso a página'],
-            ['name' => 'post.view', 'label' => '[Matérias] Acesso a página'],
-            ['name' => 'locution.view', 'label' => '[Locução] Acesso a página'],
-            ['name' => 'radio.view', 'label' => '[Rádio] Acesso a página'],
-            ['name' => 'podcast.view', 'label' => '[Podcasts] Acesso a página'],
-            ['name' => 'marketing.view', 'label' => '[Marketing] Acesso a página'],
-            ['name' => 'media.view', 'label' => '[Mídias] Acesso a página'],
-            ['name' => 'administration.view', 'label' => '[Administração] Acesso a página'],
-            ['name' => 'log.view', 'label' => '[Logs] Acesso a página'],
+            ['name' => 'dashboard.module.view', 'label' => '[Dashboard] Acesso ao módulo'],
+            ['name' => 'warning.module.view', 'label' => '[Avisos] Acesso ao módulo'],
+            ['name' => 'post.module.view', 'label' => '[Matérias] Acesso ao módulo'],
+            ['name' => 'locution.module.view', 'label' => '[Locução] Acesso ao módulo'],
+            ['name' => 'radio.module.view', 'label' => '[Rádio] Acesso ao módulo'],
+            ['name' => 'podcast.module.view', 'label' => '[Podcasts] Acesso ao módulo'],
+            ['name' => 'marketing.module.view', 'label' => '[Marketing] Acesso ao módulo'],
+            ['name' => 'media.module.view', 'label' => '[Mídias] Acesso ao módulo'],
+            ['name' => 'administration.module.view', 'label' => '[Administração] Acesso ao módulo'],
+            ['name' => 'log.module.view', 'label' => '[Logs] Acesso ao módulo'],
 
             /*
             |--------------------------------------------------------------------------
