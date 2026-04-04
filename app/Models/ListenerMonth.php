@@ -55,6 +55,7 @@ class ListenerMonth extends Model
             SELECT MIN(songs_requests.uuid) AS uuid,
                 songs_requests.name AS name,
                 songs_requests.address AS address,
+                null AS avatar,
                 COUNT(*) AS requests_total,
                 programs.name AS favorite_program
             FROM songs_requests

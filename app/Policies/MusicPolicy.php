@@ -16,10 +16,7 @@ class MusicPolicy
         return $user->hasPermission('music.list');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Music $music): bool
+    public function update(User $user, ?Music $music = null): bool
     {
         return $user->hasPermission('music.update');
     }

@@ -70,9 +70,10 @@ class RadioController extends Controller
         if (request()->user()->cannot('listener.month.view')) {
             return null;
         }
-        return new ListenerMonthResource(
-            ListenerMonth::first()
-        );
+
+        $listener = ListenerMonth::first();
+
+        return $listener ? new ListenerMonthResource($listener) : null;
     }
 
     public function showListenerMonthFound()
@@ -80,9 +81,10 @@ class RadioController extends Controller
         if (request()->user()->cannot('listener.month.view')) {
             return null;
         }
-        return new ListenerMonthResource(
-            ListenerMonth::mostActiveListenerOfCurrentMonth()
-        );
+
+        $listener = ListenerMonth::mostActiveListenerOfCurrentMonth();
+
+        return $listener ? new ListenerMonthResource($listener) : null;
     }
 
     public function showProgram(Program $program)
@@ -207,7 +209,7 @@ class RadioController extends Controller
 
     public function generateMusicRanking()
     {
-        if (request()->user()->cannot('update', Music::class)) {
+        if (request()->user()->cannot('setRanking', Music::class)) {
             return null;
         }
         Music::ranking()->update([
