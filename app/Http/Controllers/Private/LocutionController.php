@@ -53,7 +53,11 @@ class LocutionController extends Controller
         $onair = Onair::live()->first();
 
         return SongRequestResource::collection(
-            SongRequest::where('onair_id', $onair->id)->get()
+            SongRequest::where('onair_id', $onair->id)
+                ->where('was_canceled', false)
+                ->where('was_reproduced', false)
+                ->orderBy('created_at', 'asc')
+                ->get()
         );
     }
 
