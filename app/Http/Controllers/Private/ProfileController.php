@@ -30,7 +30,7 @@ class ProfileController extends Controller
         if ($request->user()->cannot('update', $user)) {
             abort(403, 'Não autorizado.');
         }
-        
+
         $user->fill([
             'avatar' =>  $this->image->store('users', $request->file('avatar'), 'public', $user->avatar),
             'name' => $request->input('name', $user->name),
