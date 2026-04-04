@@ -50,6 +50,7 @@ class LocutionController extends Controller
         if (request()->user()->cannot('viewAny', SongRequest::class)) {
             return null;
         }
+
         $onair = Onair::live()->first();
 
         return SongRequestResource::collection(
