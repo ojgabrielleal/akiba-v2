@@ -30,9 +30,7 @@
         </div>
         <!-- svelte-ignore a11y_distracting_elements -->
         <marquee class="w-5xl flex overflow-x-hidden relative marquee-container">
-            <div
-                class="whitespace-nowrap w-full md:w-auto text-neutral-aurora text-3xl font-noto-sans font-bold uppercase italic"
-            >
+            <div class="whitespace-nowrap w-full md:w-auto text-neutral-aurora text-3xl font-noto-sans font-bold uppercase italic">
                 <span class="mx-4">
                     {air.phrase}
                 </span>
@@ -59,9 +57,7 @@
     </div>
 </section>
 
-<section
-    class="cont-player-main grid grid-cols-[2fr_1fr_0.9fr] items-center gap-5"
->
+<section class="cont-player-main grid grid-cols-[2fr_1fr_0.84fr] items-center gap-5">
     <div class="block">
         <div class="flex items-center gap-5 mb-15">
             <div class="w-52">
@@ -78,23 +74,16 @@
             </div>
             <div>
                 <div class="text-orange-amber font-noto-sans uppercase">
-                    {air.program.host.gender === "male"
-                        ? "Com o DJ"
-                        : "Com a DJ"}
+                    {air.program.host.gender === "male" ? "Com o DJ" : "Com a DJ"}
                 </div>
-                <div
-                    class="w-full text-neutral-aurora text-2xl font-noto-sans font-bold uppercase italic line-clamp-1"
-                >
+                <div class="w-full text-neutral-aurora text-2xl font-noto-sans font-bold uppercase italic line-clamp-1">
                     {air.program.host.nickname}
                 </div>
-                <div
-                    class={[
-                        "mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase",
-                        { "bg-purple-mystic": air.type === "automatic" },
-                        { "bg-green-forest": air.type === "live" },
-                        { "bg-orange-sunset": air.type === "scheduled" },
-                    ]}
-                >
+                <div class={["mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase",
+                    { "bg-purple-mystic": air.type === "automatic" },
+                    { "bg-green-forest": air.type === "live" },
+                    { "bg-orange-sunset": air.type === "scheduled" },
+                ]}>
                     {#if air.type === "automatic"}
                         Robô
                     {:else if air.type === "live"}
@@ -117,8 +106,7 @@
         <div class="flex gap-3 items-end">
             <div class="w-20 shrink-0">
                 <img
-                    src={air.current_song.cover ||
-                        "https://cdn.vectorstock.com/i/500p/57/71/music-note-icon-set-vector-2855771.jpg"}
+                    src={air.current_song.cover || "https://cdn.vectorstock.com/i/500p/57/71/music-note-icon-set-vector-2855771.jpg"}
                     alt=""
                     aria-hidden="true"
                     class="rounded-lg"
