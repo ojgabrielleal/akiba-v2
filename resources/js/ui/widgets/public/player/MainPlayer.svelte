@@ -6,10 +6,11 @@
 
     $: ({ onair } = $page.props);
 
-    usePoll(30 * 1000);
     $: air = onair.data[0];
-
+    
     let modalRef;
+    
+    usePoll(60 * 1000);
 </script>
 
 <Modal bind:this={modalRef}>

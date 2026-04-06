@@ -47,7 +47,7 @@
         router.patch(`/painel/locucao/locution/finish`);
     };
 
-    usePoll(30 * 1000);
+    usePoll(60 * 1000);
 </script>
 
 {#if hasPermission("songrequest.list")}
