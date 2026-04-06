@@ -237,7 +237,12 @@
 
 <section class="cont-player-main">
     <div class="mb-10 grid grid-cols-2 gap-5">
-        <div class="bg-neutral-aurora h-30 rounded-2xl"></div>
-        <div class="bg-neutral-aurora h-30 rounded-2xl"></div>
+        <div class="bg-neutral-aurora/10 h-30 rounded-lg flex justify-center items-center text-neutral-aurora/40 text-lg font-bold uppercase italic">
+            Anúncio
+        </div>
+
+        <div class="bg-neutral-aurora/10 h-30 rounded-lg flex justify-center items-center text-neutral-aurora/40 text-lg font-bold uppercase italic">
+            Anúncio
+        </div>
     </div>
 </section>
