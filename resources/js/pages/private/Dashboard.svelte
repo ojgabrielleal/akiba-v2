@@ -4,11 +4,9 @@
     import { Layout } from "@/layouts/private/";
     import { GreatingHero } from "@/ui/widgets/private/hero";
     import { ActivityCarrousel, TaskCarrousel } from "@/ui/widgets/private/carrousel";
-    import { PostGrid, CalendarGrid } from "@/ui/widgets/private/grid";
+    import { PostGrid, CalendarGrid, RapidAccess } from "@/ui/widgets/private/grid";
 
-    $: ({ 
-        user
-    } = $page.props);
+    $: ({ user } = $page.props);
 
      const phraseSwitchHero = (nickname) => {
         const phrases = [
@@ -33,6 +31,7 @@
 <Meta meta={{ title: "Dashboard" }} />
 <Layout>
     <GreatingHero phrase={phraseSwitchHero(user.nickname)} icon="/img/default/avatar.webp"/>
+    <RapidAccess />
     <ActivityCarrousel title="Avisos e Atividades" />
     <TaskCarrousel title="Minhas Tarefas"/>
     <PostGrid title="Últimas Matérias"  />
