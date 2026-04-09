@@ -1,0 +1,117 @@
+<script>
+    export let close = () => {};
+    export let identifier;
+
+    import { useForm, page } from "@inertiajs/svelte";
+    import axios from "axios";
+    import { hasPermission } from "@/utils";
+
+    let { users } = $page.props;
+
+    let can = {
+        create: hasPermission("calendar.create"),
+        update: hasPermission("calendar.update"),
+    };
+
+    let form = useForm({
+        user: null,
+        hour: null,
+        date: null,
+        content: null,
+    });
+
+    $:if(identifier){
+        axios.get(`/painel/adms/calendar/${identifier}`)
+        .then((response)=>{
+            const data = response.data.data 
+
+            $form.user = data.responsible.uuid;
+            $form.hour = data.hour;
+            $form.date = data.date; 
+            $form.content = data.content;
+        })
+    }
+
+    const submit = () => {
+        const method = identifier ? "patch" : "post";
+        const url = identifier
+            ? `/painel/adms/calendar/${identifier}`
+            : "/painel/adms/calendar";
+
+        $form[method](url, {
+            preserveScroll: true,
+            onSuccess: () => close(),
+        });
+    };
+</script>
+
+<form on:submit|preventDefault={submit}>
+    <div class="mb-4">
+        <label for="user" class="text-md text-gray-700 font-noto-sans block mb-1">
+            Membro designado
+        </label>
+        <select
+            id="user"
+            name="user"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+            bind:value={$form.user}
+            required
+        >
+            {#each users.data as item}
+                <option value="{item.uuid}">{item.nickname}</option>
+            {/each}
+        </select>
+    </div>
+    <div class="grid grid-cols-2 gap-3">
+        <div class="mb-4">
+            <label for="hour" class="text-md text-gray-700 font-noto-sans block mb-1">
+                Hora
+            </label>
+            <input
+                type="time"
+                id="hour"
+                name="hour"
+                class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+                bind:value={$form.hour}
+                required
+            />
+            <div class="text-sm font-noto-sans text-gray-400 mt-1">
+                Hora do evento
+            </div>
+        </div>
+        <div class="mb-4">
+            <label for="date" class="text-md text-gray-700 font-noto-sans block mb-1">
+                Data
+            </label>
+            <input
+                type="date"
+                id="date"
+                name="date"
+                class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+                bind:value={$form.date}
+                required
+            />
+            <div class="text-sm font-noto-sans text-gray-400 mt-1">
+                Data do evento
+            </div>
+        </div>
+    </div>
+    <div class="mb-4">
+        <label for="content" class="text-md text-gray-700 font-noto-sans block mb-1">
+            Conteúdo
+        </label>
+        <textarea
+            id="content"
+            name="content"
+            rows="3"
+            class="w-full bg-white font-noto-sans text-md rounded-lg outline-none py-2 px-4 border border-gray-400"
+            bind:value={$form.content}
+            required
+        ></textarea>
+    </div>
+    {#if can.create || can.update}
+        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+            {identifier ? "Atualizar" : "Cadastrar"}
+        </button>
+    {/if}
+</form>

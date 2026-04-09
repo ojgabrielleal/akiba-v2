@@ -2,7 +2,8 @@
     export let title;
 
     import { page } from "@inertiajs/svelte";
-    import { Section, Pagination } from "@/ui/components/private/";
+    import { Offcanvas, Section } from "@/ui/components/private/";
+    import { CalendarForm } from "@/ui/widgets/private/form";
     import { hasPermission } from "@/utils";
     import tag from "@/data/calendar/tag.json";
 
@@ -30,14 +31,26 @@
         }
     }
 
-    $:console.log(week)
-
+    let offcanvasRef;
+    let identifier;
 </script>
+
+
+<Offcanvas bind:this={offcanvasRef} title="Atualizar atividade">
+    <div slot="content" let:close>
+        <CalendarForm {identifier} {close} />
+    </div>
+</Offcanvas>
 
 <Section {title}>
     {#if can.create}
         <div class="flex justify-center gap-5 mb-8">
-            <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-lg font-noto-sans font-bold italic uppercase text-neutral-aurora">Cadastrar evento</button>
+            <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-lg font-noto-sans font-bold italic uppercase text-neutral-aurora" on:click={()=>{
+                identifier = null;
+                offcanvasRef.open()
+            }}>
+                Cadastrar evento
+            </button>
         </div>
     {/if}
     <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
@@ -80,7 +93,7 @@
                                 <button class={["w-full cursor-pointer ",
                                     { "filter invert": !item.has_activity },
                                     { "filter invert-0": item.has_activity },
-                                ]}>
+                                ]} on:click={()=>{identifier = item.uuid; offcanvasRef.open()}}>
                                     <img src="/svg/default/edit.svg" alt="Editar" class="w-4" />
                                 </button>
                             {/if}
