@@ -1,5 +1,6 @@
 <script>
     export let title;
+    export let variant;
 
     import { page } from "@inertiajs/svelte";
     import { Offcanvas, Section } from "@/ui/components/private/";
@@ -43,7 +44,7 @@
 </Offcanvas>
 
 <Section {title}>
-    {#if can.create}
+    {#if can.create && variant === "administration"}
         <div class="flex justify-center gap-5 mb-8">
             <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-lg font-noto-sans font-bold italic uppercase text-neutral-aurora" on:click={()=>{
                 identifier = null;
@@ -89,7 +90,7 @@
                             {item.has_activity ? item.activity.title : item.content}
                         </div>
                         <div class="flex justify-between items-center">
-                            {#if can.update}
+                            {#if can.update && variant === "administration"}
                                 <button class={["w-full cursor-pointer ",
                                     { "filter invert": !item.has_activity },
                                     { "filter invert-0": item.has_activity },
