@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Private;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 
-
 use App\Models\Activity;
 use App\Models\Post;
 use App\Models\Task;
@@ -70,7 +69,7 @@ class DashboardController extends Controller
             return null;
         }
         return CalendarResource::collection(
-            Calendar::active()
+            Calendar::valid()
                 ->with(['activity', 'responsible'])
                 ->get()
         );

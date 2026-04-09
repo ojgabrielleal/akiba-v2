@@ -46,10 +46,7 @@
 
 <form on:submit|preventDefault={submit}>
     <div class="mb-4">
-        <label
-            for="title"
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-        >
+        <label for="title" class="text-md text-gray-700 font-noto-sans block mb-1">
             Título
         </label>
         <input
@@ -62,10 +59,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            for="limit"
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-        >
+        <label for="limit" class="text-md text-gray-700 font-noto-sans block mb-1">
             Limite
         </label>
         <input
@@ -82,10 +76,7 @@
     </div>
     <div class="grid grid-cols-2 gap-3">
         <div class="mb-4">
-            <label
-                for="hour"
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-            >
+            <label for="hour" class="text-md text-gray-700 font-noto-sans block mb-1">
                 Hora
             </label>
             <input
@@ -101,10 +92,7 @@
             </div>
         </div>
         <div class="mb-4">
-            <label
-                for="date"
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-            >
+            <label for="date" class="text-md text-gray-700 font-noto-sans block mb-1">
                 Data
             </label>
             <input
@@ -121,10 +109,7 @@
         </div>
     </div>
     <div class="mb-4">
-        <label
-            for="content"
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-        >
+        <label for="content" class="text-md text-gray-700 font-noto-sans block mb-1">
             Conteúdo
         </label>
         <textarea
@@ -137,10 +122,7 @@
         ></textarea>
     </div>
     {#if can.create || can.update}
-        <button
-            type="submit"
-            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase"
-        >
+        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
             {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}

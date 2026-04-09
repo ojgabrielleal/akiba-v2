@@ -14,10 +14,10 @@ class Calendar extends Model
 
     protected $fillable = [
         'uuid',
-        'is_active',
         'has_activity',
         'user_id',
         'activity_id',
+        'day_of_week',
         'hour',
         'date',
         'type',
@@ -25,10 +25,10 @@ class Calendar extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
         'has_activity' => 'boolean',
         'date' => 'date:Y-m-d',
         'hour' => 'date:h:i',
+        'day_of_week' => 'integer',
     ];
 
     protected $hidden = [
@@ -54,9 +54,9 @@ class Calendar extends Model
      * These methods define reusable query filters that can be
      * applied to Eloquent queries (e.g., active()).
      */
-    public function scopeActive($query)
+    public function scopeValid($query)
     {
-        return $query->where('is_active', true);
+        return $query->where('date', '>=', now()->format('Y-m-d'))->where('hour', '>=', now()->format('H:i'));
     }
 
     /**

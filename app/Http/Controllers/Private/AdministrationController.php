@@ -4,18 +4,21 @@ namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Str;
+use Carbon\Carbon; 
+use Inertia\Inertia;
 
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
 use App\Models\Activity;
+use App\Models\Calendar;
 
 use App\Http\Resources\UserResource;
 use App\Http\Resources\RoleResource;
 use App\Http\Resources\PermissionResource;
 use App\Http\Resources\ActivityResource;
+use App\Http\Resources\CalendarResource;
 
 use App\Exceptions\RoleHasMembersException;
 
@@ -66,6 +69,17 @@ class AdministrationController extends Controller
         return UserResource::collection(
             User::active()
                 ->with(['roles'])
+                ->get()
+        );
+    }
+
+    public function indexCalendar()
+    {
+        if (request()->user()->cannot('viewAny', Calendar::class)) {
+            return null;
+        }
+        return CalendarResource::collection(
+            Calendar::valid()
                 ->get()
         );
     }
@@ -143,10 +157,11 @@ class AdministrationController extends Controller
         ])->calendar()->create([
             'user_id' => request()->user()->id,
             'has_activity' => true,
+            'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
             'hour' => $request->input('hour'),
             'date' => $request->input('date'),
             'content' => $request->input('title'),
-            'type' => 'other',
+            'type' => 'activity',
         ]);
 
         return $this->flashMessage('save');
@@ -269,6 +284,7 @@ class AdministrationController extends Controller
         }
 
         $activity->calendar()->update([
+            'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
             'hour' => $request->input('hour'),
             'date' => $request->input('date'),
             'content' => $request->input('title'),
@@ -308,6 +324,7 @@ class AdministrationController extends Controller
             'roles' => $this->indexRoles(),
             'permissions' => $this->indexPermissions(),
             'activities' => $this->indexActivities(),
+            'calendar' => $this->indexCalendar(),
             'users' => $this->indexUsers()
         ]);
     }

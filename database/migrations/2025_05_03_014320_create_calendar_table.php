@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('calendar', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->boolean('is_active')->default(true);
             $table->boolean('has_activity')->default(false);
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('activity_id')->nullable()->constrained('activities')->cascadeOnDelete();
             $table->time('hour');
             $table->date('date');
-            $table->enum('type', ['show', 'live', 'video', 'podcast', 'other']);
+            $table->integer('day_of_week');
+            $table->enum('type', ['show', 'live', 'video', 'podcast', 'activity']);
             $table->string('content');
             $table->timestamps();
         });

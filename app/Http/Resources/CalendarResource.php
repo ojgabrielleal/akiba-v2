@@ -14,9 +14,10 @@ class CalendarResource extends JsonResource
             'has_activity' => $this->has_activity,
             'title' => $this->title,
             'hour' => $this->hour->format('H:m'),
-            'date' => $this->date->format('Y-m-d'),
+            'date' => $this->date->format('d/m/Y'),
             'content' => $this->content,
-            'category' => $this->category,
+            'type' => $this->type,
+            'day_of_week' => $this->day_of_week,
             'responsible' => [
                 'uuid' => $this->responsible->uuid,
                 'name' => $this->responsible->name,
