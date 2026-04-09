@@ -18,7 +18,7 @@
 </script>
 
 <div class="flex justify-center mb-10">
-    <div class="flex gap-5">
+    <div class="flex flex-wrap justify-center gap-5">
         {#if can.post.create}
             <a href="/painel/materias" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
                 <img src="/svg/default/materials.svg" alt="" aria-hidden="true" class="w-6 filter-blue-skywave" />

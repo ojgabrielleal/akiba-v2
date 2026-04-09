@@ -42,7 +42,7 @@
             </button>
         </div>
     {/if}
-    {#if roles}
+    {#if roles && roles.data.length > 0}
         <div class="overflow-x-auto w-full">
             <table class="min-w-[900px] w-full border-collapse table-auto">
                 <thead>

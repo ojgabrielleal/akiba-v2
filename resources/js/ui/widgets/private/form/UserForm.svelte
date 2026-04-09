@@ -30,10 +30,7 @@
 <form on:submit|preventDefault={submit}>
     <div class="mb-10">
         <div class="mb-4">
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="username"
-            >
+            <label class="text-md text-gray-700 font-noto-sans block mb-1" for="username">
                 Login
             </label>
             <input
@@ -46,10 +43,7 @@
             />
         </div>
         <div>
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="password"
-            >
+            <label class="text-md text-gray-700 font-noto-sans block mb-1" for="password">
                 Senha
             </label>
             <input
@@ -68,24 +62,15 @@
     <div class="mb-10">
         <div class="flex items-center justify-center w-full mb-5">
             <div class="relative w-full">
-                <div
-                    class="absolute left-0 w-1/5 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                ></div>
-                <span
-                    class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic"
-                >
+                <div class="absolute left-0 w-1/5 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
+                <span class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic">
                     Informações básicas
                 </span>
-                <div
-                    class="absolute right-0 w-1/5 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                ></div>
+                <div class="absolute right-0 w-1/5 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
             </div>
         </div>
         <div class="mb-4">
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="name"
-            >
+            <label class="text-md text-gray-700 font-noto-sans block mb-1" for="name">
                 Nome
             </label>
             <input
@@ -98,10 +83,7 @@
             />
         </div>
         <div class="mb-4">
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="nickname"
-            >
+            <label class="text-md text-gray-700 font-noto-sans block mb-1" for="nickname">
                 Apelido
             </label>
             <input
@@ -114,10 +96,7 @@
             />
         </div>
         <div>
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="gender"
-            >
+            <label class="text-md text-gray-700 font-noto-sans block mb-1" for="gender">
                 Gênero
             </label>
             <select
@@ -135,17 +114,11 @@
     <div class="mb-5">
         <div class="flex items-center justify-center w-full mb-5">
             <div class="relative w-full">
-                <div
-                    class="absolute left-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                ></div>
-                <span
-                    class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic"
-                >
+                <div class="absolute left-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
+                <span class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic">
                     Cargos
                 </span>
-                <div
-                    class="absolute right-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                ></div>
+                <div class="absolute right-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
             </div>
         </div>
         <div class="flex flex-col gap-2">
@@ -163,9 +136,7 @@
                             <div class="text-sm font-noto-sans font-semibold">
                                 {item.label}
                             </div>
-                            <div
-                                class="text-xs text-gray-400 font-noto-sans line-clamp-2"
-                            >
+                            <div class="text-xs text-gray-400 font-noto-sans line-clamp-2">
                                 {item.description}
                             </div>
                         </label>
@@ -175,10 +146,7 @@
         </div>
     </div>
     {#if can.create}
-        <button
-            type="submit"
-            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase"
-        >
+        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
             Cadastrar
         </button>
     {/if}

@@ -108,6 +108,43 @@ class AdministrationController extends Controller
         return new ActivityResource($activity->load(['author', 'confirmations', 'calendar']));
     }
 
+    public function showCalendar(Calendar $calendar)
+    {
+        if (request()->user()->cannot('view', $calendar)) {
+            return null;
+        }
+
+        return new CalendarResource($calendar->load(['activity', 'responsible']));
+    }
+
+    public function createCalendar(Request $request)
+    {
+        if (request()->user()->cannot('create', Calendar::class)) {
+            return null;
+        }
+
+        $request->validate([
+            'user' => 'required',
+            'content' => 'required',
+            'date' => 'required',
+            'hour' => 'required',
+            'type' => 'required',
+        ]);
+
+        $user = User::where('uuid', $request->input('user'))->first();
+
+        Calendar::create([
+            'user_id' => $user->id,
+            'content' => $request->input('content'),
+            'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
+            'date' => $request->input('date'),
+            'hour' => $request->input('hour'),
+            'type' => $request->input('type'),
+        ]);
+
+        return $this->flashMessage('save');
+    }
+
     public function createRole(Request $request)
     {
         if ($request->user()->cannot('create', Role::class)) {
@@ -217,6 +254,37 @@ class AdministrationController extends Controller
         $user->preferences()->createMany($preferences);
 
         return $this->flashMessage('save');
+    }
+
+    public function updateCalendar(Request $request, Calendar $calendar)
+    {
+        if ($request->user()->cannot('update', $calendar)) {
+            return null;
+        }
+        $request->validate([
+            'user' => 'required',
+            'content' => 'required',
+            'date' => 'required',
+            'hour' => 'required',
+            'type' => 'required',
+        ]);
+
+        $user = User::where('uuid', $request->input('user'))->first();
+
+        $calendar->fill([
+            'user_id' => $user->id,
+            'content' => $request->input('content'),
+            'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
+            'date' => $request->input('date'),
+            'hour' => $request->input('hour'),
+            'type' => $request->input('type'),
+        ]);
+
+        if($calendar->isDirty()){
+            $calendar->save();
+        }
+        
+        return $this->flashMessage('update');
     }
 
     public function updateUserAccess(Request $request, User $user)

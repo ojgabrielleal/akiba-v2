@@ -18,6 +18,7 @@
         hour: null,
         date: null,
         content: null,
+        type: null,
     });
 
     $:if(identifier){
@@ -29,6 +30,7 @@
             $form.hour = data.hour;
             $form.date = data.date; 
             $form.content = data.content;
+            $form.type = data.type;
         })
     }
 
@@ -60,6 +62,23 @@
             {#each users.data as item}
                 <option value="{item.uuid}">{item.nickname}</option>
             {/each}
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="type" class="text-md text-gray-700 font-noto-sans block mb-1">
+            Tipo do evento
+        </label>
+        <select
+            id="type"
+            name="type"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+            bind:value={$form.type}
+            required
+        >
+            <option value="show">Programa</option>
+            <option value="live">Live (Twitch/Kick)</option>
+            <option value="video">Vídeo (Youtube/Facebook/Instagram)</option>
+            <option value="podcast">Podcast</option>
         </select>
     </div>
     <div class="grid grid-cols-2 gap-3">

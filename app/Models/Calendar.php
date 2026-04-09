@@ -56,7 +56,7 @@ class Calendar extends Model
      */
     public function scopeValid($query)
     {
-        return $query->where('date', '>=', now()->format('Y-m-d'))->where('hour', '>=', now()->format('H:i'));
+        return $query->whereRaw("TIMESTAMP(date, hour) > NOW()");
     }
 
     /**

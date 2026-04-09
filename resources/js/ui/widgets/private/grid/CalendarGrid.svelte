@@ -79,7 +79,7 @@
                                 { "text-blue-midnight": item.has_activity },
                                 { "text-neutral-aurora": !item.has_activity },
                             ]}>
-                                {item.hour}
+                                {item.formated_hour}
                             </div>
                         </div>
                         <div class={["w-full font-noto-sans font-bold text-2xl text-center italic mt-6 mb-6",

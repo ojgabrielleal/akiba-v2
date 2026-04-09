@@ -145,6 +145,11 @@ Route::prefix('painel')->group(function () {
                 Route::patch('{role:uuid}', 'updateRole');
                 Route::delete('{role:uuid}', 'removeRole');
             });
+            Route::prefix('calendar')->group(function(){
+                Route::post('', 'createCalendar');
+                Route::get('{calendar:uuid}', 'showCalendar');
+                Route::patch('{calendar:uuid}', 'updateCalendar');
+            });
             Route::prefix('activity')->group(function () {
                 Route::post('', 'createActivity');
                 Route::get('{activity:uuid}', 'showActivity');
