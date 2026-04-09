@@ -142,6 +142,7 @@ class AdministrationController extends Controller
         if ($request->user()->cannot('create', Activity::class)) {
             return null;
         }
+        
         $request->validate([
             'title' => 'required',
             'limit' => 'required',
