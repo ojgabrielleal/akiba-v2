@@ -10,6 +10,8 @@
 
     $: ({ calendar } = $page.props);
 
+    $:console.log(variant)
+
     let can = {
         create: hasPermission("calendar.create"),
         update: hasPermission("calendar.update"),
