@@ -1,7 +1,8 @@
 <script>
     import { Meta } from "@/config/meta";
     import { Layout } from "@/layouts/private";
-    import { UserGrid, RoleGrid, ActivityGrid, CalendarGrid } from "@/ui/widgets/private/grid";
+    import { UserGrid, RoleGrid, CalendarGrid } from "@/ui/widgets/private/grid";
+    import { ActivityCarrousel } from "@/ui/widgets/private/carrousel";
 </script>
 
 <Meta meta={{ title: "ADM's" }} />
@@ -9,5 +10,5 @@
     <UserGrid title="Membros"/>
     <RoleGrid title="Cargos" />
     <CalendarGrid title="Calendário" variant="administration"/>
-    <ActivityGrid title="Atividades" />
+    <ActivityCarrousel title="Avisos e atividades" variant="administration"/>
 </Layout>

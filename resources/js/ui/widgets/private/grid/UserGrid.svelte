@@ -52,7 +52,7 @@
         <UserAccessForm {identifier} {close} />
     </div>
 </Offcanvas>
-<Offcanvas bind:this={offCanvasActivityRef} title="Agendar Atividade">
+<Offcanvas bind:this={offCanvasActivityRef} title="Criar Atividade e Avisos">
     <div slot="content" let:close>
         <ActivityForm {close} />
     </div>
@@ -72,7 +72,7 @@
             <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => { 
                 offCanvasActivityRef.open(); 
             }}>
-                Agendar Atividade
+                Criar Atividade e Avisos
             </button>
         {/if}
     </div>

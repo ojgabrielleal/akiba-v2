@@ -31,6 +31,7 @@ class DashboardController extends Controller
         return ActivityResource::collection(
             Activity::valid()
                 ->with(['author', 'confirmations'])
+                ->latest()
                 ->get()
         );
     }

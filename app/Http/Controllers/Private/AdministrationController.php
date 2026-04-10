@@ -36,7 +36,9 @@ class AdministrationController extends Controller
             return null;
         }
         return ActivityResource::collection(
-            Activity::with(['author', 'confirmations'])
+            Activity::valid()
+                ->with(['author', 'confirmations'])
+                ->latest()
                 ->get()
         );
     }
@@ -186,21 +188,25 @@ class AdministrationController extends Controller
             'content' => 'required'
         ]);
 
-        Activity::create([
+        $activity = Activity::create([
             'user_id' => request()->user()->id,
             'title' => $request->input('title'),
             'limit' => $request->input('limit'),
             'content' => $request->input('content'),
-            'allows_confirmations' => true,
-        ])->calendar()->create([
-            'user_id' => request()->user()->id,
-            'has_activity' => true,
-            'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
-            'hour' => $request->input('hour'),
-            'date' => $request->input('date'),
-            'content' => $request->input('title'),
-            'type' => 'activity',
+            'allows_confirmations' => $request->input('purpose') === 'activity',
         ]);
+
+        if($request->input('purpose') === 'activity') {
+            $activity->calendar()->create([
+                'user_id' => request()->user()->id,
+                'has_activity' => true,
+                'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
+                'hour' => $request->input('hour'),
+                'date' => $request->input('date'),
+                'content' => $request->input('title'),
+                'type' => 'activity',
+            ]);
+        }
 
         return $this->flashMessage('save');
     }
@@ -342,22 +348,26 @@ class AdministrationController extends Controller
         if ($request->user()->cannot('update', $activity)) {
             return null;
         }
+
         $activity->fill([
             'title' => $request->input('title'),
             'limit' => $request->input('limit'),
             'content' => $request->input('content'),
+            'allows_confirmations' => $request->input('purpose') === 'activity',
         ]);
 
         if ($activity->isDirty()) {
             $activity->save();
         }
 
-        $activity->calendar()->update([
-            'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
-            'hour' => $request->input('hour'),
-            'date' => $request->input('date'),
-            'content' => $request->input('title'),
-        ]);
+        if($request->input('purpose') === 'activity') {
+            $activity->calendar()->update([
+                'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
+                'hour' => $request->input('hour'),
+                'date' => $request->input('date'),
+                'content' => $request->input('title'),
+            ]);
+        }
 
         return $this->flashMessage('update');
     }

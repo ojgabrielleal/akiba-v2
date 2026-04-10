@@ -58,7 +58,7 @@
             <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block">
                 Escolha um icone
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-9 gap-30 lg:gap-y-30 lg:gap-x-5 mt-28">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-9 gap-30 lg:gap-y-30 lg:gap-x-5 mt-28">
                 {#each iconsJson as item, index}
                     <button type="button" aria-label={`Icon ${index}`} on:click={() => { $form.icon = item.url; }} class={["cursor-pointer w-[9.55rem] h-12 flex justify-end items-end rounded-lg bg-neutral-aurora transition duration-300 ease-in-out",
                         { "opacity-50 scale-90": $form.icon === item.url },

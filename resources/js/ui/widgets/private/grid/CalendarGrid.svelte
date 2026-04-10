@@ -36,7 +36,6 @@
     let identifier;
 </script>
 
-
 <Offcanvas bind:this={offcanvasRef} title="Atualizar atividade">
     <div slot="content" let:close>
         <CalendarForm {identifier} {close} />
@@ -68,7 +67,7 @@
                     {day.day}
                 </div>
                 {#each day.events as item}
-                    <div class={["w-full 2xl:w-[12.7rem] bg-blue-skywave rounded-lg pt-4 pl-4 pr-4 pb-3 mt-5",
+                    <div class={["w-full rounded-lg pt-4 pl-4 pr-4 pb-3 mt-5",
                         { "bg-blue-skywave": item.type === "show" },
                         { "bg-purple-mystic": item.type === "live" },
                         { "bg-red-crimson": item.type === "video" },
