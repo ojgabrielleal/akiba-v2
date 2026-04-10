@@ -36,7 +36,7 @@
     let identifier;
 </script>
 
-<Offcanvas bind:this={offcanvasRef} title="Atualizar atividade">
+<Offcanvas bind:this={offcanvasRef} title={identifier ? "Atualizar evento" : "Cadastrar evento"}>
     <div slot="content" let:close>
         <CalendarForm {identifier} {close} />
     </div>
