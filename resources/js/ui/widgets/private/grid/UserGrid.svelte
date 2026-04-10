@@ -52,7 +52,7 @@
         <UserAccessForm {identifier} {close} />
     </div>
 </Offcanvas>
-<Offcanvas bind:this={offCanvasActivityRef} title="Criar Atividade e Avisos">
+<Offcanvas bind:this={offCanvasActivityRef} title="Criar atividade/aviso">
     <div slot="content" let:close>
         <ActivityForm {close} />
     </div>

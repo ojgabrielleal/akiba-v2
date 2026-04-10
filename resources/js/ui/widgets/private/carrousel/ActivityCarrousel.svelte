@@ -24,7 +24,7 @@
     };
 </script>
 
-<Offcanvas bind:this={offcanvasRef} title={identifier ? "Atualizar atividade/aviso" : "Cadastrar atividade/aviso"}>
+<Offcanvas bind:this={offcanvasRef} title="Atualizar atividade/aviso">
     <div slot="content" let:close>
         <ActivityForm {identifier} {close} />
     </div>
