@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->boolean('allows_confirmations')->default(false);
             $table->date('limit')->nullable();
+            $table->string('title')->nullable();
             $table->longText('content');
             $table->timestamps();
         });
