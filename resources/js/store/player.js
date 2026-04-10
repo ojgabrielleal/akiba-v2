@@ -20,7 +20,12 @@ const getAudio = () => {
 
 const updateMetadata = async () => {
     try {
-        const { data } = await axios.get(import.meta.env.CAST_METADATA);
+        const { data } = await axios.get(import.meta.env.CAST_METADATA, {
+            headers: {
+                'x-requested-with': undefined
+            }
+        });
+        
         if ('mediaSession' in navigator) {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: data.musica_atual,
