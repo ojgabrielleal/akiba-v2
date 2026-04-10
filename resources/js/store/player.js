@@ -11,7 +11,7 @@ let metadataInterval;
 
 const getAudio = () => {
     if (!audio) {
-        audio = new Audio(import.meta.env.CAST_URL);
+        audio = new Audio("/api/cast");
         audio.volume = get(player).volume;
 
         audio.addEventListener('playing', () => {
