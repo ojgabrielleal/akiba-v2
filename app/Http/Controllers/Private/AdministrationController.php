@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Private;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Carbon\Carbon; 
+use Carbon\Carbon;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\User;
 use App\Models\Role;
@@ -181,7 +182,7 @@ class AdministrationController extends Controller
         if ($request->user()->cannot('create', Activity::class)) {
             return null;
         }
-        
+
         $request->validate([
             'title' => 'required',
             'limit' => 'required',
@@ -196,7 +197,8 @@ class AdministrationController extends Controller
             'allows_confirmations' => $request->input('purpose') === 'activity',
         ]);
 
-        if($request->input('purpose') === 'activity') {
+
+        if ($request->input('purpose') === 'activity') {
             $activity->calendar()->create([
                 'user_id' => request()->user()->id,
                 'has_activity' => true,
@@ -286,10 +288,10 @@ class AdministrationController extends Controller
             'type' => $request->input('type'),
         ]);
 
-        if($calendar->isDirty()){
+        if ($calendar->isDirty()) {
             $calendar->save();
         }
-        
+
         return $this->flashMessage('update');
     }
 
@@ -353,20 +355,30 @@ class AdministrationController extends Controller
             'title' => $request->input('title'),
             'limit' => $request->input('limit'),
             'content' => $request->input('content'),
-            'allows_confirmations' => $request->input('purpose') === 'activity',
+            'allows_confirmations' => $request->input('purpose') === 'activity'
+                ? $request->boolean('allows_confirmations')
+                : false
         ]);
 
         if ($activity->isDirty()) {
             $activity->save();
         }
 
-        if($request->input('purpose') === 'activity') {
-            $activity->calendar()->update([
-                'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
-                'hour' => $request->input('hour'),
-                'date' => $request->input('date'),
-                'content' => $request->input('title'),
-            ]);
+        if ($request->input('purpose') === 'activity') {
+            $activity->calendar()->updateOrCreate(
+                ['activity_id' => $activity->id],
+                [
+                    'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
+                    'hour' => $request->input('hour'),
+                    'date' => $request->input('date'),
+                    'content' => $request->input('title'),
+                    'type' => 'activity',
+                    'user_id' => request()->user()->id,
+                    'has_activity' => true,
+                ]
+            );
+        } else {
+            $activity->calendar()->delete();
         }
 
         return $this->flashMessage('update');
