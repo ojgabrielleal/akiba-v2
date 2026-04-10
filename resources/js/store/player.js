@@ -1,4 +1,5 @@
 import { writable, get } from "svelte/store";
+import axios from "axios";
 
 export const player = writable({
     playing: false,
@@ -6,6 +7,8 @@ export const player = writable({
 });
 
 let audio;
+let metadataInterval;
+
 const getAudio = () => {
     if (!audio) {
         audio = new Audio(import.meta.env.CAST_URL);
@@ -15,25 +18,54 @@ const getAudio = () => {
     return audio;
 }
 
+const updateMetadata = async () => {
+    try {
+        const { data } = await axios.get(import.meta.env.CAST_METADATA);
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: data.musica_atual,
+                artist: data.title,
+                artwork: [
+                    { src: data.capa_musica, sizes: '192x192', type: 'image/png' },
+                    { src: data.capa_musica, sizes: '512x512', type: 'image/png' }
+                ]
+            });
+        }
+    } catch (e) {
+        console.error("Erro ao buscar metadados", e);
+    }
+}
+
+const setupMediaSession = () => {
+    if (!('mediaSession' in navigator)) return;
+
+    navigator.mediaSession.setActionHandler('play', () => toggleAudio());
+    navigator.mediaSession.setActionHandler('pause', () => toggleAudio());
+
+    if (!metadataInterval) {
+        updateMetadata();
+        metadataInterval = setInterval(updateMetadata, 10000);
+    }
+}
+
 export const toggleAudio = () => {
     let audio = getAudio();
+    let isPlaying = get(player).playing;
 
-    let playing = get(player).playing;
-
-    if (playing) {
+    if (isPlaying) {
         audio.pause();
-        player.update((state) => ({
-            ...state,
-            playing: false
-        }));
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.playbackState = "paused";
+        }
+        player.update(s => ({ ...s, playing: false }));
     } else {
         audio.play();
-        player.update((state) => ({
-            ...state,
-            playing: true
-        }));
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.playbackState = "playing";
+            setupMediaSession();
+        }
+        player.update(s => ({ ...s, playing: true }));
     }
-
 }
 
 export const setVolume = (volume) => {
@@ -44,4 +76,32 @@ export const setVolume = (volume) => {
         ...state,
         volume: volume
     }));
+}
+
+const mediaSession = () => {
+    if ('mediaSession' in navigator) {
+        setInterval(async () => {
+            const { data } = await axios.get(import.meta.env.CAST_METADATA);
+
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: data.musica_atual,
+                artist: data.title,
+            artwork: [
+                {
+                    src: data.capa_musica,
+                    sizes: '192x192',
+                    type: 'image/png'
+                }
+            ]
+        });
+        }, 5000);
+
+        navigator.mediaSession.setActionHandler('play', () => {
+            toggleAudio();
+        });
+
+        navigator.mediaSession.setActionHandler('pause', () => {
+            toggleAudio();
+        });
+    }
 }
