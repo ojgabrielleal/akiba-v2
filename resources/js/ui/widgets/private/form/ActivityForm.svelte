@@ -12,7 +12,6 @@
     };
 
     let form = useForm({
-        title: null,
         purpose: null,
         limit: null,
         hour: null,
@@ -24,7 +23,6 @@
         axios.get(`/painel/adms/activity/${identifier}`).then((response) => {
             const data = response.data.data;
 
-            $form.title = data.title;
             $form.purpose = data.allows_confirmations ? "activity" : "notice";
             $form.limit = data.limit;
             $form.hour = data.hour;
@@ -47,19 +45,6 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-    <div class="mb-4">
-        <label for="title" class="text-md text-gray-700 font-noto-sans block mb-1">
-            Título
-        </label>
-        <input
-            type="text"
-            id="title"
-            name="title"
-            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
-            bind:value={$form.title}
-            required
-        />
-    </div>
     <div class="mb-4">
         <div class="text-md text-gray-700 font-noto-sans mb-2">
            Qual a finalidade desta criação?

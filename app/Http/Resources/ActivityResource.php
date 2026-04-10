@@ -12,7 +12,6 @@ class ActivityResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'allows_confirmations' => $this->allows_confirmations,
-            'title' => $this->title,
             'content' => $this->content,
             'limit' => $this->limit->format('Y-m-d'),
             'hour' => $this->calendar?->hour->format('H:i'),

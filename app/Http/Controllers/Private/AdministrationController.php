@@ -183,14 +183,12 @@ class AdministrationController extends Controller
         }
         
         $request->validate([
-            'title' => 'required',
             'limit' => 'required',
             'content' => 'required'
         ]);
 
         $activity = Activity::create([
             'user_id' => request()->user()->id,
-            'title' => $request->input('title'),
             'limit' => $request->input('limit'),
             'content' => $request->input('content'),
             'allows_confirmations' => $request->input('purpose') === 'activity',
@@ -350,7 +348,6 @@ class AdministrationController extends Controller
         }
 
         $activity->fill([
-            'title' => $request->input('title'),
             'limit' => $request->input('limit'),
             'content' => $request->input('content'),
             'allows_confirmations' => $request->input('purpose') === 'activity',

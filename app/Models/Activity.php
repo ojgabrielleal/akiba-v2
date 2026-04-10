@@ -17,7 +17,6 @@ class Activity extends Model
         'user_id',
         'allows_confirmations',
         'limit',
-        'title',
         'content',
     ];
 
