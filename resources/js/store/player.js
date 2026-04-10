@@ -50,7 +50,7 @@ const updateMetadata = async () => {
             });
         }
     } catch (e) {
-        console.error("Erro ao buscar metadados", e);
+        console.error("Erro ao buscar metadados do streaming para o media session");
     }
 }
 
@@ -62,7 +62,7 @@ const setupMediaSession = () => {
 
     if (!metadataInterval) {
         updateMetadata();
-        metadataInterval = setInterval(updateMetadata, 10000);
+        metadataInterval = setInterval(updateMetadata, 60 * 1000);
     }
 }
 
@@ -74,7 +74,7 @@ export const toggleAudio = () => {
         audio.pause();
     } else {
         audio.play();
-        
+
         if ('mediaSession' in navigator) {
             setupMediaSession();
         }
