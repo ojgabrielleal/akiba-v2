@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Log;
 
 class CastService
 {
+    protected $url;
+
+    public function stream()
+    {
+        return redirect()->to(config('services.cast.url'));
+    }
+
     public function data()
     {
         try {

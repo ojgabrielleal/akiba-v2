@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-
 use App\Traits\HasPermissions;
 use App\Traits\HasFlashMessages;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasUuids, HasPermissions, HasFlashMessages;
+    use HasFactory, Notifiable, HasUuids, HasPermissions, HasFlashMessages, HasApiTokens;
 
     protected $table = 'users';
 
