@@ -14,7 +14,7 @@
     };
 
     const requestDeactivateEvent = (event) => {
-        router.delete(`/painel/medias/event/${event}`, {}, 
+        router.delete(`/medias/event/${event}`, {}, 
             { preserveScroll: true }
         );
     };
@@ -43,7 +43,7 @@
                                         loading="lazy"
                                     />
                                 </a>
-                                <a href={`/painel/eventos/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
+                                <a href={`/eventos/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
                                     <img
                                         src="/svg/default/edit.svg"
                                         alt=""
@@ -86,7 +86,7 @@
                                 alt={`Evento ${item.title}`}
                             />
                             <div class="flex gap-4 absolute bottom-3 right-3">
-                                <a href={`/painel/eventos/${item.uuid}`} type="button" class="cursor-pointer" aria-label="Editar">
+                                <a href={`/eventos/${item.uuid}`} type="button" class="cursor-pointer" aria-label="Editar">
                                     <img
                                         src="/svg/default/edit.svg"
                                         alt=""

@@ -25,7 +25,7 @@
 
     $: if (identifier) {
         axios
-            .get(`/painel/radio/program/${identifier}`)
+            .get(`/radio/program/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
 
@@ -44,8 +44,8 @@
 
     const submit = () => {
         let url = identifier
-            ? `/painel/radio/program/${identifier}`
-            : "/painel/radio/program";
+            ? `/radio/program/${identifier}`
+            : "/radio/program";
 
         $form.post(url, {
             preserveScroll: true,

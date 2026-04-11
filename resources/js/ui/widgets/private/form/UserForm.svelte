@@ -20,7 +20,7 @@
     });
 
     const submit = () => {
-        $form.post("/painel/adms/user", {
+        $form.post("/adms/user", {
             preserveScroll: true,
             onSuccess: () => close(),
         });

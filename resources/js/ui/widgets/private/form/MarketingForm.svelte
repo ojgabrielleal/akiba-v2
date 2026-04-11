@@ -21,7 +21,7 @@
 
     $: if (identifier) {
         axios
-            .get(`/painel/marketing/repository/${identifier}`)
+            .get(`/marketing/repository/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
 
@@ -39,8 +39,8 @@
 
     const submit = () => {
         let url = identifier
-            ? `/painel/marketing/repository/${identifier}`
-            : "/painel/marketing/repository";
+            ? `/marketing/repository/${identifier}`
+            : "/marketing/repository";
 
         $form.post(url, {
             preserveScroll: true,

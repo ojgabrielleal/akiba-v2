@@ -30,7 +30,7 @@
 
     const requestDeactivateUser = (user) => {
         router.delete(
-            `/painel/adms/user/${user}`,
+            `/adms/user/${user}`,
             {},
             {
                 preserveScroll: true,
@@ -117,7 +117,7 @@
                                         />
                                     </button>
                                 {/if}
-                                <a href={`/painel/profile/${item.uuid}`} aria-label="Editar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
+                                <a href={`/profile/${item.uuid}`} aria-label="Editar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
                                     <img
                                         src="/svg/default/edit.svg"
                                         alt=""

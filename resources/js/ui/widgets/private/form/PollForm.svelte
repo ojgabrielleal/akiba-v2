@@ -20,7 +20,7 @@
     });
 
     if (identifier) {
-        axios.get(`/painel/medias/poll/${identifier}`).then((response) => {
+        axios.get(`/medias/poll/${identifier}`).then((response) => {
             const data = response.data.data;
 
             $form.question = data.question;
@@ -34,8 +34,8 @@
     const submit = () => {
         const method = identifier ? "patch" : "post";
         const url = identifier
-            ? `/painel/medias/poll/${identifier}`
-            : "/painel/medias/poll";
+            ? `/medias/poll/${identifier}`
+            : "/medias/poll";
 
         $form[method](url, {
             preserveScroll: true,

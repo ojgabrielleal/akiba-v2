@@ -31,8 +31,8 @@
 
     const submit = () => {
         let url = review
-            ? `/painel/reviews/${review?.data.uuid}`
-            : `/painel/reviews`;
+            ? `/reviews/${review?.data.uuid}`
+            : `/reviews`;
 
         $form.post(url, {
             preserveState: review,
@@ -80,13 +80,13 @@
 
 <Section title={review ? "Atualizar review" : "Criar review"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
-        <a preserveState={false} href="/painel/materias" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <a preserveState={false} href="/materias" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
             Matérias
         </a>
-        <a preserveState={false} href="/painel/reviews" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <a preserveState={false} href="/reviews" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
             Reviews
         </a>
-        <a preserveState={false} href="/painel/eventos" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <a preserveState={false} href="/eventos" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
             Eventos
         </a>
     </div>

@@ -45,7 +45,7 @@
                                     />
                                 </a>
                                 {#if can.update}
-                                    <a href={`/painel/materias/${item.uuid}`} aria-label="Editar" class="cursor-pointer">
+                                    <a href={`/materias/${item.uuid}`} aria-label="Editar" class="cursor-pointer">
                                         <img src="/svg/default/edit.svg"
                                             alt=""
                                             aria-hidden="true"

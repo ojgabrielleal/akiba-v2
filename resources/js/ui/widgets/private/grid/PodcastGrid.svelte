@@ -12,7 +12,7 @@
 
     const requestDeactivatePodcast = (podcast) => {
         router.delete(
-            `/painel/podcasts/${podcast}`,
+            `/podcasts/${podcast}`,
             {},
             {
                 preserveScroll: true,
@@ -45,7 +45,7 @@
                             <dd class="flex items-center gap-3">
                                 {#if can.update}
                                     <a
-                                        href={`/painel/podcasts/${item.uuid}`}
+                                        href={`/podcasts/${item.uuid}`}
                                         aria-label="Editar"
                                     >
                                         <img

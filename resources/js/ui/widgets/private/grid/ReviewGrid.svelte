@@ -22,7 +22,7 @@
                                 <a href={`/reviews/${item.slug}`} target="_blank" aria-label="Visualizar" class="cursor-pointer">
                                     <img src="/svg/default/eye.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy"/>
                                 </a>
-                                <a href={`/painel/reviews/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
+                                <a href={`/reviews/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
                                     <img src="/svg/default/edit.svg" alt="" aria-hidden="true" class="w-4 filter-neutral-aurora" loading="lazy"/>
                                 </a>
                             </div>

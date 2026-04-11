@@ -8,6 +8,6 @@
 <Meta meta={{ title: "Eventos" }} />
 <Layout>
     <EventForm/>
-    <EventGrid title="Todos os Eventos" view="https://akiba.com.br/eventos/" edit="/painel/eventos/"/>
+    <EventGrid title="Todos os Eventos" view="https://akiba.com.br/eventos/" edit="/eventos/"/>
 </Layout>
     

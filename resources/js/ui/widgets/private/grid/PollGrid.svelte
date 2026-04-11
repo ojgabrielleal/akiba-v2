@@ -27,7 +27,7 @@
         const option = formData.get("option");
 
         router.post(
-            `/painel/medias/poll/vote/${option}`,
+            `/medias/poll/vote/${option}`,
             {},
             {
                 preserveScroll: true,
@@ -45,7 +45,7 @@
 
     const requestDeactivatePoll = (poll) => {
         router.delete(
-            `/painel/medias/poll/${poll}`,
+            `/medias/poll/${poll}`,
             {},
             {
                 preserveScroll: true,
