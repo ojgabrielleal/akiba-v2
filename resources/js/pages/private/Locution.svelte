@@ -8,7 +8,7 @@
     $: ({ user, onair } = $page.props);
 
     const redirectToDashboard = () => {
-        router.get("/dashboard/", {}, {
+        router.get("/panel/dashboard/", {}, {
             preserveScroll: true,
         });
     }

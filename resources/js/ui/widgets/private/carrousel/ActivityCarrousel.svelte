@@ -18,7 +18,7 @@
     let identifier;
 
     const requestConfirmActivityParticipant = (activity) => {
-        router.post(`/dashboard/activity/${activity}/confirm`, {},
+        router.post(`/panel/dashboard/activity/${activity}/confirm`, {},
             { preserveScroll: true },
         );
     };

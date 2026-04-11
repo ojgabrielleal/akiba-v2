@@ -11,12 +11,8 @@
     };
 
     const requestDeactivatePodcast = (podcast) => {
-        router.delete(
-            `/podcasts/${podcast}`,
-            {},
-            {
-                preserveScroll: true,
-            },
+        router.delete(`/panel/podcasts/${podcast}`, {},
+            { preserveScroll: true },
         );
     };
 </script>

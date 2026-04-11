@@ -17,7 +17,7 @@
     });
 
     const submit = () => {
-        $form.post("/song-request", {
+        $form.post("/panel/song-request", {
             onSuccess: () => {
                 success = true;
             },
@@ -42,8 +42,7 @@
         $form.anime = null;
         $form.music = null;
 
-        axios
-            .get(`https://api.jikan.moe/v4/anime?q=${value}`)
+        axios.get(`https://api.jikan.moe/v4/anime?q=${value}`)
             .then((response) => {
                 const filtered = response.data.data.filter(
                     (item) => item.type === "TV",
@@ -64,8 +63,7 @@
     };
 
     const getAnimeThemesJikanApi = (animeId) => {
-        axios
-            .get(`https://api.jikan.moe/v4/anime/${animeId}/themes`)
+        axios.get(`https://api.jikan.moe/v4/anime/${animeId}/themes`)
             .then((response) => {
                 const { openings, endings } = response.data.data;
 

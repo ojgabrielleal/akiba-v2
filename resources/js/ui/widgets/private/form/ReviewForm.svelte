@@ -31,8 +31,8 @@
 
     const submit = () => {
         let url = review
-            ? `/reviews/${review?.data.uuid}`
-            : `/reviews`;
+            ? `/panel/reviews/${review?.data.uuid}`
+            : `/panel/reviews`;
 
         $form.post(url, {
             preserveState: review,

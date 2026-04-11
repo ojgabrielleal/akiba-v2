@@ -40,7 +40,7 @@
     }
 
     const submit = () => {
-        $form.post(`/profile/${profile.data.uuid}`, {
+        $form.post(`/panel/profile/${profile.data.uuid}`, {
             preserveScroll: true,
         });
     };

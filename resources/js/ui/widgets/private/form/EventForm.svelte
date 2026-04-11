@@ -33,8 +33,8 @@
 
     const submit = () => {
         let url = event
-            ? `/eventos/${event.data.uuid}`
-            : "/eventos";
+            ? `/panel/eventos/${event.data.uuid}`
+            : "/panel/eventos";
 
         $form.post(url, {
             preserveState: event,

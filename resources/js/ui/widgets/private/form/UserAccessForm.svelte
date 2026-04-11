@@ -17,16 +17,8 @@
         roles: null,
     });
 
-    const submit = () => {
-        $form.patch(`/adms/user/${identifier}`, {
-            preserveScroll: true,
-            onSuccess: () => close(),
-        });
-    };
-
     $: if (identifier) {
-        axios
-            .get(`/adms/user/${identifier}`)
+        axios.get(`/panel/adms/user/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
                 $form.roles = data.roles.map((role) => role.name);
@@ -36,6 +28,14 @@
                 close();
             });
     }
+    
+    const submit = () => {
+        $form.patch(`/panel/adms/user/${identifier}`, {
+            preserveScroll: true,
+            onSuccess: () => close(),
+        });
+    };
+
 </script>
 
 <form on:submit|preventDefault={submit}>

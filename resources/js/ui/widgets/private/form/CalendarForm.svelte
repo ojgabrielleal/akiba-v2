@@ -22,7 +22,7 @@
     });
 
     $:if(identifier){
-        axios.get(`/adms/calendar/${identifier}`)
+        axios.get(`/panel/adms/calendar/${identifier}`)
         .then((response)=>{
             const data = response.data.data 
 
@@ -37,8 +37,8 @@
     const submit = () => {
         const method = identifier ? "patch" : "post";
         const url = identifier
-            ? `/adms/calendar/${identifier}`
-            : "/adms/calendar";
+            ? `/panel/adms/calendar/${identifier}`
+            : "/panel/adms/calendar";
 
         $form[method](url, {
             preserveScroll: true,

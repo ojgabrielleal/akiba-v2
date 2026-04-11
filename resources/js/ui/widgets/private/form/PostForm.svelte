@@ -64,8 +64,8 @@
 
     const submit = (event) => {
         let url = post
-            ? `/materias/${post.data.uuid}`
-            : "/materias";
+            ? `/panel/materias/${post.data.uuid}`
+            : "/panel/materias";
 
         $form.type = event.submitter.value;
         $form.post(url, {
