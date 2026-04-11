@@ -193,5 +193,5 @@ $stream = function () {
     });
 };
 
-Route::prefix('stream')->group($stream);
 Route::domain('stream.akiba.com.br')->group($stream);
+Route::prefix('stream')->group($stream);
