@@ -19,28 +19,24 @@ use App\Http\Controllers\Private\ProfileController;
 // Provisory controllers
 use App\Http\Controllers\Provisory\HomeController;
 
-// Cast controllers
-use App\Http\Controllers\Cast\CastController;
-
-
 /*
 |--------------------------------------------------------------------------
 | Provisory routes
 |--------------------------------------------------------------------------
 */
-$provisory = function () {
+Route::prefix("")->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('', 'render')->name('home');
         Route::post('song-request','createSongRequest');
     });
-};
+});
 
 /*
 |--------------------------------------------------------------------------
 | Private routes
 |--------------------------------------------------------------------------
 */
-$private = function () {
+Route::prefix('painel')->group(function () {
     Route::controller(LoginController::class)->group(function () {
         Route::get('', 'render')->name('login');
         Route::post('auth', 'login');
@@ -178,29 +174,4 @@ $private = function () {
             Route::get('{user:uuid}', 'render')->name('painel.profile');
         });
     });
-};
-
-/*
-|--------------------------------------------------------------------------
-| Stream routes
-|--------------------------------------------------------------------------
-*/
-$stream = function () {
-    Route::controller(CastController::class)->group(function () {
-        Route::get('', 'redirectStream');
-        Route::get('metadata', 'showMetadata');
-    });
-};
-
-/*
-|--------------------------------------------------------------------------
-| Domains first
-|--------------------------------------------------------------------------
-*/
-Route::domain('stream.akiba.com.br')->group($stream);
-Route::prefix('streaming')->group($stream);
-
-Route::domain('painel.akiba.com.br')->group($private);
-Route::prefix('panel')->group($private);
-
-Route::prefix('')->group($provisory);
+});
