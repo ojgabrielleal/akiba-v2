@@ -198,9 +198,9 @@ $stream = function () {
 |--------------------------------------------------------------------------
 */
 Route::domain('stream.akiba.com.br')->group($stream);
-Route::prefix('cast')->group($stream);
+Route::prefix('streaming')->group($stream);
 
 Route::domain('painel.akiba.com.br')->group($private);
-Route::prefix('admin')->group($private);
+Route::prefix('panel')->group($private);
 
 Route::prefix('')->group($provisory);
