@@ -11,7 +11,7 @@ let metadataInterval;
 
 const getAudio = () => {
     if (!audio) {
-        audio = new Audio("/streaming");
+        audio = new Audio("/api/streaming");
         audio.volume = get(player).volume;
 
         audio.addEventListener('playing', () => {
@@ -34,7 +34,7 @@ const getAudio = () => {
 
 const updateMetadata = async () => {
     try {
-        const { data: response } = await axios.get('/streaming/metadata');
+        const { data: response } = await axios.get('/api/streaming/metadata');
 
         const info = response.data[0];
 

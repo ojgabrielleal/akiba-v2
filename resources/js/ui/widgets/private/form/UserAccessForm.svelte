@@ -18,7 +18,7 @@
     });
 
     $: if (identifier) {
-        axios.get(`/panel/adms/user/${identifier}`)
+        axios.get(`/painel/adms/user/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
                 $form.roles = data.roles.map((role) => role.name);
@@ -30,7 +30,7 @@
     }
     
     const submit = () => {
-        $form.patch(`/panel/adms/user/${identifier}`, {
+        $form.patch(`/painel/adms/user/${identifier}`, {
             preserveScroll: true,
             onSuccess: () => close(),
         });

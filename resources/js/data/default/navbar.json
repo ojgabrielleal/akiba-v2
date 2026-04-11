@@ -3,60 +3,60 @@
         "name": "Dashboard",
         "icon": "/svg/default/dashboard.svg",
         "permission": "dashboard.module.view",
-        "address": "/panel/dashboard"
+        "address": "/painel/dashboard"
     },
     {
         "name": "Materias",
         "icon": "/svg/default/materials.svg",
         "permission": "post.module.view",
-        "address": "/panel/materias"
+        "address": "/painel/materias"
     },
     {
         "name": "Locução",
         "icon": "/svg/default/locution.svg",
         "permission": "locution.module.view",
-        "address": "/panel/locucao"
+        "address": "/painel/locucao"
     },
     {
         "name": "Rádio",
         "icon": "/svg/default/radio.svg",
         "permission": "radio.module.view",
-        "address": "/panel/radio"
+        "address": "/painel/radio"
     },
     {
         "name": "Podcasts",
         "icon": "/svg/default/podcasts.svg",
         "permission": "podcast.module.view",
-        "address": "/panel/podcasts"
+        "address": "/painel/podcasts"
     },
     {
         "name": "Marketing",
         "icon": "/svg/default/marketing.svg",
         "permission": "marketing.module.view",
-        "address": "/panel/marketing"
+        "address": "/painel/marketing"
     },
     {
         "name": "Mídias",
         "icon": "/svg/default/media.svg",
         "permission": "media.module.view",
-        "address": "/panel/medias"
+        "address": "/painel/medias"
     },
     {
         "name": "Administração",
         "icon": "/svg/default/adms.svg",
         "permission": "administration.module.view",
-        "address": "/panel/adms"
+        "address": "/painel/adms"
     },
     {
         "name": "Logs",
         "icon": "/svg/default/logs.svg",
         "permission": "log.module.view",
-        "address": "/panel/logs"
+        "address": "/painel/logs"
     },
     {
         "name": "Avisos",
         "icon": "/svg/default/alerts.svg",
         "permission": "warning.module.view",
-        "address": "/panel/alerts"
+        "address": "/painel/alerts"
     }
 ]

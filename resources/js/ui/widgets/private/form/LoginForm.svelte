@@ -7,7 +7,7 @@
     });
 
     const submit = () => {
-        $form.post("/panel/auth");
+        $form.post("/painel/auth");
     }
 </script>
 

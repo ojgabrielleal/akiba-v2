@@ -23,7 +23,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/panel/dashboard');
+            return redirect('/painel/dashboard');
         }
 
         return Inertia::render($this->render)->with('flash', [

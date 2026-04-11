@@ -18,14 +18,14 @@
         formData.append("_method", "PATCH");
         formData.append("image_ranking", event.target.files[0]);
 
-        router.post(`/panel/radio/music-ranking/${uuid}`, formData, {
+        router.post(`/painel/radio/music-ranking/${uuid}`, formData, {
             preserveScroll: true,
             forceFormData: true,
         });
     };
 
     const setRanking = () => {
-        router.post("/panel/radio/music-ranking", {}, {
+        router.post("/painel/radio/music-ranking", {}, {
             preserveScroll: true,
         });
     };

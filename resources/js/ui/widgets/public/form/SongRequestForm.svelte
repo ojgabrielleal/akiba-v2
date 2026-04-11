@@ -17,7 +17,7 @@
     });
 
     const submit = () => {
-        $form.post("/panel/song-request", {
+        $form.post("/painel/song-request", {
             onSuccess: () => {
                 success = true;
             },

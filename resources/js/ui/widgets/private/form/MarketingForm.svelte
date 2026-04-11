@@ -20,7 +20,7 @@
     });
 
     $: if (identifier) {
-        axios.get(`/panel/marketing/repository/${identifier}`)
+        axios.get(`/painel/marketing/repository/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
 

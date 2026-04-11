@@ -29,7 +29,7 @@
     let identifier;
 
     const requestDeactivateUser = (user) => {
-        router.delete(`/panel/adms/user/${user}`, {},
+        router.delete(`/painel/adms/user/${user}`, {},
             { preserveScroll: true },
         );
     };

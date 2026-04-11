@@ -21,7 +21,7 @@
     });
 
     $: if (identifier) {
-        axios.get(`/panel/adms/activity/${identifier}`).then((response) => {
+        axios.get(`/painel/adms/activity/${identifier}`).then((response) => {
             const data = response.data.data;
 
             $form.title = data.title;
@@ -36,8 +36,8 @@
     const submit = () => {
         const method = identifier ? "patch" : "post";
         const url = identifier
-            ? `/panel/adms/activity/${identifier}`
-            : "/panel/adms/activity";
+            ? `/painel/adms/activity/${identifier}`
+            : "/painel/adms/activity";
 
         $form[method](url, {
             preserveScroll: true,

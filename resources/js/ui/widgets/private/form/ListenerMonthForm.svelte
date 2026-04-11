@@ -15,7 +15,7 @@
     });
 
     onMount(()=>{
-        axios.get('/panel/radio/listener-month/found')
+        axios.get('/painel/radio/listener-month/found')
         .then((response)=>{
             const listenerMonthFound = response.data.data;
 
@@ -31,7 +31,7 @@
     });
 
     const submit = () => {
-        $form.post('/panel/radio/listener-month', {
+        $form.post('/painel/radio/listener-month', {
             preserveScroll: true,
             onSuccess: () => close()
         })
