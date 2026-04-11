@@ -3,60 +3,60 @@
         "name": "Dashboard",
         "icon": "/svg/default/dashboard.svg",
         "permission": "dashboard.module.view",
-        "address": "/dashboard"
+        "address": "/panel/dashboard"
     },
     {
         "name": "Materias",
         "icon": "/svg/default/materials.svg",
         "permission": "post.module.view",
-        "address": "/materias"
+        "address": "/panel/materias"
     },
     {
         "name": "Locução",
         "icon": "/svg/default/locution.svg",
         "permission": "locution.module.view",
-        "address": "/locucao"
+        "address": "/panel/locucao"
     },
     {
         "name": "Rádio",
         "icon": "/svg/default/radio.svg",
         "permission": "radio.module.view",
-        "address": "/radio"
+        "address": "/panel/radio"
     },
     {
         "name": "Podcasts",
         "icon": "/svg/default/podcasts.svg",
         "permission": "podcast.module.view",
-        "address": "/podcasts"
+        "address": "/panel/podcasts"
     },
     {
         "name": "Marketing",
         "icon": "/svg/default/marketing.svg",
         "permission": "marketing.module.view",
-        "address": "/marketing"
+        "address": "/panel/marketing"
     },
     {
         "name": "Mídias",
         "icon": "/svg/default/media.svg",
         "permission": "media.module.view",
-        "address": "/medias"
+        "address": "/panel/medias"
     },
     {
         "name": "Administração",
         "icon": "/svg/default/adms.svg",
         "permission": "administration.module.view",
-        "address": "/adms"
+        "address": "/panel/adms"
     },
     {
         "name": "Logs",
         "icon": "/svg/default/logs.svg",
         "permission": "log.module.view",
-        "address": "/logs"
+        "address": "/panel/logs"
     },
     {
         "name": "Avisos",
         "icon": "/svg/default/alerts.svg",
         "permission": "warning.module.view",
-        "address": "/alerts"
+        "address": "/panel/alerts"
     }
 ]
