@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Private
+// Private controllers
 use App\Http\Controllers\Private\LoginController;
 use App\Http\Controllers\Private\AdministrationController;
 use App\Http\Controllers\Private\LocutionController;
@@ -16,13 +16,15 @@ use App\Http\Controllers\Private\RepositoryController;
 use App\Http\Controllers\Private\MediaController;
 use App\Http\Controllers\Private\ProfileController;
 
-// Provisory
+// Provisory controllers
 use App\Http\Controllers\Provisory\HomeController;
 
+// Cast controllers
+use App\Http\Controllers\Cast\CastController;
 
 /*
 |--------------------------------------------------------------------------
-| Private routes
+| Provisory routes
 |--------------------------------------------------------------------------
 */
 Route::controller(HomeController::class)->group(function () {
@@ -35,12 +37,12 @@ Route::controller(HomeController::class)->group(function () {
 | Private routes
 |--------------------------------------------------------------------------
 */
-
-Route::prefix('painel')->group(function () {
+$private = function () {
     Route::controller(LoginController::class)->group(function () {
         Route::get('', 'render')->name('login');
         Route::post('auth', 'login');
     });
+
     Route::middleware(['inertia', 'auth'])->group(function () {
         Route::prefix('dashboard')->controller(DashboardController::class)->group(function () {
             Route::get('', 'render')->name('painel.dashboard');
@@ -51,24 +53,28 @@ Route::prefix('painel')->group(function () {
                 Route::post('{task:uuid}/complete', 'markTaskCompleted');
             });
         });
+
         Route::prefix('materias')->controller(PostController::class)->group(function () {
             Route::get('', 'render')->name('painel.materias');
             Route::post('', 'createPost');
             Route::patch('{post:uuid}', 'updatePost');
             Route::get('{post:uuid}', 'showPost');
-            });
+        });
+
         Route::prefix('reviews')->controller(ReviewController::class)->group(function () {
             Route::get('', 'render')->name('painel.reviews');
             Route::post('', 'createReview');
             Route::patch('{review:uuid}', 'updateReview');
             Route::get('{review:uuid}', 'showReview');
         });
+
         Route::prefix('eventos')->controller(EventController::class)->group(function () {
             Route::get('', 'render')->name('painel.eventos');
             Route::post('', 'createEvent');
             Route::patch('{event:uuid}', 'updateEvent');
             Route::get('{event:uuid}', 'showEvent');
         });
+
         Route::prefix('locucao')->controller(LocutionController::class)->group(function () {
             Route::prefix('locution')->group(function () {
                 Route::post('start/{program:uuid}', 'startLocution');
@@ -81,6 +87,7 @@ Route::prefix('painel')->group(function () {
             });
             Route::get('', 'render')->name('painel.locucao');
         });
+
         Route::prefix('radio')->controller(RadioController::class)->group(function () {
             Route::prefix('program')->group(function () {
                 Route::post('', 'createProgram');
@@ -98,6 +105,7 @@ Route::prefix('painel')->group(function () {
             });
             Route::get('', 'render')->name('painel.radio');
         });
+
         Route::prefix('podcasts')->controller(PodcastController::class)->group(function () {
             Route::get('', 'render')->name('painel.podcasts');
             Route::post('', 'createPodcast');
@@ -105,6 +113,7 @@ Route::prefix('painel')->group(function () {
             Route::delete('{podcast:uuid}', 'deactivatePodcast');
             Route::get('{podcast:uuid}', 'showPodcast');
         });
+
         Route::prefix('marketing')->controller(RepositoryController::class)->group(function () {
             Route::prefix('repository')->group(function () {
                 Route::post('', 'createRepository');
@@ -114,6 +123,7 @@ Route::prefix('painel')->group(function () {
             });
             Route::get('', 'render')->name('painel.marketing');
         });
+
         Route::prefix('medias')->controller(MediaController::class)->group(function () {
             Route::prefix('event')->group(function () {
                 Route::delete('{event:uuid}', 'deactivateEvent');
@@ -129,6 +139,7 @@ Route::prefix('painel')->group(function () {
             });
             Route::get('', 'render')->name('painel.medias');
         });
+
         Route::prefix('adms')->controller(AdministrationController::class)->group(function () {
             Route::prefix('user')->group(function () {
                 Route::post('', 'createUser');
@@ -158,9 +169,29 @@ Route::prefix('painel')->group(function () {
             });
             Route::get('', 'render')->name('painel.adms');
         });
+
         Route::prefix('profile')->controller(ProfileController::class)->group(function () {
             Route::patch('{user:uuid}', 'updateProfile');
             Route::get('{user:uuid}', 'render')->name('painel.profile');
         });
     });
-});
+};
+
+Route::domain('painel.akiba.com.br')->group($private);
+Route::prefix('painel')->group($private);
+
+
+/*
+|--------------------------------------------------------------------------
+| Stream routes
+|--------------------------------------------------------------------------
+*/
+$stream = function () {
+    Route::controller(CastController::class)->group(function () {
+        Route::get('', 'redirectStream');
+        Route::get('metadata', 'showMetadata');
+    });
+};
+
+Route::prefix('stream')->group($stream);
+Route::domain('stream.akiba.com.br')->group($stream);
