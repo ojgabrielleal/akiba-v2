@@ -24,16 +24,6 @@ use App\Http\Controllers\Cast\CastController;
 
 /*
 |--------------------------------------------------------------------------
-| Provisory routes
-|--------------------------------------------------------------------------
-*/
-Route::controller(HomeController::class)->group(function () {
-    Route::get('', 'render')->name('home');
-    Route::post('song-request','createSongRequest');
-});
-
-/*
-|--------------------------------------------------------------------------
 | Private routes
 |--------------------------------------------------------------------------
 */
@@ -177,10 +167,6 @@ $private = function () {
     });
 };
 
-Route::domain('painel.akiba.com.br')->group($private);
-Route::prefix('painel')->group($private);
-
-
 /*
 |--------------------------------------------------------------------------
 | Stream routes
@@ -193,5 +179,23 @@ $stream = function () {
     });
 };
 
+/*
+|--------------------------------------------------------------------------
+| Domains first
+|--------------------------------------------------------------------------
+*/
 Route::domain('stream.akiba.com.br')->group($stream);
 Route::prefix('stream')->group($stream);
+
+Route::domain('painel.akiba.com.br')->group($private);
+Route::prefix('painel')->group($private);
+
+/*
+|--------------------------------------------------------------------------
+| Provisory routes
+|--------------------------------------------------------------------------
+*/
+Route::controller(HomeController::class)->group(function () {
+    Route::get('', 'render')->name('home');
+    Route::post('song-request','createSongRequest');
+});
