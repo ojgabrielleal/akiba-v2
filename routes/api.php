@@ -11,7 +11,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 */
 
-Route::prefix('streaming')->group(function () {
+Route::prefix('stream')->group(function () {
     Route::controller(CastController::class)->group(function () {
         Route::get('', 'redirectStream');
         Route::get('metadata', 'showMetadata');
