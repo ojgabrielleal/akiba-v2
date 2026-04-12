@@ -1,7 +1,6 @@
 <script>
     import { useForm, page } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
-    import { Preview, Wysiwyg } from "@/ui/components/private";
+    import { Section, Preview, Wysiwyg } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
     $: ({ event } = $page.props);

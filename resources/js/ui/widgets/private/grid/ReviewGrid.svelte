@@ -2,8 +2,7 @@
     export let title;
         
     import { page } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
-    import { Pagination } from "@/ui/components/private"
+    import { Section, Pagination } from "@/ui/components/private"
 
     $: ({ reviews } = $page.props);
 </script>

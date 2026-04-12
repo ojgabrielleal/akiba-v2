@@ -2,7 +2,7 @@
     import { useForm, page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
-    import iconsJson from "@/data/locution/icons.json";
+    import { locutionIcons } from "@/data";
 
     $: ({ programs } = $page.props);
 
@@ -59,7 +59,7 @@
                 Escolha um icone
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-9 gap-30 lg:gap-y-30 lg:gap-x-5 mt-28">
-                {#each iconsJson as item, index}
+                {#each locutionIcons as item, index}
                     <button type="button" aria-label={`Icon ${index}`} on:click={() => { $form.icon = item.url; }} class={["cursor-pointer w-[9.55rem] h-12 flex justify-end items-end rounded-lg bg-neutral-aurora transition duration-300 ease-in-out",
                         { "opacity-50 scale-90": $form.icon === item.url },
                         { "opacity-100": $form.icon !== item.url },

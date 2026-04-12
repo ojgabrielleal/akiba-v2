@@ -1,9 +1,8 @@
 <script>
     import { useForm, page } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
-    import { Preview, Wysiwyg } from "@/ui/components/private";
+    import { Section, Preview, Wysiwyg } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
-    import tagJson from "@/data/posts/tag.json";
+    import { postTags } from "@/data";
 
     $: ({ post } = $page.props);
 
@@ -158,7 +157,7 @@
                         class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg pl-4"
                         bind:value={$form.categories[0].name}
                     >
-                        {#each tagJson as tag}
+                        {#each postTags as tag}
                             <option value={tag.value}>{tag.label}</option>
                         {/each}
                     </select>
@@ -173,7 +172,7 @@
                         class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg pl-4"
                         bind:value={$form.categories[1].name}
                     >
-                        {#each tagJson as item}
+                        {#each postTags as item}
                             <option value={item.value}>{item.label}</option>
                         {/each}
                     </select>

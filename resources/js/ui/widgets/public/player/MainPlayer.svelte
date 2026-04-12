@@ -1,7 +1,7 @@
 <script>
     import { page, usePoll } from "@inertiajs/svelte";
     import { Modal } from "@/ui/components/public";
-    import { SongRequestForm } from "@/ui/widgets/public/form";
+    import { SongRequestForm } from "@/ui/widgets/public";
     import { player, toggleAudio, setVolume } from "@/store";
 
     $: ({ onair } = $page.props);

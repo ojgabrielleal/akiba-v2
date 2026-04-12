@@ -2,9 +2,9 @@
     export let close = () => {};
 
     import { onMount } from 'svelte';
+    import axios from 'axios';
     import { useForm } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
-    import axios from 'axios';
     
     let form = useForm({
         avatar: null,

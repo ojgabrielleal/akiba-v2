@@ -4,9 +4,9 @@
 
     import { page } from "@inertiajs/svelte";
     import { Offcanvas, Section } from "@/ui/components/private/";
-    import { CalendarForm } from "@/ui/widgets/private/form";
+    import { CalendarForm } from "@/ui/widgets/private";
     import { hasPermission } from "@/utils";
-    import tag from "@/data/calendar/tag.json";
+    import { calendarTags } from "@/data";
 
     $: ({ calendar } = $page.props);
 
@@ -54,7 +54,7 @@
         </div>
     {/if}
     <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
-        {#each tag as item}
+        {#each calendarTags as item}
             <span class={`h-10 text-lg font-noto-sans font-bold uppercase italic rounded-lg flex justify-center items-center ${item.color} ${item.textcolor}`}>
                 {item.label}
             </span>

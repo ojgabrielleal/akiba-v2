@@ -2,12 +2,8 @@
     export let title;
 
     import { page, router } from "@inertiajs/svelte";
-    import { Section, Offcanvas } from "@/ui/components/private/";
-    import {
-        UserForm,
-        UserAccessForm,
-        ActivityForm,
-    } from "@/ui/widgets/private/form";
+    import { Section, Offcanvas } from "@/ui/components/private";
+    import { UserForm, UserAccessForm, ActivityForm } from "@/ui/widgets/private";
     import { hasPermission } from "@/utils";
 
     $: ({ users } = $page.props);

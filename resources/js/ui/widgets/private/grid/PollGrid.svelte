@@ -1,8 +1,7 @@
 <script>
     import { router, page } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
-    import { Offcanvas } from "@/ui/components/private";
-    import { PollForm } from "@/ui/widgets/private/form";
+    import { Section, Offcanvas } from "@/ui/components/private";
+    import { PollForm } from "@/ui/widgets/private";
     import { hasPermission } from "@/utils";
 
     $: ({ polls } = $page.props);

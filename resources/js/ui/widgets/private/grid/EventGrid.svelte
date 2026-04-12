@@ -3,8 +3,7 @@
     export let variant = "default";
 
     import { router, page } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
-    import { Pagination } from "@/ui/components/private";
+    import { Section, Pagination } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
     $: ({ events } = $page.props);

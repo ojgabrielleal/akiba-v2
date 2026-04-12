@@ -1,9 +1,7 @@
 <script>
-    import { Meta } from "@/config/meta";
+    import { Meta } from "@/config";
     import { Layout } from "@/layouts/private";
-    import { UserGrid, CalendarGrid } from "@/ui/widgets/private/grid";
-    import { RoleTable } from "@/ui/widgets/private/table";
-    import { ActivityCarrousel } from "@/ui/widgets/private/carrousel";
+    import { UserGrid, CalendarGrid, RoleTable, ActivityCarrousel } from "@/ui/widgets/private";
 </script>
 
 <Meta meta={{ title: "ADM's" }} />

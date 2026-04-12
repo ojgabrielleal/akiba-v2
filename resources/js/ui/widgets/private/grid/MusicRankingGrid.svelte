@@ -2,8 +2,7 @@
     export let title;
 
     import { page, router } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
-    import { Preview } from "@/ui/components/private";
+    import { Section, Preview } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
     $: ({ musicranking } = $page.props);

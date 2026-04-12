@@ -2,8 +2,7 @@
     import { onMount } from "svelte";
     import { page } from "@inertiajs/svelte";
     import toast, { Toaster } from "svelte-hot-french-toast";
-    import { Navbar } from "@/ui/widgets/private/navbar";
-    import { CastMetrics } from "@/ui/widgets/private/metrics";
+    import { Navbar, CastMetricsGrid } from "@/ui/widgets/private";
 
     $: ({ flash } = $page.props);
 
@@ -28,6 +27,6 @@
 <footer>
     <div class="h-20"></div>
     <div class="w-full fixed bottom-0 z-50">
-        <CastMetrics />
+        <CastMetricsGrid />
     </div>
 </footer>

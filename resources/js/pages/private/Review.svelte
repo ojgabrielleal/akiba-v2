@@ -1,12 +1,11 @@
 <script>
-    import { Meta } from "@/config/meta";
+    import { Meta } from "@/config";
     import { Layout } from "@/layouts/private";
-    import { ReviewForm } from "@/ui/widgets/private/form";
-    import { ReviewGrid } from "@/ui/widgets/private/grid";
+    import { ReviewForm, ReviewGrid } from "@/ui/widgets/private";
 </script>
 
 <Meta meta={{ title: "Reviews" }} />
 <Layout>
     <ReviewForm />
-    <ReviewGrid title="Todos os reviews"/>
+    <ReviewGrid title="Todos os reviews" />
 </Layout>

@@ -1,8 +1,7 @@
 <script>
-    import { Meta } from "@/config/meta";
+    import { Meta } from "@/config";
     import { Layout } from "@/layouts/private";
-    import { PostForm } from "@/ui/widgets/private/form";
-    import { PostGrid } from "@/ui/widgets/private/grid";
+    import { PostForm, PostGrid } from "@/ui/widgets/private";
 </script>
 
 <Meta meta={{ title: "Matérias" }} />

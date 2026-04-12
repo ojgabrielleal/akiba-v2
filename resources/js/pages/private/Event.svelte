@@ -1,13 +1,15 @@
-<script>    
-    import { Meta } from "@/config/meta";
+<script>
+    import { Meta } from "@/config";
     import { Layout } from "@/layouts/private";
-    import { EventForm } from "@/ui/widgets/private/form";
-    import { EventGrid } from "@/ui/widgets/private/grid";
+    import { EventForm, EventGrid } from "@/ui/widgets/private";
 </script>
 
 <Meta meta={{ title: "Eventos" }} />
 <Layout>
-    <EventForm/>
-    <EventGrid title="Todos os Eventos" view="https://akiba.com.br/eventos/" edit="/eventos/"/>
+    <EventForm />
+    <EventGrid
+        title="Todos os Eventos"
+        view="https://akiba.com.br/eventos/"
+        edit="/eventos/"
+    />
 </Layout>
-    

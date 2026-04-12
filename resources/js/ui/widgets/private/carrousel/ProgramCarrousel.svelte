@@ -3,7 +3,7 @@
 
     import { router, page } from "@inertiajs/svelte";
     import { Offcanvas, Section } from "@/ui/components/private/";
-    import { ProgramForm } from "@/ui/widgets/private/form";
+    import { ProgramForm } from "@/ui/widgets/private";
     import { scrollx, hasPermission } from "@/utils";
 
     $: ({ programs } = $page.props);

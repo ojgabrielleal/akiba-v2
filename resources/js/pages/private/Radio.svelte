@@ -1,14 +1,18 @@
 <script>
-    import { Meta } from "@/config/meta";
+    import { Meta } from "@/config";
     import { Layout } from "@/layouts/private";
-    import { ProgramScheduleGrid, MusicRankingGrid, ListenerMonthGrid } from "@/ui/widgets/private/grid"
-    import { ProgramCarrousel } from "@/ui/widgets/private/carrousel"
+    import {
+        ProgramScheduleGrid,
+        MusicRankingGrid,
+        ListenerMonthGrid,
+        ProgramCarrousel,
+    } from "@/ui/widgets/private";
 </script>
 
 <Meta meta={{ title: "Rádio" }} />
 <Layout>
-    <ProgramCarrousel title="Programas cadastrados"/>
-    <ProgramScheduleGrid title="Grade de programação"/>
-    <MusicRankingGrid title="Ranking de música"/>
-    <ListenerMonthGrid title="Ouvinte do mês"/>
+    <ProgramCarrousel title="Programas cadastrados" />
+    <ProgramScheduleGrid title="Grade de programação" />
+    <MusicRankingGrid title="Ranking de música" />
+    <ListenerMonthGrid title="Ouvinte do mês" />
 </Layout>

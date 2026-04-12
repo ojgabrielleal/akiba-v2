@@ -1,8 +1,7 @@
 <script>
     import { page, router } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
-    import { Offcanvas } from "@/ui/components/private";
-    import { MarketingForm } from "@/ui/widgets/private/form";
+    import { Section, Offcanvas } from "@/ui/components/private";
+    import { MarketingForm } from "@/ui/widgets/private";
     import { hasPermission } from "@/utils";
 
     $: ({ repositories } = $page.props);

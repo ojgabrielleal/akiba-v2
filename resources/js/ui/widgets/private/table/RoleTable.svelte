@@ -2,8 +2,8 @@
     export let title;
 
     import { router, page } from "@inertiajs/svelte";
-    import { Section, Offcanvas } from "@/ui/components/private/";
-    import { RoleForm } from "@/ui/widgets/private/form";
+    import { Section, Offcanvas } from "@/ui/components/private";
+    import { RoleForm } from "@/ui/widgets/private";
     import { hasPermission } from "@/utils";
 
     $: ({ roles } = $page.props);

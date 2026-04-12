@@ -1,7 +1,7 @@
 <script>
     import { page } from "@inertiajs/svelte";
     import { hasPermission } from "@/utils";
-    import navbar from "@/data/default/navbar.json";
+    import { navbar } from "@/data";
 
     $: ({ user } = $page.props);
 

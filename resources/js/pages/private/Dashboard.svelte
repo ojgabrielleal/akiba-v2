@@ -1,14 +1,19 @@
 <script>
     import { page } from "@inertiajs/svelte";
-    import { Meta } from "@/config/meta";
+    import { Meta } from "@/config";
     import { Layout } from "@/layouts/private/";
-    import { GreatingHero } from "@/ui/widgets/private/hero";
-    import { ActivityCarrousel, TaskCarrousel } from "@/ui/widgets/private/carrousel";
-    import { PostGrid, CalendarGrid, RapidAccess } from "@/ui/widgets/private/grid";
+    import {
+        GreatingHero,
+        ActivityCarrousel,
+        TaskCarrousel,
+        PostGrid,
+        CalendarGrid,
+        RapidAccessGrid,
+    } from "@/ui/widgets/private";
 
     $: ({ user } = $page.props);
 
-     const phraseSwitchHero = (nickname) => {
+    const phraseSwitchHero = (nickname) => {
         const phrases = [
             `Oi, ${nickname}! Que bom te ver.`,
             `Bem-vindo(a) de volta, ${nickname}!`,
@@ -22,18 +27,21 @@
             `${nickname}, como você está?`,
             `Hora de começar, ${nickname}!`,
         ];
-        
+
         const index = Math.floor(Math.random() * phrases.length);
         return phrases[index];
-    }
+    };
 </script>
 
 <Meta meta={{ title: "Dashboard" }} />
 <Layout>
-    <GreatingHero phrase={phraseSwitchHero(user.nickname)} icon="/img/default/avatar.webp"/>
-    <RapidAccess />
+    <GreatingHero
+        phrase={phraseSwitchHero(user.nickname)}
+        icon="/img/default/avatar.webp"
+    />
+    <RapidAccessGrid />
     <ActivityCarrousel title="Avisos e Atividades" />
-    <TaskCarrousel title="Minhas Tarefas"/>
-    <PostGrid title="Últimas Matérias"  />
+    <TaskCarrousel title="Minhas Tarefas" />
+    <PostGrid title="Últimas Matérias" />
     <CalendarGrid title="Calendário" />
 </Layout>

@@ -2,8 +2,8 @@
     export let close = () => {};
     export let identifier;
 
-    import { useForm, page } from "@inertiajs/svelte";
     import axios from "axios";
+    import { useForm, page } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 

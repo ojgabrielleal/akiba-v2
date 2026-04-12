@@ -1,15 +1,15 @@
 <script>
-    import { page } from "@inertiajs/svelte"
-    import { Meta } from "@/config/meta";
+    import { page } from "@inertiajs/svelte";
+    import { Meta } from "@/config";
     import { Layout } from "@/layouts/private";
-    import { ProfileForm } from "@/ui/widgets/private/form";
+    import { ProfileForm } from "@/ui/widgets/private";
 
-     $: ({ profile } = $page.props);
+    $: ({ profile } = $page.props);
 
-     $: titleAdapted = profile ? profile.data.nickname : 'Perfil';
+    $: titleAdapted = profile ? profile.data.nickname : "Perfil";
 </script>
 
 <Meta meta={{ title: titleAdapted }} />
 <Layout>
-    <ProfileForm/>
+    <ProfileForm />
 </Layout>

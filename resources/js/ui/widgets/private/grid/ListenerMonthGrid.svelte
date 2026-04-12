@@ -2,9 +2,8 @@
     export let title;
 
     import { page } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
-    import { Offcanvas } from "@/ui/components/private";
-    import { ListenerMonthForm } from "@/ui/widgets/private/form";
+    import { Section, Offcanvas } from "@/ui/components/private";
+    import { ListenerMonthForm } from "@/ui/widgets/private";
     import { hasPermission } from "@/utils";
 
     $: ({ listenermonth } = $page.props);

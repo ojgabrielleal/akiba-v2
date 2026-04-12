@@ -2,7 +2,7 @@
     import { useForm, page } from "@inertiajs/svelte";
     import { Section, Preview } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
-    import preferencesJson from "@/data/user/preferences.json";
+    import { userPreferences } from "@/data";
 
     $: ({ profile } = $page.props);
 
@@ -245,7 +245,7 @@
                         bind:value={item.content}
                         required
                     >
-                        {#each preferencesJson as item}
+                        {#each userPreferences as item}
                             <option value={item.value}>{item.name}</option>
                         {/each}
                     </select>
@@ -268,7 +268,7 @@
                         bind:value={item.content}
                         required
                     >
-                        {#each preferencesJson as item}
+                        {#each userPreferences as item}
                             <option value={item.value}>{item.name}</option>
                         {/each}
                     </select>

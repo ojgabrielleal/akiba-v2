@@ -1,12 +1,11 @@
 <script>
-    import { Meta } from "@/config/meta";
+    import { Meta } from "@/config";
     import { Layout } from "@/layouts/private";
-    import { PodcastForm } from "@/ui/widgets/private/form"
-    import { PodcastGrid } from "@/ui/widgets/private/grid"
+    import { PodcastForm, PodcastGrid } from "@/ui/widgets/private";
 </script>
 
 <Meta meta={{ title: "Podcasts" }} />
 <Layout>
-    <PodcastForm/>
-    <PodcastGrid/>
+    <PodcastForm />
+    <PodcastGrid />
 </Layout>

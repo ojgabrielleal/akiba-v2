@@ -4,7 +4,7 @@
 
     import { page, router } from "@inertiajs/svelte";
     import { Offcanvas, Section } from "@/ui/components/private/";
-    import { ActivityForm } from "@/ui/widgets/private/form";
+    import { ActivityForm } from "@/ui/widgets/private";
     import { scrollx, hasPermission } from "@/utils";
 
     $: ({ user, activities } = $page.props);
