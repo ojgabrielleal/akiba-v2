@@ -16,7 +16,7 @@
   "theme_color": "#00061a",
   "icons": [
     {
-      "src": "/img/pwa/icon.png",
+      "src": "/img/pwa/icon.jpg",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
