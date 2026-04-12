@@ -3,6 +3,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
+        "postbuild": "node -e \"const fs = require('fs'); fs.copyFileSync('public/build/manifest.webmanifest', 'public/manifest.webmanifest');\"",
         "dev": "vite"
     },
     "devDependencies": {
