@@ -1,6 +1,6 @@
 {
-  "_vendor-C4FxEaCV.js": {
-    "file": "assets/vendor-C4FxEaCV.js",
+  "_vendor-DoXrxWPp.js": {
+    "file": "assets/vendor-DoXrxWPp.js",
     "name": "vendor"
   },
   "resources/css/app.css": {
@@ -9,12 +9,12 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-4_rF4A2h.js",
+    "file": "assets/app-BC_6dXGp.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vendor-C4FxEaCV.js"
+      "_vendor-DoXrxWPp.js"
     ],
     "css": [
       "assets/app-CHPFJqtd.css"
