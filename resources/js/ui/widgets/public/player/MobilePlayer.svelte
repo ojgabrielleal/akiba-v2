@@ -10,7 +10,7 @@
     
     let modalRef;
     
-    usePoll(60 * 1000);
+    usePoll(30 * 1000);
 </script>
 
 <Modal bind:this={modalRef}>

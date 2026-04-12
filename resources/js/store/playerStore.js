@@ -62,7 +62,7 @@ const setupMediaSession = () => {
 
     if (!metadataInterval) {
         updateMetadata();
-        metadataInterval = setInterval(updateMetadata, 60 * 1000);
+        metadataInterval = setInterval(updateMetadata, 30 * 1000);
     }
 }
 
