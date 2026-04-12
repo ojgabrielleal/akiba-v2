@@ -4,6 +4,8 @@ import path from 'path'
 import laravel from "laravel-vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 
+import { VitePWA } from 'vite-plugin-pwa';
+
 export default defineConfig({
     envPrefix: ['VITE_', 'CAST_'],
     resolve: {
@@ -18,12 +20,46 @@ export default defineConfig({
         }),
         tailwindcss(),
         svelte(),
+        VitePWA({
+            outDir: 'public',
+            registerType: 'autoUpdate',
+            injectRegister: 'auto',
+            manifest: {
+                name: 'Rede Akiba',
+                short_name: 'Akiba',
+                description: 'Leva a Akiba pra qualquer lugar! Instala o app PWA e acessa rapidinho pelo celular ou PC fácil, leve e com tudo que o otaku ama!',
+                theme_color: '#0091ff',
+                background_color: '#00061a',
+                display: 'standalone',
+                start_url: '/',
+                icons: [
+                    {
+                        src: '/img/pwa/192.png',
+                        sizes: '192x192',
+                        type: 'image/png'
+                    },
+                    {
+                        src: '/img/pwa/512.png',
+                        sizes: '512x512',
+                        type: 'image/png'
+                    },
+                    {
+                        src: '/img/pwa/512.png',
+                        sizes: '512x512',
+                        type: 'image/png',
+                        purpose: 'any maskable'
+                    }
+                ]
+            }
+        })
     ],
     build: {
         rollupOptions: {
             output: {
-                manualChunks: {
-                    vendor: ['svelte', 'svelte/transition', 'svelte/store'],
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        return 'vendor';
+                    }
                 }
             }
         }
