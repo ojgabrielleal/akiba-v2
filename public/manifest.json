@@ -1,16 +1,19 @@
 {
-  "name": "Akiba",
+  "name": "Rede Akiba",
   "short_name": "Akiba",
-  "description": "Leva a Akiba pra qualquer lugar! Instala o app PWA e acessa rapidinho pelo celular ou PC fácil, leve e com tudo que o otaku ama!",
+  "description": "Rede Akiba é seu destino definitivo para animes, mangás, doramas e cultura otaku no Brasil.",
   "start_url": "/",
   "scope": "/",
   "lang": "pt-BR, en-US, ja-JP",
   "display": "standalone",
   "orientation": "portrait",
   "categories": [
-    "entertainment",
-    "anime",
-    "mangá"
+    "animes",
+    "mangás",
+    "otaku",
+    "cultura japonesa",
+    "doramas",
+    "rede akiba"
   ],
   "background_color": "#00061a",
   "theme_color": "#00061a",
