@@ -216,7 +216,7 @@
                                     }}
                                 >
                                     <img
-                                        src="/svg/default/edit.svg"
+                                        src="/svg/edit.svg"
                                         alt=""
                                         aria-hidden="true"
                                         class="w-5 filter-blue-skywave"
@@ -232,7 +232,7 @@
                                         requestDeactivateRepository(item.uuid)}
                                 >
                                     <img
-                                        src="/svg/default/trash.svg"
+                                        src="/svg/trash.svg"
                                         alt=""
                                         aria-hidden="true"
                                         class="w-5 filter-red-crimson"

@@ -7,9 +7,9 @@
     $: ({ onair } = $page.props);
 
     $: air = onair.data[0];
-    
+
     let modalRef;
-    
+
     usePoll(30 * 1000);
 </script>
 
@@ -30,8 +30,12 @@
             />
         </div>
         <!-- svelte-ignore a11y_distracting_elements -->
-        <marquee class="w-5xl flex overflow-x-hidden relative marquee-container">
-            <div class="whitespace-nowrap w-full md:w-auto text-neutral-aurora text-3xl font-noto-sans font-bold uppercase italic">
+        <marquee
+            class="w-5xl flex overflow-x-hidden relative marquee-container"
+        >
+            <div
+                class="whitespace-nowrap w-full md:w-auto text-neutral-aurora text-3xl font-noto-sans font-bold uppercase italic"
+            >
                 <span class="mx-4">
                     {air.phrase}
                 </span>
@@ -58,7 +62,9 @@
     </div>
 </section>
 
-<section class="cont-player-main grid grid-cols-[2fr_1fr_0.84fr] items-center gap-5">
+<section
+    class="cont-player-main grid grid-cols-[2fr_1fr_0.84fr] items-center gap-5"
+>
     <div class="block">
         <div class="flex items-center gap-5 mb-15">
             <div class="w-52">
@@ -66,7 +72,7 @@
             </div>
             <div class="text-gray-500">
                 <img
-                    src="/svg/default/arrowRightTwo.svg"
+                    src="/svg/arrowRightTwo.svg"
                     alt=""
                     aria-hidden="true"
                     class="w-8 filter-neutral-gray"
@@ -75,16 +81,23 @@
             </div>
             <div>
                 <div class="text-orange-amber font-noto-sans uppercase">
-                    {air.program.host.gender === "male" ? "Com o DJ" : "Com a DJ"}
+                    {air.program.host.gender === "male"
+                        ? "Com o DJ"
+                        : "Com a DJ"}
                 </div>
-                <div class="w-full text-neutral-aurora text-2xl font-noto-sans font-bold uppercase italic line-clamp-1">
+                <div
+                    class="w-full text-neutral-aurora text-2xl font-noto-sans font-bold uppercase italic line-clamp-1"
+                >
                     {air.program.host.nickname}
                 </div>
-                <div class={["mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase",
-                    { "bg-purple-mystic": air.type === "automatic" },
-                    { "bg-green-forest": air.type === "live" },
-                    { "bg-orange-sunset": air.type === "scheduled" },
-                ]}>
+                <div
+                    class={[
+                        "mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase",
+                        { "bg-purple-mystic": air.type === "automatic" },
+                        { "bg-green-forest": air.type === "live" },
+                        { "bg-orange-sunset": air.type === "scheduled" },
+                    ]}
+                >
                     {#if air.type === "automatic"}
                         Robô
                     {:else if air.type === "live"}
@@ -96,7 +109,7 @@
             </div>
             <div class="text-gray-500">
                 <img
-                    src="/svg/default/arrowRightTwo.svg"
+                    src="/svg/arrowRightTwo.svg"
                     alt=""
                     aria-hidden="true"
                     class="w-8 filter-neutral-gray"
@@ -107,7 +120,8 @@
         <div class="flex gap-3 items-end">
             <div class="w-20 shrink-0">
                 <img
-                    src={air.current_song.cover || "https://cdn.vectorstock.com/i/500p/57/71/music-note-icon-set-vector-2855771.jpg"}
+                    src={air.current_song.cover ||
+                        "https://cdn.vectorstock.com/i/500p/57/71/music-note-icon-set-vector-2855771.jpg"}
                     alt=""
                     aria-hidden="true"
                     class="rounded-lg"
@@ -119,8 +133,12 @@
                     Tocando agora:
                 </div>
                 <!-- svelte-ignore a11y_distracting_elements -->
-                <marquee class="w-full text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic line-clamp-1">
-                    {decodeURIComponent(escape(air.current_song.music || "Estamos offline"))}
+                <marquee
+                    class="w-full text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic line-clamp-1"
+                >
+                    {decodeURIComponent(
+                        escape(air.current_song.music || "Estamos offline"),
+                    )}
                 </marquee>
             </div>
         </div>
@@ -138,15 +156,18 @@
     </div>
     <div class="block pt-10">
         <div class="flex flex-col gap-10 px-3">
-            <div class={["py-3 px-5 flex gap-2  justify-center items-center rounded-md",
-                { "bg-purple-mystic": air.type === "automatic" },
-                { "bg-green-forest": air.type === "live" },
-                { "bg-orange-sunset": air.type === "scheduled" },
-            ]}>
+            <div
+                class={[
+                    "py-3 px-5 flex gap-2  justify-center items-center rounded-md",
+                    { "bg-purple-mystic": air.type === "automatic" },
+                    { "bg-green-forest": air.type === "live" },
+                    { "bg-orange-sunset": air.type === "scheduled" },
+                ]}
+            >
                 <div>
                     {#if air.type === "automatic"}
                         <img
-                            src="/svg/default/robot.svg"
+                            src="/svg/robot.svg"
                             alt=""
                             aria-hidden="true"
                             class="w-10"
@@ -154,7 +175,7 @@
                         />
                     {:else if air.type === "live"}
                         <img
-                            src="/svg/default/stream.svg"
+                            src="/svg/stream.svg"
                             alt=""
                             aria-hidden="true"
                             class="w-10"
@@ -162,7 +183,7 @@
                         />
                     {:else}
                         <img
-                            src="/svg/default/disc.svg"
+                            src="/svg/disc.svg"
                             alt=""
                             aria-hidden="true"
                             class="w-10"
@@ -170,7 +191,9 @@
                         />
                     {/if}
                 </div>
-                <div class="font-noto-sans font-medium italic uppercase text-center leading-4">
+                <div
+                    class="font-noto-sans font-medium italic uppercase text-center leading-4"
+                >
                     {#if air.type === "automatic"}
                         Programação automática
                     {:else if air.type === "live"}
@@ -183,22 +206,33 @@
             <div class="flex flex-col mb-7">
                 <div class="flex justify-center mb-1">
                     <div>
-                        <div class="ml-2 text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic">
+                        <div
+                            class="ml-2 text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic"
+                        >
                             Dê o
                         </div>
-                        <div class={["-mt-4 font-noto-sans font-extrabold uppercase italic text-[3rem]",
-                            { "text-blue-skywave": !$player.playing },
-                            { "text-orange-amber": $player.playing },
-                        ]}>
+                        <div
+                            class={[
+                                "-mt-4 font-noto-sans font-extrabold uppercase italic text-[3rem]",
+                                { "text-blue-skywave": !$player.playing },
+                                { "text-orange-amber": $player.playing },
+                            ]}
+                        >
                             {$player.playing ? "Pause" : "Start"}
                         </div>
                     </div>
-                    <button on:click={toggleAudio} class={["cursor-pointer shrink-0 w-14 h-14 rounded-full flex justify-center items-center active:shadow-[0_0_20px_rgba(0,145,255,0.8)] active:scale-95 transition-all",
-                        { "bg-blue-skywave": !$player.playing },
-                        { "bg-orange-amber": $player.playing },
-                    ]}>
-                        <img 
-                            src={$player.playing ? "/svg/default/pause.svg" : "/svg/default/play.svg"}
+                    <button
+                        on:click={toggleAudio}
+                        class={[
+                            "cursor-pointer shrink-0 w-14 h-14 rounded-full flex justify-center items-center active:shadow-[0_0_20px_rgba(0,145,255,0.8)] active:scale-95 transition-all",
+                            { "bg-blue-skywave": !$player.playing },
+                            { "bg-orange-amber": $player.playing },
+                        ]}
+                    >
+                        <img
+                            src={$player.playing
+                                ? "/svg/pause.svg"
+                                : "/svg/play.svg"}
                             alt=""
                             aria-hidden="true"
                             class="w-5"
@@ -208,7 +242,10 @@
                 </div>
                 <div class="flex flex-col gap-2">
                     <div class="flex justify-between items-center px-1">
-                        <span class="text-[10px] text-neutral-aurora/40 font-bold uppercase">Volume</span>
+                        <span
+                            class="text-[10px] text-neutral-aurora/40 font-bold uppercase"
+                            >Volume</span
+                        >
                         <span class="text-[10px] text-orange-amber font-bold">
                             {Math.round($player.volume * 100)}%
                         </span>
@@ -227,9 +264,13 @@
                 </div>
             </div>
         </div>
-        <button aria-label="Faça seu pedido" class="cursor-pointer w-full py-2 px-1 border border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase disabled:cursor-not-allowed" on:click={() => {
-            modalRef.open();
-        }}>
+        <button
+            aria-label="Faça seu pedido"
+            class="cursor-pointer w-full py-2 px-1 border border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase disabled:cursor-not-allowed"
+            on:click={() => {
+                modalRef.open();
+            }}
+        >
             & Faça seu <strong class="text-orange-amber">Pedido</strong>
         </button>
     </div>
@@ -237,11 +278,15 @@
 
 <section class="cont-player-main">
     <div class="mb-10 grid grid-cols-2 gap-5">
-        <div class="bg-neutral-aurora/10 h-30 rounded-lg flex justify-center items-center text-neutral-aurora/40 text-lg font-bold uppercase italic">
+        <div
+            class="bg-neutral-aurora/10 h-30 rounded-lg flex justify-center items-center text-neutral-aurora/40 text-lg font-bold uppercase italic"
+        >
             Anúncio
         </div>
 
-        <div class="bg-neutral-aurora/10 h-30 rounded-lg flex justify-center items-center text-neutral-aurora/40 text-lg font-bold uppercase italic">
+        <div
+            class="bg-neutral-aurora/10 h-30 rounded-lg flex justify-center items-center text-neutral-aurora/40 text-lg font-bold uppercase italic"
+        >
             Anúncio
         </div>
     </div>

@@ -7,9 +7,9 @@
     $: ({ onair } = $page.props);
 
     $: air = onair.data[0];
-    
+
     let modalRef;
-    
+
     usePoll(30 * 1000);
 </script>
 
@@ -101,8 +101,8 @@
                 >
                     <img
                         src={$player.playing
-                            ? "/svg/default/pause.svg"
-                            : "/svg/default/play.svg"}
+                            ? "/svg/pause.svg"
+                            : "/svg/play.svg"}
                         alt={$player.playing ? "Pause" : "Play"}
                         class="w-8 filter-blue-skywave"
                     />

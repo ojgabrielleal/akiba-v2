@@ -1,61 +1,61 @@
 [
     {
         "name": "Dashboard",
-        "icon": "/svg/default/dashboard.svg",
+        "icon": "/svg/dashboard.svg",
         "permission": "dashboard.module.view",
         "address": "/painel/dashboard"
     },
     {
         "name": "Materias",
-        "icon": "/svg/default/materials.svg",
+        "icon": "/svg/materials.svg",
         "permission": "post.module.view",
         "address": "/painel/materias"
     },
     {
         "name": "Locução",
-        "icon": "/svg/default/locution.svg",
+        "icon": "/svg/locution.svg",
         "permission": "locution.module.view",
         "address": "/painel/locucao"
     },
     {
         "name": "Rádio",
-        "icon": "/svg/default/radio.svg",
+        "icon": "/svg/radio.svg",
         "permission": "radio.module.view",
         "address": "/painel/radio"
     },
     {
         "name": "Podcasts",
-        "icon": "/svg/default/podcasts.svg",
+        "icon": "/svg/podcasts.svg",
         "permission": "podcast.module.view",
         "address": "/painel/podcasts"
     },
     {
         "name": "Marketing",
-        "icon": "/svg/default/marketing.svg",
+        "icon": "/svg/marketing.svg",
         "permission": "marketing.module.view",
         "address": "/painel/marketing"
     },
     {
         "name": "Mídias",
-        "icon": "/svg/default/media.svg",
+        "icon": "/svg/media.svg",
         "permission": "media.module.view",
         "address": "/painel/medias"
     },
     {
         "name": "Administração",
-        "icon": "/svg/default/adms.svg",
+        "icon": "/svg/adms.svg",
         "permission": "administration.module.view",
         "address": "/painel/adms"
     },
     {
         "name": "Logs",
-        "icon": "/svg/default/logs.svg",
+        "icon": "/svg/logs.svg",
         "permission": "log.module.view",
         "address": "/painel/logs"
     },
     {
         "name": "Avisos",
-        "icon": "/svg/default/alerts.svg",
+        "icon": "/svg/alerts.svg",
         "permission": "warning.module.view",
         "address": "/painel/alerts"
     }

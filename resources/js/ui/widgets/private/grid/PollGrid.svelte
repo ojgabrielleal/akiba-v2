@@ -25,7 +25,9 @@
         const formData = new FormData(form);
         const option = formData.get("option");
 
-        router.post(`/painel/medias/poll/vote/${option}`, {},
+        router.post(
+            `/painel/medias/poll/vote/${option}`,
+            {},
             {
                 preserveScroll: true,
                 onSuccess: () => {
@@ -41,9 +43,13 @@
     };
 
     const requestDeactivatePoll = (poll) => {
-        router.delete(`/painel/medias/poll/${poll}`, {}, {
-            preserveScroll: true,
-        });
+        router.delete(
+            `/painel/medias/poll/${poll}`,
+            {},
+            {
+                preserveScroll: true,
+            },
+        );
     };
 </script>
 
@@ -143,7 +149,7 @@
                                         }}
                                     >
                                         <img
-                                            src="/svg/default/edit.svg"
+                                            src="/svg/edit.svg"
                                             alt=""
                                             aria-hidden="true"
                                             class="w-5 filter-neutral-aurora"
@@ -160,7 +166,7 @@
                                             requestDeactivatePoll(item.uuid)}
                                     >
                                         <img
-                                            src="/svg/default/trash.svg"
+                                            src="/svg/trash.svg"
                                             alt=""
                                             aria-hidden="true"
                                             class="w-5 filter-neutral-aurora"

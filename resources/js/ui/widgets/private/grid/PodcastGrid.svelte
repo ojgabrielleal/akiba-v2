@@ -11,7 +11,9 @@
     };
 
     const requestDeactivatePodcast = (podcast) => {
-        router.delete(`/painel/podcasts/${podcast}`, {},
+        router.delete(
+            `/painel/podcasts/${podcast}`,
+            {},
             { preserveScroll: true },
         );
     };
@@ -45,7 +47,7 @@
                                         aria-label="Editar"
                                     >
                                         <img
-                                            src="/svg/default/edit.svg"
+                                            src="/svg/edit.svg"
                                             alt=""
                                             aria-hidden="true"
                                             class="w-5 filter-neutral-aurora"
@@ -61,7 +63,7 @@
                                         aria-label="Desativar"
                                     >
                                         <img
-                                            src="/svg/default/trash.svg"
+                                            src="/svg/trash.svg"
                                             alt=""
                                             aria-hidden="true"
                                             class="w-5 filter-red-crimson"

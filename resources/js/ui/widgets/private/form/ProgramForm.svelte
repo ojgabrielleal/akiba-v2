@@ -170,7 +170,7 @@
                 class="cursor-pointer mb-2 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans"
             >
                 <img
-                    src="/svg/default/plus.svg"
+                    src="/svg/plus.svg"
                     alt=""
                     aria-hidden="true"
                     class="w-5 filter-blue-skywave"
@@ -223,7 +223,7 @@
                         class="cursor-pointer mt-4 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans"
                     >
                         <img
-                            src="/svg/default/close.svg"
+                            src="/svg/close.svg"
                             alt=""
                             aria-hidden="true"
                             class="w-5 filter-blue-skywave"
