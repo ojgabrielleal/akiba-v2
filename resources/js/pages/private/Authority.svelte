@@ -1,11 +1,11 @@
 <script>
     import { Meta } from "@/config/meta";
     import { Layout } from "@/layouts/private";
-    import { RoleGrid } from "@/ui/widgets/private/grid"
+    import { RoleTable } from "@/ui/widgets/private/table"
 </script>
 
 
 <Meta meta={{ title: "Autorização" }} />
 <Layout>
-    <RoleGrid title="Cargos disponíveis"/>
+    <RoleTable title="Cargos disponíveis"/>
 </Layout>
