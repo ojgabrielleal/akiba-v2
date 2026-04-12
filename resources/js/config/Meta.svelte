@@ -40,7 +40,7 @@
   <!-- Favicons e PWA icons -->
   <link rel="icon" href={favicon} type="image/x-icon" />
   <link rel="apple-touch-icon" href={appleIcon} />
-  <link rel="manifest" href="/build/manifest.webmanifest" />
+  <link rel="manifest" href="/manifest.webmanifest" />
 
   <!-- Canonical -->
   {#if meta.canonical}
