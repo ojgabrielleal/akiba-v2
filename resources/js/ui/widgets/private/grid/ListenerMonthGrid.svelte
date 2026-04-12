@@ -6,7 +6,7 @@
     import { ListenerMonthForm } from "@/ui/widgets/private";
     import { hasPermission } from "@/utils";
 
-    $: ({ listenermonth } = $page.props);
+    $: ({ listenerMonth } = $page.props);
 
     let can = {
         set: hasPermission("listener.month.set"),
@@ -21,7 +21,7 @@
     </div>
 </Offcanvas>
 
-{#if listenermonth}
+{#if listenerMonth}
     <Section {title}>
         <article class="grid grid-cols-1 lg:grid-cols-2">
             <div class="grid grid-cols-2">
@@ -30,7 +30,7 @@
                         Nome:
                     </dt>
                     <dd class="block text-neutral-aurora font-noto-sans uppercase">
-                        {listenermonth.data.name || "Aurora"}
+                        {listenerMonth.data.name || "Aurora"}
                     </dd>
                 </dl>
                 <dl class="mb-8">
@@ -38,7 +38,7 @@
                         Mora em:
                     </dt>
                     <dd class="block text-neutral-aurora font-noto-sans uppercase">
-                        {listenermonth.data.address || "São Paulo - SP"}
+                        {listenerMonth.data.address || "São Paulo - SP"}
                     </dd>
                 </dl>
                 <dl class="mb-8">
@@ -46,7 +46,7 @@
                         Número de pedidos feitos:
                     </dt>
                     <dd class="block text-neutral-aurora font-noto-sans uppercase">
-                        {listenermonth.data.requests_total || "+500"}
+                        {listenerMonth.data.requests_total || "+500"}
                     </dd>
                 </dl>
                 <dl class="mb-8">
@@ -54,7 +54,7 @@
                         Programa preferido
                     </dt>
                     <dd class="block text-neutral-aurora font-noto-sans uppercase">
-                        {listenermonth.data.favorite_show || "Akiba Art Online"}
+                        {listenerMonth.data.favorite_show || "Akiba Art Online"}
                     </dd>
                 </dl>
             </div>
@@ -64,7 +64,7 @@
                         Imagem do ouvinte
                     </div>
                     <img
-                        src={listenermonth.data.avatar || "https://placehold.co/500x500?text=Rede+Akiba"}
+                        src={listenerMonth.data.avatar || "https://placehold.co/500x500?text=Rede+Akiba"}
                         alt="Imagem do ouvinte"
                         class="w-36 h-36 bg-gray-600 rounded-lg"
                     />

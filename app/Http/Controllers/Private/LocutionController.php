@@ -175,7 +175,7 @@ class LocutionController extends Controller
         return Inertia::render($this->render, [
             "programs" => $this->indexPrograms(),
             "onair" => $this->showOnair(),
-            "songrequests" => $this->indexSongRequests(),
+            "songRequests" => $this->indexSongRequests(),
         ]);
     }
 }

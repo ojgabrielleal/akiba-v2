@@ -34,7 +34,6 @@ export { default as MarketingGrid } from "./grid/MarketingGrid.svelte"
 export { default as PollGrid } from "./grid/PollGrid.svelte"
 export { default as EventGrid } from "./grid/EventGrid.svelte"
 export { default as UserGrid } from "./grid/UserGrid.svelte"
-export { default as RoleGrid } from "./grid/RoleGrid.svelte"
 export { default as RapidAccessGrid } from "./grid/RapidAccessGrid.svelte"
 export { default as CastMetricsGrid } from './grid/CastMetricsGrid.svelte';
 

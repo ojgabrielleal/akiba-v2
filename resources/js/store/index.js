@@ -1,1 +1,1 @@
-export { player, toggleAudio, setVolume } from "./player.js"
+export { player, toggleAudio, setVolume } from "./playerStore.js"

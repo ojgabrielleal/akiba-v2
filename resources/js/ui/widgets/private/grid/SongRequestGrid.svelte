@@ -3,7 +3,7 @@
     import { Section } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
 
-    $: ({ onair, songrequests } = $page.props);
+    $: ({ onair, songRequests } = $page.props);
 
     let can = {
         toggle: hasPermission("songrequest.toggle"),
@@ -62,7 +62,7 @@
             {/if}
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-2 mt-10">
-            {#each songrequests.data as item}
+            {#each songRequests.data as item}
                 <article class={["w-full 2xl:w-[23.6rem] rounded-lg p-3",
                     { "bg-green-forest": item.was_reproduced },
                     { "bg-red-crimson": item.was_canceled },

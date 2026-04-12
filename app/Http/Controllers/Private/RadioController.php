@@ -229,8 +229,8 @@ class RadioController extends Controller
         return Inertia::render($this->render, [
             "programs" => $this->indexPrograms(),
             "streamers" => $this->indexStreamers(),
-            "musicranking" => $this->indexMusicRanking(),
-            "listenermonth" => $this->showListenerMonth(),
+            "musicRanking" => $this->indexMusicRanking(),
+            "listenerMonth" => $this->showListenerMonth(),
         ]);
     }
 }

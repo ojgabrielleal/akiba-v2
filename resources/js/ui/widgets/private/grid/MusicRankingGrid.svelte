@@ -5,7 +5,7 @@
     import { Section, Preview } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
-    $: ({ musicranking } = $page.props);
+    $: ({ musicRanking } = $page.props);
 
     let can = {
         update: hasPermission("music.update"),
@@ -30,11 +30,11 @@
     };
 </script>
 
-{#if musicranking}
+{#if musicRanking}
     <Section {title}>
         <div class="flex flex-col gap-5">
-            {#if musicranking.data.length >= 3}
-                {#each musicranking.data as item, index}
+            {#if musicRanking.data.length >= 3}
+                {#each musicRanking.data as item, index}
                     <article class="flex flex-wrap lg:flex-nowrap items-center gap-5">
                         <div class="flex items-center gap-5">
                             {#if can.update}
@@ -105,7 +105,7 @@
                 </article>
             {/if}
         </div>
-        {#if musicranking.data.length >= 3 && can.set}
+        {#if musicRanking.data.length >= 3 && can.set}
             <div class="flex justify-end mt-5">
                 <button on:click={() => setRanking()} class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic disabled:opacity-50 disabled:pointer-events-none">
                     Atualizar ranking
