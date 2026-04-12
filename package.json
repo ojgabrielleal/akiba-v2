@@ -3,7 +3,6 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "postbuild": "node -e \"const fs = require('fs'); fs.copyFileSync('public/build/manifest.webmanifest', 'public/manifest.webmanifest');\"",
         "dev": "vite"
     },
     "devDependencies": {
@@ -12,8 +11,7 @@
         "laravel-vite-plugin": "^1.2.0",
         "svoast": "^3.0.3",
         "tailwindcss": "^4.0.0",
-        "vite": "^6.2.4",
-        "vite-plugin-pwa": "^1.2.0"
+        "vite": "^6.2.4"
     },
     "dependencies": {
         "@inertiajs/svelte": "^2.0.9",
