@@ -34,7 +34,7 @@
                                 {item.author.nickname}
                             </dt>
                             <dd class="flex gap-3 justify-end mt-1">
-                                <a href={`/materias/${item.slug}`} target="_blank" aria-label="Visualizar" class="cursor-pointer">
+                                <a href={`/post/${item.slug}`} target="_blank" aria-label="Visualizar" class="cursor-pointer">
                                     <img
                                         src="/svg/eye.svg"
                                         alt=""
@@ -44,7 +44,7 @@
                                     />
                                 </a>
                                 {#if can.update}
-                                    <a href={`/materias/${item.uuid}`} aria-label="Editar" class="cursor-pointer">
+                                    <a href={`/post/${item.uuid}`} aria-label="Editar" class="cursor-pointer">
                                         <img
                                             src="/svg/edit.svg"
                                             alt=""

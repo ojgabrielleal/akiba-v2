@@ -55,8 +55,8 @@
 
     const submit = (event) => {
         let url = post
-            ? `/painel/materias/${post.data.uuid}`
-            : "/painel/materias";
+            ? `/panel/post/${post.data.uuid}`
+            : "/panel/post";
 
         $form.type = event.submitter.value;
 
@@ -73,17 +73,17 @@
 <Section title={post ? `Atualizar matéria` : "Criar matéria"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
         {#if can.create}
-            <a preserveState={false} href="/materias" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+            <a preserveState={false} href="/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Matérias
             </a>
         {/if}
         {#if can.review.create}
-            <a preserveState={false} href="/reviews" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+            <a preserveState={false} href="/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Reviews
             </a>
         {/if}
         {#if can.event.create}
-            <a preserveState={false} href="/eventos" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+            <a preserveState={false} href="/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Eventos
             </a>
         {/if}

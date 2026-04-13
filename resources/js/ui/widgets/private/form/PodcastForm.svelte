@@ -34,8 +34,8 @@
 
     const submit = () => {
         let url = podcast
-            ? `/painel/podcasts/${podcast.data.uuid}`
-            : "/painel/podcasts";
+            ? `/panel/podcast/${podcast.data.uuid}`
+            : "/panel/podcast";
 
         $form.post(url, {
             preserveState: podcast,

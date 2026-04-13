@@ -20,7 +20,7 @@
     });
 
     const submit = () => {
-        $form.post("/adms/user", {
+        $form.post("/administration/user", {
             preserveScroll: true,
             onSuccess: () => close(),
         });

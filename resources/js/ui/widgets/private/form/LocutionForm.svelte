@@ -20,7 +20,7 @@
     });
 
     const submit = () => {
-        $form.post(`/painel/locucao/locution/start/${$form.program}`, {
+        $form.post(`/panel/locution/locution/start/${$form.program}`, {
             preserveScroll: true,
         });
     };

@@ -18,7 +18,7 @@
     let identifier;
 
     const requestRemoveRole = (role) => {
-        router.delete(`/painel/adms/roles/${role}`, {
+        router.delete(`/panel/administration/role/${role}`, {
             preserveScroll: true,
             preserveState: true,
         });

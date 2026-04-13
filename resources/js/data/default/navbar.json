@@ -3,60 +3,60 @@
         "name": "Dashboard",
         "icon": "/svg/dashboard.svg",
         "permission": "dashboard.module.view",
-        "address": "/painel/dashboard"
+        "address": "/panel/dashboard"
     },
     {
         "name": "Materias",
         "icon": "/svg/materials.svg",
         "permission": "post.module.view",
-        "address": "/painel/materias"
+        "address": "/panel/post"
     },
     {
         "name": "Locução",
         "icon": "/svg/locution.svg",
         "permission": "locution.module.view",
-        "address": "/painel/locucao"
+        "address": "/panel/locution"
     },
     {
         "name": "Rádio",
         "icon": "/svg/radio.svg",
         "permission": "radio.module.view",
-        "address": "/painel/radio"
+        "address": "/panel/radio"
     },
     {
         "name": "Podcasts",
-        "icon": "/svg/podcasts.svg",
+        "icon": "/svg/podcast.svg",
         "permission": "podcast.module.view",
-        "address": "/painel/podcasts"
+        "address": "/panel/podcast"
     },
     {
         "name": "Marketing",
         "icon": "/svg/marketing.svg",
         "permission": "marketing.module.view",
-        "address": "/painel/marketing"
+        "address": "/panel/marketing"
     },
     {
         "name": "Mídias",
         "icon": "/svg/media.svg",
         "permission": "media.module.view",
-        "address": "/painel/medias"
+        "address": "/panel/media"
     },
     {
         "name": "Administração",
-        "icon": "/svg/adms.svg",
+        "icon": "/svg/administration.svg",
         "permission": "administration.module.view",
-        "address": "/painel/adms"
+        "address": "/panel/administration"
     },
     {
         "name": "Logs",
         "icon": "/svg/logs.svg",
         "permission": "log.module.view",
-        "address": "/painel/logs"
+        "address": "/panel/logs"
     },
     {
         "name": "Avisos",
         "icon": "/svg/alerts.svg",
         "permission": "warning.module.view",
-        "address": "/painel/alerts"
+        "address": "/panel/alerts"
     }
 ]

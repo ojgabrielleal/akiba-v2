@@ -21,7 +21,7 @@
     });
 
     $: if (identifier) {
-        axios.get(`/painel/adms/roles/${identifier}`)
+        axios.get(`/panel/administration/role/${identifier}`)
             .then(function (response) {
                 const data = response.data.data;
 
@@ -39,8 +39,8 @@
     const submit = () => {
         const method = identifier ? "patch" : "post";
         const url = identifier
-            ? `/painel/adms/roles/${identifier}`
-            : "/painel/adms/roles";
+            ? `/panel/administration/role/${identifier}`
+            : "/panel/administration/role";
 
         $form[method](url, {
             preserveScroll: true,

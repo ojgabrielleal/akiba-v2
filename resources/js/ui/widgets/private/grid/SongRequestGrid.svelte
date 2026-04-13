@@ -15,25 +15,25 @@
     };
 
     const requestToggleSongRequest = () => {
-        router.patch("/painel/locucao/songrequest/toggle", {}, { 
+        router.patch("/panel/locution/songrequest/toggle", {}, { 
             preserveScroll: true 
         });
     };
 
     const markToReproduced = (songrequest) => {
-        router.patch(`/painel/locucao/songrequest/${songrequest}/played`, {}, { 
+        router.patch(`/panel/locution/songrequest/${songrequest}/played`, {}, { 
             preserveScroll: true 
         });
     };
 
     const markToCanceled = (songrequest) => {
-        router.patch(`/painel/locucao/songrequest/${songrequest}/canceled`, {}, { 
+        router.patch(`/panel/locution/songrequest/${songrequest}/canceled`, {}, { 
             preserveScroll: true 
         });
     };
 
     const requestFinishlocution = () => {
-        router.patch(`/painel/locucao/locution/finish`);
+        router.patch(`/panel/locution/locution/finish`);
     };
 
     usePoll(30 * 1000);

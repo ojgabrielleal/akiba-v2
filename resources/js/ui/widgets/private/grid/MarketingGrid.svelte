@@ -25,7 +25,7 @@
     }
 
     const requestDeactivateRepository = (repository) => {
-        router.delete(`/painel/marketing/repository/${repository}`, {},
+        router.delete(`/panel/marketing/repository/${repository}`, {},
             { preserveScroll: true },
         );
     };
