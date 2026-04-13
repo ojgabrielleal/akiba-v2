@@ -13,14 +13,11 @@
 
 <Meta meta={{ title: "Locução" }} />
 <Layout>
-    <div
-        class:opacity-50={onair.data.type !== "automatic"}
-        class:pointer-events-none={onair.data.type !== "automatic"}
-    >
+    <div class:opacity-50={onair.data.type !== "automatic"} class:pointer-events-none={onair.data.type !== "automatic"}>
         <LocutionForm />
     </div>
     {#if onair.data.type === "live"}
-        <SongRequestGrid />
+        <SongRequestGrid title="Pedidos musicais" />
     {/if}
 </Layout>
 

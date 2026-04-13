@@ -1,4 +1,6 @@
 <script>
+    export let title;
+
     import { page, router, usePoll } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
@@ -40,7 +42,7 @@
 </script>
 
 {#if hasPermission("songrequest.list")}
-    <Section title="Pedidos musicais">
+    <Section {title}>
         <div id="requests" class="flex flex-col gap-5 lg:relative">
             {#if can.locution.finish}
                 <button class="cursor-pointer block lg:absolute right-0 w-full lg:w-auto py-2 px-6 border-4 border-solid border-red-crimson rounded-xl text-red-crimson text-xl font-bold font-noto-sans italic uppercase" on:click={() => {

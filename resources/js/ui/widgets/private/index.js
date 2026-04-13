@@ -20,6 +20,7 @@ export { default as UserAccessForm } from "./form/UserAccessForm.svelte"
 export { default as RoleForm } from "./form/RoleForm.svelte"
 export { default as ActivityForm } from "./form/ActivityForm.svelte"
 export { default as CalendarForm } from "./form/CalendarForm.svelte"
+export { default as TaskForm } from "./form/TaskForm.svelte"
 
 // Grids
 export { default as PostGrid } from "./grid/PostGrid.svelte"
@@ -36,6 +37,7 @@ export { default as EventGrid } from "./grid/EventGrid.svelte"
 export { default as UserGrid } from "./grid/UserGrid.svelte"
 export { default as RapidAccessGrid } from "./grid/RapidAccessGrid.svelte"
 export { default as CastMetricsGrid } from './grid/CastMetricsGrid.svelte';
+export { default as TaskGrid } from "./grid/TaskGrid.svelte";
 
 // Hero
 export { default as GreatingHero } from './hero/GreatingHero.svelte';	

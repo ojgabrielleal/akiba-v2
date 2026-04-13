@@ -166,6 +166,11 @@ Route::prefix('panel')->group(function () {
                 Route::patch('{activity:uuid}', 'updateActivity');
                 Route::delete('{activity:uuid}', 'removeActivity');
             });
+            Route::prefix('task')->group(function () {
+                Route::get('{task:uuid}', 'showTask');
+                Route::post('', 'createTask');
+                Route::patch('{task:uuid}', 'updateTask');
+            });
             Route::get('', 'render')->name('panel.adms');
         });
 

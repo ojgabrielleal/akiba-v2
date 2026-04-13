@@ -7,19 +7,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Log;
 
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
 use App\Models\Activity;
 use App\Models\Calendar;
+use App\Models\Task;
 
 use App\Http\Resources\UserResource;
 use App\Http\Resources\RoleResource;
 use App\Http\Resources\PermissionResource;
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\CalendarResource;
+use App\Http\Resources\TaskResource;
 
 use App\Exceptions\RoleHasMembersException;
 
@@ -87,6 +88,17 @@ class AdministrationController extends Controller
         );
     }
 
+    public function indexTask()
+    {
+        if (request()->user()->cannot('viewAny', Task::class)) {
+            return null;
+        }
+        return TaskResource::collection(
+            Task::incompleted()
+                ->get()
+        );
+    }
+
     public function showRole(Role $role)
     {
         if (request()->user()->cannot('view', $role)) {
@@ -118,6 +130,40 @@ class AdministrationController extends Controller
         }
 
         return new CalendarResource($calendar->load(['activity', 'responsible']));
+    }
+
+    public function showTask(Task $task)
+    {
+        if (request()->user()->cannot('view', $task)) {
+            return null;
+        }
+
+        return new TaskResource($task->load(['responsible']));
+    }
+
+    public function createTask(Request $request)
+    {
+        if (request()->user()->cannot('create', Task::class)) {
+            return null;
+        }
+
+        $request->validate([
+            'user' => 'required',
+            'title' => 'required',
+            'dead_line' => 'required',
+            'content' => 'required',
+        ]);
+
+        $user = User::where('uuid', $request->input('user'))->first();
+
+        Task::create([
+            'user_id' => $user->id,
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'dead_line' => $request->input('dead_line'),
+        ]);
+
+        return $this->flashMessage('save');
     }
 
     public function createCalendar(Request $request)
@@ -262,6 +308,34 @@ class AdministrationController extends Controller
         $user->preferences()->createMany($preferences);
 
         return $this->flashMessage('save');
+    }
+
+    public function updateTask(Request $request, Task $task)
+    {
+        if (request()->user()->cannot('update', $task)) {
+            return null;
+        }
+
+        $request->validate([
+            'title' => 'required',
+            'dead_line' => 'required',
+            'content' => 'required',
+        ]);
+
+        $user = User::where('uuid', $request->input('user'))->first();
+
+        $task->fill([
+            'user_id' => $user->id,
+            'title' => $request->input('title'),
+            'dead_line' => $request->input('dead_line'),
+            'content' => $request->input('content'),
+        ]);
+
+        if($task->isDirty()){
+            $task->save();
+        }
+
+        return $this->flashMessage('update');
     }
 
     public function updateCalendar(Request $request, Calendar $calendar)
@@ -416,7 +490,8 @@ class AdministrationController extends Controller
             'permissions' => $this->indexPermissions(),
             'activities' => $this->indexActivities(),
             'calendar' => $this->indexCalendar(),
-            'users' => $this->indexUsers()
+            'users' => $this->indexUsers(),
+            'tasks' => $this->indexTask()
         ]);
     }
 }

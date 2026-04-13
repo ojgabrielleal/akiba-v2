@@ -12,9 +12,17 @@ class TaskResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'is_due' => $this->is_due || $this->is_over,
-            'dead_line' => $this->dead_line?->format('d/m'),
+            'dead_line' => $this->dead_line->format('Y-m-d'),
+            'dead_line_formatted' => $this->dead_line?->format('d/m'),
             'title' => $this->title,
             'content' => $this->content,
+            'responsible' => [
+                'uuid' => $this->responsible->uuid,
+                'name' => $this->responsible->name,
+                'nickname' => $this->responsible->nickname,
+                'avatar' => $this->responsible->avatar,
+                'gender' => $this->responsible->gender
+            ],
         ];
     }
 }
