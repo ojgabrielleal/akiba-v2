@@ -7,5 +7,5 @@
 <Meta meta={{ title: "Podcasts" }} />
 <Layout>
     <PodcastForm />
-    <PodcastGrid />
+    <PodcastGrid title="Todos os podcasts" />
 </Layout>

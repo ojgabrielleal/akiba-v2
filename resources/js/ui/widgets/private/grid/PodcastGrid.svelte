@@ -1,4 +1,6 @@
 <script>
+    export let title;
+
     import { router, page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
@@ -18,7 +20,7 @@
 </script>
 
 {#if podcasts}
-    <Section title="Todos os podcasts">
+    <Section {title}>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-y-10 lg:gap-x-5">
             {#if podcasts.data.length > 0}
                 {#each podcasts.data as item}
