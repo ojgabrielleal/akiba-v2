@@ -31,7 +31,7 @@
     </div>
 </Offcanvas>
 
-{#if activities && activities.data.length > 0}
+{#if activities}
     <Section {title}>
         <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap" on:wheel|nonpassive={scrollx} role="group">
             {#each activities.data as item}

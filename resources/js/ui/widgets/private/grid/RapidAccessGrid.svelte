@@ -2,6 +2,9 @@
     import { hasPermission } from "@/utils";
 
     let can = {
+        activity: {
+            create: hasPermission("activity.create"),
+        },
         post: {
             create: hasPermission("post.create"),
         },
@@ -30,12 +33,12 @@
                 Nova matéria
             </a>
         {/if}
-        <!--
-        <a href="/administration" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
-            <img src="/svg/alerts.svg" alt="" aria-hidden="true" class="w-6 filter-blue-skywave" />
-            Novo aviso
-        </a>
-        -->
+        {#if can.activity.create}
+            <a href="/administration" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+                <img src="/svg/alerts.svg" alt="" aria-hidden="true" class="w-6 filter-blue-skywave" />
+                Adicionar aviso
+            </a>
+        {/if}
         {#if can.repository.create}
             <a href="/marketing" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
                 <img 
