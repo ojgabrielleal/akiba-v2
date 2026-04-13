@@ -25,7 +25,7 @@
     },
     {
         "name": "Podcasts",
-        "icon": "/svg/podcast.svg",
+        "icon": "/svg/podcasts.svg",
         "permission": "podcast.module.view",
         "address": "/panel/podcast"
     },
@@ -43,7 +43,7 @@
     },
     {
         "name": "Administração",
-        "icon": "/svg/administration.svg",
+        "icon": "/svg/adms.svg",
         "permission": "administration.module.view",
         "address": "/panel/administration"
     },
