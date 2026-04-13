@@ -64,7 +64,7 @@
             <option value="">Selecione um membro</option>
             {#each users.data as user}
                 <option value={user.uuid}>
-                    {user.name}
+                    {user.nickname}
                 </option>
             {/each}
         </select>
