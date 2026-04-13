@@ -2,8 +2,8 @@
     export let close = () => {};
     export let identifier;
 
-    import { useForm, page } from "@inertiajs/svelte";
     import axios from "axios";
+    import { useForm, page } from "@inertiajs/svelte";
     import { hasPermission } from "@/utils";
 
     let { users } = $page.props;
@@ -23,15 +23,19 @@
 
     $:if(identifier){
         axios.get(`/painel/adms/calendar/${identifier}`)
-        .then((response)=>{
-            const data = response.data.data 
+            .then((response)=>{
+                const data = response.data.data 
 
-            $form.user = data.responsible.uuid;
-            $form.hour = data.hour;
-            $form.date = data.date; 
-            $form.content = data.content;
-            $form.type = data.type;
-        })
+                $form.user = data.responsible.uuid;
+                $form.hour = data.hour;
+                $form.date = data.date; 
+                $form.content = data.content;
+                $form.type = data.type;
+            })
+            .catch(()=>{
+                console.error('Error when find calendar');
+                close();
+            })
     }
 
     const submit = () => {

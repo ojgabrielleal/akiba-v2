@@ -19,13 +19,9 @@
     let softwares;
 
     $: if (repositories) {
-        tutorials = repositories.data.filter(
-            (item) => item.type === "tutorial",
-        );
+        tutorials = repositories.data.filter((item) => item.type === "tutorial");
         packages = repositories.data.filter((item) => item.type === "package");
-        softwares = repositories.data.filter(
-            (item) => item.type === "software",
-        );
+        softwares = repositories.data.filter((item) => item.type === "software");
     }
 
     const requestDeactivateRepository = (repository) => {
@@ -35,10 +31,7 @@
     };
 </script>
 
-<Offcanvas
-    bind:this={offCanvasRef}
-    title={identifier ? "Atualizar arquivo" : "Cadastrar arquivo"}
->
+<Offcanvas bind:this={offCanvasRef} title={identifier ? "Atualizar arquivo" : "Cadastrar arquivo"}>
     <div slot="content" let:close>
         <MarketingForm {identifier} {close} />
     </div>
@@ -46,9 +39,7 @@
 
 {#if repositories}
     <Section title="Tutoriais">
-        <div
-            class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4"
-        >
+        <div class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {#if tutorials > 0}
                 {#each tutorials as item}
                     <article class="w-full bg-blue-skywave relative">
@@ -59,9 +50,7 @@
                                 class="w-full h-48 object-cover aspect-square"
                                 loading="lazy"
                             />
-                            <div
-                                class="p-2 text-neutral-aurora text-center font-noto-sans font-light"
-                            >
+                            <div class="p-2 text-neutral-aurora text-center font-noto-sans font-light">
                                 {item.name}
                             </div>
                         </a>
@@ -76,9 +65,7 @@
                         class="w-full h-48 object-cover aspect-square"
                         loading="lazy"
                     />
-                    <div
-                        class="p-2 text-neutral-aurora text-center font-noto-sans font-light"
-                    >
+                    <div class="p-2 text-neutral-aurora text-center font-noto-sans font-light">
                         Nada por aqui, até agora
                     </div>
                 </article>
@@ -87,9 +74,7 @@
     </Section>
 
     <Section title="Instaladores">
-        <div
-            class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4"
-        >
+        <div class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {#if softwares.length > 0}
                 {#each softwares as item}
                     <article class="w-full bg-blue-skywave relative">
@@ -100,9 +85,7 @@
                                 class="w-full h-48 object-cover aspect-square"
                                 loading="lazy"
                             />
-                            <div
-                                class="p-2 text-neutral-aurora text-center font-noto-sans font-light"
-                            >
+                            <div class="p-2 text-neutral-aurora text-center font-noto-sans font-light">
                                 {item.name}
                             </div>
                         </a>
@@ -117,9 +100,7 @@
                         class="w-full h-48 object-cover aspect-square"
                         loading="lazy"
                     />
-                    <div
-                        class="p-2 text-neutral-aurora text-center font-noto-sans font-light"
-                    >
+                    <div class="p-2 text-neutral-aurora text-center font-noto-sans font-light">
                         Nada por aqui, até agora
                     </div>
                 </article>
@@ -128,9 +109,7 @@
     </Section>
 
     <Section title="Pacotes e Modelos">
-        <div
-            class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4"
-        >
+        <div class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {#if packages > 0}
                 {#each packages as item}
                     <article class="w-full bg-blue-skywave relative">
@@ -141,9 +120,7 @@
                                 class="w-full h-48 object-cover aspect-square"
                                 loading="lazy"
                             />
-                            <div
-                                class="p-2 text-neutral-aurora text-center font-noto-sans font-light"
-                            >
+                            <div class="p-2 text-neutral-aurora text-center font-noto-sans font-light">
                                 {item.name}
                             </div>
                         </a>
@@ -158,9 +135,7 @@
                         class="w-full h-48 object-cover aspect-square"
                         loading="lazy"
                     />
-                    <div
-                        class="p-2 text-neutral-aurora text-center font-noto-sans font-light"
-                    >
+                    <div class="p-2 text-neutral-aurora text-center font-noto-sans font-light">
                         Nada por aqui, até agora
                     </div>
                 </article>
@@ -172,21 +147,16 @@
 <Section title="Todos os conteúdos">
     {#if can.create}
         <div class="flex justify-center mt-5 mb-10">
-            <button
-                class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase"
-                onclick={() => {
-                    offCanvasRef.open();
-                    identifier = null;
-                }}
-            >
+            <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" onclick={() => {
+                offCanvasRef.open();
+                identifier = null;
+            }}>
                 Upar conteúdo
             </button>
         </div>
     {/if}
     {#if repositories}
-        <div
-            class="mb-20 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-x-4 gap-y-20"
-        >
+        <div class="mb-20 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-x-4 gap-y-20">
             {#if repositories.data.length > 0}
                 {#each repositories.data as item}
                     <article class="w-full bg-blue-skywave relative">
@@ -197,24 +167,16 @@
                                 class="w-full h-48 object-cover aspect-square"
                                 loading="lazy"
                             />
-                            <div
-                                class="p-2 text-neutral-aurora text-center font-noto-sans font-light"
-                            >
+                            <div class="p-2 text-neutral-aurora text-center font-noto-sans font-light">
                                 {item.name}
                             </div>
                         </a>
-                        <div
-                            class="absolute -bottom-9 right-0 flex flex-row gap-4"
-                        >
+                        <div class="absolute -bottom-9 right-0 flex flex-row gap-4">
                             {#if can.show_button_create}
-                                <button
-                                    class="cursor-pointer"
-                                    aria-label="editar"
-                                    onclick={() => {
-                                        offCanvasRef.open();
-                                        identifier = item.uuid;
-                                    }}
-                                >
+                                <button class="cursor-pointer" aria-label="editar" onclick={() => {
+                                    offCanvasRef.open();
+                                    identifier = item.uuid;
+                                }}>
                                     <img
                                         src="/svg/edit.svg"
                                         alt=""
@@ -225,12 +187,7 @@
                                 </button>
                             {/if}
                             {#if can.deactivate}
-                                <button
-                                    aria-label="remover"
-                                    class="cursor-pointer"
-                                    onclick={() =>
-                                        requestDeactivateRepository(item.uuid)}
-                                >
+                                <button aria-label="remover" class="cursor-pointer" onclick={() => requestDeactivateRepository(item.uuid)}>
                                     <img
                                         src="/svg/trash.svg"
                                         alt=""
@@ -252,9 +209,7 @@
                         class="w-full h-48 object-cover aspect-square"
                         loading="lazy"
                     />
-                    <div
-                        class="p-2 text-neutral-aurora text-center font-noto-sans font-light"
-                    >
+                    <div class="p-2 text-neutral-aurora text-center font-noto-sans font-light">
                         Nada por aqui, até agora
                     </div>
                 </article>

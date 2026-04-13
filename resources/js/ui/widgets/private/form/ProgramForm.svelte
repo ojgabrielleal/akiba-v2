@@ -24,8 +24,7 @@
     });
 
     $: if (identifier) {
-        axios
-            .get(`/painel/radio/program/${identifier}`)
+        axios.get(`/painel/radio/program/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
 
@@ -76,10 +75,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="name"
-        >
+        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="name">
             Programa
         </label>
         <input
@@ -104,10 +100,7 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.type}
             />
-            <label
-                for="free"
-                class="cursor-pointer text-md text-gray-700 font-noto-sans"
-            >
+            <label class="cursor-pointer text-md text-gray-700 font-noto-sans" for="free">
                 Sim
             </label>
         </div>
@@ -120,20 +113,14 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.type}
             />
-            <label
-                for="private"
-                class="cursor-pointer text-md text-gray-700 font-noto-sans"
-            >
+            <label class="cursor-pointer text-md text-gray-700 font-noto-sans" for="private">
                 Não
             </label>
         </div>
     </div>
     {#if $form.type === "private"}
         <div class="mb-4">
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="user"
-            >
+            <label class="text-md text-gray-700 font-noto-sans block mb-1" for="user">
                 Locutor
             </label>
             <select
@@ -151,24 +138,14 @@
         {#if $form.schedules}
             <div class="flex items-center justify-center w-full mt-8 mb-5">
                 <div class="relative w-full">
-                    <div
-                        class="absolute left-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                    ></div>
-                    <span
-                        class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic"
-                    >
+                    <div class="absolute left-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
+                    <span class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic">
                         Horários
                     </span>
-                    <div
-                        class="absolute right-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                    ></div>
+                    <div class="absolute right-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
                 </div>
             </div>
-            <button
-                on:click={() => addSchedule()}
-                type="button"
-                class="cursor-pointer mb-2 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans"
-            >
+            <button type="button" class="cursor-pointer mb-2 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans" on:click={() => addSchedule()}>
                 <img
                     src="/svg/plus.svg"
                     alt=""
@@ -181,10 +158,7 @@
             {#each $form.schedules as schedule, index}
                 <div class="mb-4 border border-gray-400 p-4 rounded-lg">
                     <div class="mb-2">
-                        <label
-                            class="text-md text-gray-700 font-noto-sans block mb-1"
-                            for="day"
-                        >
+                        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="day">
                             Dia da semana
                         </label>
                         <select
@@ -203,10 +177,7 @@
                         </select>
                     </div>
                     <div class="mb-2">
-                        <label
-                            class="text-md text-gray-700 font-noto-sans block mb-1"
-                            for="hour"
-                        >
+                        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="hour">
                             Horário
                         </label>
                         <input
@@ -217,11 +188,7 @@
                             bind:value={schedule.hour}
                         />
                     </div>
-                    <button
-                        on:click={() => removeSchedule(index)}
-                        type="button"
-                        class="cursor-pointer mt-4 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans"
-                    >
+                    <button type="button" class="cursor-pointer mt-4 flex items-center gap-[0.2rem] text-blue-skywave text-md font-noto-sans" on:click={() => removeSchedule(index)}>
                         <img
                             src="/svg/close.svg"
                             alt=""
@@ -236,10 +203,7 @@
         {/if}
     {/if}
     {#if can.create || can.update}
-        <button
-            type="submit"
-            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase"
-        >
+        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
             {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}

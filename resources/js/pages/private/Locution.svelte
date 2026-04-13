@@ -14,10 +14,8 @@
 <Meta meta={{ title: "Locução" }} />
 <Layout>
     <div
-        class={[
-            { "opacity-50 pointer-events-none": onair.data.type !== "automatic" },
-            { "opacity-none pointer-events-auto": onair.data.type === "automatic" },
-        ]}
+        class:opacity-50={onair.data.type !== "automatic"}
+        class:pointer-events-none={onair.data.type !== "automatic"}
     >
         <LocutionForm />
     </div>
@@ -71,9 +69,9 @@
                 sabe como mudar o tempo! Respeite o horário e espere ele terminar para poder entrar ao vivo!
             </div>
             <button
-                on:click={() => redirectToDashboard()}
                 type="button"
                 class="mt-5 flex gap-2 justify-center items-center cursor-pointer w-full py-2 px-6 border-2 border-blue-ocean rounded-xl text-md text-blue-ocean font-bold font-noto-sans italic uppercase"
+                on:click={() => redirectToDashboard()}
             >
                 <img src="/svg/return.svg" alt="" aria-hidden="true" class="w-5 filter-blue-ocean" loading="lazy" />
                 Dashboard

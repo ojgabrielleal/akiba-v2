@@ -20,12 +20,12 @@
     });
 
     $: if (review) {
-        ($form._method = "PATCH"),
-            ($form.image = review.data.image),
-            ($form.title = review.data.title),
-            ($form.sinopse = review.data.sinopse),
-            ($form.cover = review.data.cover),
-            ($form.review = { uuid: null, content: "" });
+        $form._method = "PATCH";
+        $form.image = review.data.image;
+        $form.title = review.data.title;
+        $form.sinopse = review.data.sinopse;
+        $form.cover = review.data.cover;
+        $form.review = { uuid: null, content: "" };
     }
 
     const submit = () => {
@@ -147,10 +147,17 @@
                         <div class="flex gap-2 mb-4">
                             {#each reviews() as item}
                                 <div class="relative">
-                                    <button type="button" on:click={() => { $form.review.uuid = item.uuid; $form.review.content = item.content; }} class={["py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer",
-                                        {"bg-orange-amber text-neutral-aurora": item.uuid === $form.review.uuid},
-                                        {"bg-neutral-aurora text-orange-amber": item.uuid !== $form.review.uuid}
-                                    ]}>
+                                    <button 
+                                        type="button" 
+                                        class={["py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer",
+                                            {"bg-orange-amber text-neutral-aurora": item.uuid === $form.review.uuid},
+                                            {"bg-neutral-aurora text-orange-amber": item.uuid !== $form.review.uuid}
+                                        ]}
+                                        on:click={() => { 
+                                            $form.review.uuid = item.uuid; 
+                                            $form.review.content = item.content; 
+                                        }}
+                                    >
                                         {item.author.nickname}
                                     </button>
                                 </div>

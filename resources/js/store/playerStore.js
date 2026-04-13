@@ -99,14 +99,14 @@ const mediaSession = () => {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: data.musica_atual,
                 artist: data.title,
-            artwork: [
-                {
-                    src: data.capa_musica,
-                    sizes: '192x192',
-                    type: 'image/png'
-                }
-            ]
-        });
+                artwork: [
+                    {
+                        src: data.capa_musica,
+                        sizes: '192x192',
+                        type: 'image/png'
+                    }
+                ]
+            });
         }, 5000);
 
         navigator.mediaSession.setActionHandler('play', () => {

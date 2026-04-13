@@ -35,10 +35,7 @@
             bind:value={$form.password}
             required
         />
-        <button
-            type="submit"
-            class="cursor-pointer font-noto-sans flex h-14 w-full items-center justify-center gap-1 rounded-lg bg-blue-skywave pt-1 text-md font-light text-neutral-aurora hover:bg-blue-skywave/80"
-        >
+        <button type="submit" class="cursor-pointer font-noto-sans flex h-14 w-full items-center justify-center gap-1 rounded-lg bg-blue-skywave pt-1 text-md font-light text-neutral-aurora hover:bg-blue-skywave/80">
             Entrar
         </button>
     </form>

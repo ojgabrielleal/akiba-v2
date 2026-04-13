@@ -2,8 +2,8 @@
     export let close = () => {};
     export let identifier;
 
-    import { useForm } from "@inertiajs/svelte";
     import axios from "axios";
+    import { useForm } from "@inertiajs/svelte";
     import { hasPermission } from "@/utils";
 
     let can = {
@@ -19,16 +19,21 @@
         option_four: null,
     });
 
-    if (identifier) {
-        axios.get(`/painel/medias/poll/${identifier}`).then((response) => {
-            const data = response.data.data;
+    $: if (identifier) {
+        axios.get(`/painel/medias/poll/${identifier}`)
+            .then((response) => {
+                const data = response.data.data;
 
-            $form.question = data.question;
-            $form.option_one = data.options[0]?.option || null;
-            $form.option_two = data.options[1]?.option || null;
-            $form.option_three = data.options[2]?.option || null;
-            $form.option_four = data.options[3]?.option || null;
-        });
+                $form.question = data.question;
+                $form.option_one = data.options[0]?.option || null;
+                $form.option_two = data.options[1]?.option || null;
+                $form.option_three = data.options[2]?.option || null;
+                $form.option_four = data.options[3]?.option || null;
+            })
+            .catch(() => {
+                console.error("Error when find poll selected");
+                close();
+            });
     }
 
     const submit = () => {

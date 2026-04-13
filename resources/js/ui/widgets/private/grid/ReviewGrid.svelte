@@ -19,10 +19,22 @@
                         <div class="flex justify-end gap-5 absolute bottom-2 left-4 w-[calc(100%-2rem)]">
                             <div class="flex gap-3">
                                 <a href={`/reviews/${item.slug}`} target="_blank" aria-label="Visualizar" class="cursor-pointer">
-                                    <img src="/svg/eye.svg" alt="" aria-hidden="true" class="w-5 filter-neutral-aurora" loading="lazy" />
+                                    <img 
+                                        src="/svg/eye.svg" 
+                                        alt="" 
+                                        aria-hidden="true" 
+                                        class="w-5 filter-neutral-aurora" 
+                                        loading="lazy" 
+                                    />
                                 </a>
                                 <a href={`/reviews/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
-                                    <img src="/svg/edit.svg" alt="" aria-hidden="true" class="w-4 filter-neutral-aurora" loading="lazy" />
+                                    <img 
+                                        src="/svg/edit.svg" 
+                                        alt="" 
+                                        aria-hidden="true" 
+                                        class="w-4 filter-neutral-aurora" 
+                                        loading="lazy" 
+                                    />
                                 </a>
                             </div>
                         </div>

@@ -32,32 +32,24 @@
     });
 
     $: if (post) {
+        const categories = (post.data.categories || []).map(({ uuid, name }) => ({ uuid, name }));
+        const references = (post.data.references || []).map(({ uuid, name, url }) => ({ uuid, name, url }));
+
+        while (categories.length < 2) {
+            categories.push({ uuid: null, name: null });
+        }
+
+        while (references.length < 2) {
+            references.push({ uuid: null, name: null, url: null });
+        }
+
         $form._method = "PATCH";
         $form.type = post.data.type;
         $form.image = post.data.image;
         $form.title = post.data.title;
         $form.cover = post.data.cover;
         $form.content = post.data.content;
-
-        const categories = (post.data.categories || []).map(({ uuid, name }) => ({
-            uuid,
-            name,
-        }));
-
-        while (categories.length < 2) {
-            categories.push({ uuid: null, name: null });
-        }
         $form.categories = categories;
-
-        const references = (post.data.references || []).map(({ uuid, name, url }) => ({
-            uuid,
-            name,
-            url,
-        }));
-
-        while (references.length < 2) {
-            references.push({ uuid: null, name: null, url: null });
-        }
         $form.references = references;
     }
 
@@ -67,6 +59,7 @@
             : "/painel/materias";
 
         $form.type = event.submitter.value;
+
         $form.post(url, {
             preserveState: post,
             preserveScroll: true,

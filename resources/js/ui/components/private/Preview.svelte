@@ -7,7 +7,7 @@
     export let required = false;
 
     let preview = null;
-    
+
     $: imageToShow = preview ?? (src && src !== "#" ? src : null);
 
     const previewImage = (event) => {
@@ -21,25 +21,16 @@
         } else {
             preview = null;
         }
-    }
+    };
 </script>
 
 <label class="cursor-pointer">
     {#if imageToShow}
-        <img src={imageToShow} alt="" aria-hidden="true" class={`${view}`} loading="lazy"/>
+        <img src={imageToShow} alt="" aria-hidden="true" class={`${view}`} loading="lazy" />
     {:else}
         <div class={`${standard} bg-neutral-aurora flex items-center justify-center overflow-hidden font-noto-sans text-blue-skywave text-7xl font-bold italic uppercase`}>
             +
         </div>
     {/if}
-    <input
-        id={name}
-        type="file"
-        name={name}
-        class="sr-only"
-        accept="image/*"
-        on:input={oninput}
-        on:change={previewImage}
-        required={required}
-    />
+    <input id={name} type="file" {name} class="sr-only" accept="image/*" on:input={oninput} on:change={previewImage} {required} />
 </label>

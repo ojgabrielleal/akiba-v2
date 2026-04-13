@@ -21,14 +21,19 @@
     });
 
     $: if (identifier) {
-        axios.get(`/painel/adms/roles/${identifier}`).then(function (response) {
-            const data = response.data.data;
+        axios.get(`/painel/adms/roles/${identifier}`)
+            .then(function (response) {
+                const data = response.data.data;
 
-            $form.label = data.label;
-            $form.weight = data.weight;
-            $form.description = data.description;
-            $form.permissions = data.permissions.map((item) => item.uuid);
-        });
+                $form.label = data.label;
+                $form.weight = data.weight;
+                $form.description = data.description;
+                $form.permissions = data.permissions.map((item) => item.uuid);
+            })
+            .catch(()=>{
+                console.error('Error when find role');
+                close();
+            })
     }
 
     const submit = () => {

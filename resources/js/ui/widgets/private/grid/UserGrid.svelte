@@ -25,7 +25,9 @@
     let identifier;
 
     const requestDeactivateUser = (user) => {
-        router.delete(`/painel/adms/user/${user}`, {}, { preserveScroll: true });
+        router.delete(`/painel/adms/user/${user}`, {}, { 
+            preserveScroll: true,
+        });
     };
 </script>
 
@@ -48,23 +50,17 @@
 {#if users}
     <div class="flex justify-center gap-5 mb-5">
         {#if can.create}
-            <button
-                class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer"
-                on:click={() => {
-                    offCanvasUserRef.open();
-                }}
-            >
+            <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => {
+                offCanvasUserRef.open();
+            }}>
                 Cadastrar membro
             </button>
             <span class="border-l border-neutral-aurora/30"></span>
         {/if}
         {#if can.activity.create}
-            <button
-                class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer"
-                on:click={() => {
-                    offCanvasActivityRef.open();
-                }}
-            >
+            <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => {
+                offCanvasActivityRef.open();
+            }}>
                 Criar Atividade e Avisos
             </button>
         {/if}
@@ -92,31 +88,37 @@
                             </dt>
                             <dd class="flex flex-wrap lg:flex-nowrap gap-2">
                                 {#if can.authority.update}
-                                    <button
-                                        aria-label="Definir permissões"
-                                        class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                                        on:click={() => {
-                                            identifier = item.uuid;
-                                            offCanvasUserAccessRef.open();
-                                        }}
-                                    >
-                                        <img src="/svg/crown.svg" alt="" aria-hidden="true" class="w-4 filter-blue-indigo" loading="lazy" />
+                                    <button aria-label="Definir permissões" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer" on:click={() => {
+                                        identifier = item.uuid;
+                                        offCanvasUserAccessRef.open();
+                                    }}>
+                                        <img 
+                                            src="/svg/crown.svg" 
+                                            alt="" 
+                                            aria-hidden="true" 
+                                            class="w-4 filter-blue-indigo" 
+                                            loading="lazy" 
+                                        />
                                     </button>
                                 {/if}
-                                <a
-                                    href={`/profile/${item.uuid}`}
-                                    aria-label="Editar perfil"
-                                    class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                                >
-                                    <img src="/svg/edit.svg" alt="" aria-hidden="true" class="w-4 filter-blue-indigo" loading="lazy" />
+                                <a href={`/profile/${item.uuid}`} aria-label="Editar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
+                                    <img 
+                                        src="/svg/edit.svg" 
+                                        alt="" 
+                                        aria-hidden="true" 
+                                        class="w-4 filter-blue-indigo" 
+                                        loading="lazy" 
+                                    />
                                 </a>
                                 {#if can.deactivate}
-                                    <button
-                                        on:click={() => requestDeactivateUser(item.uuid)}
-                                        aria-label="Desativar perfil"
-                                        class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                                    >
-                                        <img src="/svg/trash.svg" alt="" aria-hidden="true" class="w-4 filter-red-crimson" loading="lazy" />
+                                    <button aria-label="Desativar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer" on:click={() => requestDeactivateUser(item.uuid)}>
+                                        <img 
+                                            src="/svg/trash.svg" 
+                                            alt="" 
+                                            aria-hidden="true" 
+                                            class="w-4 filter-red-crimson" 
+                                            loading="lazy" 
+                                        />
                                     </button>
                                 {/if}
                             </dd>

@@ -59,10 +59,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="name"
-        >
+        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="name">
             Nome do arquivo
         </label>
         <input
@@ -75,10 +72,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="type"
-        >
+        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="type">
             Categoria do arquivo
         </label>
         <select
@@ -94,10 +88,7 @@
         </select>
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="url"
-        >
+        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="url">
             URL do conteúdo hospedado externamente
         </label>
         <input
@@ -110,10 +101,7 @@
         />
     </div>
     {#if can.create && can.update}
-        <button
-            type="submit"
-            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase"
-        >
+        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
             {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}

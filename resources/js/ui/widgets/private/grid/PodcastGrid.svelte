@@ -11,9 +11,7 @@
     };
 
     const requestDeactivatePodcast = (podcast) => {
-        router.delete(
-            `/painel/podcasts/${podcast}`,
-            {},
+        router.delete(`/painel/podcasts/${podcast}`, {},
             { preserveScroll: true },
         );
     };
@@ -21,9 +19,7 @@
 
 {#if podcasts}
     <Section title="Todos os podcasts">
-        <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-y-10 lg:gap-x-5"
-        >
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 lg:gap-y-10 lg:gap-x-5">
             {#if podcasts.data.length > 0}
                 {#each podcasts.data as item}
                     <article>
@@ -35,17 +31,12 @@
                             />
                         </div>
                         <dl class="flex justify-between mt-3">
-                            <dt
-                                class="text-orange-amber text-2xl font-noto-sans font-bold uppercase italic"
-                            >
+                            <dt class="text-orange-amber text-2xl font-noto-sans font-bold uppercase italic">
                                 S{item.season}-EP{item.episode}
                             </dt>
                             <dd class="flex items-center gap-3">
                                 {#if can.update}
-                                    <a
-                                        href={`/podcasts/${item.uuid}`}
-                                        aria-label="Editar"
-                                    >
+                                    <a href={`/podcasts/${item.uuid}`} aria-label="Editar">
                                         <img
                                             src="/svg/edit.svg"
                                             alt=""
@@ -56,12 +47,7 @@
                                     </a>
                                 {/if}
                                 {#if can.deactivate}
-                                    <button
-                                        on:click={() =>
-                                            requestDeactivatePodcast(item.uuid)}
-                                        class="cursor-pointer"
-                                        aria-label="Desativar"
-                                    >
+                                    <button class="cursor-pointer" aria-label="Desativar" on:click={() => requestDeactivatePodcast(item.uuid)}>
                                         <img
                                             src="/svg/trash.svg"
                                             alt=""
@@ -86,9 +72,7 @@
                         />
                     </div>
                     <div class="flex justify-between mt-3">
-                        <div
-                            class="text-orange-amber text-2xl font-noto-sans font-bold uppercase italic"
-                        >
+                        <div class="text-orange-amber text-2xl font-noto-sans font-bold uppercase italic">
                             S00-EP00
                         </div>
                     </div>
@@ -99,20 +83,12 @@
             {#if podcasts?.last_page > 1}
                 <div class="flex gap-5 mt-6">
                     {#if podcasts.current_page > 1}
-                        <button
-                            on:click={() =>
-                                pagination(podcasts.current_page - 1)}
-                            class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl italic uppercase font-noto-sans font-bold"
-                        >
+                        <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl italic uppercase font-noto-sans font-bold" on:click={() => pagination(podcasts.current_page - 1)}>
                             Voltar
                         </button>
                     {/if}
                     {#if podcasts.current_page < podcasts.last_page}
-                        <button
-                            on:click={() =>
-                                pagination(podcasts.current_page + 1)}
-                            class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl italic uppercase font-noto-sans font-bold"
-                        >
+                        <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl italic uppercase font-noto-sans font-bold" on:click={() => pagination(podcasts.current_page + 1)}>
                             Próximo
                         </button>
                     {/if}

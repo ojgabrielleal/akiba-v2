@@ -15,7 +15,13 @@
                 {#if hasPermission(item.permission)}
                     <li>
                         <a href={item.address} aria-label={item.name} class="flex items-center gap-2 text-neutral-aurora">
-                            <img src={item.icon} alt="" aria-hidden="true" class="w-5 h-5" loading="lazy"/>
+                            <img 
+                                src={item.icon} 
+                                alt="" 
+                                aria-hidden="true" 
+                                class="w-5 h-5" 
+                                loading="lazy"
+                            />
                         </a>
                     </li>
                 {/if}
@@ -59,7 +65,12 @@
             {#if hasPermission(item.permission)}
                 <li>
                     <a href={item.address} aria-label={item.name} class="flex items-center gap-2 text-neutral-aurora">
-                        <img src={item.icon} alt="" aria-hidden="true" class="w-5 h-5" loading="lazy"
+                        <img 
+                            src={item.icon} 
+                            alt="" 
+                            aria-hidden="true" 
+                            class="w-5 h-5" 
+                            loading="lazy"
                         />
                     </a>
                 </li>

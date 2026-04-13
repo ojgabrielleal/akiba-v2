@@ -1,32 +1,32 @@
 <script>
     export let title;
 
-    import { fly } from 'svelte/transition';
-    import { onDestroy } from 'svelte';
+    import { fly } from "svelte/transition";
+    import { onDestroy } from "svelte";
 
     let visible = false;
 
-    $: if (typeof document !== 'undefined') {
-        document.body.style.overflow = visible ? 'hidden' : 'auto';
+    $: if (typeof document !== "undefined") {
+        document.body.style.overflow = visible ? "hidden" : "auto";
     }
 
     onDestroy(() => {
-        if (typeof document !== 'undefined') {
-            document.body.style.overflow = 'auto';
+        if (typeof document !== "undefined") {
+            document.body.style.overflow = "auto";
         }
     });
 
     export const open = () => {
         visible = true;
-    }
+    };
 
     export const close = () => {
         visible = false;
-    }
+    };
 
     const block = (event) => {
         event.stopPropagation();
-    }
+    };
 </script>
 
 {#if visible}
@@ -38,7 +38,7 @@
                 {title}
             </div>
             <div class="pl-5 pr-8 pt-8 h-[calc(100vh-6rem)] overflow-y-auto">
-                <slot name="content" {close}/>
+                <slot name="content" {close} />
             </div>
         </div>
     </div>

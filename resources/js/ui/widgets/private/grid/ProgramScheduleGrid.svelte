@@ -30,7 +30,12 @@
                                     <strong class="font-bold">Com:</strong>
                                     {program.host.nickname}
                                 </div>
-                                <img class="w-36 aspect-square absolute right-0 bottom-0 object-cover object-top" src={program.host.avatar} alt={program.host.nickname}  loading="lazy">
+                                <img 
+                                    class="w-36 aspect-square absolute right-0 bottom-0 object-cover object-top" 
+                                    src={program.host.avatar} 
+                                    alt={program.host.nickname} 
+                                    loading="lazy"
+                                />
                             </div>
                             {#each program.schedules as schedule}
                                 <dl class="w-full rounded-md py-2 px-4 bg-neutral-aurora flex justify-between mb-2">

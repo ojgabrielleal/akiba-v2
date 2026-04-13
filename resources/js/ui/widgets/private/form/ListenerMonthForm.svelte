@@ -1,8 +1,8 @@
 <script>
     export let close = () => {};
 
-    import { onMount } from 'svelte';
     import axios from 'axios';
+    import { onMount } from 'svelte';
     import { useForm } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
     
@@ -16,18 +16,18 @@
 
     onMount(()=>{
         axios.get('/painel/radio/listener-month/found')
-        .then((response)=>{
-            const listenerMonthFound = response.data.data;
+            .then((response)=>{
+                const listenerMonthFound = response.data.data;
 
-            $form.name = listenerMonthFound.name,
-            $form.address = listenerMonthFound.address,
-            $form.favorite_program = listenerMonthFound.favorite_program,
-            $form.requests_total = listenerMonthFound.requests_total
-        })
-        .catch(()=>{
-            console.error('Error when find listener month');
-            close();
-        })
+                $form.name = listenerMonthFound.name;
+                $form.address = listenerMonthFound.address;
+                $form.favorite_program = listenerMonthFound.favorite_program;
+                $form.requests_total = listenerMonthFound.requests_total;
+            })
+            .catch(()=>{
+                console.error('Error when find listener month');
+                close();
+            })
     });
 
     const submit = () => {

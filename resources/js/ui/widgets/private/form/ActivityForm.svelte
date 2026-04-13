@@ -2,8 +2,8 @@
     export let close = () => {};
     export let identifier;
 
-    import { useForm } from "@inertiajs/svelte";
     import axios from "axios";
+    import { useForm } from "@inertiajs/svelte";
     import { hasPermission } from "@/utils";
 
     let can = {
@@ -21,16 +21,21 @@
     });
 
     $: if (identifier) {
-        axios.get(`/painel/adms/activity/${identifier}`).then((response) => {
-            const data = response.data.data;
+        axios.get(`/painel/adms/activity/${identifier}`)
+            .then((response) => {
+                const data = response.data.data;
 
-            $form.title = data.title;
-            $form.purpose = data.allows_confirmations ? "activity" : "notice";
-            $form.limit = data.limit;
-            $form.hour = data.hour;
-            $form.date = data.date;
-            $form.content = data.content;
-        });
+                $form.title = data.title;
+                $form.purpose = data.allows_confirmations ? "activity" : "notice";
+                $form.limit = data.limit;
+                $form.hour = data.hour;
+                $form.date = data.date;
+                $form.content = data.content;
+            })
+            .catch(()=>{
+                console.error('Error when find activity');
+                close();
+            })
     }
 
     const submit = () => {

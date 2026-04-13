@@ -14,6 +14,7 @@
 
     const submit = (event, uuid) => {
         const formData = new FormData();
+
         formData.append("_method", "PATCH");
         formData.append("image_ranking", event.target.files[0]);
 
