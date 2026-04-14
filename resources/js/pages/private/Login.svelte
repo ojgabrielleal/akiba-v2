@@ -27,6 +27,7 @@
                 alt="" 
                 aria-hidden="true" 
                 autoplay 
+                playsinline
                 loop 
                 muted
             >
