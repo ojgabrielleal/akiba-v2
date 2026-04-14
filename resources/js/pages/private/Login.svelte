@@ -30,6 +30,7 @@
                 playsinline
                 loop 
                 muted
+                preload="auto"
             >
             </video>
         </div>
