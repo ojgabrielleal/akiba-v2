@@ -19,7 +19,7 @@
     };
 </script>
 
-{#if tasks && tasks.data.length > 0}
+{#if tasks}
     <Section {title}>
         <div class="scroll-x flex gap-5 overflow-x-auto flex-nowrap" on:wheel={scrollx} role="group">
             {#each tasks.data as item}
