@@ -37,7 +37,7 @@
         class="modal-active w-screen h-screen fixed inset-0 flex justify-center items-center p-9 bg-[#00000086] z-50"
     >
         <div on:click={block} class="w-full lg:w-104 bg-neutral-aurora rounded-t-xl rounded-b-xl relative">
-            <div class="w-full h-20 pt-8 px-5 lg:mb-2 bg-cover bg-center rounded-t-xl" style="background-image: url('/img/player/default/songsRequests.webp');">
+            <div class="w-full h-20 pt-8 px-5 lg:mb-2 bg-cover bg-center rounded-t-xl" style="background-image: url('/img/player/songsRequests.webp');">
                 <div class="w-36">
                     <img src="/img/default/logo.webp" alt="logo" loading="lazy" />
                 </div>

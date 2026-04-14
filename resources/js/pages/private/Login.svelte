@@ -21,7 +21,16 @@
             <LoginForm />
         </div>
         <div class="h-full overflow-hidden rounded-r-lg hidden xl:block">
-            <img class="w-full h-full object-cover" src="/img/login/default/banner.gif" alt="" aria-hidden="true" />
+            <video 
+                class="w-full h-full object-cover" 
+                src="/video/login/banner.webm" 
+                alt="" 
+                aria-hidden="true" 
+                autoplay 
+                loop 
+                muted
+            >
+            </video>
         </div>
     </section>
 </div>

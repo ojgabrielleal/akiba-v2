@@ -22,7 +22,7 @@
     <div class="cont-player-main py-4 relative">
         <div class="hidden lg:block absolute -top-7 -left-10 z-10">
             <img
-                src="/img/player/default/rains.webp"
+                src="/img/player/rains.webp"
                 alt=""
                 aria-hidden="true"
                 class="w-20 transform -scale-x-100 -scale-y-100"
@@ -48,7 +48,7 @@
         </div>
         <div class="hidden lg:block absolute -top-8 -right-10 z-10">
             <img
-                src="/img/player/default/rains.webp"
+                src="/img/player/rains.webp"
                 alt=""
                 aria-hidden="true"
                 class="w-20"

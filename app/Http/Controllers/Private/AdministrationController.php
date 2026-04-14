@@ -274,7 +274,7 @@ class AdministrationController extends Controller
         ]);
 
         $roles = Role::whereIn('name', $request->input('roles'))->pluck('id');
-        $avatar = $request->input('gender') === 'male' ? '/img/users/default/avatarMale.webp' : '/img/users/default/avatarFemale.webp';
+        $avatar = $request->input('gender') === 'male' ? '/img/users/avatarMale.webp' : '/img/users/avatarFemale.webp';
 
         $socials = [
             ['name' => 'Facebook', 'url' => null],
