@@ -24,8 +24,12 @@ class PollTest extends TestCase
             ->has($options, 'options')
             ->create();
 
+        $firstOption = $poll->options->first();
+
         $this->assertCount(3, $poll->options);
         $this->assertContainsOnlyInstancesOf(PollOption::class, $poll->options);
+        $this->assertNotNull($firstOption);
+        $this->assertTrue($firstOption->poll->is($poll));
     }
 
     /**

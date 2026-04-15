@@ -43,5 +43,25 @@ class AutomaticTest extends TestCase
         $this->assertContainsOnlyInstancesOf(Onair::class, $auto->onair);
     }
 
+    /**
+     * Tests from Automatic model scopes.
+     */
+    public function testActiveScope(): void
+    {
+        $user = User::factory()->create();
+
+        $activeAuto = Automatic::factory()
+            ->for($user, 'host')
+            ->create(['is_active' => true]);
+
+        $inactiveAuto = Automatic::factory()
+            ->for($user, 'host')
+            ->create(['is_active' => false]);
+
+        $actives = Automatic::active()->get();
+
+        $this->assertTrue($actives->contains($activeAuto));
+        $this->assertFalse($actives->contains($inactiveAuto));
+    }
 
 }

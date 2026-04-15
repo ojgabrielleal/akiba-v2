@@ -49,21 +49,31 @@ class CalendarTest extends TestCase
     /**
     * Tests from Calendar model scopes.
     */
-    public function testActiveScope(): void
+    public function testValidScope(): void
     {
+        if (config('database.default') === 'sqlite') {
+            $this->markTestSkipped('The valid scope uses MySQL-specific TIMESTAMP() and NOW() functions.');
+        }
+
         $user = User::factory()->create();
 
-        $calendarActive = Calendar::factory()
+        $futureCalendar = Calendar::factory()
             ->for($user, 'responsible')
-            ->create(['is_active' => true]);
+            ->create([
+                'date' => now()->addDay()->format('Y-m-d'),
+                'hour' => now()->addDay()->format('H:i:s'),
+            ]);
 
-        $calendarInatictive = Calendar::factory()
+        $pastCalendar = Calendar::factory()
             ->for($user, 'responsible')
-            ->create(['is_active' => false]);
+            ->create([
+                'date' => now()->subDay()->format('Y-m-d'),
+                'hour' => now()->subDay()->format('H:i:s'),
+            ]);
 
-        $calendar = Calendar::active()->get();
+        $calendars = Calendar::valid()->get();
 
-        $this->assertTrue($calendar->contains($calendarActive));
-        $this->assertFalse($calendar->contains($calendarInatictive));
+        $this->assertTrue($calendars->contains($futureCalendar));
+        $this->assertFalse($calendars->contains($pastCalendar));
     }
 }

@@ -40,8 +40,12 @@ class PostTest extends TestCase
             ->has($reference, 'references')
             ->create();
 
+        $firstReference = $post->references->first();
+
         $this->assertCount(2, $post->references);
         $this->assertContainsOnlyInstancesOf(PostReference::class, $post->references);
+        $this->assertNotNull($firstReference);
+        $this->assertTrue($firstReference->post->is($post));
     }
 
     public function testReactionsRelationship(): void
@@ -54,8 +58,12 @@ class PostTest extends TestCase
             ->has($reaction, 'reactions')
             ->create();
 
+        $firstReaction = $post->reactions->first();
+
         $this->assertCount(2, $post->reactions);
         $this->assertContainsOnlyInstancesOf(PostReaction::class, $post->reactions);
+        $this->assertNotNull($firstReaction);
+        $this->assertTrue($firstReaction->post->is($post));
     }
 
     public function testCategoriesRelationship(): void
@@ -68,8 +76,12 @@ class PostTest extends TestCase
             ->has($category, 'categories')
             ->create();
 
+        $firstCategory = $post->categories->first();
+
         $this->assertCount(2, $post->categories);
         $this->assertContainsOnlyInstancesOf(PostCategory::class, $post->categories);
+        $this->assertNotNull($firstCategory);
+        $this->assertTrue($firstCategory->post->is($post));
     }
 
     /**
