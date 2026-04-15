@@ -19,7 +19,7 @@
         url: null,
     });
 
-    $: if (identifier) {
+    if (identifier) {
         axios.get(`/panel/marketing/repository/${identifier}`)
             .then((response) => {
                 const data = response.data.data;

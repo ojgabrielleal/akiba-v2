@@ -20,7 +20,7 @@
         permissions: [],
     });
 
-    $: if (identifier) {
+    if (identifier) {
         axios.get(`/panel/administration/role/${identifier}`)
             .then(function (response) {
                 const data = response.data.data;

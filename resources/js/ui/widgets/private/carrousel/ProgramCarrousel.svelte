@@ -45,7 +45,7 @@
     <Section {title} styles="mb-15">
         <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap mt-5" on:wheel|nonpassive={scrollx} role="group">
             {#each programs.data as item}
-                <div class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+                <article class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
                     <div>
                         <img 
                             src={item.image} 
@@ -82,7 +82,7 @@
                             </button>
                         {/if}
                     </div>
-                </div>
+                </article>
             {/each}
         </div>
     </Section>

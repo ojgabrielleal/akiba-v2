@@ -15,16 +15,17 @@ class AutomaticResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'uuid' => $this->uuid,
             'is_default' => $this->is_default,
             'name' => $this->name,
             'image' => $this->image,
             'phrases' => $this->phrases,
             'host' => [
-                'uuid' => $this->author->uuid,
-                'name' => $this->author->name,
-                'nickname' => $this->author->nickname,
-                'avatar' => $this->author->avatar,
-                'gender' => $this->author->gender
+                'uuid' => $this->host->uuid,
+                'name' => $this->host->name,
+                'nickname' => $this->host->nickname,
+                'avatar' => $this->host->avatar,
+                'gender' => $this->host->gender
             ],
         ];
     }

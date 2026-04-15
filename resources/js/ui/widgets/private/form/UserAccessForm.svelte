@@ -17,7 +17,7 @@
         roles: null,
     });
 
-    $: if (identifier) {
+    if (identifier) {
         axios.get(`/panel/administration/user/${identifier}`)
             .then((response) => {
                 const data = response.data.data;

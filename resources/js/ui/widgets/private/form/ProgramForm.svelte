@@ -23,7 +23,7 @@
         schedules: [],
     });
 
-    $: if (identifier) {
+    if (identifier) {
         axios.get(`/panel/radio/program/${identifier}`)
             .then((response) => {
                 const data = response.data.data;

@@ -19,7 +19,7 @@
         option_four: null,
     });
 
-    $: if (identifier) {
+    if (identifier) {
         axios.get(`/panel/media/poll/${identifier}`)
             .then((response) => {
                 const data = response.data.data;

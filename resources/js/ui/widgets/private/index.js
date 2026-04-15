@@ -39,6 +39,7 @@ export { default as UserGrid } from "./grid/UserGrid.svelte"
 export { default as RapidAccessGrid } from "./grid/RapidAccessGrid.svelte"
 export { default as CastMetricsGrid } from './grid/CastMetricsGrid.svelte';
 export { default as TaskGrid } from "./grid/TaskGrid.svelte";
+export { default as AutomaticGrid } from "./grid/AutomaticGrid.svelte";
 
 // Hero
 export { default as GreatingHero } from './hero/GreatingHero.svelte';	

@@ -9,26 +9,26 @@ class AutomaticPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->hasPermission('autodj.list');
+        return $user->hasPermission('automatic.list');
     }
 
     public function view(User $user, Automatic $automatic): bool
     {
-        return $user->hasPermission('autodj.view');
+        return $user->hasPermission('automatic.view');
     }
 
     public function create(User $user): bool
     {
-        return $user->hasPermission('autodj.create');
+        return $user->hasPermission('automatic.create');
     }
 
     public function update(User $user, Automatic $automatic): bool
     {
-        return $user->hasPermission('autodj.update');
+        return $user->hasPermission('automatic.update');
     }
 
     public function delete(User $user, Automatic $automatic): bool
     {
-        return $user->hasPermission('autodj.remove');
+        return $user->hasPermission('automatic.deactivate');
     }
 }

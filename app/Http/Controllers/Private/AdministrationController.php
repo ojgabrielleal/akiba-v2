@@ -115,7 +115,7 @@ class AdministrationController extends Controller
         }
 
         return AutomaticResource::collection(
-            Automatic::with('host')->first()
+            Automatic::active()->with('host')->get()
         );
     }
 
@@ -524,6 +524,7 @@ class AdministrationController extends Controller
         if (request()->user()->cannot('delete', $automatic)) {
             return null;
         }
+
         $automatic->update([
             'is_active' => false,
         ]);
@@ -565,7 +566,7 @@ class AdministrationController extends Controller
             'calendar' => $this->indexCalendar(),
             'users' => $this->indexUsers(),
             'tasks' => $this->indexTask(),
-            'automatic' => $this->indexAutomatic(),
+            'automatics' => $this->indexAutomatic(),
         ]);
     }
 }

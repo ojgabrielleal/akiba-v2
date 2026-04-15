@@ -171,6 +171,12 @@ Route::prefix('panel')->group(function () {
                 Route::post('', 'createTask');
                 Route::patch('{task:uuid}', 'updateTask');
             });
+            Route::prefix('automatic')->group(function () {
+                Route::post('', 'createAutomatic');
+                Route::get('{automatic:uuid}', 'showAutomatic');
+                Route::patch('{automatic:uuid}', 'updateAutomatic');
+                Route::delete('{automatic:uuid}', 'deactivateAutomatic');
+            });
             Route::get('', 'render')->name('panel.adms');
         });
 
