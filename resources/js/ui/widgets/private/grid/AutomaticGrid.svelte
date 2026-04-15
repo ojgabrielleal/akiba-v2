@@ -8,6 +8,8 @@
 
     $: ({ automatics } = $page.props);
 
+    $:console.log(automatics)
+
     let can = {
         create: hasPermission("automatic.create"),
         update: hasPermission("automatic.update"),
