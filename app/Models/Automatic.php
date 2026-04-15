@@ -14,6 +14,7 @@ class Automatic extends Model
 
     protected $fillable = [
         'uuid',
+        'is_active',
         'is_default',
         'user_id',
         'name',
@@ -22,6 +23,7 @@ class Automatic extends Model
     ];
 
     protected $casts = [
+        'is_active' => 'boolean',
         'is_default' => 'boolean',
         'phrases' => 'array'
     ];
@@ -41,6 +43,18 @@ class Automatic extends Model
     {
         return ['uuid'];
     }
+
+    /**
+     * Query scopes for this model.
+     *
+     * These methods define reusable query filters that can be
+     * applied to Eloquent queries (e.g., active()).
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
 
     /**
      * Define the relationships between this model and other models.
