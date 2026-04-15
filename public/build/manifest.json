@@ -3,25 +3,25 @@
     "file": "assets/vendor-CHPFJqtd.css",
     "src": "_vendor-CHPFJqtd.css"
   },
-  "_vendor-W8XoMWPZ.js": {
-    "file": "assets/vendor-W8XoMWPZ.js",
+  "_vendor-biO854er.js": {
+    "file": "assets/vendor-biO854er.js",
     "name": "vendor",
     "css": [
       "assets/vendor-CHPFJqtd.css"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-B5Hicw4Z.css",
+    "file": "assets/app-BDKSklIv.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-C2GbowTm.js",
+    "file": "assets/app-CHjJr3xq.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vendor-W8XoMWPZ.js"
+      "_vendor-biO854er.js"
     ]
   }
 }
