@@ -31,7 +31,7 @@ class RadioController extends Controller
         $this->image = $image;
     }
 
-    public function indexStreamers()
+    public function indexUsers()
     {
         if (request()->user()->cannot('viewAny', User::class)) {
             return null;
@@ -174,9 +174,7 @@ class RadioController extends Controller
         $user = User::where('uuid', $request->input('user'))->first();
 
         $program = Program::create([
-            'user_id' => $request->input('type') === 'private'
-                ? $user->id
-                : $request->user()->id,
+            'user_id' => $request->input('type') === 'private' ? $user->id : $request->user()->id,
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'image' => $this->image->store('programs', $request->file('image'), 'public'),
@@ -227,8 +225,8 @@ class RadioController extends Controller
     public function render()
     {
         return Inertia::render($this->render, [
+            "users" => $this->indexUsers(),
             "programs" => $this->indexPrograms(),
-            "streamers" => $this->indexStreamers(),
             "musicRanking" => $this->indexMusicRanking(),
             "listenerMonth" => $this->showListenerMonth(),
         ]);

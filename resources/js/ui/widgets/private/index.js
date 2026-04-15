@@ -21,6 +21,7 @@ export { default as RoleForm } from "./form/RoleForm.svelte"
 export { default as ActivityForm } from "./form/ActivityForm.svelte"
 export { default as CalendarForm } from "./form/CalendarForm.svelte"
 export { default as TaskForm } from "./form/TaskForm.svelte"
+export { default as AutomaticForm } from "./form/AutomaticForm.svelte";
 
 // Grids
 export { default as PostGrid } from "./grid/PostGrid.svelte"

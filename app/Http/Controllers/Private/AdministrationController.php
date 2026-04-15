@@ -14,6 +14,7 @@ use App\Models\Permission;
 use App\Models\Activity;
 use App\Models\Calendar;
 use App\Models\Task;
+use App\Models\Automatic;
 
 use App\Http\Resources\UserResource;
 use App\Http\Resources\RoleResource;
@@ -21,16 +22,24 @@ use App\Http\Resources\PermissionResource;
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\CalendarResource;
 use App\Http\Resources\TaskResource;
+use App\Http\Resources\AutomaticResource;
 
 use App\Exceptions\RoleHasMembersException;
 
+use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
 
 class AdministrationController extends Controller
 {
     use HasFlashMessages;
 
+    private ImageProcessService $image;
     private $render = 'private/Administration';
+
+    public function __construct(ImageProcessService $image)
+    {
+        $this->image = $image;
+    }
 
     public function indexActivities()
     {
@@ -99,6 +108,26 @@ class AdministrationController extends Controller
         );
     }
 
+    public function indexAutomatic()
+    {
+        if (request()->user()->cannot('viewAny', Automatic::class)) {
+            return null;
+        }
+
+        return AutomaticResource::collection(
+            Automatic::with('host')->first()
+        );
+    }
+
+    public function showAutomatic(Automatic $automatic)
+    {
+        if (request()->user()->cannot('view', $automatic)){
+            return null;
+        }
+
+        return new AutomaticResource($automatic->load('host'));
+    }
+
     public function showRole(Role $role)
     {
         if (request()->user()->cannot('view', $role)) {
@@ -139,6 +168,32 @@ class AdministrationController extends Controller
         }
 
         return new TaskResource($task->load(['responsible']));
+    }
+
+    public function createAutomatic(Request $request)
+    {
+        if(request()->user()->cannot('create', Automatic::class)){
+            return null;
+        }
+
+        $request->validate([
+            'is_default' => 'required',
+            'user' => 'required', 
+            'name' => 'required', 
+            'image' => 'required', 
+            'phrases' => 'required',
+        ]);
+
+        $user = User::where('uuid', $request->input('user'))->first();
+
+        Automatic::create([
+            'user_id' => $user->id,
+            'name' => $request->input('name'),
+            'image' => $this->image->store('programs', $request->file('image'), 'public'),
+            'phrases' => $request->input('phrases'),
+        ]);
+
+        return $this->flashMessage('save');
     }
 
     public function createTask(Request $request)
@@ -310,17 +365,33 @@ class AdministrationController extends Controller
         return $this->flashMessage('save');
     }
 
+    public function updateAutomatic(Request $request, Automatic $automatic)
+    {
+        if($request->user()->cannot('update', $automatic)){
+            return null;
+        }
+
+        $user = User::where('uuid', $request->input('user'))->first();
+
+        $automatic->fill([
+            'user_id' => $user->id,
+            'name' => $request->input('name'),
+            'image' => $this->image->store('programs', $request->file('image'), 'public', $automatic->image),
+            'phrases' => $request->input('phrases'),
+        ]);
+
+        if($automatic->isDirty()){
+            $automatic->save();
+        }
+
+        return $this->flashMessage('update');
+    }
+
     public function updateTask(Request $request, Task $task)
     {
         if (request()->user()->cannot('update', $task)) {
             return null;
         }
-
-        $request->validate([
-            'title' => 'required',
-            'dead_line' => 'required',
-            'content' => 'required',
-        ]);
 
         $user = User::where('uuid', $request->input('user'))->first();
 
@@ -343,13 +414,6 @@ class AdministrationController extends Controller
         if ($request->user()->cannot('update', $calendar)) {
             return null;
         }
-        $request->validate([
-            'user' => 'required',
-            'content' => 'required',
-            'date' => 'required',
-            'hour' => 'required',
-            'type' => 'required',
-        ]);
 
         $user = User::where('uuid', $request->input('user'))->first();
 
@@ -374,10 +438,6 @@ class AdministrationController extends Controller
         if ($request->user()->cannot('updateAuthority', $user)) {
             return null;
         }
-        $request->validate([
-            'password' => 'required',
-            'roles' => 'required|array',
-        ]);
 
         $roles = Role::whereIn('name', $request->input('roles'))
             ->pluck('id')
@@ -397,6 +457,7 @@ class AdministrationController extends Controller
         if ($request->user()->cannot('update', $role)) {
             return null;
         }
+
         $role->fill([
             'label' => $request->input('label'),
             'name' => Str::slug($request->input('label')),
@@ -458,6 +519,18 @@ class AdministrationController extends Controller
         return $this->flashMessage('update');
     }
 
+    public function deactivateAutomatic(Automatic $automatic)
+    {
+        if (request()->user()->cannot('delete', $automatic)) {
+            return null;
+        }
+        $automatic->update([
+            'is_active' => false,
+        ]);
+
+        return $this->flashMessage('deactivate');
+    }
+
     public function deactivateUser(User $user)
     {
         if (request()->user()->cannot('delete', $user)) {
@@ -491,7 +564,8 @@ class AdministrationController extends Controller
             'activities' => $this->indexActivities(),
             'calendar' => $this->indexCalendar(),
             'users' => $this->indexUsers(),
-            'tasks' => $this->indexTask()
+            'tasks' => $this->indexTask(),
+            'automatic' => $this->indexAutomatic(),
         ]);
     }
 }

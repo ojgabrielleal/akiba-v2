@@ -1,6 +1,6 @@
 <script>
     import { Meta } from "@/config";
-    import { Layout } from "@/layouts/private";
+    import { Layout } from "@/ui/layouts/private";
     import { ProgramScheduleGrid, MusicRankingGrid, ListenerMonthGrid, ProgramCarrousel } from "@/ui/widgets/private";
 </script>
 

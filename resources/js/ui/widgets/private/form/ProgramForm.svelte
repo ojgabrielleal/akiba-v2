@@ -7,7 +7,7 @@
     import { Preview } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
-    $: ({ streamers } = $page.props);
+    $: ({ users } = $page.props);
 
     let can = {
         create: hasPermission("program.tete"),
@@ -130,7 +130,7 @@
                 bind:value={$form.user}
                 required
             >
-                {#each streamers.data as item}
+                {#each users.data as item}
                     <option value={item.uuid}>{item.nickname}</option>
                 {/each}
             </select>

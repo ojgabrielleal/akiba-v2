@@ -207,6 +207,15 @@ class PermissionSeeder extends Seeder
             ['name' => 'role.create', 'label' => '[Cargos] Criar'],
             ['name' => 'role.update', 'label' => '[Cargos] Atualizar'],
             ['name' => 'role.remove', 'label' => '[Cargos] Remover'],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Auto DJ
+            |--------------------------------------------------------------------------
+            */
+            ['name' => 'autodj.view', 'label' => '[Auto DJ] Visualizar'],
+            ['name' => 'autodj.create', 'label' => '[Auto DJ] Criar'],
+            ['name' => 'autodj.update', 'label' => '[Auto DJ] Atualizar'],
         ];
 
         foreach ($permissions as $item) {

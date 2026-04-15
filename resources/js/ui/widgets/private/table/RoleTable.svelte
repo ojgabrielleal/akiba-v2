@@ -50,10 +50,18 @@
             <table class="min-w-[900px] w-full border-collapse table-auto">
                 <thead>
                     <tr class="text-neutral-aurora uppercase text-sm font-bold italic whitespace-nowrap">
-                        <th class="p-4 text-start min-w-[180px]">Cargo</th>
-                        <th class="p-4 text-start min-w-[180px]">Membros relacionados</th>
-                        <th class="p-4 text-start min-w-[300px]">Descrição</th>
-                        <th class="p-4 text-start min-w-[140px]">Ações</th>
+                        <th class="p-4 text-start min-w-[180px]">
+                            Cargo
+                        </th>
+                        <th class="p-4 text-start min-w-[180px]">
+                            Membros relacionados
+                        </th>
+                        <th class="p-4 text-start min-w-[300px]">
+                            Descrição
+                        </th>
+                        <th class="p-4 text-start min-w-[140px]">
+                            Ações
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
