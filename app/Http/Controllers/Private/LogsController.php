@@ -14,15 +14,21 @@ class LogsController extends Controller
 {
     use HasFlashMessages;
 
+    private $radioStats;
     private $render = 'private/Logs';
+
+    public function __construct(RadiosStatsService $radioStats)
+    {
+        $this->radioStats = $radioStats;
+    }
 
     /**
      * Renderiza a página de Logs com as estatísticas de audiência.
      */
-    public function render(RadiosStatsService $service)
+    public function render()
     {
         return Inertia::render($this->render, [
-            'audienceStats' => $service->getStats()
+            'audienceStats' => $this->radioStats->getStats()
         ]);
     }
 }

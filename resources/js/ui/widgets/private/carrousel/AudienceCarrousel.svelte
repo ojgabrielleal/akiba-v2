@@ -8,13 +8,13 @@
     $: audienceStats = $page.props.audienceStats || [];
 
     // Habilita a atualização automática dos dados a cada 30 segundos
-    usePoll(30000, { only: ["audienceStats"] });
+    usePoll(30 * 1000);
 </script>
 
 <Section {title}>
     <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap" on:wheel|nonpassive={scrollx} role="group">
         {#each audienceStats as radio}
-            <article class="shrink-0 flex flex-col items-center w-40 text-center px-6 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-r-0">
+            <article class="shrink-0 flex flex-col items-center w-60 text-center px-6 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-r-0">
                 <!-- Logo -->
                 <div class="flex items-center justify-center h-16 w-full mb-3">
                     {#if radio.logo}
@@ -31,7 +31,7 @@
                 </div>
 
                 <!-- Radio Name -->
-                <span class="text-[10px] font-medium text-white/50 tracking-[0.1em] uppercase mb-1">
+                <span class="text-[10px] font-medium text-white/50 tracking-widest uppercase mb-1">
                     {radio.nome}
                 </span>
 
@@ -39,7 +39,7 @@
                 <div class="flex items-center gap-2 font-black italic text-lg {radio.color || 'text-cyan-400'} uppercase tracking-tight">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
-                        class="w-5 h-5 flex-shrink-0 text-blue-500" 
+                        class="w-5 h-5 shrink-0 text-blue-500" 
                         viewBox="0 0 24 24" 
                         fill="currentColor"
                     >
