@@ -8,27 +8,24 @@ use Inertia\Inertia;
 
 use App\Traits\HasFlashMessages;
 
-use App\Services\External\RadiosStatsService;
+use App\Services\External\AudienceService;
 
 class LogsController extends Controller
 {
     use HasFlashMessages;
 
-    private $radioStats;
+    private $audience;
     private $render = 'private/Logs';
 
-    public function __construct(RadiosStatsService $radioStats)
+    public function __construct(AudienceService $audience)
     {
-        $this->radioStats = $radioStats;
+        $this->audience = $audience;
     }
 
-    /**
-     * Renderiza a página de Logs com as estatísticas de audiência.
-     */
     public function render()
     {
         return Inertia::render($this->render, [
-            'audienceStats' => $this->radioStats->getStats()
+            'audience' => $this->audience->getAudience()
         ]);
     }
 }
