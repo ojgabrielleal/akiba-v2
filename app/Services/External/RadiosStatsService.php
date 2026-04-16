@@ -57,7 +57,7 @@ class RadiosStatsService
         [
             "nome" => "Rádio Tokyo Groove FM",
             "logo" => "https://www.tokyogroovefm.com/admin/assets/img/logo.png",
-            "link" => "https://stm.sistemayuki.com:1065/status=json.xsl",
+            "link" => "https://stm.sistemayuki.com:1065/status-json.xsl",
             "color" => "text-pink-400"
         ],
         [
