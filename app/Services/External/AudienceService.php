@@ -10,7 +10,7 @@ class AudienceService
     private array $radios = [
         [
             "nome" => "Rádio Doru",
-            "logo" => "https://www.radiodoru.com.br/admin/assets/img/logo.png?April162026811pm14",
+            "logo" => "https://img.radios.com.br/radio/md/radio141568_1776067616.png",
             "link" => "https://paineldj6.com.br:20038/status-json.xsl",
             "target" => "icestats.source.0.listeners"
         ],
@@ -22,49 +22,49 @@ class AudienceService
         ],
         [
             "nome" => "Rádio Nikkey",
-            "logo" => "https://www.radionikkeyweb.com.br/public/89196-2023-12-27.png",
+            "logo" => "https://img.radios.com.br/radio/md/radio72519_1529518559.png",
             "link" => "https://stm8.voxhd.com.br:7996/stats?json=1",
             "target" => "currentlisteners",
         ],
         [
             "nome" => "Rádio J-Hero",
-            "logo" => "https://thumbs.radiojhero.com/KeFhYMjzdxfJiMO5YbzmPGHkcUK3kI5wbnGr05mmBio/f:webp/g:sm/h:48/rt:fill/aHR0cHM6Ly9yYWRpb2poZXJvLmNvbS9hc3NldHMvbG9nby5wbmc.webp",
+            "logo" => "https://img.radios.com.br/radio/md/radio31206_1743416541.png",
             "link" => "https://api.radiojhero.com/streaming/np",
             "target" => "listeners.current"
         ],
         [
             "nome" => "Rádio Anime Night",
-            "logo" => "https://www.animenight.com.br/wa_images/logo1000.png?v=1jlid3r",
+            "logo" => "https://img.radios.com.br/radio/lg/radio47996_1496672705.jpg",
             "link" => "https://stm16.voxhd.com.br:10374/stats?json=1",
             "target" => "currentlisteners"
         ],
         [
             "nome" => "Rádio Toku Hero Club",
-            "logo" => "https://images.cdn-files-a.com/uploads/6678219/400_filter_nobg_6660eaee06135.png",
+            "logo" => "https://img.radios.com.br/radio/lg/radio145648_1756463989.jpeg",
             "link" => "http://sv12.hdradios.net:7664/stats?json=1",
             "target" => "currentlisteners",
         ],
         [
             "nome" => "Rádio Animu",
-            "logo" => "https://www.animu.moe/wp-content/uploads/2021/10/cropped-cropped-cropped-cropped-Logo-nova-com-slogan-1-189x69.webp",
+            "logo" => "https://img.radios.com.br/radio/lg/radio68971_1696516163.png",
             "link" => "https://api.animu.com.br/",
             "target" => "listeners"
         ],
         [
             "nome" => "Rádio Tokyo Groove FM",
-            "logo" => "https://www.tokyogroovefm.com/admin/assets/img/logo.png",
+            "logo" => "https://img.radios.com.br/radio/lg/radio222299_1768295015.png",
             "link" => "https://stm.sistemayuki.com:1065/status-json.xsl",
             "target" => "icestats.source.listeners"
         ],
         [
             "nome" => "Rede Blast",
-            "logo" => "https://redeblast.com/assets/blast/img/default.png",
+            "logo" => "https://img.radios.com.br/radio/lg/radio35904_1505828350.png",
             "link" => "https://centova4.transmissaodigital.com:20143/stats?json=1",
             "target" => "currentlisteners"
         ],
         [
             "nome" => "Rádio Okinawa",
-            "logo" => "https://yt3.googleusercontent.com/SB6vEeJ59pED2E-Tm1-afgQLQY2VAT1wdkDnoNtcWFrFYDbWDpKhjtB-kktN_wPJ1sRrjwQfag=s900-c-k-c0x00ffffff-no-rj",
+            "logo" => "https://img.radios.com.br/radio/lg/radio204874_1661782384.png",
             "link" => "https://hts05.brascast.com:9080/status-json.xsl",
             "target" => "icestats.source.0.listeners"
         ],
@@ -82,7 +82,7 @@ class AudienceService
         ],
         [
             "nome" => "Rádio UP!",
-            "logo" => "https://radioup.antbr.com/logo.png",
+            "logo" => "https://img.radios.com.br/radio/lg/radio261613_1760956640.jpg",
             "link" => "https://saber.intra.antbr.com:8443/status-json.xsl",
             "target" => "icestats.source.listeners"
         ]

@@ -7,20 +7,20 @@
 
     $: ({ audience } = $page.props);
 
-    usePoll(30 * 1000);
+    usePoll(120 * 1000);
 </script>
 
 <Section {title}>
     <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap mt-5" on:wheel|nonpassive={scrollx} role="group">
             {#each audience as item}
-                <article class="shrink-0 flex flex-col items-center justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
-                    <div>
+                <article class="shrink-0 flex flex-col items-center justify-center gap-4 px-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+                    <div class="">
                         <img 
                             src={item.logo} 
                             alt="" 
                             aria-hidden="true" 
                             loading="lazy" 
-                            class="w-20 h-20 object-contain shrink-0" 
+                            class="w-30 h-20 object-contain" 
                         />
                     </div>
                     <div class="flex flex-col gap-1">
