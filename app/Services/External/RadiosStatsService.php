@@ -107,7 +107,7 @@ class RadiosStatsService
             $responses = Http::withHeaders([
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
             ])
-            ->when(app()->isLocal(), fn ($h) => $h->withoutVerifying())
+            ->withoutVerifying() // Mantido para compatibilidade com APIs de rádio de terceiros
             ->pool(fn (Pool $pool) => 
                 collect($this->radios)->map(fn ($radio) => 
                     $pool->as($radio['nome'])->timeout(3)->get($radio['link'])

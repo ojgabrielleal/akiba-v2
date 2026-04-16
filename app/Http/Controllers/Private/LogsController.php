@@ -22,8 +22,7 @@ class LogsController extends Controller
     public function render(RadiosStatsService $service)
     {
         return Inertia::render($this->render, [
-            'audienceStats' => $service->getStats(),
-            'isLocal' => app()->isLocal()
+            'audienceStats' => $service->getStats()
         ]);
     }
 }

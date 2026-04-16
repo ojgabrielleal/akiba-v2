@@ -6,28 +6,15 @@
     import { scrollx } from "@/utils";
 
     $: audienceStats = $page.props.audienceStats || [];
-    $: isLocal = $page.props.isLocal || false;
 
     // Habilita a atualização automática dos dados a cada 30 segundos
     usePoll(30000, { only: ["audienceStats"] });
 </script>
 
 <Section {title}>
-    {#if isLocal}
-        <div class="mb-8 mx-auto max-w-2xl bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 flex items-center gap-4 text-amber-500 animate-pulse">
-            <div class="bg-amber-500/20 p-2 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-            </div>
-            <div class="flex-1 text-left">
-                <h4 class="text-sm font-bold uppercase tracking-wider">Ambiente Local</h4>
-                <p class="text-xs opacity-80">A verificação SSL está desativada para garantir a conectividade com as APIs das rádios neste ambiente.</p>
-            </div>
-        </div>
-    {/if}
-
     <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap" on:wheel|nonpassive={scrollx} role="group">
         {#each audienceStats as radio}
-            <div class="flex flex-col items-center w-40 text-center">
+            <article class="shrink-0 flex flex-col items-center w-40 text-center px-6 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-r-0">
                 <!-- Logo -->
                 <div class="flex items-center justify-center h-16 w-full mb-3">
                     {#if radio.logo}
@@ -43,9 +30,9 @@
                     {/if}
                 </div>
 
-                <!-- Admin -->
+                <!-- Radio Name -->
                 <span class="text-[10px] font-medium text-white/50 tracking-[0.1em] uppercase mb-1">
-                    ADMIN: {radio.admin || '-'}
+                    {radio.nome}
                 </span>
 
                 <!-- Listener Count -->
@@ -60,7 +47,8 @@
                     </svg>
                     <span>{radio.listeners ?? 'NaN'} OUVINTES</span>
                 </div>
-            </div>
+            </article>
         {/each}
     </div>
 </Section>
+
