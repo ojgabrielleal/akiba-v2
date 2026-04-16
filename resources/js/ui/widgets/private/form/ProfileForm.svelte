@@ -176,7 +176,6 @@
                                 name={item.name}
                                 class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                                 bind:value={item.url}
-                                required
                             />
                         </div>
                     {/each}
