@@ -228,7 +228,6 @@
                         name="unlikes"
                         class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
                         bind:value={item.content}
-                        required
                     >
                         {#each userPreferences as item}
                             <option value={item.value}>{item.name}</option>
