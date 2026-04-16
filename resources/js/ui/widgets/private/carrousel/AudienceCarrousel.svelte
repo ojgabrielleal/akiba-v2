@@ -14,7 +14,7 @@
 <Section {title}>
     <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap" on:wheel|nonpassive={scrollx} role="group">
         {#each audienceStats as radio}
-            <article class="shrink-0 flex flex-col items-center w-60 text-center px-6 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-r-0">
+            <article class="shrink-0 flex flex-col items-center w-55 text-center px-6 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-r-0">
                 <!-- Logo -->
                 <div class="flex items-center justify-center h-16 w-full mb-3">
                     {#if radio.logo}
@@ -36,15 +36,8 @@
                 </span>
 
                 <!-- Listener Count -->
-                <div class="flex items-center gap-2 font-black italic text-lg {radio.color || 'text-cyan-400'} uppercase tracking-tight">
-                    <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        class="w-5 h-5 shrink-0 text-blue-500" 
-                        viewBox="0 0 24 24" 
-                        fill="currentColor"
-                    >
-                        <path d="M12 3a9 9 0 0 0-9 9v7c0 1.1.9 2 2 2h4v-8H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-4v8h4c1.1 0 2-.9 2-2v-7a9 9 0 0 0-9-9z"/>
-                    </svg>
+                <div class="flex items-center gap-2 font-black italic text-lg text-neutral-aurora uppercase tracking-tight">
+                    <img src="/assets/icons/headphone.svg" alt="Ouvintes" class="w-5 h-5 shrink-0 filter invert" />
                     <span>{radio.listeners ?? 'NaN'} OUVINTES</span>
                 </div>
             </article>
