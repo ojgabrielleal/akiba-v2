@@ -52,8 +52,8 @@
             <div class="mb-3">
                 <Preview
                     name="image"
-                    standard="w-full h-[15rem] rounded-full"
-                    view="w-full h-[15rem] object-cover object-top bg-neutral-aurora rounded-full"
+                    standard="w-full h-[15rem] rounded-lg"
+                    view="w-full h-[15rem] object-cover object-top bg-neutral-aurora rounded-lg"
                     src={$form.avatar}
                     oninput={(event) => ($form.avatar = event.target.files[0])}
                     required={!profile}
