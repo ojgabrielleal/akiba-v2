@@ -14,6 +14,7 @@ use App\Http\Controllers\Private\RadioController;
 use App\Http\Controllers\Private\PodcastController;
 use App\Http\Controllers\Private\RepositoryController;
 use App\Http\Controllers\Private\MediaController;
+use App\Http\Controllers\Private\LogsController;
 use App\Http\Controllers\Private\ProfileController;
 
 // Provisory controllers
@@ -179,7 +180,9 @@ Route::prefix('panel')->group(function () {
             });
             Route::get('', 'render')->name('panel.adms');
         });
-
+        Route::prefix('logs')->controller(LogsController::class)->group(function () {
+            Route::get('', 'render')->name('panel.logs');
+        });
         Route::prefix('profile')->controller(ProfileController::class)->group(function () {
             Route::patch('{user:uuid}', 'updateProfile');
             Route::get('{user:uuid}', 'render')->name('panel.profile');

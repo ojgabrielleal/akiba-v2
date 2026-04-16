@@ -52,11 +52,5 @@
         "icon": "/svg/logs.svg",
         "permission": "log.module.view",
         "address": "/panel/logs"
-    },
-    {
-        "name": "Avisos",
-        "icon": "/svg/alerts.svg",
-        "permission": "warning.module.view",
-        "address": "/panel/alerts"
     }
 ]
