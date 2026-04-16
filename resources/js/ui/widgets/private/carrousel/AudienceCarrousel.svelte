@@ -5,7 +5,7 @@
     import { Section } from "@/ui/components/private/";
     import { scrollx } from "@/utils";
 
-    $: audienceStats = $page.props.audienceStats || [];
+    $: ({ audienceStats } = $page.props);
 
     // Habilita a atualização automática dos dados a cada 30 segundos
     usePoll(30 * 1000);
