@@ -64,7 +64,7 @@ class RadiosStatsService
         [
             "nome" => "Rádio Tokyo Groove FM",
             "logo" => "https://www.tokyogroovefm.com/admin/assets/img/logo.png",
-            "link" => "https://stm.sistemayuki.com:1065/status.xsl",
+            "link" => "https://stm.sistemayuki.com:1065/status=json.xsl",
             "admin" => "ADMIN",
             "color" => "text-pink-400"
         ],
@@ -100,16 +100,15 @@ class RadiosStatsService
 
     /**
      * Obtém as estatísticas de audiência de todas as rádios.
-     * Utiliza Cache de 30 segundos e Requisições Simultâneas (Pool).
      */
     public function getStats(): array
     {
         return Cache::remember('radios_audience_stats', 30, function () {
-            // Dispara requisições em paralelo com um User-Agent comum para evitar bloqueios
-            // Desativamos a verificação SSL (withoutVerifying) para evitar erros em ambientes locais
             $responses = Http::withHeaders([
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-            ])->withoutVerifying()->pool(fn (Pool $pool) => 
+            ])
+            ->when(app()->isLocal(), fn ($h) => $h->withoutVerifying())
+            ->pool(fn (Pool $pool) => 
                 collect($this->radios)->map(fn ($radio) => 
                     $pool->as($radio['nome'])->timeout(3)->get($radio['link'])
                 )
@@ -117,7 +116,7 @@ class RadiosStatsService
 
             return collect($this->radios)->map(function ($radio) use ($responses) {
                 $response = $responses[$radio['nome']];
-                $radio['listeners'] = 0;
+                $radio['listeners'] = null; // Default to null for NaN display
 
                 if ($response instanceof \Illuminate\Http\Client\Response && $response->successful()) {
                     $radio['listeners'] = $this->parseListeners($response->json() ?? []);
@@ -131,28 +130,31 @@ class RadiosStatsService
     /**
      * Analisa o JSON de resposta para extrair o número de ouvintes.
      */
-    private function parseListeners(array|int|string $data): int
+    private function parseListeners(array|int|string $data): ?int
     {
-        if (empty($data)) return 0;
+        if (empty($data)) return null;
 
         // Se o dado for apenas um número/texto
-        if (!is_array($data)) {
-            return is_numeric($data) ? (int)$data : 0;
+        if (!is_numeric($data) && !is_array($data)) {
+            return null;
+        }
+
+        if (is_numeric($data)) {
+            return (int)$data;
         }
 
         // Icecast (icestats)
         if (isset($data['icestats']['source'])) {
             $source = $data['icestats']['source'];
             $mount = is_array($source) && isset($source[0]) ? $source[0] : $source;
-            return (int) ($mount['listeners'] ?? 0);
+            return isset($mount['listeners']) ? (int)$mount['listeners'] : null;
         }
 
         // Shoutcast / Animu / Custom
-        return (int) (
-            $data['uniquelisteners'] ?? 
-            $data['listeners'] ?? 
-            $data['online'] ?? 
-            0
-        );
+        if (isset($data['uniquelisteners'])) return (int)$data['uniquelisteners'];
+        if (isset($data['listeners'])) return (int)$data['listeners'];
+        if (isset($data['online'])) return (int)$data['online'];
+
+        return null;
     }
 }

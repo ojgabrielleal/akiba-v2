@@ -3,15 +3,29 @@
 
     import { page, usePoll } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
+    import { scrollx } from "@/utils";
 
     $: audienceStats = $page.props.audienceStats || [];
+    $: isLocal = $page.props.isLocal || false;
 
     // Habilita a atualização automática dos dados a cada 30 segundos
     usePoll(30000, { only: ["audienceStats"] });
 </script>
 
 <Section {title}>
-    <div class="flex flex-wrap items-start justify-center gap-x-12 gap-y-10 p-6">
+    {#if isLocal}
+        <div class="mb-8 mx-auto max-w-2xl bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 flex items-center gap-4 text-amber-500 animate-pulse">
+            <div class="bg-amber-500/20 p-2 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            </div>
+            <div class="flex-1 text-left">
+                <h4 class="text-sm font-bold uppercase tracking-wider">Ambiente Local</h4>
+                <p class="text-xs opacity-80">A verificação SSL está desativada para garantir a conectividade com as APIs das rádios neste ambiente.</p>
+            </div>
+        </div>
+    {/if}
+
+    <div class="scroll-x overflow-x-auto flex gap-5 flex-nowrap" on:wheel|nonpassive={scrollx} role="group">
         {#each audienceStats as radio}
             <div class="flex flex-col items-center w-40 text-center">
                 <!-- Logo -->
@@ -44,7 +58,7 @@
                     >
                         <path d="M12 3a9 9 0 0 0-9 9v7c0 1.1.9 2 2 2h4v-8H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-4v8h4c1.1 0 2-.9 2-2v-7a9 9 0 0 0-9-9z"/>
                     </svg>
-                    <span>{radio.listeners || 0} OUVINTES</span>
+                    <span>{radio.listeners ?? 'NaN'} OUVINTES</span>
                 </div>
             </div>
         {/each}

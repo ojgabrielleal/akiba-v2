@@ -2,6 +2,7 @@
 export { default as ActivityCarrousel } from "./carrousel/ActivityCarrousel.svelte"
 export { default as TaskCarrousel } from "./carrousel/TaskCarrousel.svelte"
 export { default as ProgramCarrousel } from "./carrousel/ProgramCarrousel.svelte"
+export { default as AudienceCarrousel } from "./carrousel/AudienceCarrousel.svelte";
 
 // Forms
 export { default as LoginForm } from './form/LoginForm.svelte'
@@ -40,7 +41,6 @@ export { default as RapidAccessGrid } from "./grid/RapidAccessGrid.svelte"
 export { default as CastMetricsGrid } from './grid/CastMetricsGrid.svelte';
 export { default as TaskGrid } from "./grid/TaskGrid.svelte";
 export { default as AutomaticGrid } from "./grid/AutomaticGrid.svelte";
-export { default as AudienceGrid } from "./grid/AudienceGrid.svelte";
 
 // Hero
 export { default as GreatingHero } from './hero/GreatingHero.svelte';	
