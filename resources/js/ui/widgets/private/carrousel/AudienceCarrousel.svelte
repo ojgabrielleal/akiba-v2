@@ -37,7 +37,11 @@
 
                 <!-- Listener Count -->
                 <div class="flex items-center gap-2 font-black italic text-lg text-neutral-aurora uppercase tracking-tight">
-                    <img src="/assets/icons/headphone.svg" alt="Ouvintes" class="w-5 h-5 shrink-0 filter invert" />
+                    <img 
+                        src="/svg/listeners.svg" 
+                        alt="Ouvintes" 
+                        class="w-5 h-5 shrink-0 filter invert" 
+                    />
                     <span>{radio.listeners ?? 'NaN'} OUVINTES</span>
                 </div>
             </article>
