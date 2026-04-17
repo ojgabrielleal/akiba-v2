@@ -6,7 +6,7 @@
 
 <Meta meta={{ title: "Log's" }} />
 <Layout>
-    <AudienceCarrousel title="Ibope das rádios do segmento" />
+    <AudienceCarrousel title="Ibope em tempo real" />
     <ProgramHistoryTable title="Histórico de transmissões" />
 </Layout>
        
