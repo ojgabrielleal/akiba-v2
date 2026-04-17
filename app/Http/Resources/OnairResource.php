@@ -34,7 +34,7 @@ class OnairResource extends JsonResource
                 ],
             ],
             'current_song' => $this?->current_song,
-            'created_at' => $this->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i:s'),
+            'created_at' => $this->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i'),
         ];  
     }
 }
