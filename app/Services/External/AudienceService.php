@@ -101,6 +101,11 @@ class AudienceService
                     ])->get($radio['link']);
 
                     if($response->failed()){
+                        $audience[] = [
+                            'nome' => $radio['nome'],
+                            'logo' => $radio['logo'],
+                            'listeners' => 'offline'
+                        ];
                         continue;
                     }
 
@@ -109,16 +114,25 @@ class AudienceService
                     $audience[] = [
                         'nome' => $radio['nome'],
                         'logo' => $radio['logo'],
-                        'listeners' => data_get($data, $radio['target']) ?? "NaN"
+                        'listeners' => data_get($data, $radio['target']) + " Ouvintes" ?? "NaN"
                     ];
                 } catch (\Throwable $th) {
                     Log::error("AudienceService Error for " . $radio['nome'] . ": " . $th->getMessage());
+                    $audience[] = [
+                        'nome' => $radio['nome'],
+                        'logo' => $radio['logo'],
+                        'listeners' => 'offline'
+                    ];
                     continue;
                 }
             }
 
             $audience = collect($audience)
                 ->map(function ($radio) {
+                    if ($radio['listeners'] === 'offline') {
+                        return $radio;
+                    }
+
                     $radio['listeners'] = is_numeric($radio['listeners'])
                         ? (int) $radio['listeners']
                         : 0;
