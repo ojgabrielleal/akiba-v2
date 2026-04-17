@@ -6,7 +6,7 @@ Esta implementação aplicou o sistema nativo de Policies (criadas anteriormente
 
 A regra estabelecida e propagada para toda a aplicação foi: **Substituir o retorno agressivo de "403 Forbidden" por retornos nulos (`null` no PHP, que é interpretado como `undefined`/vazio pelo framework JS)**.
 
-Isso é de suma importância em arquiteturas com Inertia onde funções como `indexRoles()` ou `indexPosts()` injetam propriedades diretamente num único método `render`. Disparar um 403 nesses componentes quebraria a visualização de toda a página que renderizava múltiplos recursos.
+Isso é de suma importância em arquiteturas com Inertia onde funções como `indexRole()` ou `indexPosts()` injetam propriedades diretamente num único método `render`. Disparar um 403 nesses componentes quebraria a visualização de toda a página que renderizava múltiplos recursos.
 
 ### Exemplo do Padrão Adotado
 

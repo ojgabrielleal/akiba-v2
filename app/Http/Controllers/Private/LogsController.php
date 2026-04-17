@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 use App\Models\Onair;
+
 use App\Http\Resources\OnairResource;
 
 use App\Traits\HasFlashMessages;
@@ -24,6 +25,12 @@ class LogsController extends Controller
         $this->audience = $audience;
     }
 
+    /*
+     * ======================
+     * ONAIR LOGS
+     * ====================== 
+     */
+
     public function indexOnair()
     {
         return OnairResource::collection(
@@ -34,6 +41,12 @@ class LogsController extends Controller
                 ->paginate(10)
         );
     }
+
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
 
     public function render()
     {

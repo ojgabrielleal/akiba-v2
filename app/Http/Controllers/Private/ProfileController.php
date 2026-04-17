@@ -25,6 +25,12 @@ class ProfileController extends Controller
         $this->image = $image;
     }
 
+    /*
+     * ======================
+     * PROFILE
+     * ====================== 
+     */
+
     public function updateProfile(Request $request, User $user)
     {
         if ($request->user()->cannot('update', $user)) {
@@ -43,9 +49,7 @@ class ProfileController extends Controller
             'bibliography' => $request->input('bibliography', $user->bibliography),
         ]);
 
-        if ($user->isDirty()) {
-            $user->save();
-        }
+        if ($user->isDirty()) $user->save();
 
         if ($request->filled('socials')) {
             foreach ($request->input('socials') as $social) {
@@ -57,8 +61,9 @@ class ProfileController extends Controller
         }
 
         if ($request->input('preferences')) {
-            $prefereces = $request->input('preferences');
-            foreach (collect($prefereces['likes'])->merge($prefereces['unlikes']) as $preference) {
+            $preferences = $request->input('preferences');
+
+            foreach (collect($preferences['likes'])->merge($preferences['unlikes']) as $preference) {
                 $user->preferences()->where('uuid', $preference['uuid'])->update([
                     'content' => $preference['content']
                 ]);
@@ -68,12 +73,18 @@ class ProfileController extends Controller
         return $this->flashMessage('update');
     }
 
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
+
     public function render(User $user)
     {
         if (request()->user()->cannot('view', $user)) {
             abort(403, 'Não autorizado.');
         }
-        
+
         return Inertia::render($this->render, [
             'profile' => new UserResource($user)
         ]);

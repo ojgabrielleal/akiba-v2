@@ -8,6 +8,8 @@ use Inertia\Inertia;
 
 use App\Models\Repository;
 
+use App\Http\Requests\Repository\StoreRepositoryRequest;
+
 use App\Http\Resources\RepositoryResource;
 
 use App\Services\Process\ImageProcessService;
@@ -25,36 +27,31 @@ class RepositoryController extends Controller
         $this->image = $image;
     }
 
+    /*
+     * ======================
+     * REPOSITORIES
+     * ====================== 
+     */
+
     public function indexRepositories()
     {
-        if (request()->user()->cannot('viewAny', Repository::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Repository::class)) return null;
+
         return RepositoryResource::collection(
-            Repository::active()
-                ->get()
+            Repository::active()->get()
         );
     }
 
     public function showRepository(Repository $repository)
     {
-        if (request()->user()->cannot('view', $repository)) {
-            return null;
-        }
+        if (request()->user()->cannot('view', $repository)) return null;
+
         return new RepositoryResource($repository);
     }
 
-    public function createRepository(Request $request)
+    public function createRepository(StoreRepositoryRequest $request)
     {
-        if ($request->user()->cannot('create', Repository::class)) {
-            return null;
-        }
-        $request->validate([
-            'name' => 'required|unique:repositories,name',
-            'url' => 'required|unique:repositories,url',
-            'image' => 'required',
-            'type' => 'required',
-        ]);
+        if ($request->user()->cannot('create', Repository::class)) return null;
 
         Repository::create([
             'name' => $request->input('name'),
@@ -66,11 +63,10 @@ class RepositoryController extends Controller
         return $this->flashMessage('save');
     }
 
-    function updateRepository(Request $request, Repository $repository)
+    public function updateRepository(Request $request, Repository $repository)
     {
-        if ($request->user()->cannot('update', $repository)) {
-            return null;
-        }
+        if ($request->user()->cannot('update', $repository)) return null;
+
         $repository->fill([
             'name' => $request->input('name', $repository->name),
             'url' => $request->input('url', $repository->url),
@@ -78,24 +74,27 @@ class RepositoryController extends Controller
             'type' => $request->input('type', $repository->type),
         ]);
 
-        if ($repository->isDirty()) {
-            $repository->save();
-        }
+        if ($repository->isDirty()) $repository->save();
 
         return $this->flashMessage('update');
     }
 
     public function deactivateRepository(Repository $repository)
     {
-        if (request()->user()->cannot('delete', $repository)) {
-            return null;
-        }
+        if (request()->user()->cannot('delete', $repository)) return null;
+
         $repository->update([
             'is_active' => false,
         ]);
 
         return $this->flashMessage('deactivate');
     }
+
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
 
     public function render()
     {

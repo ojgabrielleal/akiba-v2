@@ -19,10 +19,22 @@ class CastController extends Controller
         $this->cast = $cast;
     }
 
+    /*
+    * ======================
+    * STREAM
+    * ====================== 
+    */
+
     public function redirectStream()
     {
         return $this->cast->stream();
     }
+
+    /*
+    * ======================
+    * METADATA
+    * ====================== 
+    */
 
     public function showMetadata()
     {

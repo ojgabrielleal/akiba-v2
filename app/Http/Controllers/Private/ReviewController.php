@@ -8,6 +8,8 @@ use Inertia\Inertia;
 
 use App\Models\Review;
 
+use App\Http\Requests\Review\StoreReviewRequest;
+
 use App\Http\Resources\ReviewResource;
 
 use App\Services\Process\ImageProcessService;
@@ -25,11 +27,16 @@ class ReviewController extends Controller
         $this->image = $image;
     }
 
+    /*
+     * ======================
+     * REVIEWS
+     * ====================== 
+     */
+
     public function indexReviews()
     {
-        if (request()->user()->cannot('viewAny', Review::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Review::class)) return null;
+
         return ReviewResource::collection(
             Review::with('reviews')->paginate(10)
         );
@@ -37,29 +44,19 @@ class ReviewController extends Controller
 
     public function showReview(Review $review)
     {
-        if (request()->user()->cannot('view', $review)) {
-            return null;
-        }
+        if (request()->user()->cannot('view', $review)) return null;
+
         return Inertia::render($this->render, [
-            "reviews" => $this->indexReviews(),
+            'reviews' => $this->indexReviews(),
             'review' => new ReviewResource(
                 $review->load('reviews.author')
             ),
         ]);
     }
 
-    public function createReview(Request $request)
+    public function createReview(StoreReviewRequest $request)
     {
-        if ($request->user()->cannot('create', Review::class)) {
-            return null;
-        }
-        $request->validate([
-            'title' => 'required',
-            'sinopse' => 'required',
-            'image' => 'required',
-            'cover' => 'required',
-            'review' => 'required'
-        ]);
+        if ($request->user()->cannot('create', Review::class)) return null;
 
         $review = Review::create([
             'title' => $request->input('title'),
@@ -78,9 +75,8 @@ class ReviewController extends Controller
 
     public function updateReview(Request $request, Review $review)
     {
-        if ($request->user()->cannot('update', $review)) {
-            return null;
-        }
+        if ($request->user()->cannot('update', $review)) return null;
+
         $review->fill([
             'title' => $request->input('title'),
             'sinopse' => $request->input('sinopse'),
@@ -88,9 +84,7 @@ class ReviewController extends Controller
             'cover' => $this->image->store('reviews', $request->file('cover'), 'public', $review->cover),
         ]);
 
-        if ($review->isDirty()) {
-            $review->save();
-        }
+        if ($review->isDirty()) $review->save();
 
         $review->reviews()->updateOrCreate(
             ['uuid' => $request->input('review.uuid')],
@@ -103,10 +97,16 @@ class ReviewController extends Controller
         return $this->flashMessage('update');
     }
 
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
+
     public function render()
     {
         return Inertia::render($this->render, [
-            "reviews" => $this->indexReviews(),
+            'reviews' => $this->indexReviews(),
         ]);
     }
 }

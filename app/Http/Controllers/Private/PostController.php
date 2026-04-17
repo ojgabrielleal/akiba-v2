@@ -8,8 +8,9 @@ use Inertia\Inertia;
 
 use App\Models\Post;
 
-use App\Http\Resources\PostResource;
+use App\Http\Requests\Post\StorePostRequest;
 
+use App\Http\Resources\PostResource;
 use App\Services\Process\ImageProcessService;
 
 use App\Traits\HasFlashMessages;
@@ -27,11 +28,15 @@ class PostController extends Controller
         $this->image = $image;
     }
 
+    /*
+     * ======================
+     * POSTS
+     * ====================== 
+     */
+
     public function indexPosts()
     {
-        if (request()->user()->cannot('viewAny', Post::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Post::class)) return null;
 
         if (!request()->user()->hasPermission('post.list')) {
             return PostResource::collection(
@@ -51,33 +56,19 @@ class PostController extends Controller
 
     public function showPost(Post $post)
     {
-        if (request()->user()->cannot('view', $post)) {
-            return null;
-        }
+        if (request()->user()->cannot('view', $post)) return null;
 
         return Inertia::render($this->render, [
             'post' => new PostResource(
                 $post->load('categories', 'references', 'author')
             ),
-            "posts" => $this->indexPosts(),
+            'posts' => $this->indexPosts(),
         ]);
     }
 
-    public function createPost(Request $request)
+    public function createPost(StorePostRequest $request)
     {
-        if ($request->user()->cannot('create', Post::class)) {
-            return null;
-        }
-
-        $request->validate([
-            "type" => 'required',
-            "title" => 'required',
-            "content" => 'required',
-            'image' => 'required',
-            'cover' => 'required',
-            'references' => 'required',
-            'categories' => 'required',
-        ]);
+        if ($request->user()->cannot('create', Post::class)) return null;
 
         $post = Post::create([
             'user_id' => request()->user()->id,
@@ -106,9 +97,7 @@ class PostController extends Controller
 
     public function updatePost(Request $request, Post $post)
     {
-        if ($request->user()->cannot('update', $post)) {
-            return null;
-        }
+        if ($request->user()->cannot('update', $post)) return null;
 
         $post->fill([
             'type' => $request->input('type', $post->type),
@@ -118,9 +107,7 @@ class PostController extends Controller
             'cover' => $this->image->store('posts', $request->file('cover'), 'public', $post->cover),
         ]);
 
-        if ($post->isDirty()) {
-            $post->save();
-        }
+        if ($post->isDirty()) $post->save();
 
         foreach ($request->input('categories') as $category) {
             $post->categories()->where('uuid', $category['uuid'])->update([
@@ -138,10 +125,16 @@ class PostController extends Controller
         return $this->flashMessage('update');
     }
 
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
+
     public function render()
     {
         return Inertia::render($this->render, [
-            "posts" => $this->indexPosts(),
+            'posts' => $this->indexPosts(),
         ]);
     }
 }

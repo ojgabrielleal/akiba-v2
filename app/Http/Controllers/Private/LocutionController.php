@@ -11,6 +11,8 @@ use App\Models\Program;
 use App\Models\Automatic;
 use App\Models\SongRequest;
 
+use App\Http\Requests\Locution\StartLocutionRequest;
+
 use App\Http\Resources\OnairResource;
 use App\Http\Resources\ProgramResource;
 use App\Http\Resources\SongRequestResource;
@@ -30,35 +32,31 @@ class LocutionController extends Controller
         $this->discord = $discord;
     }
 
+    /*
+     * ======================
+     * PROGRAMS
+     * ====================== 
+     */
+
     public function indexPrograms()
     {
-        if (request()->user()->cannot('viewAny', Program::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Program::class)) return null;
+
         return ProgramResource::collection(
             Program::active()
                 ->where(function ($q) {
                     $q->where('user_id', request()->user()->id)
-                        ->orWhere('type', 'free');
+                      ->orWhere('type', 'free');
                 })
                 ->get()
         );
     }
 
-    public function indexSongRequests()
-    {
-        if (request()->user()->cannot('viewAny', SongRequest::class)) {
-            return null;
-        }
-
-        $onair = Onair::live()->first();
-
-        return SongRequestResource::collection(
-            SongRequest::where('onair_id', $onair->id)
-                ->orderBy('created_at', 'asc')
-                ->get()
-        );
-    }
+    /*
+     * ======================
+     * ONAIR
+     * ====================== 
+     */
 
     public function showOnair()
     {
@@ -67,15 +65,9 @@ class LocutionController extends Controller
         );
     }
 
-    public function startLocution(Request $request, Program $program)
+    public function startLocution(StartLocutionRequest $request, Program $program)
     {
-        if ($request->user()->cannot('locution.start')) {
-            return null;
-        }
-        $request->validate([
-            'phrase' => 'required',
-            'icon' => 'required'
-        ]);
+        if ($request->user()->cannot('locution.start')) return null;
 
         Onair::live()->first()->update([
             'in_air' => false,
@@ -96,15 +88,16 @@ class LocutionController extends Controller
         ]);
 
         $this->discord->sendHookMessage(request()->user(), $program);
+
         return $this->flashMessage('start');
     }
 
     public function finishLocution()
     {
-        if (request()->user()->cannot('locution.finish')) {
-            return null;
-        }
+        if (request()->user()->cannot('locution.finish')) return null;
+
         $onair = Onair::live()->first();
+
         $onair->update([
             'in_air' => false,
             'allows_song_requests' => false,
@@ -129,40 +122,57 @@ class LocutionController extends Controller
         return $this->flashMessage('finish');
     }
 
+    /*
+     * ======================
+     * SONG REQUESTS
+     * ====================== 
+     */
+
+    public function indexSongRequests()
+    {
+        if (request()->user()->cannot('viewAny', SongRequest::class)) return null;
+
+        $onair = Onair::live()->first();
+
+        return SongRequestResource::collection(
+            SongRequest::where('onair_id', $onair->id)
+                ->orderBy('created_at', 'asc')
+                ->get()
+        );
+    }
+
     public function markSongRequestAsPlayed(SongRequest $songRequest)
     {
-        if (request()->user()->cannot('reproduce', $songRequest)) {
-            return null;
-        }
+        if (request()->user()->cannot('reproduce', $songRequest)) return null;
+
         $songRequest->update([
             'was_reproduced' => true,
         ]);
 
         $songRequest->onair()->increment('song_requests_total');
+
         return $this->flashMessage('order_fulfilled');
     }
 
     public function markSongRequestAsCanceled(SongRequest $songRequest)
     {
-        if (request()->user()->cannot('cancel', $songRequest)) {
-            return null;
-        }
+        if (request()->user()->cannot('cancel', $songRequest)) return null;
+
         $songRequest->update([
             'was_canceled' => true,
         ]);
 
         $songRequest->onair()->decrement('song_requests_total');
+
         return $this->flashMessage('order_canceled');
     }
 
-
     public function toggleSongRequestBoxStatus()
     {
-        if (request()->user()->cannot('toggle', SongRequest::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('toggle', SongRequest::class)) return null;
 
         $onair = Onair::live()->first();
+
         $onair->update([
             'allows_song_requests' => !$onair->allows_song_requests,
         ]);
@@ -170,12 +180,18 @@ class LocutionController extends Controller
         return $this->flashMessage('save');
     }
 
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
+
     public function render()
     {
         return Inertia::render($this->render, [
-            "programs" => $this->indexPrograms(),
-            "onair" => $this->showOnair(),
-            "songRequests" => $this->indexSongRequests(),
+            'programs' => $this->indexPrograms(),
+            'onair' => $this->showOnair(),
+            'songRequests' => $this->indexSongRequests(),
         ]);
     }
 }

@@ -8,8 +8,9 @@ use Inertia\Inertia;
 
 use App\Models\Podcast;
 
+use App\Http\Requests\Podcast\StorePodcastRequest;
+
 use App\Http\Resources\PodcastResource;
-use App\Http\Resources\PodcastShowResource;
 
 use App\Services\Process\ImageProcessService;
 use App\Traits\HasFlashMessages;
@@ -26,11 +27,16 @@ class PodcastController extends Controller
         $this->image = $image;
     }
 
+    /*
+     * ======================
+     * PODCASTS
+     * ====================== 
+     */
+
     public function indexPodcasts()
     {
-        if (request()->user()->cannot('viewAny', Podcast::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Podcast::class)) return null;
+
         return PodcastResource::collection(
             Podcast::active()
                 ->with('author')
@@ -40,29 +46,17 @@ class PodcastController extends Controller
 
     public function showPodcast(Podcast $podcast)
     {
-        if (request()->user()->cannot('view', $podcast)) {
-            return null;
-        }
+        if (request()->user()->cannot('view', $podcast)) return null;
+
         return Inertia::render($this->render, [
             'podcasts' => $this->indexPodcasts(),
-            'podcast' => new PodcastShowResource($podcast->load('author')),
+            'podcast' => new PodcastResource($podcast->load('author')),
         ]);
     }
 
-    public function createPodcast(Request $request)
+    public function createPodcast(StorePodcastRequest $request)
     {
-        if ($request->user()->cannot('create', Podcast::class)) {
-            return null;
-        }
-        $request->validate([
-            'image' => 'required',
-            'season' => 'required|unique:podcasts,season',
-            'episode' => 'required|unique:podcasts,episode',
-            'title' => 'required',
-            'summary' => 'required',
-            'description' => 'required',
-            'audio' => 'required'
-        ]);
+        if ($request->user()->cannot('create', Podcast::class)) return null;
 
         Podcast::create([
             'user_id' => request()->user()->id,
@@ -80,9 +74,8 @@ class PodcastController extends Controller
 
     public function updatePodcast(Request $request, Podcast $podcast)
     {
-        if ($request->user()->cannot('update', $podcast)) {
-            return null;
-        }
+        if ($request->user()->cannot('update', $podcast)) return null;
+
         $podcast->fill([
             'image' => $this->image->store('podcasts', $request->file('image'), 'public', $podcast->image),
             'season' => $request->input('season', $podcast->season),
@@ -93,24 +86,27 @@ class PodcastController extends Controller
             'audio' => $request->input('audio', $podcast->audio),
         ]);
 
-        if ($podcast->isDirty()) {
-            $podcast->save();
-        }
+        if ($podcast->isDirty()) $podcast->save();
 
         return $this->flashMessage('update');
     }
 
     public function deactivatePodcast(Podcast $podcast)
     {
-        if (request()->user()->cannot('delete', $podcast)) {
-            return null;
-        }
+        if (request()->user()->cannot('delete', $podcast)) return null;
+
         $podcast->update([
             'is_active' => false,
         ]);
 
         return $this->flashMessage('deactivate');
     }
+
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
 
     public function render()
     {

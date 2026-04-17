@@ -10,6 +10,9 @@ use App\Models\Event;
 use App\Models\Poll;
 use App\Models\PollOption;
 
+use App\Http\Requests\Media\StorePollRequest;
+use App\Http\Requests\Media\UpdatePollRequest;
+
 use App\Http\Resources\PollResource;
 use App\Http\Resources\EventResource;
 
@@ -21,55 +24,31 @@ class MediaController extends Controller
 
     private $render = 'private/Media';
 
+    /*
+     * ======================
+     * POLLS
+     * ====================== 
+     */
+
     public function indexPolls()
     {
-        if (request()->user()->cannot('viewAny', Poll::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Poll::class)) return null;
+
         return PollResource::collection(
             Poll::active()->get()
         );
     }
 
-    public function indexEvents()
-    {
-        if (request()->user()->cannot('viewAny', Event::class)) {
-            return null;
-        }
-        return EventResource::collection(
-            Event::active()->paginate(10)
-        );
-    }
-
     public function showPoll(Poll $poll)
     {
-        if (request()->user()->cannot('view', $poll)) {
-            return null;
-        }
+        if (request()->user()->cannot('view', $poll)) return null;
+
         return new PollResource($poll);
     }
 
-    public function createVote(PollOption $pollOption)
+    public function createPoll(StorePollRequest $request)
     {
-        if (request()->user()->cannot('update', $pollOption->poll)) {
-            return null;
-        }
-        $pollOption->increment('votes');
-        return $this->flashMessage('save');
-    }
-
-    public function createPoll(Request $request)
-    {
-        if ($request->user()->cannot('create', Poll::class)) {
-            return null;
-        }
-        $request->validate([
-            'question' => 'required|unique:polls,question',
-            'option_one' => 'required',
-            'option_two' => 'required',
-            'option_three' => 'required',
-            'option_four' => 'required'
-        ]);
+        if ($request->user()->cannot('create', Poll::class)) return null;
 
         $poll = Poll::create([
             'question' => $request->input('question'),
@@ -83,7 +62,7 @@ class MediaController extends Controller
         ];
 
         foreach ($options as $text) {
-            $poll->load('options')->options()->create([
+            $poll->options()->create([
                 'option' => $text
             ]);
         }
@@ -91,25 +70,16 @@ class MediaController extends Controller
         return $this->flashMessage('save');
     }
 
-    public function updatePoll(Request $request, Poll $poll)
+    public function updatePoll(UpdatePollRequest $request, Poll $poll)
     {
-        if ($request->user()->cannot('update', $poll)) {
-            return null;
-        }
-        $request->validate([
-            'question' => 'required',
-            'option_one' => 'required',
-            'option_two' => 'required',
-            'option_three' => 'required',
-            'option_four' => 'required'
-        ]);
+        if ($request->user()->cannot('update', $poll)) return null;
 
         $poll->update([
             'question' => $request->input('question'),
         ]);
 
-        $poll->load('options');
         $options = $poll->options->values();
+
         $mapped = [
             'option_one'   => $options->get(0),
             'option_two'   => $options->get(1),
@@ -128,11 +98,19 @@ class MediaController extends Controller
         return $this->flashMessage('update');
     }
 
+    public function createVote(PollOption $pollOption)
+    {
+        if (request()->user()->cannot('update', $pollOption->poll)) return null;
+
+        $pollOption->increment('votes');
+
+        return $this->flashMessage('save');
+    }
+
     public function deactivatePoll(Poll $poll)
     {
-        if (request()->user()->cannot('delete', $poll)) {
-            return null;
-        }
+        if (request()->user()->cannot('delete', $poll)) return null;
+
         $poll->update([
             'is_active' => false,
         ]);
@@ -140,17 +118,37 @@ class MediaController extends Controller
         return $this->flashMessage('deactivate');
     }
 
+    /*
+     * ======================
+     * EVENTS
+     * ====================== 
+     */
+
+    public function indexEvents()
+    {
+        if (request()->user()->cannot('viewAny', Event::class)) return null;
+
+        return EventResource::collection(
+            Event::active()->paginate(10)
+        );
+    }
+
     public function deactivateEvent(Event $event)
     {
-        if (request()->user()->cannot('delete', $event)) {
-            return null;
-        }
+        if (request()->user()->cannot('delete', $event)) return null;
+
         $event->update([
             'is_active' => false,
         ]);
 
         return $this->flashMessage('deactivate');
     }
+
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
 
     public function render()
     {

@@ -23,11 +23,16 @@ class DashboardController extends Controller
 
     private $render = 'private/Dashboard';
 
+    /*
+     * ======================
+     * ACTIVITIES
+     * ====================== 
+     */
+
     public function indexActivities()
     {
-        if (request()->user()->cannot('viewAny', Activity::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Activity::class)) return null;
+
         return ActivityResource::collection(
             Activity::valid()
                 ->with(['author', 'confirmations'])
@@ -36,11 +41,25 @@ class DashboardController extends Controller
         );
     }
 
+    public function confirmActivityParticipant(Activity $activity)
+    {
+        if (request()->user()->cannot('update', $activity)) return null;
+
+        $activity->confirmations()->attach(request()->user()->id);
+
+        return $this->flashMessage('participate');
+    }
+
+    /*
+     * ======================
+     * TASKS
+     * ====================== 
+     */
+
     public function indexTasks()
     {
-        if (request()->user()->cannot('viewAny', Task::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Task::class)) return null;
+
         return TaskResource::collection(
             Task::active()
                 ->incompleted()
@@ -50,11 +69,27 @@ class DashboardController extends Controller
         );
     }
 
+    public function markTaskCompleted(Task $task)
+    {
+        if (request()->user()->cannot('update', $task)) return null;
+
+        $task->update([
+            'is_completed' => true,
+        ]);
+
+        return $this->flashMessage('complete');
+    }
+
+    /*
+     * ======================
+     * POSTS
+     * ====================== 
+     */
+
     public function indexPosts()
     {
-        if (request()->user()->cannot('viewAny', Post::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Post::class)) return null;
+
         return PostResource::collection(
             Post::active()
                 ->published()
@@ -64,11 +99,16 @@ class DashboardController extends Controller
         );
     }
 
+    /*
+     * ======================
+     * CALENDAR
+     * ====================== 
+     */
+
     public function indexCalendar()
     {
-        if (request()->user()->cannot('viewAny', Calendar::class)) {
-            return null;
-        }
+        if (request()->user()->cannot('viewAny', Calendar::class)) return null;
+
         return CalendarResource::collection(
             Calendar::valid()
                 ->with(['activity', 'responsible'])
@@ -76,26 +116,11 @@ class DashboardController extends Controller
         );
     }
 
-    public function confirmActivityParticipant(Activity $activity)
-    {
-        if (request()->user()->cannot('update', $activity)) {
-            return null;
-        }
-        $activity->confirmations()->attach(request()->user()->id);
-        return $this->flashMessage('participate');
-    }
-
-    public function markTaskCompleted(Task $task)
-    {
-        if (request()->user()->cannot('update', $task)) {
-            return null;
-        }
-        $task->update([
-            'is_completed' => true,
-        ]);
-
-        return $this->flashMessage('complete');
-    }
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
 
     public function render()
     {

@@ -3,21 +3,25 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+
+use App\Http\Requests\Auth\AuthLoginRequest;
 
 class LoginController extends Controller
 {
     private $render = 'private/Login';
 
-    public function login(Request $request)
+    /*
+     * ======================
+     * AUTHENTICATION
+     * ====================== 
+     */
+
+    public function login(AuthLoginRequest $request)
     {
-        $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ]);
+        $credentials = $request->validated();
 
         $credentials['is_active'] = true;
 
@@ -31,6 +35,12 @@ class LoginController extends Controller
             'message' => "Usuário ou senha incorretos",
         ]);
     }
+
+    /*
+     * ======================
+     * RENDER
+     * ====================== 
+     */
 
     public function render()
     {
