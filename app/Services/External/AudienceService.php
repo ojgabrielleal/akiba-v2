@@ -3,6 +3,7 @@
 namespace App\Services\External;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class AudienceService
@@ -90,31 +91,33 @@ class AudienceService
 
     public function getAudience()
     {
-        try {
-            $audience = [];
-            
-            foreach($this->radios as $radio){
-                $response = Http::timeout(5)->withOptions([
-                    'verify' => false,
-                ])->get($radio['link']);
+        return Cache::remember('audience.radios', 60, function () {
+            try {
+                $audience = [];
+                
+                foreach($this->radios as $radio){
+                    $response = Http::timeout(5)->withOptions([
+                        'verify' => false,
+                    ])->get($radio['link']);
 
-                if($response->failed()){
-                    continue;
+                    if($response->failed()){
+                        continue;
+                    }
+
+                    $data = $response->json();
+                    
+                    $audience[] = [
+                        'nome' => $radio['nome'],
+                        'logo' => $radio['logo'],
+                        'listeners' => data_get($data, $radio['target'])
+                    ];
                 }
 
-                $data = $response->json();
-                
-                $audience[] = [
-                    'nome' => $radio['nome'],
-                    'logo' => $radio['logo'],
-                    'listeners' => data_get($data, $radio['target'])
-                ];
+                return $audience;
+            } catch (\Throwable $th) {
+                Log::error("AudienceService Error: " . $th->getMessage());
+                return [];
             }
-
-            return $audience;
-        } catch (\Throwable $th) {
-            Log::error("AudienceService Error: " . $th->getMessage());
-            return [];
-        }
+        });
     }
 }
