@@ -95,7 +95,8 @@ class DashboardController extends Controller
                 ->published()
                 ->latest()
                 ->with(['author'])
-                ->paginate(1)
+                ->limit(5)
+                ->get()
         );
     }
 
