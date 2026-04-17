@@ -40,7 +40,7 @@
                                 {item.program.name}
                             </td>
                             <td class="py-6 px-4 align-middle">
-                                {item.program.category === 'live' ? 'Ao vivo' : 'Pré-gravado'}
+                                {item.type === 'live' ? 'Ao vivo' : 'Pré-gravado'}
                             </td>
                             <td class="py-6 px-4 align-middle">
                                 {item.created_at}
