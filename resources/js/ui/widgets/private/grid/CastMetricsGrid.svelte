@@ -3,7 +3,7 @@
 
     $: ({ streaming } = $page.props);
 
-    usePoll(30 * 1000);
+    usePoll(60 * 1000);
 </script>
 
 <section class="bg-blue-indigo">

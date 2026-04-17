@@ -85,13 +85,13 @@ class AudienceService
             "nome" => "Rádio UP!",
             "logo" => "https://img.radios.com.br/radio/lg/radio261613_1760956640.jpg",
             "link" => "https://saber.intra.antbr.com:8443/status-json.xsl",
-            "target" => "icestats.source.listeners"
+            "target" => "icestats.source.0.listeners"
         ]
     ];
 
     public function getAudience()
     {
-        return Cache::remember('audience.radios', 60, function () {
+        return Cache::remember('audience.radios', 30, function () {
             try {
                 $audience = [];
                 
@@ -109,9 +109,21 @@ class AudienceService
                     $audience[] = [
                         'nome' => $radio['nome'],
                         'logo' => $radio['logo'],
-                        'listeners' => data_get($data, $radio['target'])
+                        'listeners' => data_get($data, $radio['target']) ?? "NaN"
                     ];
                 }
+
+                $audience = collect($audience)
+                    ->map(function ($radio) {
+                        $radio['listeners'] = is_numeric($radio['listeners'])
+                            ? (int) $radio['listeners']
+                            : 0;
+
+                        return $radio;
+                    })
+                    ->sortByDesc('listeners')
+                    ->values()
+                    ->all();
 
                 return $audience;
             } catch (\Throwable $th) {

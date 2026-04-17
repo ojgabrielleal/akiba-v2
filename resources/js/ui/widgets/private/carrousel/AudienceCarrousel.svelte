@@ -7,7 +7,7 @@
 
     $: ({ audience } = $page.props);
 
-    usePoll(120 * 1000);
+    usePoll(60 * 1000);
 </script>
 
 <Section {title}>
@@ -20,7 +20,7 @@
                             alt="" 
                             aria-hidden="true" 
                             loading="lazy" 
-                            class="w-30 h-30 object-contain rounded-lg" 
+                            class="w-15 h-15 object-contain rounded-lg" 
                         />
                     </div>
                     <div class="flex flex-col gap-1">
