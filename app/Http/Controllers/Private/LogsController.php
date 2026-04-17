@@ -30,6 +30,7 @@ class LogsController extends Controller
             Onair::where('type', 'live')
                 ->orWhere('type', 'schedule')
                 ->with(['program.host'])
+                ->latest()
                 ->paginate(10)
         );
     }
