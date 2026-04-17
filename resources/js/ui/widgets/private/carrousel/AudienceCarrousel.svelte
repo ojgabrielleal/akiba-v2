@@ -33,7 +33,17 @@
                                 alt="Ouvintes" 
                                 class="w-5 h-5 shrink-0 filter invert" 
                             />
-                            <span>{item.listeners} OUVINTES</span>
+                            <span>
+                                {#if item.listeners === 'offline'}
+                                    Fora do ar
+                                {:else if item.listeners === 'NaN'}
+                                    NaN
+                                {:else if item.listeners === 0}
+                                    Sem Ouvintes
+                                {:else }
+                                    {item.listeners} Ouvindo
+                                {/if}
+                            </span>
                         </div>
                     </div>
                 </article>
