@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,8 +14,8 @@ use App\Models\PollOption;
 use App\Http\Requests\Media\StorePollRequest;
 use App\Http\Requests\Media\UpdatePollRequest;
 
-use App\Http\Resources\PollResource;
 use App\Http\Resources\EventResource;
+use App\Http\Resources\PollResource;
 
 use App\Traits\HasFlashMessages;
 

@@ -3,30 +3,27 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 use App\Models\Event;
 
-use App\Http\Resources\EventResource;
-
 use App\Http\Requests\Event\StoreEventRequest;
 use App\Http\Requests\Event\UpdateEventRequest;
 
-use App\Services\Process\ImageProcessService;
+use App\Http\Resources\EventResource;
+
+use App\Actions\Event\CreateEventAction;
+use App\Actions\Event\UpdateEventAction;
+
 use App\Traits\HasFlashMessages;
 
 class EventController extends Controller
 {
     use HasFlashMessages;
 
-    private ImageProcessService $image;
     private $render = 'private/Event';
-
-    public function __construct(ImageProcessService $image)
-    {
-        $this->image = $image;
-    }
 
     /*
      * ======================
@@ -55,37 +52,30 @@ class EventController extends Controller
         ]);
     }
 
-    public function createEvent(StoreEventRequest $request)
+    public function createEvent(StoreEventRequest $request, CreateEventAction $createEventAction)
     {
         if ($request->user()->cannot('create', Event::class)) return null;
 
-        Event::create([
-            'user_id' => request()->user()->id,
-            'image' => $this->image->store('events', $request->file('image')),
-            'cover' => $this->image->store('events', $request->file('cover')),
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'dates' => $request->input('dates'),
-            'address' => $request->input('address'),
-        ]);
+        $createEventAction->execute(
+            $request->user()->id,
+            $request->all(),
+            $request->file('image'),
+            $request->file('cover')
+        );
 
         return $this->flashMessage('save');
     }
 
-    public function updateEvent(UpdateEventRequest $request, Event $event)
+    public function updateEvent(UpdateEventRequest $request, Event $event, UpdateEventAction $updateEventAction)
     {
         if ($request->user()->cannot('update', $event)) return null;
 
-        $event->fill([
-            'image' => $this->image->store('events', $request->file('image'), 'public', $event->image),
-            'cover' => $this->image->store('events', $request->file('cover'), 'public', $event->cover),
-            'title' => $request->input('title', $event->title),
-            'content' => $request->input('content', $event->content),
-            'dates' => $request->input('dates', $event->dates),
-            'address' => $request->input('address', $event->address),
-        ]);
-
-        if ($event->isDirty()) $event->save();
+        $updateEventAction->execute(
+            $event,
+            $request->all(),
+            $request->file('image'),
+            $request->file('cover')
+        );
 
         return $this->flashMessage('update');
     }

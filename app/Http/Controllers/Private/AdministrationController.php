@@ -3,50 +3,57 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
-use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
-use App\Models\User;
-use App\Models\Role;
-use App\Models\Permission;
 use App\Models\Activity;
-use App\Models\Calendar;
-use App\Models\Task;
 use App\Models\Automatic;
+use App\Models\Calendar;
+use App\Models\Permission;
+use App\Models\Role;
+use App\Models\Task;
+use App\Models\User;
 
 use App\Http\Requests\Administration\StoreActivityRequest;
 use App\Http\Requests\Administration\UpdateActivityRequest;
 use App\Http\Requests\Administration\UpdateCalendarRequest;
+use App\Http\Requests\Administration\UpdateRoleRequest;
 use App\Http\Requests\Administration\UpdateTaskRequest;
 use App\Http\Requests\Administration\UpdateUserAccessRequest;
-use App\Http\Requests\Administration\UpdateRoleRequest;
 
-use App\Http\Resources\UserResource;
-use App\Http\Resources\RoleResource;
-use App\Http\Resources\PermissionResource;
 use App\Http\Resources\ActivityResource;
-use App\Http\Resources\CalendarResource;
-use App\Http\Resources\TaskResource;
 use App\Http\Resources\AutomaticResource;
+use App\Http\Resources\CalendarResource;
+use App\Http\Resources\PermissionResource;
+use App\Http\Resources\RoleResource;
+use App\Http\Resources\TaskResource;
+use App\Http\Resources\UserResource;
+
+use App\Actions\Administration\Activity\CreateActivityAction;
+use App\Actions\Administration\Activity\UpdateActivityAction;
+use App\Actions\Administration\Automatic\CreateAutomaticAction;
+use App\Actions\Administration\Automatic\UpdateAutomaticAction;
+use App\Actions\Administration\Calendar\CreateCalendarAction;
+use App\Actions\Administration\Calendar\UpdateCalendarAction;
+use App\Actions\Administration\Role\CreateRoleAction;
+use App\Actions\Administration\Role\UpdateRoleAction;
+use App\Actions\Administration\Task\CreateTaskAction;
+use App\Actions\Administration\Task\UpdateTaskAction;
+use App\Actions\Administration\User\CreateUserAction;
+use App\Actions\Administration\User\UpdateUserAccessAction;
 
 use App\Exceptions\RoleHasMembersException;
-use App\Services\Process\ImageProcessService;
+
 use App\Traits\HasFlashMessages;
 
 class AdministrationController extends Controller
 {
     use HasFlashMessages;
 
-    private ImageProcessService $image;
     private $render = 'private/Administration';
-
-    public function __construct(ImageProcessService $image)
-    {
-        $this->image = $image;
-    }
 
     /*
      * ======================
@@ -72,64 +79,20 @@ class AdministrationController extends Controller
         );
     }
 
-    public function createActivity(StoreActivityRequest $request)
+    public function createActivity(StoreActivityRequest $request, CreateActivityAction $createActivityAction)
     {
         if ($request->user()->cannot('create', Activity::class)) return null;
 
-        $activity = Activity::create([
-            'user_id' => request()->user()->id,
-            'title' => $request->input('title'),
-            'limit' => $request->input('limit'),
-            'content' => $request->input('content'),
-            'allows_confirmations' => $request->input('purpose') === 'activity',
-        ]);
-
-        if ($request->input('purpose') === 'activity') {
-            $activity->calendar()->create([
-                'user_id' => request()->user()->id,
-                'has_activity' => true,
-                'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
-                'hour' => $request->input('hour'),
-                'date' => $request->input('date'),
-                'content' => $request->input('title'),
-                'type' => 'activity',
-            ]);
-        }
+        $createActivityAction->execute($request->user()->id, $request->all());
 
         return $this->flashMessage('save');
     }
 
-    public function updateActivity(UpdateActivityRequest $request, Activity $activity)
+    public function updateActivity(UpdateActivityRequest $request, Activity $activity, UpdateActivityAction $updateActivityAction)
     {
         if ($request->user()->cannot('update', $activity)) return null;
 
-        $activity->fill([
-            'title' => $request->input('title'),
-            'limit' => $request->input('limit'),
-            'content' => $request->input('content'),
-            'allows_confirmations' => $request->input('purpose') === 'activity'
-                ? $request->boolean('allows_confirmations')
-                : false
-        ]);
-
-        if ($activity->isDirty()) $activity->save();
-
-        if ($request->input('purpose') === 'activity') {
-            $activity->calendar()->updateOrCreate(
-                ['activity_id' => $activity->id],
-                [
-                    'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
-                    'hour' => $request->input('hour'),
-                    'date' => $request->input('date'),
-                    'content' => $request->input('title'),
-                    'type' => 'activity',
-                    'user_id' => request()->user()->id,
-                    'has_activity' => true,
-                ]
-            );
-        } else {
-            $activity->calendar()->delete();
-        }
+        $updateActivityAction->execute($request->user()->id, $activity, $request->all());
 
         return $this->flashMessage('update');
     }
@@ -154,40 +117,20 @@ class AdministrationController extends Controller
         return new CalendarResource($calendar->load(['activity', 'responsible']));
     }
 
-    public function createCalendar(Request $request)
+    public function createCalendar(Request $request, CreateCalendarAction $createCalendarAction)
     {
         if (request()->user()->cannot('create', Calendar::class)) return null;
 
-        $user = User::where('uuid', $request->input('user'))->first();
-
-        Calendar::create([
-            'user_id' => $user->id,
-            'content' => $request->input('content'),
-            'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
-            'date' => $request->input('date'),
-            'hour' => $request->input('hour'),
-            'type' => $request->input('type'),
-        ]);
+        $createCalendarAction->execute($request->all());
 
         return $this->flashMessage('save');
     }
 
-    public function updateCalendar(UpdateCalendarRequest $request, Calendar $calendar)
+    public function updateCalendar(UpdateCalendarRequest $request, Calendar $calendar, UpdateCalendarAction $updateCalendarAction)
     {
         if ($request->user()->cannot('update', $calendar)) return null;
 
-        $user = User::where('uuid', $request->input('user'))->first();
-
-        $calendar->fill([
-            'user_id' => $user->id,
-            'content' => $request->input('content'),
-            'day_of_week' => Carbon::parse($request->input('date'))->dayOfWeek,
-            'date' => $request->input('date'),
-            'hour' => $request->input('hour'),
-            'type' => $request->input('type'),
-        ]);
-
-        if ($calendar->isDirty()) $calendar->save();
+        $updateCalendarAction->execute($calendar, $request->all());
 
         return $this->flashMessage('update');
     }
@@ -212,36 +155,20 @@ class AdministrationController extends Controller
         return new TaskResource($task->load(['responsible']));
     }
 
-    public function createTask(Request $request)
+    public function createTask(Request $request, CreateTaskAction $createTaskAction)
     {
         if (request()->user()->cannot('create', Task::class)) return null;
 
-        $user = User::where('uuid', $request->input('user'))->first();
-
-        Task::create([
-            'user_id' => $user->id,
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'dead_line' => $request->input('dead_line'),
-        ]);
+        $createTaskAction->execute($request->all());
 
         return $this->flashMessage('save');
     }
 
-    public function updateTask(UpdateTaskRequest $request, Task $task)
+    public function updateTask(UpdateTaskRequest $request, Task $task, UpdateTaskAction $updateTaskAction)
     {
         if (request()->user()->cannot('update', $task)) return null;
 
-        $user = User::where('uuid', $request->input('user'))->first();
-
-        $task->fill([
-            'user_id' => $user->id,
-            'title' => $request->input('title'),
-            'dead_line' => $request->input('dead_line'),
-            'content' => $request->input('content'),
-        ]);
-
-        if ($task->isDirty()) $task->save();
+        $updateTaskAction->execute($task, $request->all());
 
         return $this->flashMessage('update');
     }
@@ -266,39 +193,20 @@ class AdministrationController extends Controller
         return new UserResource($user);
     }
 
-    public function createUser(Request $request)
+    public function createUser(Request $request, CreateUserAction $createUserAction)
     {
         if ($request->user()->cannot('create', User::class)) return null;
 
-        
-
-        $roles = Role::whereIn('name', $request->input('roles'))->pluck('id');
-        $avatar = $request->input('gender') === 'male'
-            ? '/img/users/avatarMale.webp'
-            : '/img/users/avatarFemale.webp';
-
-        $user = User::create([
-            'username' => $request->input('username'),
-            'password' => $request->input('password'),
-            'name' => $request->input('name'),
-            'avatar' => $avatar,
-            'nickname' => $request->input('nickname'),
-            'gender' => $request->input('gender'),
-        ]);
-
-        $user->roles()->attach($roles);
+        $createUserAction->execute($request->all());
 
         return $this->flashMessage('save');
     }
 
-    public function updateUserAccess(UpdateUserAccessRequest $request, User $user)
+    public function updateUserAccess(UpdateUserAccessRequest $request, User $user, UpdateUserAccessAction $updateUserAccessAction)
     {
         if ($request->user()->cannot('updateAuthority', $user)) return null;
 
-        $roles = Role::whereIn('name', $request->input('roles'))->pluck('id')->toArray();
-
-        $user->update(['password' => $request->input('password')]);
-        $user->roles()->sync($roles);
+        $updateUserAccessAction->execute($user, $request->all());
 
         return $this->flashMessage('save');
     }
@@ -339,38 +247,20 @@ class AdministrationController extends Controller
         return PermissionResource::collection(Permission::all());
     }
 
-    public function createRole(Request $request)
+    public function createRole(Request $request, CreateRoleAction $createRoleAction)
     {
         if ($request->user()->cannot('create', Role::class)) return null;
 
-        $role = Role::create([
-            'label' => $request->input('label'),
-            'name' => Str::slug($request->input('label')),
-            'weight' => $request->input('weight'),
-            'description' => $request->input('description'),
-        ]);
-
-        $permissions = Permission::whereIn('uuid', $request->input('permissions'))->pluck('id')->toArray();
-        $role->permissions()->sync($permissions);
+        $createRoleAction->execute($request->all());
 
         return $this->flashMessage('save');
     }
 
-    public function updateRole(UpdateRoleRequest $request, Role $role)
+    public function updateRole(UpdateRoleRequest $request, Role $role, UpdateRoleAction $updateRoleAction)
     {
         if ($request->user()->cannot('update', $role)) return null;
 
-        $role->fill([
-            'label' => $request->input('label'),
-            'name' => Str::slug($request->input('label')),
-            'weight' => $request->input('weight'),
-            'description' => $request->input('description'),
-        ]);
-
-        if ($role->isDirty()) $role->save();
-
-        $permissions = Permission::whereIn('uuid', $request->input('permissions'))->pluck('id')->toArray();
-        $role->permissions()->sync($permissions);
+        $updateRoleAction->execute($role, $request->all());
 
         return $this->flashMessage('update');
     }
@@ -408,36 +298,27 @@ class AdministrationController extends Controller
         return new AutomaticResource($automatic->load('host'));
     }
 
-    public function createAutomatic(Request $request)
+    public function createAutomatic(Request $request, CreateAutomaticAction $createAutomaticAction)
     {
         if (request()->user()->cannot('create', Automatic::class)) return null;
 
-        $user = User::where('uuid', $request->input('user'))->first();
-
-        Automatic::create([
-            'user_id' => $user->id,
-            'name' => $request->input('name'),
-            'image' => $this->image->store('programs', $request->file('image'), 'public'),
-            'phrases' => $request->input('phrases'),
-        ]);
+        $createAutomaticAction->execute(
+            $request->all(),
+            $request->file('image')
+        );
 
         return $this->flashMessage('save');
     }
 
-    public function updateAutomatic(Request $request, Automatic $automatic)
+    public function updateAutomatic(Request $request, Automatic $automatic, UpdateAutomaticAction $updateAutomaticAction)
     {
         if ($request->user()->cannot('update', $automatic)) return null;
 
-        $user = User::where('uuid', $request->input('user'))->first();
-
-        $automatic->fill([
-            'user_id' => $user->id,
-            'name' => $request->input('name'),
-            'image' => $this->image->store('programs', $request->file('image'), 'public', $automatic->image),
-            'phrases' => $request->input('phrases'),
-        ]);
-
-        if ($automatic->isDirty()) $automatic->save();
+        $updateAutomaticAction->execute(
+            $automatic,
+            $request->all(),
+            $request->file('image')
+        );
 
         return $this->flashMessage('update');
     }

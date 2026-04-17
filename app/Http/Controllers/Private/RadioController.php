@@ -3,35 +3,35 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Requests\Radio\StoreProgramRequest;
 
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use App\Models\User;
+use App\Models\ListenerMonth;
 use App\Models\Music;
 use App\Models\Program;
-use App\Models\ListenerMonth;
+use App\Models\User;
 
-use App\Http\Resources\UserResource;
-use App\Http\Resources\ProgramResource;
-use App\Http\Resources\MusicResource;
+use App\Http\Requests\Radio\StoreProgramRequest;
+
 use App\Http\Resources\ListenerMonthResource;
+use App\Http\Resources\MusicResource;
+use App\Http\Resources\ProgramResource;
+use App\Http\Resources\UserResource;
 
-use App\Services\Process\ImageProcessService;
+use App\Actions\Radio\CreateListenerMonthAction;
+use App\Actions\Radio\CreateProgramAction;
+use App\Actions\Radio\GenerateMusicRankingAction;
+use App\Actions\Radio\UpdateMusicRankingAction;
+use App\Actions\Radio\UpdateProgramAction;
+
 use App\Traits\HasFlashMessages;
 
 class RadioController extends Controller
 {
     use HasFlashMessages;
 
-    private ImageProcessService $image;
     private $render = 'private/Radio';
-
-    public function __construct(ImageProcessService $image)
-    {
-        $this->image = $image;
-    }
 
     /*
      * ======================
@@ -70,63 +70,28 @@ class RadioController extends Controller
         return new ProgramResource($program->load('host', 'schedules'));
     }
 
-    public function createProgram(StoreProgramRequest $request)
+    public function createProgram(StoreProgramRequest $request, CreateProgramAction $createProgramAction)
     {
         if ($request->user()->cannot('create', Program::class)) return null;
 
-        $user = User::where('uuid', $request->input('user'))->first();
-
-        $program = Program::create([
-            'user_id' => $request->input('type') === 'private' ? $user->id : $request->user()->id,
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'image' => $this->image->store('programs', $request->file('image'), 'public'),
-            'type' => $request->input('type'),
-        ]);
-
-        if ($request->input('type') === 'private') {
-            foreach ($request->input('schedules') as $schedule) {
-                $program->schedules()->create([
-                    'day' => $schedule['day'],
-                    'hour' => $schedule['hour'],
-                ]);
-            }
-        }
+        $createProgramAction->execute(
+            $request->user(),
+            $request->all(),
+            $request->file('image')
+        );
 
         return $this->flashMessage('save');
     }
 
-    public function updateProgram(Request $request, Program $program)
+    public function updateProgram(Request $request, Program $program, UpdateProgramAction $updateProgramAction)
     {
         if ($request->user()->cannot('update', $program)) return null;
 
-        $user = User::where('uuid', $request->input('user'))->first();
-
-        $program->fill([
-            'user_id' => $user->id,
-            'name' => $request->input('name', $program->name),
-            'image' => $this->image->store('programs', $request->file('image'), 'public', $program->image),
-            'type' => $request->input('type', $program->type),
-        ]);
-
-        if ($program->isDirty()) $program->save();
-
-        if ($request->has('schedules')) {
-            $schedules = collect($request->input('schedules'));
-
-            $uuidsToKeep = $schedules->pluck('uuid')->filter()->toArray();
-            $program->schedules()->whereNotIn('uuid', $uuidsToKeep)->delete();
-
-            foreach ($schedules as $schedule) {
-                $program->schedules()->updateOrCreate(
-                    ['uuid' => $schedule['uuid'] ?? null],
-                    [
-                        'day' => $schedule['day'],
-                        'hour' => $schedule['hour'],
-                    ]
-                );
-            }
-        }
+        $updateProgramAction->execute(
+            $program,
+            $request->all(),
+            $request->file('image')
+        );
 
         return $this->flashMessage('update');
     }
@@ -157,28 +122,23 @@ class RadioController extends Controller
         );
     }
 
-    public function updateMusicRanking(Request $request, Music $music)
+    public function updateMusicRanking(Request $request, Music $music, UpdateMusicRankingAction $updateMusicRankingAction)
     {
         if ($request->user()->cannot('update', $music)) return null;
 
-        $music->update([
-            'image_ranking' => $this->image->store('musics/ranking', $request->file('image_ranking'), 'public', $music->image_ranking),
-        ]);
+        $updateMusicRankingAction->execute(
+            $music,
+            $request->file('image_ranking')
+        );
 
         return $this->flashMessage('update');
     }
 
-    public function generateMusicRanking()
+    public function generateMusicRanking(GenerateMusicRankingAction $generateMusicRankingAction)
     {
         if (request()->user()->cannot('setRanking', Music::class)) return null;
 
-        Music::ranking()->update(['in_ranking' => false]);
-
-        $music = Music::orderBy('song_requests_total', 'desc')->limit(10)->get();
-
-        $music->each(function ($music) {
-            $music->update(['in_ranking' => true]);
-        });
+        $generateMusicRankingAction->execute();
 
         return $this->flashMessage('update');
     }
@@ -207,21 +167,13 @@ class RadioController extends Controller
         return $listener ? new ListenerMonthResource($listener) : null;
     }
 
-    public function createListenerMonth(Request $request)
+    public function createListenerMonth(Request $request, CreateListenerMonthAction $createListenerMonthAction)
     {
         if ($request->user()->cannot('listener.month.set')) return null;
 
-        
-
-        $found = ListenerMonth::mostActiveListenerOfCurrentMonth();
-
-        ListenerMonth::updateOrCreate(['id' => 1], [
-            'avatar' => $this->image->store('listener-month', $request->file('avatar'), 'public'),
-            'name' => $found->name,
-            'address' => $found->address,
-            'favorite_program' => $found->favorite_program,
-            'requests_total' => $found->requests_total,
-        ]);
+        $createListenerMonthAction->execute(
+            $request->file('avatar')
+        );
 
         return $this->flashMessage('save');
     }

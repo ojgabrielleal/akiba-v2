@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -11,6 +12,7 @@ use App\Models\User;
 use App\Http\Resources\UserResource;
 
 use App\Services\Process\ImageProcessService;
+
 use App\Traits\HasFlashMessages;
 
 class ProfileController extends Controller

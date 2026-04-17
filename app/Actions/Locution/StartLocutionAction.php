@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Actions\Locution;
+
+use App\Models\Program;
+use App\Models\Onair;
+use App\Models\User;
+use App\Services\External\DiscordWebhookService;
+
+class StartLocutionAction
+{
+    private DiscordWebhookService $discord;
+
+    public function __construct(DiscordWebhookService $discord)
+    {
+        $this->discord = $discord;
+    }
+
+    public function execute(User $user, Program $program, array $data): void
+    {
+        Onair::live()->first()->update([
+            'in_air' => false,
+            'song_requests_total' => false,
+        ]);
+
+        if ($program->type === 'free') {
+            $program->update([
+                'user_id' => $user->id
+            ]);
+        }
+
+        $program->onair()->create([
+            'type' => 'live',
+            'phrase' => $data['phrase'] ?? null,
+            'icon' => $data['icon'] ?? null,
+            'allows_song_requests' => true,
+        ]);
+
+        $this->discord->sendHookMessage($user, $program);
+    }
+}

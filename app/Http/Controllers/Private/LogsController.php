@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -10,8 +11,9 @@ use App\Models\Onair;
 
 use App\Http\Resources\OnairResource;
 
-use App\Traits\HasFlashMessages;
 use App\Services\External\AudienceService;
+
+use App\Traits\HasFlashMessages;
 
 class LogsController extends Controller
 {

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+use App\Models\Automatic;
 use App\Models\Onair;
 use App\Models\Program;
-use App\Models\Automatic;
 use App\Models\SongRequest;
 
 use App\Http\Requests\Locution\StartLocutionRequest;
@@ -17,20 +18,16 @@ use App\Http\Resources\OnairResource;
 use App\Http\Resources\ProgramResource;
 use App\Http\Resources\SongRequestResource;
 
-use App\Services\External\DiscordWebhookService;
+use App\Actions\Locution\FinishLocutionAction;
+use App\Actions\Locution\StartLocutionAction;
+
 use App\Traits\HasFlashMessages;
 
 class LocutionController extends Controller
 {
     use HasFlashMessages;
 
-    private DiscordWebhookService $discord;
     private $render = 'private/Locution';
-
-    public function __construct(DiscordWebhookService $discord)
-    {
-        $this->discord = $discord;
-    }
 
     /*
      * ======================
@@ -65,59 +62,24 @@ class LocutionController extends Controller
         );
     }
 
-    public function startLocution(StartLocutionRequest $request, Program $program)
+    public function startLocution(StartLocutionRequest $request, Program $program, StartLocutionAction $startLocutionAction)
     {
         if ($request->user()->cannot('locution.start')) return null;
 
-        Onair::live()->first()->update([
-            'in_air' => false,
-            'song_requests_total' => false,
-        ]);
-
-        if ($program->type === 'free') {
-            $program->update([
-                'user_id' => request()->user()->id
-            ]);
-        }
-
-        $program->onair()->create([
-            'type' => 'live',
-            'phrase' => $request->input('phrase'),
-            'icon' => $request->input('icon'),
-            'allows_song_requests' => true,
-        ]);
-
-        $this->discord->sendHookMessage(request()->user(), $program);
+        $startLocutionAction->execute(
+            $request->user(),
+            $program,
+            $request->all()
+        );
 
         return $this->flashMessage('start');
     }
 
-    public function finishLocution()
+    public function finishLocution(FinishLocutionAction $finishLocutionAction)
     {
         if (request()->user()->cannot('locution.finish')) return null;
 
-        $onair = Onair::live()->first();
-
-        $onair->update([
-            'in_air' => false,
-            'allows_song_requests' => false,
-        ]);
-
-        $auto = Automatic::where('is_default', true)->first();
-        $selected = collect($auto->phrases)->random();
-
-        $auto->onair()->create([
-            'type' => 'automatic',
-            'phrase' => $selected['phrase'],
-            'icon' => $selected['image'],
-        ]);
-
-        SongRequest::where('onair_id', $onair->id)
-            ->where('was_reproduced', false)
-            ->where('was_canceled', false)
-            ->update([
-                'was_canceled' => true,
-            ]);
+        $finishLocutionAction->execute();
 
         return $this->flashMessage('finish');
     }

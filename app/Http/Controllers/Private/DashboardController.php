@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
+
 use Inertia\Inertia;
 
 use App\Models\Activity;
+use App\Models\Calendar;
 use App\Models\Post;
 use App\Models\Task;
-use App\Models\Calendar;
 
 use App\Http\Resources\ActivityResource;
-use App\Http\Resources\TaskResource;
-use App\Http\Resources\PostResource;
 use App\Http\Resources\CalendarResource;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\TaskResource;
 
 use App\Traits\HasFlashMessages;
 

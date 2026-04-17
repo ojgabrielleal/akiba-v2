@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,20 +13,16 @@ use App\Http\Requests\Podcast\StorePodcastRequest;
 
 use App\Http\Resources\PodcastResource;
 
-use App\Services\Process\ImageProcessService;
+use App\Actions\Podcast\CreatePodcastAction;
+use App\Actions\Podcast\UpdatePodcastAction;
+
 use App\Traits\HasFlashMessages;
 
 class PodcastController extends Controller
 {
     use HasFlashMessages;
 
-    private ImageProcessService $image;
     private $render = 'private/Podcast';
-
-    public function __construct(ImageProcessService $image)
-    {
-        $this->image = $image;
-    }
 
     /*
      * ======================
@@ -54,39 +51,28 @@ class PodcastController extends Controller
         ]);
     }
 
-    public function createPodcast(StorePodcastRequest $request)
+    public function createPodcast(StorePodcastRequest $request, CreatePodcastAction $createPodcastAction)
     {
         if ($request->user()->cannot('create', Podcast::class)) return null;
 
-        Podcast::create([
-            'user_id' => request()->user()->id,
-            'image' => $this->image->store('podcasts', $request->file('image')),
-            'season' => $request->input('season'),
-            'episode' => $request->input('episode'),
-            'title' => $request->input('title'),
-            'summary' => $request->input('summary'),
-            'description' => $request->input('description'),
-            'audio' => $request->input('audio'),
-        ]);
+        $createPodcastAction->execute(
+            $request->user()->id,
+            $request->all(),
+            $request->file('image')
+        );
 
         return $this->flashMessage('save');
     }
 
-    public function updatePodcast(Request $request, Podcast $podcast)
+    public function updatePodcast(Request $request, Podcast $podcast, UpdatePodcastAction $updatePodcastAction)
     {
         if ($request->user()->cannot('update', $podcast)) return null;
 
-        $podcast->fill([
-            'image' => $this->image->store('podcasts', $request->file('image'), 'public', $podcast->image),
-            'season' => $request->input('season', $podcast->season),
-            'episode' => $request->input('episode', $podcast->episode),
-            'title' => $request->input('title', $podcast->title),
-            'summary' => $request->input('summary', $podcast->summary),
-            'description' => $request->input('description', $podcast->description),
-            'audio' => $request->input('audio', $podcast->audio),
-        ]);
-
-        if ($podcast->isDirty()) $podcast->save();
+        $updatePodcastAction->execute(
+            $podcast,
+            $request->all(),
+            $request->file('image')
+        );
 
         return $this->flashMessage('update');
     }
