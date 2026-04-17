@@ -11,7 +11,7 @@
     };
 </script>
 
-{#if pages.meta.per_page >= 10 && pages.meta.last_page > 1}
+{#if pages?.meta && pages.meta.last_page > 1}
     <div class="flex justify-center mt-10">
         <div class="flex gap-5">
             {#if pages.meta.current_page > 1}
