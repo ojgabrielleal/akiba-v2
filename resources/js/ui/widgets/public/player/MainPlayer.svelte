@@ -138,7 +138,7 @@
     </div>
     <div class="block pt-10">
         <div class="flex flex-col gap-10 px-3">
-            <div class={["py-3 px-5 flex gap-2  justify-center items-center rounded-md",
+            <div class={["py-3 px-6 flex gap-2  justify-center items-center rounded-md",
                 { "bg-purple-mystic": air.type === "automatic" },
                 { "bg-green-forest": air.type === "live" },
                 { "bg-orange-sunset": air.type === "scheduled" },
@@ -149,7 +149,7 @@
                             src="/svg/robot.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-10"
+                            class="w-20"
                             loading="lazy"
                         />
                     {:else if air.type === "live"}
@@ -157,7 +157,7 @@
                             src="/svg/stream.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-10"
+                            class="w-17"
                             loading="lazy"
                         />
                     {:else}
@@ -165,18 +165,18 @@
                             src="/svg/disc.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-10"
+                            class="w-13"
                             loading="lazy"
                         />
                     {/if}
                 </div>
-                <div class="font-noto-sans font-medium italic uppercase text-center leading-4">
+                <div class="font-noto-sans font-medium italic uppercase text-center leading-5">
                     {#if air.type === "automatic"}
                         Programação automática
                     {:else if air.type === "live"}
-                        Programa <br />ao vivo
+                        Estamos ao vivo agora
                     {:else}
-                        Programa gravado
+                        Programação gravada
                     {/if}
                 </div>
             </div>

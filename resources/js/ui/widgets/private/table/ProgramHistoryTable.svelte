@@ -32,7 +32,7 @@
                 </thead>
                 <tbody>
                     {#each onair.data as item}
-                        <tr class="border-t border-neutral-aurora/20 font-noto-sans font-bold uppercase text-neutral-aurora whitespace-nowrap">
+                        <tr class="border-t border-neutral-aurora/20 font-noto-sans text-neutral-aurora whitespace-nowrap">
                             <td class="py-6 px-4 align-middle">
                                 {item.program.host.nickname}
                             </td>
@@ -40,7 +40,7 @@
                                 {item.program.name}
                             </td>
                             <td class="py-6 px-4 align-middle">
-                                {item.type === 'live' ? 'Ao vivo' : 'Pré-gravado'}
+                                {item.type === 'live' ? 'AO VIVO' : 'Pré-gravado'}
                             </td>
                             <td class="py-6 px-4 align-middle">
                                 {item.created_at}

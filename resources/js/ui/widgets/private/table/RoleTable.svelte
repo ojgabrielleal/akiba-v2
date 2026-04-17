@@ -49,7 +49,7 @@
         <div class="overflow-x-auto w-full">
             <table class="min-w-[900px] w-full border-collapse table-auto">
                 <thead>
-                    <tr class="text-neutral-aurora uppercase text-sm font-bold italic whitespace-nowrap">
+                    <tr class="text-orange-amber uppercase text-lg font-bold font-noto-sans italic whitespace-nowrap">
                         <th class="p-4 text-start min-w-[180px]">
                             Cargo
                         </th>
@@ -60,17 +60,16 @@
                             Descrição
                         </th>
                         <th class="p-4 text-start min-w-[140px]">
-                            Ações
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {#each roles.data as item}
-                        <tr class="border-t border-neutral-aurora/20 text-neutral-aurora whitespace-nowrap">
-                            <td class="p-4 align-top min-w-[180px]">
+                        <tr class="border-t border-neutral-aurora/20 font-noto-sans text-neutral-aurora whitespace-nowrap">
+                            <td class="p-4 align-center min-w-[180px]">
                                 {item.label}
                             </td>
-                            <td class="p-4 align-top min-w-[180px]">
+                            <td class="p-4 align-center min-w-[180px]">
                                 {item.members_total} membros
                             </td>
                             <td class="p-4 min-w-[300px] max-w-[400px] whitespace-normal wrap-break-words">

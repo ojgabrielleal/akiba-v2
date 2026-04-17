@@ -14,7 +14,7 @@
             {#each navbar as item}
                 {#if hasPermission(item.permission)}
                     <li>
-                        <a href={item.address} aria-label={item.name} class="flex items-center gap-2 text-neutral-aurora">
+                        <a href={item.address} aria-label={item.name} class="flex items-center gap-2">
                             <img 
                                 src={item.icon} 
                                 alt="" 
@@ -64,7 +64,7 @@
         {#each navbar as item}
             {#if hasPermission(item.permission)}
                 <li>
-                    <a href={item.address} aria-label={item.name} class="flex items-center gap-2 text-neutral-aurora">
+                    <a href={item.address} aria-label={item.name} class="flex items-center gap-2 font-noto-sans">
                         <img 
                             src={item.icon} 
                             alt="" 
@@ -72,6 +72,7 @@
                             class="w-5 h-5" 
                             loading="lazy"
                         />
+                        {item.name}
                     </a>
                 </li>
             {/if}
