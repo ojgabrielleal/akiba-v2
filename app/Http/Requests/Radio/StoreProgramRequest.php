@@ -22,7 +22,10 @@ class StoreProgramRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => 'required',
+            'user' => 'required',
+            'name' => 'required',
+            'image' => 'required',
+            'type' => 'required',
         ];
     }
 }

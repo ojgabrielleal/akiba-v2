@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\ListenerMonth;
 use App\Models\Music;
@@ -72,7 +73,11 @@ class RadioController extends Controller
 
     public function createProgram(StoreProgramRequest $request, CreateProgramAction $createProgramAction)
     {
-        if ($request->user()->cannot('create', Program::class)) return null;
+        if ($request->user()->cannot('create', Program::class)) {
+            return null;
+        }
+        
+        Log::info($request->all());
 
         $createProgramAction->execute(
             $request->user(),

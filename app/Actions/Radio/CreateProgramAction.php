@@ -18,7 +18,8 @@ class CreateProgramAction
 
     public function execute(User $currentUser, array $data, ?UploadedFile $imageFile): Program
     {
-        $targetUserId = clone $currentUser->id; // Using current user's ID
+        $targetUserId = $currentUser->id; 
+        
         if (($data['type'] ?? '') === 'private' && !empty($data['user'])) {
             $user = User::where('uuid', $data['user'])->first();
             if ($user) $targetUserId = $user->id;
