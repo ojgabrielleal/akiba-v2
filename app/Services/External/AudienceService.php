@@ -92,10 +92,10 @@ class AudienceService
     public function getAudience()
     {
         return Cache::remember('audience.radios', 30, function () {
-            try {
-                $audience = [];
+            $audience = [];
                 
-                foreach($this->radios as $radio){
+            foreach($this->radios as $radio){
+                try {
                     $response = Http::timeout(5)->withOptions([
                         'verify' => false,
                     ])->get($radio['link']);
@@ -111,25 +111,25 @@ class AudienceService
                         'logo' => $radio['logo'],
                         'listeners' => data_get($data, $radio['target']) ?? "NaN"
                     ];
+                } catch (\Throwable $th) {
+                    Log::error("AudienceService Error for " . $radio['nome'] . ": " . $th->getMessage());
+                    continue;
                 }
-
-                $audience = collect($audience)
-                    ->map(function ($radio) {
-                        $radio['listeners'] = is_numeric($radio['listeners'])
-                            ? (int) $radio['listeners']
-                            : 0;
-
-                        return $radio;
-                    })
-                    ->sortByDesc('listeners')
-                    ->values()
-                    ->all();
-
-                return $audience;
-            } catch (\Throwable $th) {
-                Log::error("AudienceService Error: " . $th->getMessage());
-                return [];
             }
+
+            $audience = collect($audience)
+                ->map(function ($radio) {
+                    $radio['listeners'] = is_numeric($radio['listeners'])
+                        ? (int) $radio['listeners']
+                        : 0;
+
+                    return $radio;
+                })
+                ->sortByDesc('listeners')
+                ->values()
+                ->all();
+
+            return $audience;
         });
     }
 }
