@@ -30,7 +30,7 @@ class SongRequestResource extends JsonResource
                 'artist' => $this->music->artist,
                 'production' => $this->music->production,
             ],
-            'created_at' => $this->created_at->setTimezone('UTC')->format('H:i'),
+            'created_at' => $this->created_at->setTimezone('America/Sao_Paulo')->format('H:i'),
         ];
     }
 }

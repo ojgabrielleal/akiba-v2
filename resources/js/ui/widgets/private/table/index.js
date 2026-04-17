@@ -1,1 +1,0 @@
-export { default as RoleTable } from "./RoleTable.svelte";

@@ -50,3 +50,4 @@ export { default as Navbar } from './navbar/Navbar.svelte';
 
 // Tables
 export { default as RoleTable } from "./table/RoleTable.svelte";
+export { default as ProgramHistoryTable } from "./table/ProgramHistoryTable.svelte";
