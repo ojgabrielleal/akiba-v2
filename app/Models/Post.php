@@ -8,19 +8,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Support\Facades\Cache;
 
 class Post extends Model
 {
     use HasFactory, HasUuids;
 
     protected $table = 'posts';
-
-    protected static function booted()
-    {
-        static::saved(fn() => Cache::forget('latest_posts'));
-        static::deleted(fn() => Cache::forget('latest_posts'));
-    }
 
     protected $fillable = [
         'uuid',

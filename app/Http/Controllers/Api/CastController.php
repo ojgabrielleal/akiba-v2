@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 use App\Models\Onair;
 
@@ -41,9 +40,7 @@ class CastController extends Controller
     {
         $cast = $this->cast->data();
         
-        $onair = Cache::remember('radio_onair_data', 3600, function () {
-            return Onair::live()->with('program.host')->get();
-        });
+        $onair = Onair::live()->with('program.host')->get();
 
         $onair->each(function ($item) use ($cast) {
             $item->current_song = $cast['current_song'] ?? null;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Private;
 use App\Http\Controllers\Controller;
 
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Cache;
 
 use App\Models\Activity;
 use App\Models\Calendar;
@@ -35,14 +34,12 @@ class DashboardController extends Controller
     {
         if (request()->user()->cannot('viewAny', Activity::class)) return null;
 
-        $activities = Cache::remember('dashboard_activities', 3600, function () {
-            return Activity::valid()
+        return ActivityResource::collection(
+            Activity::valid()
                 ->with(['author', 'confirmations'])
                 ->latest()
-                ->get();
-        });
-
-        return ActivityResource::collection($activities);
+                ->get()
+        );
     }
 
     public function confirmActivityParticipant(Activity $activity)
@@ -94,16 +91,14 @@ class DashboardController extends Controller
     {
         if (request()->user()->cannot('viewAny', Post::class)) return null;
 
-        $posts = Cache::remember('latest_posts', 3600, function () {
-            return Post::active()
+        return PostResource::collection(
+            Post::active()
                 ->published()
                 ->latest()
                 ->with(['author'])
                 ->limit(5)
-                ->get();
-        });
-
-        return PostResource::collection($posts);
+                ->get()
+        );
     }
 
     /*
@@ -116,13 +111,11 @@ class DashboardController extends Controller
     {
         if (request()->user()->cannot('viewAny', Calendar::class)) return null;
 
-        $calendar = Cache::remember('dashboard_calendar', 3600, function () {
-            return Calendar::valid()
+        return CalendarResource::collection(
+            Calendar::valid()
                 ->with(['activity', 'responsible'])
-                ->get();
-        });
-
-        return CalendarResource::collection($calendar);
+                ->get()
+        );
     }
 
     /*
