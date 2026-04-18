@@ -5,12 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Support\Facades\Cache;
 
 class Activity extends Model
 {
     use HasFactory, HasUuids;
 
     protected $table = 'activities';
+
+    protected static function booted()
+    {
+        static::saved(fn() => Cache::forget('dashboard_activities'));
+        static::deleted(fn() => Cache::forget('dashboard_activities'));
+    }
 
     protected $fillable = [
         'uuid',
