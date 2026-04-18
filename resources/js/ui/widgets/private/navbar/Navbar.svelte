@@ -11,7 +11,7 @@
 <nav class="w-full h-12 bg-neutral-aurora hidden items-center justify-center lg:flex">
     <div class="cont relative">
         <ul class="flex justify-center items-center gap-10">
-            {#each navbar as item}
+            {#each navbar.private as item}
                 {#if hasPermission(item.permission)}
                     <li>
                         <Link href={item.address} aria-label={item.name} class="flex items-center gap-2">
@@ -61,7 +61,7 @@
         </button>
     </div>
     <ul class="p-5 pt-3 space-y-4">
-        {#each navbar as item}
+        {#each navbar.private as item}
             {#if hasPermission(item.permission)}
                 <li>
                     <Link href={item.address} aria-label={item.name} class="flex items-center gap-2 font-noto-sans">

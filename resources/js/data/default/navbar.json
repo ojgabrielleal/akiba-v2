@@ -1,56 +1,95 @@
-[
+{
+  "private": [
     {
-        "name": "Dashboard",
-        "icon": "/svg/dashboard.svg",
-        "permission": "dashboard.module.view",
-        "address": "/panel/dashboard"
+      "name": "Dashboard",
+      "icon": "/svg/dashboard.svg",
+      "permission": "dashboard.module.view",
+      "address": "/panel/dashboard"
     },
     {
-        "name": "Materias",
-        "icon": "/svg/materials.svg",
-        "permission": "post.module.view",
-        "address": "/panel/post"
+      "name": "Materias",
+      "icon": "/svg/materials.svg",
+      "permission": "post.module.view",
+      "address": "/panel/post"
     },
     {
-        "name": "Locução",
-        "icon": "/svg/locution.svg",
-        "permission": "locution.module.view",
-        "address": "/panel/locution"
+      "name": "Locução",
+      "icon": "/svg/locution.svg",
+      "permission": "locution.module.view",
+      "address": "/panel/locution"
     },
     {
-        "name": "Rádio",
-        "icon": "/svg/radio.svg",
-        "permission": "radio.module.view",
-        "address": "/panel/radio"
+      "name": "Rádio",
+      "icon": "/svg/radio.svg",
+      "permission": "radio.module.view",
+      "address": "/panel/radio"
     },
     {
-        "name": "Podcasts",
-        "icon": "/svg/podcasts.svg",
-        "permission": "podcast.module.view",
-        "address": "/panel/podcast"
+      "name": "Podcasts",
+      "icon": "/svg/podcasts.svg",
+      "permission": "podcast.module.view",
+      "address": "/panel/podcast"
     },
     {
-        "name": "Marketing",
-        "icon": "/svg/marketing.svg",
-        "permission": "marketing.module.view",
-        "address": "/panel/marketing"
+      "name": "Marketing",
+      "icon": "/svg/marketing.svg",
+      "permission": "marketing.module.view",
+      "address": "/panel/marketing"
     },
     {
-        "name": "Mídias",
-        "icon": "/svg/media.svg",
-        "permission": "media.module.view",
-        "address": "/panel/media"
+      "name": "Mídias",
+      "icon": "/svg/media.svg",
+      "permission": "media.module.view",
+      "address": "/panel/media"
     },
     {
-        "name": "Administração",
-        "icon": "/svg/adms.svg",
-        "permission": "administration.module.view",
-        "address": "/panel/administration"
+      "name": "Administração",
+      "icon": "/svg/adms.svg",
+      "permission": "administration.module.view",
+      "address": "/panel/administration"
     },
     {
-        "name": "Logs",
-        "icon": "/svg/logs.svg",
-        "permission": "log.module.view",
-        "address": "/panel/logs"
+      "name": "Logs",
+      "icon": "/svg/logs.svg",
+      "permission": "log.module.view",
+      "address": "/panel/logs"
     }
-]
+  ],
+  "public": [
+    {
+      "name": "News",
+      "icon": "/svg/news.svg",
+      "address": "/news"
+    },
+    {
+      "name": "Colunas",
+      "icon": "/svg/columns.svg",
+      "address": "/colunas"
+    },
+    {
+      "name": "Podcasts",
+      "icon": "/svg/podcasts.svg",
+      "address": "/podcasts"
+    },
+    {
+      "name": "Mídias",
+      "icon": "/svg/media.svg",
+      "address": "/midias"
+    },
+    {
+      "name": "Rádio",
+      "icon": "/svg/radio.svg",
+      "address": "/radio"
+    },
+    {
+      "name": "Equipe",
+      "icon": "/svg/team.svg",
+      "address": "/equipe"
+    },
+    {
+      "name": "Contato",
+      "icon": "/svg/contact.svg",
+      "address": "/contato"
+    }
+  ]
+}

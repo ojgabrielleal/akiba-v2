@@ -1,5 +1,4 @@
 <script>
-    import { onMount } from "svelte";
     import { page } from "@inertiajs/svelte";
     import toast, { Toaster } from "svelte-hot-french-toast";
     import { Navbar, CastMetricsGrid } from "@/ui/widgets/private";
