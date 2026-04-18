@@ -1,14 +1,14 @@
 {
-  "_vendor-C1lIN_7G.js": {
-    "file": "assets/vendor-C1lIN_7G.js",
+  "_vendor-CHPFJqtd.css": {
+    "file": "assets/vendor-CHPFJqtd.css",
+    "src": "_vendor-CHPFJqtd.css"
+  },
+  "_vendor-DOXCcjDr.js": {
+    "file": "assets/vendor-DOXCcjDr.js",
     "name": "vendor",
     "css": [
       "assets/vendor-CHPFJqtd.css"
     ]
-  },
-  "_vendor-CHPFJqtd.css": {
-    "file": "assets/vendor-CHPFJqtd.css",
-    "src": "_vendor-CHPFJqtd.css"
   },
   "resources/css/app.css": {
     "file": "assets/app-BoGe25BA.css",
@@ -16,12 +16,12 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-D-hYVf4y.js",
+    "file": "assets/app-Bm7jALPu.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vendor-C1lIN_7G.js"
+      "_vendor-DOXCcjDr.js"
     ],
     "css": [
       "assets/app-Dr7mPRvw.css"
