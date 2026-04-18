@@ -39,14 +39,14 @@
                             <td class="py-6 px-4 align-middle">
                                 {item.program.name}
                             </td>
-                            <td class="py-6 px-4 align-middle">
-                                {item.type === 'live' ? 'AO VIVO' : 'Pré-gravado'}
+                            <td class="py-6 px-4 align-middle ">
+                                {item.type === 'live' ? 'Ao Vivo' : 'Pré-gravado'}
                             </td>
                             <td class="py-6 px-4 align-middle">
                                 {item.created_at}
                             </td>
                             <td class="py-6 px-4 align-middle">
-                                {item.song_requests_total}
+                                {item.song_requests_total} Atendidos
                             </td>
                         </tr>
                     {/each}

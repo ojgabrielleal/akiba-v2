@@ -13,12 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->validateCsrfTokens(except: [
+            '*',
+        ]);
+
         $middleware->alias([
             'inertia' => \App\Http\Middleware\HandleInertiaRequestsMiddleware::class,
-            'authentication' => \App\Http\Middleware\AuthenticateMiddleware::class,
         ]);
-        
-        $middleware->validateCsrfTokens(except: ['*']); // Desativa CSRF globalmente
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

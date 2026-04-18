@@ -10,6 +10,11 @@ trait ResolvesUserLogged
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
+
+        if (!$user) {
+            return null;
+        }
+
         $user->load('roles.permissions');
 
         return [

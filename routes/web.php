@@ -25,7 +25,7 @@ use App\Http\Controllers\Provisory\HomeController;
 | Provisory routes
 |--------------------------------------------------------------------------
 */
-Route::prefix("")->group(function () {
+Route::prefix("")->middleware(['inertia'])->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('', 'render')->name('home');
         Route::post('song-request','createSongRequest');
@@ -37,13 +37,13 @@ Route::prefix("")->group(function () {
 | Private routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('panel')->group(function () {
+Route::prefix('panel')->middleware(['inertia'])->group(function () {
     Route::controller(LoginController::class)->group(function () {
         Route::get('', 'render')->name('login');
         Route::post('auth', 'login');
     });
 
-    Route::middleware(['inertia', 'auth'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         Route::prefix('dashboard')->controller(DashboardController::class)->group(function () {
             Route::get('', 'render')->name('panel.dashboard');
             Route::prefix('activity')->group(function () {

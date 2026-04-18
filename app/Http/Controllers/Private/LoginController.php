@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 use App\Http\Requests\Auth\AuthLoginRequest;
@@ -28,7 +29,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/panel/dashboard');
+            return redirect()->intended(route('panel.dashboard'));
         }
 
         return Inertia::render($this->render)->with('flash', [

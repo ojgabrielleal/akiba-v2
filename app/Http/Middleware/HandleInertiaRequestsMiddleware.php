@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 
 use App\Services\External\CastService;
@@ -35,11 +36,10 @@ class HandleInertiaRequestsMiddleware extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            'user' => fn() => $this->getUserLogged(),
-            'streaming' => fn() => (
-                new CastService()
-            )->data(),
-            'flash' => fn() => [
+            'user' => $this->getUserLogged(),
+            'streaming' => (new CastService())->data(),
+            'csrf_token' => csrf_token(),
+            'flash' => [
                 'icon' => session('flash.icon'),
                 'message' => session('flash.message'),
             ],

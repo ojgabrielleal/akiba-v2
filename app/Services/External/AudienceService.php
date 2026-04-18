@@ -10,12 +10,6 @@ class AudienceService
 {
     private array $radios = [
         [
-            "nome" => "Rede Akiba",
-            "logo" => "https://img.radios.com.br/radio/lg/radio40131_1609874495.png",
-            "link" => "https://cast.radioamc.com.br/api-json/Vkc1d2FrMHdNVUpRVkRBOStS",
-            "target" => "ouvintes_conectados"
-        ],
-        [
             "nome" => "Rádio Doru",
             "logo" => "https://img.radios.com.br/radio/md/radio141568_1776067616.png",
             "link" => "https://paineldj6.com.br:20038/status-json.xsl",
