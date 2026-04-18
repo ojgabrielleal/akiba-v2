@@ -1,6 +1,8 @@
 <script>
   export let meta = {};
 
+  import { page } from "@inertiajs/svelte";
+
   // Defaults gerais
   const defaultTitle = 'Rede Akiba - O Paraíso dos Otakus! | Sua Melhor Fonte de Animes (e Mangás) no Brasil!';
   const defaultDescription = 'Rede Akiba é seu destino definitivo para animes, mangás, doramas e cultura otaku no Brasil.';
@@ -29,6 +31,7 @@
   <!-- Meta padrão -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content={$page.props.csrf_token}>
   <meta name="description" content={metaDescription} />
   <meta name="keywords" content={metaKeywords} />
   <meta name="author" content={meta.author || 'Rede Akiba'} />

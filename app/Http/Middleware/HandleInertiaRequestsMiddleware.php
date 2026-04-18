@@ -38,6 +38,7 @@ class HandleInertiaRequestsMiddleware extends Middleware
         return array_merge(parent::share($request), [
             'user' => $this->getUserLogged(),
             'streaming' => (new CastService())->data(),
+            'csrf_token' => csrf_token(),
             'flash' => [
                 'icon' => session('flash.icon'),
                 'message' => session('flash.message'),
