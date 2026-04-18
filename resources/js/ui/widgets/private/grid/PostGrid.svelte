@@ -1,7 +1,7 @@
 <script>
     export let title;
 
-    import { page } from "@inertiajs/svelte";
+    import { page, Link } from "@inertiajs/svelte";
     import { Section, Pagination } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
@@ -43,7 +43,7 @@
                                 />
                             </a>
                             {#if canUpdate}
-                                <a href={`/post/${item.uuid}`} aria-label="Editar" class="cursor-pointer">
+                                <Link href={`/post/${item.uuid}`} aria-label="Editar" class="cursor-pointer">
                                     <img
                                         src="/svg/edit.svg"
                                         alt=""
@@ -51,7 +51,7 @@
                                         class="w-4 filter invert"
                                         loading="lazy"
                                     />
-                                </a>
+                                </Link>
                             {/if}
                         </dd>
                     </dl>

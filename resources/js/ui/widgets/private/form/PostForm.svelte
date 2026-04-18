@@ -1,5 +1,5 @@
 <script>
-    import { useForm, page } from "@inertiajs/svelte";
+    import { useForm, page, Link } from "@inertiajs/svelte";
     import { Section, Preview, Wysiwyg } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
     import { postTags } from "@/data";
@@ -73,19 +73,19 @@
 <Section title={post ? `Atualizar matéria` : "Criar matéria"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
         {#if can.create}
-            <a preserveState={false} href="/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+            <Link preserveState={false} href="/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Matérias
-            </a>
+            </Link>
         {/if}
         {#if can.review.create}
-            <a preserveState={false} href="/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+            <Link preserveState={false} href="/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Reviews
-            </a>
+            </Link>
         {/if}
         {#if can.event.create}
-            <a preserveState={false} href="/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+            <Link preserveState={false} href="/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Eventos
-            </a>
+            </Link>
         {/if}
     </div>
     <form on:submit|preventDefault={submit} class="mt-10 xl:mt-15">

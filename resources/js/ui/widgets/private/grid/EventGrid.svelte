@@ -2,7 +2,7 @@
     export let title;
     export let variant = "default";
 
-    import { router, page } from "@inertiajs/svelte";
+    import { router, page, Link } from "@inertiajs/svelte";
     import { Section, Pagination } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
@@ -41,7 +41,7 @@
                                     loading="lazy"
                                 />
                             </a>
-                            <a href={`/event/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
+                            <Link href={`/event/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
                                 <img
                                     src="/svg/edit.svg"
                                     alt=""
@@ -49,7 +49,7 @@
                                     class="w-4 filter-neutral-aurora"
                                     loading="lazy"
                                 />
-                            </a>
+                            </Link>
                         </dd>
                     </dl>
                 </article>
@@ -71,7 +71,7 @@
                             alt={`Evento ${item.title}`}
                         />
                         <div class="flex gap-4 absolute bottom-3 right-3">
-                            <a href={`/event/${item.uuid}`} type="button" class="cursor-pointer" aria-label="Editar">
+                            <Link href={`/event/${item.uuid}`} type="button" class="cursor-pointer" aria-label="Editar">
                                 <img
                                     src="/svg/edit.svg"
                                     alt=""
@@ -79,7 +79,7 @@
                                     class="w-5 filter-neutral-aurora"
                                     loading="lazy"
                                 />
-                            </a>
+                            </Link>
                             {#if can.deactivate}
                                 <button type="button" class="cursor-pointer" aria-label="Desativar" on:click={() => requestDeactivateEvent(item.uuid)}>
                                     <img

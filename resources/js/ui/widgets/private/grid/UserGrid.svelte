@@ -1,7 +1,7 @@
 <script>
     export let title;
 
-    import { page, router } from "@inertiajs/svelte";
+    import { page, router, Link } from "@inertiajs/svelte";
     import { Section, Offcanvas } from "@/ui/components/private";
     import { UserForm, UserAccessForm, ActivityForm } from "@/ui/widgets/private";
     import { hasPermission } from "@/utils";
@@ -100,7 +100,7 @@
                                     />
                                 </button>
                             {/if}
-                            <a href={`/panel/profile/${item.uuid}`} aria-label="Editar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
+                            <Link href={`/panel/profile/${item.uuid}`} aria-label="Editar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
                                 <img 
                                     src="/svg/edit.svg" 
                                     alt="" 
@@ -108,7 +108,7 @@
                                     class="w-4 filter-blue-indigo" 
                                     loading="lazy" 
                                 />
-                            </a>
+                            </Link>
                             {#if can.deactivate}
                                 <button aria-label="Desativar perfil" class="w-8 h-8 bg-neutral-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer" on:click={() => requestDeactivateUser(item.uuid)}>
                                     <img 

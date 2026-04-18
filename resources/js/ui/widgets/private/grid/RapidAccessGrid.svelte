@@ -1,4 +1,5 @@
 <script>
+    import { Link } from "@inertiajs/svelte";
     import { hasPermission } from "@/utils";
 
     let can = {
@@ -23,7 +24,7 @@
 <div class="flex justify-center mb-10">
     <div class="flex flex-wrap justify-center gap-5">
         {#if can.post.create}
-            <a href="/post" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+            <Link href="/post" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
                 <img 
                     src="/svg/materials.svg" 
                     alt="" 
@@ -31,16 +32,16 @@
                     class="w-6 filter-blue-skywave" 
                 />
                 Nova matéria
-            </a>
+            </Link>
         {/if}
         {#if can.activity.create}
-            <a href="/administration" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+            <Link href="/administration" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
                 <img src="/svg/alerts.svg" alt="" aria-hidden="true" class="w-6 filter-blue-skywave" />
                 Adicionar aviso
-            </a>
+            </Link>
         {/if}
         {#if can.repository.create}
-            <a href="/marketing" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+            <Link href="/marketing" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
                 <img 
                     src="/svg/download.svg" 
                     alt="" 
@@ -48,10 +49,10 @@
                     class="w-6 filter-blue-skywave" 
                 />
                 Upar arquivo
-            </a>
+            </Link>
         {/if}
         {#if can.locution.start}
-            <a href="/locution" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+            <Link href="/locution" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
                 <img 
                     src="/svg/locution.svg" 
                     alt="" 
@@ -59,10 +60,10 @@
                     class="w-6 filter-blue-skywave" 
                 />
                 Iniciar programa
-            </a>
+            </Link>
         {/if}
         {#if can.event.create}
-            <a href="/event" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
+            <Link href="/event" class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-neutral-aurora/10 lg:last:border-0">
                 <img 
                     src="/svg/event.svg" 
                     alt="" 
@@ -70,7 +71,7 @@
                     class="w-6 filter-blue-skywave" 
                 />
                 Adicionar evento
-            </a>
+            </Link>
         {/if}
     </div>
 </div>

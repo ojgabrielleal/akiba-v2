@@ -1,7 +1,7 @@
 <script>
     export let title;
 
-    import { page } from "@inertiajs/svelte";
+    import { page, Link } from "@inertiajs/svelte";
     import { Section, Pagination } from "@/ui/components/private";
 
     $: ({ reviews } = $page.props);
@@ -26,7 +26,7 @@
                                     loading="lazy" 
                                 />
                             </a>
-                            <a href={`/review/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
+                            <Link href={`/review/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
                                 <img 
                                     src="/svg/edit.svg" 
                                     alt="" 
@@ -34,7 +34,7 @@
                                     class="w-4 filter-neutral-aurora" 
                                     loading="lazy" 
                                 />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </article>

@@ -1,7 +1,7 @@
 <script>
     export let title;
 
-    import { router, page } from "@inertiajs/svelte";
+    import { router, page, Link } from "@inertiajs/svelte";
     import { Section, Pagination } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
 
@@ -37,7 +37,7 @@
                         </dt>
                         <dd class="flex items-center gap-3">
                             {#if can.update}
-                                <a href={`/podcast/${item.uuid}`} aria-label="Editar">
+                                <Link href={`/podcast/${item.uuid}`} aria-label="Editar">
                                     <img
                                         src="/svg/edit.svg"
                                         alt=""
@@ -45,7 +45,7 @@
                                         class="w-5 filter-neutral-aurora"
                                         loading="lazy"
                                     />
-                                </a>
+                                </Link>
                             {/if}
                             {#if can.deactivate}
                                 <button class="cursor-pointer" aria-label="Desativar" on:click={() => requestDeactivatePodcast(item.uuid)}>

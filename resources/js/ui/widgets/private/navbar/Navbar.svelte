@@ -1,5 +1,5 @@
 <script>
-    import { page } from "@inertiajs/svelte";
+    import { page, Link } from "@inertiajs/svelte";
     import { hasPermission } from "@/utils";
     import { navbar } from "@/data";
 
@@ -14,7 +14,7 @@
             {#each navbar as item}
                 {#if hasPermission(item.permission)}
                     <li>
-                        <a href={item.address} aria-label={item.name} class="flex items-center gap-2">
+                        <Link href={item.address} aria-label={item.name} class="flex items-center gap-2">
                             <img 
                                 src={item.icon} 
                                 alt="" 
@@ -22,20 +22,20 @@
                                 class="w-5 h-5" 
                                 loading="lazy"
                             />
-                        </a>
+                        </Link>
                     </li>
                 {/if}
             {/each}
         </ul>
         <div class="absolute -bottom-[1.45rem] right-0 flex items-center gap-2">
-            <a href={`/panel/profile/${user.uuid}`} aria-label={user.nickname}>
+            <Link href={`/panel/profile/${user.uuid}`} aria-label={user.nickname}>
                 <img
                     src={user.avatar}
                     alt={`Avatar de ${user.nickname}`}
                     class="w-16 h-16 rounded-full object-cover object-top border-8 border-neutral-aurora"
                     loading="lazy"
                 />
-            </a>
+            </Link>
         </div>
     </div>
 </nav>
@@ -64,7 +64,7 @@
         {#each navbar as item}
             {#if hasPermission(item.permission)}
                 <li>
-                    <a href={item.address} aria-label={item.name} class="flex items-center gap-2 font-noto-sans">
+                    <Link href={item.address} aria-label={item.name} class="flex items-center gap-2 font-noto-sans">
                         <img 
                             src={item.icon} 
                             alt="" 
@@ -73,7 +73,7 @@
                             loading="lazy"
                         />
                         {item.name}
-                    </a>
+                    </Link>
                 </li>
             {/if}
         {/each}
