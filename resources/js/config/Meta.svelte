@@ -3,8 +3,6 @@
 
   import { page } from "@inertiajs/svelte";
 
-  $:console.log($page)
-
   // Defaults gerais
   const defaultTitle = 'Rede Akiba - O Paraíso dos Otakus! | Sua Melhor Fonte de Animes (e Mangás) no Brasil!';
   const defaultDescription = 'Rede Akiba é seu destino definitivo para animes, mangás, doramas e cultura otaku no Brasil.';
