@@ -19,7 +19,7 @@
     </div>
 </Modal>
 
-<section class="flex flex-col w-full bg-blue-midnight p-6 gap-8 rounded-3xl overflow-hidden relative">
+<section class="flex flex-col w-full p-6 gap-8 rounded-3xl overflow-hidden relative">
     <!-- Info Card (Glassmorphism) -->
     <div class="relative z-10 bg-neutral-aurora/5 backdrop-blur-xl border border-white/10 rounded-3xl p-5 flex flex-col gap-4 shadow-xl">
         <div class="flex items-center gap-4">

@@ -7,18 +7,18 @@
 </script>
 
 <nav class="w-full relative">
-    <div class="w-full lg:w-[85%] lg:h-[2.8rem] px-5 py-2 lg:px-0 lg:py-0 relative lg:top-15 bg-neutral-aurora lg:float-end flex items-center">
+    <div class="w-full lg:w-[88%] lg:h-[2.57rem] px-5 py-2 lg:px-0 lg:py-0 relative lg:top-15 bg-neutral-aurora lg:float-end flex items-center">
         <button on:click={() => (mobilenavbar = !mobilenavbar)} aria-label="Abrir menu" class="lg:hidden p-1">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
 
-        <div class="mx-auto lg:mx-0 lg:absolute lg:-bottom-[0.9rem] lg:-left-27 lg:z-50">
-            <img src="/img/default/logo.webp" alt="Logo" class="w-30 lg:w-45" />
+        <div class="mx-auto lg:mx-0 lg:absolute lg:-bottom-3 lg:-left-23 lg:z-50">
+            <img src="/img/default/logo.webp" alt="Logo" class="w-30 lg:w-40" />
         </div>
 
-        <ul class="hidden lg:flex gap-5 mx-auto">
+        <ul class="hidden lg:flex gap-5 ml-20">
             {#each navbar.public as item}
                 <li class="border-l first:border-none pl-5 border-blue-midnight h-6 flex items-center text-blue-midnight">
                     <Link href={item.address} aria-label={item.name} class="flex items-center gap-1 text-lg font-noto-sans font-extrabold italic uppercase">
@@ -29,11 +29,11 @@
             {/each}
         </ul>
 
-        <div class="hidden lg:flex justify-center items-center w-26 h-9 gap-1 bg-blue-skywave rounded-lg mr-5">
+        <div class="hidden lg:flex justify-center items-center w-25 h-8 gap-1 bg-blue-skywave rounded-full absolute right-5">
             <button aria-label="Modo Claro" on:click={() => theme = 'light'} class={["cursor-pointer shrink-0 p-1", 
                 {'bg-orange-morning rounded-full': theme === 'light'}
             ]}>
-                <img src="/svg/dawn.svg" alt="" aria-hidden="true" class={["w-5 h-5", 
+                <img src="/svg/dawn.svg" alt="" aria-hidden="true" class={["w-4 h-4", 
                     { 'filter-orange-amber' : theme === 'light' }, 
                     { 'filter invert' : theme !== 'light' }]
                 } />
@@ -41,7 +41,7 @@
             <button aria-label="Modo Akiba" on:click={() => theme = 'akiba'} class={["cursor-pointer shrink-0 p-1", 
                 {'bg-blue-midnight rounded-full': theme === 'akiba'}
             ]}>
-                <img src="/svg/akiba.svg" alt="" aria-hidden="true" class={["w-5 h-5", 
+                <img src="/svg/akiba.svg" alt="" aria-hidden="true" class={["w-4 h-4", 
                     { 'filter-orange-amber' : theme === 'akiba' }, 
                     { 'filter invert' : theme !== 'akiba' }]
                 }/>
@@ -49,7 +49,7 @@
             <button aria-label="Modo Ecuro" on:click={() => theme = 'night'} class={["cursor-pointer shrink-0 p-1", 
                 {'bg-blue-midnight rounded-full': theme === 'night'}
             ]}>
-                <img src="/svg/night.svg" alt="" aria-hidden="true" class={["w-5 h-5", 
+                <img src="/svg/night.svg" alt="" aria-hidden="true" class={["w-4 h-4", 
                     { 'filter-orange-morning' : theme === 'night' }, 
                     { 'filter invert' : theme !== 'night' }]
                 }/>
@@ -63,7 +63,7 @@
     ]}>
         <button type="button" aria-hidden="true" class="absolute inset-0 bg-blue-midnight/40 backdrop-blur-sm" on:click={() => (mobilenavbar = false)}></button>
 
-        <div class={["absolute left-0 top-0 h-full w-72 bg-neutral-aurora shadow-2xl transition-transform duration-300 ease-out", 
+        <div class={["absolute left-0 top-0 h-screen w-72 bg-neutral-aurora shadow-2xl transition-transform duration-300 ease-out", 
             { "translate-x-0": mobilenavbar }, 
             { "-translate-x-full": !mobilenavbar }
         ]}>
@@ -89,15 +89,15 @@
                 </ul>
             </nav>
 
-            <div class="absolute bottom-0 left-0 w-full p-6 border-t border-blue-midnight/10 bg-neutral-aurora">
+            <div class="absolute bottom-0 left-0 w-full p-6 border-t border-blue-midnight/10 bg-neutral-aurora z-10">
                 <span class="w-full block text-[0.6rem] font-bold uppercase tracking-widest text-blue-midnight text-center opacity-40 mb-3">
                     Temas da Akiba
                 </span>
-                <div class="w-30 h-11 mx-auto flex justify-center items-center gap-1 bg-blue-skywave p-1 rounded-lg">
+                <div class="w-25 h-8 mx-auto flex justify-center items-center gap-1 bg-blue-skywave p-1 rounded-full">
                     <button on:click={() => theme = 'light'} class={["flex-1 flex justify-center items-center transition-all h-full", 
                         {'bg-orange-morning rounded-full': theme === 'light'}
                     ]}>
-                        <img src="/svg/dawn.svg" alt="Claro" aria-hidden="true" class={["w-5 h-5", 
+                        <img src="/svg/dawn.svg" alt="Claro" aria-hidden="true" class={["w-4 h-4", 
                             { 'filter-orange-amber' : theme === 'light' }, 
                             { 'filter invert' : theme !== 'light' }
                         ]} />
@@ -105,7 +105,7 @@
                     <button on:click={() => theme = 'akiba'} class={["flex-1 flex justify-center items-center transition-all h-full", 
                         {'bg-blue-midnight rounded-full': theme === 'akiba'}
                     ]}>
-                        <img src="/svg/akiba.svg" alt="Akiba" aria-hidden="true" class={["w-5 h-5", 
+                        <img src="/svg/akiba.svg" alt="Akiba" aria-hidden="true" class={["w-4 h-4", 
                             { 'filter-orange-amber' : theme === 'akiba' }, 
                             { 'filter invert' : theme !== 'akiba' }
                         ]}/>
@@ -113,7 +113,7 @@
                     <button on:click={() => theme = 'night'} class={["flex-1 flex justify-center items-center transition-all h-full", 
                         {'bg-blue-midnight rounded-full': theme === 'night'}
                     ]}>
-                        <img src="/svg/night.svg" alt="Escuro" aria-hidden="true" class={["w-5 h-5", 
+                        <img src="/svg/night.svg" alt="Escuro" aria-hidden="true" class={["w-4 h-4", 
                             { 'filter-orange-morning' : theme === 'night' }, 
                             { 'filter invert' : theme !== 'night' }
                         ]}/>

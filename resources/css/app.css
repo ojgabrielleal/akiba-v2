@@ -23,6 +23,7 @@
     --color-blue-indigo: #000036;
     --color-blue-skywave: #0091ff;
     --color-blue-cerulean: #060652;
+    --color-blue-night: #000014;
 
     /* Purples */
     --color-purple-mystic: #b82bff;
@@ -31,7 +32,7 @@
     --color-green-forest: #00a859;
 }
 
-@theme theme {
+@theme {
     --color-neutral-aurora: var(--color-neutral-aurora);
     --color-neutral-sandstone: var(--color-neutral-sandstone);
     --color-neutral-honeycream: var(--color-neutral-honeycream);
@@ -49,12 +50,13 @@
     --color-blue-indigo: var(--color-blue-indigo);
     --color-blue-skywave: var(--color-blue-skywave);
     --color-blue-cerulean: var(--color-blue-cerulean);
-
+    --color-blue-night: var(--color-blue-night);
+    
     --color-purple-mystic: var(--color-purple-mystic);
     --color-green-forest: var(--color-green-forest);
 }
 
-@theme fonts {
+@theme {
     --font-noto-sans: "Noto Sans", sans-serif;
 }
 
