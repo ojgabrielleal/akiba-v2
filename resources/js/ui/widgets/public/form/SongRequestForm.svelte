@@ -101,7 +101,7 @@
             💌 Yay! Pedido enviado!
         </div>
         <div class="text-sm font-noto-sans text-gray-500">
-            Seu pedido já tá a caminho! {air.program.host.gender === "male" ? "O locutor" : "A locutora"} {air.program.host.nickname} 
+            Seu pedido já tá a caminho! {air.program.host.gender === "male" ? "O" : "A"} {air.program.host.nickname} 
             vai ver rapidinho. Fica por aqui e curte a vibe da programação! ✨🔥
         </div>
     </div>
@@ -273,7 +273,7 @@
             😭 Ai… não dá pra mandar pedido agora!
         </div>
         <div class="text-sm font-noto-sans text-gray-500">
-            O programa não tá rolando ou {air.program.host.gender === "male" ? "o locutor" : "a locutora"} {air.program.host.nickname} tá 
+            O programa não tá rolando ou {air.program.host.gender === "male" ? "o" : "a"} {air.program.host.nickname.toLowerCase()} tá 
             dando uma pausa, tá? Mas relaxa, daqui a pouco você consegue mandar sua música! 💬🎶
         </div>
     </div>
