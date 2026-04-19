@@ -18,6 +18,8 @@
         <SongRequestForm />
     </div>
 </Modal>
+
+<!-- Phrase Section -->
 <section class="w-full bg-blue-ocean mb-5">
     <div class="cont-player-main py-4 relative">
         <div class="hidden lg:block absolute -top-7 -left-10 z-10">
@@ -58,8 +60,12 @@
     </div>
 </section>
 
+<!-- Main Player Section -->
 <section class="cont-player-main grid grid-cols-[2fr_1fr_0.84fr] items-center gap-5">
+
+    <!-- First Column-->
     <div class="block">
+        <!--Program and Host Information-->
         <div class="flex items-center gap-5 mb-15">
             <div class="w-52">
                 <img src={air.program.image} alt="Programa" loading="lazy" />
@@ -75,20 +81,20 @@
             </div>
             <div>
                 <div class="text-orange-amber font-noto-sans uppercase">
-                    {air.program.host.gender === "male" ? "Com o DJ" : "Com a DJ"}
+                    {air.program.host.gender === "male" ? "Com o locutor" : "Com a locutora"}
                 </div>
                 <div class="w-full text-neutral-aurora text-2xl font-noto-sans font-bold uppercase italic line-clamp-1">
                     {air.program.host.nickname}
                 </div>
-                <div class={["mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase",
-                    { "bg-purple-mystic": air.type === "automatic" },
+                <div class={["mt-[0.4rem] float-end w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase",
+                    { "bg-neutral-gray": air.type === "automatic" },
                     { "bg-green-forest": air.type === "live" },
                     { "bg-orange-sunset": air.type === "scheduled" },
                 ]}>
                     {#if air.type === "automatic"}
                         Robô
                     {:else if air.type === "live"}
-                        Humano
+                        Human{air.program.host.gender === "male" ? "o" : "a"}
                     {:else}
                         Gravado
                     {/if}
@@ -104,6 +110,7 @@
                 />
             </div>
         </div>
+        <!--Current Song Information-->
         <div class="flex gap-3 items-end">
             <div class="w-20 shrink-0">
                 <img
@@ -125,7 +132,9 @@
             </div>
         </div>
     </div>
+    <!--Second Column-->
     <div class="block">
+        <!--Host Image-->
         <div class="w-76">
             <img
                 src={air.program.host.avatar}
@@ -136,28 +145,31 @@
             />
         </div>
     </div>
-    <div class="block pt-10">
+    <!--Third Column-->
+    <div class="block">
+        <!-- Player Controls-->
         <div class="flex flex-col gap-10 px-3">
-            <div class={["py-3 px-6 flex gap-2  justify-center items-center rounded-md",
-                { "bg-purple-mystic": air.type === "automatic" },
+            <!-- Player Type Information-->
+            <div class={["py-2 px-6 gap-2 flex justify-center items-center rounded-md",
+                { "bg-neutral-gray": air.type === "automatic" },
                 { "bg-green-forest": air.type === "live" },
                 { "bg-orange-sunset": air.type === "scheduled" },
             ]}>
-                <div>
+                <div class="block">
                     {#if air.type === "automatic"}
                         <img
-                            src="/svg/robot.svg"
+                            src="/svg/playlist.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-20"
+                            class="w-10 filter-blue-midnight"
                             loading="lazy"
                         />
                     {:else if air.type === "live"}
                         <img
-                            src="/svg/stream.svg"
+                            src="/svg/onair.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-17"
+                            class="w-10 filter-blue-midnight"
                             loading="lazy"
                         />
                     {:else}
@@ -165,21 +177,23 @@
                             src="/svg/disc.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-13"
+                            class="w-9 filter-blue-midnight"
                             loading="lazy"
                         />
                     {/if}
                 </div>
-                <div class="font-noto-sans font-medium italic uppercase text-center leading-5">
+                <div class="shrink-0 font-noto-sans font-bold italic uppercase text-center text-blue-midnight leading-4">
                     {#if air.type === "automatic"}
-                        Programação automática
+                        Playlist <br/>automática
                     {:else if air.type === "live"}
-                        Estamos ao vivo agora
+                        Locut{air.program.host.gender === "male" ? "or" : "ora"}
+                        <br/>ao vivo
                     {:else}
-                        Programação gravada
+                        Programa<br/>gravado
                     {/if}
                 </div>
             </div>
+            <!-- Player Controls-->
             <div class="flex flex-col mb-7">
                 <div class="flex justify-center mb-1">
                     <div>
@@ -190,7 +204,7 @@
                             { "text-blue-skywave": !$player.playing },
                             { "text-orange-amber": $player.playing },
                         ]}>
-                            {$player.playing ? "Pause" : "Start"}
+                            {$player.playing ? "Pause" : "Play"}
                         </div>
                     </div>
                     <button on:click={toggleAudio} class={["cursor-pointer shrink-0 w-14 h-14 rounded-full flex justify-center items-center active:shadow-[0_0_20px_rgba(0,145,255,0.8)] active:scale-95 transition-all",
@@ -227,6 +241,7 @@
                 </div>
             </div>
         </div>
+        <!-- Song Request Button-->
         <button aria-label="Faça seu pedido" class="cursor-pointer w-full py-2 px-1 border border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase disabled:cursor-not-allowed" on:click={() => {
             modalRef.open();
         }}>

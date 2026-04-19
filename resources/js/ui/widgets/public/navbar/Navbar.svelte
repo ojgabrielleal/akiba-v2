@@ -57,12 +57,14 @@
         </div>
     </div>
 
+    <!-- Mobile Navbar -->
     <div class={["fixed inset-0 z-150 transition-opacity duration-300 lg:hidden", 
         { "opacity-100 pointer-events-auto": mobilenavbar }, 
         { "opacity-0 pointer-events-none": !mobilenavbar }
     ]}>
         <button type="button" aria-hidden="true" class="absolute inset-0 bg-blue-midnight/40 backdrop-blur-sm" on:click={() => (mobilenavbar = false)}></button>
 
+        <!-- Sidebar        -->
         <div class={["absolute left-0 top-0 h-screen w-72 bg-neutral-aurora shadow-2xl transition-transform duration-300 ease-out", 
             { "translate-x-0": mobilenavbar }, 
             { "-translate-x-full": !mobilenavbar }

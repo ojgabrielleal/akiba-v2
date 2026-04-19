@@ -46,7 +46,7 @@
                         {#if air.type === "automatic"}
                             Robô
                         {:else if air.type === "live"}
-                            Humano
+                            Human{air.program.host.gender === "male" ? "o" : "a"}
                         {:else}
                             Gravado
                         {/if}
