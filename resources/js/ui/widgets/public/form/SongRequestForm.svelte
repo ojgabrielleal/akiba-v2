@@ -273,7 +273,7 @@
             😭 Ai… não dá pra mandar pedido agora!
         </div>
         <div class="text-sm font-noto-sans text-gray-500">
-            O programa não tá rolando ou {air.program.host.gender === "male" ? "a locutora" : "o locutor"} {air.program.host.nickname} tá 
+            O programa não tá rolando ou {air.program.host.gender === "male" ? "o locutor" : "a locutora"} {air.program.host.nickname} tá 
             dando uma pausa, tá? Mas relaxa, daqui a pouco você consegue mandar sua música! 💬🎶
         </div>
     </div>
