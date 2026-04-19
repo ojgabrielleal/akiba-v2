@@ -86,7 +86,7 @@
                 <div class="w-full text-neutral-aurora text-2xl font-noto-sans font-bold uppercase italic line-clamp-1">
                     {air.program.host.nickname}
                 </div>
-                <div class={["mt-[0.4rem] float-end w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase",
+                <div class={["mt-[0.4rem] w-24 rounded-xl text-center text-sm text-neutral-aurora font-noto-sans font-bold italic uppercase",
                     { "bg-neutral-gray": air.type === "automatic" },
                     { "bg-green-forest": air.type === "live" },
                     { "bg-orange-sunset": air.type === "scheduled" },
