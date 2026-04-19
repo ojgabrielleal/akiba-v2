@@ -37,7 +37,7 @@
                                     src="/svg/eye.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-5 filter-neutral-aurora"
+                                    class="w-5 filter invert"
                                     loading="lazy"
                                 />
                             </a>
@@ -46,7 +46,7 @@
                                     src="/svg/edit.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-4 filter-neutral-aurora"
+                                    class="w-4 filter invert"
                                     loading="lazy"
                                 />
                             </Link>
@@ -76,7 +76,7 @@
                                     src="/svg/edit.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-5 filter-neutral-aurora"
+                                    class="w-5 filter invert"
                                     loading="lazy"
                                 />
                             </Link>
@@ -86,7 +86,7 @@
                                         src="/svg/trash.svg"
                                         alt=""
                                         aria-hidden="true"
-                                        class="w-5 filter-neutral-aurora"
+                                        class="w-5 filter invert"
                                         loading="lazy"
                                     />
                                 </button>

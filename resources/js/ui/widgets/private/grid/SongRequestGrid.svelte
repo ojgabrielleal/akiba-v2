@@ -81,7 +81,7 @@
                             src="/svg/profile.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 filter-neutral-aurora"
+                            class="w-5 filter invert"
                             loading="lazy"
                         />
                         <span class="truncate">
@@ -93,7 +93,7 @@
                             src="/svg/gps.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 filter-neutral-aurora"
+                            class="w-5 filter invert"
                             loading="lazy"
                         />
                         <span class="truncate">
@@ -105,7 +105,7 @@
                             src="/svg/ip.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 filter-neutral-aurora"
+                            class="w-5 filter invert"
                             loading="lazy"
                         />
                         {item.ip}
@@ -118,7 +118,7 @@
                                     src="/svg/music.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-6 filter-neutral-aurora"
+                                    class="w-6 filter invert"
                                     loading="lazy"
                                 />
                             </div>
@@ -161,7 +161,7 @@
                                     src="/svg/telegram.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-7 filter-neutral-aurora"
+                                    class="w-7 filter invert"
                                     loading="lazy"
                                 />
                             </div>
@@ -177,7 +177,7 @@
                                 src="/svg/clock.svg"
                                 alt=""
                                 aria-hidden="true"
-                                class="w-5 filter-neutral-aurora"
+                                class="w-5 filter invert"
                                 loading="lazy"
                             />
                             {item.created_at}
@@ -190,7 +190,7 @@
                                             src="/svg/close.svg"
                                             alt=""
                                             aria-hidden="true"
-                                            class="w-6 filter-neutral-aurora"
+                                            class="w-6 filter invert"
                                             loading="lazy"
                                         />
                                     </button>
@@ -201,7 +201,7 @@
                                             src="/svg/like.svg"
                                             alt=""
                                             aria-hidden="true"
-                                            class="w-6 filter-neutral-aurora"
+                                            class="w-6 filter invert"
                                             loading="lazy"
                                         />
                                     </button>

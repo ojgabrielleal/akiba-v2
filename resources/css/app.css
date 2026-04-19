@@ -12,6 +12,7 @@
     --color-red-crimson: #ed3237;
 
     /* Oranges */
+    --color-orange-morning: #FFE8BF;
     --color-orange-sunset: #ffa919;
     --color-orange-amber: #f69700;
     --color-orange-copper: #cc6633;
@@ -38,6 +39,7 @@
 
     --color-red-crimson: var(--color-red-crimson);
 
+    --color-orange-morning: var(--color-orange-morning);
     --color-orange-sunset: var(--color-orange-sunset);
     --color-orange-amber: var(--color-orange-amber);
     --color-orange-copper: var(--color-orange-copper);
@@ -151,10 +153,6 @@
         background: linear-gradient(to left, var(--color-blue-ocean), transparent);
     }
 
-    .filter-neutral-aurora {
-        filter: invert(100%) sepia(75%) saturate(292%) hue-rotate(322deg) brightness(106%) contrast(102%);
-    }
-
     .filter-neutral-gray {
         filter: invert(54%) sepia(12%) saturate(23%) hue-rotate(46deg) brightness(92%) contrast(88%);
     }
@@ -181,5 +179,13 @@
 
     .filter-red-crimson {
         filter: invert(44%) sepia(59%) saturate(4904%) hue-rotate(335deg) brightness(88%) contrast(113%);
+    }
+
+    .filter-orange-amber{
+        filter: invert(64%) sepia(30%) saturate(6101%) hue-rotate(8deg) brightness(106%) contrast(102%);
+    }
+
+    .filter-orange-morning{
+        filter: invert(84%) sepia(12%) saturate(1050%) hue-rotate(333deg) brightness(111%) contrast(105%);
     }
 }

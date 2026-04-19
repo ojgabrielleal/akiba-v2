@@ -114,7 +114,7 @@
                                         src="/svg/edit.svg"
                                         alt=""
                                         aria-hidden="true"
-                                        class="w-5 filter-neutral-aurora"
+                                        class="w-5 filter invert"
                                         loading="lazy"
                                     />
                                 </button>
@@ -125,7 +125,7 @@
                                         src="/svg/trash.svg"
                                         alt=""
                                         aria-hidden="true"
-                                        class="w-5 filter-neutral-aurora"
+                                        class="w-5 filter invert"
                                         loading="lazy"
                                     />
                                 </button>
