@@ -30,7 +30,7 @@
                     <div class="grid grid-cols-3 absolute bottom-2 left-4 w-[calc(100%-2rem)]">
                         <div class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-lg text-neutral-aurora truncate">
                             <img src="/svg/statistics.svg" alt="" aria-hidden="true" class="w-5 filter invert" loading="lazy" />
-                            {item.views}
+                            {item.views ?? 0}
                         </div>
                         <div class="font-noto-sans font-bold italic uppercase text-lg text-neutral-aurora truncate">
                             {item.author.nickname}
