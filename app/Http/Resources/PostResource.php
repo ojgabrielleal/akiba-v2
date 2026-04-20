@@ -11,6 +11,7 @@ class PostResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
+            'slug' => $this->slug,
             'type' => $this->type,
             'title' => $this->title,
             'image' => $this->image,
@@ -35,7 +36,8 @@ class PostResource extends JsonResource
             'categories' => $this->categories->map(fn($item) => [
                 'uuid' => $item->uuid,
                 'name' => $item->name,
-            ])
+            ]),
+            'views' => $this->views_count,
         ];
     }
 }

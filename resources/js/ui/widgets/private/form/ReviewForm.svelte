@@ -79,13 +79,13 @@
 
 <Section title={review ? "Atualizar review" : "Criar review"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
-        <Link preserveState={false} href="/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <Link preserveState={false} href="/panel/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
             Matérias
         </Link>
-        <Link preserveState={false} href="/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <Link preserveState={false} href="/panel/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
             Reviews
         </Link>
-        <Link preserveState={false} href="/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <Link preserveState={false} href="/panel/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
             Eventos
         </Link>
     </div>
@@ -101,6 +101,14 @@
                     oninput={(event) => ($form.image = event.target.files[0])}
                     required={!review}
                 />
+                <ul class="mt-4 ml-5 list-disc font-noto-sans font-light text-orange-sunset">
+                    <li>
+                       <strong>Tamanho:</strong> 708x827
+                    </li>
+                    <li>
+                        <strong>Fundo:</strong> Transparente
+                    </li>
+                </ul>
             </div>
             <div>
                 <div class="mb-8">
@@ -133,7 +141,8 @@
                     </label>
                     <Preview
                         name="cover"
-                        viewobject="object-cover"
+                        standard="w-full h-[30rem] rounded-lg"
+                        view="w-full max-h-[30rem] object-cover object-center rounded-lg bg-neutral-aurora"
                         src={$form.cover}
                         oninput={(event) => ($form.cover = event.target.files[0])}
                         required={!review}

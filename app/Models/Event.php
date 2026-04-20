@@ -69,12 +69,23 @@ class Event extends Model
         return $query->where('is_active', true);
     }
 
+    public function scopeFeatured($query)
+    {
+        return $query->withCount('views')
+        ->orderByDesc('views_count');
+    }
+
     /**
      * Define the relationships between this model and other models.
      *
      * Use these methods to access related data via Eloquent relationships
      * (hasOne, hasMany, belongsTo, belongsToMany, etc.).
      */
+    public function views()
+    {
+        return $this->morphMany(PageView::class, 'viewable');
+    }
+    
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');

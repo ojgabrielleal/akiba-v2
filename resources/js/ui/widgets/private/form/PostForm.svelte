@@ -73,23 +73,23 @@
 <Section title={post ? `Atualizar matéria` : "Criar matéria"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
         {#if can.create}
-            <Link preserveState={false} href="/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+            <Link preserveState={false} href="/panel/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Matérias
             </Link>
         {/if}
         {#if can.review.create}
-            <Link preserveState={false} href="/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+            <Link preserveState={false} href="/panel/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Reviews
             </Link>
         {/if}
         {#if can.event.create}
-            <Link preserveState={false} href="/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+            <Link preserveState={false} href="/panel/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Eventos
             </Link>
         {/if}
     </div>
     <form on:submit|preventDefault={submit} class="mt-10 xl:mt-15">
-        <div class="grid grid-cols-1 xl:grid-cols-[22rem_1fr] gap-5">
+        <div class="grid grid-cols-1 xl:grid-cols-[20rem_1fr] gap-5">
             <div class="mb-3">
                 <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                     Imagem em destaque
@@ -100,6 +100,14 @@
                     oninput={(event) => ($form.image = event.target.files[0])}
                     required={!post}
                 />
+                <ul class="mt-4 ml-5 list-disc font-noto-sans font-light text-orange-sunset">
+                    <li>
+                       <strong>Tamanho:</strong> 708x827
+                    </li>
+                    <li>
+                        <strong>Fundo:</strong> Transparente
+                    </li>
+                </ul>
             </div>
             <div class="mb-3">
                 <div class="mb-8">
@@ -120,7 +128,8 @@
                     </label>
                     <Preview
                         name="cover"
-                        viewobject="object-cover"
+                        standard="w-full h-[30rem] rounded-lg"
+                        view="w-full max-h-[30rem] object-cover object-center rounded-lg bg-neutral-aurora"
                         src={$form.cover}
                         oninput={(event) => ($form.cover = event.target.files[0])}
                         required={!post}

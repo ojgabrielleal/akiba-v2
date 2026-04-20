@@ -40,7 +40,7 @@ class ReviewController extends Controller
         if (request()->user()->cannot('viewAny', Review::class)) return null;
 
         return ReviewResource::collection(
-            Review::with('reviews')->paginate(10)
+            Review::with(['reviews', 'views'])->paginate(10)
         );
     }
 

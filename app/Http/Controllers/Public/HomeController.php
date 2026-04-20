@@ -27,7 +27,12 @@ class HomeController extends Controller
 
     public function indexFeaturedPosts()
     {
-        return PostResource::collection(Post::limit(3)->get());
+        return PostResource::collection(
+            Post::published()
+                ->featured()
+                ->take(3)
+                ->get()
+        );
     }
 
     public function showOnair()
@@ -68,7 +73,7 @@ class HomeController extends Controller
         }
 
         $onair->songRequests()->create([
-            'ip' => $request->ip(),
+            'ip_address' => $request->ip(),
             'name' => $request->input('name'),
             'address' => $request->input('address'),
             'message' => $request->input('message'),

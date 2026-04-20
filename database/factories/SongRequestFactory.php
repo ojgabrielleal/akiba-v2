@@ -19,7 +19,7 @@ class SongRequestFactory extends Factory
         return [
             'was_reproduced' => false,
             'was_canceled' => false,
-            'ip' => fake()->ipv4(),
+            'ip_address' => fake()->ipv4(),
             'name' => fake()->userName(),
             'address' => fake()->address(),
             'message' => fake()->sentence()

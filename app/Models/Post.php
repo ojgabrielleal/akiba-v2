@@ -25,6 +25,7 @@ class Post extends Model
         'title',
         'content',
         'cover',
+        'views',
     ];
 
     protected $casts = [
@@ -78,12 +79,23 @@ class Post extends Model
         return $query->where('user_id', Auth::id());
     }
 
+    public function scopeFeatured($query)
+    {
+        return $query->withCount('views')
+        ->orderByDesc('views_count');
+    }
+    
     /**
      * Define the relationships between this model and other models.
      *
      * Use these methods to access related data via Eloquent relationships
      * (hasOne, hasMany, belongsTo, belongsToMany, etc.).
      */
+    public function views()
+    {
+        return $this->morphMany(PageView::class, 'viewable');
+    }
+
     public function references()
     {
         return $this->hasMany(PostReference::class, 'post_id');

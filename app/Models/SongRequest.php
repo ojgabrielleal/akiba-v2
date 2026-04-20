@@ -18,7 +18,7 @@ class SongRequest extends Model
         'was_canceled',
         'onair_id',
         'music_id',
-        'ip',
+        'ip_address',
         'name',
         'address',
         'message',

@@ -38,14 +38,14 @@ class PostController extends Controller
         if (!request()->user()->hasPermission('post.list')) {
             return PostResource::collection(
                 Post::mine()
-                    ->with('author')
+                    ->with(['author', 'views'])
                     ->latest()
                     ->paginate(10)
             );
         }
 
         return PostResource::collection(
-            Post::with('author')
+            Post::with(['author', 'views'])
                 ->latest()
                 ->paginate(10)
         );

@@ -37,7 +37,7 @@ class EventController extends Controller
 
         return EventResource::collection(
             Event::active()
-                ->with('author')
+                ->with(['author', 'views'])
                 ->paginate(10)
         );
     }

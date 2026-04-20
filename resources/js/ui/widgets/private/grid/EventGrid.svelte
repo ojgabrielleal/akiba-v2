@@ -27,12 +27,16 @@
                     <div class="font-noto-sans text-lg text-neutral-aurora line-clamp-5 uppercase">
                         {item.title}
                     </div>
-                    <dl class="grid grid-cols-2 absolute bottom-2 left-4 w-[calc(100%-2rem)]">
-                        <dt class="font-noto-sans font-bold italic uppercase text-lg text-neutral-aurora truncate">
+                    <div class="grid grid-cols-3 absolute bottom-2 left-4 w-[calc(100%-2rem)]">
+                        <div class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-lg text-neutral-aurora truncate">
+                            <img src="/svg/statistics.svg" alt="" aria-hidden="true" class="w-5 filter invert" loading="lazy" />
+                            {item.views}
+                        </div>
+                        <div class="font-noto-sans font-bold italic uppercase text-lg text-neutral-aurora truncate">
                             {item.author.nickname}
-                        </dt>
-                        <dd class="flex gap-3 justify-end mt-1">
-                            <a href={`/event/${item.slug}`} target="_blank" aria-label="Visualizar" class="cursor-pointer">
+                        </div>
+                        <div class="flex gap-3 justify-end mt-1">
+                            <a href={`/materia/${item.slug}`} target="_blank" aria-label="Visualizar" class="cursor-pointer">
                                 <img
                                     src="/svg/eye.svg"
                                     alt=""
@@ -41,7 +45,7 @@
                                     loading="lazy"
                                 />
                             </a>
-                            <Link href={`/event/${item.uuid}`} aria-label="Editar" class="cursor-pointer disabled:opacity-50">
+                            <Link href={`/panel/post/${item.uuid}`} aria-label="Editar" class="cursor-pointer">
                                 <img
                                     src="/svg/edit.svg"
                                     alt=""
@@ -50,8 +54,8 @@
                                     loading="lazy"
                                 />
                             </Link>
-                        </dd>
-                    </dl>
+                        </div>
+                    </div>
                 </article>
             {/each}
         </div>
