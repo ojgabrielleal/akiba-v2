@@ -10,7 +10,7 @@
 
     let modalRef;
 
-    usePoll(60 * 1000);
+    usePoll(30 * 1000);
 </script>
 
 <Modal bind:this={modalRef}>
@@ -118,6 +118,9 @@
                     aria-hidden="true"
                     class="rounded-lg"
                     loading="lazy"
+                    on:error={(e) => {
+                        e.target.src = "https://cdn.vectorstock.com/i/500p/57/71/music-note-icon-set-vector-2855771.jpg";
+                    }}
                 />
             </div>
             <div class="w-full srink-0">

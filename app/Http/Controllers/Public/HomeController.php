@@ -9,9 +9,11 @@ use Inertia\Inertia;
 use App\Models\Onair;
 use App\Models\Music;
 use App\Models\Post;
+use App\Models\Review;
 
 use App\Http\Resources\OnairResource;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\ReviewResource;
 
 use App\Services\External\CastService;
 
@@ -31,6 +33,15 @@ class HomeController extends Controller
             Post::published()
                 ->featured()
                 ->take(3)
+                ->get()
+        );
+    }
+
+    public function indexLatestReviews()
+    {
+        return ReviewResource::collection(
+            Review::latest()
+                ->take(5)
                 ->get()
         );
     }
@@ -87,6 +98,7 @@ class HomeController extends Controller
     {
         return Inertia::render($this->render, [
             'posts' => $this->indexFeaturedPosts(),
+            'reviews' => $this->indexLatestReviews(),
             'onair' => $this->showOnair()
         ]);
     }

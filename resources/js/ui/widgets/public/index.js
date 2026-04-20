@@ -2,7 +2,8 @@
 export { default as SongRequestForm } from "./form/SongRequestForm.svelte"
 
 // Grid
-export { default as FeaturedPosts } from "./grid/FeaturedPosts.svelte"
+export { default as PostGrid } from "./grid/PostGrid.svelte"
+export { default as ReviewGrid } from "./grid/ReviewGrid.svelte"
 
 // Player
 export { default as MainPlayer } from "./player/MainPlayer.svelte"

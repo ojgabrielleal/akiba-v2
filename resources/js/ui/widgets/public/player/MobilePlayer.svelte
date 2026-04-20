@@ -10,7 +10,7 @@
 
     let modalRef;
 
-    usePoll(60 * 1000);
+    usePoll(30 * 1000);
 </script>
 
 <Modal bind:this={modalRef}>
@@ -39,7 +39,7 @@
                 </h3>
                 <div class="flex flex-wrap items-center gap-2 mt-1">
                     <span class={["text-[9px] px-2 py-0.5 rounded-full text-white font-bold uppercase italic",
-                        { "bg-purple-mystic": air.type === "automatic" },
+                        { "bg-neutral-gray": air.type === "automatic" },
                         { "bg-green-forest": air.type === "live" },
                         { "bg-orange-sunset": air.type === "scheduled" },
                     ]}>
