@@ -8,7 +8,7 @@
     $: ({ reviews } = $page.props);
 </script>
 
-{#if variant === "latest"}
+{#if variant === "latest" && reviews.data.length > 0}
     <Section {title}>
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-5">
             {#each reviews.data as review}

@@ -8,7 +8,7 @@
     $: ({ posts } = $page.props);
 </script>
 
-{#if variant === "featured"}
+{#if variant === "featured" && posts.data.length > 0}
     <Section {title}>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:mt-17">
             {#each posts.data as post}
