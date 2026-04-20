@@ -10,7 +10,7 @@
 
 {#if variant === "featured"}
     <Section {title}>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:mt-20">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:mt-17">
             {#each posts.data as post}
                 <Link href={`materia/${post.slug}`} class="h-60 lg:h-50 lg:p-4 bg-blue-skywave rounded-md relative overflow-hidden lg:overflow-visible flex flex-col lg:flex-row">
                     <img 
@@ -28,7 +28,7 @@
                     <img 
                         src={post.image}
                         alt={post.title}
-                        class="hidden lg:block absolute bottom-0 right-0  lg:w-55"
+                        class="hidden lg:block absolute bottom-0 right-0 lg:w-55"
                         loading="lazy"
                     />
                 </Link>
