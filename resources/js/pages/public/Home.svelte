@@ -6,13 +6,13 @@
 
 <Meta/>
 <Layout>
-    <div class="bg-blue-night lg:h-170 hidden lg:block lg:pt-50">
+    <div class="bg-blue-night lg:h-175 hidden lg:block lg:pt-50">
         <MainPlayer/>
     </div>
     <div class="bg-blue-night lg:hidden pt-10">
         <MobilePlayer/>
     </div>
-    <div class="bg-blue-midnight pt-10 lg:pt-25">
+    <div class="bg-blue-midnight pt-10 lg:pt-30">
         <FeaturedPosts title="Destaques da Akiba"/>
     </div>
 </Layout>

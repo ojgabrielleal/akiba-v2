@@ -49,7 +49,7 @@
 <form on:submit|preventDefault={submit}>
     <Section title="O básico">
         <div class="grid grid-cols-1 xl:grid-cols-[15rem_1fr] gap-5 items-center">
-            <div class="mb-3">
+            <div class="mb-3 relative">
                 <Preview
                     name="image"
                     standard="w-full h-[15rem] rounded-lg"
@@ -58,6 +58,9 @@
                     oninput={(event) => ($form.avatar = event.target.files[0])}
                     required={!profile}
                 />
+                <div class="mt-1 py-1 px-3 rounded-md bg-blue-skywave font-noto-sans font-bold italic uppercase text-xs text-neutral-aurora absolute bottom-2 left-2">
+                    304 x 400
+                </div>
             </div>
             <div>
                 <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr_0.5fr_0.5fr] gap-5 mb-8">
