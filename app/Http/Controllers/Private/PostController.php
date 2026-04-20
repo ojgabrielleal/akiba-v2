@@ -57,7 +57,7 @@ class PostController extends Controller
 
         return Inertia::render($this->render, [
             'post' => new PostResource(
-                $post->load('categories', 'references', 'author')
+                $post->load(['categories', 'references', 'author'])
             ),
             'posts' => $this->indexPosts(),
         ]);
