@@ -56,7 +56,7 @@
         </Link>
     </div>
     <form on:submit|preventDefault={submit} class="mt-10 xl:mt-25">
-        <div class="grid grid-cols-1 xl:grid-cols-[22rem_1fr] gap-5">
+        <div class="grid grid-cols-1 xl:grid-cols-[20rem_1fr]gap-5">
             <div class="mb-3">
                 <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-1">
                     Imagem em destaque
