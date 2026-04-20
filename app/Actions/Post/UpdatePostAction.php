@@ -31,7 +31,9 @@ class UpdatePostAction
 
         if (!empty($data['categories'])) {
             foreach ($data['categories'] as $category) {
-                $post->categories()->where('uuid', $category['uuid'])->update([
+                $post->categories()->updateOrCreate([
+                    'uuid' => $category['uuid'],
+                ], [
                     'name' => $category['name'],
                 ]);
             }

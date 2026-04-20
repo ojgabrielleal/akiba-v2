@@ -6,8 +6,6 @@
 
     $: ({ post } = $page.props);
 
-    $:console.log(post)
-
     let can = {
         create: hasPermission("post.create"),
         update:hasPermission("post.update") && hasPermission("post.update.own"),

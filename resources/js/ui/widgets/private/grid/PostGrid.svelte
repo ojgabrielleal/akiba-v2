@@ -38,7 +38,7 @@
                             <img src="/svg/statistics.svg" alt="" aria-hidden="true" class="w-5 filter invert" loading="lazy" />
                             {item.views ?? 0}
                         </div>
-                        <div class="font-noto-sans font-bold italic uppercase text-lg text-neutral-aurora truncate">
+                        <div class="font-noto-sans font-bold italic uppercase text-lg text-neutral-aurora text-center truncate">
                             {item.author.nickname}
                         </div>
                         <div class="flex gap-3 justify-end mt-1">
