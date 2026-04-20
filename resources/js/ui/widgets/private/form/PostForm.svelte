@@ -6,6 +6,8 @@
 
     $: ({ post } = $page.props);
 
+    $:console.log(post)
+
     let can = {
         create: hasPermission("post.create"),
         update:hasPermission("post.update") && hasPermission("post.update.own"),
@@ -61,8 +63,6 @@
         $form.type = event.submitter.value;
 
         $form.post(url, {
-            preserveState: post,
-            preserveScroll: true,
             onSuccess: () => {
                 post ? null : $form.reset();
             },
