@@ -8,8 +8,11 @@ use Inertia\Inertia;
 
 use App\Models\Onair;
 use App\Models\Music;
+use App\Models\Post;
 
 use App\Http\Resources\OnairResource;
+use App\Http\Resources\PostResource;
+
 use App\Services\External\CastService;
 
 class HomeController extends Controller
@@ -20,6 +23,11 @@ class HomeController extends Controller
     public function __construct(CastService $cast)
     {
         $this->cast = $cast;
+    }
+
+    public function indexFeaturedPosts()
+    {
+        return PostResource::collection(Post::limit(3)->get());
     }
 
     public function showOnair()
@@ -73,6 +81,7 @@ class HomeController extends Controller
     public function render()
     {
         return Inertia::render($this->render, [
+            'posts' => $this->indexFeaturedPosts(),
             'onair' => $this->showOnair()
         ]);
     }

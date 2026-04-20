@@ -61,8 +61,7 @@
 </section>
 
 <!-- Main Player Section -->
-<section class="cont-player-main grid grid-cols-[2fr_1fr_0.84fr] items-center gap-5">
-
+<section class="cont-player-main grid grid-cols-[2fr_1fr_0.8fr] items-center gap-5">
     <!-- First Column-->
     <div class="block">
         <!--Program and Host Information-->
@@ -81,7 +80,7 @@
             </div>
             <div>
                 <div class="text-orange-amber font-noto-sans uppercase">
-                    {air.program.host.gender === "male" ? "Com o locutor" : "Com a locutora"}
+                    COM DJ
                 </div>
                 <div class="w-full text-neutral-aurora text-2xl font-noto-sans font-bold uppercase italic line-clamp-1">
                     {air.program.host.nickname}
@@ -135,7 +134,7 @@
     <!--Second Column-->
     <div class="block">
         <!--Host Image-->
-        <div class="w-76">
+        <div class="w-70">
             <img
                 src={air.program.host.avatar}
                 alt=""
@@ -147,99 +146,94 @@
     </div>
     <!--Third Column-->
     <div class="block">
-        <!-- Player Controls-->
-        <div class="flex flex-col gap-10 px-3">
-            <!-- Player Type Information-->
-            <div class={["py-2 px-6 gap-2 flex justify-center items-center rounded-md",
-                { "bg-neutral-gray": air.type === "automatic" },
-                { "bg-green-forest": air.type === "live" },
-                { "bg-orange-sunset": air.type === "scheduled" },
-            ]}>
-                <div class="block">
-                    {#if air.type === "automatic"}
-                        <img
-                            src="/svg/playlist.svg"
-                            alt=""
-                            aria-hidden="true"
-                            class="w-10 filter-blue-midnight"
-                            loading="lazy"
-                        />
-                    {:else if air.type === "live"}
-                        <img
-                            src="/svg/onair.svg"
-                            alt=""
-                            aria-hidden="true"
-                            class="w-10 filter-blue-midnight"
-                            loading="lazy"
-                        />
-                    {:else}
-                        <img
-                            src="/svg/disc.svg"
-                            alt=""
-                            aria-hidden="true"
-                            class="w-9 filter-blue-midnight"
-                            loading="lazy"
-                        />
-                    {/if}
-                </div>
-                <div class="shrink-0 font-noto-sans font-bold italic uppercase text-center text-blue-midnight leading-4">
-                    {#if air.type === "automatic"}
-                        Playlist <br/>automática
-                    {:else if air.type === "live"}
-                        Locut{air.program.host.gender === "male" ? "or" : "ora"}
-                        <br/>ao vivo
-                    {:else}
-                        Programa<br/>gravado
-                    {/if}
-                </div>
-            </div>
-            <!-- Player Controls-->
-            <div class="flex flex-col mb-7">
-                <div class="flex justify-center mb-1">
-                    <div>
-                        <div class="ml-2 text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic">
-                            Dê o
-                        </div>
-                        <div class={["-mt-4 font-noto-sans font-extrabold uppercase italic text-[3rem]",
-                            { "text-blue-skywave": !$player.playing },
-                            { "text-orange-amber": $player.playing },
-                        ]}>
-                            {$player.playing ? "Pause" : "Play"}
-                        </div>
-                    </div>
-                    <button on:click={toggleAudio} class={["cursor-pointer shrink-0 w-14 h-14 rounded-full flex justify-center items-center active:shadow-[0_0_20px_rgba(0,145,255,0.8)] active:scale-95 transition-all",
-                        { "bg-blue-skywave": !$player.playing },
-                        { "bg-orange-amber": $player.playing },
-                    ]}>
-                        <img
-                            src={$player.playing ? "/svg/pause.svg" : "/svg/play.svg"}
-                            alt=""
-                            aria-hidden="true"
-                            class="w-5"
-                            loading="lazy"
-                        />
-                    </button>
-                </div>
-                <div class="flex flex-col gap-2">
-                    <div class="flex justify-between items-center px-1">
-                        <span class="text-[10px] text-neutral-aurora/40 font-bold uppercase">Volume</span>
-                        <span class="text-[10px] text-orange-amber font-bold">
-                            {Math.round($player.volume * 100)}%
-                        </span>
-                    </div>
-                    <input
-                        id="volume"
-                        name="volume"
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value={$player.volume}
-                        on:input={(e) => setVolume(e.target.value)}
-                        class="w-full accent-orange-amber h-1.5 rounded-full bg-white/10 cursor-pointer transition-all hover:bg-white/20"
+        <!-- Player Type Information-->
+        <div class={["mx-4 mb-10 py-2 px-6 gap-2 flex justify-center items-center rounded-md",
+            { "bg-neutral-gray": air.type === "automatic" },
+            { "bg-green-forest": air.type === "live" },
+            { "bg-orange-sunset": air.type === "scheduled" },
+        ]}>
+            <div class="block">
+                {#if air.type === "automatic"}
+                    <img
+                        src="/svg/playlist.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-10 filter-blue-midnight"
+                        loading="lazy"
                     />
+                {:else if air.type === "live"}
+                    <img
+                        src="/svg/onair.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-10 filter-blue-midnight"
+                        loading="lazy"
+                    />
+                {:else}
+                    <img
+                        src="/svg/disc.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-9 filter-blue-midnight"
+                        loading="lazy"
+                    />
+                {/if}
+            </div>
+            <div class="shrink-0 font-noto-sans font-bold italic uppercase text-center text-md text-blue-midnight leading-4">
+                {#if air.type === "automatic"}
+                    Playlist <br/>automática
+                {:else if air.type === "live"}
+                    Locut{air.program.host.gender === "male" ? "or" : "ora"}
+                    <br/>ao vivo
+                {:else}
+                    Programa<br/>gravado
+                {/if}
+            </div>
+        </div>
+        <!-- Player Controls-->
+        <div class="w-55 h-20 flex items-center justify-center gap-1">
+            <div>
+                <div class="ml-2 text-neutral-aurora text-lg font-noto-sans font-bold uppercase italic">
+                    Dê o
+                </div>
+                <div class={["-mt-4 font-noto-sans font-extrabold uppercase italic",
+                    { "text-blue-skywave text-[3.5rem]": !$player.playing },
+                    { "text-orange-amber text-[3rem]": $player.playing },
+                ]}>
+                    {$player.playing ? "Pause" : "Play"}
                 </div>
             </div>
+            <button on:click={toggleAudio} class={["cursor-pointer shrink-0 w-14 h-14 rounded-full flex justify-center items-center",
+                { "bg-blue-skywave": !$player.playing },
+                { "bg-orange-amber": $player.playing },
+            ]}>
+                <img
+                    src={$player.playing ? "/svg/pause.svg" : "/svg/play.svg"}
+                    alt=""
+                    aria-hidden="true"
+                    class="w-5"
+                    loading="lazy"
+                />
+            </button>
+        </div>
+        <div class="mx-3 mb-5 flex flex-col gap-2">
+            <div class="flex justify-between items-center px-1">
+                <span class="text-[10px] text-neutral-aurora/40 font-bold uppercase">Volume</span>
+                <span class="text-[10px] text-orange-amber font-bold">
+                    {Math.round($player.volume * 100)}%
+                </span>
+            </div>
+            <input
+                id="volume"
+                name="volume"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={$player.volume}
+                on:input={(e) => setVolume(e.target.value)}
+                class="w-full accent-orange-amber h-1.5 rounded-full bg-white/10 cursor-pointer transition-all hover:bg-white/20"
+            />
         </div>
         <!-- Song Request Button-->
         <button aria-label="Faça seu pedido" class="cursor-pointer w-full py-2 px-1 border border-neutral-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase disabled:cursor-not-allowed" on:click={() => {
