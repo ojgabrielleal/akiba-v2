@@ -4,7 +4,9 @@
     import { Layout } from "@/ui/layouts/private";
     import { AudienceCarrousel, ProgramHistoryTable } from "@/ui/widgets/private";
 
-    usePoll(60 * 1000);
+    usePoll(60 * 1000, {
+        only: ["audience"]
+    });
 </script>
 
 <Meta meta={{ title: "Log's" }} />

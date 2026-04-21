@@ -1,15 +1,11 @@
 <script>
     export let title;
 
-    import { page, usePoll } from "@inertiajs/svelte";
+    import { page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
     import { scrollx } from "@/utils";
 
     $: ({ audience } = $page.props);
-
-    usePoll(60 * 1000, {
-        only: ["audience"]
-    });
 </script>
 
 <Section {title}>
