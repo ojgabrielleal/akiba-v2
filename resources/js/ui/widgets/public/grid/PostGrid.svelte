@@ -17,7 +17,7 @@
                     <img
                         src={item.cover}
                         alt={item.title}
-                        class="w-full lg:w-60 h-40 object-cover rounded-md bg-amber-50 shrink-0"
+                        class="w-full lg:w-65 h-40 object-cover rounded-md bg-amber-50 shrink-0"
                     />
                     <div class="flex flex-col justify-between relative w-full">
                         <h1 class="font-noto-sans font-extrabold text-lg sm:text-xl text-neutral-aurora italic uppercase line-clamp-3 sm:line-clamp-4">
