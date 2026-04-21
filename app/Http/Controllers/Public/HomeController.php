@@ -49,7 +49,7 @@ class HomeController extends Controller
     {
         return ReviewResource::collection(
             Review::latest()
-                ->take(5)
+                ->limit(5)
                 ->get()
         );
     }
@@ -59,7 +59,7 @@ class HomeController extends Controller
         return PostResource::collection(
             Post::published()
                 ->latest()
-                ->take(6)
+                ->limit(6)
                 ->get()
         );
     }
