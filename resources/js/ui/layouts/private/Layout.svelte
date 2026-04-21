@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { page } from "@inertiajs/svelte";
+    import { page, usePoll } from "@inertiajs/svelte";
     import toast, { Toaster } from "svelte-hot-french-toast";
     import { Navbar, CastMetricsGrid } from "@/ui/widgets/private";
 
@@ -11,6 +11,10 @@
             icon: flash.icon,
         });
     }
+
+    usePoll(60 * 1000, {
+        only: ["songRequests", "audience", "streaming"]
+    });
 
     onMount(() => {
         document.body.style.backgroundColor = "var(--color-blue-indigo)";

@@ -112,7 +112,7 @@
 
 @layer components {
     .cont {
-        @apply w-full px-10 mx-auto sm:max-w-380 lg:px-0;
+        @apply max-w-380 mx-auto px-4 sm:px-8 lg:px-20;
     }
 
     .cont-player-main {

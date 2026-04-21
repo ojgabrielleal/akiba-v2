@@ -10,13 +10,13 @@
 
 {#if variant === "home" && reviews.data.length > 0}
     <Section {title}>
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
             {#each reviews.data as item}
-                <Link href={`review/${item.slug}`} class="h-60 bg-orange-sunset rounded-t-xl rounded-b-md relative">
+                <Link href={`review/${item.slug}`} class="aspect-square sm:aspect-auto sm:h-60 bg-orange-sunset rounded-t-xl rounded-b-md relative">
                     <img 
                         src={item.cover} 
                         alt={item.title} 
-                        class="w-full h-50 object-cover rounded-t-md" 
+                        class="w-full h-[90%] sm:h-50 object-cover rounded-t-md" 
                     />
                     <div class="p-2">
                         <h1 class="text-lg text-center text-blue-night font-noto-sans font-extrabold italic uppercase line-clamp-1">

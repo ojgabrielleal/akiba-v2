@@ -11,13 +11,13 @@
 
 {#if variant === "home" && posts.data.length > 0}
     <Section {title}>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
             {#each posts.data as item}
                 <Link href={`review/${item.slug}`} class="flex flex-col sm:flex-row gap-4">
                     <img
                         src={item.cover}
                         alt={item.title}
-                        class="w-full lg:w-65 h-40 object-cover rounded-md bg-amber-50 shrink-0"
+                        class="w-full sm:w-50 sm:h-40 aspect-square sm:aspect-auto object-cover rounded-md bg-amber-50 shrink-0"
                     />
                     <div class="flex flex-col justify-between relative w-full">
                         <h1 class="font-noto-sans font-extrabold text-lg sm:text-xl text-neutral-aurora italic uppercase line-clamp-3 sm:line-clamp-4">

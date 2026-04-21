@@ -1,14 +1,10 @@
 <script>
-    import { page, router, usePoll } from "@inertiajs/svelte";
+    import { page, router } from "@inertiajs/svelte";
     import { Meta } from "@/config";
     import { Layout } from "@/ui/layouts/private";
     import { LocutionForm, SongRequestGrid } from "@/ui/widgets/private";
 
     $: ({ user, onair } = $page.props);
-
-    usePoll(30 * 1000, {
-        only: ["songRequests"]
-    });
 
     const redirectToDashboard = () => {
         router.get("/panel/dashboard/", {}, { preserveScroll: true });

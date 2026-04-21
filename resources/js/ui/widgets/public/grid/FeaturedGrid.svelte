@@ -9,25 +9,25 @@
 
 {#if featureds.data.length > 0}
     <Section {title}>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:mt-17">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-10 xl:gap-5">
             {#each featureds.data as item}
-                <Link href={`materia/${item.slug}`} class="h-60 lg:h-50 lg:p-4 bg-blue-skywave rounded-md relative overflow-hidden lg:overflow-visible flex flex-col lg:flex-row">
+                <Link href={`materia/${item.slug}`} class="aspect-square sm:aspect-auto sm:h-50 sm:p-4 bg-blue-skywave rounded-md relative overflow-hidden sm:overflow-visible flex flex-col sm:flex-row">
                     <img 
                         src={item.cover}
                         alt={item.title}
-                        class="absolute inset-0 w-full h-full object-cover lg:static lg:w-auto lg:h-auto lg:hidden" 
+                        class="absolute inset-0 w-full h-full object-cover sm:static sm:w-auto sm:h-auto sm:hidden" 
                         loading="lazy"
                     />
-                    <div class="absolute inset-0 bg-linear-to-t from-black to-transparent lg:hidden"></div>
-                    <div class="relative z-10 p-3 mt-auto lg:mt-0 lg:p-0">
-                        <h1 class="w-full lg:w-1/2 font-noto-sans font-bold text-white lg:text-neutral-aurora text-md lg:text-lg uppercase italic line-clamp-4 lg:line-clamp-5">
+                    <div class="absolute inset-0 bg-linear-to-t from-black to-transparent sm:hidden"></div>
+                    <div class="relative z-10 p-3 mt-auto sm:mt-0 sm:p-0">
+                        <h1 class="w-full sm:w-[45%] font-noto-sans font-bold text-white sm:text-neutral-aurora text-md sm:text-md uppercase italic line-clamp-4 sm:line-clamp-5">
                             {item.title}
                         </h1>
                     </div>
                     <img 
                         src={item.image}
                         alt={item.title}
-                        class="hidden lg:block absolute bottom-0 right-0 lg:w-55"
+                        class="hidden sm:block absolute bottom-0 right-0 sm:w-55"
                         loading="lazy"
                     />
                 </Link>

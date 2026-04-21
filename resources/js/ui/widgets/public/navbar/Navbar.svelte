@@ -7,18 +7,18 @@
 </script>
 
 <nav class="w-full relative">
-    <div class="w-full lg:w-[88%] lg:h-[2.57rem] px-5 py-2 lg:px-0 lg:py-0 relative lg:top-15 bg-neutral-aurora lg:float-end flex items-center">
-        <button on:click={() => (mobilenavbar = !mobilenavbar)} aria-label="Abrir menu" class="lg:hidden p-1">
+    <div class="w-full xl:w-[88%] xl:h-[2.57rem] px-5 py-2 xl:px-0 xl:py-0 relative xl:top-15 bg-neutral-aurora xl:float-end flex items-center">
+        <button on:click={() => (mobilenavbar = !mobilenavbar)} aria-label="Abrir menu" class="xl:hidden p-1">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
 
-        <div class="mx-auto lg:mx-0 lg:absolute lg:-bottom-3 lg:-left-23 lg:z-50">
-            <img src="/img/default/logo.webp" alt="Logo" class="w-30 lg:w-40" />
+        <div class="mx-auto xl:mx-0 xl:absolute xl:-bottom-3 xl:-left-23 xl:z-50">
+            <img src="/img/default/logo.webp" alt="Logo" class="w-30 xl:w-40" />
         </div>
 
-        <ul class="hidden lg:flex gap-5 ml-20">
+        <ul class="hidden xl:flex gap-5 ml-20">
             {#each navbar.public as item}
                 <li class="border-l first:border-none pl-5 border-blue-midnight h-6 flex items-center text-blue-midnight">
                     <Link href={item.address} aria-label={item.name} class="flex items-center gap-1 text-lg font-noto-sans font-extrabold italic uppercase">
@@ -29,7 +29,7 @@
             {/each}
         </ul>
 
-        <div class="hidden lg:flex justify-center items-center w-25 h-8 gap-1 bg-blue-skywave rounded-full absolute right-5">
+        <div class="hidden xl:flex justify-center items-center w-25 h-8 gap-1 bg-blue-skywave rounded-full absolute right-5">
             <button aria-label="Modo Claro" on:click={() => theme = 'light'} class={["cursor-pointer shrink-0 p-1", 
                 {'bg-orange-morning rounded-full': theme === 'light'}
             ]}>
@@ -58,7 +58,7 @@
     </div>
 
     <!-- Mobile Navbar -->
-    <div class={["fixed inset-0 z-150 transition-opacity duration-300 lg:hidden", 
+    <div class={["fixed inset-0 z-150 transition-opacity duration-300 xl:hidden", 
         { "opacity-100 pointer-events-auto": mobilenavbar }, 
         { "opacity-0 pointer-events-none": !mobilenavbar }
     ]}>

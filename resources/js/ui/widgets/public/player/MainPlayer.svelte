@@ -20,7 +20,7 @@
 <!-- Phrase Section -->
 <section class="w-full bg-blue-ocean mb-5">
     <div class="cont-player-main py-4 relative">
-        <div class="hidden lg:block absolute -top-7 -left-10 z-10">
+        <div class="block absolute -top-7 left-0 xl:-left-10 z-10">
             <img
                 src="/img/player/rains.webp"
                 alt=""
@@ -30,14 +30,14 @@
             />
         </div>
         <!-- svelte-ignore a11y_distracting_elements -->
-        <marquee class="w-5xl flex overflow-x-hidden relative marquee-container">
+        <marquee class="w-[95%] xl:w-5xl flex overflow-x-hidden relative marquee-container">
             <div class="whitespace-nowrap w-full md:w-auto text-neutral-aurora text-3xl font-noto-sans font-bold uppercase italic">
                 <span class="mx-4">
                     {air.phrase}
                 </span>
             </div>
         </marquee>
-        <div class="hidden lg:block absolute bottom-0 -right-4 z-10">
+        <div class="block absolute bottom-0 right-5 xl:-right-4 z-10">
             <img
                 src={air.icon}
                 alt=""
@@ -46,7 +46,7 @@
                 loading="lazy"
             />
         </div>
-        <div class="hidden lg:block absolute -top-8 -right-10 z-10">
+        <div class="block absolute -top-8 right-0 xl:-right-10 z-10">
             <img
                 src="/img/player/rains.webp"
                 alt=""
