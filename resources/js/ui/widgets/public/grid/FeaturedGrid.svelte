@@ -1,17 +1,16 @@
 <script>
     export let title;
-    export let variant = "default";
 
     import { page, Link } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/public";
 
-    $: ({ posts } = $page.props);
+    $: ({ featureds } = $page.props);
 </script>
 
-{#if variant === "featured" && posts.data.length > 0}
+{#if featureds.data.length > 0}
     <Section {title}>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:mt-17">
-            {#each posts.data as post}
+            {#each featureds.data as post}
                 <Link href={`materia/${post.slug}`} class="h-60 lg:h-50 lg:p-4 bg-blue-skywave rounded-md relative overflow-hidden lg:overflow-visible flex flex-col lg:flex-row">
                     <img 
                         src={post.cover}

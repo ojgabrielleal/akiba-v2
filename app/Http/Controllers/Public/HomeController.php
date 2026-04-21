@@ -10,9 +10,10 @@ use App\Models\Onair;
 use App\Models\Music;
 use App\Models\Post;
 use App\Models\Review;
+use App\Models\Event;
 
 use App\Http\Resources\OnairResource;
-use App\Http\Resources\PostResource;
+use App\Http\Resources\FeaturedResource;
 use App\Http\Resources\ReviewResource;
 
 use App\Services\External\CastService;
@@ -27,14 +28,20 @@ class HomeController extends Controller
         $this->cast = $cast;
     }
 
-    public function indexFeaturedPosts()
+    public function indexFeatured()
     {
-        return PostResource::collection(
-            Post::published()
-                ->featured()
-                ->take(3)
-                ->get()
-        );
+        $posts = Post::published()->featured()->take(15)->get();
+        $events = Event::featured()->take(15)->get();
+        $reviews = Review::featured()->take(15)->get();
+
+        $feed = $posts
+            ->concat($events)
+            ->concat($reviews)
+            ->sortByDesc('views')
+            ->take(3)
+            ->values();
+
+        return FeaturedResource::collection($feed);
     }
 
     public function indexLatestReviews()
@@ -49,12 +56,12 @@ class HomeController extends Controller
     public function showOnair()
     {
         $cast = $this->cast->data();
-        
-        // get() retorna uma coleção
         $onair = Onair::live()->with('program.host')->get();
+
         $onair->each(function ($item) use ($cast) {
             $item->current_song = $cast['current_song'] ?? null;
         });
+        
         return OnairResource::collection($onair);
     }
 
@@ -97,7 +104,7 @@ class HomeController extends Controller
     public function render()
     {
         return Inertia::render($this->render, [
-            'posts' => $this->indexFeaturedPosts(),
+            'featureds' => $this->indexFeatured(),
             'reviews' => $this->indexLatestReviews(),
             'onair' => $this->showOnair()
         ]);
