@@ -10,8 +10,6 @@
             icon: flash.icon,
         });
     }
-
-    document.body.style.backgroundColor = "var(--color-blue-indigo)";
 </script>
 
 <Toaster />
@@ -27,3 +25,9 @@
         <CastMetricsGrid />
     </div>
 </footer>
+
+<style>
+    :global(body) {
+        background-color: var(--color-blue-indigo);
+    }
+</style>

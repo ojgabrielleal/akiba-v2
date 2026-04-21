@@ -7,7 +7,9 @@
 
     $: ({ audience } = $page.props);
 
-    usePoll(60 * 1000);
+    usePoll(60 * 1000, {
+        only: ["audience"]
+    });
 </script>
 
 <Section {title}>

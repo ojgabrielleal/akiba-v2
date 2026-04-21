@@ -11,17 +11,20 @@
     "src": "_vendor-CHPFJqtd.css"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CSil6CVl.css",
+    "file": "assets/app-BEjE7TVq.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BOslp5Ik.js",
+    "file": "assets/app-DDyh7a9Z.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
       "_vendor-C1lIN_7G.js"
+    ],
+    "css": [
+      "assets/app-CQsw1F2i.css"
     ]
   }
 }

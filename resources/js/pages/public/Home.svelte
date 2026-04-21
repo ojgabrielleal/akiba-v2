@@ -1,7 +1,12 @@
 <script>
+    import { usePoll } from "@inertiajs/svelte";
     import { Meta } from "@/config";
     import { Layout } from "@/ui/layouts/public";
     import { MainPlayer, MobilePlayer, FeaturedGrid, ReviewGrid, PostGrid } from "@/ui/widgets/public";
+
+    usePoll(30 * 1000, {
+        only: ["onair"]
+    });
 </script>
 
 <Meta/>

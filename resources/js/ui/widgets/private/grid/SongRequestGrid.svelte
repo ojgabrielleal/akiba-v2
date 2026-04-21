@@ -1,7 +1,7 @@
 <script>
     export let title;
 
-    import { page, router, usePoll } from "@inertiajs/svelte";
+    import { page, router } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
 
@@ -37,8 +37,6 @@
     const requestFinishlocution = () => {
         router.patch(`/panel/locution/locution/finish`);
     };
-
-    usePoll(30 * 1000);
 </script>
 
 {#if hasPermission("songrequest.list")}

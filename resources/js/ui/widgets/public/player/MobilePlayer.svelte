@@ -1,5 +1,5 @@
 <script>
-    import { page, usePoll } from "@inertiajs/svelte";
+    import { page } from "@inertiajs/svelte";
     import { Modal } from "@/ui/components/public";
     import { SongRequestForm } from "@/ui/widgets/public";
     import { player, toggleAudio, setVolume } from "@/store";
@@ -9,8 +9,6 @@
     $: air = onair.data[0];
 
     let modalRef;
-
-    usePoll(30 * 1000);
 </script>
 
 <Modal bind:this={modalRef}>
