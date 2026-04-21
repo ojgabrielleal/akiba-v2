@@ -1,7 +1,7 @@
 <script>
     import { Meta } from "@/config";
     import { Layout } from "@/ui/layouts/public";
-    import { MainPlayer, MobilePlayer, FeaturedGrid, ReviewGrid } from "@/ui/widgets/public";
+    import { MainPlayer, MobilePlayer, FeaturedGrid, ReviewGrid, PostGrid } from "@/ui/widgets/public";
 </script>
 
 <Meta/>
@@ -14,7 +14,8 @@
     </div>
     <div class="bg-blue-midnight pt-10 lg:pt-30">
         <FeaturedGrid title="Destaques da Akiba"/>
-        <ReviewGrid title="Reviews da Akiba" variant="latest"/>
+        <ReviewGrid title="Reviews da Akiba" variant="home"/>
+        <PostGrid title="Últimas matérias da Akiba" variant="home"/>
     </div>
 
 </Layout>

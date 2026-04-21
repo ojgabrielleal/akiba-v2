@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -44,11 +45,20 @@ class HomeController extends Controller
         return FeaturedResource::collection($feed);
     }
 
-    public function indexLatestReviews()
+    public function indexReview()
     {
         return ReviewResource::collection(
             Review::latest()
                 ->take(5)
+                ->get()
+        );
+    }
+
+    public function indexPost()
+    {
+        return PostResource::collection(
+            Post::published()
+                ->take(6)
                 ->get()
         );
     }
@@ -105,7 +115,8 @@ class HomeController extends Controller
     {
         return Inertia::render($this->render, [
             'featureds' => $this->indexFeatured(),
-            'reviews' => $this->indexLatestReviews(),
+            'reviews' => $this->indexReview(),
+            'posts' => $this->indexPost(),
             'onair' => $this->showOnair()
         ]);
     }

@@ -1,46 +1,51 @@
-[
-    {
+{
+    "default": {
         "value": "#",
         "label": "Selecione uma tag"
     },
-    {
+    "news": {
         "value": "news",
-        "label": "Notícias"
+        "label": "Notícias",
+        "icon": "/svg/news.svg"
     },
-    {
-        "value": "updates",
-        "label": "Novidades"
-    },
-    {
+    "anime": {
         "value": "anime",
-        "label": "Anime"
+        "label": "Anime",
+        "icon": "/svg/anime.svg"
     },
-    {
+    "events": {
         "value": "events",
-        "label": "Eventos"
+        "label": "Eventos",
+        "icon": "/svg/events.svg"
     },
-    {
+    "manga": {
         "value": "manga",
-        "label": "Mangá"
+        "label": "Mangá",
+        "icon": "/svg/manga.svg"
     },
-    {
+    "light-novel": {
         "value": "light-novel",
-        "label": "Light Novel"
+        "label": "Light Novel",
+        "icon": "/svg/light-novel.svg"
     },
-    {
+    "lists": {
         "value": "lists",
-        "label": "Listas"
+        "label": "Listas",
+        "icon": "/svg/lists.svg"
     },
-    {
+    "curiosities": {
         "value": "curiosities",
-        "label": "Curiosidades"
+        "label": "Curiosidades",
+        "icon": "/svg/curiosities.svg"
     },
-    {
+    "tops": {
         "value": "tops",
-        "label": "Top’s"
+        "label": "Top’s",
+        "icon": "/svg/tops.svg"
     },
-    {
+    "first-impression": {
         "value": "first-impression",
-        "label": "1ª Impressão"
+        "label": "1ª Impressão",
+        "icon": "/svg/first-impression.svg"
     }
-]
+}
