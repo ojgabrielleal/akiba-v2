@@ -28,6 +28,6 @@
 
 <style>
     :global(body) {
-        background-color: var(--color-blue-indigo);
+        background-color: var(--color-blue-midnight);
     }
 </style>
