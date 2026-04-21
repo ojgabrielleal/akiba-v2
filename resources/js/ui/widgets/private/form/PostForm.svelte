@@ -157,8 +157,8 @@
                         class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg pl-4"
                         bind:value={$form.categories[0].name}
                     >
-                        {#each postTags as tag}
-                            <option value={tag.value}>{tag.label}</option>
+                        {#each Object.values(postTags) as item}
+                            <option value={item.value}>{item.label}</option>
                         {/each}
                     </select>
                 </div>
@@ -172,7 +172,7 @@
                         class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg pl-4"
                         bind:value={$form.categories[1].name}
                     >
-                        {#each postTags as item}
+                        {#each Object.values(postTags) as item}
                             <option value={item.value}>{item.label}</option>
                         {/each}
                     </select>
