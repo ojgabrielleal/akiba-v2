@@ -1,10 +1,15 @@
 <script>
+    import { onMount } from "svelte";
     import { usePoll } from "@inertiajs/svelte";
     import { Meta } from "@/config";
     import { MainPlayer, MobilePlayer } from "@/ui/widgets/public";
-
+    
     usePoll(30 * 1000, {
         only: ["onair"]
+    });
+
+    onMount(() => {
+        document.body.style.backgroundColor = "var(--color-blue-midnight)";
     });
 </script>
 
@@ -61,9 +66,3 @@
         {/each}
     </div>
 </footer>
-
-<style>
-    :global(body) {
-        background-color: var(--color-blue-midnight);
-    }
-</style>

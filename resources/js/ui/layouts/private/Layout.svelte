@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from "svelte";
     import { page } from "@inertiajs/svelte";
     import toast, { Toaster } from "svelte-hot-french-toast";
     import { Navbar, CastMetricsGrid } from "@/ui/widgets/private";
@@ -11,7 +12,9 @@
         });
     }
 
-    document.body.style.backgroundColor = "var(--color-blue-indigo)";
+    onMount(() => {
+        document.body.style.backgroundColor = "var(--color-blue-indigo)";
+    });
 </script>
 
 <Toaster />
