@@ -58,6 +58,7 @@ class HomeController extends Controller
     {
         return PostResource::collection(
             Post::published()
+                ->latest()
                 ->take(6)
                 ->get()
         );
