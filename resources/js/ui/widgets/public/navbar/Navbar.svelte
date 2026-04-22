@@ -21,45 +21,48 @@
         <ul class="hidden xl:flex">
             {#each navbar.public as item}
                 <li class="pr-5 pl-5 first:pl-0 border-l first:border-none border-neutral-gray/50 h-6 flex items-center">
-                    <Link href={item.address} aria-label={item.name} class="flex items-center gap-1 text-lg font-noto-sans font-extrabold text-neutral-gray italic uppercase group/item">
+                    <Link href={item.address} aria-label={item.name} class="relative flex items-center gap-1 text-lg font-noto-sans font-extrabold text-neutral-gray hover:text-orange-amber italic uppercase group/item">
                            <img 
-                            src={item.icon} 
-                            alt=""
-                            aria-hidden="true" 
-                            class="w-5 h-5 filter-neutral-gray group-hover/item:filter-orange-sunset" 
-                            loading="lazy" 
-                        />
+                                src={item.icon} 
+                                alt=""
+                                aria-hidden="true" 
+                                class="w-5 h-5 filter-neutral-gray group-hover/item:filter-orange-amber" 
+                                loading="lazy" 
+                            />
                         {item.name}
+                        <span class="absolute -bottom-1 left-0 h-px rounded-full w-full bg-orange-amber scale-x-0 group-hover/item:scale-x-100 origin-left transition-transform duration-300"></span>
                     </Link>
                 </li>
             {/each}
         </ul>
 
-        <div class="hidden xl:flex justify-center items-center w-30 h-8 gap-1 bg-blue-skywave rounded-full">
-            <button aria-label="Modo Claro" on:click={() => theme = 'light'} class={["cursor-pointer shrink-0 p-1", 
-                {'bg-orange-morning rounded-full': theme === 'light'}
-            ]}>
-                <img src="/svg/dawn.svg" alt="" aria-hidden="true" class={["w-4 h-4", 
-                    { 'filter-orange-amber' : theme === 'light' }, 
-                    { 'filter invert' : theme !== 'light' }]
-                } />
-            </button>
-            <button aria-label="Modo Akiba" on:click={() => theme = 'akiba'} class={["cursor-pointer shrink-0 p-1", 
-                {'bg-blue-midnight rounded-full': theme === 'akiba'}
-            ]}>
-                <img src="/svg/akiba.svg" alt="" aria-hidden="true" class={["w-4 h-4", 
-                    { 'filter-orange-amber' : theme === 'akiba' }, 
-                    { 'filter invert' : theme !== 'akiba' }]
-                }/>
-            </button>
-            <button aria-label="Modo Ecuro" on:click={() => theme = 'night'} class={["cursor-pointer shrink-0 p-1", 
-                {'bg-blue-midnight rounded-full': theme === 'night'}
-            ]}>
-                <img src="/svg/night.svg" alt="" aria-hidden="true" class={["w-4 h-4", 
-                    { 'filter-orange-morning' : theme === 'night' }, 
-                    { 'filter invert' : theme !== 'night' }]
-                }/>
-            </button>
+        <div class="w-35">
+            <div class="hidden xl:flex justify-center items-center w-22 h-8 gap-1 bg-blue-skywave rounded-full">
+                <button aria-label="Modo Claro" on:click={() => theme = 'light'} class={["cursor-pointer shrink-0 p-1", 
+                    {'bg-orange-morning rounded-full': theme === 'light'}
+                ]}>
+                    <img src="/svg/dawn.svg" alt="" aria-hidden="true" class={["w-4 h-4", 
+                        { 'filter-orange-amber' : theme === 'light' }, 
+                        { 'filter invert' : theme !== 'light' }]
+                    } />
+                </button>
+                <button aria-label="Modo Akiba" on:click={() => theme = 'akiba'} class={["cursor-pointer shrink-0 p-1", 
+                    {'bg-blue-midnight rounded-full': theme === 'akiba'}
+                ]}>
+                    <img src="/svg/akiba.svg" alt="" aria-hidden="true" class={["w-4 h-4", 
+                        { 'filter-orange-amber' : theme === 'akiba' }, 
+                        { 'filter invert' : theme !== 'akiba' }]
+                    }/>
+                </button>
+                <button aria-label="Modo Ecuro" on:click={() => theme = 'night'} class={["cursor-pointer shrink-0 p-1", 
+                    {'bg-blue-midnight rounded-full': theme === 'night'}
+                ]}>
+                    <img src="/svg/night.svg" alt="" aria-hidden="true" class={["w-4 h-4", 
+                        { 'filter-orange-morning' : theme === 'night' }, 
+                        { 'filter invert' : theme !== 'night' }]
+                    }/>
+                </button>
+            </div>
         </div>
     </div>
 
