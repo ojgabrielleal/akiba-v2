@@ -6,7 +6,7 @@
 
 <Meta/>
 <Layout>
-    <div class="bg-blue-night lg:h-179 hidden lg:block pt-25 xl:pt-50">
+    <div class="bg-blue-night lg:h-179 hidden lg:block pt-25 lg:pt-50">
         <MainPlayer/>
     </div>
     <div class="bg-blue-night lg:hidden pt-20">
