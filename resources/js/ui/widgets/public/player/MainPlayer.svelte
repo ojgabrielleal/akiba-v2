@@ -30,7 +30,7 @@
             />
         </div>
         <!-- svelte-ignore a11y_distracting_elements -->
-        <marquee class="w-[95%] xl:w-5xl flex overflow-x-hidden relative marquee-container">
+        <marquee class="w-[95%] xl:w-5xl flex overflow-x-hidden relative marquee-cont">
             <div class="whitespace-nowrap w-full md:w-auto text-neutral-aurora text-3xl font-noto-sans font-bold uppercase italic">
                 <span class="mx-4">
                     {air.phrase}

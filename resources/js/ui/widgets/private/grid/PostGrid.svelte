@@ -7,7 +7,6 @@
 
     $: ({ user, posts } = $page.props);
 
-    $:console.log(posts);
 
     let can = {
         update: hasPermission("post.update"),
@@ -19,7 +18,7 @@
 
 {#if posts}
     <Section {title}>
-        <div class="gap-6 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5">
+        <div class="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {#each posts.data as item}
                 {@const canUpdate = can.update || (can.own.update && item.author.uuid === user.uuid)}
                 <article class={["w-full h-56 rounded-lg p-4 relative",

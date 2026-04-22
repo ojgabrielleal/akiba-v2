@@ -1,6 +1,6 @@
 <script>
     export let title = null;
-    export let styles = "mb-10";
+    export let styles = "cont mb-10";
 </script>
 
 <section class={styles}>

@@ -87,8 +87,8 @@
             Eventos
         </Link>
     </div>
-    <form on:submit|preventDefault={submit} class="mt-10 xl:mt-15">
-        <div class="grid grid-cols-1 xl:grid-cols-[20rem_1fr] gap-5">
+    <form on:submit|preventDefault={submit} class="mt-10 lg:mt-15">
+        <div class="grid grid-cols-1 lg:grid-cols-[20rem_1fr] gap-5">
             <div class="mb-3">
                 <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-2">
                     Imagem em destaque
@@ -139,8 +139,8 @@
                     </label>
                     <Preview
                         name="cover"
-                        standard="w-full h-[30rem] rounded-lg"
-                        view="w-full max-h-[30rem] object-cover object-center rounded-lg bg-neutral-aurora"
+                        standard="w-full h-[25rem] rounded-lg"
+                        view="w-full max-h-[25rem] object-cover object-center rounded-lg bg-neutral-aurora"
                         src={$form.cover}
                         oninput={(event) => ($form.cover = event.target.files[0])}
                         required={!review}

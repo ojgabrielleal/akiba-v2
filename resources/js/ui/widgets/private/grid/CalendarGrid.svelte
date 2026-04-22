@@ -52,14 +52,14 @@
             </button>
         </div>
     {/if}
-    <div class="w-full grid gap-5 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
+    <div class="w-full grid gap-2 lg:grid-cols-7">
         {#each calendarTags as item}
-        <span class={`h-10 text-lg font-noto-sans font-bold uppercase italic rounded-lg flex justify-center items-center ${item.color} ${item.textcolor}`}>
-            {item.label}
-        </span>
+            <span class={`h-10 text-md xl:text-lg font-noto-sans font-bold uppercase italic rounded-lg flex justify-center items-center ${item.color} ${item.textcolor}`}>
+                {item.label}
+            </span>
         {/each}
     </div>
-    <div class="w-full grid gap-5 mt-5 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
+    <div class="w-full grid gap-2 mt-5 lg:grid-cols-7">
         {#each week as day}
             <div class="flex flex-col gap-2 w-full">
                 <div class="text-neutral-aurora text-lg font-noto-sans text-center font-bold uppercase italic">
@@ -74,14 +74,14 @@
                         { "bg-neutral-honeycream": item.has_activity },
                     ]}>
                         <div class="flex events-center">
-                            <div class={["w-full font-noto-sans text-2xl text-center uppercase",
+                            <div class={["w-full font-noto-sans text-md xl:text-2xl text-center uppercase",
                                 { "text-blue-midnight": item.has_activity },
                                 { "text-neutral-aurora": !item.has_activity },
                             ]}>
                                 {item.formated_hour}
                             </div>
                         </div>
-                        <div class={["w-full font-noto-sans font-bold text-2xl text-center italic mt-6 mb-6",
+                        <div class={["w-full font-noto-sans font-bold text-md xl:text-2xl text-center italic mt-6 mb-6",
                             { "text-blue-midnight": item.has_activity },
                             { "text-neutral-aurora": !item.has_activity },
                         ]}>

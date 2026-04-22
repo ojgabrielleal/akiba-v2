@@ -6,13 +6,13 @@
 
 <Meta/>
 <Layout>
-    <div class="bg-blue-night lg:h-179 hidden lg:block pt-25 lg:pt-50">
+    <div class="bg-blue-night lg:h-179 hidden xl:block pt-25 lg:pt-50">
         <MainPlayer/>
     </div>
-    <div class="bg-blue-night lg:hidden pt-20">
+    <div class="bg-blue-night xl:hidden pt-30 pb-10">
         <MobilePlayer/>
     </div>
-    <div class="bg-blue-midnight pt-10 lg:pt-30">
+    <div class="bg-blue-midnight pt-10 xl:pt-30">
         <FeaturedGrid title="Destaques da Akiba"/>
         <ReviewGrid title="Reviews da Akiba" variant="home"/>
         <PostGrid title="Últimas matérias da Akiba" variant="home"/>

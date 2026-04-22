@@ -51,7 +51,7 @@
     --color-blue-skywave: var(--color-blue-skywave);
     --color-blue-cerulean: var(--color-blue-cerulean);
     --color-blue-night: var(--color-blue-night);
-    
+
     --color-purple-mystic: var(--color-purple-mystic);
     --color-green-forest: var(--color-green-forest);
 }
@@ -112,11 +112,11 @@
 
 @layer components {
     .cont {
-        @apply max-w-400 mx-auto px-4 sm:px-8 lg:px-20;
+        @apply w-full max-w-[1100px] md:max-w-[1200px] xl:max-w-[1280px] 2xl:max-w-[1366px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-0;
     }
 
     .cont-player-main {
-        @apply w-full px-10 mx-auto sm:max-w-276 xl:px-0;
+        @apply w-full max-w-[1000px] xl:max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-0;
     }
 }
 
@@ -130,12 +130,12 @@
         display: none;
     }
 
-    .marquee-container {
+    .marquee-cont {
         z-index: 0;
     }
 
-    .marquee-container::before,
-    .marquee-container::after {
+    .marquee-cont::before,
+    .marquee-cont::after {
         content: "";
         position: absolute;
         inset: 0 auto 0 auto;
@@ -143,14 +143,14 @@
         z-index: 2;
     }
 
-    .marquee-container::before {
+    .marquee-cont::before {
         left: 0;
         background: linear-gradient(to right,
                 var(--color-blue-ocean),
                 transparent);
     }
 
-    .marquee-container::after {
+    .marquee-cont::after {
         right: 0;
         background: linear-gradient(to left, var(--color-blue-ocean), transparent);
     }
