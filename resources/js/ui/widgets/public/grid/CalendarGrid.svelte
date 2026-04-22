@@ -1,6 +1,6 @@
 <script>
-    export let title;
-    export let variant = "default";
+    //export let title;
+    // export let variant = "default";
 
     import { page, Link } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/public";
