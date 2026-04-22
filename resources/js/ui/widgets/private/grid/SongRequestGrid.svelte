@@ -123,34 +123,38 @@
                             <div class="absolute right-0 w-2/5 h-[0.1rem] bg-white rounded-full top-1/2 -translate-y-1/2"></div>
                         </div>
                     </div>
-                    <div class="flex flex-wrap xl:flex-nowrap gap-3">
-                        <img
-                            src={item.music.image}
-                            alt={`Capa do anime ${item.music.production}`}
-                            class="w-15 h-15 rounded-lg object-cover object-top shrink-0"
-                            loading="lazy"
-                        />
-                        <div>
-                            <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans">
-                                Anime:
-                                <span class="truncate">
-                                    {item.music.production}
-                                </span>
-                            </div>
-                            <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans">
-                                Artista:
-                                <span class="truncate">
-                                    {item.music.artist}
-                                </span>
-                            </div>
-                            <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans">
-                                Música:
-                                <span class="truncate">
-                                    {item.music.name}
-                                </span>
+                    {#if item.music}
+                        <div class="flex flex-wrap xl:flex-nowrap gap-3">
+                            <img
+                                src={item.music.image}
+                                alt={`Capa do anime ${item.music.production}`}
+                                class="w-15 h-15 rounded-lg object-cover object-top shrink-0"
+                                loading="lazy"
+                            />
+                            <div>
+                                <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans">
+                                    Anime:
+                                    <span class="truncate">
+                                        {item.music.production}
+                                    </span>
+                                </div>
+                                <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans">
+                                    Artista:
+                                    <span class="truncate">
+                                        {item.music.artist}
+                                    </span>
+                                </div>
+                                <div class="w-full lg:w-50 xl:w-full block text-neutral-aurora text-sm font-noto-sans">
+                                    Música:
+                                    <span class="truncate">
+                                        {item.music.name}
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {:else}
+                        <div class="text-neutral-aurora/60 text-sm font-noto-sans italic">Música não disponível</div>
+                    {/if}
                     <div class="flex items-center justify-center w-full mt-5 mb-5">
                         <div class="relative w-full">
                             <div class="absolute left-0 w-2/5 h-[0.1rem] bg-white rounded-full top-1/2 -translate-y-1/2"></div>

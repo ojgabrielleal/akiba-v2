@@ -1,3 +1,4 @@
+
 import { writable, get } from "svelte/store";
 import axios from "axios";
 
@@ -38,7 +39,7 @@ const updateMetadata = async () => {
 
         const info = response.data[0];
 
-        if (info && 'mediaSession' in navigator) {
+        if (info && info.current_song && 'mediaSession' in navigator) {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: info.current_song.music,
                 artist: info.program.name + " - " + info.program.host.name,
