@@ -7,7 +7,7 @@
     });
 </script>
 
-<header>
+<header class="h-0">
     <Navbar />
 </header>
 

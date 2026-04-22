@@ -9,7 +9,7 @@
     <div class="bg-blue-night lg:h-179 hidden lg:block pt-25 xl:pt-50">
         <MainPlayer/>
     </div>
-    <div class="bg-blue-night lg:hidden pt-10">
+    <div class="bg-blue-night lg:hidden pt-20">
         <MobilePlayer/>
     </div>
     <div class="bg-blue-midnight pt-10 xl:pt-30">

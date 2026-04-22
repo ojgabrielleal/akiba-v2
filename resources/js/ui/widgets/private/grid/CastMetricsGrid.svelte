@@ -4,8 +4,8 @@
     $: ({ streaming } = $page.props);
 </script>
 
-<section class="bg-blue-indigo">
-    <div class="cont border-t border-orange-amber py-4">
+<section class="cont bg-blue-indigo">
+    <div class="border-t border-orange-amber py-4">
         <div class="flex">
             <div class="hidden gap-2 items-end font-noto-sans text-orange-amber text-xl uppercase pr-6 border-r border-r-[rgba(229,231,235,0.3)] lg:flex">
                 <img

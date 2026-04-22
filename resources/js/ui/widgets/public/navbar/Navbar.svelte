@@ -7,29 +7,35 @@
 </script>
 
 <nav class="w-full relative">
-    <div class="w-full xl:w-[88%] xl:h-[2.57rem] px-5 py-2 xl:px-0 xl:py-0 relative xl:top-15 bg-neutral-aurora xl:float-end flex items-center">
-        <button on:click={() => (mobilenavbar = !mobilenavbar)} aria-label="Abrir menu" class="xl:hidden p-1">
+    <div class="cont h-24 xl:h-[2.57rem] relative xl:top-15 flex xl:justify-between items-center">
+        <button on:click={() => (mobilenavbar = !mobilenavbar)} aria-label="Abrir menu" class="xl:hidden p-1 filter invert">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
 
-        <div class="mx-auto xl:mx-0 xl:absolute xl:-bottom-3 xl:-left-23 xl:z-50">
-            <img src="/img/default/logo.webp" alt="Logo" class="w-30 xl:w-40" />
+        <div class="ml-5">
+            <img src="/img/default/logo.webp" alt="Logo" class="w-30 xl:w-35" />
         </div>
 
-        <ul class="hidden xl:flex gap-5 ml-20">
+        <ul class="hidden xl:flex">
             {#each navbar.public as item}
-                <li class="border-l first:border-none pl-5 border-blue-midnight h-6 flex items-center text-blue-midnight">
-                    <Link href={item.address} aria-label={item.name} class="flex items-center gap-1 text-lg font-noto-sans font-extrabold italic uppercase">
-                        <img src={item.icon} alt="" aria-hidden="true" class="w-5 h-5 filter-blue-midnight" loading="lazy" />
+                <li class="pr-5 pl-5 first:pl-0 border-l first:border-none border-neutral-gray/50 h-6 flex items-center">
+                    <Link href={item.address} aria-label={item.name} class="flex items-center gap-1 text-lg font-noto-sans font-extrabold text-neutral-gray italic uppercase group/item">
+                           <img 
+                            src={item.icon} 
+                            alt=""
+                            aria-hidden="true" 
+                            class="w-5 h-5 filter-neutral-gray group-hover/item:filter-orange-sunset" 
+                            loading="lazy" 
+                        />
                         {item.name}
                     </Link>
                 </li>
             {/each}
         </ul>
 
-        <div class="hidden xl:flex justify-center items-center w-25 h-8 gap-1 bg-blue-skywave rounded-full absolute right-5">
+        <div class="hidden xl:flex justify-center items-center w-30 h-8 gap-1 bg-blue-skywave rounded-full">
             <button aria-label="Modo Claro" on:click={() => theme = 'light'} class={["cursor-pointer shrink-0 p-1", 
                 {'bg-orange-morning rounded-full': theme === 'light'}
             ]}>
