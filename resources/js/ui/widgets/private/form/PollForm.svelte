@@ -20,7 +20,8 @@
     });
 
     if (identifier) {
-        axios.get(`/panel/media/poll/${identifier}`)
+        axios
+            .get(`/panel/media/poll/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
 
@@ -51,7 +52,10 @@
 
 <form on:submit|preventDefault={submit}>
     <div class="mb-4">
-        <label for="question" class="text-md text-gray-700 font-noto-sans block mb-1">
+        <label
+            for="question"
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+        >
             Pergunta
         </label>
         <input
@@ -64,7 +68,10 @@
     </div>
     <div class="px-4 mb-4 rounded-lg border border-gray-400">
         <div class="mt-5 mb-4">
-            <label for="option_one" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="option_one"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 1º Opção
             </label>
             <input
@@ -78,7 +85,10 @@
             />
         </div>
         <div class="mb-4">
-            <label for="option_two" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="option_two"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 2º Opção
             </label>
             <input
@@ -92,7 +102,10 @@
             />
         </div>
         <div class="mb-4">
-            <label for="option_three" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="option_three"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 3º Opção
             </label>
             <input
@@ -106,7 +119,10 @@
             />
         </div>
         <div class="mb-6">
-            <label for="option_four" class="text-md text-gray-700 font-noto-sans block mb-1">
+            <label
+                for="option_four"
+                class="text-md text-gray-700 font-noto-sans block mb-1"
+            >
                 4º Opção
             </label>
             <input
@@ -121,7 +137,10 @@
         </div>
     </div>
     {#if can.create || can.update}
-        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+        <button
+            type="submit"
+            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
+        >
             {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}

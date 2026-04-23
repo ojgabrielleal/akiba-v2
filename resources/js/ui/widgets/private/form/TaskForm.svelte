@@ -21,7 +21,8 @@
     });
 
     if (identifier) {
-        axios.get(`/panel/administration/task/${identifier}`)
+        axios
+            .get(`/panel/administration/task/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
 
@@ -51,7 +52,10 @@
 
 <form on:submit|preventDefault={submit}>
     <div class="mb-4">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="user">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="user"
+        >
             Membro responsável
         </label>
         <select
@@ -70,7 +74,10 @@
         </select>
     </div>
     <div class="mb-4">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="title">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="title"
+        >
             Título
         </label>
         <input
@@ -83,7 +90,10 @@
         />
     </div>
     <div class="mb-4">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="dead_line">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="dead_line"
+        >
             Data de vencimento
         </label>
         <input
@@ -96,7 +106,10 @@
         />
     </div>
     <div class="mb-4">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="content">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="content"
+        >
             Descrição
         </label>
         <textarea
@@ -109,7 +122,10 @@
         ></textarea>
     </div>
     {#if can.create || can.update}
-        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+        <button
+            type="submit"
+            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
+        >
             {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}

@@ -1,8 +1,8 @@
 <script>
-    export let title; 
+    export let title;
 
     import { page } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";    
+    import { Section } from "@/ui/components/private/";
 
     $: ({ programs } = $page.props);
 
@@ -13,36 +13,53 @@
         3: "Quarta",
         4: "Quinta",
         5: "Sexta",
-        6: "Sábado"
-    }
+        6: "Sábado",
+    };
 </script>
 
 {#if programs}
     <Section {title}>
-        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-15 mt-10">
+        <div
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-15 mt-10"
+        >
             {#each programs.data as program}
-                {#if program.type === 'private'}
+                {#if program.type === "private"}
                     <article class="w-full">
                         <div>
-                            <img class="w-40 mb-3" src={program.image} alt={program.name} loading="lazy"/>
-                            <div class="w-full rounded-md py-3 px-4 bg-neutral-aurora relative mb-2">
-                                <div class="text-blue-skywave text-md font-noto-sans uppercase">
+                            <img
+                                class="w-40 mb-3"
+                                src={program.image}
+                                alt={program.name}
+                                loading="lazy"
+                            />
+                            <div
+                                class="w-full rounded-md py-3 px-4 bg-suspense-aurora relative mb-2"
+                            >
+                                <div
+                                    class="text-blue-skywave text-md font-noto-sans uppercase"
+                                >
                                     <strong class="font-bold">Com:</strong>
                                     {program.host.nickname}
                                 </div>
-                                <img 
-                                    class="w-36 aspect-square absolute right-0 bottom-0 object-cover object-top" 
-                                    src={program.host.avatar} 
-                                    alt={program.host.nickname} 
+                                <img
+                                    class="w-36 aspect-square absolute right-0 bottom-0 object-cover object-top"
+                                    src={program.host.avatar}
+                                    alt={program.host.nickname}
                                     loading="lazy"
                                 />
                             </div>
                             {#each program.schedules as schedule}
-                                <dl class="w-full rounded-md py-2 px-4 bg-neutral-aurora flex justify-between mb-2">
-                                    <dt class='block text-black text-md font-noto-sans italic uppercase font-bold'>
+                                <dl
+                                    class="w-full rounded-md py-2 px-4 bg-suspense-aurora flex justify-between mb-2"
+                                >
+                                    <dt
+                                        class="block text-black text-md font-noto-sans italic uppercase font-bold"
+                                    >
                                         {days[schedule.day]}
                                     </dt>
-                                    <dd class="block text-black font-noto-sans uppercase">
+                                    <dd
+                                        class="block text-black font-noto-sans uppercase"
+                                    >
                                         {schedule.hour}
                                     </dd>
                                 </dl>

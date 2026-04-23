@@ -1,11 +1,11 @@
 <script>
     export let close = () => {};
 
-    import axios from 'axios';
-    import { onMount } from 'svelte';
+    import axios from "axios";
+    import { onMount } from "svelte";
     import { useForm } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
-    
+
     let form = useForm({
         avatar: null,
         name: null,
@@ -14,9 +14,10 @@
         requests_total: null,
     });
 
-    onMount(()=>{
-        axios.get('/panel/radio/listener-month/found')
-            .then((response)=>{
+    onMount(() => {
+        axios
+            .get("/panel/radio/listener-month/found")
+            .then((response) => {
                 const listenerMonthFound = response.data.data;
 
                 $form.name = listenerMonthFound.name;
@@ -24,18 +25,18 @@
                 $form.favorite_program = listenerMonthFound.favorite_program;
                 $form.requests_total = listenerMonthFound.requests_total;
             })
-            .catch(()=>{
-                console.error('Error when find listener month');
+            .catch(() => {
+                console.error("Error when find listener month");
                 close();
-            })
+            });
     });
 
     const submit = () => {
-        $form.post('/panel/radio/listener-month', {
+        $form.post("/panel/radio/listener-month", {
             preserveScroll: true,
-            onSuccess: () => close()
-        })
-    }
+            onSuccess: () => close(),
+        });
+    };
 </script>
 
 <form on:submit|preventDefault={submit}>
@@ -48,7 +49,10 @@
         />
     </div>
     <div class="mb-4">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="listener">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="listener"
+        >
             Ouvinte
         </label>
         <input
@@ -61,7 +65,10 @@
         />
     </div>
     <div class="mb-4">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="address">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="address"
+        >
             Endereço
         </label>
         <input
@@ -74,7 +81,10 @@
         />
     </div>
     <div class="mb-4">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="favorite_show">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="favorite_show"
+        >
             Programa favorito
         </label>
         <input
@@ -87,7 +97,10 @@
         />
     </div>
     <div class="mb-4">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="requests_total">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="requests_total"
+        >
             Quantidade de pedidos feitos
         </label>
         <input
@@ -99,7 +112,10 @@
             disabled
         />
     </div>
-    <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+    <button
+        type="submit"
+        class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
+    >
         Atualizar
     </button>
 </form>

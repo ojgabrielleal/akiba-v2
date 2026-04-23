@@ -21,7 +21,8 @@
     });
 
     if (identifier) {
-        axios.get(`/panel/administration/role/${identifier}`)
+        axios
+            .get(`/panel/administration/role/${identifier}`)
             .then(function (response) {
                 const data = response.data.data;
 
@@ -30,10 +31,10 @@
                 $form.description = data.description;
                 $form.permissions = data.permissions.map((item) => item.uuid);
             })
-            .catch(()=>{
-                console.error('Error when find role');
+            .catch(() => {
+                console.error("Error when find role");
                 close();
-            })
+            });
     }
 
     const submit = () => {
@@ -51,7 +52,10 @@
 
 <form on:submit|preventDefault={submit}>
     <div class="mb-3">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="label">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="label"
+        >
             Nome
         </label>
         <input
@@ -64,7 +68,10 @@
         />
     </div>
     <div class="mb-3">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="weight">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="weight"
+        >
             Peso
         </label>
         <input
@@ -80,7 +87,10 @@
         </div>
     </div>
     <div class="mb-3">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="description">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="description"
+        >
             Descrição
         </label>
         <textarea
@@ -93,7 +103,10 @@
         ></textarea>
     </div>
     <div class="mb-3">
-        <label class="text-md text-gray-700 font-noto-sans block mb-1" for="permissions">
+        <label
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+            for="permissions"
+        >
             Permissões
         </label>
         <select
@@ -114,7 +127,10 @@
         </div>
     </div>
     {#if can.create || can.update}
-        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+        <button
+            type="submit"
+            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
+        >
             {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}

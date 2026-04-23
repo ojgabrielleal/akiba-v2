@@ -13,11 +13,11 @@
     }
 
     usePoll(60 * 1000, {
-        only: ["songRequests", "audience", "streaming"]
+        only: ["songRequests", "audience", "streaming"],
     });
 
     onMount(() => {
-        document.body.style.backgroundColor = "var(--color-blue-indigo)";
+        document.body.style.backgroundColor = "var(--color-blue-marinho)";
     });
 </script>
 

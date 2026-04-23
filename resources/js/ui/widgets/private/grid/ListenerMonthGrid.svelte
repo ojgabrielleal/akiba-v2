@@ -26,34 +26,50 @@
         <article class="grid grid-cols-1 lg:grid-cols-2">
             <div class="grid grid-cols-2">
                 <dl class="mb-8">
-                    <dt class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans">
+                    <dt
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans"
+                    >
                         Nome:
                     </dt>
-                    <dd class="block text-neutral-aurora font-noto-sans uppercase">
+                    <dd
+                        class="block text-suspense-aurora font-noto-sans uppercase"
+                    >
                         {listenerMonth.data.name}
                     </dd>
                 </dl>
                 <dl class="mb-8">
-                    <dt class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block">
+                    <dt
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block"
+                    >
                         Mora em:
                     </dt>
-                    <dd class="block text-neutral-aurora font-noto-sans uppercase">
+                    <dd
+                        class="block text-suspense-aurora font-noto-sans uppercase"
+                    >
                         {listenerMonth.data.address}
                     </dd>
                 </dl>
                 <dl class="mb-8">
-                    <dt class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block">
+                    <dt
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block"
+                    >
                         Número de pedidos feitos:
                     </dt>
-                    <dd class="block text-neutral-aurora font-noto-sans uppercase">
+                    <dd
+                        class="block text-suspense-aurora font-noto-sans uppercase"
+                    >
                         {listenerMonth.data.requests_total}
                     </dd>
                 </dl>
                 <dl class="mb-8">
-                    <dt class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block">
+                    <dt
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block"
+                    >
                         Programa preferido
                     </dt>
-                    <dd class="block text-neutral-aurora font-noto-sans uppercase">
+                    <dd
+                        class="block text-suspense-aurora font-noto-sans uppercase"
+                    >
                         {listenerMonth.data.favorite_show}
                     </dd>
                 </dl>
@@ -61,7 +77,9 @@
             <div class="flex gap-5 items-center justify-end">
                 {#if listenerMonth.data.avatar}
                     <div>
-                        <div class="text-orange-amber font-bold italic text-sm uppercase font-noto-sans block">
+                        <div
+                            class="text-orange-amber font-bold italic text-sm uppercase font-noto-sans block"
+                        >
                             Imagem do ouvinte
                         </div>
                         <img
@@ -72,9 +90,12 @@
                     </div>
                 {/if}
                 {#if can.set}
-                    <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold uppercase italic" on:click={() => { 
-                        offcanvasRef.open();
-                    }}>
+                    <button
+                        class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold uppercase italic"
+                        on:click={() => {
+                            offcanvasRef.open();
+                        }}
+                    >
                         Atualizar ouvinte
                     </button>
                 {/if}

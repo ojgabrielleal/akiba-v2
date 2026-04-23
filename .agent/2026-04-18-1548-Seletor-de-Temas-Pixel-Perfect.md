@@ -7,7 +7,7 @@ Seguindo a referência visual fornecida, foi implementado um seletor de temas (C
 ### 1. Design do Componente
 - **Container**: Estilo "pílula" (pill-shaped) com fundo azul `--color-blue-skywave`.
 - **Destaque Ativo**: Círculos de seleção com cores dinâmicas:
-    - **Modo Claro**: Fundo `--color-neutral-honeycream` com ícone laranja.
+    - **Modo Claro**: Fundo `--color-suspense-honeycream` com ícone laranja.
     - **Modo Auto/Escuro**: Fundo `--color-blue-ocean` com ícone laranja ou branco.
 
 ### 2. Ícones Customizados (SVG Inline)

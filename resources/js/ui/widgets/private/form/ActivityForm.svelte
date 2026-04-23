@@ -21,21 +21,24 @@
     });
 
     if (identifier) {
-        axios.get(`/panel/administration/activity/${identifier}`)
+        axios
+            .get(`/panel/administration/activity/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
 
                 $form.title = data.title;
-                $form.purpose = data.allows_confirmations ? "activity" : "notice";
+                $form.purpose = data.allows_confirmations
+                    ? "activity"
+                    : "notice";
                 $form.limit = data.limit;
                 $form.hour = data.hour;
                 $form.date = data.date;
                 $form.content = data.content;
             })
-            .catch(()=>{
-                console.error('Error when find activity');
+            .catch(() => {
+                console.error("Error when find activity");
                 close();
-            })
+            });
     }
 
     const submit = () => {
@@ -54,7 +57,7 @@
 <form on:submit|preventDefault={submit}>
     <div class="mb-4">
         <div class="text-md text-gray-700 font-noto-sans mb-2">
-           Qual a finalidade desta criação?
+            Qual a finalidade desta criação?
         </div>
         <div class="flex items-center gap-2 mb-1">
             <input
@@ -65,7 +68,10 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.purpose}
             />
-            <label for="notice" class="cursor-pointer text-md text-gray-700 font-noto-sans">
+            <label
+                for="notice"
+                class="cursor-pointer text-md text-gray-700 font-noto-sans"
+            >
                 Aviso
             </label>
         </div>
@@ -78,16 +84,22 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.purpose}
             />
-            <label for="activity" class="cursor-pointer text-md text-gray-700 font-noto-sans">
+            <label
+                for="activity"
+                class="cursor-pointer text-md text-gray-700 font-noto-sans"
+            >
                 Atividade
             </label>
         </div>
     </div>
     <div class="mb-4">
-        <label for="title" class="text-md text-gray-700 font-noto-sans block mb-1">
-            {#if $form.purpose === 'activity'}
+        <label
+            for="title"
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+        >
+            {#if $form.purpose === "activity"}
                 Título da atividade
-            {:else if $form.purpose === 'notice'}
+            {:else if $form.purpose === "notice"}
                 Título do aviso
             {:else}
                 Título
@@ -103,7 +115,10 @@
         />
     </div>
     <div class="mb-4">
-        <label for="limit" class="text-md text-gray-700 font-noto-sans block mb-1">
+        <label
+            for="limit"
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+        >
             Data limite
         </label>
         <input
@@ -115,7 +130,7 @@
             required
         />
         <div class="text-sm font-noto-sans text-gray-400 mt-1">
-            {#if $form.purpose === "notice"} 
+            {#if $form.purpose === "notice"}
                 Data limite para exibição do aviso
             {:else if $form.purpose === "activity"}
                 Data limite para confirmação da atividade
@@ -125,7 +140,10 @@
     {#if $form.purpose === "activity"}
         <div class="grid grid-cols-2 gap-3">
             <div class="mb-4">
-                <label for="hour" class="text-md text-gray-700 font-noto-sans block mb-1">
+                <label
+                    for="hour"
+                    class="text-md text-gray-700 font-noto-sans block mb-1"
+                >
                     Hora
                 </label>
                 <input
@@ -141,7 +159,10 @@
                 </div>
             </div>
             <div class="mb-4">
-                <label for="date" class="text-md text-gray-700 font-noto-sans block mb-1">
+                <label
+                    for="date"
+                    class="text-md text-gray-700 font-noto-sans block mb-1"
+                >
                     Data
                 </label>
                 <input
@@ -159,7 +180,10 @@
         </div>
     {/if}
     <div class="mb-4">
-        <label for="content" class="text-md text-gray-700 font-noto-sans block mb-1">
+        <label
+            for="content"
+            class="text-md text-gray-700 font-noto-sans block mb-1"
+        >
             Conteúdo
         </label>
         <textarea
@@ -172,7 +196,10 @@
         ></textarea>
     </div>
     {#if can.create || can.update}
-        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-neutral-aurora font-noto-sans font-bold italic uppercase">
+        <button
+            type="submit"
+            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
+        >
             {identifier ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}

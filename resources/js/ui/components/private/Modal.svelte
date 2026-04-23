@@ -32,13 +32,33 @@
 {#if visible}
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <div on:click={close} transition:fade={{ duration: 200 }} class="w-screen h-screen fixed inset-0 flex justify-center items-center bg-black/40 backdrop-blur-xs z-100 p-4">
-        <div on:click={block} class="w-full min-w-sm max-w-sm bg-neutral-aurora rounded-lg overflow-hidden">
+    <div
+        on:click={close}
+        transition:fade={{ duration: 200 }}
+        class="w-screen h-screen fixed inset-0 flex justify-center items-center bg-black/40 backdrop-blur-xs z-100 p-4"
+    >
+        <div
+            on:click={block}
+            class="w-full min-w-sm max-w-sm bg-suspense-aurora rounded-lg overflow-hidden"
+        >
             {#if title}
-                <div class="bg-blue-skywave p-4 text-neutral-aurora font-bold italic uppercase flex justify-between items-center">
+                <div
+                    class="bg-blue-skywave p-4 text-suspense-aurora font-bold italic uppercase flex justify-between items-center"
+                >
                     <span>{title}</span>
-                    <button type="button" on:click={close} class="cursor-pointer hover:opacity-80 transition-opacity" aria-label="Fechar">
-                         <img src="/svg/close.svg" alt="" aria-hidden="true" class="w-4 invert brightness-0" loading="lazy" />
+                    <button
+                        type="button"
+                        on:click={close}
+                        class="cursor-pointer hover:opacity-80 transition-opacity"
+                        aria-label="Fechar"
+                    >
+                        <img
+                            src="/svg/close.svg"
+                            alt=""
+                            aria-hidden="true"
+                            class="w-4 invert brightness-0"
+                            loading="lazy"
+                        />
                     </button>
                 </div>
             {/if}

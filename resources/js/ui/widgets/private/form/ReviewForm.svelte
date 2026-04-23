@@ -77,20 +77,34 @@
 
 <Section title={review ? "Atualizar review" : "Criar review"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
-        <Link preserveState={false} href="/panel/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <Link
+            preserveState={false}
+            href="/panel/post"
+            class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
+        >
             Matérias
         </Link>
-        <Link preserveState={false} href="/panel/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <Link
+            preserveState={false}
+            href="/panel/review"
+            class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
+        >
             Reviews
         </Link>
-        <Link preserveState={false} href="/panel/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+        <Link
+            preserveState={false}
+            href="/panel/event"
+            class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
+        >
             Eventos
         </Link>
     </div>
     <form on:submit|preventDefault={submit} class="mt-10 lg:mt-15">
         <div class="grid grid-cols-1 lg:grid-cols-[20rem_1fr] gap-5">
             <div class="mb-3">
-                <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-2">
+                <div
+                    class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-2"
+                >
                     Imagem em destaque
                 </div>
                 <Preview
@@ -99,9 +113,11 @@
                     oninput={(event) => ($form.image = event.target.files[0])}
                     required={!review}
                 />
-                <ul class="mt-4 ml-5 list-disc font-noto-sans font-light text-orange-sunset">
+                <ul
+                    class="mt-4 ml-5 list-disc font-noto-sans font-light text-orange-citric"
+                >
                     <li>
-                       <strong>Tamanho:</strong> 708x827
+                        <strong>Tamanho:</strong> 708x827
                     </li>
                     <li>
                         <strong>Fundo:</strong> Transparente
@@ -110,20 +126,26 @@
             </div>
             <div>
                 <div class="mb-8">
-                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2" for="title">
+                    <label
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2"
+                        for="title"
+                    >
                         Nome do anime
                     </label>
                     <input
                         id="title"
                         type="text"
                         name="title"
-                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                        class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                         bind:value={$form.title}
                         required
                     />
                 </div>
                 <div class="mb-8">
-                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2" for="sinopse">
+                    <label
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2"
+                        for="sinopse"
+                    >
                         Sinopse do anime
                     </label>
                     <Wysiwyg
@@ -134,35 +156,51 @@
                     />
                 </div>
                 <div class="mb-8">
-                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2" for="cover">
+                    <label
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2"
+                        for="cover"
+                    >
                         Capa do anime
                     </label>
                     <Preview
                         name="cover"
                         standard="w-full h-[25rem] rounded-lg"
-                        view="w-full max-h-[25rem] object-cover object-center rounded-lg bg-neutral-aurora"
+                        view="w-full max-h-[25rem] object-cover object-center rounded-lg bg-suspense-aurora"
                         src={$form.cover}
-                        oninput={(event) => ($form.cover = event.target.files[0])}
+                        oninput={(event) =>
+                            ($form.cover = event.target.files[0])}
                         required={!review}
                     />
                 </div>
                 <div>
-                    <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2" for="content">
+                    <label
+                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2"
+                        for="content"
+                    >
                         Escreva sobre o anime
                     </label>
                     {#if review && reviews()}
                         <div class="flex gap-2 mb-4">
                             {#each reviews() as item}
                                 <div class="relative">
-                                    <button 
-                                        type="button" 
-                                        class={["py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer",
-                                            {"bg-orange-amber text-neutral-aurora": item.uuid === $form.review.uuid},
-                                            {"bg-neutral-aurora text-orange-amber": item.uuid !== $form.review.uuid}
+                                    <button
+                                        type="button"
+                                        class={[
+                                            "py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer",
+                                            {
+                                                "bg-orange-amber text-suspense-aurora":
+                                                    item.uuid ===
+                                                    $form.review.uuid,
+                                            },
+                                            {
+                                                "bg-suspense-aurora text-orange-amber":
+                                                    item.uuid !==
+                                                    $form.review.uuid,
+                                            },
                                         ]}
-                                        on:click={() => { 
-                                            $form.review.uuid = item.uuid; 
-                                            $form.review.content = item.content; 
+                                        on:click={() => {
+                                            $form.review.uuid = item.uuid;
+                                            $form.review.content = item.content;
                                         }}
                                     >
                                         {item.author.nickname}
@@ -181,7 +219,10 @@
         </div>
         <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10">
             {#if can.create || can.update}
-                <button type="submit" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
+                <button
+                    type="submit"
+                    class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase"
+                >
                     {$form.review.uuid ? "Atualizar review" : "Publicar review"}
                 </button>
             {/if}

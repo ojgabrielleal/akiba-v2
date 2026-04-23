@@ -48,56 +48,71 @@
 
 <form on:submit|preventDefault={submit}>
     <Section title="O básico">
-        <div class="grid grid-cols-1 xl:grid-cols-[15rem_1fr] gap-5 items-center">
+        <div
+            class="grid grid-cols-1 xl:grid-cols-[15rem_1fr] gap-5 items-center"
+        >
             <div class="mb-3 relative">
                 <Preview
                     name="image"
                     standard="w-full h-[15rem] rounded-lg"
-                    view="w-full h-[15rem] object-cover object-top bg-neutral-aurora rounded-lg"
+                    view="w-full h-[15rem] object-cover object-top bg-suspense-aurora rounded-lg"
                     src={$form.avatar}
                     oninput={(event) => ($form.avatar = event.target.files[0])}
                     required={!profile}
                 />
-                <div class="mt-1 py-1 px-3 rounded-md bg-blue-skywave font-noto-sans font-bold italic uppercase text-xs text-neutral-aurora absolute bottom-2 left-2">
+                <div
+                    class="mt-1 py-1 px-3 rounded-md bg-blue-skywave font-noto-sans font-bold italic uppercase text-xs text-suspense-aurora absolute bottom-2 left-2"
+                >
                     304 x 400
                 </div>
             </div>
             <div>
-                <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr_0.5fr_0.5fr] gap-5 mb-8">
+                <div
+                    class="grid grid-cols-1 lg:grid-cols-[1fr_1fr_0.5fr_0.5fr] gap-5 mb-8"
+                >
                     <div>
-                        <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="name">
+                        <label
+                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                            for="name"
+                        >
                             Nome completo
                         </label>
                         <input
                             id="name"
                             type="text"
                             name="name"
-                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.name}
                             required
                         />
                     </div>
                     <div>
-                        <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="nickname">
+                        <label
+                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                            for="nickname"
+                        >
                             Apelido
                         </label>
                         <input
                             id="nickname"
                             type="text"
                             name="nickname"
-                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.nickname}
                             required
                         />
                     </div>
                     <div>
-                        <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="gender">
+                        <label
+                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                            for="gender"
+                        >
                             Gênero
                         </label>
                         <select
                             id="gender"
                             name="gender"
-                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.gender}
                             required
                         >
@@ -106,14 +121,17 @@
                         </select>
                     </div>
                     <div>
-                        <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="birthday">
+                        <label
+                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                            for="birthday"
+                        >
                             Nascimento
                         </label>
                         <input
                             id="birthday"
                             type="date"
                             name="birthday"
-                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.birthday}
                             required
                         />
@@ -121,40 +139,49 @@
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-5 mb-8">
                     <div>
-                        <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="city">
+                        <label
+                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                            for="city"
+                        >
                             Cidade
                         </label>
                         <input
                             id="city"
                             type="text"
                             name="city"
-                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.city}
                             required
                         />
                     </div>
                     <div>
-                        <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="state">
+                        <label
+                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                            for="state"
+                        >
                             Estado
                         </label>
                         <input
                             id="state"
                             type="text"
                             name="state"
-                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                             bind:value={$form.state}
                             required
                         />
                     </div>
                     <div>
-                        <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="country">
+                        <label
+                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                            for="country"
+                        >
                             País
                         </label>
                         <input
                             id="country"
                             type="text"
                             name="country"
-                            class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                             defaultValue="Brasil"
                             bind:value={$form.country}
                             required
@@ -170,14 +197,17 @@
                 {#if $form.socials}
                     {#each $form.socials as item}
                         <div>
-                            <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for={item.url}>
+                            <label
+                                class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                                for={item.url}
+                            >
                                 {item.name}
                             </label>
                             <input
                                 id={item.name}
                                 type="url"
                                 name={item.name}
-                                class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                                class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                                 bind:value={item.url}
                             />
                         </div>
@@ -188,20 +218,26 @@
     </Section>
     <Section title="Aprofundando">
         <div class="mb-8">
-            <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="bibliography">
+            <label
+                class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                for="bibliography"
+            >
                 Biografia
             </label>
             <textarea
                 id="bibliography"
                 name="bibliography"
                 rows="5"
-                class="w-full bg-neutral-aurora font-noto-sans rounded-lg outline-none p-4"
+                class="w-full bg-suspense-aurora font-noto-sans rounded-lg outline-none p-4"
                 bind:value={$form.bibliography}
                 required
             ></textarea>
         </div>
         <div class="mb-8">
-            <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="likes">
+            <label
+                class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                for="likes"
+            >
                 3 Gêneros de anime que você mais gosta
             </label>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -209,7 +245,7 @@
                     <select
                         id="likes"
                         name="likes"
-                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                        class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                         bind:value={item.content}
                     >
                         {#each userPreferences as item}
@@ -220,7 +256,10 @@
             </div>
         </div>
         <div>
-            <label class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1" for="unlikes">
+            <label
+                class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
+                for="unlikes"
+            >
                 3 Gêneros de anime que você menos gosta
             </label>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -228,7 +267,7 @@
                     <select
                         id="unlikes"
                         name="unlikes"
-                        class="w-full h-12 bg-neutral-aurora font-noto-sans rounded-lg outline-none pl-4"
+                        class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
                         bind:value={item.content}
                     >
                         {#each userPreferences as item}
@@ -241,7 +280,11 @@
     </Section>
     {#if can.update}
         <div class="flex justify-center mt-5 mb-8">
-            <button type="submit" value="published" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase">
+            <button
+                type="submit"
+                value="published"
+                class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase"
+            >
                 Atualizar
             </button>
         </div>

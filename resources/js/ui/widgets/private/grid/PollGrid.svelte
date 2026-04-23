@@ -25,7 +25,9 @@
         const formData = new FormData(form);
         const option = formData.get("option");
 
-        router.post(`/panel/media/poll/vote/${option}`, {},
+        router.post(
+            `/panel/media/poll/vote/${option}`,
+            {},
             {
                 preserveScroll: true,
                 onSuccess: () => {
@@ -41,13 +43,20 @@
     };
 
     const requestDeactivatePoll = (poll) => {
-        router.delete(`/panel/media/poll/${poll}`, {}, {
-            preserveScroll: true,
-        });
+        router.delete(
+            `/panel/media/poll/${poll}`,
+            {},
+            {
+                preserveScroll: true,
+            },
+        );
     };
 </script>
 
-<Offcanvas bind:this={offcanvasRef} title={identifier ? "Atualizar enquete" : "Cadastrar enquete"}>
+<Offcanvas
+    bind:this={offcanvasRef}
+    title={identifier ? "Atualizar enquete" : "Cadastrar enquete"}
+>
     <div slot="content" let:close>
         <PollForm {identifier} {close} />
     </div>
@@ -57,10 +66,13 @@
     <Section title="Enquetes">
         {#if can.create || can.update}
             <div class="flex justify-center">
-                <button class="cursor-pointer text-neutral-aurora text-xl font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber" on:click={() => {
-                    offcanvasRef.open();
-                    identifier = null;
-                }}>
+                <button
+                    class="cursor-pointer text-suspense-aurora text-xl font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber"
+                    on:click={() => {
+                        offcanvasRef.open();
+                        identifier = null;
+                    }}
+                >
                     Criar enquete
                 </button>
             </div>
@@ -68,26 +80,39 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-10">
             {#each polls.data as item}
                 {@const alreadyVoted = storageVotedPolls.includes(item.uuid)}
-                <form on:submit|preventDefault={(event) => submitVote(event, item)} class="flex flex-col justify-between gap-5 bg-blue-skywave p-5 rounded-md">
-                    <div class="text-neutral-aurora text-xl text-start font-noto-sans font-bold">
+                <form
+                    on:submit|preventDefault={(event) =>
+                        submitVote(event, item)}
+                    class="flex flex-col justify-between gap-5 bg-blue-skywave p-5 rounded-md"
+                >
+                    <div
+                        class="text-suspense-aurora text-xl text-start font-noto-sans font-bold"
+                    >
                         {item.question}
                     </div>
                     <div class="flex flex-col gap-3">
                         {#each item.options as optitem}
                             <div class="inline-flex items-center">
-                                <div class="relative flex items-center cursor-pointer">
+                                <div
+                                    class="relative flex items-center cursor-pointer"
+                                >
                                     <input
                                         id={optitem.uuid}
                                         name="option"
                                         type="radio"
-                                        class="peer h-5 w-5 cursor-pointer appearance-none rounded-full bg-neutral-aurora"
+                                        class="peer h-5 w-5 cursor-pointer appearance-none rounded-full bg-suspense-aurora"
                                         value={optitem.uuid}
                                         disabled={alreadyVoted}
                                         required
                                     />
-                                    <div class="absolute bg-blue-skywave w-2/4 h-2/4 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                                    <div
+                                        class="absolute bg-blue-skywave w-2/4 h-2/4 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                                    ></div>
                                 </div>
-                                <label class="w-full ml-2 flex justify-between text-neutral-aurora text-md font-noto-sans cursor-pointer" for={optitem.uuid}>
+                                <label
+                                    class="w-full ml-2 flex justify-between text-suspense-aurora text-md font-noto-sans cursor-pointer"
+                                    for={optitem.uuid}
+                                >
                                     <div>
                                         {optitem.option}
                                     </div>
@@ -100,16 +125,25 @@
                     </div>
                     <div class="flex justify-between">
                         {#if can.vote.create}
-                            <button type="submit" class="cursor-pointer text-neutral-aurora text-md font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber disabled:opacity-50" disabled={alreadyVoted}>
+                            <button
+                                type="submit"
+                                class="cursor-pointer text-suspense-aurora text-md font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber disabled:opacity-50"
+                                disabled={alreadyVoted}
+                            >
                                 Votar
                             </button>
                         {/if}
                         <div class="flex gap-3">
                             {#if can.show_button_update}
-                                <button type="button" aria-label="Editar" class="cursor-pointer" on:click={() => {
-                                    offcanvasRef.open();
-                                    identifier = item.uuid;
-                                }}>
+                                <button
+                                    type="button"
+                                    aria-label="Editar"
+                                    class="cursor-pointer"
+                                    on:click={() => {
+                                        offcanvasRef.open();
+                                        identifier = item.uuid;
+                                    }}
+                                >
                                     <img
                                         src="/svg/edit.svg"
                                         alt=""
@@ -120,7 +154,13 @@
                                 </button>
                             {/if}
                             {#if can.deactivate}
-                                <button type="button" class="cursor-pointer" aria-label="Desativar" on:click={() => requestDeactivatePoll(item.uuid)}>
+                                <button
+                                    type="button"
+                                    class="cursor-pointer"
+                                    aria-label="Desativar"
+                                    on:click={() =>
+                                        requestDeactivatePoll(item.uuid)}
+                                >
                                     <img
                                         src="/svg/trash.svg"
                                         alt=""

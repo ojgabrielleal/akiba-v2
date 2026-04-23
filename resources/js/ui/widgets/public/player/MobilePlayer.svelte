@@ -17,12 +17,16 @@
     </div>
 </Modal>
 
-<section class="cont flex flex-col items-center justify-center gap-8 overflow-hidden relative">
-
-    <div class="w-full  relative z-10 bg-neutral-aurora/5 backdrop-blur-xl border border-white/10 rounded-4xl p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 shadow-2xl">
-        
+<section
+    class="cont flex flex-col items-center justify-center gap-8 overflow-hidden relative"
+>
+    <div
+        class="w-full relative z-10 bg-suspense-aurora/5 backdrop-blur-xl border border-white/10 rounded-4xl p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 shadow-2xl"
+    >
         <div class="flex items-center gap-5 md:flex-1">
-            <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border-2 border-white/10 shrink-0 shadow-lg">
+            <div
+                class="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border-2 border-white/10 shrink-0 shadow-lg"
+            >
                 <img
                     src={air.program.host.avatar}
                     alt="Programa"
@@ -30,55 +34,78 @@
                 />
             </div>
             <div class="flex flex-col min-w-0">
-                <span class="text-orange-amber text-[10px] md:text-xs uppercase font-noto-sans font-bold italic">
+                <span
+                    class="text-orange-amber text-[10px] md:text-xs uppercase font-noto-sans font-bold italic"
+                >
                     PROGRAMA
                 </span>
-                <h3 class="text-neutral-aurora text-xl md:text-2xl font-noto-sans font-bold uppercase  italic truncate">
+                <h3
+                    class="text-suspense-aurora text-xl md:text-2xl font-noto-sans font-bold uppercase italic truncate"
+                >
                     {air.program.name}
                 </h3>
                 <div class="flex flex-wrap items-center gap-2 mt-2">
-                    <span class={["text-[10px] px-2.5 py-1 rounded-lg text-neutral-aurora font-noto-sans font-bold uppercase italic",
-                        { "bg-neutral-gray": air.type === "automatic" },
-                        { "bg-green-forest": air.type === "live" },
-                        { "bg-orange-sunset": air.type === "scheduled" },
-                    ]}>
+                    <span
+                        class={[
+                            "text-[10px] px-2.5 py-1 rounded-lg text-suspense-aurora font-noto-sans font-bold uppercase italic",
+                            { "bg-neutral-gray": air.type === "automatic" },
+                            { "bg-green-mint": air.type === "live" },
+                            { "bg-orange-citric": air.type === "scheduled" },
+                        ]}
+                    >
                         {#if air.type === "automatic"}
                             Robô
                         {:else if air.type === "live"}
-                            Human{air.program.host.gender === "male" ? "o" : "a"}
+                            Human{air.program.host.gender === "male"
+                                ? "o"
+                                : "a"}
                         {:else}
                             Gravado
                         {/if}
                     </span>
-                    <span class="text-neutral-aurora/50 text-xs md:text-sm font-noto-sans font-medium italic">
+                    <span
+                        class="text-suspense-aurora/50 text-xs md:text-sm font-noto-sans font-medium italic"
+                    >
                         com {air.program.host.nickname}
                     </span>
                 </div>
             </div>
         </div>
 
-        <div class="hidden md:block w-px h-16 bg-neutral-aurora/10"></div>
-        <div class="block md:hidden w-full h-px bg-neutral-aurora/10"></div>
+        <div class="hidden md:block w-px h-16 bg-suspense-aurora/10"></div>
+        <div class="block md:hidden w-full h-px bg-suspense-aurora/10"></div>
 
         <div class="flex flex-col gap-1.5 md:flex-1">
-            <span class="text-orange-amber text-[10px] md:text-xs italic uppercase font-noto-sans font-bold">
+            <span
+                class="text-orange-amber text-[10px] md:text-xs italic uppercase font-noto-sans font-bold"
+            >
                 TOCANDO AGORA
             </span>
-            <p class="text-neutral-aurora text-lg md:text-xl font-noto-sans font-bold italic line-clamp-2 leading-snug">
+            <p
+                class="text-suspense-aurora text-lg md:text-xl font-noto-sans font-bold italic line-clamp-2 leading-snug"
+            >
                 {air?.current_song?.music}
             </p>
         </div>
     </div>
 
-    <div class="w-full relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-        
+    <div
+        class="w-full relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center"
+    >
         <div class="md:col-span-3 flex justify-center">
-            <button on:click={toggleAudio} class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-blue-skywave flex items-center justify-center hover:scale-105 active:scale-95 transition-all group">
-                <div class="bg-neutral-aurora rounded-full p-4 md:p-5 flex items-center justify-center shadow-inner">
-                    <img 
-                        src={$player.playing ? "/svg/pause.svg" : "/svg/play.svg"} 
-                        alt={$player.playing ? "Pause" : "Play"} 
-                        class="w-8 md:w-10 filter-blue-skywave" 
+            <button
+                on:click={toggleAudio}
+                class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-blue-skywave flex items-center justify-center hover:scale-105 active:scale-95 transition-all group"
+            >
+                <div
+                    class="bg-suspense-aurora rounded-full p-4 md:p-5 flex items-center justify-center shadow-inner"
+                >
+                    <img
+                        src={$player.playing
+                            ? "/svg/pause.svg"
+                            : "/svg/play.svg"}
+                        alt={$player.playing ? "Pause" : "Play"}
+                        class="w-8 md:w-10 filter-blue-skywave"
                     />
                 </div>
             </button>
@@ -88,11 +115,15 @@
             <div class="flex flex-col gap-2">
                 <div class="flex justify-between items-center px-1">
                     <div class="flex items-center gap-2">
-                        <span class="text-[10px] md:text-xs text-neutral-aurora/40 font-noto-sans font-bold italic uppercase">
+                        <span
+                            class="text-[10px] md:text-xs text-suspense-aurora/40 font-noto-sans font-bold italic uppercase"
+                        >
                             Volume
                         </span>
                     </div>
-                    <span class="text-[10px] md:text-xs text-orange-amber font-noto-sans font-bold italic">
+                    <span
+                        class="text-[10px] md:text-xs text-orange-amber font-noto-sans font-bold italic"
+                    >
                         {Math.round($player.volume * 100)}%
                     </span>
                 </div>
@@ -103,12 +134,18 @@
                     step="0.01"
                     value={$player.volume}
                     on:input={(e) => setVolume(e.target.value)}
-                    class="w-full accent-orange-amber h-2 rounded-full bg-neutral-aurora/10 cursor-pointer transition-all hover:bg-neutral-aurora/20"
+                    class="w-full accent-orange-amber h-2 rounded-full bg-suspense-aurora/10 cursor-pointer transition-all hover:bg-suspense-aurora/20"
                 />
             </div>
 
-            <button on:click={() => modalRef.open()} class="group cursor-pointer w-full py-3 px-6 border-2 border-neutral-aurora/20 hover:border-orange-amber/50 rounded-full text-blue-skywave text-lg md:text-xl text-center font-noto-sans font-bold italic uppercase transition-all">
-                & Faça seu <strong class="text-orange-amber group-hover:underline">Pedido</strong>
+            <button
+                on:click={() => modalRef.open()}
+                class="group cursor-pointer w-full py-3 px-6 border-2 border-suspense-aurora/20 hover:border-orange-amber/50 rounded-full text-blue-skywave text-lg md:text-xl text-center font-noto-sans font-bold italic uppercase transition-all"
+            >
+                & Faça seu <strong
+                    class="text-orange-amber group-hover:underline"
+                    >Pedido</strong
+                >
             </button>
         </div>
     </div>

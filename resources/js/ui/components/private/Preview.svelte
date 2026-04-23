@@ -1,7 +1,8 @@
 <script>
     export let name = null;
     export let standard = "w-full h-[19rem] rounded-lg";
-    export let view = "w-full max-h-[19rem] object-cover object-center rounded-lg bg-neutral-aurora";
+    export let view =
+        "w-full max-h-[19rem] object-cover object-center rounded-lg bg-suspense-aurora";
     export let src = null;
     export let oninput = null;
     export let required = false;
@@ -26,11 +27,28 @@
 
 <label class="cursor-pointer">
     {#if imageToShow}
-        <img src={imageToShow} alt="" aria-hidden="true" class={`${view}`} loading="lazy" />
+        <img
+            src={imageToShow}
+            alt=""
+            aria-hidden="true"
+            class={`${view}`}
+            loading="lazy"
+        />
     {:else}
-        <div class={`${standard} bg-neutral-aurora flex items-center justify-center overflow-hidden font-noto-sans text-blue-skywave text-7xl font-bold italic uppercase`}>
+        <div
+            class={`${standard} bg-suspense-aurora flex items-center justify-center overflow-hidden font-noto-sans text-blue-skywave text-7xl font-bold italic uppercase`}
+        >
             +
         </div>
     {/if}
-    <input id={name} type="file" {name} class="sr-only" accept="image/*" on:input={oninput} on:change={previewImage} {required} />
+    <input
+        id={name}
+        type="file"
+        {name}
+        class="sr-only"
+        accept="image/*"
+        on:input={oninput}
+        on:change={previewImage}
+        {required}
+    />
 </label>

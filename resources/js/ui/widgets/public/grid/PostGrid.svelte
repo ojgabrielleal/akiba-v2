@@ -13,17 +13,24 @@
     <Section {title}>
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
             {#each posts.data as item}
-                <Link href={`review/${item.slug}`} class="flex flex-col sm:flex-row gap-4">
+                <Link
+                    href={`review/${item.slug}`}
+                    class="flex flex-col sm:flex-row gap-4"
+                >
                     <img
                         src={item.cover}
                         alt={item.title}
                         class="w-full sm:w-50 sm:h-40 aspect-square sm:aspect-auto object-cover rounded-md bg-amber-50 shrink-0"
                     />
                     <div class="flex flex-col justify-between relative w-full">
-                        <h1 class="font-noto-sans font-extrabold text-lg sm:text-xl text-neutral-aurora italic uppercase line-clamp-3 sm:line-clamp-4">
+                        <h1
+                            class="font-noto-sans font-extrabold text-lg sm:text-xl text-suspense-aurora italic uppercase line-clamp-3 sm:line-clamp-4"
+                        >
                             {item.title}
                         </h1>
-                        <div class="flex gap-3 mt-2 sm:mt-0 sm:absolute sm:bottom-0">
+                        <div
+                            class="flex gap-3 mt-2 sm:mt-0 sm:absolute sm:bottom-0"
+                        >
                             {#each item.categories as category}
                                 <img
                                     src={postTags[category.name]?.icon}
