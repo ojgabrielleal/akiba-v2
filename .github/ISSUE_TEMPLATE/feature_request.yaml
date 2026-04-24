@@ -1,5 +1,5 @@
-name: Feature Request
-description: Request a new feature or improvement
+name: "✨ Feature Request"
+description: "Request a new feature or improvement"
 labels: ["enhancement"]
 assignees: []
 body:

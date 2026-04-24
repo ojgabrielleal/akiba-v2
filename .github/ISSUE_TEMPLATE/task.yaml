@@ -1,5 +1,5 @@
-name: Task
-description: Add a general task to the project
+name: "📋 Task"
+description: "Add a general task to the project"
 labels: []
 assignees: []
 body:

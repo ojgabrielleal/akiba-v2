@@ -1,5 +1,5 @@
-name: Refactor
-description: Improve or refactor existing code
+name: "🔧 Refactor"
+description: "Improve or refactor existing code"
 labels: ["refactor"]
 assignees: []
 body:
