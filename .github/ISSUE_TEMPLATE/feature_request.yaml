@@ -1,0 +1,79 @@
+name: 🚀 Feature Request
+description: Solicite uma nova funcionalidade ou melhoria
+labels: ["enhancement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por sugerir uma nova funcionalidade! Preencha os detalhes abaixo.
+  
+  - type: input
+    id: title
+    attributes:
+      label: Título da Funcionalidade
+      description: "Exemplo: 🎨 Adicionar tema escuro à interface"
+      placeholder: "Digite um título descritivo com emoji"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: 📌 Descrição
+      description: Descreva brevemente a funcionalidade que você quer adicionar
+      placeholder: "Explique qual é a funcionalidade desejada..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: 🎯 Objetivo
+      description: Qual é o objetivo principal desta funcionalidade?
+      placeholder: "Qual problema isso resolve ou que valor agrega?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: ✨ Benefícios
+      description: Quais são os benefícios ou melhorias esperadas?
+      placeholder: "- Melhora na experiência do usuário\n- Facilita manutenção do código"
+
+  - type: checkboxes
+    id: tasks
+    attributes:
+      label: "✅ Tarefas Propostas"
+      description: "Liste as tarefas que precisam ser feitas (você pode editar depois)"
+      options:
+        - label: "Tarefa 1"
+        - label: "Tarefa 2"
+        - label: "Tarefa 3"
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📝 Informações Adicionais
+      description: "Adicione qualquer contexto, screenshot ou referência relevante"
+      placeholder: "Links, exemplos, mocks, etc."
+
+  - type: checkboxes
+    id: area
+    attributes:
+      label: "📍 Área do Projeto"
+      options:
+        - label: "Backend"
+        - label: "Frontend"
+        - label: "Documentação"
+        - label: "DevOps/Infraestrutura"
+
+  - type: checkboxes
+    id: priority
+    attributes:
+      label: "⚡ Prioridade"
+      options:
+        - label: "Alta"
+        - label: "Média"
+        - label: "Baixa"

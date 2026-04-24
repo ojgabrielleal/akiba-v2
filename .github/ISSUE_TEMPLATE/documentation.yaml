@@ -1,0 +1,111 @@
+name: 📚 Documentation
+description: Melhore ou adicione documentação
+labels: ["documentation"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proponha melhorias ou adição de documentação para o projeto.
+
+  - type: input
+    id: title
+    attributes:
+      label: Título da Documentação
+      description: "Exemplo: 📚 Documentar API de posts"
+      placeholder: "Digite um título descritivo com emoji"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📌 Descrição
+      description: O que será documentado?
+      placeholder: "Que documentação está faltando ou precisa melhorar?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: "🎯 Por que é necessário?"
+      description: Qual é a razão para adicionar/melhorar esta documentação?
+      placeholder: |
+        - Novos desenvolvedores têm dificuldade em entender
+        - API não está documentada
+        - Setup é complicado
+    validations:
+      required: true
+
+  - type: textarea
+    id: content
+    attributes:
+      label: "✍️ Conteúdo Proposto"
+      description: "Escreva ou descreva o conteúdo que será documentado"
+      placeholder: |
+        # Título
+        
+        ## Seções principais
+        - Introdução
+        - Como usar
+        - Exemplos
+        - Troubleshooting
+
+  - type: textarea
+    id: location
+    attributes:
+      label: "📁 Local da Documentação"
+      description: "Onde será adicionada/atualizada? (ex: README.md, docs/api.md)"
+      placeholder: "docs/api.md ou README.md"
+
+  - type: checkboxes
+    id: type
+    attributes:
+      label: "📋 Tipo de Documentação"
+      options:
+        - label: "README"
+        - label: "API Docs"
+        - label: "Setup/Installation"
+        - label: "Architecture/Design"
+        - label: "Code Comments"
+        - label: "Troubleshooting"
+        - label: "Contributing Guidelines"
+
+  - type: checkboxes
+    id: audience
+    attributes:
+      label: "👥 Público-Alvo"
+      options:
+        - label: "Novos desenvolvedores"
+        - label: "Usuários da API"
+        - label: "Maintainers"
+        - label: "Contribuidores"
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: "🔗 Recursos Úteis"
+      description: "Links, referências, exemplos que devem ser incluídos"
+      placeholder: |
+        - Link para issue relacionada
+        - Link para PR
+        - Exemplos de código
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "⚡ Prioridade"
+      options:
+        - "🔴 Alta (Crítica para onboarding)"
+        - "🟡 Média (Útil ter)"
+        - "🟢 Baixa (Melhoria futura)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "📝 Notas Adicionais"
+      description: "Qualquer informação extra"
+      placeholder: "Contexto adicional, sugestões, etc."

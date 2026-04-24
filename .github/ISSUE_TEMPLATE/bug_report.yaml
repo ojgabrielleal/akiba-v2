@@ -1,0 +1,104 @@
+name: 🐛 Bug Report
+description: Reporte um bug ou comportamento inesperado
+labels: ["bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por reportar um bug! Por favor, preencha as informações abaixo para ajudar a resolver o problema rapidamente.
+
+  - type: input
+    id: title
+    attributes:
+      label: Título do Bug
+      description: "Exemplo: 🐛 Erro ao carregar posts na página inicial"
+      placeholder: "Digite um título descritivo com emoji"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📌 Descrição
+      description: Descreva o bug observado
+      placeholder: "O que você notou de incorreto?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 🔄 Passos para Reproduzir
+      description: |
+        Liste os passos exatos para reproduzir o bug
+      placeholder: |
+        1. Acesse a página de...
+        2. Clique em...
+        3. Observe o resultado inesperado...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ Comportamento Esperado
+      description: O que deveria acontecer?
+      placeholder: "Descreva o comportamento esperado"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❌ Comportamento Atual
+      description: O que está acontecendo ao invés?
+      placeholder: "Descreva o comportamento incorreto"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: "📍 Área Afetada"
+      options:
+        - Backend
+        - Frontend
+        - Banco de Dados
+        - Autenticação
+        - API
+        - Outro
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: 🌐 Navegador e Versão (se aplicável)
+      placeholder: "Ex: Chrome 125.0, Firefox 120.0"
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 📸 Screenshots/Logs
+      description: "Adicione screenshots, erro logs ou qualquer informação relevante"
+      placeholder: "Cola de logs de erro ou screenshot do problema"
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📝 Informações Adicionais
+      description: Qualquer contexto adicional que possa ser útil
+      placeholder: "Informações extras sobre o ambiente, banco de dados, etc."
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "⚡ Prioridade"
+      options:
+        - "🔴 Crítica (Produção quebrada)"
+        - "🟠 Alta (Funcionalidade indisponível)"
+        - "🟡 Média (Comportamento inesperado)"
+        - "🟢 Baixa (Inconveniente menor)"
+    validations:
+      required: true

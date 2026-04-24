@@ -1,0 +1,98 @@
+name: 📋 Task
+description: Adicione uma tarefa geral ao projeto
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Crie uma nova tarefa para o projeto. Defina os detalhes e tarefas relacionadas.
+
+  - type: input
+    id: title
+    attributes:
+      label: Título da Tarefa
+      description: "Exemplo: 🎯 Implementar autenticação OAuth"
+      placeholder: "Digite um título descritivo com emoji"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📌 Descrição
+      description: Descreva em detalhes o que precisa ser feito
+      placeholder: "Explique a tarefa com clareza..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: 🎯 Objetivo
+      description: Qual é o propósito desta tarefa?
+      placeholder: "Qual problema resolve ou que melhoria traz?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: "✅ Subtarefas"
+      description: "Liste as subtarefas ou checkpoints"
+      placeholder: |
+        - [ ] Tarefa 1
+        - [ ] Tarefa 2
+        - [ ] Tarefa 3
+        - [ ] Validar e testar
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "🎫 Critérios de Aceitação"
+      description: "O que define que esta tarefa está completa?"
+      placeholder: |
+        - Feature X funciona corretamente
+        - Testes passam
+        - Documentação atualizada
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 📝 Notas Adicionais
+      description: "Contexto extra, referências, ou informações importantes"
+      placeholder: "Links, dependencies, constraints, etc."
+
+  - type: checkboxes
+    id: area
+    attributes:
+      label: "📍 Área do Projeto"
+      options:
+        - label: "Backend"
+        - label: "Frontend"
+        - label: "Banco de Dados"
+        - label: "DevOps"
+        - label: "Documentação"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "⚡ Prioridade"
+      options:
+        - "🔴 Alta"
+        - "🟡 Média"
+        - "🟢 Baixa"
+    validations:
+      required: true
+
+  - type: input
+    id: estimate
+    attributes:
+      label: "⏱️ Estimativa (em horas)"
+      placeholder: "Quantas horas estima para completar?"
+
+  - type: input
+    id: assignee
+    attributes:
+      label: "👤 Responsável"
+      placeholder: "@username ou deixe em branco"

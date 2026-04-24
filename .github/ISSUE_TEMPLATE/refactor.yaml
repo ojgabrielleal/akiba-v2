@@ -1,0 +1,116 @@
+name: 🔧 Refactor
+description: Melhore ou refatore código existente
+labels: ["refactor"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proponha uma refatoração de código para melhorar qualidade, performance ou manutenibilidade.
+
+  - type: input
+    id: title
+    attributes:
+      label: Título da Refatoração
+      description: "Exemplo: 🔧 Extrair duplicação em controllers"
+      placeholder: "Digite um título descritivo com emoji"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📌 Descrição
+      description: Explique o que será refatorado
+      placeholder: "Que código está sendo refatorado?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🚨 Problema Atual
+      description: Qual é o problema com o código atual?
+      placeholder: |
+        - Código duplicado em múltiplos locais
+        - Difícil de manter
+        - Performance baixa
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: ✨ Solução Proposta
+      description: Como você propõe resolver este problema?
+      placeholder: "Descreva a abordagem de refatoração"
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: 💡 Benefícios
+      description: Quais são os benefícios desta refatoração?
+      placeholder: |
+        - Reduz linhas de código duplicadas
+        - Facilita manutenção futura
+        - Melhora performance
+
+  - type: textarea
+    id: files
+    attributes:
+      label: 📁 Arquivos Afetados
+      description: "Quais arquivos serão modificados?"
+      placeholder: |
+        - app/Http/Controllers/PostController.php
+        - app/Services/PostService.php
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: "✅ Tarefas"
+      description: "Passos para completar a refatoração"
+      placeholder: |
+        - [ ] Extrair duplicação
+        - [ ] Criar testes para cobertura
+        - [ ] Verificar performance
+        - [ ] Atualizar documentação
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "⚠️ Impacto"
+      description: "Qual é o impacto desta mudança?"
+      placeholder: |
+        - Breaking changes (se houver)
+        - Arquivos afetados
+        - Testes necessários
+
+  - type: checkboxes
+    id: area
+    attributes:
+      label: "📍 Área Afetada"
+      options:
+        - label: "Backend"
+        - label: "Frontend"
+        - label: "Database"
+        - label: "Architecture"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "⚡ Prioridade"
+      options:
+        - "🔴 Alta (Bloqueia outras tarefas)"
+        - "🟡 Média (Nice to have)"
+        - "🟢 Baixa (Manutenção técnica)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "📝 Notas Adicionais"
+      description: "Qualquer informação extra importante"
+      placeholder: "Links, referências, exemplos, etc."
