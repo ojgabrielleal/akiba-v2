@@ -92,19 +92,19 @@ body:
     attributes:
       label: Affected area
       options:
-        - label: "Backend"
-        - label: "Frontend"
-        - label: "Database"
-        - label: "Architecture"
+        - label: "⚙️ Backend"
+        - label: "🎨 Frontend"
+        - label: "🗄️ Database"
+        - label: "🏗️ Architecture"
 
   - type: dropdown
     id: priority
     attributes:
       label: Priority
       options:
-        - High, blocks other tasks
-        - Medium, nice to have
-        - Low, technical maintenance
+        - "🔥 High, blocks other tasks"
+        - "⚠️ Medium, nice to have"
+        - "🌱 Low, technical maintenance"
     validations:
       required: true
 

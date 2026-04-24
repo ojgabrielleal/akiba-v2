@@ -64,23 +64,23 @@ body:
     attributes:
       label: Documentation type
       options:
-        - label: "README"
-        - label: "API docs"
-        - label: "Setup/Installation"
-        - label: "Architecture/Design"
-        - label: "Code comments"
-        - label: "Troubleshooting"
-        - label: "Contributing guidelines"
+        - label: "📘 README"
+        - label: "🔌 API docs"
+        - label: "🛠️ Setup/Installation"
+        - label: "🏗️ Architecture/Design"
+        - label: "💬 Code comments"
+        - label: "🧭 Troubleshooting"
+        - label: "🤝 Contributing guidelines"
 
   - type: checkboxes
     id: audience
     attributes:
       label: Target audience
       options:
-        - label: "New developers"
-        - label: "API users"
-        - label: "Maintainers"
-        - label: "Contributors"
+        - label: "🌱 New developers"
+        - label: "🔌 API users"
+        - label: "🛡️ Maintainers"
+        - label: "🤝 Contributors"
 
   - type: textarea
     id: resources
@@ -97,9 +97,9 @@ body:
     attributes:
       label: Priority
       options:
-        - High, critical for onboarding
-        - Medium, useful to have
-        - Low, future improvement
+        - "🔥 High, critical for onboarding"
+        - "⚠️ Medium, useful to have"
+        - "🌱 Low, future improvement"
     validations:
       required: true
 

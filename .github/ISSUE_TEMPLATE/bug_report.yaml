@@ -61,12 +61,12 @@ body:
     attributes:
       label: Affected area
       options:
-        - Backend
-        - Frontend
-        - Database
-        - Authentication
-        - API
-        - Other
+        - "⚙️ Backend"
+        - "🎨 Frontend"
+        - "🗄️ Database"
+        - "🔐 Authentication"
+        - "🔌 API"
+        - "📦 Other"
     validations:
       required: true
 
@@ -95,9 +95,9 @@ body:
     attributes:
       label: Priority
       options:
-        - Critical, production is broken
-        - High, functionality is unavailable
-        - Medium, unexpected behavior
-        - Low, minor inconvenience
+        - "🚨 Critical, production is broken"
+        - "🔥 High, functionality is unavailable"
+        - "⚠️ Medium, unexpected behavior"
+        - "🌱 Low, minor inconvenience"
     validations:
       required: true

@@ -24,12 +24,12 @@ Closes #
 
 <!-- Mark the change type with an X. -->
 
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Refactor
-- [ ] Documentation
-- [ ] Performance
-- [ ] Security
+- [ ] 🐛 Bug fix
+- [ ] ✨ New feature
+- [ ] 🔧 Refactor
+- [ ] 📚 Documentation
+- [ ] ⚡ Performance
+- [ ] 🔐 Security
 
 ## Checklist
 

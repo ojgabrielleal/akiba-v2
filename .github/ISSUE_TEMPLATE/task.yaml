@@ -68,20 +68,20 @@ body:
     attributes:
       label: Project area
       options:
-        - label: "Backend"
-        - label: "Frontend"
-        - label: "Database"
-        - label: "DevOps"
-        - label: "Documentation"
+        - label: "⚙️ Backend"
+        - label: "🎨 Frontend"
+        - label: "🗄️ Database"
+        - label: "🚀 DevOps"
+        - label: "📚 Documentation"
 
   - type: dropdown
     id: priority
     attributes:
       label: Priority
       options:
-        - High
-        - Medium
-        - Low
+        - "🔥 High"
+        - "⚠️ Medium"
+        - "🌱 Low"
     validations:
       required: true
 
