@@ -8,15 +8,6 @@ body:
       value: |
         Create a new task for the project. Define the details and related work.
 
-  - type: input
-    id: title
-    attributes:
-      label: Task title
-      description: "Example: Implement OAuth authentication."
-      placeholder: "Enter a descriptive title"
-    validations:
-      required: true
-
   - type: textarea
     id: description
     attributes:
