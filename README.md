@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/WbKAm6A.png" alt="Akiba V2" />
+  <img src="https://i.imgur.com/WbKAm6A.png" alt="Akiba V2" width="300" />
 </div>
 
 ## Português
