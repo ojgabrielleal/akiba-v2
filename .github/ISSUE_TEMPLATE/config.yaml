@@ -1,11 +1,11 @@
 blank_issues_enabled: true
 contact_links:
-  - name: 💬 Discussão Geral
+  - name: Discussao geral / General discussion
     url: https://github.com/ojgabrielleal/akiba-v2/discussions
-    about: "Tire dúvidas, compartilhe ideias e tenha discussões gerais"
-  - name: 🐦 Twitter
+    about: "PT: Tire duvidas, compartilhe ideias e tenha discussoes gerais. EN: Ask questions, share ideas, and have general discussions."
+  - name: Twitter
     url: https://twitter.com/ojgabrielleal
-    about: "Siga para atualizações sobre o projeto"
-  - name: 🤝 Contribuir
+    about: "PT: Siga para atualizacoes sobre o projeto. EN: Follow for project updates."
+  - name: Contribuir / Contribute
     url: https://github.com/ojgabrielleal/akiba-v2/blob/main/CONTRIBUTING.md
-    about: "Veja como contribuir para o projeto"
+    about: "PT: Veja como contribuir para o projeto. EN: Learn how to contribute to the project."

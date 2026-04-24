@@ -1,111 +1,113 @@
-name: 📚 Documentation
-description: Melhore ou adicione documentação
+name: Documentation / Documentacao
+description: Melhore ou adicione documentacao / Improve or add documentation
 labels: ["documentation"]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        Proponha melhorias ou adição de documentação para o projeto.
+        **Portugues:** Proponha melhorias ou adicao de documentacao para o projeto.
+
+        **English:** Propose documentation improvements or additions for the project.
 
   - type: input
     id: title
     attributes:
-      label: Título da Documentação
-      description: "Exemplo: 📚 Documentar API de posts"
-      placeholder: "Digite um título descritivo com emoji"
+      label: Titulo da documentacao / Documentation title
+      description: "PT: Exemplo: Documentar API de posts. EN: Example: Document the posts API."
+      placeholder: "PT/EN: Digite um titulo descritivo / Enter a descriptive title"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: 📌 Descrição
-      description: O que será documentado?
-      placeholder: "Que documentação está faltando ou precisa melhorar?"
+      label: Descricao / Description
+      description: "PT: O que sera documentado? EN: What will be documented?"
+      placeholder: "PT: Que documentacao esta faltando ou precisa melhorar? EN: What documentation is missing or needs improvement?"
     validations:
       required: true
 
   - type: textarea
     id: reason
     attributes:
-      label: "🎯 Por que é necessário?"
-      description: Qual é a razão para adicionar/melhorar esta documentação?
+      label: Por que e necessario? / Why is this needed?
+      description: "PT: Qual e a razao para adicionar ou melhorar esta documentacao? EN: Why should this documentation be added or improved?"
       placeholder: |
-        - Novos desenvolvedores têm dificuldade em entender
-        - API não está documentada
-        - Setup é complicado
+        - PT: Novos desenvolvedores tem dificuldade em entender / EN: New developers have trouble understanding it
+        - PT: API nao esta documentada / EN: API is not documented
+        - PT: Setup e complicado / EN: Setup is complicated
     validations:
       required: true
 
   - type: textarea
     id: content
     attributes:
-      label: "✍️ Conteúdo Proposto"
-      description: "Escreva ou descreva o conteúdo que será documentado"
+      label: Conteudo proposto / Proposed content
+      description: "PT: Escreva ou descreva o conteudo que sera documentado. EN: Write or describe the content that will be documented."
       placeholder: |
-        # Título
-        
-        ## Seções principais
-        - Introdução
-        - Como usar
-        - Exemplos
+        # Titulo / Title
+
+        ## Secoes principais / Main sections
+        - Introducao / Introduction
+        - Como usar / How to use
+        - Exemplos / Examples
         - Troubleshooting
 
   - type: textarea
     id: location
     attributes:
-      label: "📁 Local da Documentação"
-      description: "Onde será adicionada/atualizada? (ex: README.md, docs/api.md)"
-      placeholder: "docs/api.md ou README.md"
+      label: Local da documentacao / Documentation location
+      description: "PT: Onde sera adicionada ou atualizada? EN: Where will it be added or updated?"
+      placeholder: "docs/api.md ou README.md / docs/api.md or README.md"
 
   - type: checkboxes
     id: type
     attributes:
-      label: "📋 Tipo de Documentação"
+      label: Tipo de documentacao / Documentation type
       options:
         - label: "README"
-        - label: "API Docs"
-        - label: "Setup/Installation"
-        - label: "Architecture/Design"
-        - label: "Code Comments"
-        - label: "Troubleshooting"
-        - label: "Contributing Guidelines"
+        - label: "API Docs / Documentacao de API"
+        - label: "Setup/Installation / Configuracao/Instalacao"
+        - label: "Architecture/Design / Arquitetura/Design"
+        - label: "Code Comments / Comentarios de codigo"
+        - label: "Troubleshooting / Solucao de problemas"
+        - label: "Contributing Guidelines / Guia de contribuicao"
 
   - type: checkboxes
     id: audience
     attributes:
-      label: "👥 Público-Alvo"
+      label: Publico-alvo / Target audience
       options:
-        - label: "Novos desenvolvedores"
-        - label: "Usuários da API"
-        - label: "Maintainers"
-        - label: "Contribuidores"
+        - label: "Novos desenvolvedores / New developers"
+        - label: "Usuarios da API / API users"
+        - label: "Maintainers / Mantenedores"
+        - label: "Contribuidores / Contributors"
 
   - type: textarea
     id: resources
     attributes:
-      label: "🔗 Recursos Úteis"
-      description: "Links, referências, exemplos que devem ser incluídos"
+      label: Recursos uteis / Useful resources
+      description: "PT: Links, referencias ou exemplos que devem ser incluidos. EN: Links, references, or examples that should be included."
       placeholder: |
-        - Link para issue relacionada
-        - Link para PR
-        - Exemplos de código
+        - PT: Link para issue relacionada / EN: Link to related issue
+        - PT: Link para PR / EN: Link to PR
+        - PT: Exemplos de codigo / EN: Code examples
 
   - type: dropdown
     id: priority
     attributes:
-      label: "⚡ Prioridade"
+      label: Prioridade / Priority
       options:
-        - "🔴 Alta (Crítica para onboarding)"
-        - "🟡 Média (Útil ter)"
-        - "🟢 Baixa (Melhoria futura)"
+        - Alta, critica para onboarding / High, critical for onboarding
+        - Media, util ter / Medium, useful to have
+        - Baixa, melhoria futura / Low, future improvement
     validations:
       required: true
 
   - type: textarea
     id: notes
     attributes:
-      label: "📝 Notas Adicionais"
-      description: "Qualquer informação extra"
-      placeholder: "Contexto adicional, sugestões, etc."
+      label: Notas adicionais / Additional notes
+      description: "PT: Qualquer informacao extra. EN: Any extra information."
+      placeholder: "PT/EN: Contexto adicional, sugestoes, etc. / Additional context, suggestions, etc."

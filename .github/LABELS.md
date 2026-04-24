@@ -1,162 +1,153 @@
-# 🏷️ Labels Padrão do Akiba v2
+# Akiba v2 Standard Labels / Labels Padrao do Akiba v2
 
-Este documento define todos os labels usados no repositório Akiba v2 e suas finalidades.
+## Portugues
 
-## 📋 Categorias de Labels
+Este documento define todos os labels usados no repositorio Akiba v2 e suas finalidades.
 
-### 🔴 Tipo de Issue
+### Tipo de issue
 
-| Label | Descrição | Cor |
+| Label | Descricao | Cor |
 |-------|-----------|-----|
-| `bug` | Relatório de erro ou comportamento inesperado | 🔴 Red |
-| `enhancement` | Nova funcionalidade ou melhoria | 🟢 Green |
-| `refactor` | Melhoria de código existente | 🟠 Orange |
-| `documentation` | Adição ou melhoria de documentação | 🔵 Blue |
-| `security` | Problema de segurança | 🔴 Red |
-| `performance` | Melhoria de performance | ⚡ Yellow |
+| `bug` | Relatorio de erro ou comportamento inesperado | Red |
+| `enhancement` | Nova funcionalidade ou melhoria | Green |
+| `refactor` | Melhoria de codigo existente | Orange |
+| `documentation` | Adicao ou melhoria de documentacao | Blue |
+| `security` | Problema de seguranca | Red |
+| `performance` | Melhoria de performance | Yellow |
 
-### 🏗️ Área do Código
+### Area do codigo
 
-| Label | Descrição | Cor |
+| Label | Descricao | Cor |
 |-------|-----------|-----|
-| `backend` | Mudanças em PHP/Laravel/API | 🔵 Blue |
-| `frontend` | Mudanças em Vue/JavaScript/CSS | 🟣 Purple |
-| `database` | Mudanças em banco de dados | 🟤 Brown |
-| `devops` | Mudanças em infraestrutura/CI-CD | 🖤 Black |
-| `documentation` | Melhorias em docs | 📘 Blue |
+| `backend` | Mudancas em PHP/Laravel/API | Blue |
+| `frontend` | Mudancas em Vue/JavaScript/CSS | Purple |
+| `database` | Mudancas em banco de dados | Brown |
+| `devops` | Mudancas em infraestrutura/CI-CD | Black |
+| `documentation` | Melhorias em docs | Blue |
 
-### ⚡ Status
+### Status
 
-| Label | Descrição | Cor |
+| Label | Descricao | Cor |
 |-------|-----------|-----|
-| `in-progress` | Trabalho em andamento | 🟠 Orange |
-| `blocked` | Bloqueada, aguardando algo | 🔴 Red |
-| `ready` | Pronta para ser desenvolvida | 🟢 Green |
-| `needs-review` | Aguardando revisão | 🟡 Yellow |
-| `in-review` | Em processo de revisão | 🟡 Yellow |
+| `in-progress` | Trabalho em andamento | Orange |
+| `blocked` | Bloqueada, aguardando algo | Red |
+| `ready` | Pronta para ser desenvolvida | Green |
+| `needs-review` | Aguardando revisao | Yellow |
+| `in-review` | Em processo de revisao | Yellow |
 
-### 🎯 Prioridade
+### Prioridade
 
-| Label | Descrição | Cor |
+| Label | Descricao | Cor |
 |-------|-----------|-----|
-| `priority-critical` | Bloqueador, produção quebrada | 🔴 Red |
-| `priority-high` | Alta prioridade | 🟠 Orange |
-| `priority-medium` | Prioridade média | 🟡 Yellow |
-| `priority-low` | Baixa prioridade, pode esperar | 🟢 Green |
+| `priority-critical` | Bloqueador, producao quebrada | Red |
+| `priority-high` | Alta prioridade | Orange |
+| `priority-medium` | Prioridade media | Yellow |
+| `priority-low` | Baixa prioridade, pode esperar | Green |
 
-### 🤝 Comunidade
+### Comunidade
 
-| Label | Descrição | Cor |
+| Label | Descricao | Cor |
 |-------|-----------|-----|
-| `help-wanted` | Procurando ajuda de contribuidores | 🟡 Yellow |
-| `good-first-issue` | Boa para primeiro contribuidor | 💚 Green |
-| `question` | Dúvida ou pergunta | 🔵 Blue |
-| `discussion` | Discussão aberta | 🟣 Purple |
+| `help-wanted` | Procurando ajuda de contribuidores | Yellow |
+| `good-first-issue` | Boa para primeiro contribuidor | Green |
+| `question` | Duvida ou pergunta | Blue |
+| `discussion` | Discussao aberta | Purple |
 
-### ❌ Decisões
+### Decisoes
 
-| Label | Descrição | Cor |
+| Label | Descricao | Cor |
 |-------|-----------|-----|
-| `duplicate` | Duplicata de outra issue | ⚫ Gray |
-| `wontfix` | Não será corrigido | ⚫ Gray |
-| `invalid` | Inválida ou incorreta | ⚫ Gray |
-| `needs-more-info` | Precisa de mais informações | 🟡 Yellow |
+| `duplicate` | Duplicata de outra issue | Gray |
+| `wontfix` | Nao sera corrigido | Gray |
+| `invalid` | Invalida ou incorreta | Gray |
+| `needs-more-info` | Precisa de mais informacoes | Yellow |
 
-## 📌 Como Usar Labels
+### Como usar labels
 
-### Ao Criar uma Issue
+Ao criar uma issue, inclua um label de tipo, um label de area, um label de prioridade quando aplicavel, e labels adicionais conforme necessario.
 
-Sempre inclua:
+Exemplo para uma nova feature de autenticacao:
 
-1. **Um label de tipo**: `bug`, `enhancement`, `refactor`, `documentation`
-2. **Um label de área**: `backend`, `frontend`, `database`, `devops`
-3. **Um label de prioridade** (se aplicável): `priority-high`, `priority-medium`, etc
-4. **Labels adicionais** conforme necessário
-
-### Exemplo
-
-Uma nova feature de autenticação deveria ter:
-- `enhancement` (tipo)
-- `backend` (área)
-- `security` (tópico)
-- `priority-high` (prioridade)
-
-### Ao Revisar
-
-Você pode atualizar labels conforme a issue progride:
-- `ready` → `in-progress` → `needs-review` → fechada
-- `blocked` quando há dependências
-
-## 🎯 Gerenciando Labels
-
-### Criar um novo label
-
-Se um novo label for necessário:
-
-1. Vá em Issues → Labels
-2. Clique em "New label"
-3. Use a convenção de nomenclatura do projeto
-4. Adicione uma descrição clara
-5. Escolha uma cor consistente
-
-### Padrão de Cores
-
-- 🔴 **Red (#d73a49)**: Crítico, bloqueador, erro
-- 🟠 **Orange (#ffa500)**: Alto, em progresso
-- 🟡 **Yellow (#ffd700)**: Médio, atenção
-- 🟢 **Green (#28a745)**: Baixo, pronto
-- 🔵 **Blue (#0366d6)**: Informativo (backend, documentação)
-- 🟣 **Purple (#7b3ff2)**: Frontend
-- 🖤 **Black (#000000)**: DevOps, infraestrutura
-- ⚫ **Gray (#6f42c1)**: Inválido, não será corrigido
-
-## 🔍 Buscando por Labels
-
-Use labels para buscar e filtrar:
-
-```
-# Issues abertas de alta prioridade no backend
-is:open label:backend label:priority-high
-
-# Bugs que precisam de revisão
-is:open label:bug label:needs-review
-
-# Issues prontas para novo contribuidor
-is:open label:good-first-issue label:ready
-
-# Tudo bloqueado
-is:open label:blocked
-```
-
-## 📝 Exemplos
-
-### 🐛 Bug Report
-
-Labels sugeridos:
-- `bug`
-- `backend` ou `frontend`
-- `priority-high` ou `priority-medium`
-
-### 🚀 Feature Request
-
-Labels sugeridos:
 - `enhancement`
-- `backend` ou `frontend`
-- `priority-medium` ou `priority-low`
+- `backend`
+- `security`
+- `priority-high`
 
-### 🔧 Refactor
-
-Labels sugeridos:
-- `refactor`
-- `backend` ou `frontend`
-- `priority-low` (geralmente)
-
-### 📚 Documentation
-
-Labels sugeridos:
-- `documentation`
-- `help-wanted` (se for chamar contribuidores)
+Durante a revisao, atualize labels conforme a issue progride: `ready` -> `in-progress` -> `needs-review` -> fechada.
 
 ---
 
-**Mantenha a consistência nos labels para melhor organização do projeto! 🎯**
+## English
+
+This document defines all labels used in the Akiba v2 repository and their purpose.
+
+### Issue type
+
+| Label | Description | Color |
+|-------|-------------|-------|
+| `bug` | Error report or unexpected behavior | Red |
+| `enhancement` | New feature or improvement | Green |
+| `refactor` | Improvement to existing code | Orange |
+| `documentation` | Documentation addition or improvement | Blue |
+| `security` | Security issue | Red |
+| `performance` | Performance improvement | Yellow |
+
+### Code area
+
+| Label | Description | Color |
+|-------|-------------|-------|
+| `backend` | PHP/Laravel/API changes | Blue |
+| `frontend` | Vue/JavaScript/CSS changes | Purple |
+| `database` | Database changes | Brown |
+| `devops` | Infrastructure/CI-CD changes | Black |
+| `documentation` | Documentation improvements | Blue |
+
+### Status
+
+| Label | Description | Color |
+|-------|-------------|-------|
+| `in-progress` | Work in progress | Orange |
+| `blocked` | Blocked, waiting for something | Red |
+| `ready` | Ready to be developed | Green |
+| `needs-review` | Waiting for review | Yellow |
+| `in-review` | In review | Yellow |
+
+### Priority
+
+| Label | Description | Color |
+|-------|-------------|-------|
+| `priority-critical` | Blocker, production is broken | Red |
+| `priority-high` | High priority | Orange |
+| `priority-medium` | Medium priority | Yellow |
+| `priority-low` | Low priority, can wait | Green |
+
+### Community
+
+| Label | Description | Color |
+|-------|-------------|-------|
+| `help-wanted` | Looking for contributor help | Yellow |
+| `good-first-issue` | Good for a first-time contributor | Green |
+| `question` | Question | Blue |
+| `discussion` | Open discussion | Purple |
+
+### Decisions
+
+| Label | Description | Color |
+|-------|-------------|-------|
+| `duplicate` | Duplicate of another issue | Gray |
+| `wontfix` | Will not be fixed | Gray |
+| `invalid` | Invalid or incorrect | Gray |
+| `needs-more-info` | Needs more information | Yellow |
+
+### How to use labels
+
+When creating an issue, include one type label, one area label, one priority label when applicable, and any additional labels as needed.
+
+Example for a new authentication feature:
+
+- `enhancement`
+- `backend`
+- `security`
+- `priority-high`
+
+During review, update labels as the issue progresses: `ready` -> `in-progress` -> `needs-review` -> closed.

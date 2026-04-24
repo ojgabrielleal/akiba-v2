@@ -1,99 +1,177 @@
-# 📁 Configurações GitHub
+# GitHub Configuration / Configuracoes do GitHub
 
-Este diretório contém configurações e templates para o repositório Akiba v2.
+## Portugues
 
-## 📋 Arquivos
+Este diretorio contem configuracoes e templates para o repositorio Akiba v2.
 
-### `ISSUE_TEMPLATE/`
+### Arquivos
 
-Contém templates para criar issues padronizadas:
+#### `ISSUE_TEMPLATE/`
 
-- **bug_report.yaml** - 🐛 Para reportar bugs
-- **feature_request.yaml** - 🚀 Para sugerir novas funcionalidades
-- **task.yaml** - 📋 Para tarefas gerais
-- **refactor.yaml** - 🔧 Para refatorações
-- **documentation.yaml** - 📚 Para melhorias em documentação
-- **config.yaml** - Configuração dos templates
+Contem templates para criar issues padronizadas:
 
-### `pull_request_template.md`
+- `bug_report.yaml` - Para reportar bugs
+- `feature_request.yaml` - Para sugerir novas funcionalidades
+- `task.yaml` - Para tarefas gerais
+- `refactor.yaml` - Para refatoracoes
+- `documentation.yaml` - Para melhorias em documentacao
+- `config.yaml` - Configuracao dos templates
 
-Template padrão para Pull Requests, garante que PRs tenham:
-- Descrição clara do objetivo
+#### `pull_request_template.md`
+
+Template padrao para Pull Requests, garantindo que PRs tenham:
+
+- Descricao clara do objetivo
 - Testes realizados
-- Checklist de verificação
+- Checklist de verificacao
 - Links relacionados
 
-## 🏷️ Labels Padronizados
+### Labels padronizados
 
-Os templates usam os seguintes labels:
-
-| Label | Cor | Descrição |
+| Label | Cor | Descricao |
 |-------|-----|-----------|
-| `bug` | 🔴 Red | Relatório de bug |
-| `enhancement` | 🟢 Green | Nova feature ou melhoria |
-| `documentation` | 📘 Blue | Melhorias na documentação |
-| `refactor` | 🟠 Orange | Refatoração de código |
-| `backend` | 🔵 Blue | Mudanças no backend (PHP/Laravel) |
-| `frontend` | 🟣 Purple | Mudanças no frontend (Vue/JS) |
-| `help wanted` | 🟡 Yellow | Procurando ajuda de contribuidores |
-| `duplicate` | ⚫ Gray | Duplicata de outra issue |
-| `wontfix` | ⚫ Gray | Não será corrigido |
+| `bug` | Red | Relatorio de bug |
+| `enhancement` | Green | Nova feature ou melhoria |
+| `documentation` | Blue | Melhorias na documentacao |
+| `refactor` | Orange | Refatoracao de codigo |
+| `backend` | Blue | Mudancas no backend (PHP/Laravel) |
+| `frontend` | Purple | Mudancas no frontend (Vue/JS) |
+| `help wanted` | Yellow | Procurando ajuda de contribuidores |
+| `duplicate` | Gray | Duplicata de outra issue |
+| `wontfix` | Gray | Nao sera corrigido |
 
-## 🚀 Como Usar
+### Como usar
 
-### Para Criar uma Issue
+#### Para criar uma issue
 
-1. Vá em "Issues" → "New issue"
-2. Escolha um dos templates disponíveis
-3. Preencha os campos obrigatórios (marcados com *)
+1. Va em "Issues" -> "New issue"
+2. Escolha um dos templates disponiveis
+3. Preencha os campos obrigatorios, marcados com `*`
 4. Clique em "Submit new issue"
 
-### Para Criar um PR
+#### Para criar um PR
 
-1. Faça push da sua branch
+1. Faca push da sua branch
 2. Abra um "New pull request"
-3. Descreva as mudanças seguindo o template
+3. Descreva as mudancas seguindo o template
 4. Preencha o checklist
 5. Clique em "Create pull request"
 
-## 📖 Documentação
+### Documentacao
 
-Para mais informações sobre como contribuir, consulte o [CONTRIBUTING.md](../CONTRIBUTING.md)
+Para mais informacoes sobre como contribuir, consulte o [CONTRIBUTING.md](../CONTRIBUTING.md).
 
-## 💡 Boas Práticas
+### Boas praticas
 
-### Títulos de Issues
+Use titulos de issues com um emoji e um titulo descritivo:
 
-Sempre use um emoji + título descritivo:
-
-```
-🐛 Erro ao carregar posts
-🚀 Adicionar tema escuro
-📋 Refatorar validação
+```text
+Bug ao carregar posts
+Adicionar tema escuro
+Refatorar validacao
 ```
 
-### Descrição Estruturada
-
-Use seções claras:
+Use secoes claras:
 
 ```markdown
-## 📌 Descrição
-[O quê?]
+## Descricao
+[O que?]
 
-## 🎯 Objetivo
-[Por quê? Qual problema resolve?]
+## Objetivo
+[Por que? Qual problema resolve?]
 
-## ✅ Tasks/Passos
+## Tasks/Passos
 - [ ] Passo 1
 - [ ] Passo 2
 ```
 
-### Labels Úteis
+Use no minimo 2 labels por issue, categorize por area (`backend`, `frontend`, etc.) e use prioridade quando aplicavel.
 
-- Use **no mínimo 2 labels** por issue
-- Sempre categorize por área (**backend**, **frontend**, etc)
-- Use prioridade quando aplicável
+---
 
-## 🔧 Manutenção
+## English
 
-Estes templates são mantidos pela equipe do projeto. Para sugestões de melhorias, abra uma discussion.
+This directory contains GitHub configuration files and templates for the Akiba v2 repository.
+
+### Files
+
+#### `ISSUE_TEMPLATE/`
+
+Contains templates for standardized issues:
+
+- `bug_report.yaml` - For reporting bugs
+- `feature_request.yaml` - For suggesting new features
+- `task.yaml` - For general tasks
+- `refactor.yaml` - For refactoring work
+- `documentation.yaml` - For documentation improvements
+- `config.yaml` - Template configuration
+
+#### `pull_request_template.md`
+
+Default Pull Request template, ensuring PRs include:
+
+- A clear goal description
+- Tests performed
+- Verification checklist
+- Related links
+
+### Standard labels
+
+| Label | Color | Description |
+|-------|-------|-------------|
+| `bug` | Red | Bug report |
+| `enhancement` | Green | New feature or improvement |
+| `documentation` | Blue | Documentation improvements |
+| `refactor` | Orange | Code refactoring |
+| `backend` | Blue | Backend changes (PHP/Laravel) |
+| `frontend` | Purple | Frontend changes (Vue/JS) |
+| `help wanted` | Yellow | Looking for contributor help |
+| `duplicate` | Gray | Duplicate of another issue |
+| `wontfix` | Gray | Will not be fixed |
+
+### How to use
+
+#### To create an issue
+
+1. Go to "Issues" -> "New issue"
+2. Choose one of the available templates
+3. Fill in the required fields, marked with `*`
+4. Click "Submit new issue"
+
+#### To create a PR
+
+1. Push your branch
+2. Open a "New pull request"
+3. Describe the changes using the template
+4. Fill in the checklist
+5. Click "Create pull request"
+
+### Documentation
+
+For more information about contributing, see [CONTRIBUTING.md](../CONTRIBUTING.md).
+
+### Best practices
+
+Use issue titles with an emoji and a descriptive title:
+
+```text
+Bug loading posts
+Add dark theme
+Refactor validation
+```
+
+Use clear sections:
+
+```markdown
+## Description
+[What?]
+
+## Goal
+[Why? What problem does it solve?]
+
+## Tasks/Steps
+- [ ] Step 1
+- [ ] Step 2
+```
+
+Use at least 2 labels per issue, categorize by area (`backend`, `frontend`, etc.), and use priority labels when applicable.
