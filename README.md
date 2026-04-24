@@ -2,10 +2,7 @@
   <img src="https://i.imgur.com/WbKAm6A.png" alt="Akiba V2" width="500" />
 </div>
 
-Segunda versão (2026) do portal de notícias e web-rádio da Rede Akiba. Trazendo uma nova experiência para os fãs da cultura japonesa desde 2016 
-
-Second version (2026) of the Akiba Network news portal and web radio. Bringing a new experience to fans of Japanese culture since 2016.
-
+Segunda versão (2026) do portal de notícias e web-rádio da Rede Akiba. Trazendo uma nova experiência para os fãs da cultura japonesa desde 2016.
 
 ## Português
 
