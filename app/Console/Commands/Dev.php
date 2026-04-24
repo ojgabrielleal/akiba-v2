@@ -19,7 +19,7 @@ class Dev extends Command
      *
      * @var string
      */
-    protected $description = 'Manager Laravel and Svelte development servers togheter';
+    protected $description = 'Manage Laravel and Svelte development servers together';
 
     /**
      * Execute the console command.

@@ -1,29 +1,29 @@
 # Akiba V2
 
-## Portugues
+## Português
 
-Akiba V2 e uma aplicacao Laravel para gerenciar uma plataforma de comunidade/radio com foco em cultura anime. O projeto combina uma experiencia publica com player e pedidos de musica, alem de um painel privado para conteudo, programacao, locucao, midia, marketing, usuarios, permissoes e tarefas operacionais.
+Akiba V2 é uma aplicação Laravel para gerenciar uma plataforma de comunidade e rádio com foco em cultura anime. O projeto combina uma experiência pública com player e pedidos de música, além de um painel privado para conteúdo, programação, locução, mídia, marketing, usuários, permissões e tarefas operacionais.
 
 ### Stack
 
 - **Back-end:** PHP 8.2, Laravel 12, Laravel Sanctum
 - **Front-end:** Inertia.js, Svelte, Vite, Tailwind CSS 4
 - **Banco de dados:** MySQL
-- **Assets e midia:** Intervention Image
+- **Assets e mídia:** Intervention Image
 - **Ferramentas:** PHPUnit, Laravel Pint, Laravel Pail
 
 ### Principais recursos
 
-- Pagina publica com player e suporte a pedidos de musica
-- Painel privado com autenticacao
-- Dashboard com atividades e conclusao de tarefas
-- Gestao de posts, reviews, eventos, podcasts, midias e materiais de marketing
-- Gestao de radio com programas, ranking musical, ouvinte do mes e pedidos de musica
-- Fluxo de locucao para iniciar e finalizar transmissoes
-- Area administrativa para usuarios, cargos, permissoes, calendario, atividades, tarefas e programas automaticos
+- Página pública com player e suporte a pedidos de música
+- Painel privado com autenticação
+- Dashboard com atividades e conclusão de tarefas
+- Gestão de posts, reviews, eventos, podcasts, mídias e materiais de marketing
+- Gestão de rádio com programas, ranking musical, ouvinte do mês e pedidos de música
+- Fluxo de locução para iniciar e finalizar transmissões
+- Área administrativa para usuários, cargos, permissões, calendário, atividades, tarefas e programas automáticos
 - Gerenciamento de perfil
 - Endpoints de cast para redirecionamento de stream e metadados
-- Integracao com webhook do Discord para eventos da stream
+- Integração com webhook do Discord para eventos da stream
 
 ### Requisitos
 
@@ -31,18 +31,18 @@ Akiba V2 e uma aplicacao Laravel para gerenciar uma plataforma de comunidade/rad
 - Composer
 - Node.js e npm
 - MySQL
-- Redis opcional, dependendo da configuracao local de cache/sessao
+- Redis opcional, dependendo da configuração local de cache/sessão
 
-### Instalacao
+### Instalação
 
-Clone o repositorio e instale as dependencias PHP e JavaScript:
+Clone o repositório e instale as dependências PHP e JavaScript:
 
 ```bash
 composer install
 npm install
 ```
 
-Crie o arquivo de ambiente e gere a chave da aplicacao:
+Crie o arquivo de ambiente e gere a chave da aplicação:
 
 ```bash
 cp .env.example .env
@@ -66,17 +66,36 @@ Depois execute as migrations:
 php artisan migrate
 ```
 
+Para preparar o banco com dados iniciais, execute as seeders:
+
+```bash
+php artisan db:seed
+```
+
+Em um ambiente local novo, você também pode recriar o banco e popular tudo em um único comando:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+As seeders cadastram permissões, cargos, usuários, atividades, programas, conteúdos, podcasts, rádio, enquetes, pedidos musicais e outros dados de desenvolvimento. O usuário administrador local criado pela seeder é:
+
+```text
+Usuário: admin
+Senha: admin
+```
+
 ### Desenvolvimento
 
-Execute o ambiente local completo:
+Execute o ambiente local completo pelo script do Composer:
 
 ```bash
 composer run dev
 ```
 
-Esse comando inicia o servidor Laravel, o listener da fila, os logs com Pail e o servidor Vite.
+Esse comando inicia o servidor Laravel, o listener da fila, os logs com Laravel Pail e o servidor Vite.
 
-Tambem e possivel rodar as partes separadamente:
+Também é possível rodar as partes separadamente:
 
 ```bash
 php artisan serve
@@ -84,9 +103,25 @@ npm run dev
 php artisan queue:listen
 ```
 
+### Comandos personalizados
+
+O projeto possui comandos Artisan próprios para facilitar o desenvolvimento:
+
+```bash
+php artisan dev
+```
+
+Inicia o servidor Laravel e o servidor Vite no mesmo terminal.
+
+```bash
+php artisan logs
+```
+
+Exibe o arquivo `storage/logs/laravel.log` em tempo real.
+
 ### Build
 
-Gere o build de producao do front-end:
+Gere o build de produção do front-end:
 
 ```bash
 npm run build
@@ -94,7 +129,7 @@ npm run build
 
 ### Testes
 
-Execute a suite de testes:
+Execute a suíte de testes:
 
 ```bash
 composer test
@@ -106,21 +141,21 @@ Ou diretamente pelo Artisan:
 php artisan test
 ```
 
-### Rotas uteis
+### Rotas úteis
 
-- `/` - home/player publico provisorio
-- `/site` - rota publica do site
+- `/` - home/player público provisório
+- `/site` - rota pública do site
 - `/panel` - login do painel
 - `/panel/dashboard` - dashboard privado
-- `/panel/radio` - gestao de radio
-- `/panel/locution` - area de locucao
-- `/panel/administration` - area administrativa
+- `/panel/radio` - gestão de rádio
+- `/panel/locution` - área de locução
+- `/panel/administration` - área administrativa
 - `/api/cast` - redirecionamento da stream
 - `/api/cast/metadata` - metadados da stream
 
-### Variaveis de ambiente
+### Variáveis de ambiente
 
-O projeto inclui variaveis extras para integracoes de stream e Discord:
+O projeto inclui variáveis extras para integrações de stream e Discord:
 
 ```env
 CAST_URL=null
@@ -128,30 +163,32 @@ CAST_METADATA=null
 DISCORD_STREAM_WEBHOOK=null
 ```
 
-Defina esses valores quando quiser conectar a aplicacao local a metadados reais da stream ou a notificacoes via webhook.
+Defina esses valores quando quiser conectar a aplicação local a metadados reais da stream ou a notificações via webhook.
 
 ### Estrutura do projeto
 
-- `app/Actions` - casos de uso agrupados por dominio
-- `app/Http/Controllers` - controllers publicos, privados, API e provisorios
-- `app/Http/Requests` - validacoes de formulario
-- `app/Http/Resources` - formatacao de respostas e resources
+- `app/Actions` - casos de uso agrupados por domínio
+- `app/Console/Commands` - comandos Artisan personalizados
+- `app/Http/Controllers` - controllers públicos, privados, API e provisórios
+- `app/Http/Requests` - validações de formulário
+- `app/Http/Resources` - formatação de respostas e resources
 - `app/Models` - models Eloquent
-- `app/Policies` - regras de autorizacao
-- `app/Services` - servicos externos e de processamento
-- `resources/js/pages` - paginas Inertia/Svelte
-- `resources/js/ui` - componentes, layouts e widgets reutilizaveis
+- `app/Policies` - regras de autorização
+- `app/Services` - serviços externos e de processamento
+- `database/seeders` - dados iniciais e registros de desenvolvimento
+- `resources/js/pages` - páginas Inertia/Svelte
+- `resources/js/ui` - componentes, layouts e widgets reutilizáveis
 - `routes/web` - rotas web separadas por contexto
 
-### Licenca
+### Licença
 
-Este projeto e open-source sob a licenca MIT.
+Este projeto é open-source sob a licença MIT.
 
 ---
 
 ## English
 
-Akiba V2 is a Laravel application for managing a radio/community platform focused on anime culture. It combines a public player experience with song requests and a private control panel for content, programming, locution, media, marketing assets, users, permissions, and operational tasks.
+Akiba V2 is a Laravel application for managing a community and radio platform focused on anime culture. The project combines a public player experience with song requests and a private control panel for content, programming, live hosting, media, marketing assets, users, permissions, and operational tasks.
 
 ### Stack
 
@@ -163,15 +200,15 @@ Akiba V2 is a Laravel application for managing a radio/community platform focuse
 
 ### Main features
 
-- Public page with player and song request support
+- Public page with a player and song request support
 - Private panel with authentication
 - Dashboard with activities and task completion
-- Post, review, event, podcast, media, and marketing management
-- Radio management for programs, music ranking, listener of the month, and song requests
-- Locution flow for starting and finishing broadcasts
+- Management for posts, reviews, events, podcasts, media, and marketing assets
+- Radio management for programs, music rankings, listener of the month, and song requests
+- Live hosting flow for starting and finishing broadcasts
 - Administration area for users, roles, permissions, calendars, activities, tasks, and automatic programs
 - Profile management
-- Cast endpoints for stream redirect and metadata
+- Cast endpoints for stream redirects and metadata
 - Discord webhook integration for stream events
 
 ### Requirements
@@ -180,7 +217,7 @@ Akiba V2 is a Laravel application for managing a radio/community platform focuse
 - Composer
 - Node.js and npm
 - MySQL
-- Redis is optional depending on your local cache/session configuration
+- Redis is optional, depending on your local cache/session configuration
 
 ### Installation
 
@@ -215,9 +252,28 @@ Then run the migrations:
 php artisan migrate
 ```
 
+To prepare the database with initial data, run the seeders:
+
+```bash
+php artisan db:seed
+```
+
+For a fresh local environment, you can recreate the database and seed it in one command:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+The seeders create permissions, roles, users, activities, programs, content, podcasts, radio data, polls, song requests, and other development records. The local administrator user created by the seeder is:
+
+```text
+Username: admin
+Password: admin
+```
+
 ### Development
 
-Run the full local development stack:
+Run the full local development stack through the Composer script:
 
 ```bash
 composer run dev
@@ -232,6 +288,22 @@ php artisan serve
 npm run dev
 php artisan queue:listen
 ```
+
+### Custom commands
+
+The project includes custom Artisan commands to make local development easier:
+
+```bash
+php artisan dev
+```
+
+Starts the Laravel server and the Vite server in the same terminal.
+
+```bash
+php artisan logs
+```
+
+Shows `storage/logs/laravel.log` in real time.
 
 ### Build
 
@@ -262,7 +334,7 @@ php artisan test
 - `/panel` - panel login
 - `/panel/dashboard` - private dashboard
 - `/panel/radio` - radio management
-- `/panel/locution` - locution area
+- `/panel/locution` - live hosting area
 - `/panel/administration` - administration area
 - `/api/cast` - cast stream redirect
 - `/api/cast/metadata` - cast metadata
@@ -282,12 +354,14 @@ Set these values when you want to connect the local app to real stream metadata 
 ### Project structure
 
 - `app/Actions` - application use cases grouped by domain
+- `app/Console/Commands` - custom Artisan commands
 - `app/Http/Controllers` - public, private, API, and provisional controllers
 - `app/Http/Requests` - form request validation
 - `app/Http/Resources` - API/resource response formatting
 - `app/Models` - Eloquent models
 - `app/Policies` - authorization rules
 - `app/Services` - external and processing services
+- `database/seeders` - initial data and development records
 - `resources/js/pages` - Inertia/Svelte pages
 - `resources/js/ui` - reusable UI components, layouts, and widgets
 - `routes/web` - web routes split by context

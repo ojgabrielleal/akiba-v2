@@ -18,7 +18,7 @@ class Logs extends Command
      *
      * @var string
      */
-    protected $description = 'Show laravel.log in real time on terminal';
+    protected $description = 'Show laravel.log in real time in the terminal';
 
     /**
      * Execute the console command.
@@ -28,11 +28,11 @@ class Logs extends Command
          $logFile = storage_path('logs/laravel.log');
 
         if (!file_exists($logFile)) {
-            $this->error("laravel.logs is not found: $logFile");
+            $this->error("laravel.log was not found: $logFile");
             return;
         }
 
-        $this->info("Show logs from laravel.log in real time. Press CTRL+C to exit.\n");
+        $this->info("Showing logs from laravel.log in real time. Press CTRL+C to exit.\n");
         $handle = fopen($logFile, 'r');
 
         fseek($handle, 0, SEEK_END);
