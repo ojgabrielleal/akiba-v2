@@ -1,4 +1,6 @@
-# Akiba V2
+<div align="center">
+  <img src="https://i.imgur.com/WbKAm6A.png" alt="Akiba V2" />
+</div>
 
 ## Português
 
@@ -87,10 +89,10 @@ Senha: admin
 
 ### Desenvolvimento
 
-Execute o ambiente local completo pelo script do Composer:
+Execute o ambiente local completo pelo comando personalizado:
 
 ```bash
-composer run dev
+php artisan dev
 ```
 
 Esse comando inicia o servidor Laravel, o listener da fila, os logs com Laravel Pail e o servidor Vite.
@@ -105,20 +107,6 @@ php artisan queue:listen
 
 ### Comandos personalizados
 
-O projeto possui comandos Artisan próprios para facilitar o desenvolvimento:
-
-```bash
-php artisan dev
-```
-
-Inicia o servidor Laravel e o servidor Vite no mesmo terminal.
-
-```bash
-php artisan logs
-```
-
-Exibe o arquivo `storage/logs/laravel.log` em tempo real.
-
 ### Build
 
 Gere o build de produção do front-end:
@@ -130,12 +118,6 @@ npm run build
 ### Testes
 
 Execute a suíte de testes:
-
-```bash
-composer test
-```
-
-Ou diretamente pelo Artisan:
 
 ```bash
 php artisan test
@@ -276,7 +258,7 @@ Password: admin
 Run the full local development stack through the Composer script:
 
 ```bash
-composer run dev
+php artisan dev
 ```
 
 This starts the Laravel server, queue listener, Laravel Pail logs, and Vite dev server together.
@@ -289,22 +271,6 @@ npm run dev
 php artisan queue:listen
 ```
 
-### Custom commands
-
-The project includes custom Artisan commands to make local development easier:
-
-```bash
-php artisan dev
-```
-
-Starts the Laravel server and the Vite server in the same terminal.
-
-```bash
-php artisan logs
-```
-
-Shows `storage/logs/laravel.log` in real time.
-
 ### Build
 
 Create a production frontend build:
@@ -316,12 +282,6 @@ npm run build
 ### Tests
 
 Run the test suite:
-
-```bash
-composer test
-```
-
-Or run Artisan directly:
 
 ```bash
 php artisan test
