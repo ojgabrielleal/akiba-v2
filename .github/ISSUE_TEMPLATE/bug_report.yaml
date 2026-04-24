@@ -1,105 +1,103 @@
-name: Bug Report / Relatorio de Bug
-description: Reporte um bug ou comportamento inesperado / Report a bug or unexpected behavior
+name: Bug Report
+description: Report a bug or unexpected behavior
 labels: ["bug"]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        **Portugues:** Obrigado por reportar um bug. Preencha as informacoes abaixo para ajudar a resolver o problema rapidamente.
-
-        **English:** Thanks for reporting a bug. Please fill in the information below to help us resolve the issue quickly.
+        Thanks for reporting a bug. Please fill in the information below to help us resolve the issue quickly.
 
   - type: input
     id: title
     attributes:
-      label: Titulo do bug / Bug title
-      description: "PT: Exemplo: Erro ao carregar posts na pagina inicial. EN: Example: Error loading posts on the home page."
-      placeholder: "PT/EN: Digite um titulo descritivo / Enter a descriptive title"
+      label: Bug title
+      description: "Example: Error loading posts on the home page."
+      placeholder: "Enter a descriptive title"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Descricao / Description
-      description: "PT: Descreva o bug observado. EN: Describe the bug you observed."
-      placeholder: "PT: O que voce notou de incorreto? EN: What did you notice was wrong?"
+      label: Description
+      description: "Describe the bug you observed."
+      placeholder: "What did you notice was wrong?"
     validations:
       required: true
 
   - type: textarea
     id: steps
     attributes:
-      label: Passos para reproduzir / Steps to reproduce
-      description: "PT: Liste os passos exatos para reproduzir o bug. EN: List the exact steps to reproduce the bug."
+      label: Steps to reproduce
+      description: "List the exact steps to reproduce the bug."
       placeholder: |
-        1. PT: Acesse a pagina de... / EN: Go to the page...
-        2. PT: Clique em... / EN: Click on...
-        3. PT: Observe o resultado inesperado... / EN: Observe the unexpected result...
+        1. Go to...
+        2. Click on...
+        3. Observe...
     validations:
       required: true
 
   - type: textarea
     id: expected
     attributes:
-      label: Comportamento esperado / Expected behavior
-      description: "PT: O que deveria acontecer? EN: What should happen?"
-      placeholder: "PT: Descreva o comportamento esperado. EN: Describe the expected behavior."
+      label: Expected behavior
+      description: "What should happen?"
+      placeholder: "Describe the expected behavior."
     validations:
       required: true
 
   - type: textarea
     id: actual
     attributes:
-      label: Comportamento atual / Actual behavior
-      description: "PT: O que esta acontecendo ao inves disso? EN: What is happening instead?"
-      placeholder: "PT: Descreva o comportamento incorreto. EN: Describe the incorrect behavior."
+      label: Actual behavior
+      description: "What is happening instead?"
+      placeholder: "Describe the incorrect behavior."
     validations:
       required: true
 
   - type: dropdown
     id: area
     attributes:
-      label: Area afetada / Affected area
+      label: Affected area
       options:
         - Backend
         - Frontend
-        - Banco de Dados / Database
-        - Autenticacao / Authentication
+        - Database
+        - Authentication
         - API
-        - Outro / Other
+        - Other
     validations:
       required: true
 
   - type: input
     id: browser
     attributes:
-      label: Navegador e versao / Browser and version
-      placeholder: "Ex: Chrome 125.0, Firefox 120.0"
+      label: Browser and version
+      placeholder: "Example: Chrome 125.0, Firefox 120.0"
 
   - type: textarea
     id: screenshots
     attributes:
-      label: Screenshots/Logs
-      description: "PT: Adicione screenshots, logs de erro ou qualquer informacao relevante. EN: Add screenshots, error logs, or any relevant information."
-      placeholder: "PT/EN: Cole logs de erro ou screenshots do problema / Paste error logs or screenshots of the issue"
+      label: Screenshots or logs
+      description: "Add screenshots, error logs, or any relevant information."
+      placeholder: "Paste error logs or screenshots of the issue."
 
   - type: textarea
     id: additional
     attributes:
-      label: Informacoes adicionais / Additional information
-      description: "PT: Qualquer contexto adicional que possa ser util. EN: Any additional context that may be useful."
-      placeholder: "PT/EN: Ambiente, banco de dados, links, contexto, etc. / Environment, database, links, context, etc."
+      label: Additional information
+      description: "Any additional context that may be useful."
+      placeholder: "Environment, database, links, context, etc."
 
   - type: dropdown
     id: priority
     attributes:
-      label: Prioridade / Priority
+      label: Priority
       options:
-        - Critica, producao quebrada / Critical, production is broken
-        - Alta, funcionalidade indisponivel / High, functionality unavailable
-        - Media, comportamento inesperado / Medium, unexpected behavior
-        - Baixa, inconveniente menor / Low, minor inconvenience
+        - Critical, production is broken
+        - High, functionality is unavailable
+        - Medium, unexpected behavior
+        - Low, minor inconvenience
     validations:
       required: true

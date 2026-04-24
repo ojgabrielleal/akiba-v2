@@ -1,83 +1,83 @@
-name: Feature Request / Solicitacao de Funcionalidade
-description: Solicite uma nova funcionalidade ou melhoria / Request a new feature or improvement
+name: Feature Request
+description: Request a new feature or improvement
 labels: ["enhancement"]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        **Portugues:** Obrigado por sugerir uma nova funcionalidade. Preencha os detalhes abaixo.
-
-        **English:** Thanks for suggesting a new feature. Please fill in the details below.
+        Thanks for suggesting a new feature. Please fill in the details below.
 
   - type: input
     id: title
     attributes:
-      label: Titulo da funcionalidade / Feature title
-      description: "PT: Exemplo: Adicionar tema escuro a interface. EN: Example: Add dark theme to the interface."
-      placeholder: "PT/EN: Digite um titulo descritivo / Enter a descriptive title"
+      label: Feature title
+      description: "Example: Add dark theme support."
+      placeholder: "Enter a descriptive title"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Descricao / Description
-      description: "PT: Descreva brevemente a funcionalidade desejada. EN: Briefly describe the desired feature."
-      placeholder: "PT: Explique qual e a funcionalidade desejada. EN: Explain the desired feature."
+      label: Description
+      description: "Briefly describe the desired feature."
+      placeholder: "Explain the desired feature."
     validations:
       required: true
 
   - type: textarea
     id: objective
     attributes:
-      label: Objetivo / Goal
-      description: "PT: Qual e o objetivo principal desta funcionalidade? EN: What is the main goal of this feature?"
-      placeholder: "PT: Qual problema isso resolve ou que valor agrega? EN: What problem does this solve or what value does it add?"
+      label: Goal
+      description: "What is the main goal of this feature?"
+      placeholder: "What problem does this solve or what value does it add?"
     validations:
       required: true
 
   - type: textarea
     id: benefits
     attributes:
-      label: Beneficios / Benefits
-      description: "PT: Quais sao os beneficios ou melhorias esperadas? EN: What benefits or improvements are expected?"
+      label: Benefits
+      description: "What benefits or improvements are expected?"
       placeholder: |
-        - PT: Melhora na experiencia do usuario / EN: Improves the user experience
-        - PT: Facilita manutencao do codigo / EN: Makes code maintenance easier
+        - Improves the user experience
+        - Makes code maintenance easier
 
-  - type: checkboxes
+  - type: textarea
     id: tasks
     attributes:
-      label: Tarefas propostas / Proposed tasks
-      description: "PT: Liste as tarefas que precisam ser feitas. EN: List the tasks that need to be done."
-      options:
-        - label: "Tarefa 1 / Task 1"
-        - label: "Tarefa 2 / Task 2"
-        - label: "Tarefa 3 / Task 3"
+      label: Proposed tasks
+      description: "List the tasks that need to be done."
+      placeholder: |
+        - [ ] Task 1
+        - [ ] Task 2
+        - [ ] Task 3
 
   - type: textarea
     id: additional
     attributes:
-      label: Informacoes adicionais / Additional information
-      description: "PT: Adicione qualquer contexto, screenshot ou referencia relevante. EN: Add any relevant context, screenshot, or reference."
-      placeholder: "PT/EN: Links, exemplos, mocks, etc. / Links, examples, mockups, etc."
+      label: Additional information
+      description: "Add any relevant context, screenshot, or reference."
+      placeholder: "Links, examples, mockups, etc."
 
   - type: checkboxes
     id: area
     attributes:
-      label: Area do projeto / Project area
+      label: Project area
       options:
         - label: "Backend"
         - label: "Frontend"
-        - label: "Documentacao / Documentation"
-        - label: "DevOps/Infraestrutura / DevOps/Infrastructure"
+        - label: "Documentation"
+        - label: "DevOps/Infrastructure"
 
-  - type: checkboxes
+  - type: dropdown
     id: priority
     attributes:
-      label: Prioridade / Priority
+      label: Priority
       options:
-        - label: "Alta / High"
-        - label: "Media / Medium"
-        - label: "Baixa / Low"
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true

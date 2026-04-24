@@ -1,69 +1,67 @@
-name: Refactor / Refatoracao
-description: Melhore ou refatore codigo existente / Improve or refactor existing code
+name: Refactor
+description: Improve or refactor existing code
 labels: ["refactor"]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        **Portugues:** Proponha uma refatoracao de codigo para melhorar qualidade, performance ou manutenibilidade.
-
-        **English:** Propose a code refactor to improve quality, performance, or maintainability.
+        Propose a code refactor to improve quality, performance, or maintainability.
 
   - type: input
     id: title
     attributes:
-      label: Titulo da refatoracao / Refactor title
-      description: "PT: Exemplo: Extrair duplicacao em controllers. EN: Example: Extract duplication from controllers."
-      placeholder: "PT/EN: Digite um titulo descritivo / Enter a descriptive title"
+      label: Refactor title
+      description: "Example: Extract duplicated controller logic."
+      placeholder: "Enter a descriptive title"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Descricao / Description
-      description: "PT: Explique o que sera refatorado. EN: Explain what will be refactored."
-      placeholder: "PT: Que codigo esta sendo refatorado? EN: What code is being refactored?"
+      label: Description
+      description: "Explain what will be refactored."
+      placeholder: "What code is being refactored?"
     validations:
       required: true
 
   - type: textarea
     id: problem
     attributes:
-      label: Problema atual / Current problem
-      description: "PT: Qual e o problema com o codigo atual? EN: What is the problem with the current code?"
+      label: Current problem
+      description: "What is the problem with the current code?"
       placeholder: |
-        - PT: Codigo duplicado em multiplos locais / EN: Duplicated code in multiple places
-        - PT: Dificil de manter / EN: Hard to maintain
-        - PT: Performance baixa / EN: Poor performance
+        - Duplicated code in multiple places
+        - Hard to maintain
+        - Poor performance
     validations:
       required: true
 
   - type: textarea
     id: solution
     attributes:
-      label: Solucao proposta / Proposed solution
-      description: "PT: Como voce propoe resolver este problema? EN: How do you propose solving this problem?"
-      placeholder: "PT: Descreva a abordagem de refatoracao. EN: Describe the refactoring approach."
+      label: Proposed solution
+      description: "How do you propose solving this problem?"
+      placeholder: "Describe the refactoring approach."
     validations:
       required: true
 
   - type: textarea
     id: benefits
     attributes:
-      label: Beneficios / Benefits
-      description: "PT: Quais sao os beneficios desta refatoracao? EN: What are the benefits of this refactor?"
+      label: Benefits
+      description: "What are the benefits of this refactor?"
       placeholder: |
-        - PT: Reduz linhas de codigo duplicadas / EN: Reduces duplicated code
-        - PT: Facilita manutencao futura / EN: Makes future maintenance easier
-        - PT: Melhora performance / EN: Improves performance
+        - Reduces duplicated code
+        - Makes future maintenance easier
+        - Improves performance
 
   - type: textarea
     id: files
     attributes:
-      label: Arquivos afetados / Affected files
-      description: "PT: Quais arquivos serao modificados? EN: Which files will be changed?"
+      label: Affected files
+      description: "Which files will be changed?"
       placeholder: |
         - app/Http/Controllers/PostController.php
         - app/Services/PostService.php
@@ -71,48 +69,48 @@ body:
   - type: textarea
     id: tasks
     attributes:
-      label: Tarefas / Tasks
-      description: "PT: Passos para completar a refatoracao. EN: Steps to complete the refactor."
+      label: Tasks
+      description: "Steps to complete the refactor."
       placeholder: |
-        - [ ] PT: Extrair duplicacao / EN: Extract duplication
-        - [ ] PT: Criar testes para cobertura / EN: Add tests for coverage
-        - [ ] PT: Verificar performance / EN: Verify performance
-        - [ ] PT: Atualizar documentacao / EN: Update documentation
+        - [ ] Extract duplication
+        - [ ] Add tests for coverage
+        - [ ] Verify performance
+        - [ ] Update documentation
 
   - type: textarea
     id: impact
     attributes:
-      label: Impacto / Impact
-      description: "PT: Qual e o impacto desta mudanca? EN: What is the impact of this change?"
+      label: Impact
+      description: "What is the impact of this change?"
       placeholder: |
-        - PT: Breaking changes, se houver / EN: Breaking changes, if any
-        - PT: Arquivos afetados / EN: Affected files
-        - PT: Testes necessarios / EN: Required tests
+        - Breaking changes, if any
+        - Affected files
+        - Required tests
 
   - type: checkboxes
     id: area
     attributes:
-      label: Area afetada / Affected area
+      label: Affected area
       options:
         - label: "Backend"
         - label: "Frontend"
-        - label: "Database / Banco de Dados"
-        - label: "Architecture / Arquitetura"
+        - label: "Database"
+        - label: "Architecture"
 
   - type: dropdown
     id: priority
     attributes:
-      label: Prioridade / Priority
+      label: Priority
       options:
-        - Alta, bloqueia outras tarefas / High, blocks other tasks
-        - Media, nice to have / Medium, nice to have
-        - Baixa, manutencao tecnica / Low, technical maintenance
+        - High, blocks other tasks
+        - Medium, nice to have
+        - Low, technical maintenance
     validations:
       required: true
 
   - type: textarea
     id: notes
     attributes:
-      label: Notas adicionais / Additional notes
-      description: "PT: Qualquer informacao extra importante. EN: Any important extra information."
-      placeholder: "PT/EN: Links, referencias, exemplos, etc. / Links, references, examples, etc."
+      label: Additional notes
+      description: "Any important extra information."
+      placeholder: "Links, references, examples, etc."

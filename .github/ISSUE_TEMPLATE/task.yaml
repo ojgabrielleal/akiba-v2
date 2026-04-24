@@ -1,100 +1,98 @@
-name: Task / Tarefa
-description: Adicione uma tarefa geral ao projeto / Add a general task to the project
+name: Task
+description: Add a general task to the project
 labels: []
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        **Portugues:** Crie uma nova tarefa para o projeto. Defina os detalhes e tarefas relacionadas.
-
-        **English:** Create a new task for the project. Define the details and related tasks.
+        Create a new task for the project. Define the details and related work.
 
   - type: input
     id: title
     attributes:
-      label: Titulo da tarefa / Task title
-      description: "PT: Exemplo: Implementar autenticacao OAuth. EN: Example: Implement OAuth authentication."
-      placeholder: "PT/EN: Digite um titulo descritivo / Enter a descriptive title"
+      label: Task title
+      description: "Example: Implement OAuth authentication."
+      placeholder: "Enter a descriptive title"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Descricao / Description
-      description: "PT: Descreva em detalhes o que precisa ser feito. EN: Describe in detail what needs to be done."
-      placeholder: "PT: Explique a tarefa com clareza. EN: Explain the task clearly."
+      label: Description
+      description: "Describe in detail what needs to be done."
+      placeholder: "Explain the task clearly."
     validations:
       required: true
 
   - type: textarea
     id: objective
     attributes:
-      label: Objetivo / Goal
-      description: "PT: Qual e o proposito desta tarefa? EN: What is the purpose of this task?"
-      placeholder: "PT: Qual problema resolve ou que melhoria traz? EN: What problem does it solve or what improvement does it bring?"
+      label: Goal
+      description: "What is the purpose of this task?"
+      placeholder: "What problem does it solve or what improvement does it bring?"
     validations:
       required: true
 
   - type: textarea
     id: tasks
     attributes:
-      label: Subtarefas / Subtasks
-      description: "PT: Liste as subtarefas ou checkpoints. EN: List subtasks or checkpoints."
+      label: Subtasks
+      description: "List subtasks or checkpoints."
       placeholder: |
-        - [ ] Tarefa 1 / Task 1
-        - [ ] Tarefa 2 / Task 2
-        - [ ] Tarefa 3 / Task 3
-        - [ ] Validar e testar / Validate and test
+        - [ ] Task 1
+        - [ ] Task 2
+        - [ ] Task 3
+        - [ ] Validate and test
 
   - type: textarea
     id: acceptance
     attributes:
-      label: Criterios de aceitacao / Acceptance criteria
-      description: "PT: O que define que esta tarefa esta completa? EN: What defines this task as complete?"
+      label: Acceptance criteria
+      description: "What defines this task as complete?"
       placeholder: |
-        - PT: Feature X funciona corretamente / EN: Feature X works correctly
-        - PT: Testes passam / EN: Tests pass
-        - PT: Documentacao atualizada / EN: Documentation updated
+        - Feature X works correctly
+        - Tests pass
+        - Documentation is updated
 
   - type: textarea
     id: notes
     attributes:
-      label: Notas adicionais / Additional notes
-      description: "PT: Contexto extra, referencias ou informacoes importantes. EN: Extra context, references, or important information."
-      placeholder: "PT/EN: Links, dependencias, restricoes, etc. / Links, dependencies, constraints, etc."
+      label: Additional notes
+      description: "Extra context, references, or important information."
+      placeholder: "Links, dependencies, constraints, etc."
 
   - type: checkboxes
     id: area
     attributes:
-      label: Area do projeto / Project area
+      label: Project area
       options:
         - label: "Backend"
         - label: "Frontend"
-        - label: "Banco de Dados / Database"
+        - label: "Database"
         - label: "DevOps"
-        - label: "Documentacao / Documentation"
+        - label: "Documentation"
 
   - type: dropdown
     id: priority
     attributes:
-      label: Prioridade / Priority
+      label: Priority
       options:
-        - Alta / High
-        - Media / Medium
-        - Baixa / Low
+        - High
+        - Medium
+        - Low
     validations:
       required: true
 
   - type: input
     id: estimate
     attributes:
-      label: Estimativa em horas / Estimate in hours
-      placeholder: "PT: Quantas horas estima para completar? EN: How many hours do you estimate?"
+      label: Estimate in hours
+      placeholder: "How many hours do you estimate?"
 
   - type: input
     id: assignee
     attributes:
-      label: Responsavel / Assignee
-      placeholder: "@username ou deixe em branco / @username or leave blank"
+      label: Assignee
+      placeholder: "@username or leave blank"

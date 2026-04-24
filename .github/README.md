@@ -1,177 +1,104 @@
-# GitHub Configuration / Configuracoes do GitHub
+# GitHub Configuration
 
-## Portugues
+This directory contains GitHub configuration files and templates for the Akiba V2 repository.
 
-Este diretorio contem configuracoes e templates para o repositorio Akiba v2.
+## Files
 
-### Arquivos
-
-#### `ISSUE_TEMPLATE/`
-
-Contem templates para criar issues padronizadas:
-
-- `bug_report.yaml` - Para reportar bugs
-- `feature_request.yaml` - Para sugerir novas funcionalidades
-- `task.yaml` - Para tarefas gerais
-- `refactor.yaml` - Para refatoracoes
-- `documentation.yaml` - Para melhorias em documentacao
-- `config.yaml` - Configuracao dos templates
-
-#### `pull_request_template.md`
-
-Template padrao para Pull Requests, garantindo que PRs tenham:
-
-- Descricao clara do objetivo
-- Testes realizados
-- Checklist de verificacao
-- Links relacionados
-
-### Labels padronizados
-
-| Label | Cor | Descricao |
-|-------|-----|-----------|
-| `bug` | Red | Relatorio de bug |
-| `enhancement` | Green | Nova feature ou melhoria |
-| `documentation` | Blue | Melhorias na documentacao |
-| `refactor` | Orange | Refatoracao de codigo |
-| `backend` | Blue | Mudancas no backend (PHP/Laravel) |
-| `frontend` | Purple | Mudancas no frontend (Vue/JS) |
-| `help wanted` | Yellow | Procurando ajuda de contribuidores |
-| `duplicate` | Gray | Duplicata de outra issue |
-| `wontfix` | Gray | Nao sera corrigido |
-
-### Como usar
-
-#### Para criar uma issue
-
-1. Va em "Issues" -> "New issue"
-2. Escolha um dos templates disponiveis
-3. Preencha os campos obrigatorios, marcados com `*`
-4. Clique em "Submit new issue"
-
-#### Para criar um PR
-
-1. Faca push da sua branch
-2. Abra um "New pull request"
-3. Descreva as mudancas seguindo o template
-4. Preencha o checklist
-5. Clique em "Create pull request"
-
-### Documentacao
-
-Para mais informacoes sobre como contribuir, consulte o [CONTRIBUTING.md](../CONTRIBUTING.md).
-
-### Boas praticas
-
-Use titulos de issues com um emoji e um titulo descritivo:
-
-```text
-Bug ao carregar posts
-Adicionar tema escuro
-Refatorar validacao
-```
-
-Use secoes claras:
-
-```markdown
-## Descricao
-[O que?]
-
-## Objetivo
-[Por que? Qual problema resolve?]
-
-## Tasks/Passos
-- [ ] Passo 1
-- [ ] Passo 2
-```
-
-Use no minimo 2 labels por issue, categorize por area (`backend`, `frontend`, etc.) e use prioridade quando aplicavel.
-
----
-
-## English
-
-This directory contains GitHub configuration files and templates for the Akiba v2 repository.
-
-### Files
-
-#### `ISSUE_TEMPLATE/`
+### `ISSUE_TEMPLATE/`
 
 Contains templates for standardized issues:
 
-- `bug_report.yaml` - For reporting bugs
-- `feature_request.yaml` - For suggesting new features
-- `task.yaml` - For general tasks
-- `refactor.yaml` - For refactoring work
-- `documentation.yaml` - For documentation improvements
-- `config.yaml` - Template configuration
+- `bug_report.yaml` - report bugs or unexpected behavior
+- `feature_request.yaml` - suggest new features or improvements
+- `task.yaml` - track general development or maintenance tasks
+- `refactor.yaml` - propose code quality, architecture, or performance refactors
+- `documentation.yaml` - request documentation additions or improvements
+- `config.yaml` - configure issue templates and contact links
 
-#### `pull_request_template.md`
+### `pull_request_template.md`
 
-Default Pull Request template, ensuring PRs include:
+Default pull request template. It keeps PRs focused on:
 
-- A clear goal description
-- Tests performed
-- Verification checklist
-- Related links
+- A clear goal
+- A concise change summary
+- Test instructions
+- A verification checklist
+- Related issues, PRs, or documentation
 
-### Standard labels
+### `LABELS.md`
 
-| Label | Color | Description |
-|-------|-------|-------------|
-| `bug` | Red | Bug report |
-| `enhancement` | Green | New feature or improvement |
-| `documentation` | Blue | Documentation improvements |
-| `refactor` | Orange | Code refactoring |
-| `backend` | Blue | Backend changes (PHP/Laravel) |
-| `frontend` | Purple | Frontend changes (Vue/JS) |
-| `help wanted` | Yellow | Looking for contributor help |
-| `duplicate` | Gray | Duplicate of another issue |
-| `wontfix` | Gray | Will not be fixed |
+Reference for the repository label system.
 
-### How to use
+## Language Guidelines
 
-#### To create an issue
+The repository uses English as its default public language. Use English for:
 
-1. Go to "Issues" -> "New issue"
-2. Choose one of the available templates
-3. Fill in the required fields, marked with `*`
-4. Click "Submit new issue"
+- README and project documentation
+- Issue and PR templates
+- Issue and PR titles
+- Commit messages
+- Labels and milestones
+- Release notes
 
-#### To create a PR
+Because the team is fully Brazilian, day-to-day discussion inside issue or PR comments can be in Portuguese when it makes collaboration faster. Keep the title, summary, and final decision in English so the repository remains easy to scan later.
 
-1. Push your branch
-2. Open a "New pull request"
-3. Describe the changes using the template
-4. Fill in the checklist
-5. Click "Create pull request"
+## Standard Labels
 
-### Documentation
+| Label | Description |
+|-------|-------------|
+| `bug` | Bug report or unexpected behavior |
+| `enhancement` | New feature or improvement |
+| `documentation` | Documentation additions or improvements |
+| `refactor` | Code refactoring |
+| `backend` | PHP, Laravel, or API changes |
+| `frontend` | Svelte, JavaScript, or CSS changes |
+| `database` | Database, migration, or seeding changes |
+| `devops` | Infrastructure, CI, or deployment changes |
+| `help-wanted` | Looking for contributor help |
+| `good-first-issue` | Good task for a first-time contributor |
+| `duplicate` | Duplicate of another issue |
+| `wontfix` | Will not be fixed |
 
-For more information about contributing, see [CONTRIBUTING.md](../CONTRIBUTING.md).
+## How to Use
 
-### Best practices
+### Creating an issue
 
-Use issue titles with an emoji and a descriptive title:
+1. Go to "Issues" -> "New issue".
+2. Choose one of the available templates.
+3. Fill in the required fields.
+4. Add at least one type label and one area label when possible.
+5. Click "Submit new issue".
+
+### Creating a pull request
+
+1. Push your branch.
+2. Open a "New pull request".
+3. Describe the changes using the template.
+4. Fill in the checklist.
+5. Link the related issue with `Closes #123` when applicable.
+
+## Best Practices
+
+Use short, descriptive issue titles:
 
 ```text
-Bug loading posts
-Add dark theme
-Refactor validation
+Fix post loading error on the home page
+Add dark theme support
+Refactor post validation rules
 ```
 
-Use clear sections:
+Use clear sections when writing issues manually:
 
 ```markdown
 ## Description
-[What?]
+[What is the issue or request?]
 
 ## Goal
-[Why? What problem does it solve?]
+[Why does this matter? What problem does it solve?]
 
-## Tasks/Steps
+## Tasks
 - [ ] Step 1
 - [ ] Step 2
 ```
 
-Use at least 2 labels per issue, categorize by area (`backend`, `frontend`, etc.), and use priority labels when applicable.
+For more details about contributing, see [CONTRIBUTING.md](../CONTRIBUTING.md).

@@ -1,260 +1,219 @@
-# 🤝 Contribuindo para Akiba v2
+# Contributing to Akiba V2
 
-Obrigado por considerar contribuir para Akiba v2! Este documento fornece orientações e instruções sobre como contribuir de forma efetiva.
+Thanks for considering a contribution to Akiba V2. This guide explains how to open issues, submit pull requests, and keep the repository consistent.
 
-## 📋 Índice
+## Language
 
-- [Como Reportar Bugs](#como-reportar-bugs)
-- [Como Sugerir Melhorias](#como-sugerir-melhorias)
-- [Criando uma Issue](#criando-uma-issue)
-- [Padrões de Issues](#padrões-de-issues)
-- [Pull Requests](#pull-requests)
-- [Convensões de Código](#convenções-de-código)
+English is the default language for public repository content:
 
-## 🐛 Como Reportar Bugs
+- README and documentation
+- Issue and pull request titles
+- Issue and pull request summaries
+- Commit messages
+- Labels and milestones
+- Release notes
 
-Ao reportar um bug, use o template **Bug Report**. Forneça:
+The core team is fully Brazilian, so Portuguese is fine for quick internal discussion inside comments when it makes collaboration faster. Keep the title, summary, acceptance criteria, and final decision in English so the work remains easy to search and understand later.
 
-1. **Título claro**: Comece com um emoji (🐛) e descreva o problema sucintamente
-   - ✅ `🐛 Erro ao carregar posts na página inicial`
-   - ❌ `Algo não funciona`
+## Reporting Bugs
 
-2. **Descrição detalhada**: Explique o que está acontecendo
+Use the **Bug Report** template when you find unexpected behavior.
 
-3. **Passos para reproduzir**: Liste os passos exatos para replicar o bug
+A good bug report includes:
 
-4. **Comportamento esperado**: O que deveria acontecer
+1. A clear title, such as `Fix post loading error on the home page`.
+2. A detailed description of what is happening.
+3. Exact steps to reproduce the issue.
+4. The expected behavior.
+5. The actual behavior.
+6. Environment details, such as browser, operating system, PHP/Laravel version, and Node.js version when relevant.
 
-5. **Comportamento atual**: O que está acontecendo ao invés
-
-6. **Informações do ambiente**:
-   - Navegador e versão
-   - Sistema operacional
-   - PHP/Laravel versão (se backend)
-   - Node.js versão (se frontend)
-
-### Exemplo de Bug Report Bem-Feito
-
-```
-Título: 🐛 Erro ao filtrar podcasts por categoria
-
-Descrição:
-Quando filtro podcasts por categoria, a página retorna erro 500.
-
-Passos para Reproduzir:
-1. Acesse /podcasts
-2. Clique no filtro "Categoria"
-3. Selecione "Drama"
-4. Observe erro na página
-
-Comportamento Esperado:
-Deve exibir apenas podcasts da categoria Drama
-
-Comportamento Atual:
-Erro 500 - Internal Server Error
-```
-
-## ✨ Como Sugerir Melhorias
-
-Use o template **Feature Request** para sugerir novas funcionalidades.
-
-1. **Título com emoji**: Descreva brevemente a feature
-   - ✅ `🎨 Adicionar tema escuro à interface`
-   - ❌ `Feature nova`
-
-2. **Descrição**: O que é a nova funcionalidade
-
-3. **Objetivo**: Por que é necessária
-
-4. **Benefícios**: Qual valor agrega
-
-5. **Informações adicionais**: Sketches, exemplos, referências
-
-## 📝 Criando uma Issue
-
-Você pode criar uma issue de 5 formas:
-
-### 1. **Bug Report** 🐛
-Use quando encontrar um comportamento inesperado ou erro.
-
-### 2. **Feature Request** 🚀
-Use para sugerir novas funcionalidades ou melhorias.
-
-### 3. **Task** 📋
-Use para tarefas gerais de desenvolvimento ou manutenção.
-
-### 4. **Refactor** 🔧
-Use para melhorias de código, performance ou arquitetura.
-
-### 5. **Documentation** 📚
-Use para adicionar ou melhorar documentação.
-
-### 6. **Issue em Branco**
-Use se nenhum template se adequar (menos recomendado).
-
-## 🏷️ Padrões de Issues
-
-### Títulos
-
-Sempre comece com um emoji relevante:
-
-- 🐛 **Bug**: Erros ou comportamentos inesperados
-- 🚀 **Feature**: Novas funcionalidades
-- 📋 **Task**: Tarefas gerais
-- 🔧 **Refactor**: Melhorias de código
-- 📚 **Documentation**: Documentação
-- 🎨 **UI/Design**: Mudanças visuais
-- ⚡ **Performance**: Otimizações
-- 🔒 **Security**: Problemas de segurança
-- 🚨 **Urgent**: Issues críticas
-
-### Descrição
-
-Estruture as issues com seções claras:
+Example:
 
 ```markdown
-## 📌 Descrição
-[Descrição clara do que é a issue]
+Title: Fix podcast category filtering error
 
-## 🎯 Objetivo
-[O que isso resolve ou melhora?]
+Description:
+Filtering podcasts by category returns a 500 error.
 
-## ✅ Tasks (para features/tasks)
-- [ ] Tarefa 1
-- [ ] Tarefa 2
-- [ ] Tarefa 3
+Steps to reproduce:
+1. Go to /podcasts.
+2. Click the category filter.
+3. Select "Drama".
+4. Observe the error.
 
-## 📝 Notas Adicionais
-[Contexto extra, links, etc.]
+Expected behavior:
+Only podcasts from the Drama category should be displayed.
+
+Actual behavior:
+The page returns a 500 Internal Server Error.
 ```
 
-### Labels
+## Suggesting Improvements
 
-Use labels apropriados:
+Use the **Feature Request** template to suggest new features or improvements.
 
-- **backend**: Mudanças no código backend (PHP/Laravel)
-- **frontend**: Mudanças no código frontend (Vue/JavaScript)
-- **documentation**: Melhorias na documentação
-- **enhancement**: Nova feature ou melhoria
-- **bug**: Relatório de bug
-- **refactor**: Refatoração de código
-- **help wanted**: Procurando ajuda
-- **wontfix**: Não será corrigido
-- **duplicate**: Duplicata de outra issue
+Include:
 
-## 🚀 Pull Requests
+1. A clear title, such as `Add dark theme support`.
+2. A short description of the feature.
+3. The goal or problem being solved.
+4. Expected benefits.
+5. Additional context, such as screenshots, mockups, examples, or references.
 
-Ao criar um PR:
+## Creating Issues
 
-1. **Vincule a issue**: Use "Closes #123" na descrição
-2. **Descreva as mudanças**: O que foi mudado e por quê
-3. **Adicione testes**: Se aplicável
-4. **Atualize documentação**: Se necessário
-5. **Siga os padrões de código**: Veja seção abaixo
+Choose the template that best matches the work:
 
-### Exemplo de PR
+1. **Bug Report** - unexpected behavior or errors.
+2. **Feature Request** - new features or improvements.
+3. **Task** - general development or maintenance work.
+4. **Refactor** - code quality, architecture, or performance improvements.
+5. **Documentation** - documentation additions or updates.
+6. **Blank issue** - only when no template fits.
+
+## Issue Standards
+
+Use short, descriptive titles:
+
+- `Fix post loading error on the home page`
+- `Add dark theme support`
+- `Refactor post validation rules`
+- `Document stream metadata endpoint`
+
+When writing an issue manually, use clear sections:
 
 ```markdown
-## 🎯 Objetivo
-Resolve #123 - Adicionar filtro por categoria em podcasts
+## Description
+[What is the issue or request?]
 
-## 📝 O que mudou?
-- Adicionado componente de filtro em PodcastIndex.vue
-- Criado método filterByCategory() no PodcastController
-- Adicionados testes unitários
+## Goal
+[Why does this matter? What problem does it solve?]
 
-## ✅ Checklist
-- [x] Testes passam
-- [x] Documentação atualizada
-- [x] Sem erros de lint
-- [x] Testado localmente
+## Tasks
+- [ ] Task 1
+- [ ] Task 2
+- [ ] Task 3
+
+## Additional Notes
+[Extra context, links, or references.]
 ```
 
-## 📋 Convenções de Código
+Use labels consistently:
 
-### Backend (PHP/Laravel)
+- `backend` - PHP, Laravel, or API changes
+- `frontend` - Svelte, JavaScript, or CSS changes
+- `database` - database, migration, or seeding changes
+- `documentation` - documentation additions or improvements
+- `enhancement` - new feature or improvement
+- `bug` - bug report
+- `refactor` - code refactoring
+- `help-wanted` - looking for contributor help
+- `wontfix` - will not be fixed
+- `duplicate` - duplicate of another issue
 
-- Use PSR-12 para style guide
-- Nomes em inglês (variáveis, métodos, classes)
-- Use type hints
-- Sempre valide inputs
-- Use controllers slim, use services para lógica
+## Pull Requests
+
+When opening a pull request:
+
+1. Link the related issue with `Closes #123` when applicable.
+2. Describe what changed and why.
+3. Add or update tests when relevant.
+4. Update documentation when needed.
+5. Follow the project's code standards.
+6. Fill in the PR checklist.
+
+Example:
+
+```markdown
+## Goal
+Closes #123 - Add category filtering to podcasts.
+
+## What Changed?
+- Added the category filter component.
+- Added filtering logic to the podcast controller.
+- Added coverage for category filtering.
+
+## How to Test
+1. Run php artisan test.
+2. Open /podcasts.
+3. Filter podcasts by category.
+
+## Checklist
+- [x] Tests pass locally
+- [x] Documentation updated
+- [x] Tested locally
+```
+
+## Code Conventions
+
+### Backend
+
+- Follow PSR-12.
+- Use English names for variables, methods, classes, and files.
+- Use type hints.
+- Validate inputs with form requests where appropriate.
+- Keep controllers slim and move business logic into actions or services.
 
 ```php
-// ✅ Bom
 class PostController extends Controller
 {
     public function __construct(private PostService $service) {}
-    
+
     public function store(StorePostRequest $request): JsonResponse
     {
         $post = $this->service->create($request->validated());
+
         return response()->json($post, 201);
     }
 }
-
-// ❌ Ruim
-class PostController extends Controller
-{
-    public function store(Request $request) {
-        $post = Post::create($request->all());
-        return $post;
-    }
-}
 ```
 
-### Frontend (Vue/JavaScript)
+### Frontend
 
-- Use PascalCase para componentes
-- Use camelCase para variáveis/métodos
-- Use const em vez de let/var
-- Adicione PropTypes (se não usar TypeScript)
-- Mantenha componentes pequenos e reutilizáveis
+- Use PascalCase for components.
+- Use camelCase for variables and functions.
+- Prefer `const` over `let` when values do not change.
+- Keep components small and reusable.
+- Keep UI copy in English unless the product requirement says otherwise.
 
-```vue
-<!-- ✅ Bom -->
-<template>
-  <div class="podcast-card">
-    <h2>{{ podcast.title }}</h2>
-    <p>{{ truncate(podcast.description, 100) }}</p>
-  </div>
-</template>
+```svelte
+<script>
+  export let podcast;
 
-<script setup>
-const props = defineProps({
-  podcast: {
-    type: Object,
-    required: true
-  }
-});
-
-const truncate = (str, len) => str.length > len ? str.slice(0, len) + '...' : str;
+  const truncate = (value, length) =>
+    value.length > length ? `${value.slice(0, length)}...` : value;
 </script>
+
+<article class="podcast-card">
+  <h2>{podcast.title}</h2>
+  <p>{truncate(podcast.description, 100)}</p>
+</article>
 ```
 
-### Commits
+## Commits
 
-Use mensagens claras e em inglês:
+Use clear commit messages in English:
 
 ```bash
-# ✅ Bom
-git commit -m "feat: add podcast filter by category"
-git commit -m "fix: resolve 500 error on category filter"
-git commit -m "refactor: extract duplicate code from controllers"
+git commit -m "feat: add podcast category filter"
+git commit -m "fix: resolve category filter server error"
+git commit -m "refactor: extract duplicated controller logic"
 git commit -m "docs: update API documentation"
+```
 
-# ❌ Ruim
+Avoid vague messages:
+
+```bash
 git commit -m "fix"
 git commit -m "updating stuff"
 git commit -m "asdfgh"
 ```
 
-## 🆘 Precisa de Ajuda?
+## Getting Help
 
-- 💬 Abra uma **Discussion** para perguntas
-- 📖 Confira a **Documentação**
-- 🐦 Siga no Twitter para atualizações
+- Open a discussion for questions and broader ideas.
+- Check the documentation before opening a new issue.
+- Search existing issues and pull requests to avoid duplicates.
 
----
-
-**Obrigado por contribuir! Você é incrível! 🎉**
+Thanks for helping improve Akiba V2.
