@@ -4,6 +4,7 @@ namespace Tests\Unit\Models;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 use App\Models\User;
@@ -193,5 +194,35 @@ class UserTest extends TestCase
         );
 
         $this->assertEquals('sample-review-title', $user->slug);
+    }
+
+    public function testPasswordAttributeAcceptsNullableValues(): void
+    {
+        $user = User::factory()->create([
+            'username' => null,
+            'password' => null,
+        ]);
+
+        $this->assertNull($user->username);
+        $this->assertNull($user->password);
+    }
+
+    public function testPasswordAttributeIgnoresEmptyValues(): void
+    {
+        $user = User::factory()->create([
+            'username' => null,
+            'password' => '',
+        ]);
+
+        $this->assertNull($user->password);
+    }
+
+    public function testPasswordAttributeHashesFilledValues(): void
+    {
+        $user = User::factory()->create([
+            'password' => 'secret',
+        ]);
+
+        $this->assertTrue(Hash::check('secret', $user->password));
     }
 }

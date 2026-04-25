@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Traits\HasPermissions;
@@ -41,10 +42,16 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'password' => 'hashed',
         'is_active' => 'boolean',
         'birthday' => 'date:Y-m-d',
     ];
+
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn(?string $value) => filled($value) ? Hash::make($value) : null,
+        );
+    }
 
     protected function nickname(): Attribute
     {
