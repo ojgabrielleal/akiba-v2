@@ -64,7 +64,7 @@ trait HasFlashMessages
         $base = $messages[$action] ?? $messages['save'];
         $final =  $base['message'];
 
-        return back()->with('flash', [
+        return redirect()->to(request()->fullUrl())->with('flash', [
             'icon' => $base['icon'],
             'message' => $final,
         ]);
