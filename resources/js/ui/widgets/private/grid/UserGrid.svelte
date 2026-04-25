@@ -29,12 +29,8 @@
     let identifier;
 
     const requestDeactivateUser = (user) => {
-        router.delete(
-            `/panel/administration/user/${user}`,
-            {},
-            {
-                preserveScroll: true,
-            },
+        router.delete(`/panel/administration/user/${user}`, {},
+            { preserveScroll: true },
         );
     };
 </script>
@@ -95,7 +91,7 @@
                             {highestRole.label}
                         </dt>
                         <dd class="flex flex-wrap lg:flex-nowrap gap-2">
-                            {#if can.authority.update}
+                            {#if !item.is_bot && can.authority.update}
                                 <button
                                     aria-label="Definir permissões"
                                     class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
@@ -123,9 +119,7 @@
                                 <button
                                     aria-label="Desativar perfil"
                                     class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                                    on:click={()
-                                >
-                                        requestDeactivateUser(item.uuid)}
+                                    on:click={()=> requestDeactivateUser(item.uuid)}
                                 >
                                     <img
                                         src="/svg/trash.svg"

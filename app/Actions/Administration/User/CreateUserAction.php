@@ -21,7 +21,7 @@ class CreateUserAction
             'avatar' => $avatar,
             'nickname' => $data['nickname'] ?? null,
             'gender' => $data['gender'] ?? null,
-            'is_auto' => $data['is_auto'] ?? false,
+            'is_bot' => $data['is_bot'] ?? false,
         ]);
 
         $user->roles()->attach($roles);

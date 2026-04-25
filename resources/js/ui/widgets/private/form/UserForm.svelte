@@ -11,6 +11,7 @@
     };
 
     let form = useForm({
+        is_bot: null,
         username: null,
         password: null,
         name: null,
@@ -30,34 +31,67 @@
 <form on:submit|preventDefault={submit}>
     <div class="mb-10">
         <div class="mb-4">
-            <label for="username" class="text-md font-noto-sans mb-1 block text-gray-700">
-                Login
-            </label>
-            <input
-                id="username"
-                type="text"
-                name="username"
-                class="font-noto-sans text-md h-10 w-full rounded-lg border border-gray-400 bg-white pl-4 outline-none"
-                bind:value={$form.username}
-                required
-            />
-        </div>
-        <div>
-            <label for="password" class="text-md font-noto-sans mb-1 block text-gray-700">
-                Senha
-            </label>
-            <input
-                id="password"
-                type="password"
-                name="password"
-                class="font-noto-sans text-md h-10 w-full rounded-lg border border-gray-400 bg-white pl-4 outline-none"
-                bind:value={$form.password}
-                required
-            />
-            <div class="font-noto-sans mt-1 text-sm text-gray-400">
-                Essa senha será criptografada para proteção
+            <div class="text-md text-gray-700 font-noto-sans mb-2">
+                Esse usuário é humano ou um bot?
+            </div>
+            <div class="flex items-center gap-2 mb-1">
+                <input
+                    id="human"
+                    type="radio"
+                    name="human"
+                    value={false}
+                    class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                    bind:group={$form.is_bot}
+                />
+                <label for="free" class="cursor-pointer text-md text-gray-700 font-noto-sans">
+                    Humano
+                </label>
+            </div>
+            <div class="flex items-center gap-2">
+                <input
+                    id="bot"
+                    type="radio"
+                    name="human"
+                    value={true}
+                    class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                    bind:group={$form.is_bot}
+                />
+                <label for="private" class="cursor-pointer text-md text-gray-700 font-noto-sans">
+                    Bot
+                </label>
             </div>
         </div>
+        {#if $form.is_bot}
+            <div class="mb-4">
+                <label for="username" class="text-md font-noto-sans mb-1 block text-gray-700">
+                    Login
+                </label>
+                <input
+                    id="username"
+                    type="text"
+                    name="username"
+                    class="font-noto-sans text-md h-10 w-full rounded-lg border border-gray-400 bg-white pl-4 outline-none"
+                    bind:value={$form.username}
+                    required
+                />
+            </div>
+            <div>
+                <label for="password" class="text-md font-noto-sans mb-1 block text-gray-700">
+                    Senha
+                </label>
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    class="font-noto-sans text-md h-10 w-full rounded-lg border border-gray-400 bg-white pl-4 outline-none"
+                    bind:value={$form.password}
+                    required
+                />
+                <div class="font-noto-sans mt-1 text-sm text-gray-400">
+                    Essa senha será criptografada para proteção
+                </div>
+            </div>
+        {/if}
     </div>
     <div class="mb-10">
         <div class="mb-5 flex w-full items-center justify-center">
