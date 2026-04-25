@@ -4,7 +4,7 @@
     import { EventForm, EventGrid } from "@/ui/widgets/private";
 </script>
 
-<Meta meta={{ title: "Eventos" }} />
+<Meta meta={{ title: "Eventos" } } />
 <Layout>
     <EventForm />
     <EventGrid title="Todos os Eventos" />

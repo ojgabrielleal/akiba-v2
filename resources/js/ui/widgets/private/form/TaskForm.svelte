@@ -52,10 +52,7 @@
 
 <form on:submit|preventDefault={submit}>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="user"
-        >
+        <label for="user" class="text-md text-gray-700 font-noto-sans block mb-1">
             Membro responsável
         </label>
         <select
@@ -65,7 +62,9 @@
             bind:value={$form.user}
             required
         >
-            <option value="">Selecione um membro</option>
+            <option value="">
+                Selecione um membro
+            </option>
             {#each users.data as user}
                 <option value={user.uuid}>
                     {user.nickname}
@@ -74,10 +73,7 @@
         </select>
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="title"
-        >
+        <label for="title" class="text-md text-gray-700 font-noto-sans block mb-1">
             Título
         </label>
         <input
@@ -90,10 +86,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="dead_line"
-        >
+        <label for="dead_line" class="text-md text-gray-700 font-noto-sans block mb-1">
             Data de vencimento
         </label>
         <input
@@ -106,10 +99,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="content"
-        >
+        <label for="content" class="text-md text-gray-700 font-noto-sans block mb-1">
             Descrição
         </label>
         <textarea
@@ -123,6 +113,7 @@
     </div>
     {#if can.create || can.update}
         <button
+            aria-label=""
             type="submit"
             class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
         >

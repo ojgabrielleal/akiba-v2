@@ -74,39 +74,25 @@
 <Section title={post ? `Atualizar matéria` : "Criar matéria"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
         {#if can.create}
-            <Link
-                preserveState={false}
-                href="/panel/post"
-                class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-            >
+            <Link preserveState={false} href="/panel/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Matérias
             </Link>
         {/if}
         {#if can.review.create}
-            <Link
-                preserveState={false}
-                href="/panel/review"
-                class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-            >
+            <Link preserveState={false} href="/panel/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Reviews
             </Link>
         {/if}
         {#if can.event.create}
-            <Link
-                preserveState={false}
-                href="/panel/event"
-                class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-            >
+            <Link preserveState={false} href="/panel/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
                 Eventos
             </Link>
         {/if}
     </div>
-    <form on:submit|preventDefault={submit} class="mt-10 lg:mt-15">
+    <form class="mt-10 lg:mt-15" on:submit|preventDefault={submit}>
         <div class="grid grid-cols-1 lg:grid-cols-[20rem_1fr] gap-5">
             <div class="mb-3">
-                <div
-                    class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                >
+                <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                     Imagem em destaque
                 </div>
                 <Preview
@@ -115,9 +101,7 @@
                     oninput={(event) => ($form.image = event.target.files[0])}
                     required={!post}
                 />
-                <ul
-                    class="mt-4 ml-5 list-disc font-noto-sans font-light text-orange-citric"
-                >
+                <ul class="mt-4 ml-5 list-disc font-noto-sans font-light text-orange-citric">
                     <li>
                         <strong>Tamanho:</strong> 708x827
                     </li>
@@ -128,10 +112,7 @@
             </div>
             <div class="mb-3">
                 <div class="mb-8">
-                    <label
-                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                        for="title"
-                    >
+                    <label for="title" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                         Título
                     </label>
                     <input
@@ -143,10 +124,7 @@
                     />
                 </div>
                 <div class="mb-8">
-                    <label
-                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                        for="cover"
-                    >
+                    <label for="cover" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                         Capa da matéria
                     </label>
                     <Preview
@@ -154,16 +132,14 @@
                         standard="w-full h-[25rem] rounded-lg"
                         view="w-full max-h-[25rem] object-cover object-center rounded-lg bg-suspense-aurora"
                         src={$form.cover}
-                        oninput={(event) =>
+                        oninput={(event)
+                    >
                             ($form.cover = event.target.files[0])}
                         required={!post}
                     />
                 </div>
                 <div class="mb-8">
-                    <label
-                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                        for="content"
-                    >
+                    <label for="content" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                         Escreva sua matéria
                     </label>
                     <Wysiwyg
@@ -177,10 +153,7 @@
         <div class="w-full xl:w-7xl 2xl:w-340 ml-auto">
             <div class="gap-2 grid grid-cols-1 md:grid-cols-2 md:gap-10">
                 <div class="mb-8">
-                    <label
-                        class="text-blue-skywave font-bold italic text-lg text-center uppercase font-noto-sans block mb-1"
-                        for="categories"
-                    >
+                    <label for="categories" class="text-blue-skywave font-bold italic text-lg text-center uppercase font-noto-sans block mb-1">
                         Primeira Tag
                     </label>
                     <select
@@ -190,15 +163,14 @@
                         bind:value={$form.categories[0].name}
                     >
                         {#each Object.values(postTags) as item}
-                            <option value={item.value}>{item.label}</option>
+                            <option value={item.value}>
+                                {item.label}
+                            </option>
                         {/each}
                     </select>
                 </div>
                 <div class="mb-8">
-                    <label
-                        class="text-blue-skywave font-bold italic text-lg text-center uppercase font-noto-sans block mb-1"
-                        for="categories"
-                    >
+                    <label for="categories" class="text-blue-skywave font-bold italic text-lg text-center uppercase font-noto-sans block mb-1">
                         Segunda Tag
                     </label>
                     <select
@@ -208,25 +180,20 @@
                         bind:value={$form.categories[1].name}
                     >
                         {#each Object.values(postTags) as item}
-                            <option value={item.value}>{item.label}</option>
+                            <option value={item.value}>
+                                {item.label}
+                            </option>
                         {/each}
                     </select>
                 </div>
             </div>
             <div class="gap-5 grid grid-cols-1 lg:grid-cols-2 lg:gap-10">
                 <div>
-                    <div
-                        class="text-center text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-1"
-                    >
+                    <div class="text-center text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-1">
                         Primeira fonte de pesquisa
                     </div>
-                    <div
-                        class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center mb-4"
-                    >
-                        <label
-                            class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1"
-                            for="references"
-                        >
+                    <div class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center mb-4">
+                        <label for="references" class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1">
                             Nome:
                         </label>
                         <input
@@ -237,13 +204,8 @@
                             bind:value={$form.references[0].name}
                         />
                     </div>
-                    <div
-                        class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center"
-                    >
-                        <label
-                            class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1"
-                            for="references"
-                        >
+                    <div class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center">
+                        <label for="references" class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1">
                             Link:
                         </label>
                         <input
@@ -256,18 +218,11 @@
                     </div>
                 </div>
                 <div>
-                    <div
-                        class="text-center text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-1"
-                    >
+                    <div class="text-center text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-1">
                         Segunda fonte de pesquisa
                     </div>
-                    <div
-                        class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center mb-4"
-                    >
-                        <label
-                            class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1"
-                            for="references"
-                        >
+                    <div class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center mb-4">
+                        <label for="references" class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1">
                             Nome:
                         </label>
                         <input
@@ -278,13 +233,8 @@
                             bind:value={$form.references[1].name}
                         />
                     </div>
-                    <div
-                        class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center"
-                    >
-                        <label
-                            class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1"
-                            for="references"
-                        >
+                    <div class="grid grid-cols-1 xl:grid-cols-[5rem_1fr] items-center">
+                        <label for="references" class="text-orange-amber font-light text-xl uppercase font-noto-sans block mb-1">
                             Link:
                         </label>
                         <input
@@ -299,9 +249,7 @@
             </div>
         </div>
         {#if can.create || can.update}
-            <div
-                class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-15"
-            >
+            <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-15">
                 <button
                     type="submit"
                     value="draft"
@@ -324,7 +272,7 @@
                         Mandar pra revisão
                     </button>
                 {/if}
-                <button
+                <button aria-label=""
                     type="submit"
                     value="published"
                     class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase"

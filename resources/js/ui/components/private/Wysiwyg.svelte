@@ -48,10 +48,13 @@
     }
 </script>
 
-<div
-    class="bg-suspense-aurora rounded-xl overflow-hidden"
-    class:opacity-70={disable}
->
+<div class="bg-suspense-aurora rounded-xl overflow-hidden" class:opacity-70={disable}>
     <div bind:this={editor} class="p-3" style="min-height: {height};"></div>
 </div>
-<textarea bind:this={textarea} {name} {required} class="sr-only"></textarea>
+<textarea
+    bind:this={textarea}
+    {name}
+    {required}
+    class="sr-only"
+>
+</textarea>

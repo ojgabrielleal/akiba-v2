@@ -4,7 +4,7 @@
     import { PollGrid, EventGrid } from "@/ui/widgets/private";
 </script>
 
-<Meta meta={{ title: "Mídias" }} />
+<Meta meta={{ title: "Mídias" } } />
 <Layout>
     <PollGrid />
     <EventGrid variant="detailed" />

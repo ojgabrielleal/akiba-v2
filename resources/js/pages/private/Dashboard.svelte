@@ -33,7 +33,7 @@
     };
 </script>
 
-<Meta meta={{ title: "Dashboard" }} />
+<Meta meta={{ title: "Dashboard" } } />
 <Layout>
     <GreatingHero phrase={phraseSwitchHero(user.nickname)} icon="/img/default/avatar.webp" />
     <RapidAccessGrid />

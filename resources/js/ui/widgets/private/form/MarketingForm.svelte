@@ -60,10 +60,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="name"
-        >
+        <label for="name" class="text-md text-gray-700 font-noto-sans block mb-1">
             Nome do arquivo
         </label>
         <input
@@ -76,10 +73,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="type"
-        >
+        <label for="type" class="text-md text-gray-700 font-noto-sans block mb-1">
             Categoria do arquivo
         </label>
         <select
@@ -89,16 +83,19 @@
             bind:value={$form.type}
             required
         >
-            <option value="tutorial">Tutoriais</option>
-            <option value="software">Programas</option>
-            <option value="package">Pacotes</option>
+            <option value="tutorial">
+                Tutoriais
+            </option>
+            <option value="software">
+                Programas
+            </option>
+            <option value="package">
+                Pacotes
+            </option>
         </select>
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="url"
-        >
+        <label for="url" class="text-md text-gray-700 font-noto-sans block mb-1">
             URL do conteúdo hospedado externamente
         </label>
         <input
@@ -112,6 +109,7 @@
     </div>
     {#if can.create && can.update}
         <button
+            aria-label=""
             type="submit"
             class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
         >

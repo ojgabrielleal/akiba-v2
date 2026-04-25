@@ -66,17 +66,12 @@
 
 <Modal bind:this={modalRef} title="Selecione um Ícone">
     <div slot="content">
-        <div
-            class="grid grid-cols-3 sm:grid-cols-4 gap-4 overflow-y-auto max-h-[50vh] p-1"
-        >
+        <div class="grid grid-cols-3 sm:grid-cols-4 gap-4 overflow-y-auto max-h-[50vh] p-1">
             {#each locutionIcons as icon}
                 <button
                     type="button"
                     class="aspect-square rounded-lg border-2 border-transparent hover:border-blue-skywave transition-all bg-gray-100 overflow-hidden group"
-                    on:click={() => {
-                        $form.phrases[currentPhraseIndex].image = icon.url;
-                        modalRef.close();
-                    }}
+                    on:click={() => { $form.phrases[currentPhraseIndex].image = icon.url; modalRef.close(); }}
                 >
                     <img
                         src={icon.url}
@@ -101,10 +96,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            for="user"
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-        >
+        <label for="user" class="text-md text-gray-700 font-noto-sans block mb-1">
             Locutor responsável
         </label>
         <select
@@ -114,17 +106,22 @@
             bind:value={$form.user}
             required
         >
-            <option value={null} disabled selected>Selecione um locutor</option>
+            <option
+                value={null}
+                disabled
+                selected
+            >
+                Selecione um locutor
+            </option>
             {#each users.data as user}
-                <option value={user.uuid}>{user.nickname}</option>
+                <option value={user.uuid}>
+                    {user.nickname}
+                </option>
             {/each}
         </select>
     </div>
     <div class="mb-4">
-        <label
-            for="name"
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-        >
+        <label for="name" class="text-md text-gray-700 font-noto-sans block mb-1">
             Nome
         </label>
         <input
@@ -149,10 +146,7 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.is_default}
             />
-            <label
-                for="is_default_true"
-                class="cursor-pointer text-md text-gray-700 font-noto-sans"
-            >
+            <label for="is_default_true" class="cursor-pointer text-md text-gray-700 font-noto-sans">
                 Sim
             </label>
         </div>
@@ -165,10 +159,7 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.is_default}
             />
-            <label
-                for="is_default_false"
-                class="cursor-pointer text-md text-gray-700 font-noto-sans"
-            >
+            <label for="is_default_false" class="cursor-pointer text-md text-gray-700 font-noto-sans">
                 Não
             </label>
         </div>
@@ -177,35 +168,25 @@
     <div class="mt-8 mb-4">
         <div class="flex items-center justify-center w-full mt-8 mb-5">
             <div class="relative w-full">
-                <div
-                    class="absolute left-0 w-1/4 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                ></div>
-                <span
-                    class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic"
-                >
+                <div class="absolute left-0 w-1/4 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
+                <span class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic">
                     Frases e Ícones
                 </span>
-                <div
-                    class="absolute right-0 w-1/4 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                ></div>
+                <div class="absolute right-0 w-1/4 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
             </div>
         </div>
         {#each $form.phrases as item, index}
-            <div
-                class="flex items-center gap-4 mb-4 p-3 border border-gray-200 rounded-lg bg-gray-50/50"
-            >
+            <div class="flex items-center gap-4 mb-4 p-3 border border-gray-200 rounded-lg bg-gray-50/50">
                 <button
                     type="button"
                     class="w-24 h-24 shrink-0 bg-suspense-aurora border-2 border-dashed border-gray-300 rounded-md overflow-hidden flex items-center justify-center cursor-pointer"
-                    on:click={() => {
-                        currentPhraseIndex = index;
-                        modalRef.open();
-                    }}
+                    on:click={() => { currentPhraseIndex = index; modalRef.open(); }}
                 >
                     {#if item.image}
                         <img
                             src={item.image}
                             alt=""
+                            aria-hidden="true"
                             class="w-full h-full object-cover"
                         />
                     {:else}
@@ -215,17 +196,13 @@
                     {/if}
                 </button>
                 <div class="flex-1">
-                    <label
-                        for={`phrase_text_${index}`}
-                        class="text-sm text-gray-600 font-noto-sans block mb-1"
-                    >
+                    <label for={`phrase_text_${index}
+                        } class="text-sm text-gray-600 font-noto-sans block mb-1">
                         Frase {index + 1}
                     </label>
                     <input
                         type="text"
-                        id={`phrase_text_${index}`}
-                        class="w-full h-10 bg-white font-noto-sans text-sm rounded-lg outline-none px-3 border border-gray-400"
-                        bind:value={item.phrase}
+                        id={`phrase_text_${index}} class="w-full h-10 bg-white font-noto-sans text-sm rounded-lg outline-none px-3 border border-gray-400" bind:value={item.phrase}
                     />
                 </div>
             </div>
@@ -234,6 +211,7 @@
 
     <div class="mt-6">
         <button
+            aria-label=""
             type="submit"
             class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
         >

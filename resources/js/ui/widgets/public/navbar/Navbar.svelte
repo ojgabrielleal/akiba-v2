@@ -7,13 +7,11 @@
 </script>
 
 <nav class="w-full relative">
-    <div
-        class="cont h-24 xl:h-[2.57rem] relative xl:top-15 flex xl:justify-between items-center"
-    >
+    <div class="cont h-24 xl:h-[2.57rem] relative xl:top-15 flex xl:justify-between items-center">
         <button
-            on:click={() => (mobilenavbar = !mobilenavbar)}
             aria-label="Abrir menu"
             class="xl:hidden p-1 filter invert"
+            on:click={() => (mobilenavbar = !mobilenavbar)}
         >
             <svg
                 class="w-5 h-5"
@@ -32,19 +30,17 @@
         </button>
 
         <div class="ml-5">
-            <img src="/img/default/logo.webp" alt="Logo" class="w-30 xl:w-35" />
+            <img
+                src="/img/default/logo.webp"
+                alt="Logo"
+                class="w-30 xl:w-35"
+            />
         </div>
 
         <ul class="hidden xl:flex">
             {#each navbar.public as item}
-                <li
-                    class="pr-5 pl-5 first:pl-0 border-l first:border-none border-neutral-gray/50 h-6 flex items-center"
-                >
-                    <Link
-                        href={item.address}
-                        aria-label={item.name}
-                        class="relative flex items-center gap-1 text-lg font-noto-sans font-extrabold text-neutral-gray hover:text-orange-amber italic uppercase group/item"
-                    >
+                <li class="pr-5 pl-5 first:pl-0 border-l first:border-none border-neutral-gray/50 h-6 flex items-center">
+                    <Link href={item.address} aria-label={item.name} class="relative flex items-center gap-1 text-lg font-noto-sans font-extrabold text-neutral-gray hover:text-orange-amber italic uppercase group/item">
                         <img
                             src={item.icon}
                             alt=""
@@ -53,73 +49,48 @@
                             loading="lazy"
                         />
                         {item.name}
-                        <span
-                            class="absolute -bottom-1 left-0 h-px rounded-full w-full bg-orange-amber scale-x-0 group-hover/item:scale-x-100 origin-left transition-transform duration-300"
-                        ></span>
+                        <span class="absolute -bottom-1 left-0 h-px rounded-full w-full bg-orange-amber scale-x-0 group-hover/item:scale-x-100 origin-left transition-transform duration-300"></span>
                     </Link>
                 </li>
             {/each}
         </ul>
 
         <div class="w-35">
-            <div
-                class="hidden xl:flex justify-center items-center w-22 h-8 gap-1 bg-blue-skywave rounded-full"
-            >
+            <div class="hidden xl:flex justify-center items-center w-22 h-8 gap-1 bg-blue-skywave rounded-full">
                 <button
                     aria-label="Modo Claro"
+                    class={["cursor-pointer shrink-0 p-1", { "bg-orange-morning rounded-full": theme === "light" }, ]}
                     on:click={() => (theme = "light")}
-                    class={[
-                        "cursor-pointer shrink-0 p-1",
-                        { "bg-orange-morning rounded-full": theme === "light" },
-                    ]}
                 >
                     <img
                         src="/svg/dawn.svg"
                         alt=""
                         aria-hidden="true"
-                        class={[
-                            "w-4 h-4",
-                            { "filter-orange-amber": theme === "light" },
-                            { "filter invert": theme !== "light" },
-                        ]}
+                        class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter invert": theme !== "light" }, ]}
                     />
                 </button>
                 <button
                     aria-label="Modo Akiba"
+                    class={["cursor-pointer shrink-0 p-1", { "bg-blue-night rounded-full": theme === "akiba" }, ]}
                     on:click={() => (theme = "akiba")}
-                    class={[
-                        "cursor-pointer shrink-0 p-1",
-                        { "bg-blue-night rounded-full": theme === "akiba" },
-                    ]}
                 >
                     <img
                         src="/svg/akiba.svg"
                         alt=""
                         aria-hidden="true"
-                        class={[
-                            "w-4 h-4",
-                            { "filter-orange-amber": theme === "akiba" },
-                            { "filter invert": theme !== "akiba" },
-                        ]}
+                        class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter invert": theme !== "akiba" }, ]}
                     />
                 </button>
                 <button
                     aria-label="Modo Ecuro"
+                    class={["cursor-pointer shrink-0 p-1", { "bg-blue-night rounded-full": theme === "night" }, ]}
                     on:click={() => (theme = "night")}
-                    class={[
-                        "cursor-pointer shrink-0 p-1",
-                        { "bg-blue-night rounded-full": theme === "night" },
-                    ]}
                 >
                     <img
                         src="/svg/night.svg"
                         alt=""
                         aria-hidden="true"
-                        class={[
-                            "w-4 h-4",
-                            { "filter-orange-morning": theme === "night" },
-                            { "filter invert": theme !== "night" },
-                        ]}
+                        class={["w-4 h-4", { "filter-orange-morning": theme === "night" }, { "filter invert": theme !== "night" }, ]}
                     />
                 </button>
             </div>
@@ -127,36 +98,34 @@
     </div>
 
     <!-- Mobile Navbar -->
-    <div
-        class={[
-            "fixed inset-0 z-150 transition-opacity duration-300 xl:hidden",
-            { "opacity-100 pointer-events-auto": mobilenavbar },
-            { "opacity-0 pointer-events-none": !mobilenavbar },
-        ]}
-    >
+    <div class={["fixed inset-0 z-150 transition-opacity duration-300 xl:hidden",
+        { "opacity-100 pointer-events-auto": mobilenavbar },
+        { "opacity-0 pointer-events-none": !mobilenavbar },
+    ]}>
         <button
             type="button"
             aria-hidden="true"
             class="absolute inset-0 bg-blue-night/40 backdrop-blur-sm"
-            on:click={() => (mobilenavbar = false)}
-        ></button>
+            on:click={() =
+        >
+            (mobilenavbar = false)}>
+        </button>
 
         <!-- Sidebar        -->
-        <div
-            class={[
-                "absolute left-0 top-0 h-screen w-72 bg-suspense-aurora shadow-2xl transition-transform duration-300 ease-out",
-                { "translate-x-0": mobilenavbar },
-                { "-translate-x-full": !mobilenavbar },
-            ]}
-        >
-            <div
-                class="p-6 border-b border-blue-night/10 flex items-center justify-between"
-            >
-                <img src="/img/default/logo.webp" alt="Logo" class="w-30" />
+        <div class={["absolute left-0 top-0 h-screen w-72 bg-suspense-aurora shadow-2xl transition-transform duration-300 ease-out",
+            { "translate-x-0": mobilenavbar },
+            { "-translate-x-full": !mobilenavbar },
+        ]}>
+            <div class="p-6 border-b border-blue-night/10 flex items-center justify-between">
+                <img
+                    src="/img/default/logo.webp"
+                    alt="Logo"
+                    class="w-30"
+                />
                 <button
-                    on:click={() => (mobilenavbar = false)}
                     aria-label="Fechar menu"
                     class="text-blue-night"
+                    on:click={() => (mobilenavbar = false)}
                 >
                     <svg
                         class="w-6 h-6"
@@ -178,14 +147,11 @@
                 <ul class="space-y-5">
                     {#each navbar.public as item}
                         <li>
-                            <Link
-                                href={item.address}
-                                on:click={() => (mobilenavbar = false)}
-                                class="flex items-center gap-2 text-md font-noto-sans font-extrabold italic uppercase text-blue-night"
-                            >
+                            <Link href={item.address} class="flex items-center gap-2 text-md font-noto-sans font-extrabold italic uppercase text-blue-night" on:click={() => (mobilenavbar = false)}>
                                 <img
                                     src={item.icon}
                                     alt=""
+                                    aria-hidden="true"
                                     class="w-5 h-5 filter-blue-night"
                                 />
                                 {item.name}
@@ -195,72 +161,36 @@
                 </ul>
             </nav>
 
-            <div
-                class="absolute bottom-0 left-0 w-full p-6 border-t border-blue-night/10 bg-suspense-aurora z-10"
-            >
-                <span
-                    class="w-full block text-[0.6rem] font-bold uppercase tracking-widest text-blue-night text-center opacity-40 mb-3"
-                >
+            <div class="absolute bottom-0 left-0 w-full p-6 border-t border-blue-night/10 bg-suspense-aurora z-10">
+                <span class="w-full block text-[0.6rem] font-bold uppercase tracking-widest text-blue-night text-center opacity-40 mb-3">
                     Temas da Akiba
                 </span>
-                <div
-                    class="w-25 h-8 mx-auto flex justify-center items-center gap-1 bg-blue-skywave p-1 rounded-full"
-                >
-                    <button
-                        on:click={() => (theme = "light")}
-                        class={[
-                            "flex-1 flex justify-center items-center transition-all h-full",
-                            {
-                                "bg-orange-morning rounded-full":
-                                    theme === "light",
-                            },
-                        ]}
-                    >
+                <div class="w-25 h-8 mx-auto flex justify-center items-center gap-1 bg-blue-skywave p-1 rounded-full">
+                    <button class={["flex-1 flex justify-center items-center transition-all h-full",
+                        { "bg-orange-morning rounded-full": theme === "light" },
+                    ]} on:click={() => (theme = "light")}>
                         <img
                             src="/svg/dawn.svg"
                             alt="Claro"
-                            aria-hidden="true"
-                            class={[
-                                "w-4 h-4",
-                                { "filter-orange-amber": theme === "light" },
-                                { "filter invert": theme !== "light" },
-                            ]}
+                            class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter invert": theme !== "light" }, ]}
                         />
                     </button>
-                    <button
-                        on:click={() => (theme = "akiba")}
-                        class={[
-                            "flex-1 flex justify-center items-center transition-all h-full",
-                            { "bg-blue-night rounded-full": theme === "akiba" },
-                        ]}
-                    >
+                    <button class={["flex-1 flex justify-center items-center transition-all h-full",
+                        { "bg-blue-night rounded-full": theme === "akiba" },
+                    ]} on:click={() => (theme = "akiba")}>
                         <img
                             src="/svg/akiba.svg"
                             alt="Akiba"
-                            aria-hidden="true"
-                            class={[
-                                "w-4 h-4",
-                                { "filter-orange-amber": theme === "akiba" },
-                                { "filter invert": theme !== "akiba" },
-                            ]}
+                            class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter invert": theme !== "akiba" }, ]}
                         />
                     </button>
-                    <button
-                        on:click={() => (theme = "night")}
-                        class={[
-                            "flex-1 flex justify-center items-center transition-all h-full",
-                            { "bg-blue-night rounded-full": theme === "night" },
-                        ]}
-                    >
+                    <button class={["flex-1 flex justify-center items-center transition-all h-full",
+                        { "bg-blue-night rounded-full": theme === "night" },
+                    ]} on:click={() => (theme = "night")}>
                         <img
                             src="/svg/night.svg"
                             alt="Escuro"
-                            aria-hidden="true"
-                            class={[
-                                "w-4 h-4",
-                                { "filter-orange-morning": theme === "night" },
-                                { "filter invert": theme !== "night" },
-                            ]}
+                            class={["w-4 h-4", { "filter-orange-morning": theme === "night" }, { "filter invert": theme !== "night" }, ]}
                         />
                     </button>
                 </div>

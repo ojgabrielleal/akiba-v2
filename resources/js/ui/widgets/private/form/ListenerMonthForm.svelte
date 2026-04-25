@@ -49,10 +49,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="listener"
-        >
+        <label for="listener" class="text-md text-gray-700 font-noto-sans block mb-1">
             Ouvinte
         </label>
         <input
@@ -65,10 +62,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="address"
-        >
+        <label for="address" class="text-md text-gray-700 font-noto-sans block mb-1">
             Endereço
         </label>
         <input
@@ -81,10 +75,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="favorite_show"
-        >
+        <label for="favorite_show" class="text-md text-gray-700 font-noto-sans block mb-1">
             Programa favorito
         </label>
         <input
@@ -97,10 +88,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="requests_total"
-        >
+        <label for="requests_total" class="text-md text-gray-700 font-noto-sans block mb-1">
             Quantidade de pedidos feitos
         </label>
         <input
@@ -112,10 +100,7 @@
             disabled
         />
     </div>
-    <button
-        type="submit"
-        class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
-    >
+    <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase">
         Atualizar
     </button>
 </form>

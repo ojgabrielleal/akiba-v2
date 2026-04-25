@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_auto')->default(false);
             $table->string('slug');
             $table->string('username')->unique();
             $table->string('password');

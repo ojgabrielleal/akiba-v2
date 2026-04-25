@@ -27,66 +27,37 @@
     <Section {title}>
         <div
             class="scroll-x flex gap-5 overflow-x-auto flex-nowrap"
-            on:wheel={scrollx}
             role="group"
+            on:wheel={scrollx}
         >
             {#each tasks.data as item}
-                <article
-                    class={[
-                        "w-100 h-50 lg:w-160 lg:h-43 shrink-0 rounded-lg p-4 relative",
-                        { "bg-orange-amber": item.is_due },
-                        { "bg-blue-skywave": !item.is_due },
-                    ]}
-                >
-                    <div
-                        class={[
-                            "w-3/4 uppercase font-noto-sans italic font-bold text-2xl truncate",
-                            { "text-blue-night": item.is_due },
-                            { "text-suspense-aurora": !item.is_due },
-                        ]}
-                    >
+                <article class={["w-100 h-50 lg:w-160 lg:h-43 shrink-0 rounded-lg p-4 relative",
+                    { "bg-orange-amber": item.is_due },
+                    { "bg-blue-skywave": !item.is_due },
+                ]}>
+                    <div class={["w-3/4 uppercase font-noto-sans italic font-bold text-2xl truncate",
+                        { "text-blue-night": item.is_due },
+                        { "text-suspense-aurora": !item.is_due },
+                    ]}>
                         {item.title}
                     </div>
-                    <div
-                        class={[
-                            "w-60 lg:w-90 font-noto-sans text-sm line-clamp-4 mt-1",
-                            { "text-blue-night": item.is_due },
-                            { "text-suspense-aurora": !item.is_due },
-                        ]}
-                    >
+                    <div class={["w-60 lg:w-90 font-noto-sans text-sm line-clamp-4 mt-1",
+                        { "text-blue-night": item.is_due },
+                        { "text-suspense-aurora": !item.is_due },
+                    ]}>
                         {item.content}
                     </div>
-                    <dl
-                        class="absolute top-5 right-5 rounded-xl shadow-lg w-28 text-center overflow-hidden bg-suspense-aurora"
-                    >
-                        <dt
-                            class={[
-                                "font-noto-sans italic font-black text-sm py-1 uppercase tracking-wide",
-                                {
-                                    "text-blue-night bg-red-crimson":
-                                        item.is_due,
-                                },
-                                {
-                                    "text-suspense-aurora bg-blue-marinho":
-                                        !item.is_due,
-                                },
-                            ]}
-                        >
+                    <dl class="absolute top-5 right-5 rounded-xl shadow-lg w-28 text-center overflow-hidden bg-suspense-aurora">
+                        <dt class={["font-noto-sans italic font-black text-sm py-1 uppercase tracking-wide",
+                            { "text-blue-night bg-red-crimson": item.is_due },
+                            { "text-suspense-aurora bg-blue-marinho": !item.is_due },
+                        ]}>
                             Data Limite
                         </dt>
-                        <dd
-                            class={[
-                                "font-noto-sans italic font-extrabold text-2xl py-1 tracking-widest",
-                                {
-                                    "text-orange-amber bg-blue-night":
-                                        item.is_due,
-                                },
-                                {
-                                    "text-blue-night bg-suspense-aurora":
-                                        !item.is_due,
-                                },
-                            ]}
-                        >
+                        <dd class={["font-noto-sans italic font-extrabold text-2xl py-1 tracking-widest",
+                            { "text-orange-amber bg-blue-night": item.is_due },
+                            { "text-blue-night bg-suspense-aurora": !item.is_due },
+                        ]}>
                             {item.dead_line_formatted}
                         </dd>
                     </dl>
@@ -94,17 +65,7 @@
                         <button
                             type="button"
                             aria-label="Concluir tarefa"
-                            class={[
-                                "font-noto-sans italic font-bold cursor-pointer",
-                                {
-                                    "bg-red-crimson rounded-xl text-suspense-aurora uppercase absolute right-5 bottom-3 py-2 px-6":
-                                        item.is_due,
-                                },
-                                {
-                                    "bg-suspense-aurora absolute right-5 bottom-3 py-2 px-2 rounded-md flex justify-center items-center":
-                                        !item.is_due,
-                                },
-                            ]}
+                            class={["font-noto-sans italic font-bold cursor-pointer", { "bg-red-crimson rounded-xl text-suspense-aurora uppercase absolute right-5 bottom-3 py-2 px-6": item.is_due }, { "bg-suspense-aurora absolute right-5 bottom-3 py-2 px-2 rounded-md flex justify-center items-center": !item.is_due }, ]}
                             on:click={() => requestMarkTaskCompleted(item.uuid)}
                         >
                             {#if item.is_due}

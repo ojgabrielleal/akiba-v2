@@ -113,10 +113,7 @@
 {:else if air.allows_song_requests}
     <form on:submit|preventDefault={submit}>
         <div class="mb-3">
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="name"
-            >
+            <label for="name" class="text-md text-gray-700 font-noto-sans block mb-1">
                 Como gostaria de ser chamado?
             </label>
             <input
@@ -133,10 +130,7 @@
             </span>
         </div>
         <div class="mb-3">
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="address"
-            >
+            <label for="address" class="text-md text-gray-700 font-noto-sans block mb-1">
                 Qual é a sua cidade e estado?
             </label>
             <input
@@ -153,10 +147,7 @@
             </span>
         </div>
         <div class="mb-3 relative">
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="anime"
-            >
+            <label for="anime" class="text-md text-gray-700 font-noto-sans block mb-1">
                 Escolha um anime para ouvir a música
             </label>
             <input
@@ -173,18 +164,12 @@
                 Selecione o anime para que possamos buscar as músicas.
             </span>
             {#if activeAnimeDropdown && animesList.length > 0}
-                <div
-                    class="absolute w-full bg-white border border-gray-200 rounded-2xl shadow-xl z-25 max-h-56 overflow-y-auto p-2"
-                >
+                <div class="absolute w-full bg-white border border-gray-200 rounded-2xl shadow-xl z-25 max-h-56 overflow-y-auto p-2">
                     {#each animesList as item}
                         <button
                             type="button"
                             class="cursor-pointer flex items-center gap-3 w-full p-2 rounded-xl"
-                            on:mousedown={() => {
-                                $form.anime = item;
-                                activeAnimeDropdown = false;
-                                getAnimeThemesJikanApi(item.mal_id);
-                            }}
+                            on:mousedown={() => { $form.anime = item; activeAnimeDropdown = false; getAnimeThemesJikanApi(item.mal_id); }}
                         >
                             <img
                                 src={item.image}
@@ -193,14 +178,10 @@
                                 loading="lazy"
                             />
                             <div class="flex flex-col items-start text-left">
-                                <div
-                                    class="font-noto-sans font-semibold text-gray-900 text-sm line-clamp-1"
-                                >
+                                <div class="font-noto-sans font-semibold text-gray-900 text-sm line-clamp-1">
                                     {item.title}
                                 </div>
-                                <div
-                                    class="font-noto-sans text-gray-500 text-xs"
-                                >
+                                <div class="font-noto-sans text-gray-500 text-xs">
                                     {item.year}
                                 </div>
                             </div>
@@ -221,12 +202,8 @@
                     on:blur={() => (activeMusicDropdown = false)}
                 >
                     {#if $form.music}
-                        <div
-                            class="flex flex-col items-start overflow-hidden flex-1 min-w-0"
-                        >
-                            <span
-                                class="text-sm text-gray-900 font-normal truncate w-full text-left"
-                            >
+                        <div class="flex flex-col items-start overflow-hidden flex-1 min-w-0">
+                            <span class="text-sm text-gray-900 font-normal truncate w-full text-left">
                                 {$form.music.name} - {$form.music.artist}
                             </span>
                         </div>
@@ -251,32 +228,21 @@
                     </svg>
                 </button>
                 {#if activeMusicDropdown && animeThemesList.length > 0}
-                    <div
-                        class="absolute w-full mt-2 bg-white border border-gray-100 rounded-2xl shadow-2xl z-30 max-h-56 overflow-y-auto"
-                    >
+                    <div class="absolute w-full mt-2 bg-white border border-gray-100 rounded-2xl shadow-2xl z-30 max-h-56 overflow-y-auto">
                         {#each ["OP", "ED"] as type}
-                            <div
-                                class="px-3 py-2 text-[0.6rem] font-bold text-gray-400 uppercase tracking-[0.2em]"
-                            >
+                            <div class="px-3 py-2 text-[0.6rem] font-bold text-gray-400 uppercase tracking-[0.2em]">
                                 {type === "OP" ? "Aberturas" : "Encerramentos"}
                             </div>
                             {#each animeThemesList.filter((item) => item.type === type) as item}
                                 <button
                                     type="button"
                                     class="w-full flex flex-col items-start gap-0.5 p-3 rounded-xl hover:bg-gray-50 active:bg-pink-50 transition-colors border-b last:border-0 border-gray-50 mb-1"
-                                    on:mousedown={() => {
-                                        $form.music = item;
-                                        activeMusicDropdown = false;
-                                    }}
+                                    on:mousedown={() => { $form.music = item; activeMusicDropdown = false; }}
                                 >
-                                    <div
-                                        class="font-noto-sans font-bold text-gray-900 text-sm line-clamp-1 w-full text-left leading-tight"
-                                    >
+                                    <div class="font-noto-sans font-bold text-gray-900 text-sm line-clamp-1 w-full text-left leading-tight">
                                         {item.name}
                                     </div>
-                                    <div
-                                        class="font-noto-sans text-gray-500 text-xs truncate w-full text-left"
-                                    >
+                                    <div class="font-noto-sans text-gray-500 text-xs truncate w-full text-left">
                                         {item.artist}
                                     </div>
                                 </button>
@@ -287,10 +253,7 @@
             </div>
         {/if}
         <div class="mb-3">
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="message"
-            >
+            <label for="message" class="text-md text-gray-700 font-noto-sans block mb-1">
                 Escreva uma mensagem
             </label>
             <textarea
@@ -306,10 +269,7 @@
                 Vamos evitar ofensas! Se pedido pode não tocar por isso.
             </span>
         </div>
-        <button
-            type="submit"
-            class="cursor-pointer w-full bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
-        >
+        <button type="submit" class="cursor-pointer w-full bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase">
             Enviar
         </button>
     </form>

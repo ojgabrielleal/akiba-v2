@@ -4,7 +4,7 @@
     import { ProgramScheduleGrid, MusicRankingGrid, ListenerMonthGrid, ProgramCarrousel } from "@/ui/widgets/private";
 </script>
 
-<Meta meta={{ title: "Rádio" }} />
+<Meta meta={{ title: "Rádio" } } />
 <Layout>
     <ProgramCarrousel title="Programas cadastrados" />
     <ProgramScheduleGrid title="Grade de programação" />

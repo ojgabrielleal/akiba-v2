@@ -48,9 +48,7 @@
 
 <form on:submit|preventDefault={submit}>
     <Section title="O básico">
-        <div
-            class="grid grid-cols-1 xl:grid-cols-[15rem_1fr] gap-5 items-center"
-        >
+        <div class="grid grid-cols-1 xl:grid-cols-[15rem_1fr] gap-5 items-center">
             <div class="mb-3 relative">
                 <Preview
                     name="image"
@@ -60,21 +58,14 @@
                     oninput={(event) => ($form.avatar = event.target.files[0])}
                     required={!profile}
                 />
-                <div
-                    class="mt-1 py-1 px-3 rounded-md bg-blue-skywave font-noto-sans font-bold italic uppercase text-xs text-suspense-aurora absolute bottom-2 left-2"
-                >
+                <div class="mt-1 py-1 px-3 rounded-md bg-blue-skywave font-noto-sans font-bold italic uppercase text-xs text-suspense-aurora absolute bottom-2 left-2">
                     304 x 400
                 </div>
             </div>
             <div>
-                <div
-                    class="grid grid-cols-1 lg:grid-cols-[1fr_1fr_0.5fr_0.5fr] gap-5 mb-8"
-                >
+                <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr_0.5fr_0.5fr] gap-5 mb-8">
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="name"
-                        >
+                        <label for="name" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             Nome completo
                         </label>
                         <input
@@ -87,10 +78,7 @@
                         />
                     </div>
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="nickname"
-                        >
+                        <label for="nickname" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             Apelido
                         </label>
                         <input
@@ -103,10 +91,7 @@
                         />
                     </div>
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="gender"
-                        >
+                        <label for="gender" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             Gênero
                         </label>
                         <select
@@ -116,15 +101,16 @@
                             bind:value={$form.gender}
                             required
                         >
-                            <option value="male">Masculino</option>
-                            <option value="female">Feminino</option>
+                            <option value="male">
+                                Masculino
+                            </option>
+                            <option value="female">
+                                Feminino
+                            </option>
                         </select>
                     </div>
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="birthday"
-                        >
+                        <label for="birthday" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             Nascimento
                         </label>
                         <input
@@ -139,10 +125,7 @@
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-5 mb-8">
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="city"
-                        >
+                        <label for="city" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             Cidade
                         </label>
                         <input
@@ -155,10 +138,7 @@
                         />
                     </div>
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="state"
-                        >
+                        <label for="state" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             Estado
                         </label>
                         <input
@@ -171,10 +151,7 @@
                         />
                     </div>
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="country"
-                        >
+                        <label for="country" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             País
                         </label>
                         <input
@@ -197,10 +174,7 @@
                 {#if $form.socials}
                     {#each $form.socials as item}
                         <div>
-                            <label
-                                class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                                for={item.url}
-                            >
+                            <label for={item.url} class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                                 {item.name}
                             </label>
                             <input
@@ -218,10 +192,7 @@
     </Section>
     <Section title="Aprofundando">
         <div class="mb-8">
-            <label
-                class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                for="bibliography"
-            >
+            <label for="bibliography" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                 Biografia
             </label>
             <textarea
@@ -234,10 +205,7 @@
             ></textarea>
         </div>
         <div class="mb-8">
-            <label
-                class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                for="likes"
-            >
+            <label for="likes" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                 3 Gêneros de anime que você mais gosta
             </label>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -249,17 +217,16 @@
                         bind:value={item.content}
                     >
                         {#each userPreferences as item}
-                            <option value={item.value}>{item.name}</option>
+                            <option value={item.value}>
+                                {item.name}
+                            </option>
                         {/each}
                     </select>
                 {/each}
             </div>
         </div>
         <div>
-            <label
-                class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                for="unlikes"
-            >
+            <label for="unlikes" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                 3 Gêneros de anime que você menos gosta
             </label>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -271,7 +238,9 @@
                         bind:value={item.content}
                     >
                         {#each userPreferences as item}
-                            <option value={item.value}>{item.name}</option>
+                            <option value={item.value}>
+                                {item.name}
+                            </option>
                         {/each}
                     </select>
                 {/each}

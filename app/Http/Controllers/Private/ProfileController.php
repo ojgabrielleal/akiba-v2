@@ -41,6 +41,7 @@ class ProfileController extends Controller
 
         $user->fill([
             'avatar' => $this->image->store('users', $request->file('avatar'), 'public', $user->avatar),
+            'is_auto' => $request->input('is_auto', $user->is_auto),
             'name' => $request->input('name', $user->name),
             'nickname' => $request->input('nickname', $user->nickname),
             'gender' => $request->input('gender', $user->gender),

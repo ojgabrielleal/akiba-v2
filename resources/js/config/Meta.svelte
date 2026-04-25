@@ -26,7 +26,9 @@
 </script>
 
 <svelte:head>
-  <title>{fullTitle}</title>
+  <title>
+      {fullTitle}
+  </title>
 
   <!-- Meta padrão -->
   <meta charset="utf-8" />
@@ -41,7 +43,11 @@
   <meta name="robots" content={metaRobots} />
 
   <!-- Favicons e PWA icons -->
-  <link rel="icon" href={favicon} type="image/x-icon" />
+  <link
+      rel="icon"
+      href={favicon}
+      type="image/x-icon"
+  />
   <link rel="apple-touch-icon" href={appleIcon} />
   <link rel="manifest" href="/manifest.json" />
 

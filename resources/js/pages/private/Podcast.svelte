@@ -4,7 +4,7 @@
     import { PodcastForm, PodcastGrid } from "@/ui/widgets/private";
 </script>
 
-<Meta meta={{ title: "Podcasts" }} />
+<Meta meta={{ title: "Podcasts" } } />
 <Layout>
     <PodcastForm />
     <PodcastGrid title="Todos os podcasts" />

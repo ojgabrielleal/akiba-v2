@@ -21,6 +21,8 @@ class UserFactory extends Factory
 
         return [
             'is_active' => true,
+            'is_auto' => fake()->boolean(),
+            'slug' => fake()->slug(),
             'username' => fake()->userName(),
             'password' => Hash::make(fake()->password()),
             'name' => fake()->name(),

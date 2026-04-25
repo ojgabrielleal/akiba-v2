@@ -25,10 +25,7 @@
     };
 </script>
 
-<Offcanvas
-    bind:this={offCanvasRef}
-    title={identifier ? "Atualizar cargo" : "Cadastrar cargo"}
->
+<Offcanvas bind:this={offCanvasRef} title={identifier ? "Atualizar cargo" : "Cadastrar cargo"}>
     <div slot="content" let:close>
         <RoleForm {identifier} {close} />
     </div>
@@ -37,13 +34,7 @@
 <Section {title}>
     {#if can.create}
         <div class="flex justify-center gap-5 mb-5">
-            <button
-                class="cursor-pointer bg-blue-ocean px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-suspense-aurora"
-                on:click={() => {
-                    identifier = null;
-                    offCanvasRef.open();
-                }}
-            >
+            <button class="cursor-pointer bg-blue-ocean px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offCanvasRef.open(); }}>
                 Cadastrar cargo
             </button>
         </div>
@@ -52,10 +43,10 @@
         <div class="overflow-x-auto w-full">
             <table class="min-w-[900px] w-full border-collapse table-auto">
                 <thead>
-                    <tr
-                        class="text-orange-amber uppercase text-lg font-bold font-noto-sans italic whitespace-nowrap"
-                    >
-                        <th class="p-4 text-start min-w-[180px]"> Cargo </th>
+                    <tr class="text-orange-amber uppercase text-lg font-bold font-noto-sans italic whitespace-nowrap">
+                        <th class="p-4 text-start min-w-[180px]">
+                            Cargo
+                        </th>
                         <th class="p-4 text-start min-w-[180px]">
                             Membros relacionados
                         </th>
@@ -67,18 +58,14 @@
                 </thead>
                 <tbody>
                     {#each roles.data as item}
-                        <tr
-                            class="border-t border-suspense-aurora/20 font-noto-sans text-suspense-aurora whitespace-nowrap"
-                        >
+                        <tr class="border-t border-suspense-aurora/20 font-noto-sans text-suspense-aurora whitespace-nowrap">
                             <td class="p-4 align-center min-w-[180px]">
                                 {item.label}
                             </td>
                             <td class="p-4 align-center min-w-[180px]">
                                 {item.members_total} membros
                             </td>
-                            <td
-                                class="p-4 min-w-[300px] max-w-[400px] whitespace-normal wrap-break-words"
-                            >
+                            <td class="p-4 min-w-[300px] max-w-[400px] whitespace-normal wrap-break-words">
                                 {item.description}
                             </td>
                             <td class="p-4 min-w-[140px]">
@@ -87,10 +74,7 @@
                                         <button
                                             class="bg-blue-ocean rounded-md p-3 cursor-pointer shrink-0"
                                             aria-label="atualizar cargo"
-                                            on:click={() => {
-                                                identifier = item.uuid;
-                                                offCanvasRef.open();
-                                            }}
+                                            on:click={() => { identifier = item.uuid; offCanvasRef.open(); }}
                                         >
                                             <img
                                                 src="/svg/edit.svg"
@@ -105,9 +89,7 @@
                                         <button
                                             class="bg-red-crimson p-3 rounded-md cursor-pointer shrink-0"
                                             aria-label="remover cargo"
-                                            on:click={() => {
-                                                requestRemoveRole(item.uuid);
-                                            }}
+                                            on:click={() => { requestRemoveRole(item.uuid); }}
                                         >
                                             <img
                                                 src="/svg/trash.svg"

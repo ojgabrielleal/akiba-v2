@@ -31,13 +31,22 @@
             src={imageToShow}
             alt=""
             aria-hidden="true"
-            class={`${view}`}
-            loading="lazy"
+            class={`${view}} loading="lazy"
         />
     {:else}
-        <div
-            class={`${standard} bg-suspense-aurora flex items-center justify-center overflow-hidden font-noto-sans text-blue-skywave text-7xl font-bold italic uppercase`}
-        >
+        <div class={`${standard}
+            bg-suspense-aurora
+            flex
+            items-center
+            justify-center
+            overflow-hidden
+            font-noto-sans
+            text-blue-skywave
+            text-7xl
+            font-bold
+            italic
+            uppercase
+            }>
             +
         </div>
     {/if}
@@ -47,8 +56,8 @@
         {name}
         class="sr-only"
         accept="image/*"
+        {required}
         on:input={oninput}
         on:change={previewImage}
-        {required}
     />
 </label>

@@ -33,17 +33,12 @@
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
-        on:click={close}
         transition:fly={{ x: 400, duration: 300 }}
         class="w-screen h-screen fixed inset-0 bg-black/1 backdrop-blur-xs z-100"
+        on:click={close}
     >
-        <div
-            on:click={block}
-            class="max-w-sm min-w-sm h-screen float-right bg-suspense-aurora"
-        >
-            <div
-                class="bg-blue-skywave p-4 text-suspense-aurora font-bold italic uppercase"
-            >
+        <div class="max-w-sm min-w-sm h-screen float-right bg-suspense-aurora" on:click={block}>
+            <div class="bg-blue-skywave p-4 text-suspense-aurora font-bold italic uppercase">
                 {title}
             </div>
             <div class="pl-5 pr-8 pt-8 h-[calc(100vh-6rem)] overflow-y-auto">

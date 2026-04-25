@@ -29,10 +29,7 @@
     };
 </script>
 
-<Offcanvas
-    bind:this={offcanvasRef}
-    title={identifier ? "Atualizar programa" : "Cadastrar programa"}
->
+<Offcanvas bind:this={offcanvasRef} title={identifier ? "Atualizar programa" : "Cadastrar programa"}>
     <div slot="content" let:close>
         <ProgramForm {identifier} {close} />
     </div>
@@ -41,13 +38,7 @@
 {#if programs}
     {#if can.create}
         <div class="flex justify-center mb-5">
-            <button
-                class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-suspense-aurora"
-                on:click={() => {
-                    identifier = null;
-                    offcanvasRef.open();
-                }}
-            >
+            <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offcanvasRef.open(); }}>
                 Cadastrar programa
             </button>
         </div>
@@ -55,13 +46,11 @@
     <Section {title} styles="mb-15">
         <div
             class="scroll-x overflow-x-auto flex gap-5 flex-nowrap mt-5"
-            on:wheel|nonpassive={scrollx}
             role="group"
+            on:wheel|nonpassive={scrollx}
         >
             {#each programs.data as item}
-                <article
-                    class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
-                >
+                <article class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0">
                     <div>
                         <img
                             src={item.image}
@@ -76,10 +65,7 @@
                             <button
                                 class="cursor-pointer"
                                 aria-label="atualizar programa"
-                                on:click={() => {
-                                    identifier = item.uuid;
-                                    offcanvasRef.open();
-                                }}
+                                on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
                             >
                                 <img
                                     src="/svg/edit.svg"
@@ -94,7 +80,8 @@
                             <button
                                 class="cursor-pointer"
                                 aria-label="desativar programa"
-                                on:click={() =>
+                                on:click={()
+                            >
                                     requestDeactivateProgram(item.uuid)}
                             >
                                 <img

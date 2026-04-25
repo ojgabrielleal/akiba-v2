@@ -24,10 +24,7 @@
     };
 </script>
 
-<Offcanvas
-    bind:this={offcanvasRef}
-    title={identifier ? "Atualizar auto DJ" : "Cadastrar auto DJ"}
->
+<Offcanvas bind:this={offcanvasRef} title={identifier ? "Atualizar auto DJ" : "Cadastrar auto DJ"}>
     <div slot="content" let:close>
         <AutomaticForm {identifier} {close} />
     </div>
@@ -37,13 +34,7 @@
     <Section {title}>
         {#if can.create}
             <div class="flex justify-center gap-5 mb-14">
-                <button
-                    class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-lg font-noto-sans font-bold italic uppercase text-suspense-aurora"
-                    on:click={() => {
-                        identifier = null;
-                        offcanvasRef.open();
-                    }}
-                >
+                <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-lg font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offcanvasRef.open(); }}>
                     Cadastrar auto DJ
                 </button>
             </div>
@@ -58,20 +49,16 @@
                             alt={item.name}
                             loading="lazy"
                         />
-                        <div
-                            class="w-full rounded-md py-3 px-4 bg-suspense-aurora relative mb-2"
-                        >
+                        <div class="w-full rounded-md py-3 px-4 bg-suspense-aurora relative mb-2">
                             {#if item.is_default}
-                                <span
-                                    class="absolute -top-2.5 -right-1.5 bg-blue-skywave text-suspense-aurora text-[0.6rem] font-noto-sans font-bold px-2 py-1 rounded-md uppercase italic shadow-md z-10"
-                                >
+                                <span class="absolute -top-2.5 -right-1.5 bg-blue-skywave text-suspense-aurora text-[0.6rem] font-noto-sans font-bold px-2 py-1 rounded-md uppercase italic shadow-md z-10">
                                     Padrão
                                 </span>
                             {/if}
-                            <div
-                                class="text-blue-skywave text-md font-noto-sans uppercase"
-                            >
-                                <strong class="font-bold">Com:</strong>
+                            <div class="text-blue-skywave text-md font-noto-sans uppercase">
+                                <strong class="font-bold">
+                                    Com:
+                                </strong>
                                 {item.host.nickname}
                             </div>
                             <img
@@ -87,10 +74,7 @@
                             <button
                                 class="cursor-pointer"
                                 aria-label="atualizar auto DJ"
-                                on:click={() => {
-                                    identifier = item.uuid;
-                                    offcanvasRef.open();
-                                }}
+                                on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
                             >
                                 <img
                                     src="/svg/edit.svg"
@@ -105,7 +89,8 @@
                             <button
                                 class="cursor-pointer"
                                 aria-label="desativar auto DJ"
-                                on:click={() =>
+                                on:click={()
+                            >
                                     requestDeactivateProgram(item.uuid)}
                             >
                                 <img

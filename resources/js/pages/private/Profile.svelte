@@ -9,7 +9,7 @@
     $: titleAdapted = profile ? profile.data.nickname : "Perfil";
 </script>
 
-<Meta meta={{ title: titleAdapted }} />
+<Meta meta={{ title: titleAdapted } } />
 <Layout>
     <ProfileForm />
 </Layout>

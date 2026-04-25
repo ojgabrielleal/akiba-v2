@@ -76,10 +76,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="name"
-        >
+        <label for="name" class="text-md text-gray-700 font-noto-sans block mb-1">
             Programa
         </label>
         <input
@@ -104,10 +101,7 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.type}
             />
-            <label
-                class="cursor-pointer text-md text-gray-700 font-noto-sans"
-                for="free"
-            >
+            <label for="free" class="cursor-pointer text-md text-gray-700 font-noto-sans">
                 Sim
             </label>
         </div>
@@ -120,20 +114,14 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.type}
             />
-            <label
-                class="cursor-pointer text-md text-gray-700 font-noto-sans"
-                for="private"
-            >
+            <label for="private" class="cursor-pointer text-md text-gray-700 font-noto-sans">
                 Não
             </label>
         </div>
     </div>
     {#if $form.type === "private"}
         <div class="mb-4">
-            <label
-                class="text-md text-gray-700 font-noto-sans block mb-1"
-                for="user"
-            >
+            <label for="user" class="text-md text-gray-700 font-noto-sans block mb-1">
                 Locutor
             </label>
             <select
@@ -144,24 +132,20 @@
                 required
             >
                 {#each users.data as item}
-                    <option value={item.uuid}>{item.nickname}</option>
+                    <option value={item.uuid}>
+                        {item.nickname}
+                    </option>
                 {/each}
             </select>
         </div>
         {#if $form.schedules}
             <div class="flex items-center justify-center w-full mt-8 mb-5">
                 <div class="relative w-full">
-                    <div
-                        class="absolute left-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                    ></div>
-                    <span
-                        class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic"
-                    >
+                    <div class="absolute left-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
+                    <span class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic">
                         Horários
                     </span>
-                    <div
-                        class="absolute right-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"
-                    ></div>
+                    <div class="absolute right-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
                 </div>
             </div>
             <button
@@ -181,10 +165,7 @@
             {#each $form.schedules as schedule, index}
                 <div class="mb-4 border border-gray-400 p-4 rounded-lg">
                     <div class="mb-2">
-                        <label
-                            class="text-md text-gray-700 font-noto-sans block mb-1"
-                            for="day"
-                        >
+                        <label for="day" class="text-md text-gray-700 font-noto-sans block mb-1">
                             Dia da semana
                         </label>
                         <select
@@ -193,20 +174,31 @@
                             class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
                             bind:value={schedule.day}
                         >
-                            <option value={0}>Domingo</option>
-                            <option value={1}>Segunda</option>
-                            <option value={2}>Terça</option>
-                            <option value={3}>Quarta</option>
-                            <option value={4}>Quinta</option>
-                            <option value={5}>Sexta</option>
-                            <option value={6}>Sábado</option>
+                            <option value={0}>
+                                Domingo
+                            </option>
+                            <option value={1}>
+                                Segunda
+                            </option>
+                            <option value={2}>
+                                Terça
+                            </option>
+                            <option value={3}>
+                                Quarta
+                            </option>
+                            <option value={4}>
+                                Quinta
+                            </option>
+                            <option value={5}>
+                                Sexta
+                            </option>
+                            <option value={6}>
+                                Sábado
+                            </option>
                         </select>
                     </div>
                     <div class="mb-2">
-                        <label
-                            class="text-md text-gray-700 font-noto-sans block mb-1"
-                            for="hour"
-                        >
+                        <label for="hour" class="text-md text-gray-700 font-noto-sans block mb-1">
                             Horário
                         </label>
                         <input
@@ -237,6 +229,7 @@
     {/if}
     {#if can.create || can.update}
         <button
+            aria-label=""
             type="submit"
             class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
         >

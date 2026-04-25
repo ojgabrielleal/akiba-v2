@@ -4,7 +4,7 @@
     import { PostForm, PostGrid } from "@/ui/widgets/private";
 </script>
 
-<Meta meta={{ title: "Matérias" }} />
+<Meta meta={{ title: "Matérias" } } />
 <Layout>
     <PostForm />
     <PostGrid title="Todas as matérias" />

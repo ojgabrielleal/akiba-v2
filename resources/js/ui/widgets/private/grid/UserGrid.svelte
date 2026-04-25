@@ -44,10 +44,7 @@
         <UserForm {close} />
     </div>
 </Offcanvas>
-<Offcanvas
-    bind:this={offCanvasUserAccessRef}
-    title="Configurações administrativas"
->
+<Offcanvas bind:this={offCanvasUserAccessRef} title="Configurações administrativas">
     <div slot="content" let:close>
         <UserAccessForm {identifier} {close} />
     </div>
@@ -61,47 +58,29 @@
 {#if users}
     <div class="flex justify-center gap-5 mb-5">
         {#if can.create}
-            <button
-                class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer"
-                on:click={() => {
-                    offCanvasUserRef.open();
-                }}
-            >
+            <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => { offCanvasUserRef.open(); }}>
                 Cadastrar membro
             </button>
             <span class="border-l border-suspense-aurora/30"></span>
         {/if}
         {#if can.activity.create}
-            <button
-                class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer"
-                on:click={() => {
-                    offCanvasActivityRef.open();
-                }}
-            >
+            <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => { offCanvasActivityRef.open(); }}>
                 Criar Atividade e Avisos
             </button>
         {/if}
     </div>
     <Section {title}>
-        <div
-            class="mt-18 grid grid-cols-1 lg:grid-cols-4 gap-15 lg:gap-x-5 lg:gap-y-18"
-        >
+        <div class="mt-18 grid grid-cols-1 lg:grid-cols-4 gap-15 lg:gap-x-5 lg:gap-y-18">
             {#each users.data as item}
                 {@const highestRole = item.roles.reduce((prev, current) => {
                     return prev.weight > current.weight ? prev : current;
                 })}
-                <article
-                    class="h-35 px-3 py-1 bg-blue-skywave rounded-sm relative"
-                >
+                <article class="h-35 px-3 py-1 bg-blue-skywave rounded-sm relative">
                     <dl>
-                        <dt
-                            class="text-suspense-aurora text-xl lg:text-2xl font-noto-sans font-bold italic uppercase"
-                        >
+                        <dt class="text-suspense-aurora text-xl lg:text-2xl font-noto-sans font-bold italic uppercase">
                             {item.nickname}
                         </dt>
-                        <dd
-                            class="text-suspense-aurora text-xs font-noto-sans font-semibold italic uppercase"
-                        >
+                        <dd class="text-suspense-aurora text-xs font-noto-sans font-semibold italic uppercase">
                             {item.name}
                         </dd>
                     </dl>
@@ -111,12 +90,8 @@
                         alt=""
                         aria-hidden="true"
                     />
-                    <dl
-                        class="w-full flex justify-between items-end px-3 absolute left-0 bottom-2"
-                    >
-                        <dt
-                            class="rounded-full p-2 bg-suspense-aurora text-xs text-blue-marinho font-noto-sans font-bold uppercase italic"
-                        >
+                    <dl class="w-full flex justify-between items-end px-3 absolute left-0 bottom-2">
+                        <dt class="rounded-full p-2 bg-suspense-aurora text-xs text-blue-marinho font-noto-sans font-bold uppercase italic">
                             {highestRole.label}
                         </dt>
                         <dd class="flex flex-wrap lg:flex-nowrap gap-2">
@@ -124,10 +99,7 @@
                                 <button
                                     aria-label="Definir permissões"
                                     class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                                    on:click={() => {
-                                        identifier = item.uuid;
-                                        offCanvasUserAccessRef.open();
-                                    }}
+                                    on:click={() => { identifier = item.uuid; offCanvasUserAccessRef.open(); }}
                                 >
                                     <img
                                         src="/svg/crown.svg"
@@ -138,11 +110,7 @@
                                     />
                                 </button>
                             {/if}
-                            <Link
-                                href={`/panel/profile/${item.uuid}`}
-                                aria-label="Editar perfil"
-                                class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                            >
+                            <Link href={`/panel/profile/${item.uuid}`} aria-label="Editar perfil" class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
                                 <img
                                     src="/svg/edit.svg"
                                     alt=""
@@ -155,7 +123,8 @@
                                 <button
                                     aria-label="Desativar perfil"
                                     class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                                    on:click={() =>
+                                    on:click={()
+                                >
                                         requestDeactivateUser(item.uuid)}
                                 >
                                     <img

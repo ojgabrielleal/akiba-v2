@@ -52,10 +52,7 @@
 
 <form on:submit|preventDefault={submit}>
     <div class="mb-3">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="label"
-        >
+        <label for="label" class="text-md text-gray-700 font-noto-sans block mb-1">
             Nome
         </label>
         <input
@@ -68,10 +65,7 @@
         />
     </div>
     <div class="mb-3">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="weight"
-        >
+        <label for="weight" class="text-md text-gray-700 font-noto-sans block mb-1">
             Peso
         </label>
         <input
@@ -87,10 +81,7 @@
         </div>
     </div>
     <div class="mb-3">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="description"
-        >
+        <label for="description" class="text-md text-gray-700 font-noto-sans block mb-1">
             Descrição
         </label>
         <textarea
@@ -103,10 +94,7 @@
         ></textarea>
     </div>
     <div class="mb-3">
-        <label
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-            for="permissions"
-        >
+        <label for="permissions" class="text-md text-gray-700 font-noto-sans block mb-1">
             Permissões
         </label>
         <select
@@ -128,6 +116,7 @@
     </div>
     {#if can.create || can.update}
         <button
+            aria-label=""
             type="submit"
             class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
         >

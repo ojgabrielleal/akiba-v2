@@ -4,7 +4,7 @@
     import { AudienceCarrousel, ProgramHistoryTable } from "@/ui/widgets/private";
 </script>
 
-<Meta meta={{ title: "Log's" }} />
+<Meta meta={{ title: "Log's" } } />
 <Layout>
     <AudienceCarrousel title="Estatísticas da concorrência" />
     <ProgramHistoryTable title="Histórico de transmissões" />

@@ -4,7 +4,7 @@
     import { MarketingGrid } from "@/ui/widgets/private";
 </script>
 
-<Meta meta={{ title: "Marketing" }} />
+<Meta meta={{ title: "Marketing" } } />
 <Layout>
     <MarketingGrid />
 </Layout>

@@ -37,10 +37,7 @@
     };
 </script>
 
-<Offcanvas
-    bind:this={offCanvasRef}
-    title={identifier ? "Atualizar arquivo" : "Cadastrar arquivo"}
->
+<Offcanvas bind:this={offCanvasRef} title={identifier ? "Atualizar arquivo" : "Cadastrar arquivo"}>
     <div slot="content" let:close>
         <MarketingForm {identifier} {close} />
     </div>
@@ -48,9 +45,7 @@
 
 {#if repositories}
     <Section title="Tutoriais">
-        <div
-            class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4"
-        >
+        <div class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {#each tutorials as item}
                 <article class="w-full bg-blue-skywave relative">
                     <a href={item.url} target="_blank">
@@ -60,9 +55,7 @@
                             class="w-full h-48 object-cover aspect-square"
                             loading="lazy"
                         />
-                        <div
-                            class="p-2 text-suspense-aurora text-center font-noto-sans font-light"
-                        >
+                        <div class="p-2 text-suspense-aurora text-center font-noto-sans font-light">
                             {item.name}
                         </div>
                     </a>
@@ -72,9 +65,7 @@
     </Section>
 
     <Section title="Instaladores">
-        <div
-            class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4"
-        >
+        <div class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {#each softwares as item}
                 <article class="w-full bg-blue-skywave relative">
                     <a href={item.url} target="_blank">
@@ -84,9 +75,7 @@
                             class="w-full h-48 object-cover aspect-square"
                             loading="lazy"
                         />
-                        <div
-                            class="p-2 text-suspense-aurora text-center font-noto-sans font-light"
-                        >
+                        <div class="p-2 text-suspense-aurora text-center font-noto-sans font-light">
                             {item.name}
                         </div>
                     </a>
@@ -96,9 +85,7 @@
     </Section>
 
     <Section title="Pacotes e Modelos">
-        <div
-            class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4"
-        >
+        <div class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {#each packages as item}
                 <article class="w-full bg-blue-skywave relative">
                     <a href={item.url} target="_blank">
@@ -108,9 +95,7 @@
                             class="w-full h-48 object-cover aspect-square"
                             loading="lazy"
                         />
-                        <div
-                            class="p-2 text-suspense-aurora text-center font-noto-sans font-light"
-                        >
+                        <div class="p-2 text-suspense-aurora text-center font-noto-sans font-light">
                             {item.name}
                         </div>
                     </a>
@@ -123,21 +108,13 @@
 <Section title="Todos os conteúdos">
     {#if can.create}
         <div class="flex justify-center mt-5 mb-10">
-            <button
-                class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase"
-                onclick={() => {
-                    offCanvasRef.open();
-                    identifier = null;
-                }}
-            >
+            <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" onclick={() => { offCanvasRef.open(); identifier = null; }}>
                 Upar conteúdo
             </button>
         </div>
     {/if}
     {#if repositories}
-        <div
-            class="mb-20 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-x-4 gap-y-20"
-        >
+        <div class="mb-20 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-x-4 gap-y-20">
             {#each repositories.data as item}
                 <article class="w-full bg-blue-skywave relative">
                     <a href={item.url} target="_blank">
@@ -147,9 +124,7 @@
                             class="w-full h-48 object-cover aspect-square"
                             loading="lazy"
                         />
-                        <div
-                            class="p-2 text-suspense-aurora text-center font-noto-sans font-light"
-                        >
+                        <div class="p-2 text-suspense-aurora text-center font-noto-sans font-light">
                             {item.name}
                         </div>
                     </a>
@@ -158,10 +133,7 @@
                             <button
                                 class="cursor-pointer"
                                 aria-label="editar"
-                                onclick={() => {
-                                    offCanvasRef.open();
-                                    identifier = item.uuid;
-                                }}
+                                onclick={() => { offCanvasRef.open(); identifier = item.uuid; }}
                             >
                                 <img
                                     src="/svg/edit.svg"
@@ -176,7 +148,8 @@
                             <button
                                 aria-label="remover"
                                 class="cursor-pointer"
-                                onclick={() =>
+                                onclick={()
+                            >
                                     requestDeactivateRepository(item.uuid)}
                             >
                                 <img

@@ -4,12 +4,12 @@
     import { UserGrid, CalendarGrid, RoleTable, ActivityCarrousel, TaskGrid, AutomaticGrid } from "@/ui/widgets/private";
 </script>
 
-<Meta meta={{ title: "ADM's" }} />
+<Meta meta={{ title: "ADM's" } } />
 <Layout>
-    <UserGrid title="Membros"/>
+    <UserGrid title="Membros" />
     <RoleTable title="Cargos" />
-    <CalendarGrid title="Calendário" variant="administration"/>
-    <ActivityCarrousel title="Avisos e atividades" variant="administration"/>
+    <CalendarGrid title="Calendário" variant="administration" />
+    <ActivityCarrousel title="Avisos e atividades" variant="administration" />
     <TaskGrid title="Tarefas" />
-    <AutomaticGrid title="Auto DJ"/>
+    <AutomaticGrid title="Auto DJ" />
 </Layout>

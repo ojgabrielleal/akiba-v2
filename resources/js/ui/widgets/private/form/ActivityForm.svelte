@@ -68,10 +68,7 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.purpose}
             />
-            <label
-                for="notice"
-                class="cursor-pointer text-md text-gray-700 font-noto-sans"
-            >
+            <label for="notice" class="cursor-pointer text-md text-gray-700 font-noto-sans">
                 Aviso
             </label>
         </div>
@@ -84,19 +81,13 @@
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 bind:group={$form.purpose}
             />
-            <label
-                for="activity"
-                class="cursor-pointer text-md text-gray-700 font-noto-sans"
-            >
+            <label for="activity" class="cursor-pointer text-md text-gray-700 font-noto-sans">
                 Atividade
             </label>
         </div>
     </div>
     <div class="mb-4">
-        <label
-            for="title"
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-        >
+        <label for="title" class="text-md text-gray-700 font-noto-sans block mb-1">
             {#if $form.purpose === "activity"}
                 Título da atividade
             {:else if $form.purpose === "notice"}
@@ -115,10 +106,7 @@
         />
     </div>
     <div class="mb-4">
-        <label
-            for="limit"
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-        >
+        <label for="limit" class="text-md text-gray-700 font-noto-sans block mb-1">
             Data limite
         </label>
         <input
@@ -140,10 +128,7 @@
     {#if $form.purpose === "activity"}
         <div class="grid grid-cols-2 gap-3">
             <div class="mb-4">
-                <label
-                    for="hour"
-                    class="text-md text-gray-700 font-noto-sans block mb-1"
-                >
+                <label for="hour" class="text-md text-gray-700 font-noto-sans block mb-1">
                     Hora
                 </label>
                 <input
@@ -159,10 +144,7 @@
                 </div>
             </div>
             <div class="mb-4">
-                <label
-                    for="date"
-                    class="text-md text-gray-700 font-noto-sans block mb-1"
-                >
+                <label for="date" class="text-md text-gray-700 font-noto-sans block mb-1">
                     Data
                 </label>
                 <input
@@ -180,10 +162,7 @@
         </div>
     {/if}
     <div class="mb-4">
-        <label
-            for="content"
-            class="text-md text-gray-700 font-noto-sans block mb-1"
-        >
+        <label for="content" class="text-md text-gray-700 font-noto-sans block mb-1">
             Conteúdo
         </label>
         <textarea
@@ -197,6 +176,7 @@
     </div>
     {#if can.create || can.update}
         <button
+            aria-label=""
             type="submit"
             class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
         >

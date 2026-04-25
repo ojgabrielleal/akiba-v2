@@ -48,14 +48,10 @@
 </script>
 
 <Section title={podcast ? "Editar Podcast" : "Adicionar Podcast"}>
-    <form on:submit|preventDefault={submit} class="mt-10">
-        <div
-            class="grid grid-cols-1 xl:grid-cols-[20rem_1fr] items-center gap-8 mb-8"
-        >
+    <form class="mt-10" on:submit|preventDefault={submit}>
+        <div class="grid grid-cols-1 xl:grid-cols-[20rem_1fr] items-center gap-8 mb-8">
             <div>
-                <div
-                    class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                >
+                <div class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                     Capa do podcast
                 </div>
                 <Preview
@@ -65,14 +61,9 @@
                 />
             </div>
             <div class="flex flex-col gap-8">
-                <div
-                    class="grid grid-cols-1 xl:grid-cols-[9rem_9rem_1fr] gap-8 lg:gap-5"
-                >
+                <div class="grid grid-cols-1 xl:grid-cols-[9rem_9rem_1fr] gap-8 lg:gap-5">
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="season"
-                        >
+                        <label for="season" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             Season
                         </label>
                         <input
@@ -85,10 +76,7 @@
                         />
                     </div>
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="episode"
-                        >
+                        <label for="episode" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             Episode
                         </label>
                         <input
@@ -101,10 +89,7 @@
                         />
                     </div>
                     <div>
-                        <label
-                            class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                            for="title"
-                        >
+                        <label for="title" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                             Título do episódio
                         </label>
                         <input
@@ -118,10 +103,7 @@
                     </div>
                 </div>
                 <div>
-                    <label
-                        class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                        for="summary"
-                    >
+                    <label for="summary" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                         Resumo do episódio
                     </label>
                     <Wysiwyg
@@ -135,10 +117,7 @@
         </div>
         <div class="flex flex-col">
             <div class="mb-8">
-                <label
-                    class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                    for="description"
-                >
+                <label for="description" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                     Escreva sobre o episódio
                 </label>
                 <Wysiwyg
@@ -149,10 +128,7 @@
                 />
             </div>
             <div>
-                <label
-                    class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1"
-                    for="audio"
-                >
+                <label for="audio" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                     URL Embeded do Spotify do episódio
                 </label>
                 <input
@@ -166,10 +142,9 @@
             </div>
         </div>
         {#if can.create || can.update}
-            <div
-                class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10"
-            >
+            <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10">
                 <button
+                    aria-label=""
                     type="submit"
                     class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase"
                 >

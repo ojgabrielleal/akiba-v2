@@ -40,36 +40,29 @@
         <div class="flex flex-col gap-5">
             {#if musicRanking.data.length >= 3}
                 {#each musicRanking.data as item, index}
-                    <article
-                        class="flex flex-wrap lg:flex-nowrap items-center gap-5"
-                    >
+                    <article class="flex flex-wrap lg:flex-nowrap items-center gap-5">
                         <div class="flex items-center gap-5">
                             {#if can.update}
                                 <Preview
                                     standard="w-24 h-24 rounded-lg"
                                     view="w-24 h-24 rounded-lg"
-                                    src={item.ranking.image ||
-                                        "https://placehold.co/500x500?text=Rede+Akiba"}
-                                    oninput={(event) =>
+                                    src={item.ranking.image || "https://placehold.co/500x500?text=Rede+Akiba"}
+                                    oninput={(event)
+                                >
                                         submit(event, item.uuid)}
                                 />
                             {:else}
                                 <img
                                     class="w-24 h-24 rounded-lg"
-                                    src={item.ranking.image ||
-                                        "https://placehold.co/500x500?text=Rede+Akiba"}
+                                    src={item.ranking.image || "https://placehold.co/500x500?text=Rede+Akiba"}
                                     alt={item.name}
                                 />
                             {/if}
-                            <strong
-                                class="text-suspense-aurora text-6xl font-noto-sans font-bold uppercase italic"
-                            >
+                            <strong class="text-suspense-aurora text-6xl font-noto-sans font-bold uppercase italic">
                                 #{index + 1}
                             </strong>
                         </div>
-                        <div
-                            class="text-suspense-aurora font-noto-sans uppercase"
-                        >
+                        <div class="text-suspense-aurora font-noto-sans uppercase">
                             {item.name} - {item.type} - {item.production} - {item.artist}
                         </div>
                     </article>
@@ -78,10 +71,7 @@
         </div>
         {#if musicRanking.data.length >= 3 && can.set}
             <div class="flex justify-end mt-5">
-                <button
-                    on:click={() => setRanking()}
-                    class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold uppercase italic disabled:opacity-50 disabled:pointer-events-none"
-                >
+                <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold uppercase italic disabled:opacity-50 disabled:pointer-events-none" on:click={() => setRanking()}>
                     Atualizar ranking
                 </button>
             </div>

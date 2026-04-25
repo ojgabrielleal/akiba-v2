@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "format:svelte": "node resources/js/scripts/format-svelte.js"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",

@@ -8,19 +8,13 @@
     let mobilenavbar = false;
 </script>
 
-<nav
-    class="w-full h-12 bg-suspense-aurora hidden items-center justify-center lg:flex"
->
+<nav class="w-full h-12 bg-suspense-aurora hidden items-center justify-center lg:flex">
     <div class="cont relative">
         <ul class="flex justify-center items-center gap-10">
             {#each navbar.private as item}
                 {#if hasPermission(item.permission)}
                     <li>
-                        <Link
-                            href={item.address}
-                            aria-label={item.name}
-                            class="flex items-center gap-2"
-                        >
+                        <Link href={item.address} aria-label={item.name} class="flex items-center gap-2">
                             <img
                                 src={item.icon}
                                 alt=""
@@ -34,10 +28,7 @@
             {/each}
         </ul>
         <div class="absolute -bottom-[1.45rem] right-0 flex items-center gap-2">
-            <Link
-                href={`/panel/profile/${user.uuid}`}
-                aria-label={user.nickname}
-            >
+            <Link href={`/panel/profile/${user.uuid}`} aria-label={user.nickname}>
                 <img
                     src={user.avatar}
                     alt={`Avatar de ${user.nickname}`}
@@ -50,13 +41,8 @@
 </nav>
 
 <!-- Mobile Navbar -->
-<nav
-    class="w-full h-16 bg-suspense-aurora flex items-center justify-between px-10 lg:hidden"
->
-    <button
-        on:click={() => (mobilenavbar = !mobilenavbar)}
-        aria-label="Abrir menu"
-    >
+<nav class="w-full h-16 bg-suspense-aurora flex items-center justify-between px-10 lg:hidden">
+    <button aria-label="Abrir menu" on:click={() => (mobilenavbar = !mobilenavbar)}>
         <svg
             class="w-6 h-6"
             fill="none"
@@ -81,19 +67,18 @@
 </nav>
 
 <!-- Sidebar Menu -->
-<div
-    class={[
-        "fixed top-0 left-0 h-full w-64 bg-suspense-aurora z-50 shadow-md transform transition-transform duration-300",
-        { "translate-x-0": mobilenavbar },
-        { "-translate-x-full": !mobilenavbar },
-    ]}
->
+<div class={["fixed top-0 left-0 h-full w-64 bg-suspense-aurora z-50 shadow-md transform transition-transform duration-300",
+    { "translate-x-0": mobilenavbar },
+    { "-translate-x-full": !mobilenavbar },
+]}>
     <div class="p-5 flex items-center justify-between">
-        <img src="/favicon.ico" alt="Logo" class="w-8 h-8" loading="lazy" />
-        <button
-            on:click={() => (mobilenavbar = false)}
-            aria-label="Fechar menu"
-        >
+        <img
+            src="/favicon.ico"
+            alt="Logo"
+            class="w-8 h-8"
+            loading="lazy"
+        />
+        <button aria-label="Fechar menu" on:click={() => (mobilenavbar = false)}>
             <svg
                 class="w-6 h-6"
                 fill="none"
@@ -114,11 +99,7 @@
         {#each navbar.private as item}
             {#if hasPermission(item.permission)}
                 <li>
-                    <Link
-                        href={item.address}
-                        aria-label={item.name}
-                        class="flex items-center gap-2 font-noto-sans"
-                    >
+                    <Link href={item.address} aria-label={item.name} class="flex items-center gap-2 font-noto-sans">
                         <img
                             src={item.icon}
                             alt=""
