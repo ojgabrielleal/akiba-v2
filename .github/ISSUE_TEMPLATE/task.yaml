@@ -1,89 +1,89 @@
-name: "📋 Task"
-description: "Add a general task to the project"
+name: "📋 Tarefa"
+description: "Adicione uma tarefa geral ao projeto"
 labels: []
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        Create a new task for the project. Define the details and related work.
+        Crie uma nova tarefa para o projeto. Defina os detalhes e o trabalho relacionado.
 
   - type: textarea
     id: description
     attributes:
-      label: Description
-      description: "Describe in detail what needs to be done."
-      placeholder: "Explain the task clearly."
+      label: Descrição
+      description: "Descreva em detalhes o que precisa ser feito."
+      placeholder: "Explique a tarefa com clareza."
     validations:
       required: true
 
   - type: textarea
     id: objective
     attributes:
-      label: Goal
-      description: "What is the purpose of this task?"
-      placeholder: "What problem does it solve or what improvement does it bring?"
+      label: Objetivo
+      description: "Qual é o propósito desta tarefa?"
+      placeholder: "Qual problema ela resolve ou qual melhoria traz?"
     validations:
       required: true
 
   - type: textarea
     id: tasks
     attributes:
-      label: Subtasks
-      description: "List subtasks or checkpoints."
+      label: Subtarefas
+      description: "Liste subtarefas ou pontos de verificação."
       placeholder: |
-        - [ ] Task 1
-        - [ ] Task 2
-        - [ ] Task 3
-        - [ ] Validate and test
+        - [ ] Tarefa 1
+        - [ ] Tarefa 2
+        - [ ] Tarefa 3
+        - [ ] Validar e testar
 
   - type: textarea
     id: acceptance
     attributes:
-      label: Acceptance criteria
-      description: "What defines this task as complete?"
+      label: Critérios de aceite
+      description: "O que define esta tarefa como concluída?"
       placeholder: |
-        - Feature X works correctly
-        - Tests pass
-        - Documentation is updated
+        - Funcionalidade X funciona corretamente
+        - Testes passam
+        - Documentação está atualizada
 
   - type: textarea
     id: notes
     attributes:
-      label: Additional notes
-      description: "Extra context, references, or important information."
-      placeholder: "Links, dependencies, constraints, etc."
+      label: Notas adicionais
+      description: "Contexto extra, referências ou informações importantes."
+      placeholder: "Links, dependências, restrições etc."
 
   - type: checkboxes
     id: area
     attributes:
-      label: Project area
+      label: Área do projeto
       options:
         - label: "⚙️ Backend"
         - label: "🎨 Frontend"
-        - label: "🗄️ Database"
+        - label: "🗄️ Banco de dados"
         - label: "🚀 DevOps"
-        - label: "📚 Documentation"
+        - label: "📚 Documentação"
 
   - type: dropdown
     id: priority
     attributes:
-      label: Priority
+      label: Prioridade
       options:
-        - "🔥 High"
-        - "⚠️ Medium"
-        - "🌱 Low"
+        - "🔥 Alta"
+        - "⚠️ Média"
+        - "🌱 Baixa"
     validations:
       required: true
 
   - type: input
     id: estimate
     attributes:
-      label: Estimate in hours
-      placeholder: "How many hours do you estimate?"
+      label: Estimativa em horas
+      placeholder: "Quantas horas você estima?"
 
   - type: input
     id: assignee
     attributes:
       label: Assignee
-      placeholder: "@username or leave blank"
+      placeholder: "@usuario ou deixe em branco"

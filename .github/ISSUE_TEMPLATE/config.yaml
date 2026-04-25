@@ -1,11 +1,11 @@
 blank_issues_enabled: true
 contact_links:
-  - name: General discussion
+  - name: Discussão geral
     url: https://github.com/ojgabrielleal/akiba-v2/discussions
-    about: "Ask questions, share ideas, and start general discussions."
+    about: "Faça perguntas, compartilhe ideias e inicie discussões gerais."
   - name: Twitter
     url: https://twitter.com/gahbiru
-    about: "Follow for project updates."
-  - name: Contributing
+    about: "Acompanhe atualizações do projeto."
+  - name: Contribuindo
     url: https://github.com/ojgabrielleal/akiba-v2/blob/main/CONTRIBUTING.md
-    about: "Learn how to contribute to the project."
+    about: "Saiba como contribuir com o projeto."

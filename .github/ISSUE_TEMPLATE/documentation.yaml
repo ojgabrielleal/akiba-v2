@@ -1,111 +1,111 @@
-name: "📚 Documentation"
-description: "Improve or add documentation"
+name: "📚 Documentação"
+description: "Melhore ou adicione documentação"
 labels: ["documentation"]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        Propose documentation improvements or additions for the project.
+        Proponha melhorias ou adições de documentação para o projeto.
 
   - type: input
     id: title
     attributes:
-      label: Documentation title
-      description: "Example: Document the posts API."
-      placeholder: "Enter a descriptive title"
+      label: Título da documentação
+      description: "Exemplo: Documentar a API de posts."
+      placeholder: "Digite um título descritivo"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Description
-      description: "What will be documented?"
-      placeholder: "What documentation is missing or needs improvement?"
+      label: Descrição
+      description: "O que será documentado?"
+      placeholder: "Qual documentação está faltando ou precisa de melhoria?"
     validations:
       required: true
 
   - type: textarea
     id: reason
     attributes:
-      label: Why is this needed?
-      description: "Why should this documentation be added or improved?"
+      label: Por que isso é necessário?
+      description: "Por que esta documentação deve ser adicionada ou melhorada?"
       placeholder: |
-        - New developers have trouble understanding it
-        - API is not documented
-        - Setup is complicated
+        - Novos desenvolvedores têm dificuldade para entender
+        - A API não está documentada
+        - A configuração é complicada
     validations:
       required: true
 
   - type: textarea
     id: content
     attributes:
-      label: Proposed content
-      description: "Write or describe the content that will be documented."
+      label: Conteúdo proposto
+      description: "Escreva ou descreva o conteúdo que será documentado."
       placeholder: |
-        # Title
+        # Título
 
-        ## Main sections
-        - Introduction
-        - How to use
-        - Examples
-        - Troubleshooting
+        ## Seções principais
+        - Introdução
+        - Como usar
+        - Exemplos
+        - Solução de problemas
 
   - type: textarea
     id: location
     attributes:
-      label: Documentation location
-      description: "Where will it be added or updated?"
+      label: Local da documentação
+      description: "Onde será adicionada ou atualizada?"
       placeholder: "docs/api.md or README.md"
 
   - type: checkboxes
     id: type
     attributes:
-      label: Documentation type
+      label: Tipo de documentação
       options:
         - label: "📘 README"
-        - label: "🔌 API docs"
-        - label: "🛠️ Setup/Installation"
-        - label: "🏗️ Architecture/Design"
-        - label: "💬 Code comments"
-        - label: "🧭 Troubleshooting"
-        - label: "🤝 Contributing guidelines"
+        - label: "🔌 Documentação de API"
+        - label: "🛠️ Configuração/Instalação"
+        - label: "🏗️ Arquitetura/Design"
+        - label: "💬 Comentários de código"
+        - label: "🧭 Solução de problemas"
+        - label: "🤝 Guia de contribuição"
 
   - type: checkboxes
     id: audience
     attributes:
-      label: Target audience
+      label: Público-alvo
       options:
-        - label: "🌱 New developers"
-        - label: "🔌 API users"
-        - label: "🛡️ Maintainers"
-        - label: "🤝 Contributors"
+        - label: "🌱 Novos desenvolvedores"
+        - label: "🔌 Usuários da API"
+        - label: "🛡️ Mantenedores"
+        - label: "🤝 Contribuidores"
 
   - type: textarea
     id: resources
     attributes:
-      label: Useful resources
-      description: "Links, references, or examples that should be included."
+      label: Recursos úteis
+      description: "Links, referências ou exemplos que devem ser incluídos."
       placeholder: |
-        - Link to related issue
-        - Link to PR
-        - Code examples
+        - Link para issue relacionada
+        - Link para PR
+        - Exemplos de código
 
   - type: dropdown
     id: priority
     attributes:
-      label: Priority
+      label: Prioridade
       options:
-        - "🔥 High, critical for onboarding"
-        - "⚠️ Medium, useful to have"
-        - "🌱 Low, future improvement"
+        - "🔥 Alta, crítica para onboarding"
+        - "⚠️ Média, seria útil ter"
+        - "🌱 Baixa, melhoria futura"
     validations:
       required: true
 
   - type: textarea
     id: notes
     attributes:
-      label: Additional notes
-      description: "Any extra information."
-      placeholder: "Additional context, suggestions, etc."
+      label: Notas adicionais
+      description: "Qualquer informação extra."
+      placeholder: "Contexto adicional, sugestões etc."

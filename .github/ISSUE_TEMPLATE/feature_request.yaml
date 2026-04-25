@@ -1,83 +1,83 @@
-name: "✨ Feature Request"
-description: "Request a new feature or improvement"
+name: "✨ Solicitação de Funcionalidade"
+description: "Solicite uma nova funcionalidade ou melhoria"
 labels: ["enhancement"]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for suggesting a new feature. Please fill in the details below.
+        Obrigado por sugerir uma nova funcionalidade. Preencha os detalhes abaixo.
 
   - type: input
     id: title
     attributes:
-      label: Feature title
-      description: "Example: Add dark theme support."
-      placeholder: "Enter a descriptive title"
+      label: Título da funcionalidade
+      description: "Exemplo: Adicionar suporte a tema escuro."
+      placeholder: "Digite um título descritivo"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Description
-      description: "Briefly describe the desired feature."
-      placeholder: "Explain the desired feature."
+      label: Descrição
+      description: "Descreva brevemente a funcionalidade desejada."
+      placeholder: "Explique a funcionalidade desejada."
     validations:
       required: true
 
   - type: textarea
     id: objective
     attributes:
-      label: Goal
-      description: "What is the main goal of this feature?"
-      placeholder: "What problem does this solve or what value does it add?"
+      label: Objetivo
+      description: "Qual é o principal objetivo desta funcionalidade?"
+      placeholder: "Qual problema isso resolve ou qual valor adiciona?"
     validations:
       required: true
 
   - type: textarea
     id: benefits
     attributes:
-      label: Benefits
-      description: "What benefits or improvements are expected?"
+      label: Benefícios
+      description: "Quais benefícios ou melhorias são esperados?"
       placeholder: |
-        - Improves the user experience
-        - Makes code maintenance easier
+        - Melhora a experiência do usuário
+        - Facilita a manutenção do código
 
   - type: textarea
     id: tasks
     attributes:
-      label: Proposed tasks
-      description: "List the tasks that need to be done."
+      label: Tarefas propostas
+      description: "Liste as tarefas que precisam ser feitas."
       placeholder: |
-        - [ ] Task 1
-        - [ ] Task 2
-        - [ ] Task 3
+        - [ ] Tarefa 1
+        - [ ] Tarefa 2
+        - [ ] Tarefa 3
 
   - type: textarea
     id: additional
     attributes:
-      label: Additional information
-      description: "Add any relevant context, screenshot, or reference."
-      placeholder: "Links, examples, mockups, etc."
+      label: Informações adicionais
+      description: "Adicione qualquer contexto, screenshot ou referência relevante."
+      placeholder: "Links, exemplos, mockups etc."
 
   - type: checkboxes
     id: area
     attributes:
-      label: Project area
+      label: Área do projeto
       options:
         - label: "⚙️ Backend"
         - label: "🎨 Frontend"
-        - label: "📚 Documentation"
-        - label: "🚀 DevOps/Infrastructure"
+        - label: "📚 Documentação"
+        - label: "🚀 DevOps/Infraestrutura"
 
   - type: dropdown
     id: priority
     attributes:
-      label: Priority
+      label: Prioridade
       options:
-        - "🔥 High"
-        - "⚠️ Medium"
-        - "🌱 Low"
+        - "🔥 Alta"
+        - "⚠️ Média"
+        - "🌱 Baixa"
     validations:
       required: true

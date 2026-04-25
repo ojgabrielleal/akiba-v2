@@ -1,67 +1,67 @@
-name: "🔧 Refactor"
-description: "Improve or refactor existing code"
+name: "🔧 Refatoração"
+description: "Melhore ou refatore código existente"
 labels: ["refactor"]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        Propose a code refactor to improve quality, performance, or maintainability.
+        Proponha uma refatoração de código para melhorar qualidade, performance ou manutenibilidade.
 
   - type: input
     id: title
     attributes:
-      label: Refactor title
-      description: "Example: Extract duplicated controller logic."
-      placeholder: "Enter a descriptive title"
+      label: Título da refatoração
+      description: "Exemplo: Extrair lógica duplicada do controller."
+      placeholder: "Digite um título descritivo"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Description
-      description: "Explain what will be refactored."
-      placeholder: "What code is being refactored?"
+      label: Descrição
+      description: "Explique o que será refatorado."
+      placeholder: "Qual código será refatorado?"
     validations:
       required: true
 
   - type: textarea
     id: problem
     attributes:
-      label: Current problem
-      description: "What is the problem with the current code?"
+      label: Problema atual
+      description: "Qual é o problema com o código atual?"
       placeholder: |
-        - Duplicated code in multiple places
-        - Hard to maintain
-        - Poor performance
+        - Código duplicado em vários lugares
+        - Difícil de manter
+        - Baixa performance
     validations:
       required: true
 
   - type: textarea
     id: solution
     attributes:
-      label: Proposed solution
-      description: "How do you propose solving this problem?"
-      placeholder: "Describe the refactoring approach."
+      label: Solução proposta
+      description: "Como você propõe resolver este problema?"
+      placeholder: "Descreva a abordagem de refatoração."
     validations:
       required: true
 
   - type: textarea
     id: benefits
     attributes:
-      label: Benefits
-      description: "What are the benefits of this refactor?"
+      label: Benefícios
+      description: "Quais são os benefícios desta refatoração?"
       placeholder: |
-        - Reduces duplicated code
-        - Makes future maintenance easier
-        - Improves performance
+        - Reduz código duplicado
+        - Facilita manutenções futuras
+        - Melhora a performance
 
   - type: textarea
     id: files
     attributes:
-      label: Affected files
-      description: "Which files will be changed?"
+      label: Arquivos afetados
+      description: "Quais arquivos serão alterados?"
       placeholder: |
         - app/Http/Controllers/PostController.php
         - app/Services/PostService.php
@@ -69,48 +69,48 @@ body:
   - type: textarea
     id: tasks
     attributes:
-      label: Tasks
-      description: "Steps to complete the refactor."
+      label: Tarefas
+      description: "Passos para concluir a refatoração."
       placeholder: |
-        - [ ] Extract duplication
-        - [ ] Add tests for coverage
-        - [ ] Verify performance
-        - [ ] Update documentation
+        - [ ] Extrair duplicação
+        - [ ] Adicionar testes para cobertura
+        - [ ] Verificar performance
+        - [ ] Atualizar documentação
 
   - type: textarea
     id: impact
     attributes:
       label: Impact
-      description: "What is the impact of this change?"
+      description: "Qual é o impacto desta alteração?"
       placeholder: |
-        - Breaking changes, if any
-        - Affected files
-        - Required tests
+        - Mudanças incompatíveis, se houver
+        - Arquivos afetados
+        - Testes necessários
 
   - type: checkboxes
     id: area
     attributes:
-      label: Affected area
+      label: Área afetada
       options:
         - label: "⚙️ Backend"
         - label: "🎨 Frontend"
-        - label: "🗄️ Database"
-        - label: "🏗️ Architecture"
+        - label: "🗄️ Banco de dados"
+        - label: "🏗️ Arquitetura"
 
   - type: dropdown
     id: priority
     attributes:
-      label: Priority
+      label: Prioridade
       options:
-        - "🔥 High, blocks other tasks"
-        - "⚠️ Medium, nice to have"
-        - "🌱 Low, technical maintenance"
+        - "🔥 Alta, bloqueia outras tarefas"
+        - "⚠️ Média, seria bom ter"
+        - "🌱 Baixa, manutenção técnica"
     validations:
       required: true
 
   - type: textarea
     id: notes
     attributes:
-      label: Additional notes
-      description: "Any important extra information."
-      placeholder: "Links, references, examples, etc."
+      label: Notas adicionais
+      description: "Qualquer informação extra importante."
+      placeholder: "Links, referências, exemplos etc."

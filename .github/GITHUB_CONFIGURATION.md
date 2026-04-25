@@ -1,104 +1,104 @@
-# GitHub Configuration
+# Configuração do GitHub
 
-This directory contains GitHub configuration files and templates for the Akiba V2 repository.
+Este diretório contém arquivos de configuração e templates do GitHub para o repositório Akiba V2.
 
-## Files
+## Arquivos
 
 ### `ISSUE_TEMPLATE/`
 
-Contains templates for standardized issues:
+Contém templates para issues padronizadas:
 
-- `bug_report.yaml` - report bugs or unexpected behavior
-- `feature_request.yaml` - suggest new features or improvements
-- `task.yaml` - track general development or maintenance tasks
-- `refactor.yaml` - propose code quality, architecture, or performance refactors
-- `documentation.yaml` - request documentation additions or improvements
-- `config.yaml` - configure issue templates and contact links
+- `bug_report.yaml` - relatar bugs ou comportamentos inesperados
+- `feature_request.yaml` - sugerir novas funcionalidades ou melhorias
+- `task.yaml` - acompanhar tarefas gerais de desenvolvimento ou manutenção
+- `refactor.yaml` - propor refatorações de qualidade de código, arquitetura ou performance
+- `documentation.yaml` - solicitar adições ou melhorias na documentação
+- `config.yaml` - configurar templates de issue e links de contato
 
 ### `pull_request_template.md`
 
-Default pull request template. It keeps PRs focused on:
+Template padrão de pull request. Ele mantém os PRs focados em:
 
-- A clear goal
-- A concise change summary
-- Test instructions
-- A verification checklist
-- Related issues, PRs, or documentation
+- Um objetivo claro
+- Um resumo conciso das alterações
+- Instruções de teste
+- Um checklist de verificação
+- Issues, PRs ou documentação relacionados
 
 ### `LABELS.md`
 
-Reference for the repository label system.
+Referência para o sistema de labels do repositório.
 
-## Language Guidelines
+## Diretrizes de Idioma
 
-The repository uses English as its default public language. Use English for:
+O repositório usa português brasileiro como idioma público principal. Use PT-BR para:
 
-- README and project documentation
-- Issue and PR templates
-- Issue and PR titles
-- Commit messages
-- Labels and milestones
-- Release notes
+- README e documentação do projeto
+- Templates de issues e PRs
+- Títulos de issues e PRs
+- Mensagens de commit
+- Labels e milestones
+- Notas de release
 
-Because the team is fully Brazilian, day-to-day discussion inside issue or PR comments can be in Portuguese when it makes collaboration faster. Keep the title, summary, and final decision in English so the repository remains easy to scan later.
+Quando houver conteúdo voltado a contribuidores internacionais, mantenha uma versão em inglês separada ou inclua um link claro para a tradução.
 
-## Standard Labels
+## Labels Padrão
 
-| Label | Description |
+| Label | Descrição |
 |-------|-------------|
-| `bug` | Bug report or unexpected behavior |
-| `enhancement` | New feature or improvement |
-| `documentation` | Documentation additions or improvements |
-| `refactor` | Code refactoring |
-| `backend` | PHP, Laravel, or API changes |
-| `frontend` | Svelte, JavaScript, or CSS changes |
-| `database` | Database, migration, or seeding changes |
-| `devops` | Infrastructure, CI, or deployment changes |
-| `help-wanted` | Looking for contributor help |
-| `good-first-issue` | Good task for a first-time contributor |
-| `duplicate` | Duplicate of another issue |
-| `wontfix` | Will not be fixed |
+| `bug` | Relato de bug ou comportamento inesperado |
+| `enhancement` | Nova funcionalidade ou melhoria |
+| `documentation` | Adições ou melhorias de documentação |
+| `refactor` | Refatoração de código |
+| `backend` | Alterações em PHP, Laravel ou API |
+| `frontend` | Alterações em Svelte, JavaScript ou CSS |
+| `database` | Alterações em banco de dados, migrations ou seeders |
+| `devops` | Alterações em infraestrutura, CI ou deploy |
+| `help-wanted` | Procurando ajuda de contribuidores |
+| `good-first-issue` | Boa tarefa para uma primeira contribuição |
+| `duplicate` | Duplicada de outra issue |
+| `wontfix` | Não será corrigida |
 
-## How to Use
+## Como Usar
 
-### Creating an issue
+### Criando uma issue
 
-1. Go to "Issues" -> "New issue".
-2. Choose one of the available templates.
-3. Fill in the required fields.
-4. Add at least one type label and one area label when possible.
-5. Click "Submit new issue".
+1. Acesse "Issues" -> "New issue".
+2. Escolha um dos templates disponíveis.
+3. Preencha os campos obrigatórios.
+4. Adicione pelo menos uma label de tipo e uma label de área quando possível.
+5. Clique em "Submit new issue".
 
-### Creating a pull request
+### Criando um pull request
 
-1. Push your branch.
-2. Open a "New pull request".
-3. Describe the changes using the template.
-4. Fill in the checklist.
-5. Link the related issue with `Closes #123` when applicable.
+1. Faça push da sua branch.
+2. Abra um "New pull request".
+3. Descreva as alterações usando o template.
+4. Preencha o checklist.
+5. Vincule a issue relacionada com `Closes #123` quando aplicável.
 
-## Best Practices
+## Boas Práticas
 
-Use short, descriptive issue titles:
+Use títulos de issue curtos e descritivos:
 
 ```text
-Fix post loading error on the home page
-Add dark theme support
-Refactor post validation rules
+Corrigir erro ao carregar posts na home
+Adicionar suporte a tema escuro
+Refatorar regras de validação de posts
 ```
 
-Use clear sections when writing issues manually:
+Use seções claras ao escrever issues manualmente:
 
 ```markdown
-## Description
-[What is the issue or request?]
+## Descrição
+[Qual é o problema ou solicitação?]
 
-## Goal
-[Why does this matter? What problem does it solve?]
+## Objetivo
+[Por que isso importa? Qual problema resolve?]
 
-## Tasks
-- [ ] Step 1
-- [ ] Step 2
+## Tarefas
+- [ ] Passo 1
+- [ ] Passo 2
 ```
 
-For more details about contributing, see [CONTRIBUTING.md](../CONTRIBUTING.md).
+Para mais detalhes sobre contribuição, veja [CONTRIBUTING.md](../CONTRIBUTING.md).

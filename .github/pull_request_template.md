@@ -1,59 +1,59 @@
-## Goal
+## Objetivo
 
-<!-- Describe the goal of this PR. Reference the issue with Closes #123 or Related to #456. -->
+<!-- Descreva o objetivo deste PR. Referencie a issue com Closes #123 ou Related to #456. -->
 
 Closes #
 
-## What Changed?
+## O Que Mudou?
 
-<!-- Briefly describe the changes made. -->
+<!-- Descreva brevemente as alterações feitas. -->
 
 - [ ]
 - [ ]
 - [ ]
 
-## How to Test
+## Como Testar
 
-<!-- Explain how to test the changes. -->
+<!-- Explique como testar as alterações. -->
 
 1.
 2.
 3.
 
-## Change Type
+## Tipo de Alteração
 
-<!-- Mark the change type with an X. -->
+<!-- Marque o tipo de alteração com um X. -->
 
-- [ ] 🐛 Bug fix
-- [ ] ✨ New feature
-- [ ] 🔧 Refactor
-- [ ] 📚 Documentation
+- [ ] 🐛 Correção de bug
+- [ ] ✨ Nova funcionalidade
+- [ ] 🔧 Refatoração
+- [ ] 📚 Documentação
 - [ ] ⚡ Performance
-- [ ] 🔐 Security
+- [ ] 🔐 Segurança
 
 ## Checklist
 
-- [ ] My code follows the project standards
-- [ ] I ran lint and there are no errors
-- [ ] I added tests, if applicable
-- [ ] Tests pass locally
-- [ ] I updated documentation, if needed
-- [ ] I tested in different browsers, if this affects the frontend
-- [ ] There are no merge conflicts
-- [ ] The changes do not break existing functionality
+- [ ] Meu código segue os padrões do projeto
+- [ ] Rodei o lint e não há erros
+- [ ] Adicionei testes, se aplicável
+- [ ] Os testes passam localmente
+- [ ] Atualizei a documentação, se necessário
+- [ ] Testei em navegadores diferentes, se isso afeta o frontend
+- [ ] Não há conflitos de merge
+- [ ] As alterações não quebram funcionalidades existentes
 
 ## Screenshots
 
-<!-- Add screenshots if this is a visual change. -->
+<!-- Adicione screenshots se esta for uma alteração visual. -->
 
-## Related Links
+## Links Relacionados
 
-<!-- Links to related issues, PRs, documentation, etc. -->
+<!-- Links para issues, PRs, documentação etc. -->
 
-- Related to #
-- Depends on #
-- [Documentation](link)
+- Relacionado a #
+- Depende de #
+- [Documentação](link)
 
-## Additional Notes
+## Notas Adicionais
 
-<!-- Add notes that are important for the reviewer. -->
+<!-- Adicione observações importantes para quem revisar. -->

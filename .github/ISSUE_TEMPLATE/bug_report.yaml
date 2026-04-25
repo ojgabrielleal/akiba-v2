@@ -1,39 +1,39 @@
-name: "🐛 Bug Report"
-description: "Report a bug or unexpected behavior"
+name: "🐛 Relato de Bug"
+description: "Relate um bug ou comportamento inesperado"
 labels: ["bug"]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting a bug. Please fill in the information below to help us resolve the issue quickly.
+        Obrigado por relatar um bug. Preencha as informações abaixo para nos ajudar a resolver o problema rapidamente.
 
   - type: input
     id: title
     attributes:
-      label: Bug title
-      description: "Example: Error loading posts on the home page."
-      placeholder: "Enter a descriptive title"
+      label: Título do bug
+      description: "Exemplo: Erro ao carregar posts na página inicial."
+      placeholder: "Digite um título descritivo"
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Description
-      description: "Describe the bug you observed."
-      placeholder: "What did you notice was wrong?"
+      label: Descrição
+      description: "Descreva o bug observado."
+      placeholder: "O que você percebeu que estava errado?"
     validations:
       required: true
 
   - type: textarea
     id: steps
     attributes:
-      label: Steps to reproduce
-      description: "List the exact steps to reproduce the bug."
+      label: Passos para reproduzir
+      description: "Liste os passos exatos para reproduzir o bug."
       placeholder: |
-        1. Go to...
-        2. Click on...
+        1. Acesse...
+        2. Clique em...
         3. Observe...
     validations:
       required: true
@@ -41,63 +41,63 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: Expected behavior
-      description: "What should happen?"
-      placeholder: "Describe the expected behavior."
+      label: Comportamento esperado
+      description: "O que deveria acontecer?"
+      placeholder: "Descreva o comportamento esperado."
     validations:
       required: true
 
   - type: textarea
     id: actual
     attributes:
-      label: Actual behavior
-      description: "What is happening instead?"
-      placeholder: "Describe the incorrect behavior."
+      label: Comportamento atual
+      description: "O que está acontecendo no lugar?"
+      placeholder: "Descreva o comportamento incorreto."
     validations:
       required: true
 
   - type: dropdown
     id: area
     attributes:
-      label: Affected area
+      label: Área afetada
       options:
         - "⚙️ Backend"
         - "🎨 Frontend"
-        - "🗄️ Database"
-        - "🔐 Authentication"
+        - "🗄️ Banco de dados"
+        - "🔐 Autenticação"
         - "🔌 API"
-        - "📦 Other"
+        - "📦 Outro"
     validations:
       required: true
 
   - type: input
     id: browser
     attributes:
-      label: Browser and version
-      placeholder: "Example: Chrome 125.0, Firefox 120.0"
+      label: Navegador e versão
+      placeholder: "Exemplo: Chrome 125.0, Firefox 120.0"
 
   - type: textarea
     id: screenshots
     attributes:
-      label: Screenshots or logs
-      description: "Add screenshots, error logs, or any relevant information."
-      placeholder: "Paste error logs or screenshots of the issue."
+      label: Screenshots ou logs
+      description: "Adicione screenshots, logs de erro ou qualquer informação relevante."
+      placeholder: "Cole logs de erro ou screenshots do problema."
 
   - type: textarea
     id: additional
     attributes:
-      label: Additional information
-      description: "Any additional context that may be useful."
-      placeholder: "Environment, database, links, context, etc."
+      label: Informações adicionais
+      description: "Qualquer contexto adicional que possa ser útil."
+      placeholder: "Ambiente, banco de dados, links, contexto etc."
 
   - type: dropdown
     id: priority
     attributes:
-      label: Priority
+      label: Prioridade
       options:
-        - "🚨 Critical, production is broken"
-        - "🔥 High, functionality is unavailable"
-        - "⚠️ Medium, unexpected behavior"
-        - "🌱 Low, minor inconvenience"
+        - "🚨 Crítica, produção está quebrada"
+        - "🔥 Alta, funcionalidade indisponível"
+        - "⚠️ Média, comportamento inesperado"
+        - "🌱 Baixa, pequeno incômodo"
     validations:
       required: true
