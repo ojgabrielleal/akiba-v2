@@ -6,14 +6,14 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 
-class GitFlowt extends Command
+class GitFlow extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'gitflow:start
+    protected $signature = 'gitflow
         {type : Branch type: feature, refactor, fix, hotfix, release, docs or chore}
         {name : Branch name without the type prefix}
         {--base= : Custom base branch}
