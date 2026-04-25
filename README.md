@@ -3,58 +3,60 @@
 </div>
 <br/>
 
-Second version (2026) of Rede Akiba's news and web radio portal, bringing a renewed experience to fans of Japanese culture since 2016.
+Idioma: [Português BR](README.md) | [English](README.en-US.md)
 
-## About
+Segunda versão (2026) do portal de notícias e web rádio da Rede Akiba, trazendo uma experiência renovada para fãs da cultura japonesa desde 2016.
 
-Akiba V2 is a Laravel application for managing a community and radio platform focused on anime culture. The project combines a public player experience with song requests and a private control panel for content, programming, live hosting, media, marketing assets, users, permissions, and operational tasks.
+## Sobre
+
+Rede Akiba ( Akiba V2 ) é uma aplicação Laravel para gerenciar uma plataforma de comunidade e rádio focada em cultura anime. O projeto combina uma experiência pública de player com pedidos de músicas e um painel privado para conteúdo, programação, locução ao vivo, mídias, materiais de marketing, usuários, permissões e tarefas operacionais.
 
 ## Stack
 
 - **Backend:** PHP 8.2, Laravel 12, Laravel Sanctum
 - **Frontend:** Inertia.js, Svelte, Vite, Tailwind CSS 4
-- **Database:** MySQL
-- **Assets and media:** Intervention Image
-- **Tooling:** PHPUnit, Laravel Pint, Laravel Pail
+- **Banco de dados:** MySQL
+- **Assets e mídia:** Intervention Image
+- **Ferramentas:** PHPUnit, Laravel Pint, Laravel Pail
 
-## Main Features
+## Principais Recursos
 
-- Public page with a player and song request support
-- Private panel with authentication
-- Dashboard with activities and task completion
-- Management for posts, reviews, events, podcasts, media, and marketing assets
-- Radio management for programs, music rankings, listener of the month, and song requests
-- Live hosting flow for starting and finishing broadcasts
-- Administration area for users, roles, permissions, calendars, activities, tasks, and automatic programs
-- Profile management
-- Cast endpoints for stream redirects and metadata
-- Discord webhook integration for stream events
+- Página pública com player e suporte a pedidos de músicas
+- Painel privado com autenticação
+- Dashboard com atividades e conclusão de tarefas
+- Gerenciamento de posts, reviews, eventos, podcasts, mídias e materiais de marketing
+- Gerenciamento da rádio para programas, rankings de músicas, ouvinte do mês e pedidos de músicas
+- Fluxo de locução ao vivo para iniciar e finalizar transmissões
+- Área de administração para usuários, funções, permissões, calendários, atividades, tarefas e programas automáticos
+- Gerenciamento de perfil
+- Endpoints de cast para redirecionamento de stream e metadados
+- Integração com webhook do Discord para eventos da stream
 
-## Requirements
+## Requisitos
 
 - PHP 8.2+
 - Composer
-- Node.js and npm
+- Node.js e npm
 - MySQL
-- Redis is optional, depending on your local cache/session configuration
+- Redis é opcional, dependendo da configuração local de cache/sessão
 
-## Installation
+## Instalação
 
-Clone the repository and install the PHP and JavaScript dependencies:
+Clone o repositório e instale as dependências PHP e JavaScript:
 
 ```bash
 composer install
 npm install
 ```
 
-Create the environment file and generate the Laravel app key:
+Crie o arquivo de ambiente e gere a chave da aplicação Laravel:
 
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-Configure your database in `.env`:
+Configure o banco de dados no `.env`:
 
 ```env
 DB_CONNECTION=mysql
@@ -65,42 +67,42 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Then run the migrations:
+Depois execute as migrations:
 
 ```bash
 php artisan migrate
 ```
 
-To prepare the database with initial data, run the seeders:
+Para preparar o banco com dados iniciais, execute os seeders:
 
 ```bash
 php artisan db:seed
 ```
 
-For a fresh local environment, you can recreate the database and seed it in one command:
+Para um ambiente local novo, você pode recriar o banco e popular os dados em um único comando:
 
 ```bash
 php artisan migrate:fresh --seed
 ```
 
-The seeders create permissions, roles, users, activities, programs, content, podcasts, radio data, polls, song requests, and other development records. The local administrator user created by the seeder is:
+Os seeders criam permissões, funções, usuários, atividades, programas, conteúdos, podcasts, dados da rádio, enquetes, pedidos de músicas e outros registros de desenvolvimento. O usuário administrador local criado pelo seeder é:
 
 ```text
 Username: admin
 Password: admin
 ```
 
-## Development
+## Desenvolvimento
 
-Run the full local development stack through the custom Artisan command:
+Execute toda a stack local de desenvolvimento pelo comando Artisan customizado:
 
 ```bash
 php artisan dev
 ```
 
-This starts the Laravel server, queue listener, Laravel Pail logs, and Vite dev server together.
+Esse comando inicia o servidor Laravel, o listener de filas, os logs do Laravel Pail e o servidor de desenvolvimento do Vite juntos.
 
-You can also run each service separately:
+Você também pode executar cada serviço separadamente:
 
 ```bash
 php artisan serve
@@ -110,35 +112,35 @@ php artisan queue:listen
 
 ## Build
 
-Create a production frontend build:
+Crie o build de frontend para produção:
 
 ```bash
 npm run build
 ```
 
-## Tests
+## Testes
 
-Run the test suite:
+Execute a suíte de testes:
 
 ```bash
 php artisan test
 ```
 
-## Useful Routes
+## Rotas Úteis
 
-- `/` - provisional public home/player
-- `/site` - public site route
+- `/` - home/player público provisória
+- `/site` - rota pública do site
 - `/panel` - panel login
-- `/panel/dashboard` - private dashboard
-- `/panel/radio` - radio management
-- `/panel/locution` - live hosting area
-- `/panel/administration` - administration area
-- `/api/cast` - cast stream redirect
-- `/api/cast/metadata` - cast metadata
+- `/panel/dashboard` - dashboard privado
+- `/panel/radio` - gerenciamento da rádio
+- `/panel/locution` - área de locução ao vivo
+- `/panel/administration` - área de administração
+- `/api/cast` - redirecionamento da stream do cast
+- `/api/cast/metadata` - metadados do cast
 
-## Environment Notes
+## Notas de Ambiente
 
-The project includes extra environment variables for stream and Discord integrations:
+O projeto inclui variáveis de ambiente extras para integrações com stream e Discord:
 
 ```env
 CAST_URL=null
@@ -146,23 +148,23 @@ CAST_METADATA=null
 DISCORD_STREAM_WEBHOOK=null
 ```
 
-Set these values when you want to connect the local app to real stream metadata or webhook notifications.
+Defina esses valores quando quiser conectar o app local a metadados reais da stream ou notificações por webhook.
 
-## Project Structure
+## Estrutura do Projeto
 
-- `app/Actions` - application use cases grouped by domain
-- `app/Console/Commands` - custom Artisan commands
-- `app/Http/Controllers` - public, private, API, and provisional controllers
-- `app/Http/Requests` - form request validation
-- `app/Http/Resources` - API/resource response formatting
+- `app/Actions` - casos de uso da aplicação agrupados por domínio
+- `app/Console/Commands` - comandos Artisan customizados
+- `app/Http/Controllers` - controllers públicos, privados, de API e provisórios
+- `app/Http/Requests` - validação de formulários
+- `app/Http/Resources` - formatação de respostas de API/resources
 - `app/Models` - Eloquent models
-- `app/Policies` - authorization rules
-- `app/Services` - external and processing services
-- `database/seeders` - initial data and development records
-- `resources/js/pages` - Inertia/Svelte pages
-- `resources/js/ui` - reusable UI components, layouts, and widgets
-- `routes/web` - web routes split by context
+- `app/Policies` - regras de autorização
+- `app/Services` - serviços externos e de processamento
+- `database/seeders` - dados iniciais e registros de desenvolvimento
+- `resources/js/pages` - páginas Inertia/Svelte
+- `resources/js/ui` - componentes de UI, layouts e widgets reutilizáveis
+- `routes/web` - rotas web separadas por contexto
 
-## License
+## Licença
 
-This project is open-sourced under the MIT license.
+Este projeto é open-source sob a licença MIT.
