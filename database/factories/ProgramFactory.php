@@ -32,17 +32,17 @@ class ProgramFactory extends Factory
             'type' => 'automatic',
             'phrases' => [
                 [
-                    'phrase' => fake()->sentence(),
+                    'text' => fake()->sentence(),
                     'icon' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
                     'decoration' => 'default',
                 ],
                 [
-                    'phrase' => fake()->sentence(),
+                    'text' => fake()->sentence(),
                     'icon' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
                     'decoration' => 'default',
                 ],
                 [
-                    'phrase' => fake()->sentence(),
+                    'text' => fake()->sentence(),
                     'icon' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
                     'decoration' => 'default',
                 ],

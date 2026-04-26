@@ -32,7 +32,7 @@ class StartLocutionAction
         $program->onair()->create([
             'type' => 'live',
             'phrase' => [
-                'phrase' => $data['phrase'] ?? null,
+                'text' => $data['phrase'] ?? null,
                 'icon' => $data['icon'] ?? null,
                 'decoration' => $data['decoration'] ?? null,
             ],

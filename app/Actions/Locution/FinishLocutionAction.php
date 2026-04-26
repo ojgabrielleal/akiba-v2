@@ -25,11 +25,16 @@ class FinishLocutionAction
 
         if ($auto) {
             $selected = collect($auto->phrases)->random();
+            $phrase = [
+                'text' => $selected['text'] ?? $selected['phrase'] ?? null,
+                'icon' => $selected['icon'] ?? null,
+                'decoration' => $selected['decoration'] ?? null,
+            ];
 
             $auto->onair()->create([
                 'type' => 'automatic',
-                'phrase' => $selected,
-                'icon' => $selected['icon'] ?? null,
+                'phrase' => $phrase,
+                'icon' => $phrase['icon'],
             ]);
         }
 
