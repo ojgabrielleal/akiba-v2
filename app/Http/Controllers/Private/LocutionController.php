@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use App\Models\Automatic;
 use App\Models\Onair;
 use App\Models\Program;
 use App\Models\SongRequest;

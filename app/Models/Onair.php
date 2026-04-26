@@ -16,7 +16,6 @@ class Onair extends Model
         'uuid',
         'in_air',
         'program_id',
-        'program_type',
         'phrase',
         'type',
         'icon',
@@ -64,7 +63,7 @@ class Onair extends Model
      */
     public function program()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Program::class, 'program_id');
     }
 
     public function songRequests()

@@ -12,7 +12,6 @@ use App\Models\UserPreference;
 use App\Models\UserSocial;
 use App\Models\Role;
 use App\Models\Activity;
-use App\Models\Automatic;
 use App\Models\Calendar;
 use App\Models\Event;
 use App\Models\Program;
@@ -71,17 +70,6 @@ class UserTest extends TestCase
             ->create();
 
         $this->assertContainsOnlyInstancesOf(Activity::class, $user->activities);
-    }
-
-    public function testAutomaticRelationship(): void
-    {
-        $automatic = Automatic::factory();
-
-        $user = User::factory()
-            ->has($automatic, 'automatic')
-            ->create();
-
-        $this->assertContainsOnlyInstancesOf(Automatic::class, $user->automatic);
     }
 
     public function testCalendarRelationship(): void
