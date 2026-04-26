@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('in_air')->default(true);
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
             $table->string('icon')->nullable();
-            $table->string('phrase');
+            $table->json('phrase');
             $table->enum('type', ['automatic', 'live', 'scheduled']);
             $table->boolean('allows_song_requests')->default(false);
             $table->integer('song_requests_total')->default(0);

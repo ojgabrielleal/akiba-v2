@@ -25,7 +25,8 @@ class Onair extends Model
 
     protected $casts = [
         'allows_song_requests' => 'boolean',
-        'in_air' => 'boolean'
+        'in_air' => 'boolean',
+        'phrase' => 'array',
     ];
 
     protected $hidden = [

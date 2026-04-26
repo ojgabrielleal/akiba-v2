@@ -28,7 +28,7 @@ class FinishLocutionAction
 
             $auto->onair()->create([
                 'type' => 'automatic',
-                'phrase' => $selected['phrase'] ?? null,
+                'phrase' => $selected,
                 'icon' => $selected['icon'] ?? null,
             ]);
         }
