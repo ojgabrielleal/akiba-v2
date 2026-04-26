@@ -4,6 +4,8 @@
 
 Closes #
 
+Base: develop
+
 Development: <!-- branch que deve ser fechada ao mergear o PR -->
 
 Labels: <!-- ex: front-end, back-end, bug, enhancement -->
