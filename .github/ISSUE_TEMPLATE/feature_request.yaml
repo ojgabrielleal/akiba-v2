@@ -1,83 +1,25 @@
-name: "✨ Solicitação de Funcionalidade"
-description: "Solicite uma nova funcionalidade ou melhoria"
+name: "Funcionalidade"
+description: "Sugira uma melhoria ou nova funcionalidade"
 labels: ["enhancement"]
-assignees: []
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Obrigado por sugerir uma nova funcionalidade. Preencha os detalhes abaixo.
-
-  - type: input
-    id: title
-    attributes:
-      label: Título da funcionalidade
-      description: "Exemplo: Adicionar suporte a tema escuro."
-      placeholder: "Digite um título descritivo"
-    validations:
-      required: true
-
   - type: textarea
     id: description
     attributes:
-      label: Descrição
-      description: "Descreva brevemente a funcionalidade desejada."
-      placeholder: "Explique a funcionalidade desejada."
+      label: Descricao
+      placeholder: "O que precisa ser feito?"
     validations:
       required: true
-
-  - type: textarea
-    id: objective
-    attributes:
-      label: Objetivo
-      description: "Qual é o principal objetivo desta funcionalidade?"
-      placeholder: "Qual problema isso resolve ou qual valor adiciona?"
-    validations:
-      required: true
-
-  - type: textarea
-    id: benefits
-    attributes:
-      label: Benefícios
-      description: "Quais benefícios ou melhorias são esperados?"
-      placeholder: |
-        - Melhora a experiência do usuário
-        - Facilita a manutenção do código
 
   - type: textarea
     id: tasks
     attributes:
-      label: Tarefas propostas
-      description: "Liste as tarefas que precisam ser feitas."
+      label: Tarefas
       placeholder: |
         - [ ] Tarefa 1
         - [ ] Tarefa 2
-        - [ ] Tarefa 3
 
   - type: textarea
-    id: additional
+    id: context
     attributes:
-      label: Informações adicionais
-      description: "Adicione qualquer contexto, screenshot ou referência relevante."
-      placeholder: "Links, exemplos, mockups etc."
-
-  - type: checkboxes
-    id: area
-    attributes:
-      label: Área do projeto
-      options:
-        - label: "⚙️ Backend"
-        - label: "🎨 Frontend"
-        - label: "📚 Documentação"
-        - label: "🚀 DevOps/Infraestrutura"
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Prioridade
-      options:
-        - "🔥 Alta"
-        - "⚠️ Média"
-        - "🌱 Baixa"
-    validations:
-      required: true
+      label: Contexto
+      placeholder: "Links, referencias, prints ou observacoes."

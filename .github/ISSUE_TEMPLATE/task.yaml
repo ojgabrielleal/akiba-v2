@@ -1,89 +1,25 @@
-name: "📋 Tarefa"
-description: "Adicione uma tarefa geral ao projeto"
+name: "Tarefa"
+description: "Crie uma tarefa geral"
 labels: []
-assignees: []
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Crie uma nova tarefa para o projeto. Defina os detalhes e o trabalho relacionado.
-
   - type: textarea
     id: description
     attributes:
-      label: Descrição
-      description: "Descreva em detalhes o que precisa ser feito."
-      placeholder: "Explique a tarefa com clareza."
-    validations:
-      required: true
-
-  - type: textarea
-    id: objective
-    attributes:
-      label: Objetivo
-      description: "Qual é o propósito desta tarefa?"
-      placeholder: "Qual problema ela resolve ou qual melhoria traz?"
+      label: Descricao
+      placeholder: "Descreva a tarefa."
     validations:
       required: true
 
   - type: textarea
     id: tasks
     attributes:
-      label: Subtarefas
-      description: "Liste subtarefas ou pontos de verificação."
+      label: Checklist
       placeholder: |
         - [ ] Tarefa 1
         - [ ] Tarefa 2
-        - [ ] Tarefa 3
-        - [ ] Validar e testar
 
   - type: textarea
-    id: acceptance
+    id: context
     attributes:
-      label: Critérios de aceite
-      description: "O que define esta tarefa como concluída?"
-      placeholder: |
-        - Funcionalidade X funciona corretamente
-        - Testes passam
-        - Documentação está atualizada
-
-  - type: textarea
-    id: notes
-    attributes:
-      label: Notas adicionais
-      description: "Contexto extra, referências ou informações importantes."
-      placeholder: "Links, dependências, restrições etc."
-
-  - type: checkboxes
-    id: area
-    attributes:
-      label: Área do projeto
-      options:
-        - label: "⚙️ Backend"
-        - label: "🎨 Frontend"
-        - label: "🗄️ Banco de dados"
-        - label: "🚀 DevOps"
-        - label: "📚 Documentação"
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Prioridade
-      options:
-        - "🔥 Alta"
-        - "⚠️ Média"
-        - "🌱 Baixa"
-    validations:
-      required: true
-
-  - type: input
-    id: estimate
-    attributes:
-      label: Estimativa em horas
-      placeholder: "Quantas horas você estima?"
-
-  - type: input
-    id: assignee
-    attributes:
-      label: Assignee
-      placeholder: "@usuario ou deixe em branco"
+      label: Contexto
+      placeholder: "Dependencias, links ou observacoes."
