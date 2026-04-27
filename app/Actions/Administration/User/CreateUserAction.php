@@ -24,7 +24,17 @@ class CreateUserAction
             'is_bot' => $data['is_bot'] ?? false,
         ]);
 
+        $socials = [
+            ['name' => 'Twitter', 'url' => null],
+            ['name' => 'Facebook', 'url' => null],
+            ['name' => 'Instagram', 'url' => null],
+            ['name' => 'Youtube', 'url' => null],
+            ['name' => 'Discord', 'url' => null],
+            ['name' => 'MyAnimeList', 'url' => null],
+        ];
+
         $user->roles()->attach($roles);
+        $user->socials()->createMany($socials);
 
         return $user;
     }
