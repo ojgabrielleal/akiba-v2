@@ -16,6 +16,7 @@
         title: null,
         sinopse: null,
         cover: null,
+        year_of_release: null,
         review: { uuid: null, content: null },
     });
 
@@ -25,6 +26,7 @@
         $form.title = review.data.title;
         $form.sinopse = review.data.sinopse;
         $form.cover = review.data.cover;
+        $form.year_of_release = review.data.year_of_release;
         $form.review = { uuid: null, content: "" };
     }
 
@@ -123,6 +125,19 @@
                     />
                 </div>
                 <div class="mb-8">
+                    <label for="year_of_release" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2">
+                        Ano de lançamento
+                    </label>
+                    <input
+                        id="year_of_release"
+                        type="number"
+                        name="year_of_release"
+                        class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-lg outline-none pl-4"
+                        bind:value={$form.year_of_release}
+                        required
+                    />
+                </div>
+                <div class="mb-8">
                     <label for="sinopse" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2">
                         Sinopse do anime
                     </label>
@@ -178,7 +193,6 @@
         <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap mt-10">
             {#if can.create || can.update}
                 <button
-                    aria-label=""
                     type="submit"
                     class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-xl font-bold font-noto-sans italic uppercase"
                 >

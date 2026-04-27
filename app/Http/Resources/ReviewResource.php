@@ -15,6 +15,7 @@ class ReviewResource extends JsonResource
             'cover' => $this->cover,
             'image' => $this->image,
             'title' => $this->title,
+            'year_of_release' => $this->year_of_release,
             'sinopse' => $this->sinopse,
             'views' => $this->views_count,
             'reviews' => $this->reviews->map(fn($item) => [
