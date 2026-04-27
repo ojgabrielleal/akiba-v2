@@ -10,6 +10,7 @@ class CreateUserAction
     public function execute(array $data): User
     {
         $roles = Role::whereIn('name', $data['roles'] ?? [])->pluck('id');
+
         $avatar = ($data['gender'] ?? '') === 'male'
             ? '/img/users/avatarMale.webp'
             : '/img/users/avatarFemale.webp';
@@ -24,8 +25,34 @@ class CreateUserAction
             'is_bot' => $data['is_bot'] ?? false,
         ]);
 
-        $user->roles()->attach($roles);
+        $socials = [
+            ['name' => 'Twitter', 'url' => null],
+            ['name' => 'Facebook', 'url' => null],
+            ['name' => 'Instagram', 'url' => null],
+            ['name' => 'Youtube', 'url' => null],
+            ['name' => 'Discord', 'url' => null],
+        ];
 
+        $preferences = [
+            ['is_like' => true, 'content' => null],
+            ['is_like' => true, 'content' => null],
+            ['is_like' => true, 'content' => null],
+            ['is_like' => false, 'content' => null],
+            ['is_like' => false, 'content' => null],
+            ['is_like' => false, 'content' => null],
+        ];
+
+        $favorites = [
+            ['name' => null, 'image' => null],
+            ['name' => null, 'image' => null],
+            ['name' => null, 'image' => null],
+        ];
+
+        $user->roles()->attach($roles);
+        $user->socials()->createMany($socials);
+        $user->preferences()->createMany($preferences);
+        $user->favorites()->createMany($favorites);
+        
         return $user;
     }
 }

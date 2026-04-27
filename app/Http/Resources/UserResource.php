@@ -26,10 +26,15 @@ class UserResource extends JsonResource
             'state' => $this->state,
             'country' => $this->country,
             'bibliography' => $this->bibliography,
+            'favorites' => $this->favorites->map(fn($item) => [
+                'uuid' => $item->uuid,
+                'name' => $item->name,
+                'image' => $item->image,
+            ]),
             'socials' => $this->socials->map(fn($item) => [
-                    'uuid' => $item->uuid,
-                    'name' => $item->name,
-                    'url' => $item->url,
+                'uuid' => $item->uuid,
+                'name' => $item->name,
+                'url' => $item->url,
             ]),
             'preferences' => [
                 'likes' => $this->preferences->filter(function ($item) {
