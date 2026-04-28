@@ -1,116 +1,25 @@
-name: "🔧 Refatoração"
-description: "Melhore ou refatore código existente"
+name: "Refatoração"
+description: "Proponha uma melhoria em código existente"
 labels: ["refactor"]
-assignees: []
 body:
-  - type: markdown
+  - type: textarea
+    id: target
     attributes:
-      value: |
-        Proponha uma refatoração de código para melhorar qualidade, performance ou manutenibilidade.
-
-  - type: input
-    id: title
-    attributes:
-      label: Título da refatoração
-      description: "Exemplo: Extrair lógica duplicada do controller."
-      placeholder: "Digite um título descritivo"
+      label: Alvo
+      placeholder: "Arquivo, módulo, fluxo ou trecho que precisa mudar."
     validations:
       required: true
 
   - type: textarea
-    id: description
+    id: reason
     attributes:
-      label: Descrição
-      description: "Explique o que será refatorado."
-      placeholder: "Qual código será refatorado?"
+      label: Motivo
+      placeholder: "Qual problema técnico isso resolve?"
     validations:
       required: true
 
   - type: textarea
-    id: problem
+    id: care
     attributes:
-      label: Problema atual
-      description: "Qual é o problema com o código atual?"
-      placeholder: |
-        - Código duplicado em vários lugares
-        - Difícil de manter
-        - Baixa performance
-    validations:
-      required: true
-
-  - type: textarea
-    id: solution
-    attributes:
-      label: Solução proposta
-      description: "Como você propõe resolver este problema?"
-      placeholder: "Descreva a abordagem de refatoração."
-    validations:
-      required: true
-
-  - type: textarea
-    id: benefits
-    attributes:
-      label: Benefícios
-      description: "Quais são os benefícios desta refatoração?"
-      placeholder: |
-        - Reduz código duplicado
-        - Facilita manutenções futuras
-        - Melhora a performance
-
-  - type: textarea
-    id: files
-    attributes:
-      label: Arquivos afetados
-      description: "Quais arquivos serão alterados?"
-      placeholder: |
-        - app/Http/Controllers/PostController.php
-        - app/Services/PostService.php
-
-  - type: textarea
-    id: tasks
-    attributes:
-      label: Tarefas
-      description: "Passos para concluir a refatoração."
-      placeholder: |
-        - [ ] Extrair duplicação
-        - [ ] Adicionar testes para cobertura
-        - [ ] Verificar performance
-        - [ ] Atualizar documentação
-
-  - type: textarea
-    id: impact
-    attributes:
-      label: Impact
-      description: "Qual é o impacto desta alteração?"
-      placeholder: |
-        - Mudanças incompatíveis, se houver
-        - Arquivos afetados
-        - Testes necessários
-
-  - type: checkboxes
-    id: area
-    attributes:
-      label: Área afetada
-      options:
-        - label: "⚙️ Backend"
-        - label: "🎨 Frontend"
-        - label: "🗄️ Banco de dados"
-        - label: "🏗️ Arquitetura"
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Prioridade
-      options:
-        - "🔥 Alta, bloqueia outras tarefas"
-        - "⚠️ Média, seria bom ter"
-        - "🌱 Baixa, manutenção técnica"
-    validations:
-      required: true
-
-  - type: textarea
-    id: notes
-    attributes:
-      label: Notas adicionais
-      description: "Qualquer informação extra importante."
-      placeholder: "Links, referências, exemplos etc."
+      label: Cuidados
+      placeholder: "Riscos, testes ou comportamento que não pode quebrar."
