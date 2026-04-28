@@ -1,15 +1,19 @@
 name: "Documentacao"
-description: "Sugira criacao ou ajuste de documentacao"
+description: "Sugira ajuste de documentacao"
 labels: ["documentation"]
 body:
   - type: textarea
     id: location
     attributes:
       label: Onde
-      placeholder: "README, docs, comentario no codigo, issue relacionada..."
+      placeholder: "README, docs, comentario no codigo, rota, componente..."
+    validations:
+      required: true
 
   - type: textarea
-    id: context
+    id: change
     attributes:
-      label: Contexto
-      placeholder: "Links, exemplos ou observacoes."
+      label: O que ajustar?
+      placeholder: "O que falta, esta confuso ou precisa ser atualizado?"
+    validations:
+      required: true

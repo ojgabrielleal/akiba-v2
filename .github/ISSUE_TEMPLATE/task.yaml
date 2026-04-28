@@ -3,7 +3,15 @@ description: "Crie uma tarefa geral"
 labels: []
 body:
   - type: textarea
-    id: context
+    id: goal
     attributes:
-      label: Contexto
-      placeholder: "Dependencias, links ou observacoes."
+      label: Objetivo
+      placeholder: "O que precisa ser feito e por que?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: Concluido quando
+      placeholder: "Como saber que a tarefa terminou?"

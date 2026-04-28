@@ -1,9 +1,25 @@
 name: "Funcionalidade"
-description: "Sugira uma melhoria ou nova funcionalidade"
+description: "Sugira melhoria ou nova funcionalidade"
 labels: ["enhancement"]
 body:
   - type: textarea
-    id: context
+    id: need
     attributes:
-      label: Contexto
-      placeholder: "Links, referencias, prints ou observacoes."
+      label: Necessidade
+      placeholder: "Qual problema, fluxo ou oportunidade motiva isso?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Resultado esperado
+      placeholder: "Como deve funcionar quando estiver pronto?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Referencias
+      placeholder: "Links, prints, exemplos ou observacoes."

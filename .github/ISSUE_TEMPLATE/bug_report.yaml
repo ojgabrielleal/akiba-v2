@@ -1,11 +1,19 @@
 name: "Bug"
-description: "Relate um problema ou comportamento inesperado"
+description: "Relate um problema"
 labels: ["bug"]
 body:
   - type: textarea
+    id: current
+    attributes:
+      label: O que aconteceu?
+      placeholder: "Explique o comportamento atual, erro ou impacto."
+    validations:
+      required: true
+
+  - type: textarea
     id: steps
     attributes:
-      label: Como reproduzir
+      label: Como reproduzir?
       placeholder: |
         1. Acesse...
         2. Clique em...
@@ -14,11 +22,11 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: Resultado esperado
+      label: O que era esperado?
       placeholder: "O que deveria acontecer?"
 
   - type: textarea
     id: context
     attributes:
-      label: Contexto adicional
-      placeholder: "Logs, prints, navegador, ambiente ou links relacionados."
+      label: Evidencias
+      placeholder: "Logs, prints, ambiente, navegador ou links."

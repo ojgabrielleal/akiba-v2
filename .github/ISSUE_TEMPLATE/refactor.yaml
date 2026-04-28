@@ -3,7 +3,23 @@ description: "Proponha uma melhoria em codigo existente"
 labels: ["refactor"]
 body:
   - type: textarea
+    id: target
+    attributes:
+      label: Alvo
+      placeholder: "Arquivo, modulo, fluxo ou trecho que precisa mudar."
+    validations:
+      required: true
+
+  - type: textarea
     id: reason
     attributes:
       label: Motivo
-      placeholder: "Por que essa mudanca ajuda?"
+      placeholder: "Qual problema tecnico isso resolve?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: care
+    attributes:
+      label: Cuidados
+      placeholder: "Riscos, testes ou comportamento que nao pode quebrar."
