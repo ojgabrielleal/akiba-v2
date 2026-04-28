@@ -2,14 +2,6 @@
 
 <!-- O que este PR muda? -->
 
-Closes #
-
-Base: develop
-
-Development: <!-- branch que deve ser fechada ao mergear o PR -->
-
-Labels: <!-- ex: front-end, back-end, bug, enhancement -->
-
 ## Como testar
 
 <!-- Liste os passos principais ou diga "Nao testado" com o motivo. -->
