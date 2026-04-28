@@ -1,12 +1,12 @@
-name: "Documentacao"
-description: "Sugira ajuste de documentacao"
+name: "Documentação"
+description: "Sugira ajuste de documentação"
 labels: ["documentation"]
 body:
   - type: textarea
     id: location
     attributes:
       label: Onde
-      placeholder: "README, docs, comentario no codigo, rota, componente..."
+      placeholder: "README, docs, comentário no código, rota, componente..."
     validations:
       required: true
 
@@ -14,6 +14,6 @@ body:
     id: change
     attributes:
       label: O que ajustar?
-      placeholder: "O que falta, esta confuso ou precisa ser atualizado?"
+      placeholder: "O que falta, está confuso ou precisa ser atualizado?"
     validations:
       required: true

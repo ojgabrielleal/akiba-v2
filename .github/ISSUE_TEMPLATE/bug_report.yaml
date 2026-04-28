@@ -28,5 +28,5 @@ body:
   - type: textarea
     id: context
     attributes:
-      label: Evidencias
+      label: Evidências
       placeholder: "Logs, prints, ambiente, navegador ou links."

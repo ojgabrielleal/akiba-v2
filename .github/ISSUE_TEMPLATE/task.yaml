@@ -13,5 +13,5 @@ body:
   - type: textarea
     id: done
     attributes:
-      label: Concluido quando
+      label: Concluído quando
       placeholder: "Como saber que a tarefa terminou?"
