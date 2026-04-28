@@ -16,13 +16,7 @@ class TaskResource extends JsonResource
             'dead_line_formatted' => $this->dead_line?->format('d/m'),
             'title' => $this->title,
             'content' => $this->content,
-            'responsible' => [
-                'uuid' => $this->responsible->uuid,
-                'name' => $this->responsible->name,
-                'nickname' => $this->responsible->nickname,
-                'avatar' => $this->responsible->avatar,
-                'gender' => $this->responsible->gender
-            ],
+            'responsible' => UserResource::make($this->responsible),
         ];
     }
 }

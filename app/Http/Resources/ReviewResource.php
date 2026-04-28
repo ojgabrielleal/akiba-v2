@@ -17,17 +17,7 @@ class ReviewResource extends JsonResource
             'title' => $this->title,
             'sinopse' => $this->sinopse,
             'views' => $this->views_count,
-            'reviews' => $this->reviews->map(fn($item) => [
-                'uuid' => $item->uuid,
-                'content' => $item->content,
-                'author' => [
-                    'uuid' => $item->author->uuid,
-                    'name' => $item->author->name,
-                    'nickname' => $item->author->nickname,
-                    'avatar' => $item->author->avatar,
-                    'gender' => $item->author->gender
-                ],
-            ]),
+            'reviews' => ReviewContentResource::collection($this->reviews),
         ];
     }
 }

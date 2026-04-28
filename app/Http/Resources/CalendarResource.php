@@ -20,13 +20,7 @@ class CalendarResource extends JsonResource
             'content' => $this->content,
             'type' => $this->type,
             'day_of_week' => $this->day_of_week,
-            'responsible' => [
-                'uuid' => $this->responsible->uuid,
-                'name' => $this->responsible->name,
-                'nickname' => $this->responsible->nickname,
-                'avatar' => $this->responsible->avatar,
-                'gender' => $this->responsible->gender
-            ],
+            'responsible' => UserResource::make($this->responsible),
             'activity' => $this->has_activity ? [
                 'uuid' => $this->activity->uuid,
                 'title' => $this->activity->title,

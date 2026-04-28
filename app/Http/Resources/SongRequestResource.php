@@ -22,14 +22,7 @@ class SongRequestResource extends JsonResource
             'name' => $this->name,
             'address' => $this->address,
             'message' => $this->message,
-            'music' => [
-                'uuid' => $this->music->uuid,
-                'type' => $this->music->type,
-                'image' => $this->music->image,
-                'name' => $this->music->name,
-                'artist' => $this->music->artist,
-                'production' => $this->music->production,
-            ],
+            'music' => MusicResource::make($this->music),
             'created_at' => $this->created_at->setTimezone('America/Sao_Paulo')->format('H:i'),
         ];
     }

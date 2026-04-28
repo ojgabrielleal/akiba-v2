@@ -24,13 +24,7 @@ class EventResource extends JsonResource
             'dates' => $this->dates,
             'address' => $this->address,
             'views' => $this->views_count,
-            'author' => [
-                'uuid' => $this->author->uuid,
-                'name' => $this->author->name,
-                'nickname' => $this->author->nickname,
-                'avatar' => $this->author->avatar,
-                'gender' => $this->author->gender
-            ]
+            'author' => UserResource::make($this->author)
         ];
     }
 }
