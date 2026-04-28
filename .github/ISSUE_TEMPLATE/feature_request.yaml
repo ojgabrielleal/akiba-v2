@@ -3,22 +3,6 @@ description: "Sugira uma melhoria ou nova funcionalidade"
 labels: ["enhancement"]
 body:
   - type: textarea
-    id: description
-    attributes:
-      label: Descricao
-      placeholder: "O que precisa ser feito?"
-    validations:
-      required: true
-
-  - type: textarea
-    id: tasks
-    attributes:
-      label: Tarefas
-      placeholder: |
-        - [ ] Tarefa 1
-        - [ ] Tarefa 2
-
-  - type: textarea
     id: context
     attributes:
       label: Contexto

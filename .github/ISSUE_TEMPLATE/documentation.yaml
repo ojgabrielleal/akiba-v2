@@ -3,14 +3,6 @@ description: "Sugira criacao ou ajuste de documentacao"
 labels: ["documentation"]
 body:
   - type: textarea
-    id: description
-    attributes:
-      label: Descricao
-      placeholder: "O que precisa ser documentado ou ajustado?"
-    validations:
-      required: true
-
-  - type: textarea
     id: location
     attributes:
       label: Onde

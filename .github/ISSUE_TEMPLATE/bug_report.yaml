@@ -3,14 +3,6 @@ description: "Relate um problema ou comportamento inesperado"
 labels: ["bug"]
 body:
   - type: textarea
-    id: description
-    attributes:
-      label: Descricao
-      placeholder: "O que aconteceu?"
-    validations:
-      required: true
-
-  - type: textarea
     id: steps
     attributes:
       label: Como reproduzir

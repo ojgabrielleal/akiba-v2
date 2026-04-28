@@ -3,22 +3,6 @@ description: "Crie uma tarefa geral"
 labels: []
 body:
   - type: textarea
-    id: description
-    attributes:
-      label: Descricao
-      placeholder: "Descreva a tarefa."
-    validations:
-      required: true
-
-  - type: textarea
-    id: tasks
-    attributes:
-      label: Checklist
-      placeholder: |
-        - [ ] Tarefa 1
-        - [ ] Tarefa 2
-
-  - type: textarea
     id: context
     attributes:
       label: Contexto
