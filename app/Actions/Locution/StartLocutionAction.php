@@ -31,7 +31,11 @@ class StartLocutionAction
 
         $program->onair()->create([
             'type' => 'live',
-            'phrase' => $data['phrase'] ?? null,
+            'phrase' => [
+                'text' => $data['phrase'] ?? null,
+                'icon' => $data['icon'] ?? null,
+                'decoration' => $data['decoration'] ?? null,
+            ],
             'icon' => $data['icon'] ?? null,
             'allows_song_requests' => true,
         ]);

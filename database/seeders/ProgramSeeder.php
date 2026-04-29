@@ -18,21 +18,29 @@ class ProgramSeeder extends Seeder
     {
         $admin = User::find(1);
         $user = User::inRandomOrder()->first();
+
+        Program::factory()
+            ->automatic()
+            ->for($admin ?? $user, 'host')
+            ->create([
+                'is_default' => true,
+                'name' => 'Auto DJ',
+            ]);
         
         Program::factory(2)
-            ->state(['type' => 'private'])
+            ->private()
             ->for($admin, 'host')
             ->has(ProgramSchedule::factory(5), 'schedules')
             ->create();
 
         Program::factory(2)
-            ->state(['type' => 'private'])
+            ->private()
             ->for($user, 'host')
             ->has(ProgramSchedule::factory(5), 'schedules')
             ->create();
 
         Program::factory(2)
-            ->state(['type' => 'free'])
+            ->free()
             ->for($user, 'host')
             ->create();
     }

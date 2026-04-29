@@ -6,7 +6,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use App\Models\User;
-use App\Models\Automatic;
 use App\Models\Program;
 use App\Models\Onair;
 
@@ -20,13 +19,17 @@ class OnairSeeder extends Seeder
         $admin = User::find(1);
         $user = User::inRandomOrder()->first();
 
-        $auto = Automatic::where('is_default', true)->first();
+        $auto = Program::where('type', 'automatic')
+            ->where('is_default', true)
+            ->first();
 
         if (!$auto) {
-            $auto = Automatic::factory()
+            $auto = Program::factory()
+                ->automatic()
                 ->for($admin ?? $user, 'host')
                 ->create([
                     'is_default' => true,
+                    'name' => 'Auto DJ',
                 ]);
         }
 

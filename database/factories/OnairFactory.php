@@ -18,7 +18,11 @@ class OnairFactory extends Factory
     {
         return [
             'in_air' => true,
-            'phrase' => fake()->sentence(),
+            'phrase' => [
+                'text' => fake()->sentence(),
+                'icon' => '/img/locution/icons/aoba.webp',
+                'decoration' => 'default',
+            ],
             'type' => fake()->randomElement([
                 'automatic', 
                 'live', 

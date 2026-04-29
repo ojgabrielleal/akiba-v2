@@ -3,7 +3,7 @@
 namespace App\Actions\Locution;
 
 use App\Models\Onair;
-use App\Models\Automatic;
+use App\Models\Program;
 use App\Models\SongRequest;
 
 class FinishLocutionAction
@@ -19,14 +19,22 @@ class FinishLocutionAction
             ]);
         }
 
-        $auto = Automatic::where('is_default', true)->first();
+        $auto = Program::where('type', 'automatic')
+            ->where('is_default', true)
+            ->first();
+
         if ($auto) {
             $selected = collect($auto->phrases)->random();
+            $phrase = [
+                'text' => $selected['text'] ?? $selected['phrase'] ?? null,
+                'icon' => $selected['icon'] ?? null,
+                'decoration' => $selected['decoration'] ?? null,
+            ];
 
             $auto->onair()->create([
                 'type' => 'automatic',
-                'phrase' => $selected['phrase'] ?? null,
-                'icon' => $selected['image'] ?? null,
+                'phrase' => $phrase,
+                'icon' => $phrase['icon'],
             ]);
         }
 

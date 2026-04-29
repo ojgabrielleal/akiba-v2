@@ -15,14 +15,18 @@ class Program extends Model
     protected $fillable = [
         'uuid',
         'is_active',
+        'is_default',
         'user_id',
         'name',
         'image',
-        'type'
+        'type',
+        'phrases',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_default' => 'boolean',
+        'phrases' => 'array',
     ];
 
     protected $hidden = [
@@ -60,7 +64,7 @@ class Program extends Model
      */
     public function onair()
     {
-        return $this->morphMany(Onair::class, 'program');
+        return $this->hasMany(Onair::class, 'program_id');
     }
 
     public function host()

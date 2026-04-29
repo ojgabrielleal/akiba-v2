@@ -33,7 +33,7 @@
         <marquee class="w-[95%] xl:w-5xl flex overflow-x-hidden relative marquee-cont">
             <div class="whitespace-nowrap w-full md:w-auto text-suspense-aurora text-3xl font-noto-sans font-bold uppercase italic">
                 <span class="mx-4">
-                    {air.phrase}
+                    {air.phrase?.text ?? air.phrase?.phrase ?? air.phrase}
                 </span>
             </div>
         </marquee>

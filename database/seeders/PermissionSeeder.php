@@ -213,11 +213,6 @@ class PermissionSeeder extends Seeder
             | Automáticos
             |--------------------------------------------------------------------------
             */
-            ['name' => 'automatic.list', 'label' => '[Auto DJ] Listar'],
-            ['name' => 'automatic.view', 'label' => '[Auto DJ] Visualizar'],
-            ['name' => 'automatic.create', 'label' => '[Auto DJ] Criar'],
-            ['name' => 'automatic.update', 'label' => '[Auto DJ] Atualizar'],
-            ['name' => 'automatic.deactivate', 'label' => '[Auto DJ] Desativar'],
         ];
 
         foreach ($permissions as $item) {

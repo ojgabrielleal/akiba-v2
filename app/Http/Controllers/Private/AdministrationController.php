@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 use App\Models\Activity;
-use App\Models\Automatic;
 use App\Models\Calendar;
 use App\Models\Permission;
 use App\Models\Role;
@@ -25,7 +24,6 @@ use App\Http\Requests\Administration\UpdateTaskRequest;
 use App\Http\Requests\Administration\UpdateUserAccessRequest;
 
 use App\Http\Resources\ActivityResource;
-use App\Http\Resources\AutomaticResource;
 use App\Http\Resources\CalendarResource;
 use App\Http\Resources\PermissionResource;
 use App\Http\Resources\RoleResource;
@@ -34,8 +32,6 @@ use App\Http\Resources\UserResource;
 
 use App\Actions\Administration\Activity\CreateActivityAction;
 use App\Actions\Administration\Activity\UpdateActivityAction;
-use App\Actions\Administration\Automatic\CreateAutomaticAction;
-use App\Actions\Administration\Automatic\UpdateAutomaticAction;
 use App\Actions\Administration\Calendar\CreateCalendarAction;
 use App\Actions\Administration\Calendar\UpdateCalendarAction;
 use App\Actions\Administration\Role\CreateRoleAction;
@@ -279,62 +275,6 @@ class AdministrationController extends Controller
         return $this->flashMessage('delete');
     }
 
-    /*
-     * ======================
-     * AUTOMATICS
-     * ====================== 
-     */
-
-    public function indexAutomatic()
-    {
-        if (request()->user()->cannot('viewAny', Automatic::class)) return null;
-
-        return AutomaticResource::collection(
-            Automatic::active()->with('host')->get()
-        );
-    }
-
-    public function showAutomatic(Automatic $automatic)
-    {
-        if (request()->user()->cannot('view', $automatic)) return null;
-
-        return new AutomaticResource($automatic->load('host'));
-    }
-
-    public function createAutomatic(Request $request, CreateAutomaticAction $createAutomaticAction)
-    {
-        if (request()->user()->cannot('create', Automatic::class)) return null;
-
-        $createAutomaticAction->execute(
-            $request->all(),
-            $request->file('image')
-        );
-
-        return $this->flashMessage('save');
-    }
-
-    public function updateAutomatic(Request $request, Automatic $automatic, UpdateAutomaticAction $updateAutomaticAction)
-    {
-        if ($request->user()->cannot('update', $automatic)) return null;
-
-        $updateAutomaticAction->execute(
-            $automatic,
-            $request->all(),
-            $request->file('image')
-        );
-
-        return $this->flashMessage('update');
-    }
-
-    public function deactivateAutomatic(Automatic $automatic)
-    {
-        if (request()->user()->cannot('delete', $automatic)) return null;
-
-        $automatic->update(['is_active' => false]);
-
-        return $this->flashMessage('deactivate');
-    }
-
     /**
      * ======================
      * RENDER
@@ -350,7 +290,6 @@ class AdministrationController extends Controller
             'calendar' => $this->indexCalendar(),
             'users' => $this->indexUsers(),
             'tasks' => $this->indexTask(),
-            'automatics' => $this->indexAutomatic(),
         ]);
     }
 }
