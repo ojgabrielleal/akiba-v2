@@ -15,8 +15,7 @@
     });
 
     onMount(() => {
-        axios
-            .get("/panel/radio/listener-month/found")
+        axios.get("/panel/radio/listener-month/found")
             .then((response) => {
                 const listenerMonthFound = response.data.data;
 
