@@ -54,7 +54,7 @@
                         Programa preferido
                     </dt>
                     <dd class="block text-suspense-aurora font-noto-sans uppercase">
-                        {listenerMonth.data.favorite_show}
+                        {listenerMonth.data.favorite_program.name}
                     </dd>
                 </dl>
             </div>

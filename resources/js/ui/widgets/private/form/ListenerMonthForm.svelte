@@ -11,18 +11,20 @@
         name: null,
         address: null,
         favorite_program: null,
+        favorite_anime: null,
         requests_total: null,
     });
 
     onMount(() => {
         axios.get("/panel/radio/listener-month/found")
             .then((response) => {
-                const listenerMonthFound = response.data.data;
+                const listenerMonth = response.data.data;
 
-                $form.name = listenerMonthFound.name;
-                $form.address = listenerMonthFound.address;
-                $form.favorite_program = listenerMonthFound.favorite_program;
-                $form.requests_total = listenerMonthFound.requests_total;
+                $form.name = listenerMonth.name;
+                $form.address = listenerMonth.address;
+                $form.favorite_anime = listenerMonth.favorite_anime;
+                $form.favorite_program = listenerMonth.favorite_program;
+                $form.requests_total = listenerMonth.requests_total;
             })
             .catch(() => {
                 console.error("Error when find listener month");
@@ -86,6 +88,20 @@
             disabled
         />
     </div>
+    // TODO: Carregar uma busca igual na caixa de pedidos a API da Jikan para que seja escolhido um anime favorito
+    <div class="mb-4">
+        <label for="favorite_anime" class="text-md text-gray-700 font-noto-sans block mb-1">
+            Anime favorito
+        </label>
+        <input
+            id="favorite_anime"
+            type="text"
+            name="favorite_anime"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400 disabled:bg-gray-200"
+            bind:value={$form.favorite_anime}
+            disabled
+        />
+    </div>
     <div class="mb-4">
         <label for="requests_total" class="text-md text-gray-700 font-noto-sans block mb-1">
             Quantidade de pedidos feitos
@@ -99,6 +115,7 @@
             disabled
         />
     </div>
+
     <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase">
         Atualizar
     </button>

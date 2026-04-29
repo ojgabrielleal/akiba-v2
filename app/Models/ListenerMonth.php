@@ -21,7 +21,12 @@ class ListenerMonth extends Model
         'avatar',
         'address',
         'favorite_program',
+        'favorite_anime',
         'requests_total',
+    ];
+
+    protected $casts = [
+        'requests_total' => 'integer',
     ];
 
     /**
@@ -57,15 +62,19 @@ class ListenerMonth extends Model
                 songs_requests.address AS address,
                 null AS avatar,
                 COUNT(*) AS requests_total,
+                programs.uuid AS program_uuid,
+                programs.name AS program_name,
+                programs.image AS program_image,
                 programs.name AS favorite_program
             FROM songs_requests
             JOIN onair ON songs_requests.onair_id = onair.id
             JOIN programs ON onair.program_id = programs.id
             WHERE songs_requests.created_at BETWEEN ? AND ?
-            GROUP BY songs_requests.name, programs.name, songs_requests.address
+                AND onair.program_type = ?
+            GROUP BY songs_requests.name, songs_requests.address, programs.uuid, programs.name, programs.image
             ORDER BY requests_total DESC
             LIMIT 1
-        ', [$startOfMonth, $endOfMonth]);
+        ', [$startOfMonth, $endOfMonth, Program::class]);
 
         return $result[0] ?? null;
     }
