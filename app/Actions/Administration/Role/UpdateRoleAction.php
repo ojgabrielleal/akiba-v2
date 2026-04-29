@@ -4,15 +4,16 @@ namespace App\Actions\Administration\Role;
 
 use App\Models\Role;
 use App\Models\Permission;
-use Illuminate\Support\Str;
 
 class UpdateRoleAction
 {
+    /**
+     * @param array{label?: string, weight?: int|null, description?: string|null, permissions?: array<int, string>} $data
+     */
     public function execute(Role $role, array $data): Role
     {
         $role->fill([
             'label' => $data['label'] ?? $role->label,
-            'name' => isset($data['label']) ? Str::slug($data['label']) : $role->name,
             'weight' => $data['weight'] ?? $role->weight,
             'description' => $data['description'] ?? $role->description,
         ]);
@@ -22,7 +23,11 @@ class UpdateRoleAction
         }
 
         if (array_key_exists('permissions', $data)) {
-            $permissions = Permission::whereIn('uuid', $data['permissions'])->pluck('id')->toArray();
+            $permissions = Permission::query()
+                ->whereIn('uuid', $data['permissions'], 'and', false)
+                ->pluck('id')
+                ->toArray();
+
             $role->permissions()->sync($permissions);
         }
 
