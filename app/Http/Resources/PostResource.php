@@ -17,26 +17,10 @@ class PostResource extends JsonResource
             'image' => $this->image,
             'cover' => $this->cover,
             'content' => $this->content,
-            'author' => [
-                'uuid' => $this->author->uuid,
-                'name' => $this->author->name,
-                'nickname' => $this->author->nickname,
-                'avatar' => $this->author->avatar,
-                'gender' => $this->author->gender
-            ],
-            'references' => $this->references->map(fn($item) => [
-                'uuid' => $item->uuid,
-                'name' => $item->name,
-                'url' => $item->url
-            ]),
-            'reactions' => $this->reactions->map(fn($item) => [
-                'uuid' => $item->uuid,
-                'name' => $item->name
-            ]),
-            'categories' => $this->categories->map(fn($item) => [
-                'uuid' => $item->uuid,
-                'name' => $item->name,
-            ]),
+            'author' => UserResource::make($this->author),
+            'references' => PostReferenceResource::collection($this->references),
+            'reactions' => PostReactionResource::collection($this->reactions),
+            'categories' => PostCategoryResource::collection($this->categories),
             'views' => $this->views_count,
         ];
     }

@@ -43,20 +43,12 @@
 <!-- Mobile Navbar -->
 <nav class="w-full h-16 bg-suspense-aurora flex items-center justify-between px-10 lg:hidden">
     <button aria-label="Abrir menu" on:click={() => (mobilenavbar = !mobilenavbar)}>
-        <svg
+        <img
+            src="/svg/menu.svg"
+            alt=""
             class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
             aria-hidden="true"
-        >
-            <path
-                d="M4 6h16M4 12h16M4 18h16"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-        </svg>
+        />
     </button>
     <img
         src={user.avatar}
@@ -79,20 +71,12 @@
             loading="lazy"
         />
         <button aria-label="Fechar menu" on:click={() => (mobilenavbar = false)}>
-            <svg
+            <img
+                src="/svg/x.svg"
+                alt=""
                 class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
                 aria-hidden="true"
-            >
-                <path
-                    d="M6 18L18 6M6 6l12 12"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-            </svg>
+            />
         </button>
     </div>
     <ul class="p-5 pt-3 space-y-4">

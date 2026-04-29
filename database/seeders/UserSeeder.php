@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             ['name' => 'Bluesky', 'url' => null],
             ['name' => 'Discord', 'url' => null],
             ['name' => 'YouTube', 'url' => null],
+            ['name' => 'MyAnimeList', 'url' => null],
         ];
 
         $preferences = [

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AutomaticResource extends JsonResource
+class PostReactionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,7 @@ class AutomaticResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'is_default' => $this->is_default,
             'name' => $this->name,
-            'image' => $this->image,
-            'phrases' => $this->phrases,
-            'host' => UserResource::make($this->host),
         ];
     }
 }

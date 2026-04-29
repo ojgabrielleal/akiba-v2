@@ -214,18 +214,12 @@
                             </span>
                         </div>
                     {/if}
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
+                    <img
+                        src="/svg/chevron-down.svg"
+                        alt=""
                         class="w-5 h-5 text-gray-400 shrink-0 ml-2"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
+                        aria-hidden="true"
+                    />
                 </button>
                 {#if activeMusicDropdown && animeThemesList.length > 0}
                     <div class="absolute w-full mt-2 bg-white border border-gray-100 rounded-2xl shadow-2xl z-30 max-h-56 overflow-y-auto">

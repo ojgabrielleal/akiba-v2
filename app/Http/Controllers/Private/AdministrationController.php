@@ -190,7 +190,7 @@ class AdministrationController extends Controller
     {
         if (request()->user()->cannot('view', $user)) return null;
 
-        return new UserResource($user);
+        return new UserResource($user->load(['roles']));
     }
 
     public function createUser(Request $request, CreateUserAction $createUserAction)
@@ -271,7 +271,10 @@ class AdministrationController extends Controller
 
         if ($role->members()->count() > 0) throw new RoleHasMembersException();
 
-        $role->delete();
+        // Avoids an Intelephense false positive on Eloquent's (Laravel default) instance delete().
+        Role::query()
+            ->whereKey($role->getKey())
+            ->delete();
 
         return $this->flashMessage('delete');
     }
