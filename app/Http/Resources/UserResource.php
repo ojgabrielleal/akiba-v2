@@ -26,16 +26,8 @@ class UserResource extends JsonResource
             'state' => $this->state,
             'country' => $this->country,
             'bibliography' => $this->bibliography,
-            'favorites' => $this->favorites->map(fn($item) => [
-                'uuid' => $item->uuid,
-                'name' => $item->name,
-                'image' => $item->image,
-            ]),
-            'socials' => $this->socials->map(fn($item) => [
-                'uuid' => $item->uuid,
-                'name' => $item->name,
-                'url' => $item->url,
-            ]),
+            'favorites' => UserFavoriteResource::collection($this->favorites),
+            'socials' => UserSocialResource::collection($this->socials),
             'preferences' => [
                 'likes' => UserPreferenceResource::collection($this->preferences->filter(function ($item) {
                     return $item->is_like;
