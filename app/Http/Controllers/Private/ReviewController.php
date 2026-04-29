@@ -63,6 +63,7 @@ class ReviewController extends Controller
         $review = Review::create([
             'title' => $request->input('title'),
             'sinopse' => $request->input('sinopse'),
+            'year_of_release' => $request->input('year_of_release'),
             'image' => $this->image->store('reviews', $request->file('image'), 'public'),
             'cover' => $this->image->store('reviews', $request->file('cover'), 'public'),
         ]);
@@ -82,6 +83,7 @@ class ReviewController extends Controller
         $review->fill([
             'title' => $request->input('title'),
             'sinopse' => $request->input('sinopse'),
+            'year_of_release' => $request->input('year_of_release'),
             'image' => $this->image->store('reviews', $request->file('image'), 'public', $review->image),
             'cover' => $this->image->store('reviews', $request->file('cover'), 'public', $review->cover),
         ]);
