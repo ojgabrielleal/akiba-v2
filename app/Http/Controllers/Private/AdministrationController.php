@@ -186,7 +186,7 @@ class AdministrationController extends Controller
     {
         if (request()->user()->cannot('view', $user)) return null;
 
-        return new UserResource($user);
+        return new UserResource($user->load(['roles']));
     }
 
     public function createUser(Request $request, CreateUserAction $createUserAction)

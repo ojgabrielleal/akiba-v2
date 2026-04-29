@@ -1,103 +1,32 @@
-name: "🐛 Relato de Bug"
-description: "Relate um bug ou comportamento inesperado"
+name: "Bug"
+description: "Relate um problema"
 labels: ["bug"]
-assignees: []
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Obrigado por relatar um bug. Preencha as informações abaixo para nos ajudar a resolver o problema rapidamente.
-
-  - type: input
-    id: title
-    attributes:
-      label: Título do bug
-      description: "Exemplo: Erro ao carregar posts na página inicial."
-      placeholder: "Digite um título descritivo"
-    validations:
-      required: true
-
   - type: textarea
-    id: description
+    id: current
     attributes:
-      label: Descrição
-      description: "Descreva o bug observado."
-      placeholder: "O que você percebeu que estava errado?"
+      label: O que aconteceu?
+      placeholder: "Explique o comportamento atual, erro ou impacto."
     validations:
       required: true
 
   - type: textarea
     id: steps
     attributes:
-      label: Passos para reproduzir
-      description: "Liste os passos exatos para reproduzir o bug."
+      label: Como reproduzir?
       placeholder: |
         1. Acesse...
         2. Clique em...
-        3. Observe...
-    validations:
-      required: true
+        3. Veja o erro...
 
   - type: textarea
     id: expected
     attributes:
-      label: Comportamento esperado
-      description: "O que deveria acontecer?"
-      placeholder: "Descreva o comportamento esperado."
-    validations:
-      required: true
+      label: O que era esperado?
+      placeholder: "O que deveria acontecer?"
 
   - type: textarea
-    id: actual
+    id: context
     attributes:
-      label: Comportamento atual
-      description: "O que está acontecendo no lugar?"
-      placeholder: "Descreva o comportamento incorreto."
-    validations:
-      required: true
-
-  - type: dropdown
-    id: area
-    attributes:
-      label: Área afetada
-      options:
-        - "⚙️ Backend"
-        - "🎨 Frontend"
-        - "🗄️ Banco de dados"
-        - "🔐 Autenticação"
-        - "🔌 API"
-        - "📦 Outro"
-    validations:
-      required: true
-
-  - type: input
-    id: browser
-    attributes:
-      label: Navegador e versão
-      placeholder: "Exemplo: Chrome 125.0, Firefox 120.0"
-
-  - type: textarea
-    id: screenshots
-    attributes:
-      label: Screenshots ou logs
-      description: "Adicione screenshots, logs de erro ou qualquer informação relevante."
-      placeholder: "Cole logs de erro ou screenshots do problema."
-
-  - type: textarea
-    id: additional
-    attributes:
-      label: Informações adicionais
-      description: "Qualquer contexto adicional que possa ser útil."
-      placeholder: "Ambiente, banco de dados, links, contexto etc."
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Prioridade
-      options:
-        - "🚨 Crítica, produção está quebrada"
-        - "🔥 Alta, funcionalidade indisponível"
-        - "⚠️ Média, comportamento inesperado"
-        - "🌱 Baixa, pequeno incômodo"
-    validations:
-      required: true
+      label: Evidências
+      placeholder: "Logs, prints, ambiente, navegador ou links."
