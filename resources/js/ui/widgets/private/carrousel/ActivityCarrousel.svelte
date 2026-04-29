@@ -102,11 +102,7 @@
                                 type="button"
                                 aria-label="Confirmar"
                                 class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                                on:click={()
-                            >
-                                    requestConfirmActivityParticipant(
-                                        item.uuid,
-                                    )}
+                                on:click={()=>requestConfirmActivityParticipant(item.uuid)}
                             >
                                 <img
                                     src="/svg/verify.svg"

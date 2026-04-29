@@ -55,7 +55,7 @@ class ProfileController extends Controller
         }
 
         return Inertia::render($this->render, [
-            'profile' => new UserResource($user)
+            'profile' => new UserResource($user->load(['favorites', 'socials', 'preferences'])),
         ]);
     }
 }

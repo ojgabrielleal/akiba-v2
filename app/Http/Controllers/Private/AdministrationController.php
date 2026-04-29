@@ -267,7 +267,10 @@ class AdministrationController extends Controller
 
         if ($role->members()->count() > 0) throw new RoleHasMembersException();
 
-        $role->delete();
+        // Avoids an Intelephense false positive on Eloquent's (Laravel default) instance delete().
+        Role::query()
+            ->whereKey($role->getKey())
+            ->delete();
 
         return $this->flashMessage('delete');
     }

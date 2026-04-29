@@ -92,6 +92,11 @@ class User extends Authenticatable
      * Use these methods to access related data via Eloquent relationships
      * (hasOne, hasMany, belongsTo, belongsToMany, etc.).
      */
+    public function favorites()
+    {
+        return $this->hasMany(UserFavorite::class, 'user_id');
+    }
+
     public function socials()
     {
         return $this->hasMany(UserSocial::class, 'user_id');

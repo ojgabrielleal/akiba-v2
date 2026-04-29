@@ -13,20 +13,12 @@
             class="xl:hidden p-1 filter invert"
             on:click={() => (mobilenavbar = !mobilenavbar)}
         >
-            <svg
+            <img
+                src="/svg/menu.svg"
+                alt=""
                 class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
                 aria-hidden="true"
-            >
-                <path
-                    d="M4 6h16M4 12h16M4 18h16"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-            </svg>
+            />
         </button>
 
         <div class="ml-5">
@@ -127,19 +119,12 @@
                     class="text-blue-night"
                     on:click={() => (mobilenavbar = false)}
                 >
-                    <svg
+                    <img
+                        src="/svg/x.svg"
+                        alt=""
                         class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            d="M6 18L18 6M6 6l12 12"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
+                        aria-hidden="true"
+                    />
                 </button>
             </div>
 

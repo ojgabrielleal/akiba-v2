@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\UserFavorite;
 use App\Models\UserPreference;
 use App\Models\UserSocial;
 use App\Models\Role;
@@ -22,6 +23,7 @@ class UserSeeder extends Seeder
             ['name' => 'Bluesky', 'url' => null],
             ['name' => 'Discord', 'url' => null],
             ['name' => 'YouTube', 'url' => null],
+            ['name' => 'MyAnimeList', 'url' => null],
         ];
 
         $preferences = [
@@ -33,14 +35,23 @@ class UserSeeder extends Seeder
             ['is_like' => false, 'content' => '#'],
         ];
 
+        $favorites = [
+            ['name' => null, 'image' => null],
+            ['name' => null, 'image' => null],
+            ['name' => null, 'image' => null],
+        ];
+
         User::factory()
             ->hasAttached(Role::where('name', 'administrator')->first(), [], 'roles')
-            ->afterCreating(function ($user) use ($socials, $preferences) {
+            ->afterCreating(function ($user) use ($socials, $preferences, $favorites) {
                 foreach ($socials as $social) {
                     $user->socials()->save(UserSocial::factory()->make($social));
                 }
                 foreach ($preferences as $preference){
                     $user->preferences()->save(UserPreference::factory()->make($preference));
+                }
+                foreach ($favorites as $favorite){
+                    $user->favorites()->save(UserFavorite::factory()->make($favorite));
                 }
             })
             ->create([
@@ -53,13 +64,16 @@ class UserSeeder extends Seeder
 
         $roles = Role::where('name', '!=', 'administrator')->get();
         User::factory(5)
-            ->afterCreating(function ($user) use ($roles, $socials, $preferences) {
+            ->afterCreating(function ($user) use ($roles, $socials, $preferences, $favorites) {
                 $user->roles()->attach($roles->random()->id);
                 foreach ($socials as $social) {
                     $user->socials()->save(UserSocial::factory()->make($social));
                 }
                 foreach ($preferences as $preference){
                     $user->preferences()->save(UserPreference::factory()->make($preference));
+                }
+                foreach ($favorites as $favorite){
+                    $user->favorites()->save(UserFavorite::factory()->make($favorite));
                 }
             })
             ->create();

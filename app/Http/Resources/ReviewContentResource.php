@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EventResource extends JsonResource
+class ReviewContentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,15 +16,8 @@ class EventResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'slug' => $this->slug,
-            'cover' => $this->cover,
-            'image' => $this->image,
-            'title' => $this->title,
             'content' => $this->content,
-            'dates' => $this->dates,
-            'address' => $this->address,
-            'views' => $this->views_count,
-            'author' => UserResource::make($this->author)
+            'author' => UserResource::make($this->author),
         ];
     }
 }
