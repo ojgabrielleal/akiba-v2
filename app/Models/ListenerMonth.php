@@ -70,11 +70,10 @@ class ListenerMonth extends Model
             JOIN onair ON songs_requests.onair_id = onair.id
             JOIN programs ON onair.program_id = programs.id
             WHERE songs_requests.created_at BETWEEN ? AND ?
-                AND onair.program_type = ?
             GROUP BY songs_requests.name, songs_requests.address, programs.uuid, programs.name, programs.image
             ORDER BY requests_total DESC
             LIMIT 1
-        ', [$startOfMonth, $endOfMonth, Program::class]);
+        ', [$startOfMonth, $endOfMonth]);
 
         return $result[0] ?? null;
     }
