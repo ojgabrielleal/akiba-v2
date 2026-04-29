@@ -53,6 +53,15 @@ class UpdateProfileAction
             }
         }
 
+        if(!empty($data['favorites'])) {
+            foreach ($data['favorites'] as $favorite) {
+                $user->favorites()->where('uuid', $favorite['uuid'])->update([
+                    'name' => $favorite['name'],
+                    'image' => $favorite['image'],
+                ]);
+            }
+        }
+
         return $user;
     }
 }
