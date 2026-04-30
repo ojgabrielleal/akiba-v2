@@ -24,7 +24,7 @@ class UpdateRoleAction
 
         if (array_key_exists('permissions', $data)) {
             $permissions = Permission::query()
-                ->whereIn('uuid', $data['permissions'], 'and', false)
+                ->whereIn('uuid', $data['permissions'])
                 ->pluck('id')
                 ->toArray();
 
