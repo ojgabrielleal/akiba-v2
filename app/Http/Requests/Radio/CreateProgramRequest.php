@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Event;
+namespace App\Http\Requests\Radio;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEventRequest extends FormRequest
+class CreateProgramRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,10 @@ class StoreEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
+            'user' => 'required',
+            'name' => 'required',
             'image' => 'required',
-            'cover' => 'required',
-            'content' => 'required',
-            'dates' => 'required',
-            'address' => 'required',
+            'type' => 'required',
         ];
     }
 }

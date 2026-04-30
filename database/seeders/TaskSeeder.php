@@ -18,10 +18,12 @@ class TaskSeeder extends Seeder
         $user = User::inRandomOrder()->first();
         $admin = User::find(1);
 
-        Task::factory(5)
-            ->for($user, 'responsible')
-            ->create();
+        $this->seedAdministration($admin);
+        $this->seedNonAdministrationContent($user);
+    }
 
+    private function seedAdministration(?User $admin): void
+    {
         Task::factory(5)
             ->for($admin, 'responsible')
             ->create();
@@ -33,5 +35,12 @@ class TaskSeeder extends Seeder
                     now()->startOfWeek(), now()->endOfWeek()
                 )->format('Y-m-d')
             ]);
+    }
+
+    private function seedNonAdministrationContent(?User $user): void
+    {
+        Task::factory(5)
+            ->for($user, 'responsible')
+            ->create();
     }
 }

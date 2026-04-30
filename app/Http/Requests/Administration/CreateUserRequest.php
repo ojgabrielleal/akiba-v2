@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Media;
+namespace App\Http\Requests\Administration;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePollRequest extends FormRequest
+class CreateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,11 +22,7 @@ class StorePollRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'question' => 'required|unique:polls,question',
-            'option_one' => 'required',
-            'option_two' => 'required',
-            'option_three' => 'required',
-            'option_four' => 'required'
+            //
         ];
     }
 }

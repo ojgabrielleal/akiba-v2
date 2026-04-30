@@ -2,22 +2,15 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-
-use App\Models\Event;
-
-use App\Http\Requests\Event\StoreEventRequest;
-use App\Http\Requests\Event\UpdateEventRequest;
-
-use App\Http\Resources\EventResource;
-
 use App\Actions\Event\CreateEventAction;
 use App\Actions\Event\UpdateEventAction;
-
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Event\CreateEventRequest;
+use App\Http\Requests\Event\UpdateEventRequest;
+use App\Http\Resources\EventResource;
+use App\Models\Event;
 use App\Traits\HasFlashMessages;
+use Inertia\Inertia;
 
 class EventController extends Controller
 {
@@ -28,12 +21,14 @@ class EventController extends Controller
     /*
      * ======================
      * EVENTS
-     * ====================== 
+     * ======================
      */
 
     public function indexEvents()
     {
-        if (request()->user()->cannot('viewAny', Event::class)) return null;
+        if (request()->user()->cannot('viewAny', Event::class)) {
+            return null;
+        }
 
         return EventResource::collection(
             Event::active()
@@ -44,17 +39,21 @@ class EventController extends Controller
 
     public function showEvent(Event $event)
     {
-        if (request()->user()->cannot('view', $event)) return null;
+        if (request()->user()->cannot('view', $event)) {
+            return null;
+        }
 
         return Inertia::render($this->render, [
             'event' => new EventResource($event->load('author')),
-            'events' => $this->indexEvents()
+            'events' => $this->indexEvents(),
         ]);
     }
 
-    public function createEvent(StoreEventRequest $request, CreateEventAction $createEventAction)
+    public function createEvent(CreateEventRequest $request, CreateEventAction $createEventAction)
     {
-        if ($request->user()->cannot('create', Event::class)) return null;
+        if ($request->user()->cannot('create', Event::class)) {
+            return null;
+        }
 
         $createEventAction->execute(
             $request->user()->id,
@@ -68,7 +67,9 @@ class EventController extends Controller
 
     public function updateEvent(UpdateEventRequest $request, Event $event, UpdateEventAction $updateEventAction)
     {
-        if ($request->user()->cannot('update', $event)) return null;
+        if ($request->user()->cannot('update', $event)) {
+            return null;
+        }
 
         $updateEventAction->execute(
             $event,
@@ -83,7 +84,7 @@ class EventController extends Controller
     /*
      * ======================
      * RENDER
-     * ====================== 
+     * ======================
      */
 
     public function render()

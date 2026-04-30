@@ -20,7 +20,7 @@ class ProgramFactory extends Factory
             'is_active' => true,
             'is_default' => false,
             'name' => fake()->name(),
-            'image' => '/img/locution/default/program.webp',
+            'image' => fake()->imageUrl(),
             'type' => 'free',
             'phrases' => null,
         ];
@@ -33,17 +33,17 @@ class ProgramFactory extends Factory
             'phrases' => [
                 [
                     'text' => fake()->sentence(),
-                    'icon' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
+                    'icon' => fake()->imageUrl(),
                     'decoration' => 'default',
                 ],
                 [
                     'text' => fake()->sentence(),
-                    'icon' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
+                    'icon' => fake()->imageUrl(),
                     'decoration' => 'default',
                 ],
                 [
                     'text' => fake()->sentence(),
-                    'icon' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
+                    'icon' => fake()->imageUrl(),
                     'decoration' => 'default',
                 ],
             ],

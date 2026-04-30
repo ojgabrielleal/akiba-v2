@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-
-use App\Models\Post;
-
-use App\Http\Requests\Post\StorePostRequest;
-
-use App\Http\Resources\PostResource;
-
 use App\Actions\Post\CreatePostAction;
 use App\Actions\Post\UpdatePostAction;
-
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\CreatePostRequest;
+use App\Http\Resources\PostResource;
+use App\Models\Post;
 use App\Traits\HasFlashMessages;
 use App\Traits\ResolvesUserLogged;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -28,14 +22,16 @@ class PostController extends Controller
     /*
      * ======================
      * POSTS
-     * ====================== 
+     * ======================
      */
 
     public function indexPosts()
     {
-        if (request()->user()->cannot('viewAny', Post::class)) return null;
+        if (request()->user()->cannot('viewAny', Post::class)) {
+            return null;
+        }
 
-        if (!request()->user()->hasPermission('post.list')) {
+        if (! request()->user()->hasPermission('post.list')) {
             return PostResource::collection(
                 Post::mine()
                     ->with(['author', 'views'])
@@ -53,7 +49,9 @@ class PostController extends Controller
 
     public function showPost(Post $post)
     {
-        if (request()->user()->cannot('view', $post)) return null;
+        if (request()->user()->cannot('view', $post)) {
+            return null;
+        }
 
         return Inertia::render($this->render, [
             'post' => new PostResource(
@@ -63,9 +61,11 @@ class PostController extends Controller
         ]);
     }
 
-    public function createPost(StorePostRequest $request, CreatePostAction $createPostAction)
+    public function createPost(CreatePostRequest $request, CreatePostAction $createPostAction)
     {
-        if ($request->user()->cannot('create', Post::class)) return null;
+        if ($request->user()->cannot('create', Post::class)) {
+            return null;
+        }
 
         $createPostAction->execute(
             $request->user()->id,
@@ -79,7 +79,9 @@ class PostController extends Controller
 
     public function updatePost(Request $request, Post $post, UpdatePostAction $updatePostAction)
     {
-        if ($request->user()->cannot('update', $post)) return null;
+        if ($request->user()->cannot('update', $post)) {
+            return null;
+        }
 
         $updatePostAction->execute(
             $post,
@@ -94,7 +96,7 @@ class PostController extends Controller
     /*
      * ======================
      * RENDER
-     * ====================== 
+     * ======================
      */
 
     public function render()

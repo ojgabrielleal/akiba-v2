@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Administration;
+namespace App\Http\Requests\Radio;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCalendarRequest extends FormRequest
+class CreateListenerMonthRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

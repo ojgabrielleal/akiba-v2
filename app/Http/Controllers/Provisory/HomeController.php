@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Provisory;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OnairResource;
+use App\Models\Music;
+use App\Models\Onair;
+use App\Services\External\CastService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
-use App\Models\Onair;
-use App\Models\Music;
-
-use App\Http\Resources\OnairResource;
-use App\Services\External\CastService;
 
 class HomeController extends Controller
 {
@@ -26,12 +24,13 @@ class HomeController extends Controller
     public function showOnair()
     {
         $cast = $this->cast->data();
-        
+
         // get() retorna uma coleção
         $onair = Onair::live()->with('program.host')->get();
         $onair->each(function ($item) use ($cast) {
             $item->current_song = $cast['current_song'] ?? null;
         });
+
         return OnairResource::collection($onair);
     }
 
@@ -48,7 +47,7 @@ class HomeController extends Controller
         $onair = Onair::live()->first();
 
         $music = Music::where('name', $request->input('music.name'))->first();
-        if (!$music) {
+        if (! $music) {
             $music = Music::create([
                 'production' => $request->input('anime.title'),
                 'type' => $request->input('music.type'),
@@ -74,7 +73,7 @@ class HomeController extends Controller
     public function render()
     {
         return Inertia::render($this->render, [
-            'onair' => $this->showOnair()
+            'onair' => $this->showOnair(),
         ]);
     }
 }

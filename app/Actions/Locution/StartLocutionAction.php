@@ -2,10 +2,11 @@
 
 namespace App\Actions\Locution;
 
-use App\Models\Program;
 use App\Models\Onair;
+use App\Models\Program;
 use App\Models\User;
 use App\Services\External\DiscordWebhookService;
+use Illuminate\Support\Facades\DB;
 
 class StartLocutionAction
 {
@@ -18,27 +19,29 @@ class StartLocutionAction
 
     public function execute(User $user, Program $program, array $data): void
     {
-        Onair::live()->first()->update([
-            'in_air' => false,
-            'song_requests_total' => false,
-        ]);
-
-        if ($program->type === 'free') {
-            $program->update([
-                'user_id' => $user->id
+        DB::transaction(function () use ($user, $program, $data) {
+            Onair::live()->first()?->update([
+                'in_air' => false,
+                'song_requests_total' => 0,
             ]);
-        }
 
-        $program->onair()->create([
-            'type' => 'live',
-            'phrase' => [
-                'text' => $data['phrase'] ?? null,
+            if ($program->type === 'free') {
+                $program->update([
+                    'user_id' => $user->id,
+                ]);
+            }
+
+            $program->onair()->create([
+                'type' => 'live',
+                'phrase' => [
+                    'text' => $data['phrase'] ?? null,
+                    'icon' => $data['icon'] ?? null,
+                    'decoration' => $data['decoration'] ?? null,
+                ],
                 'icon' => $data['icon'] ?? null,
-                'decoration' => $data['decoration'] ?? null,
-            ],
-            'icon' => $data['icon'] ?? null,
-            'allows_song_requests' => true,
-        ]);
+                'allows_song_requests' => true,
+            ]);
+        });
 
         $this->discord->sendHookMessage($user, $program);
     }

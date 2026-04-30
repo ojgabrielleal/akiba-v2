@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'nickname' => fake()->userName(),
             'gender' => $gender,
-            'avatar' => $gender === 'male' ? '/img/users/avatarMale.webp' : '/img/users/avatarFemale.webp',
+            'avatar' => fake()->imageUrl(),
             'birthday' => fake()->date(),
             'city' => fake()->city(),
             'state' => fake()->state(),

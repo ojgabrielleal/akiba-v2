@@ -18,13 +18,9 @@ class RepositoryFactory extends Factory
     {
         return [
             'is_active' => true,
-            'image' => 'https://placehold.co/500x500?text=Rede%20Akiba%20Placeholder',
+            'image' => fake()->imageUrl(),
             'url' => fake()->url(),
-            'type' => fake()->randomElement([
-                'tutorial', 
-                'package', 
-                'software'
-            ]),
+            'type' => fake()->randomElement(['tutorial', 'package', 'software']),
             'name' => fake()->userName(),
         ];
     }

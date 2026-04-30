@@ -23,22 +23,29 @@ class OnairSeeder extends Seeder
             ->where('is_default', true)
             ->first();
 
-        if (!$auto) {
-            $auto = Program::factory()
-                ->automatic()
-                ->for($admin ?? $user, 'host')
-                ->create([
-                    'is_default' => true,
-                    'name' => 'Auto DJ',
-                ]);
-        }
+        $this->seedAdministration($auto, $admin, $user);
+        $this->seedNonAdministrationContent($user);
+    }
+
+    private function seedAdministration(?Program $auto, ?User $admin, ?User $user): void
+    {
+        $auto ??= Program::factory()
+            ->automatic()
+            ->for($admin ?? $user, 'host')
+            ->create([
+                'is_default' => true,
+                'name' => 'Auto DJ',
+            ]);
 
         Onair::factory()
             ->for($auto, 'program')
             ->create([
                 'type' => 'automatic'
             ]);
+    }
 
+    private function seedNonAdministrationContent(?User $user): void
+    {
         $program = Program::factory()
             ->for($user, 'host')
             ->create();

@@ -5,6 +5,7 @@ namespace App\Actions\Event;
 use App\Models\Event;
 use App\Services\Process\ImageProcessService;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 
 class CreateEventAction
 {
@@ -17,7 +18,7 @@ class CreateEventAction
 
     public function execute(string $userId, array $data, ?UploadedFile $imageFile, ?UploadedFile $coverFile): Event
     {
-        return Event::create([
+        return DB::transaction(fn () => Event::create([
             'user_id' => $userId,
             'image' => $this->image->store('events', $imageFile),
             'cover' => $this->image->store('events', $coverFile),
@@ -25,6 +26,6 @@ class CreateEventAction
             'content' => $data['content'] ?? null,
             'dates' => $data['dates'] ?? null,
             'address' => $data['address'] ?? null,
-        ]);
+        ]));
     }
 }

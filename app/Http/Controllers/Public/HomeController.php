@@ -3,25 +3,23 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FeaturedResource;
+use App\Http\Resources\OnairResource;
 use App\Http\Resources\PostResource;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-
-use App\Models\Onair;
+use App\Http\Resources\ReviewResource;
+use App\Models\Event;
 use App\Models\Music;
+use App\Models\Onair;
 use App\Models\Post;
 use App\Models\Review;
-use App\Models\Event;
-
-use App\Http\Resources\OnairResource;
-use App\Http\Resources\FeaturedResource;
-use App\Http\Resources\ReviewResource;
-
 use App\Services\External\CastService;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
     private $render = 'public/Home';
+
     protected $cast;
 
     public function __construct(CastService $cast)
@@ -72,7 +70,7 @@ class HomeController extends Controller
         $onair->each(function ($item) use ($cast) {
             $item->current_song = $cast['current_song'] ?? null;
         });
-        
+
         return OnairResource::collection($onair);
     }
 
@@ -89,7 +87,7 @@ class HomeController extends Controller
         $onair = Onair::live()->first();
 
         $music = Music::where('name', $request->input('music.name'))->first();
-        if (!$music) {
+        if (! $music) {
             $music = Music::create([
                 'production' => $request->input('anime.title'),
                 'type' => $request->input('music.type'),
@@ -118,7 +116,7 @@ class HomeController extends Controller
             'featureds' => $this->indexFeatured(),
             'reviews' => $this->indexReview(),
             'posts' => $this->indexPost(),
-            'onair' => $this->showOnair()
+            'onair' => $this->showOnair(),
         ]);
     }
 }

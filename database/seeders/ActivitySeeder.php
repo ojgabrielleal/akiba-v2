@@ -17,6 +17,11 @@ class ActivitySeeder extends Seeder
     {
         $admin = User::find(1);
 
+        $this->seedAdministration($admin);
+    }
+
+    private function seedAdministration(?User $admin): void
+    {
         Activity::factory(5)
             ->for($admin, 'author')
             ->create();

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Podcast;
+namespace App\Http\Requests\Media;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePodcastRequest extends FormRequest
+class CreatePollRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,11 @@ class StorePodcastRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required',
-            'season' => 'required|unique:podcasts,season',
-            'episode' => 'required|unique:podcasts,episode',
-            'title' => 'required',
-            'summary' => 'required',
-            'description' => 'required',
-            'audio' => 'required'
+            'question' => 'required|unique:polls,question',
+            'option_one' => 'required',
+            'option_two' => 'required',
+            'option_three' => 'required',
+            'option_four' => 'required',
         ];
     }
 }

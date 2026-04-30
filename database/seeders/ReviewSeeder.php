@@ -18,17 +18,26 @@ class ReviewSeeder extends Seeder
     {
         $admin = User::find(1);
         $user = User::inRandomOrder()->first();
-        
+
+        $this->seedAdministration($admin);
+        $this->seedNonAdministrationContent($user);
+    }
+
+    private function seedAdministration(?User $admin): void
+    {
         $adminContent = ReviewContent::factory(5)
             ->for($admin, 'author');
-
-        $userContent = ReviewContent::factory(5)
-            ->for($user, 'author');
 
         Review::factory(5)
             ->has($adminContent, 'reviews')
             ->create();
-            
+    }
+
+    private function seedNonAdministrationContent(?User $user): void
+    {
+        $userContent = ReviewContent::factory(5)
+            ->for($user, 'author');
+
         Review::factory(5)
             ->has($userContent, 'reviews')
             ->create();

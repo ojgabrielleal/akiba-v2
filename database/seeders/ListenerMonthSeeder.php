@@ -14,6 +14,11 @@ class ListenerMonthSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->seedNonAdministrationContent();
+    }
+
+    private function seedNonAdministrationContent(): void
+    {
         ListenerMonth::factory(5)->create();
     }
 }

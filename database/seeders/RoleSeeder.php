@@ -15,6 +15,11 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->seedAdministration();
+    }
+
+    private function seedAdministration(): void
+    {
         $roles = [
             [
                 'name' => 'administrator',

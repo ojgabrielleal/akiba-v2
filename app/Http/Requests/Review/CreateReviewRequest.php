@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Radio;
+namespace App\Http\Requests\Review;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProgramRequest extends FormRequest
+class CreateReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,11 @@ class StoreProgramRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user' => 'required',
-            'name' => 'required',
+            'title' => 'required',
+            'sinopse' => 'required',
             'image' => 'required',
-            'type' => 'required',
+            'cover' => 'required',
+            'review' => 'required',
         ];
     }
 }

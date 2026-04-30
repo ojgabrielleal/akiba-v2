@@ -11,13 +11,13 @@ class UserPreferenceFactory extends Factory
 {
     /**
      * Define the model's default state.
-    *
-    * @return array<string, mixed>
-    */
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
-            'is_like' => fake()->boolean(0.5),
+            'is_like' => fake()->boolean(),
             'content' => fake()->sentence(),
         ];
     }

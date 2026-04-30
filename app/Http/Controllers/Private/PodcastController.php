@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-
-use App\Models\Podcast;
-
-use App\Http\Requests\Podcast\StorePodcastRequest;
-
-use App\Http\Resources\PodcastResource;
-
 use App\Actions\Podcast\CreatePodcastAction;
 use App\Actions\Podcast\UpdatePodcastAction;
-
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Podcast\CreatePodcastRequest;
+use App\Http\Resources\PodcastResource;
+use App\Models\Podcast;
 use App\Traits\HasFlashMessages;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PodcastController extends Controller
 {
@@ -27,12 +21,14 @@ class PodcastController extends Controller
     /*
      * ======================
      * PODCASTS
-     * ====================== 
+     * ======================
      */
 
     public function indexPodcasts()
     {
-        if (request()->user()->cannot('viewAny', Podcast::class)) return null;
+        if (request()->user()->cannot('viewAny', Podcast::class)) {
+            return null;
+        }
 
         return PodcastResource::collection(
             Podcast::active()
@@ -43,7 +39,9 @@ class PodcastController extends Controller
 
     public function showPodcast(Podcast $podcast)
     {
-        if (request()->user()->cannot('view', $podcast)) return null;
+        if (request()->user()->cannot('view', $podcast)) {
+            return null;
+        }
 
         return Inertia::render($this->render, [
             'podcasts' => $this->indexPodcasts(),
@@ -51,9 +49,11 @@ class PodcastController extends Controller
         ]);
     }
 
-    public function createPodcast(StorePodcastRequest $request, CreatePodcastAction $createPodcastAction)
+    public function createPodcast(CreatePodcastRequest $request, CreatePodcastAction $createPodcastAction)
     {
-        if ($request->user()->cannot('create', Podcast::class)) return null;
+        if ($request->user()->cannot('create', Podcast::class)) {
+            return null;
+        }
 
         $createPodcastAction->execute(
             $request->user()->id,
@@ -66,7 +66,9 @@ class PodcastController extends Controller
 
     public function updatePodcast(Request $request, Podcast $podcast, UpdatePodcastAction $updatePodcastAction)
     {
-        if ($request->user()->cannot('update', $podcast)) return null;
+        if ($request->user()->cannot('update', $podcast)) {
+            return null;
+        }
 
         $updatePodcastAction->execute(
             $podcast,
@@ -79,7 +81,9 @@ class PodcastController extends Controller
 
     public function deactivatePodcast(Podcast $podcast)
     {
-        if (request()->user()->cannot('delete', $podcast)) return null;
+        if (request()->user()->cannot('delete', $podcast)) {
+            return null;
+        }
 
         $podcast->update([
             'is_active' => false,
@@ -91,7 +95,7 @@ class PodcastController extends Controller
     /*
      * ======================
      * RENDER
-     * ====================== 
+     * ======================
      */
 
     public function render()

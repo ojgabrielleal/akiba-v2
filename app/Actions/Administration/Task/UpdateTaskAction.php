@@ -13,9 +13,9 @@ class UpdateTaskAction
 
         $task->fill([
             'user_id' => $user ? $user->id : $task->user_id,
-            'title' => $data['title'] ?? $task->title,
-            'dead_line' => $data['dead_line'] ?? $task->dead_line,
-            'content' => $data['content'] ?? $task->content,
+            'title' => array_key_exists('title', $data) ? $data['title'] : $task->title,
+            'dead_line' => array_key_exists('dead_line', $data) ? $data['dead_line'] : $task->dead_line,
+            'content' => array_key_exists('content', $data) ? $data['content'] : $task->content,
         ]);
 
         if ($task->isDirty()) {

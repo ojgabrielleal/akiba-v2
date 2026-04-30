@@ -20,17 +20,13 @@ class OnairFactory extends Factory
             'in_air' => true,
             'phrase' => [
                 'text' => fake()->sentence(),
-                'icon' => '/img/locution/icons/aoba.webp',
+                'icon' => fake()->imageUrl(),
                 'decoration' => 'default',
             ],
-            'type' => fake()->randomElement([
-                'automatic', 
-                'live', 
-                'scheduled'
-            ]),
-            'icon' => '/img/locution/icons/aoba.webp',
+            'type' => fake()->randomElement(['automatic', 'live', 'scheduled']),
+            'icon' => fake()->imageUrl(),
             'allows_song_requests' => true,
-            'song_requests_total' => fake()->randomNumber()
+            'song_requests_total' => fake()->randomNumber(),
         ];
     }
 }

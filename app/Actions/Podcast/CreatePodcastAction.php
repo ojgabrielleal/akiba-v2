@@ -5,6 +5,7 @@ namespace App\Actions\Podcast;
 use App\Models\Podcast;
 use App\Services\Process\ImageProcessService;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 
 class CreatePodcastAction
 {
@@ -17,7 +18,7 @@ class CreatePodcastAction
 
     public function execute(string $userId, array $data, ?UploadedFile $imageFile): Podcast
     {
-        return Podcast::create([
+        return DB::transaction(fn () => Podcast::create([
             'user_id' => $userId,
             'image' => $this->image->store('podcasts', $imageFile),
             'season' => $data['season'] ?? null,
@@ -26,6 +27,6 @@ class CreatePodcastAction
             'summary' => $data['summary'] ?? null,
             'description' => $data['description'] ?? null,
             'audio' => $data['audio'] ?? null,
-        ]);
+        ]));
     }
 }

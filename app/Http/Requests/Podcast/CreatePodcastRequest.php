@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Repository;
+namespace App\Http\Requests\Podcast;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRepositoryRequest extends FormRequest
+class CreatePodcastRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,13 @@ class StoreRepositoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:repositories,name',
-            'url' => 'required|unique:repositories,url',
             'image' => 'required',
-            'type' => 'required',
+            'season' => 'required|unique:podcasts,season',
+            'episode' => 'required|unique:podcasts,episode',
+            'title' => 'required',
+            'summary' => 'required',
+            'description' => 'required',
+            'audio' => 'required',
         ];
     }
 }

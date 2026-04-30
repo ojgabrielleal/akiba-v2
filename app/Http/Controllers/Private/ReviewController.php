@@ -3,25 +3,20 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Review\CreateReviewRequest;
+use App\Http\Resources\ReviewResource;
+use App\Models\Review;
+use App\Services\Process\ImageProcessService;
+use App\Traits\HasFlashMessages;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
-use App\Models\Review;
-
-use App\Http\Requests\Review\StoreReviewRequest;
-
-use App\Http\Resources\ReviewResource;
-
-use App\Services\Process\ImageProcessService;
-
-use App\Traits\HasFlashMessages;
 
 class ReviewController extends Controller
 {
     use HasFlashMessages;
 
     private ImageProcessService $image;
+
     private $render = 'private/Review';
 
     public function __construct(ImageProcessService $image)
@@ -32,12 +27,14 @@ class ReviewController extends Controller
     /*
      * ======================
      * REVIEWS
-     * ====================== 
+     * ======================
      */
 
     public function indexReviews()
     {
-        if (request()->user()->cannot('viewAny', Review::class)) return null;
+        if (request()->user()->cannot('viewAny', Review::class)) {
+            return null;
+        }
 
         return ReviewResource::collection(
             Review::with(['reviews', 'views'])->paginate(10)
@@ -46,7 +43,9 @@ class ReviewController extends Controller
 
     public function showReview(Review $review)
     {
-        if (request()->user()->cannot('view', $review)) return null;
+        if (request()->user()->cannot('view', $review)) {
+            return null;
+        }
 
         return Inertia::render($this->render, [
             'reviews' => $this->indexReviews(),
@@ -56,9 +55,11 @@ class ReviewController extends Controller
         ]);
     }
 
-    public function createReview(StoreReviewRequest $request)
+    public function createReview(CreateReviewRequest $request)
     {
-        if ($request->user()->cannot('create', Review::class)) return null;
+        if ($request->user()->cannot('create', Review::class)) {
+            return null;
+        }
 
         $review = Review::create([
             'title' => $request->input('title'),
@@ -78,7 +79,9 @@ class ReviewController extends Controller
 
     public function updateReview(Request $request, Review $review)
     {
-        if ($request->user()->cannot('update', $review)) return null;
+        if ($request->user()->cannot('update', $review)) {
+            return null;
+        }
 
         $review->fill([
             'title' => $request->input('title'),
@@ -88,7 +91,9 @@ class ReviewController extends Controller
             'cover' => $this->image->store('reviews', $request->file('cover'), 'public', $review->cover),
         ]);
 
-        if ($review->isDirty()) $review->save();
+        if ($review->isDirty()) {
+            $review->save();
+        }
 
         $review->reviews()->updateOrCreate(
             ['uuid' => $request->input('review.uuid')],
@@ -104,7 +109,7 @@ class ReviewController extends Controller
     /*
      * ======================
      * RENDER
-     * ====================== 
+     * ======================
      */
 
     public function render()

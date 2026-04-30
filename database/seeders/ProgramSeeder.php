@@ -19,6 +19,12 @@ class ProgramSeeder extends Seeder
         $admin = User::find(1);
         $user = User::inRandomOrder()->first();
 
+        $this->seedAdministration($admin, $user);
+        $this->seedNonAdministrationContent($user);
+    }
+
+    private function seedAdministration(?User $admin, ?User $user): void
+    {
         Program::factory()
             ->automatic()
             ->for($admin ?? $user, 'host')
@@ -26,13 +32,16 @@ class ProgramSeeder extends Seeder
                 'is_default' => true,
                 'name' => 'Auto DJ',
             ]);
-        
+
         Program::factory(2)
             ->private()
             ->for($admin, 'host')
             ->has(ProgramSchedule::factory(5), 'schedules')
             ->create();
+    }
 
+    private function seedNonAdministrationContent(?User $user): void
+    {
         Program::factory(2)
             ->private()
             ->for($user, 'host')

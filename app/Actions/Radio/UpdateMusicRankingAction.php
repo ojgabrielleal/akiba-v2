@@ -5,6 +5,7 @@ namespace App\Actions\Radio;
 use App\Models\Music;
 use App\Services\Process\ImageProcessService;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 
 class UpdateMusicRankingAction
 {
@@ -17,10 +18,12 @@ class UpdateMusicRankingAction
 
     public function execute(Music $music, ?UploadedFile $imageFile): Music
     {
-        $music->update([
-            'image_ranking' => $this->image->store('musics/ranking', $imageFile, 'public', $music->image_ranking),
-        ]);
-        
-        return $music;
+        return DB::transaction(function () use ($music, $imageFile) {
+            $music->update([
+                'image_ranking' => $this->image->store('musics/ranking', $imageFile, 'public', $music->image_ranking),
+            ]);
+
+            return $music;
+        });
     }
 }

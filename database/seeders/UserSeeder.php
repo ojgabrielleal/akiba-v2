@@ -16,31 +16,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $socials = [
-            ['name' => 'Facebook', 'url' => null],
-            ['name' => 'Instagram', 'url' => null],
-            ['name' => 'Twitter', 'url' => null],
-            ['name' => 'Bluesky', 'url' => null],
-            ['name' => 'Discord', 'url' => null],
-            ['name' => 'YouTube', 'url' => null],
-            ['name' => 'MyAnimeList', 'url' => null],
-        ];
+        $socials = $this->socials();
+        $preferences = $this->preferences();
+        $favorites = $this->favorites();
 
-        $preferences = [
-            ['is_like' => true, 'content' => '#'],
-            ['is_like' => true, 'content' => '#'],
-            ['is_like' => true, 'content' => '#'],
-            ['is_like' => false, 'content' => '#'],
-            ['is_like' => false, 'content' => '#'],
-            ['is_like' => false, 'content' => '#'],
-        ];
+        $this->seedAdministration($socials, $preferences, $favorites);
+        $this->seedNonAdministrationContent($socials, $preferences, $favorites);
+    }
 
-        $favorites = [
-            ['name' => null, 'image' => null],
-            ['name' => null, 'image' => null],
-            ['name' => null, 'image' => null],
-        ];
-
+    private function seedAdministration(array $socials, array $preferences, array $favorites): void
+    {
         User::factory()
             ->hasAttached(Role::where('name', 'administrator')->first(), [], 'roles')
             ->afterCreating(function ($user) use ($socials, $preferences, $favorites) {
@@ -61,7 +46,10 @@ class UserSeeder extends Seeder
                 'nickname' => 'Yagami',
                 'gender' => 'female',
             ]);
+    }
 
+    private function seedNonAdministrationContent(array $socials, array $preferences, array $favorites): void
+    {
         $roles = Role::where('name', '!=', 'administrator')->get();
         User::factory(5)
             ->afterCreating(function ($user) use ($roles, $socials, $preferences, $favorites) {
@@ -77,5 +65,39 @@ class UserSeeder extends Seeder
                 }
             })
             ->create();
+    }
+
+    private function socials(): array
+    {
+        return [
+            ['name' => 'Facebook', 'url' => null],
+            ['name' => 'Instagram', 'url' => null],
+            ['name' => 'Twitter', 'url' => null],
+            ['name' => 'Bluesky', 'url' => null],
+            ['name' => 'Discord', 'url' => null],
+            ['name' => 'YouTube', 'url' => null],
+            ['name' => 'MyAnimeList', 'url' => null],
+        ];
+    }
+
+    private function preferences(): array
+    {
+        return [
+            ['is_like' => true, 'content' => '#'],
+            ['is_like' => true, 'content' => '#'],
+            ['is_like' => true, 'content' => '#'],
+            ['is_like' => false, 'content' => '#'],
+            ['is_like' => false, 'content' => '#'],
+            ['is_like' => false, 'content' => '#'],
+        ];
+    }
+
+    private function favorites(): array
+    {
+        return [
+            ['name' => null, 'image' => null],
+            ['name' => null, 'image' => null],
+            ['name' => null, 'image' => null],
+        ];
     }
 }

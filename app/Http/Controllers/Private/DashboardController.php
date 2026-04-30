@@ -3,20 +3,16 @@
 namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
-
-use Inertia\Inertia;
-
-use App\Models\Activity;
-use App\Models\Calendar;
-use App\Models\Post;
-use App\Models\Task;
-
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\CalendarResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\TaskResource;
-
+use App\Models\Activity;
+use App\Models\Calendar;
+use App\Models\Post;
+use App\Models\Task;
 use App\Traits\HasFlashMessages;
+use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
@@ -27,12 +23,14 @@ class DashboardController extends Controller
     /*
      * ======================
      * ACTIVITIES
-     * ====================== 
+     * ======================
      */
 
     public function indexActivities()
     {
-        if (request()->user()->cannot('viewAny', Activity::class)) return null;
+        if (request()->user()->cannot('viewAny', Activity::class)) {
+            return null;
+        }
 
         return ActivityResource::collection(
             Activity::valid()
@@ -44,7 +42,9 @@ class DashboardController extends Controller
 
     public function confirmActivityParticipant(Activity $activity)
     {
-        if (request()->user()->cannot('update', $activity)) return null;
+        if (request()->user()->cannot('update', $activity)) {
+            return null;
+        }
 
         $activity->confirmations()->attach(request()->user()->id);
 
@@ -54,12 +54,14 @@ class DashboardController extends Controller
     /*
      * ======================
      * TASKS
-     * ====================== 
+     * ======================
      */
 
     public function indexTasks()
     {
-        if (request()->user()->cannot('viewAny', Task::class)) return null;
+        if (request()->user()->cannot('viewAny', Task::class)) {
+            return null;
+        }
 
         return TaskResource::collection(
             Task::active()
@@ -72,7 +74,9 @@ class DashboardController extends Controller
 
     public function markTaskCompleted(Task $task)
     {
-        if (request()->user()->cannot('update', $task)) return null;
+        if (request()->user()->cannot('update', $task)) {
+            return null;
+        }
 
         $task->update([
             'is_completed' => true,
@@ -84,12 +88,14 @@ class DashboardController extends Controller
     /*
      * ======================
      * POSTS
-     * ====================== 
+     * ======================
      */
 
     public function indexPosts()
     {
-        if (request()->user()->cannot('viewAny', Post::class)) return null;
+        if (request()->user()->cannot('viewAny', Post::class)) {
+            return null;
+        }
 
         return PostResource::collection(
             Post::active()
@@ -104,12 +110,14 @@ class DashboardController extends Controller
     /*
      * ======================
      * CALENDAR
-     * ====================== 
+     * ======================
      */
 
     public function indexCalendar()
     {
-        if (request()->user()->cannot('viewAny', Calendar::class)) return null;
+        if (request()->user()->cannot('viewAny', Calendar::class)) {
+            return null;
+        }
 
         return CalendarResource::collection(
             Calendar::valid()
@@ -121,7 +129,7 @@ class DashboardController extends Controller
     /*
      * ======================
      * RENDER
-     * ====================== 
+     * ======================
      */
 
     public function render()
@@ -130,7 +138,7 @@ class DashboardController extends Controller
             'activities' => $this->indexActivities(),
             'tasks' => $this->indexTasks(),
             'posts' => $this->indexPosts(),
-            'calendar' => $this->indexCalendar()
+            'calendar' => $this->indexCalendar(),
         ]);
     }
 }

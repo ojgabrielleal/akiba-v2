@@ -25,6 +25,11 @@ class SongRequestSeeder extends Seeder
             return;
         }
 
+        $this->seedNonAdministrationContent($onairs, $music);
+    }
+
+    private function seedNonAdministrationContent($onairs, ?Music $music): void
+    {
         foreach ($onairs as $onair) {
             SongRequest::factory(5)
                 ->for($onair, 'onair')

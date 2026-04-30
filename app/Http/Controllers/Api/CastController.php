@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Models\Onair;
-
 use App\Http\Resources\OnairResource;
+use App\Models\Onair;
 use App\Services\External\CastService;
 
 class CastController extends Controller
@@ -22,7 +19,7 @@ class CastController extends Controller
     /*
     * ======================
     * STREAM
-    * ====================== 
+    * ======================
     */
 
     public function redirectStream()
@@ -33,13 +30,13 @@ class CastController extends Controller
     /*
     * ======================
     * METADATA
-    * ====================== 
+    * ======================
     */
 
     public function showMetadata()
     {
         $cast = $this->cast->data();
-        
+
         $onair = Onair::live()->with('program.host')->get();
 
         $onair->each(function ($item) use ($cast) {

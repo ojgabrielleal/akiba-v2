@@ -18,13 +18,22 @@ class CalendarSeeder extends Seeder
     {
         $admin = User::find(1);
         $user = User::inRandomOrder()->first();
-        
+
+        $this->seedAdministration($admin);
+        $this->seedNonAdministrationContent($user);
+    }
+
+    private function seedAdministration(?User $admin): void
+    {
         Activity::factory()
             ->for($admin, 'author')
             ->create([
                 'allows_confirmations' => true,
             ]);
+    }
 
+    private function seedNonAdministrationContent(?User $user): void
+    {
         Calendar::factory(5)
             ->for($user, 'responsible')
             ->create();

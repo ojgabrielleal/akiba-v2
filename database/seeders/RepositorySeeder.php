@@ -14,6 +14,11 @@ class RepositorySeeder extends Seeder
      */
     public function run(): void
     {
+        $this->seedNonAdministrationContent();
+    }
+
+    private function seedNonAdministrationContent(): void
+    {
         Repository::factory(5)->create();
     }
 }

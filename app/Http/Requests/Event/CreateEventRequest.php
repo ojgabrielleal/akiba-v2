@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Administration;
+namespace App\Http\Requests\Event;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTaskRequest extends FormRequest
+class CreateEventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'image' => 'required',
+            'cover' => 'required',
+            'content' => 'required',
+            'dates' => 'required',
+            'address' => 'required',
         ];
     }
 }

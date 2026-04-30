@@ -5,6 +5,7 @@ namespace App\Actions\Event;
 use App\Models\Event;
 use App\Services\Process\ImageProcessService;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 
 class UpdateEventAction
 {
@@ -17,19 +18,21 @@ class UpdateEventAction
 
     public function execute(Event $event, array $data, ?UploadedFile $imageFile, ?UploadedFile $coverFile): Event
     {
-        $event->fill([
-            'image' => $this->image->store('events', $imageFile, 'public', $event->image),
-            'cover' => $this->image->store('events', $coverFile, 'public', $event->cover),
-            'title' => $data['title'] ?? $event->title,
-            'content' => $data['content'] ?? $event->content,
-            'dates' => $data['dates'] ?? $event->dates,
-            'address' => $data['address'] ?? $event->address,
-        ]);
+        return DB::transaction(function () use ($event, $data, $imageFile, $coverFile) {
+            $event->fill([
+                'image' => $this->image->store('events', $imageFile, 'public', $event->image),
+                'cover' => $this->image->store('events', $coverFile, 'public', $event->cover),
+                'title' => array_key_exists('title', $data) ? $data['title'] : $event->title,
+                'content' => array_key_exists('content', $data) ? $data['content'] : $event->content,
+                'dates' => array_key_exists('dates', $data) ? $data['dates'] : $event->dates,
+                'address' => array_key_exists('address', $data) ? $data['address'] : $event->address,
+            ]);
 
-        if ($event->isDirty()) {
-            $event->save();
-        }
+            if ($event->isDirty()) {
+                $event->save();
+            }
 
-        return $event;
+            return $event;
+        });
     }
 }

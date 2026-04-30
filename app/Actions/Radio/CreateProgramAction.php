@@ -6,6 +6,7 @@ use App\Models\Program;
 use App\Models\User;
 use App\Services\Process\ImageProcessService;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 
 class CreateProgramAction
 {
@@ -18,30 +19,34 @@ class CreateProgramAction
 
     public function execute(User $currentUser, array $data, ?UploadedFile $imageFile): Program
     {
-        $targetUserId = $currentUser->id; 
-        
-        if (($data['type'] ?? '') === 'private' && !empty($data['user'])) {
+        $targetUserId = $currentUser->id;
+
+        if (($data['type'] ?? '') === 'private' && ! empty($data['user'])) {
             $user = User::where('uuid', $data['user'])->first();
-            if ($user) $targetUserId = $user->id;
-        }
-
-        $program = Program::create([
-            'user_id' => $targetUserId,
-            'name' => $data['name'] ?? null,
-            'description' => $data['description'] ?? null,
-            'image' => $this->image->store('programs', $imageFile, 'public'),
-            'type' => $data['type'] ?? null,
-        ]);
-
-        if (($data['type'] ?? '') === 'private' && !empty($data['schedules'])) {
-            foreach ($data['schedules'] as $schedule) {
-                $program->schedules()->create([
-                    'day' => $schedule['day'],
-                    'hour' => $schedule['hour'],
-                ]);
+            if ($user) {
+                $targetUserId = $user->id;
             }
         }
 
-        return $program;
+        return DB::transaction(function () use ($targetUserId, $data, $imageFile) {
+            $program = Program::create([
+                'user_id' => $targetUserId,
+                'name' => $data['name'] ?? null,
+                'description' => $data['description'] ?? null,
+                'image' => $this->image->store('programs', $imageFile, 'public'),
+                'type' => $data['type'] ?? null,
+            ]);
+
+            if (($data['type'] ?? '') === 'private' && ! empty($data['schedules'])) {
+                foreach ($data['schedules'] as $schedule) {
+                    $program->schedules()->create([
+                        'day' => $schedule['day'],
+                        'hour' => $schedule['hour'],
+                    ]);
+                }
+            }
+
+            return $program;
+        });
     }
 }

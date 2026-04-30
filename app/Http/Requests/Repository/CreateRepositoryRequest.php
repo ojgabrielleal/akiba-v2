@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Review;
+namespace App\Http\Requests\Repository;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreReviewRequest extends FormRequest
+class CreateRepositoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,10 @@ class StoreReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'sinopse' => 'required',
+            'name' => 'required|unique:repositories,name',
+            'url' => 'required|unique:repositories,url',
             'image' => 'required',
-            'cover' => 'required',
-            'review' => 'required'
+            'type' => 'required',
         ];
     }
 }
