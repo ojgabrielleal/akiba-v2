@@ -11,20 +11,22 @@ class CreateUserAction
     public function execute(array $data): User
     {
         return DB::transaction(function () use ($data) {
-            $roles = Role::whereIn('name', $data['roles'] ?? [])->pluck('id');
+            $roles = Role::whereIn('name', $data['roles'] ?? [])
+                ->pluck('id')
+                ->toArray();
 
-            $avatar = ($data['gender'] ?? '') === 'male'
-                ? '/img/users/avatarMale.webp'
+            $avatar = ($data['gender']) === 'male' 
+                ? '/img/users/avatarMale.webp' 
                 : '/img/users/avatarFemale.webp';
 
             $user = User::create([
-                'username' => $data['username'] ?? null,
-                'password' => $data['password'] ?? null,
-                'name' => $data['name'] ?? null,
+                'username' => $data['username'],
+                'password' => $data['password'],
+                'name' => $data['name'],
                 'avatar' => $avatar,
-                'nickname' => $data['nickname'] ?? null,
-                'gender' => $data['gender'] ?? null,
-                'is_bot' => $data['is_bot'] ?? false,
+                'nickname' => $data['nickname'],
+                'gender' => $data['gender'],
+                'is_bot' => $data['is_bot'],
             ]);
 
             $socials = [

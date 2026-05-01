@@ -2,10 +2,8 @@
 
 namespace App\Actions\Podcast;
 
-use App\Models\Podcast;
 use App\Services\Process\ImageProcessService;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
+use App\Models\Podcast;
 
 class UpdatePodcastAction
 {
@@ -16,24 +14,22 @@ class UpdatePodcastAction
         $this->image = $image;
     }
 
-    public function execute(Podcast $podcast, array $data, ?UploadedFile $imageFile): Podcast
+    public function execute(Podcast $podcast, array $data): Podcast
     {
-        return DB::transaction(function () use ($podcast, $data, $imageFile) {
-            $podcast->fill([
-                'image' => $this->image->store('podcasts', $imageFile, 'public', $podcast->image),
-                'season' => array_key_exists('season', $data) ? $data['season'] : $podcast->season,
-                'episode' => array_key_exists('episode', $data) ? $data['episode'] : $podcast->episode,
-                'title' => array_key_exists('title', $data) ? $data['title'] : $podcast->title,
-                'summary' => array_key_exists('summary', $data) ? $data['summary'] : $podcast->summary,
-                'description' => array_key_exists('description', $data) ? $data['description'] : $podcast->description,
-                'audio' => array_key_exists('audio', $data) ? $data['audio'] : $podcast->audio,
-            ]);
+        $podcast->fill([
+            'image' => $this->image->store('podcasts', $data['image'], 'public', $podcast->image),
+            'season' => $data['season'],
+            'episode' => $data['episode'],
+            'title' => $data['title'],
+            'summary' => $data['summary'],
+            'description' => $data['description'],
+            'audio' => $data['audio'],
+        ]);
 
-            if ($podcast->isDirty()) {
-                $podcast->save();
-            }
+        if ($podcast->isDirty()) {
+            $podcast->save();
+        }
 
-            return $podcast;
-        });
+        return $podcast;
     }
 }

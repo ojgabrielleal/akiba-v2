@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Actions\Administration\Activity;
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\User;
+use App\Models\Activity;
+
+class CreateActivityAction
+{
+    public function execute(User $user, array $data): Activity
+    {
+        return DB::transaction(function () use ($user, $data) {
+            $mayHaveConfirmations = $data['purpose'] === 'activity';
+
+            $activity = Activity::create([
+                'user_id' => $user->id,
+                'title' => $data['title'],
+                'limit' => $data['limit'],
+                'content' => $data['content'],
+                'allows_confirmations' => $mayHaveConfirmations,
+            ]);
+
+            if ($mayHaveConfirmations) {
+                $date = $data['date'];
+
+                $activity->calendar()->create([
+                    'user_id' => $user->id,
+                    'has_activity' => true,
+                    'type' => 'activity',
+                    'content' => $data['title'],
+                    'hour' => $data['hour'],
+                    'date' => $date,
+                    'day_of_week' => Carbon::parse($date)->dayOfWeek,
+                ]);
+            }
+
+            return $activity;
+        });
+    }
+}

@@ -2,10 +2,11 @@
 
 namespace App\Actions\Post;
 
-use App\Models\Post;
-use App\Services\Process\ImageProcessService;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use App\Services\Process\ImageProcessService;
+
+use App\Models\User;
+use App\Models\Post;
 
 class CreatePostAction
 {
@@ -16,19 +17,19 @@ class CreatePostAction
         $this->image = $image;
     }
 
-    public function execute(string $userId, array $data, ?UploadedFile $imageFile, ?UploadedFile $coverFile): Post
+    public function execute(User $user, array $data): Post
     {
-        return DB::transaction(function () use ($userId, $data, $imageFile, $coverFile) {
+        return DB::transaction(function () use ($user, $data) {
             $post = Post::create([
-                'user_id' => $userId,
-                'type' => $data['type'] ?? null,
-                'title' => $data['title'] ?? null,
-                'content' => $data['content'] ?? null,
-                'image' => $this->image->store('posts', $imageFile, 'public'),
-                'cover' => $this->image->store('posts', $coverFile, 'public'),
+                'user_id' => $user->id,
+                'type' => $data['type'],
+                'title' => $data['title'],
+                'content' => $data['content'],
+                'image' => $this->image->store('posts', $data['image'], 'public'),
+                'cover' => $this->image->store('posts', $data['cover'], 'public'),
             ]);
 
-            if (! empty($data['categories'])) {
+            if (!empty($data['categories'])) {
                 foreach ($data['categories'] as $category) {
                     $post->categories()->create([
                         'name' => $category['name'],
@@ -36,7 +37,7 @@ class CreatePostAction
                 }
             }
 
-            if (! empty($data['references'])) {
+            if (!empty($data['references'])) {
                 foreach ($data['references'] as $reference) {
                     $post->references()->create([
                         'name' => $reference['name'],

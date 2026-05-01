@@ -2,11 +2,10 @@
 
 namespace App\Actions\Post;
 
-use App\Models\Post;
-use App\Services\Process\ImageProcessService;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use App\Services\Process\ImageProcessService;
+
+use App\Models\Post;
 
 class UpdatePostAction
 {
@@ -17,59 +16,46 @@ class UpdatePostAction
         $this->image = $image;
     }
 
-    public function execute(Post $post, array $data, ?UploadedFile $imageFile, ?UploadedFile $coverFile): Post
+    public function execute(Post $post, array $data): Post
     {
-        return DB::transaction(function () use ($post, $data, $imageFile, $coverFile) {
+        return DB::transaction(function () use ($post, $data) {
             $post->fill([
-                'type' => array_key_exists('type', $data) ? $data['type'] : $post->type,
-                'title' => array_key_exists('title', $data) ? $data['title'] : $post->title,
-                'content' => array_key_exists('content', $data) ? $data['content'] : $post->content,
-                'image' => $this->image->store('posts', $imageFile, 'public', $post->image),
-                'cover' => $this->image->store('posts', $coverFile, 'public', $post->cover),
+                'type' => $data['type'],
+                'title' =>  $data['title'],
+                'content' => $data['content'],
+                'image' => $this->image->store('posts', $data['image'], 'public', $post->image),
+                'cover' => $this->image->store('posts', $data['cover'], 'public', $post->cover),
             ]);
 
-            if ($post->isDirty()) {
+            if ($post->isDirty()){
                 $post->save();
             }
 
             if (array_key_exists('categories', $data)) {
-                $this->syncRelation(
-                    $post->categories(),
-                    $data['categories'] ?? [],
-                    fn (array $category) => ['name' => $category['name']]
-                );
+                $uuids = collect($data['categories'])->pluck('uuid')->filter()->toArray();
+                $relation = $post->categories()->whereNotIn('uuid', $uuids)->get();
+
+                foreach($data['categories'] as $category) {
+                    $relation->updateOrCreate(
+                        ['uuid' => $category['uuid']], 
+                        ['name' => $category['name']]
+                    );
+                }
             }
 
             if (array_key_exists('references', $data)) {
-                $this->syncRelation(
-                    $post->references(),
-                    $data['references'] ?? [],
-                    fn (array $reference) => [
-                        'name' => $reference['name'],
-                        'url' => $reference['url'],
-                    ]
-                );
+                $uuids = collect($data['references'])->pluck('uuid')->filter()->toArray();
+                $relation = $post->references()->whereNotIn('uuid', $uuids)->get();
+
+                foreach($data['references'] as $reference) {
+                    $relation->updateOrCreate(
+                        ['uuid' => $reference['uuid']], 
+                        ['name' => $reference['name'], 'url' => $reference['url']]
+                    );
+                }
             }
 
             return $post;
         });
-    }
-
-    private function syncRelation(HasMany $relation, array $items, callable $payload): void
-    {
-        $items = collect($items);
-        $uuidsToKeep = $items->pluck('uuid')->filter()->toArray();
-
-        $relation->whereNotIn('uuid', $uuidsToKeep)->delete();
-
-        foreach ($items as $item) {
-            if (! empty($item['uuid'])) {
-                $relation->updateOrCreate(['uuid' => $item['uuid']], $payload($item));
-
-                continue;
-            }
-
-            $relation->create($payload($item));
-        }
     }
 }

@@ -12,12 +12,17 @@ class UpdateUserAccessAction
     {
         return DB::transaction(function () use ($user, $data) {
             if (array_key_exists('roles', $data)) {
-                $roles = Role::whereIn('name', $data['roles'])->pluck('id')->toArray();
+                $roles = Role::whereIn('name', $data['roles'])
+                    ->pluck('id')
+                    ->toArray();
+
                 $user->roles()->sync($roles);
             }
 
-            if (array_key_exists('password', $data) && ! empty($data['password'])) {
-                $user->update(['password' => $data['password']]);
+            if (array_key_exists('password', $data) && !empty($data['password'])) {
+                $user->update([
+                    'password' => $data['password']
+                ]);
             }
 
             return $user;

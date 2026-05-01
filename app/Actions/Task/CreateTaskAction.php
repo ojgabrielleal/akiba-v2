@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Actions\Administration\Task;
+
+use App\Models\Task;
+use App\Models\User;
+
+class CreateTaskAction
+{
+    public function execute(User $user, array $data): Task
+    {
+        return Task::create([
+            'user_id' => $user->id,
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'dead_line' => $data['dead_line'],
+        ]);
+    }
+}
