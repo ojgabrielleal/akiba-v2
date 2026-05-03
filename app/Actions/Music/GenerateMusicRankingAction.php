@@ -2,8 +2,8 @@
 
 namespace App\Actions\Radio;
 
-use App\Models\Music;
 use Illuminate\Support\Facades\DB;
+use App\Models\Music;
 
 class GenerateMusicRankingAction
 {
@@ -11,11 +11,9 @@ class GenerateMusicRankingAction
     {
         DB::transaction(function () {
             Music::ranking()->update(['in_ranking' => false]);
-            $musicList = Music::orderBy('song_requests_total', 'desc')->limit(10)->get();
-
-            $musicList->each(function ($music) {
-                $music->update(['in_ranking' => true]);
-            });
+            Music::orderBy('song_requests_total', 'desc')->limit(10)->update([
+                'in_ranking' => true,
+            ]);
         });
     }
 }

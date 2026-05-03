@@ -2,12 +2,12 @@
 
 namespace App\Actions\Profile;
 
-use App\Services\Process\ImageProcessService;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use App\Services\Process\ImageProcessService;
+
 use App\Models\User;
 
-class UpdateProfileAction
+class UpdateUserAction
 {
     private ImageProcessService $image;
 

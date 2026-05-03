@@ -2,10 +2,8 @@
 
 namespace App\Actions\Radio;
 
-use App\Models\ListenerMonth;
 use App\Services\Process\ImageProcessService;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
+use App\Models\ListenerMonth;
 
 class CreateListenerMonthAction
 {
@@ -16,20 +14,20 @@ class CreateListenerMonthAction
         $this->image = $image;
     }
 
-    public function execute(?UploadedFile $avatarFile): ?ListenerMonth
+    public function execute(array $data): ?ListenerMonth
     {
         $found = ListenerMonth::mostActiveListenerOfCurrentMonth();
 
-        if (! $found) {
+        if (!$found) {
             return null;
         }
 
-        return DB::transaction(fn () => ListenerMonth::updateOrCreate(['id' => 1], [
-            'avatar' => $this->image->store('listener-month', $avatarFile, 'public'),
+        return ListenerMonth::where('id', 1)->update([
+            'avatar' => $this->image->store('listener-month', $data['avatar'], 'public'),
             'name' => $found->name,
             'address' => $found->address,
             'favorite_program' => $found->favorite_program,
             'requests_total' => $found->requests_total,
-        ]));
+        ]);
     }
 }

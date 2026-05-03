@@ -31,7 +31,7 @@ class UpdatePostAction
                 $post->save();
             }
 
-            if (array_key_exists('categories', $data)) {
+            if ($data['categories']) {
                 $uuids = collect($data['categories'])->pluck('uuid')->filter()->toArray();
                 $relation = $post->categories()->whereNotIn('uuid', $uuids)->get();
 
@@ -43,7 +43,7 @@ class UpdatePostAction
                 }
             }
 
-            if (array_key_exists('references', $data)) {
+            if ($data['references']) {
                 $uuids = collect($data['references'])->pluck('uuid')->filter()->toArray();
                 $relation = $post->references()->whereNotIn('uuid', $uuids)->get();
 
