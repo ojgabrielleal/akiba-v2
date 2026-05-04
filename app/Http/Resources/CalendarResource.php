@@ -21,10 +21,7 @@ class CalendarResource extends JsonResource
             'type' => $this->type,
             'day_of_week' => $this->day_of_week,
             'responsible' => UserResource::make($this->responsible),
-            'activity' => $this->has_activity ? [
-                'uuid' => $this->activity->uuid,
-                'title' => $this->activity->title,
-            ] : null,
+            'activity' => $this->has_activity ? ActivityResource::make($this->activity) : null,
         ];
     }
 }
