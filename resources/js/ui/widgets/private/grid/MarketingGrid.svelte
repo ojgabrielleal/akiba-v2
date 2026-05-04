@@ -148,9 +148,7 @@
                             <button
                                 aria-label="remover"
                                 class="cursor-pointer"
-                                onclick={()
-                            >
-                                    requestDeactivateRepository(item.uuid)}
+                                onclick={() => requestDeactivateRepository(item.uuid)}
                             >
                                 <img
                                     src="/svg/trash.svg"
