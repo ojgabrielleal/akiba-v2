@@ -27,8 +27,6 @@ class UpdateActivityAction
             }
 
             if ($confirmationsAllowed) {
-                $date = $data['date'];
-
                 $activity->calendar()->updateOrCreate(
                     ['activity_id' => $activity->id],
                     [
@@ -37,12 +35,10 @@ class UpdateActivityAction
                         'type' => 'activity',
                         'content' => $data['title'],
                         'hour' => $data['hour'],
-                        'date' => $date,
-                        'day_of_week' => Carbon::parse($date)->dayOfWeek,
+                        'date' => $data['date'],
+                        'day_of_week' => Carbon::parse($data['date'])->dayOfWeek,
                     ]
                 );
-            } else {
-                $activity->calendar()->delete();
             }
 
             return $activity;

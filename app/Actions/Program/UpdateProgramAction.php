@@ -31,7 +31,7 @@ class UpdateProgramAction
                 $program->save();
             }
 
-            if ($data['schedules']){
+            if (!empty($data['schedules'])){
                 $uuids = $data['schedules']->pluck('uuid')->filter()->toArray();
                 $program->schedules()->whereNotIn('uuid', $uuids)->delete();
 

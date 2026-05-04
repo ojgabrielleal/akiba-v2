@@ -4,8 +4,8 @@ namespace App\Actions\Administration\Role;
 
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Permission;
 use App\Models\Role;
+use App\Models\Permission;
 
 class CreateRoleAction
 {
@@ -18,7 +18,7 @@ class CreateRoleAction
                 'description' => $data['description'],
             ]);
 
-            if (array_key_exists('permissions', $data)) {
+            if (!empty($data['permissions'])) {
                 $permissions = Permission::query()
                     ->whereIn('uuid', $data['permissions'])
                     ->pluck('id')

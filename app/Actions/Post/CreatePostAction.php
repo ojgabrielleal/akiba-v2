@@ -30,20 +30,11 @@ class CreatePostAction
             ]);
 
             if (!empty($data['categories'])) {
-                foreach ($data['categories'] as $category) {
-                    $post->categories()->create([
-                        'name' => $category['name'],
-                    ]);
-                }
+                $post->categories()->createMany($data['categories']);
             }
 
             if (!empty($data['references'])) {
-                foreach ($data['references'] as $reference) {
-                    $post->references()->create([
-                        'name' => $reference['name'],
-                        'url' => $reference['url'],
-                    ]);
-                }
+                $post->references()->createMany($data['references']);
             }
 
             return $post;

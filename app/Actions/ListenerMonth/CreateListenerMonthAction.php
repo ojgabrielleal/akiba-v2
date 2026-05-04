@@ -18,9 +18,7 @@ class CreateListenerMonthAction
     {
         $found = ListenerMonth::mostActiveListenerOfCurrentMonth();
 
-        if (!$found) {
-            return null;
-        }
+        if (!$found) return null;
 
         return ListenerMonth::where('id', 1)->update([
             'avatar' => $this->image->store('listener-month', $data['avatar'], 'public'),

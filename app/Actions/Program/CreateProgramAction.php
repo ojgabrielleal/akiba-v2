@@ -28,7 +28,7 @@ class CreateProgramAction
                 'type' => $data['type'],
             ]);
 
-            if ($data['type'] === 'private' && !empty($data['schedules'])) {
+            if (!empty($data['schedules']) && $data['type'] === 'private') {
                 $program->schedules()->createMany($data['schedules']);
             }
 

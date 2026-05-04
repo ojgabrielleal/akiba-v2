@@ -31,27 +31,20 @@ class UpdatePostAction
                 $post->save();
             }
 
-            if ($data['categories']) {
-                $uuids = collect($data['categories'])->pluck('uuid')->filter()->toArray();
-                $relation = $post->categories()->whereNotIn('uuid', $uuids)->get();
-
+            if (!empty($data['categories'])) {
                 foreach($data['categories'] as $category) {
-                    $relation->updateOrCreate(
-                        ['uuid' => $category['uuid']], 
+                    $post->categories()->where('uuid', $category['uuid'])->update(
                         ['name' => $category['name']]
                     );
                 }
             }
 
-            if ($data['references']) {
-                $uuids = collect($data['references'])->pluck('uuid')->filter()->toArray();
-                $relation = $post->references()->whereNotIn('uuid', $uuids)->get();
-
+            if (!empty($data['references'])) {
                 foreach($data['references'] as $reference) {
-                    $relation->updateOrCreate(
-                        ['uuid' => $reference['uuid']], 
-                        ['name' => $reference['name'], 'url' => $reference['url']]
-                    );
+                    $post->references()->where('uuid', $reference['uuid'])->update([
+                        'name' => $reference['name'], 
+                        'url' => $reference['url']
+                    ]);
                 }
             }
 

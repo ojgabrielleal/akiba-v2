@@ -11,7 +11,7 @@ class UpdateUserAccessAction
     public function execute(User $user, array $data): User
     {
         return DB::transaction(function () use ($user, $data) {
-            if (array_key_exists('roles', $data)) {
+            if ($data['roles']) {
                 $roles = Role::whereIn('name', $data['roles'])
                     ->pluck('id')
                     ->toArray();
@@ -19,7 +19,7 @@ class UpdateUserAccessAction
                 $user->roles()->sync($roles);
             }
 
-            if (array_key_exists('password', $data) && !empty($data['password'])) {
+            if (!empty($data['password'])) {
                 $user->update([
                     'password' => $data['password']
                 ]);

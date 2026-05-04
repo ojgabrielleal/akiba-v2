@@ -24,16 +24,14 @@ class CreateActivityAction
             ]);
 
             if ($mayHaveConfirmations) {
-                $date = $data['date'];
-
                 $activity->calendar()->create([
                     'user_id' => $user->id,
                     'has_activity' => true,
                     'type' => 'activity',
                     'content' => $data['title'],
                     'hour' => $data['hour'],
-                    'date' => $date,
-                    'day_of_week' => Carbon::parse($date)->dayOfWeek,
+                    'date' => $data['date'],
+                    'day_of_week' => Carbon::parse($data['date'])->dayOfWeek,
                 ]);
             }
 

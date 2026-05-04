@@ -11,15 +11,13 @@ class CreateCalendarAction
 {
     public function execute(User $user, array $data): Calendar
     {
-        $date = $data['date'];
-
         return Calendar::create([
             'user_id' => $user->id,
             'content' => $data['content'],
             'hour' => $data['hour'],
             'type' => $data['type'],
-            'date' => $date,
-            'day_of_week' => Carbon::parse($date)->dayOfWeek,
+            'date' => $data['date'],
+            'day_of_week' => Carbon::parse($data['date'])->dayOfWeek,
         ]);
     }
 }

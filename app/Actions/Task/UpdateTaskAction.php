@@ -2,8 +2,8 @@
 
 namespace App\Actions\Administration\Task;
 
-use App\Models\Task;
 use App\Models\User;
+use App\Models\Task;
 
 class UpdateTaskAction
 {
