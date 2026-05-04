@@ -18,7 +18,41 @@ class ReviewResource extends JsonResource
             'year_of_release' => $this->year_of_release,
             'sinopse' => $this->sinopse,
             'views' => $this->views_count,
-            'reviews' => ReviewContentResource::collection($this->reviews),
+            'reviews' => $this->reviewsCurrentWithUser($request),
+        ];
+    }
+
+    private function reviewsCurrentWithUser(Request $request): array
+    {
+        $user = $request->user();
+        $reviews = ReviewContentResource::collection($this->reviews)->resolve();
+
+        $currentUserReview = collect($reviews)->first(
+            fn ($review) => $review['author']['uuid'] === $user->uuid
+        );
+
+        if ($currentUserReview) {
+            return [
+                $currentUserReview,
+                ...collect($reviews)
+                    ->reject(fn ($review) => $review['author']['uuid'] === $user->uuid)
+                    ->values()
+                    ->all(),
+            ];
+        }
+
+        return [
+            [
+                'uuid' => null,
+                'content' => 'Escreva o seu primeiro review',
+                'author' => [
+                    'uuid' => $user->uuid,
+                    'name' => $user->name,
+                    'nickname' => $user->nickname,
+                    'avatar' => $user->avatar,
+                ],
+            ],
+            ...$reviews,
         ];
     }
 }
