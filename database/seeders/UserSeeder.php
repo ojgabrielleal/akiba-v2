@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
         $administrator = Role::where('name', 'administrator')->first();
 
         if ($administrator) {
-            $user->roles()->syncWithoutDetaching($administrator->id);
+            $user->roles()->syncWithoutDetaching([$administrator->id]);
         }
 
         if (!$user->socials()->exists()) {
