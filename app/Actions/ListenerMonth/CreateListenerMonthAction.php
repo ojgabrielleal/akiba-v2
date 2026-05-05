@@ -25,6 +25,7 @@ class CreateListenerMonthAction
             'name' => $found->name,
             'address' => $found->address,
             'favorite_program' => $found->favorite_program,
+            'favorite_anime' => $found->favorite_anime,
             'requests_total' => $found->requests_total,
         ]);
     }

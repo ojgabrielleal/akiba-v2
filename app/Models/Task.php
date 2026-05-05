@@ -18,7 +18,7 @@ class Task extends Model
         'uuid',
         'is_active',
         'user_id',
-        'is_completed',
+        'status',
         'title',
         'dead_line',
         'content',
@@ -27,7 +27,6 @@ class Task extends Model
     protected $casts = [
         'is_active' => 'boolean',
         'dead_line' => 'date:Y-m-d',
-        'is_completed' => 'boolean',
     ];
 
     protected $hidden = [
@@ -40,7 +39,7 @@ class Task extends Model
     {
         return Attribute::make(
             get: function () {
-                if ($this->is_complete) {
+                if ($this->status === 'completed') {
                     return false;
                 }
 
@@ -54,7 +53,7 @@ class Task extends Model
     {
         return Attribute::make(
             get: function () {
-                if ($this->is_complete) {
+                if ($this->status === 'completed') {
                     return false;
                 }
 
@@ -89,7 +88,7 @@ class Task extends Model
 
     public function scopeIncompleted($query)
     {
-        return $query->where('is_completed', false);
+        return $query->where('status', '!=', 'completed');
     }
 
     public function scopeMine($query)

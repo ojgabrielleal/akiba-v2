@@ -57,21 +57,35 @@ class TaskTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $incompletedTask = Task::factory()
+        $inProgressTask = Task::factory()
             ->for($user, 'responsible')
             ->create([
-                'is_completed' => false
+                'status' => 'in_progress'
+            ]);
+
+        $inReviewTask = Task::factory()
+            ->for($user, 'responsible')
+            ->create([
+                'status' => 'in_review'
+            ]);
+
+        $lateTask = Task::factory()
+            ->for($user, 'responsible')
+            ->create([
+                'status' => 'late'
             ]);
 
         $completedTask = Task::factory()
             ->for($user, 'responsible')
             ->create([
-                'is_completed' => true
+                'status' => 'completed'
             ]);
 
         $incompletedTasks = Task::incompleted()->get();
 
-        $this->assertTrue($incompletedTasks->contains($incompletedTask));
+        $this->assertTrue($incompletedTasks->contains($inProgressTask));
+        $this->assertTrue($incompletedTasks->contains($inReviewTask));
+        $this->assertTrue($incompletedTasks->contains($lateTask));
         $this->assertFalse($incompletedTasks->contains($completedTask));
     }
 
@@ -112,18 +126,26 @@ class TaskTest extends TestCase
             ->for($user, 'responsible')
             ->create([
                 'dead_line' => '2026-01-15',
-                'is_completed' => false
+                'status' => 'in_progress'
             ]);
 
         $farTask = Task::factory()
             ->for($user, 'responsible')
             ->create([
                 'dead_line' => '2026-01-30',
-                'is_completed' => false
+                'status' => 'in_progress'
+            ]);
+
+        $completedTask = Task::factory()
+            ->for($user, 'responsible')
+            ->create([
+                'dead_line' => '2026-01-15',
+                'status' => 'completed'
             ]);
 
         $this->assertTrue($overTask->is_over);
         $this->assertFalse($farTask->is_over);
+        $this->assertFalse($completedTask->is_over);
 
         Carbon::setTestNow();
     }
@@ -140,10 +162,18 @@ class TaskTest extends TestCase
             ->for($user, 'responsible')
             ->create([
                 'dead_line' => '2026-01-25',
-                'is_completed' => false
+                'status' => 'in_progress'
+            ]);
+
+        $completedTask = Task::factory()
+            ->for($user, 'responsible')
+            ->create([
+                'dead_line' => '2026-01-25',
+                'status' => 'completed'
             ]);
 
         $this->assertTrue($dueTask->is_due);
+        $this->assertFalse($completedTask->is_due);
         Carbon::setTestNow();
     }
 }

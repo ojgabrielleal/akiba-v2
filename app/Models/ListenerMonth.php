@@ -27,6 +27,8 @@ class ListenerMonth extends Model
 
     protected $casts = [
         'requests_total' => 'integer',
+        'favorite_program' => 'array',
+        'favorite_anime' => 'array',
     ];
 
     /**

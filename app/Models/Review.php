@@ -20,12 +20,14 @@ class Review extends Model
         'slug',
         'cover',
         'image',
+        'year_of_release',
         'title',
         'sinopse',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
+        'year_of_release' => 'integer',
     ];
 
     protected function title(): Attribute

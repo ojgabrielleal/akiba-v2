@@ -67,18 +67,20 @@ class RoleSeeder extends Seeder
 
         
         foreach($roles as $item){
-            Role::create([
-                'name' => $item['name'],
-                'label' => $item['label'],
-                'description' => $item['description'],
-                'weight' => $item['weight'],
-            ]);
+            Role::updateOrCreate(
+                ['label' => $item['label']],
+                [
+                    'label' => $item['label'],
+                    'name' => $item['name'],
+                    'description' => $item['description'],
+                    'weight' => $item['weight'],
+                ]
+            );
         }
 
         $role = Role::where('name', 'administrator')->first();
-        $permissions = Permission::all();
-        foreach($permissions as $item){
-            $role->permissions()->attach($item->id);
-        }
+        $permissions = Permission::all()->pluck('id');
+
+        $role->permissions()->syncWithoutDetaching($permissions);
     }
 }

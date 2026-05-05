@@ -25,13 +25,19 @@ class ProgramSeeder extends Seeder
 
     private function seedAdministration(?User $admin, ?User $user): void
     {
-        Program::factory()
-            ->automatic()
-            ->for($admin ?? $user, 'host')
-            ->create([
-                'is_default' => true,
-                'name' => 'Auto DJ',
-            ]);
+        $host = $admin ?? $user;
+
+        Program::updateOrCreate(
+            ['name' => 'Auto DJ'],
+            Program::factory()
+                ->automatic()
+                ->make([
+                    'user_id' => $host?->id,
+                    'is_default' => true,
+                    'name' => 'Auto DJ',
+                ])
+                ->toArray()
+        );
 
         Program::factory(2)
             ->private()

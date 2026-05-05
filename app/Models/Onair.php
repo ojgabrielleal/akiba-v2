@@ -27,6 +27,7 @@ class Onair extends Model
         'allows_song_requests' => 'boolean',
         'in_air' => 'boolean',
         'phrase' => 'array',
+        'song_requests_total' => 'integer',
     ];
 
     protected $hidden = [

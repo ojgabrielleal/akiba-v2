@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('listener_month', function (Blueprint $table) {
-            $table->string('favorite_anime')->nullable()->after('favorite_program');
+            $table->json('favorite_anime')->nullable()->after('favorite_program');
         });
     }
 

@@ -26,34 +26,50 @@ class UserSeeder extends Seeder
 
     private function seedAdministration(array $socials, array $preferences, array $favorites): void
     {
-        User::factory()
-            ->hasAttached(Role::where('name', 'administrator')->first(), [], 'roles')
-            ->afterCreating(function ($user) use ($socials, $preferences, $favorites) {
-                foreach ($socials as $social) {
-                    $user->socials()->save(UserSocial::factory()->make($social));
-                }
-                foreach ($preferences as $preference){
-                    $user->preferences()->save(UserPreference::factory()->make($preference));
-                }
-                foreach ($favorites as $favorite){
-                    $user->favorites()->save(UserFavorite::factory()->make($favorite));
-                }
-            })
-            ->create([
+        $user = User::updateOrCreate(
+            ['username' => 'admin'],
+            [
                 'username' => 'admin',
-                'password' => bcrypt('admin'),
+                'password' => 'admin',
                 'name' => 'Yagami Kou',
                 'nickname' => 'Yagami',
                 'gender' => 'female',
-            ]);
+            ]
+        );
+
+        $administrator = Role::where('name', 'administrator')->first();
+
+        if ($administrator) {
+            $user->roles()->syncWithoutDetaching($administrator->id);
+        }
+
+        if (!$user->socials()->exists()) {
+            foreach ($socials as $social) {
+                $user->socials()->save(UserSocial::factory()->make($social));
+            }
+        }
+
+        if (!$user->preferences()->exists()) {
+            foreach ($preferences as $preference){
+                $user->preferences()->save(UserPreference::factory()->make($preference));
+            }
+        }
+
+        if (!$user->favorites()->exists()) {
+            foreach ($favorites as $favorite){
+                $user->favorites()->save(UserFavorite::factory()->make($favorite));
+            }
+        }
     }
 
     private function seedNonAdministrationContent(array $socials, array $preferences, array $favorites): void
     {
         $roles = Role::where('name', '!=', 'administrator')->get();
+
         User::factory(5)
             ->afterCreating(function ($user) use ($roles, $socials, $preferences, $favorites) {
                 $user->roles()->attach($roles->random()->id);
+
                 foreach ($socials as $social) {
                     $user->socials()->save(UserSocial::factory()->make($social));
                 }
