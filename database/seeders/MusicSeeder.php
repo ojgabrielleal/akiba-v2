@@ -14,11 +14,6 @@ class MusicSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->seedNonAdministrationContent();
-    }
-
-    private function seedNonAdministrationContent(): void
-    {
         Music::factory(5)->create();
     }
 }

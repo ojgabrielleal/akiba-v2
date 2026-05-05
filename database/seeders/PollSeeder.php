@@ -15,11 +15,6 @@ class PollSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->seedNonAdministrationContent();
-    }
-
-    private function seedNonAdministrationContent(): void
-    {
         Poll::factory(5)
             ->has(PollOption::factory(4), 'options')
             ->create();

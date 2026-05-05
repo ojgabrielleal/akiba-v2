@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
-use App\Models\User;
-use App\Models\Program;
 use App\Models\Onair;
+use App\Models\Program;
+use Illuminate\Database\Seeder;
 
 class OnairSeeder extends Seeder
 {
@@ -16,45 +13,22 @@ class OnairSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::find(1);
-        $user = User::inRandomOrder()->first();
-
         $auto = Program::where('type', 'automatic')
             ->where('is_default', true)
             ->first();
 
-        $this->seedAdministration($auto, $admin, $user);
-        $this->seedNonAdministrationContent($user);
-    }
+        if (!$auto) return;
 
-    private function seedAdministration(?Program $auto, ?User $admin, ?User $user): void
-    {
-        $auto ??= Program::factory()
-            ->automatic()
-            ->for($admin ?? $user, 'host')
-            ->create([
-                'is_default' => true,
-                'name' => 'Auto DJ',
-            ]);
-
-        Onair::factory()
-            ->for($auto, 'program')
-            ->create([
-                'type' => 'automatic'
-            ]);
-    }
-
-    private function seedNonAdministrationContent(?User $user): void
-    {
-        $program = Program::factory()
-            ->for($user, 'host')
-            ->create();
-
-        Onair::factory(5)
-            ->for($program, 'program')
-            ->create([
-                'in_air' => false,
-                'type' => 'live'
-            ]);
+        Onair::firstOrCreate(
+            [
+                'program_id' => $auto->id,
+                'type' => 'automatic',
+            ],
+            Onair::factory()
+                ->for($auto, 'program')
+                ->automatic()
+                ->make(['in_air' => true])
+                ->getAttributes()
+        );
     }
 }

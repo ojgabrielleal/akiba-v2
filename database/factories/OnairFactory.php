@@ -29,4 +29,25 @@ class OnairFactory extends Factory
             'song_requests_total' => fake()->randomNumber(),
         ];
     }
+
+    public function automatic(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'type' => 'automatic',
+        ]);
+    }
+
+    public function live(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'type' => 'live',
+        ]);
+    }
+
+    public function scheduled(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'type' => 'scheduled',
+        ]);
+    }
 }

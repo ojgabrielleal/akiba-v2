@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
-use App\Models\User;
 use App\Models\Program;
-use App\Models\ProgramSchedule;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class ProgramSeeder extends Seeder
 {
@@ -17,45 +14,45 @@ class ProgramSeeder extends Seeder
     public function run(): void
     {
         $admin = User::find(1);
-        $user = User::inRandomOrder()->first();
+        $user = User::where('id', '!=', 1)->inRandomOrder()->first();
 
-        $this->seedAdministration($admin, $user);
-        $this->seedNonAdministrationContent($user);
+        $this->seedAdministrator($admin);
+        $this->seedAutoDJ($user);
+        $this->seedPrograms($user);
     }
 
-    private function seedAdministration(?User $admin, ?User $user): void
+    private function seedAdministrator($user): void
     {
-        $host = $admin ?? $user;
+        if(!$user) return;
 
-        Program::updateOrCreate(
-            ['name' => 'Auto DJ'],
-            Program::factory()
-                ->automatic()
-                ->make([
-                    'user_id' => $host?->id,
-                    'is_default' => true,
-                    'name' => 'Auto DJ',
-                ])
-                ->toArray()
-        );
-
-        Program::factory(2)
-            ->private()
-            ->for($admin, 'host')
-            ->has(ProgramSchedule::factory(5), 'schedules')
-            ->create();
-    }
-
-    private function seedNonAdministrationContent(?User $user): void
-    {
-        Program::factory(2)
+        Program::factory()
             ->private()
             ->for($user, 'host')
-            ->has(ProgramSchedule::factory(5), 'schedules')
+            ->create();
+    }
+
+    private function seedPrograms(?User $user): void
+    {
+       if(!$user) return;
+
+        Program::factory()
+            ->free()
+            ->for($user, 'host')
             ->create();
 
-        Program::factory(2)
-            ->free()
+        Program::factory()
+            ->private()
+            ->for($user, 'host')
+            ->create();
+    }
+
+    private function seedAutoDJ(?User $user): void
+    {
+        if(!$user) return;
+
+        Program::factory()
+            ->automatic()
+            ->isDefault()
             ->for($user, 'host')
             ->create();
     }

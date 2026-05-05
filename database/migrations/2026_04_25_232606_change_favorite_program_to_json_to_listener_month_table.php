@@ -12,12 +12,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('listener_month')
-            ->whereNotNull('favorite_program')
-            ->update([
-                'favorite_program' => DB::raw("JSON_OBJECT('name', favorite_program)"),
-            ]);
-
         Schema::table('listener_month', function (Blueprint $table) {
             $table->json('favorite_program')->change();
         });
@@ -28,12 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('listener_month')
-            ->whereNotNull('favorite_program')
-            ->update([
-                'favorite_program' => DB::raw("JSON_UNQUOTE(JSON_EXTRACT(favorite_program, '$.name'))"),
-            ]);
-
         Schema::table('listener_month', function (Blueprint $table) {
             $table->string('favorite_program')->change();
         });

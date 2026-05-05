@@ -17,13 +17,22 @@ class ActivitySeeder extends Seeder
     {
         $admin = User::find(1);
 
-        $this->seedAdministration($admin);
+        $this->seedHasConfirmations($admin);
+        $this->seedNotHasConfirmations($admin);
     }
 
-    private function seedAdministration(?User $admin): void
+    public function seedHasConfirmations(User $user): void
     {
         Activity::factory(5)
-            ->for($admin, 'author')
+            ->allowsConfirmations()
+            ->for($user, 'author')
+            ->create();
+    }
+
+    public function seedNotHasConfirmations(User $user): void
+    {
+        Activity::factory(5)
+            ->for($user, 'author')
             ->create();
     }
 }

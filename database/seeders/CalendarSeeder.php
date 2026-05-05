@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
-use App\Models\User;
 use App\Models\Activity;
 use App\Models\Calendar;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class CalendarSeeder extends Seeder
 {
@@ -16,40 +14,35 @@ class CalendarSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::find(1);
         $user = User::inRandomOrder()->first();
 
-        $this->seedAdministration($admin);
-        $this->seedNonAdministrationContent($user);
+        if (!$user || Calendar::exists()) return;
+
+        $this->seedHasActivity($user);
+        $this->seedNotHasActivity($user);
     }
 
-    private function seedAdministration(?User $admin): void
+    public function seedHasActivity(User $user): void
     {
-        Activity::factory()
-            ->for($admin, 'author')
-            ->create([
-                'allows_confirmations' => true,
-            ]);
-    }
+        $activities = Activity::where('allows_confirmations', true)
+            ->get();
 
-    private function seedNonAdministrationContent(?User $user): void
-    {
-        Calendar::factory(5)
-            ->for($user, 'responsible')
-            ->create();
+        if ($activities->isEmpty()) return;
 
-        Calendar::factory(5)
-            ->for($user, 'responsible')
-            ->create();
-        
-        $confirmations = Activity::where('allows_confirmations', true)->get();
-        foreach ($confirmations as $confirmation) {
+        foreach ($activities as $activity) {
             Calendar::factory()
                 ->for($user, 'responsible')
-                ->for($confirmation, 'activity')
-                ->create([
-                    'has_activity' => true,
-                ]);
+                ->for($activity, 'activity')
+                ->hasActivity()
+                ->create();
         }
+    }
+
+    public function seedNotHasActivity(User $user): void
+    {
+        Calendar::factory(5)
+            ->for($user, 'responsible')
+            ->hasActivity()
+            ->create();
     }
 }

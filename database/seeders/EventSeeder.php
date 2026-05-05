@@ -22,14 +22,14 @@ class EventSeeder extends Seeder
         $this->seedNonAdministrationContent($user);
     }
 
-    private function seedAdministration(?User $admin): void
+    private function seedAdministration(User $admin): void
     {
         Event::factory(5)
             ->for($admin, 'author')
             ->create();
     }
 
-    private function seedNonAdministrationContent(?User $user): void
+    private function seedNonAdministrationContent(User $user): void
     {
         Event::factory(5)
             ->for($user, 'author')

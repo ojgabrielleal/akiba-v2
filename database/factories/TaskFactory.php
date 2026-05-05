@@ -22,4 +22,13 @@ class TaskFactory extends Factory
             'content' => fake()->paragraph(),
         ];
     }
+
+    public function withDeadline(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'dead_line' => fake()->dateTimeBetween(
+                now()->startOfWeek(), now()->endOfWeek()
+            )->format('Y-m-d')
+        ]);
+    }
 }

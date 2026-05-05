@@ -20,7 +20,12 @@ class ActivityFactory extends Factory
             'title' => fake()->word(),
             'content' => fake()->paragraph(),
             'limit' => fake()->dateTimeBetween(now()->startOfWeek(), now()->endOfWeek())->format('Y-m-d'),
-            'allows_confirmations' => fake()->boolean(),
         ];
     }
-}
+
+    public function allowsConfirmations(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'allows_confirmations' => true,
+        ]);
+    }}

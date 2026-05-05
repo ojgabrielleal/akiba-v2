@@ -26,6 +26,13 @@ class ProgramFactory extends Factory
         ];
     }
 
+    public function isDefault(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_default' => true,
+        ]);
+    }
+
     public function automatic(): static
     {
         return $this->state(fn (array $attributes) => [

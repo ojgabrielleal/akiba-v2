@@ -17,13 +17,13 @@ class ReviewSeeder extends Seeder
     public function run(): void
     {
         $admin = User::find(1);
-        $user = User::inRandomOrder()->first();
+        $user = User::where('id', '!=', 1)->inRandomOrder()->first();
 
         $this->seedAdministration($admin);
         $this->seedNonAdministrationContent($user);
     }
 
-    private function seedAdministration(?User $admin): void
+    private function seedAdministration(User $admin): void
     {
         $adminContent = ReviewContent::factory(5)
             ->for($admin, 'author');
@@ -33,7 +33,7 @@ class ReviewSeeder extends Seeder
             ->create();
     }
 
-    private function seedNonAdministrationContent(?User $user): void
+    private function seedNonAdministrationContent(User $user): void
     {
         $userContent = ReviewContent::factory(5)
             ->for($user, 'author');

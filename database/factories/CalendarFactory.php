@@ -24,4 +24,11 @@ class CalendarFactory extends Factory
             'content' => fake()->word(),
         ];
     }
+
+    public function hasActivity(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'has_activity' => true,
+        ]);
+    }
 }

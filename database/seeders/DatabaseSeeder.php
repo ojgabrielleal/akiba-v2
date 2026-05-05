@@ -17,7 +17,19 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ActivitySeeder::class,
-            CalendarSeeder::class,
+            ProgramSeeder::class,
+            OnairSeeder::class,
+        ]);
+
+        if (app()->environment('local')) {
+            $this->fake();
+            $this->development();
+        }
+    }
+
+    private function fake(): void
+    {
+        $this->call([
             EventSeeder::class,
             ListenerMonthSeeder::class,
             MusicSeeder::class,
@@ -25,19 +37,19 @@ class DatabaseSeeder extends Seeder
             PollSeeder::class,
             PostSeeder::class,
             PodcastSeeder::class,
-            ProgramSeeder::class,
             RepositorySeeder::class,
             ReviewSeeder::class,
-            OnairSeeder::class,
-            SongRequestSeeder::class,
             TaskSeeder::class,
         ]);
+    }
 
-        // User::factory(10)->create();
-
-        //User::factory()->create([
-        //    'name' => 'Test User',
-        //    'email' => 'test@example.com',
-        //]);
+    private function development(): void
+    {
+        $this->call([
+            CalendarSeeder::class,
+            ProgramSeeder::class,
+            OnairSeeder::class,
+            SongRequestSeeder::class,
+        ]);
     }
 }

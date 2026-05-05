@@ -84,4 +84,32 @@ class OnairTest extends TestCase
         $this->assertTrue($onairs->contains($liveOnair));
         $this->assertFalse($onairs->contains($notLiveOnair));
     }
+
+    public function testFactoryTypeStates(): void
+    {
+        $user = User::factory()->create();
+
+        $program = Program::factory()
+            ->for($user, 'host')
+            ->create();
+
+        $automatic = Onair::factory()
+            ->for($program, 'program')
+            ->automatic()
+            ->create();
+
+        $live = Onair::factory()
+            ->for($program, 'program')
+            ->live()
+            ->create();
+
+        $scheduled = Onair::factory()
+            ->for($program, 'program')
+            ->scheduled()
+            ->create();
+
+        $this->assertSame('automatic', $automatic->type);
+        $this->assertSame('live', $live->type);
+        $this->assertSame('scheduled', $scheduled->type);
+    }
 }

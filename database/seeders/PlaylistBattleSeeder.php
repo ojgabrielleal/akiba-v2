@@ -14,11 +14,6 @@ class PlaylistBattleSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->seedNonAdministrationContent();
-    }
-
-    private function seedNonAdministrationContent(): void
-    {
         PlaylistBattle::factory()->create();
     }
 }

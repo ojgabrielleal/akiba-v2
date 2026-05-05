@@ -25,23 +25,23 @@ class PostSeeder extends Seeder
         $this->seedNonAdministrationContent($user);
     }
 
-    private function seedAdministration(?User $admin): void
+    private function seedAdministration(User $admin): void
     {
         Post::factory(5)
             ->for($admin, 'author')
             ->has(PostReference::factory(2), 'references')
-            ->has(PostReaction::factory(5), 'reactions')
             ->has(PostCategory::factory(2), 'categories')
+            ->has(PostReaction::factory(5), 'reactions')
             ->create();
     }
 
-    private function seedNonAdministrationContent(?User $user): void
+    private function seedNonAdministrationContent(User $user): void
     {
         Post::factory(15)
             ->for($user, 'author')
             ->has(PostReference::factory(2), 'references')
-            ->has(PostReaction::factory(5), 'reactions')
             ->has(PostCategory::factory(2), 'categories')
+            ->has(PostReaction::factory(5), 'reactions')
             ->create();
     }
 }
