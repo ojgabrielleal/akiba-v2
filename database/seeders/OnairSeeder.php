@@ -19,16 +19,9 @@ class OnairSeeder extends Seeder
 
         if (!$auto) return;
 
-        Onair::firstOrCreate(
-            [
-                'program_id' => $auto->id,
-                'type' => 'automatic',
-            ],
-            Onair::factory()
-                ->for($auto, 'program')
-                ->automatic()
-                ->make(['in_air' => true])
-                ->getAttributes()
-        );
+        Onair::factory()
+            ->for($auto, 'program')
+            ->withAutomatic()
+            ->create(['in_air' => true]);    
     }
 }

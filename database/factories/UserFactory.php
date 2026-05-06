@@ -41,7 +41,7 @@ class UserFactory extends Factory
         ];
     }
 
-    public function administrator(): static
+    public function withAdministrator(): static
     {
         return $this
             ->state(fn (array $attributes) => [

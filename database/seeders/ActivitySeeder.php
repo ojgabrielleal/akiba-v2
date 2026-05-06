@@ -24,7 +24,7 @@ class ActivitySeeder extends Seeder
     public function seedHasConfirmations(User $user): void
     {
         Activity::factory(5)
-            ->allowsConfirmations()
+            ->withAllowsConfirmations()
             ->for($user, 'author')
             ->create();
     }

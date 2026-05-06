@@ -26,7 +26,7 @@ class ProgramSeeder extends Seeder
         if(!$user) return;
 
         Program::factory()
-            ->private()
+            ->withPrivate()
             ->for($user, 'host')
             ->create();
     }
@@ -36,12 +36,12 @@ class ProgramSeeder extends Seeder
        if(!$user) return;
 
         Program::factory()
-            ->free()
+            ->withFree()
             ->for($user, 'host')
             ->create();
 
         Program::factory()
-            ->private()
+            ->withPrivate()
             ->for($user, 'host')
             ->create();
     }
@@ -51,7 +51,7 @@ class ProgramSeeder extends Seeder
         if(!$user) return;
 
         Program::factory()
-            ->automatic()
+            ->withAutomatic()
             ->isDefault()
             ->for($user, 'host')
             ->create();

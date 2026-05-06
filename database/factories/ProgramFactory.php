@@ -33,7 +33,7 @@ class ProgramFactory extends Factory
         ]);
     }
 
-    public function automatic(): static
+    public function withAutomatic(): static
     {
         return $this->state(fn (array $attributes) => [
             'type' => 'automatic',
@@ -57,7 +57,7 @@ class ProgramFactory extends Factory
         ]);
     }
 
-    public function free(): static
+    public function withFree(): static
     {
         return $this->state(fn (array $attributes) => [
             'type' => 'free',
@@ -66,7 +66,7 @@ class ProgramFactory extends Factory
         ]);
     }
 
-    public function private(): static
+    public function withPrivate(): static
     {
         return $this->state(fn (array $attributes) => [
             'type' => 'private',

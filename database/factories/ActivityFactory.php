@@ -23,7 +23,7 @@ class ActivityFactory extends Factory
         ];
     }
 
-    public function allowsConfirmations(): static
+    public function withAllowsConfirmations(): static
     {
         return $this->state(fn (array $attributes) => [
             'allows_confirmations' => true,

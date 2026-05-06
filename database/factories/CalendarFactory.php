@@ -25,7 +25,7 @@ class CalendarFactory extends Factory
         ];
     }
 
-    public function hasActivity(): static
+    public function withHasActivity(): static
     {
         return $this->state(fn (array $attributes) => [
             'has_activity' => true,
