@@ -16,40 +16,51 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
-            ActivitySeeder::class,
-            ProgramSeeder::class,
-            OnairSeeder::class,
         ]);
 
-        if (app()->environment('local')) {
-            $this->fake();
-            $this->development();
-        }
+        $this->post();
+        $this->radio();
+        $this->variable();
+        $this->locution();
     }
 
-    private function fake(): void
+    public function post(): void
     {
         $this->call([
+            PostSeeder::class,
+            ReviewSeeder::class,
             EventSeeder::class,
-            ListenerMonthSeeder::class,
+        ]);
+    }
+
+    public function radio(): void
+    {
+        $this->call([
+            PodcastSeeder::class,
             MusicSeeder::class,
             PlaylistBattleSeeder::class,
-            PollSeeder::class,
-            PostSeeder::class,
-            PodcastSeeder::class,
-            RepositorySeeder::class,
-            ReviewSeeder::class,
-            TaskSeeder::class,
+            ListenerMonthSeeder::class,
         ]);
     }
 
-    private function development(): void
+    private function locution(): void
     {
         $this->call([
-            CalendarSeeder::class,
             ProgramSeeder::class,
             OnairSeeder::class,
             SongRequestSeeder::class,
         ]);
     }
+
+    public function variable(): void
+    {
+        $this->call([
+            PollSeeder::class,
+            TaskSeeder::class,
+            RepositorySeeder::class,
+            ActivitySeeder::class,
+            CalendarSeeder::class,
+        ]);
+    }
+
 }
