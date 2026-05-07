@@ -51,7 +51,9 @@
             <div class="hidden xl:flex justify-center items-center w-22 h-8 gap-1 bg-blue-skywave rounded-full">
                 <button type="button"
                     aria-label="Modo Claro"
-                    class={["cursor-pointer shrink-0 p-1", { "bg-orange-morning rounded-full": theme === "light" }, ]}
+                    class={["cursor-pointer shrink-0 p-1",
+                        { "bg-orange-morning rounded-full": theme === "light" },
+                    ]}
                     on:click={() => (theme = "light")}
                 >
                     <img
@@ -63,7 +65,9 @@
                 </button>
                 <button type="button"
                     aria-label="Modo Akiba"
-                    class={["cursor-pointer shrink-0 p-1", { "bg-blue-night rounded-full": theme === "akiba" }, ]}
+                    class={["cursor-pointer shrink-0 p-1",
+                        { "bg-blue-night rounded-full": theme === "akiba" },
+                    ]}
                     on:click={() => (theme = "akiba")}
                 >
                     <img
@@ -75,7 +79,9 @@
                 </button>
                 <button type="button"
                     aria-label="Modo Ecuro"
-                    class={["cursor-pointer shrink-0 p-1", { "bg-blue-night rounded-full": theme === "night" }, ]}
+                    class={["cursor-pointer shrink-0 p-1",
+                        { "bg-blue-night rounded-full": theme === "night" },
+                    ]}
                     on:click={() => (theme = "night")}
                 >
                     <img
@@ -149,7 +155,7 @@
                     Temas da Akiba
                 </span>
                 <div class="w-25 h-8 mx-auto flex justify-center items-center gap-1 bg-blue-skywave p-1 rounded-full">
-                    <button type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
+                    <button aria-label="" type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
                         { "bg-orange-morning rounded-full": theme === "light" },
                     ]} on:click={() => (theme = "light")}>
                         <img
@@ -158,7 +164,7 @@
                             class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter invert": theme !== "light" }, ]}
                         />
                     </button>
-                    <button type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
+                    <button aria-label="" type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
                         { "bg-blue-night rounded-full": theme === "akiba" },
                     ]} on:click={() => (theme = "akiba")}>
                         <img
@@ -167,7 +173,7 @@
                             class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter invert": theme !== "akiba" }, ]}
                         />
                     </button>
-                    <button type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
+                    <button aria-label="" type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
                         { "bg-blue-night rounded-full": theme === "night" },
                     ]} on:click={() => (theme = "night")}>
                         <img

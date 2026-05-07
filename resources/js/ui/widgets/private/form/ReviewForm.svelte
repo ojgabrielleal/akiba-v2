@@ -171,9 +171,12 @@
                         <div class="flex gap-2 mb-4">
                             {#each reviews() as item}
                                 <div class="relative">
-                                    <button
+                                    <button aria-label=""
                                         type="button"
-                                        class={["py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer", { "bg-orange-amber text-suspense-aurora": item.uuid === $form.review.uuid }, { "bg-suspense-aurora text-orange-amber": item.uuid !== $form.review.uuid }, ]}
+                                        class={["py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer",
+                                            { "bg-orange-amber text-suspense-aurora": item.uuid === $form.review.uuid },
+                                            { "bg-suspense-aurora text-orange-amber": item.uuid !== $form.review.uuid },
+                                        ]}
                                         on:click={() => { $form.review.uuid = item.uuid; $form.review.content = item.content; }}
                                     >
                                         {item.author.nickname}

@@ -211,7 +211,10 @@
             </div>
             <button type="button"
                 aria-label=""
-                class={["cursor-pointer shrink-0 w-14 h-14 rounded-full flex justify-center items-center", { "bg-blue-skywave": !$player.playing }, { "bg-orange-amber": $player.playing }, ]}
+                class={["cursor-pointer shrink-0 w-14 h-14 rounded-full flex justify-center items-center",
+                    { "bg-blue-skywave": !$player.playing },
+                    { "bg-orange-amber": $player.playing },
+                ]}
                 on:click={toggleAudio}
             >
                 <img

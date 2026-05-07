@@ -82,19 +82,14 @@
                                 { "text-blue-night": item.has_activity },
                                 { "text-suspense-aurora": !item.has_activity },
                             ]}>
-                                {item.has_activity
-                                    ? item.activity.title
-                                    : item.content}
+                                {item.has_activity ? item.activity.title : item.content}
                             </div>
                             <div class="flex justify-between items-center">
                                 {#if can.update && variant === "administration"}
                                     <button
                                         type="button"
                                         aria-label=""
-                                        class={["w-full cursor-pointer ",
-                                        { "filter invert": !item.has_activity },
-                                        { "filter invert-0": item.has_activity },
-                                    ]}
+                                        class={["w-full cursor-pointer ", { "filter invert": !item.has_activity }, { "filter invert-0": item.has_activity }, ]}
                                     >
                                         <img
                                             src="/svg/edit.svg"

@@ -103,9 +103,7 @@
             💌 Yay! Pedido enviado!
         </div>
         <div class="text-sm font-noto-sans text-gray-500">
-            Seu pedido já tá a caminho! {air.program.host.gender === "male"
-                ? "O"
-                : "A"}
+            Seu pedido já tá a caminho! {air.program.host.gender === "male" ? "O" : "A"}
             {air.program.host.nickname}
             vai ver rapidinho. Fica por aqui e curte a vibe da programação! ✨🔥
         </div>
@@ -166,7 +164,7 @@
             {#if activeAnimeDropdown && animesList.length > 0}
                 <div class="absolute w-full bg-white border border-gray-200 rounded-2xl shadow-xl z-25 max-h-56 overflow-y-auto p-2">
                     {#each animesList as item}
-                        <button
+                        <button aria-label=""
                             type="button"
                             class="cursor-pointer flex items-center gap-3 w-full p-2 rounded-xl"
                             on:mousedown={() => { $form.anime = item; activeAnimeDropdown = false; getAnimeThemesJikanApi(item.mal_id); }}
@@ -228,7 +226,7 @@
                                 {type === "OP" ? "Aberturas" : "Encerramentos"}
                             </div>
                             {#each animeThemesList.filter((item) => item.type === type) as item}
-                                <button
+                                <button aria-label=""
                                     type="button"
                                     class="w-full flex flex-col items-start gap-0.5 p-3 rounded-xl hover:bg-gray-50 active:bg-pink-50 transition-colors border-b last:border-0 border-gray-50 mb-1"
                                     on:mousedown={() => { $form.music = item; activeMusicDropdown = false; }}
@@ -273,9 +271,7 @@
             😭 Ai… não dá pra mandar pedido agora!
         </div>
         <div class="text-sm font-noto-sans text-gray-500">
-            O programa não tá rolando ou {air.program.host.gender === "male"
-                ? "o"
-                : "a"}
+            O programa não tá rolando ou {air.program.host.gender === "male" ? "o" : "a"}
             {air.program.host.nickname.toLowerCase()} tá dando uma pausa, tá? Mas
             relaxa, daqui a pouco você consegue mandar sua música! 💬🎶
         </div>

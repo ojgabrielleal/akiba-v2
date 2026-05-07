@@ -31,12 +31,29 @@ function getAttributes(attributes) {
     let current = '';
     let quote = null;
     let braceDepth = 0;
+    let templateExpressionDepth = 0;
 
-    for (const character of normalized) {
+    for (let index = 0; index < normalized.length; index += 1) {
+        const character = normalized[index];
+        const nextCharacter = normalized[index + 1];
+
         if (quote) {
+            if (quote === '`' && character === '$' && nextCharacter === '{') {
+                templateExpressionDepth += 1;
+                current += '${';
+                index += 1;
+                continue;
+            }
+
+            if (quote === '`' && character === '}' && templateExpressionDepth > 0) {
+                templateExpressionDepth -= 1;
+                current += character;
+                continue;
+            }
+
             current += character;
 
-            if (character === quote) {
+            if (character === quote && templateExpressionDepth === 0) {
                 quote = null;
             }
 
@@ -83,12 +100,25 @@ function getAttributes(attributes) {
 function hasBalancedAttributeSyntax(attributes) {
     let quote = null;
     let braceDepth = 0;
+    let templateExpressionDepth = 0;
 
     for (let index = 0; index < attributes.length; index += 1) {
         const character = attributes[index];
+        const nextCharacter = attributes[index + 1];
 
         if (quote) {
-            if (character === quote && attributes[index - 1] !== '\\') {
+            if (quote === '`' && character === '$' && nextCharacter === '{') {
+                templateExpressionDepth += 1;
+                index += 1;
+                continue;
+            }
+
+            if (quote === '`' && character === '}' && templateExpressionDepth > 0) {
+                templateExpressionDepth -= 1;
+                continue;
+            }
+
+            if (character === quote && attributes[index - 1] !== '\\' && templateExpressionDepth === 0) {
                 quote = null;
             }
 
@@ -618,27 +648,82 @@ function hasVisibleText(content) {
         .trim().length > 0;
 }
 
+function hasAttribute(attributes, name) {
+    return new RegExp(`(?:^|\\s)${name}(?:\\s*=|\\s|$)`).test(attributes);
+}
+
+function formatInlineTextTernaries(source) {
+    const lines = source.split(/\r?\n/);
+    const formatted = [];
+
+    for (let index = 0; index < lines.length; index += 1) {
+        const conditionMatch = lines[index].match(/^([^\S\r\n]*)(.+\{.+)$/);
+        const truthyMatch = lines[index + 1]?.match(/^[^\S\r\n]*\?\s+(.+)$/);
+        const falsyMatch = lines[index + 2]?.match(/^[^\S\r\n]*:\s+(.+\})$/);
+
+        if (conditionMatch && truthyMatch && falsyMatch) {
+            const [, indent, start] = conditionMatch;
+            formatted.push(`${indent}${start} ? ${truthyMatch[1].trim()} : ${falsyMatch[1].trim()}`);
+            index += 2;
+            continue;
+        }
+
+        formatted.push(lines[index]);
+    }
+
+    return formatted.join('\n');
+}
+
 function addMissingButtonAttributes(source) {
-    return source.replace(
-        /<button\b([^>]*)>([\s\S]*?)<\/button>/g,
-        (button, attributes, content) => {
-            let formatted = button;
+    let formatted = '';
+    let cursor = 0;
 
-            if (!/\stype=/.test(attributes)) {
-                formatted = formatted.replace('<button', '<button type="button"');
-            }
+    while (cursor < source.length) {
+        const start = source.indexOf('<button', cursor);
 
-            if (!/\saria-label=/.test(attributes) && !hasVisibleText(content)) {
-                formatted = formatted.replace('<button', '<button aria-label=""');
-            }
+        if (start === -1) {
+            formatted += source.slice(cursor);
+            break;
+        }
 
-            return formatted;
-        },
-    );
+        const tagEnd = findOpeningTagEnd(source, start);
+
+        if (tagEnd === -1) {
+            formatted += source.slice(cursor);
+            break;
+        }
+
+        const closeStart = source.indexOf('</button>', tagEnd + 1);
+
+        if (closeStart === -1) {
+            formatted += source.slice(cursor, tagEnd + 1);
+            cursor = tagEnd + 1;
+            continue;
+        }
+
+        const opening = source.slice(start, tagEnd + 1);
+        const attributes = opening.match(/^<button\b([\s\S]*?)(\/?)>$/)?.[1] ?? '';
+        let formattedOpening = opening;
+
+        if (!hasAttribute(attributes, 'type')) {
+            formattedOpening = formattedOpening.replace('<button', '<button type="button"');
+        }
+
+        if (!hasAttribute(attributes, 'aria-label') && !hasVisibleText(source.slice(tagEnd + 1, closeStart))) {
+            formattedOpening = formattedOpening.replace('<button', '<button aria-label=""');
+        }
+
+        formatted += source.slice(cursor, start);
+        formatted += formattedOpening;
+        formatted += source.slice(tagEnd + 1, closeStart + '</button>'.length);
+        cursor = closeStart + '</button>'.length;
+    }
+
+    return formatted;
 }
 
 function formatSvelte(source) {
-    return formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source)))))))).replace(
+    return formatInlineTextTernaries(formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source))))))))).replace(
         /^([^\S\r\n]*)<([A-Za-z][A-Za-z0-9:-]*)([^>]*)>([^\S\r\n]*\S(?:[^\r\n]*\S)?[^\S\r\n]*)<\/\2>[^\S\r\n]*\r?$/gm,
         (line, indent, tag, attributes, content) => {
             const childIndent = `${indent}    `;
