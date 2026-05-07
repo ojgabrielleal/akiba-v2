@@ -35,10 +35,12 @@
 
 <Meta meta={{ title: "Dashboard" } } />
 <Layout>
-    <GreatingHero phrase={phraseSwitchHero(user.nickname)} icon="/img/default/avatar.webp" />
-    <RapidAccessGrid />
-    <ActivityCarrousel title="Avisos e Atividades" />
-    <TaskCarrousel title="Minhas Tarefas" />
-    <PostGrid title="Últimas Matérias" />
-    <CalendarGrid title="Calendário" />
+    <!--
+        <GreatingHero phrase={phraseSwitchHero(user.nickname)} icon="/img/default/avatar.webp" />
+        <RapidAccessGrid />
+        <ActivityCarrousel title="Avisos e Atividades" />
+        <TaskCarrousel title="Minhas Tarefas" />
+        <PostGrid title="Últimas Matérias" />
+        <CalendarGrid title="Calendário" />
+    -->
 </Layout>

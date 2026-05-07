@@ -68,63 +68,21 @@
     --font-noto-sans: "Noto Sans", sans-serif;
 }
 
-@keyframes marquee {
-    from {
-        transform: translateX(100%);
-    }
-
-    to {
-        transform: translateX(-100%);
-    }
-}
-
 @layer base {
     * {
         transition: 0.3s ease-in-out;
     }
-
-    button:disabled {
-        cursor: default !important;
-        filter: opacity(50%);
-    }
-
-    select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        width: 16.25rem;
-        font-size: 1rem;
-        color: #333;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 1rem center;
-        background-size: 1rem;
-    }
-
-    select:focus {
-        outline: none;
-    }
-
-    select:disabled {
-        background-color: #f3f4f6;
-        color: #9ca3af;
-        cursor: not-allowed;
-    }
-
-    .ql-editor {
-        font-family: var(--font-noto-sans);
-    }
 }
 
 @layer components {
-    .cont {
-        @apply w-full max-w-[1100px] md:max-w-[1200px] xl:max-w-[1280px] 2xl:max-w-[1366px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-0;
+    .container-page {
+        width: min(100% - clamp(2rem, 5vw, 5rem), 85.375rem);
+        margin-inline: auto;
     }
 
-    .cont-player-main {
-        @apply w-full max-w-[1000px] xl:max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-0;
+    .container-player {
+        width: min(100% - clamp(2rem, 5vw, 4rem), 68.75rem);
+        margin-inline: auto;
     }
 }
 
@@ -137,34 +95,13 @@
     .scroll-x::-webkit-scrollbar {
         display: none;
     }
-
-    .marquee-cont {
-        z-index: 0;
-    }
-
-    .marquee-cont::before,
-    .marquee-cont::after {
-        content: "";
-        position: absolute;
-        inset: 0 auto 0 auto;
-        width: 5rem;
-        z-index: 2;
-    }
-
-    .marquee-cont::before {
-        left: 0;
-        background: linear-gradient(to right,
-                var(--color-blue-ocean),
-                transparent);
-    }
-
-    .marquee-cont::after {
-        right: 0;
-        background: linear-gradient(to left, var(--color-blue-ocean), transparent);
-    }
-
 }
 
+
+/*
+    Filters generated to match the color palette of the project, based on the original image of the logo.
+    Filter Generator: https://codepen.io/sosuke/pen/Pjoqqp
+*/
 @utility filter-neutral-gray {
     filter: invert(54%) sepia(12%) saturate(23%) hue-rotate(46deg) brightness(92%) contrast(88%);
 }

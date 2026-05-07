@@ -9,7 +9,7 @@
 </script>
 
 <nav class="w-full h-12 bg-suspense-aurora hidden items-center justify-center lg:flex">
-    <div class="cont relative">
+    <div class="container-page relative">
         <ul class="flex justify-center items-center gap-10">
             {#each navbar.private as item}
                 {#if hasPermission(item.permission)}

@@ -7,7 +7,7 @@
 </script>
 
 <nav class="w-full relative">
-    <div class="cont h-24 xl:h-[2.57rem] relative xl:top-15 flex xl:justify-between items-center">
+    <div class="container-page h-24 xl:h-[2.57rem] relative xl:top-15 flex xl:justify-between items-center">
         <button type="button"
             aria-label="Abrir menu"
             class="xl:hidden p-1 filter invert"

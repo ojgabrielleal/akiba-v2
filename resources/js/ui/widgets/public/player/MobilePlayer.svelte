@@ -17,7 +17,7 @@
     </div>
 </Modal>
 
-<section class="cont flex flex-col items-center justify-center gap-8 overflow-hidden relative">
+<section class="container-page flex flex-col items-center justify-center gap-8 overflow-hidden relative">
     <div class="w-full relative z-10 bg-suspense-aurora/5 backdrop-blur-xl border border-white/10 rounded-4xl p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 shadow-2xl">
         <div class="flex items-center gap-5 md:flex-1">
             <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border-2 border-white/10 shrink-0 shadow-lg">

@@ -19,7 +19,7 @@
 
 <!-- Phrase Section -->
 <section class="w-full bg-blue-ocean mb-5">
-    <div class="cont-player-main py-4 relative">
+    <div class="container-player py-4 relative">
         <div class="block absolute -top-7 left-0 xl:-left-10 z-10">
             <img
                 src="/img/player/rains.webp"
@@ -59,7 +59,7 @@
 </section>
 
 <!-- Main Player Section -->
-<section class="cont-player-main grid grid-cols-[2fr_1fr_0.8fr] items-center gap-5">
+<section class="container-player grid grid-cols-[2fr_1fr_0.8fr] items-center gap-5">
     <!-- First Column-->
     <div class="block">
         <!--Program and Host Information-->
@@ -258,7 +258,7 @@
     </div>
 </section>
 
-<section class="cont-player-main">
+<section class="container-player">
     <div class="mb-10 grid grid-cols-2 gap-5">
         <div class="bg-suspense-aurora/10 h-30 rounded-lg flex justify-center items-center text-suspense-aurora/40 text-lg font-bold uppercase italic">
             Anúncio
