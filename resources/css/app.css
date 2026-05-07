@@ -76,12 +76,12 @@
 
 @layer components {
     .container-page {
-        width: min(100% - clamp(2rem, 5vw, 5rem), 85.375rem);
+        width: min(100% - clamp(4rem, 5vw, 5rem), 85.375rem);
         margin-inline: auto;
     }
 
     .container-player {
-        width: min(100% - clamp(2rem, 5vw, 4rem), 68.75rem);
+        width: min(100% - clamp(1rem, 5vw, 4rem), 68.75rem);
         margin-inline: auto;
     }
 }

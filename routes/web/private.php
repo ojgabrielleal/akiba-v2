@@ -29,6 +29,8 @@ Route::prefix('panel')->middleware(['inertia'])->group(function () {
     });
 
     Route::middleware(['auth'])->group(function () {
+        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
         Route::prefix('dashboard')->controller(DashboardController::class)->group(function () {
             Route::get('', 'render')->name('panel.dashboard');
             Route::prefix('activity')->group(function () {

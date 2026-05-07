@@ -403,7 +403,7 @@ function formatOpeningTag(indent, tag, rawAttributes, selfClosing) {
         ].join('\n');
     }
 
-    if (['input', 'select', 'textarea'].includes(tag)) {
+    if (['Link', 'a', 'input', 'select', 'textarea'].includes(tag)) {
         return [
             `${indent}<${tag}`,
             ...attributes.map((attribute) => `${indent}    ${attribute}`),
@@ -775,7 +775,7 @@ function addMissingLinkAttributes(source) {
             }
         }
 
-        formatted += source.slice(cursor, lineStart);
+        formatted += source.slice(cursor, formattedOpening.startsWith(indent) ? lineStart : start);
         formatted += formattedOpening;
         formatted += source.slice(tagEnd + 1, closeStart + `</${tag}>`.length);
         cursor = closeStart + `</${tag}>`.length;
@@ -796,7 +796,7 @@ function formatSvelte(source) {
                 `${indent}</${tag}>`,
             ].join('\n');
         },
-    );
+    ).replace(/[^\S\r\n]+$/gm, '');
 }
 
 async function formatFile(filePath) {

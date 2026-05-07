@@ -98,19 +98,13 @@
                                         />
                                     </button>
                                 {/if}
-                                <button 
+                                <button
                                     type="button"
                                     aria-label=""
-                                    class={["w-full font-noto-sans text-md text-end",
-                                        { "text-blue-night": item.has_activity },
-                                        { "text-suspense-aurora": !item.has_activity },
-                                    ]}
-                                    on:click={() => { 
-                                        identifier = item.uuid; 
-                                        offcanvasRef.open(); 
-                                    }}
+                                    class={["w-full font-noto-sans text-md text-end", { "text-blue-night": item.has_activity }, { "text-suspense-aurora": !item.has_activity }, ]}
+                                    on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
                                 >
-                                        
+
                                     {item.responsible.nickname}
                                 </button>
                             </div>
