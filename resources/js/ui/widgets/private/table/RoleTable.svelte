@@ -34,7 +34,7 @@
 <Section {title}>
     {#if can.create}
         <div class="flex justify-center gap-5 mb-5">
-            <button class="cursor-pointer bg-blue-ocean px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offCanvasRef.open(); }}>
+            <button type="button" class="cursor-pointer bg-blue-ocean px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offCanvasRef.open(); }}>
                 Cadastrar cargo
             </button>
         </div>
@@ -71,7 +71,7 @@
                             <td class="p-4 min-w-[140px]">
                                 <div class="flex justify-start gap-3">
                                     {#if can.update}
-                                        <button
+                                        <button type="button"
                                             class="bg-blue-ocean rounded-md p-3 cursor-pointer shrink-0"
                                             aria-label="atualizar cargo"
                                             on:click={() => { identifier = item.uuid; offCanvasRef.open(); }}
@@ -86,7 +86,7 @@
                                         </button>
                                     {/if}
                                     {#if can.remove}
-                                        <button
+                                        <button type="button"
                                             class="bg-red-crimson p-3 rounded-md cursor-pointer shrink-0"
                                             aria-label="remover cargo"
                                             on:click={() => { requestRemoveRole(item.uuid); }}

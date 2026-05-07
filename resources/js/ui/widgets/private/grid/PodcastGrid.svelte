@@ -48,7 +48,7 @@
                                 </Link>
                             {/if}
                             {#if can.deactivate}
-                                <button class="cursor-pointer" aria-label="Desativar" on:click={() => requestDeactivatePodcast(item.uuid)}>
+                                <button type="button" class="cursor-pointer" aria-label="Desativar" on:click={() => requestDeactivatePodcast(item.uuid)}>
                                     <img
                                         src="/svg/trash.svg"
                                         alt=""

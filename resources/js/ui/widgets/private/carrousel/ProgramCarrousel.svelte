@@ -38,7 +38,7 @@
 {#if programs}
     {#if can.create}
         <div class="flex justify-center mb-5">
-            <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offcanvasRef.open(); }}>
+            <button type="button" class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offcanvasRef.open(); }}>
                 Cadastrar programa
             </button>
         </div>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="flex flex-col gap-5">
                         {#if can.update}
-                            <button
+                            <button type="button"
                                 class="cursor-pointer"
                                 aria-label="atualizar programa"
                                 on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
@@ -77,12 +77,10 @@
                             </button>
                         {/if}
                         {#if can.deactivate}
-                            <button
+                            <button type="button"
                                 class="cursor-pointer"
                                 aria-label="desativar programa"
-                                on:click={()
-                            >
-                                    requestDeactivateProgram(item.uuid)}
+                                on:click={() => requestDeactivateProgram(item.uuid)}
                             >
                                 <img
                                     src="/svg/trash.svg"

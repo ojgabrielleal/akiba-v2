@@ -71,7 +71,7 @@
         </div>
         {#if musicRanking.data.length >= 3 && can.set}
             <div class="flex justify-end mt-5">
-                <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold uppercase italic disabled:opacity-50 disabled:pointer-events-none" on:click={() => setRanking()}>
+                <button type="button" class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold uppercase italic disabled:opacity-50 disabled:pointer-events-none" on:click={() => setRanking()}>
                     Atualizar ranking
                 </button>
             </div>

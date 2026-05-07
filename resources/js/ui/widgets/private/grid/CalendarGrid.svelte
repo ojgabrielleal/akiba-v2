@@ -43,7 +43,7 @@
 <Section {title}>
     {#if can.create && variant === "administration"}
         <div class="flex justify-center gap-5 mb-8">
-            <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-lg font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offcanvasRef.open(); }}>
+            <button type="button" class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-lg font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offcanvasRef.open(); }}>
                 Cadastrar evento
             </button>
         </div>
@@ -51,9 +51,7 @@
     <div class="w-full overflow-x-auto pb-4">
         <div class="w-full min-w-[1280px] grid gap-2 grid-cols-7 overflow-auto">
             {#each calendarTags as item}
-                <span class={`h-10 text-lg font-noto-sans font-bold uppercase italic rounded-lg flex justify-center items-center ${item.color}
-                    ${item.textcolor}
-                    }>
+                <span class={`h-10 text-lg font-noto-sans font-bold uppercase italic rounded-lg flex justify-center items-center ${item.color} ${item.textcolor}`}>
                     {item.label}
                 </span>
             {/each}
@@ -67,9 +65,9 @@
                     {#each day.events as item}
                         <div class={["w-full rounded-lg pt-4 pl-4 pr-4 pb-3 mt-5",
                             { "bg-blue-skywave": item.type === "show" },
-                            { "bg-purple-mystic": item.type live },
-                            { "bg-red-crimson": item.type video },
-                            { "bg-green-mint": item.type podcast },
+                            { "bg-purple-mystic": item.type === "live" },
+                            { "bg-red-crimson": item.type === "video" },
+                            { "bg-green-mint": item.type === "podcast" },
                             { "bg-suspense-honeycream": item.has_activity },
                         ]}>
                             <div class="flex events-center">
@@ -90,27 +88,36 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 {#if can.update && variant === "administration"}
-                                    <button aria-label=""
+                                    <button
+                                        type="button"
+                                        aria-label=""
                                         class={["w-full cursor-pointer ",
-                                            { "filter invert": !item.has_activity },
-                                            { "filter invert-0": item.has_activity },
-                                        ]}
-                                        <img
-                                        src="/svg/edit.svg"
-                                        alt="Editar"
-                                        class="w-4"
-                                        />
-                                        </button>
-                                        {/if}
-                                        <div
-                                        class={["w-full font-noto-sans text-md text-end ",
-                                            { "text-blue-night": item.has_activity },
-                                            { "text-suspense-aurora": !item.has_activity },
-                                        ]}
-                                        on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}>
+                                        { "filter invert": !item.has_activity },
+                                        { "filter invert-0": item.has_activity },
+                                    ]}
                                     >
+                                        <img
+                                            src="/svg/edit.svg"
+                                            alt="Editar"
+                                            class="w-4"
+                                        />
+                                    </button>
+                                {/if}
+                                <button 
+                                    type="button"
+                                    aria-label=""
+                                    class={["w-full font-noto-sans text-md text-end",
+                                        { "text-blue-night": item.has_activity },
+                                        { "text-suspense-aurora": !item.has_activity },
+                                    ]}
+                                    on:click={() => { 
+                                        identifier = item.uuid; 
+                                        offcanvasRef.open(); 
+                                    }}
+                                >
+                                        
                                     {item.responsible.nickname}
-                                </div>
+                                </button>
                             </div>
                         </div>
                     {/each}

@@ -27,7 +27,7 @@
     <Section {title}>
         {#if can.create}
             <div class="flex justify-center gap-5 mb-8">
-                <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-lg font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offcanvasRef.open(); }}>
+                <button type="button" class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-lg font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offcanvasRef.open(); }}>
                     Cadastrar tarefa
                 </button>
             </div>
@@ -42,7 +42,7 @@
                         {task.title}
                     </div>
                     {#if can.update}
-                        <button
+                        <button type="button"
                             aria-label="Atualizar tarefa"
                             class="cursor-pointer"
                             on:click={() => { identifier = task.uuid; offcanvasRef.open(); }}

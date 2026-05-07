@@ -99,9 +99,7 @@
                                     type="button"
                                     class="cursor-pointer"
                                     aria-label="Desativar"
-                                    on:click={()
-                                >
-                                        requestDeactivateEvent(item.uuid)}
+                                    on:click={requestDeactivateEvent(item.uuid)}
                                 >
                                     <img
                                         src="/svg/trash.svg"

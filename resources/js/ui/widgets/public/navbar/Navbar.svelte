@@ -8,7 +8,7 @@
 
 <nav class="w-full relative">
     <div class="cont h-24 xl:h-[2.57rem] relative xl:top-15 flex xl:justify-between items-center">
-        <button
+        <button type="button"
             aria-label="Abrir menu"
             class="xl:hidden p-1 filter invert"
             on:click={() => (mobilenavbar = !mobilenavbar)}
@@ -49,7 +49,7 @@
 
         <div class="w-35">
             <div class="hidden xl:flex justify-center items-center w-22 h-8 gap-1 bg-blue-skywave rounded-full">
-                <button
+                <button type="button"
                     aria-label="Modo Claro"
                     class={["cursor-pointer shrink-0 p-1", { "bg-orange-morning rounded-full": theme === "light" }, ]}
                     on:click={() => (theme = "light")}
@@ -61,7 +61,7 @@
                         class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter invert": theme !== "light" }, ]}
                     />
                 </button>
-                <button
+                <button type="button"
                     aria-label="Modo Akiba"
                     class={["cursor-pointer shrink-0 p-1", { "bg-blue-night rounded-full": theme === "akiba" }, ]}
                     on:click={() => (theme = "akiba")}
@@ -73,7 +73,7 @@
                         class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter invert": theme !== "akiba" }, ]}
                     />
                 </button>
-                <button
+                <button type="button"
                     aria-label="Modo Ecuro"
                     class={["cursor-pointer shrink-0 p-1", { "bg-blue-night rounded-full": theme === "night" }, ]}
                     on:click={() => (theme = "night")}
@@ -94,13 +94,11 @@
         { "opacity-100 pointer-events-auto": mobilenavbar },
         { "opacity-0 pointer-events-none": !mobilenavbar },
     ]}>
-        <button
+        <button aria-label=""
             type="button"
             aria-hidden="true"
             class="absolute inset-0 bg-blue-night/40 backdrop-blur-sm"
-            on:click={() =
-        >
-            (mobilenavbar = false)}>
+            on:click={mobilenavbar = false}>
         </button>
 
         <!-- Sidebar        -->
@@ -114,7 +112,7 @@
                     alt="Logo"
                     class="w-30"
                 />
-                <button
+                <button type="button"
                     aria-label="Fechar menu"
                     class="text-blue-night"
                     on:click={() => (mobilenavbar = false)}
@@ -151,7 +149,7 @@
                     Temas da Akiba
                 </span>
                 <div class="w-25 h-8 mx-auto flex justify-center items-center gap-1 bg-blue-skywave p-1 rounded-full">
-                    <button class={["flex-1 flex justify-center items-center transition-all h-full",
+                    <button type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
                         { "bg-orange-morning rounded-full": theme === "light" },
                     ]} on:click={() => (theme = "light")}>
                         <img
@@ -160,7 +158,7 @@
                             class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter invert": theme !== "light" }, ]}
                         />
                     </button>
-                    <button class={["flex-1 flex justify-center items-center transition-all h-full",
+                    <button type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
                         { "bg-blue-night rounded-full": theme === "akiba" },
                     ]} on:click={() => (theme = "akiba")}>
                         <img
@@ -169,7 +167,7 @@
                             class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter invert": theme !== "akiba" }, ]}
                         />
                     </button>
-                    <button class={["flex-1 flex justify-center items-center transition-all h-full",
+                    <button type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
                         { "bg-blue-night rounded-full": theme === "night" },
                     ]} on:click={() => (theme = "night")}>
                         <img

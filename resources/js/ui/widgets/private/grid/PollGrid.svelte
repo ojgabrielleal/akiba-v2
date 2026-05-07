@@ -63,7 +63,7 @@
     <Section title="Enquetes">
         {#if can.create || can.update}
             <div class="flex justify-center">
-                <button class="cursor-pointer text-suspense-aurora text-xl font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber" on:click={() => { offcanvasRef.open(); identifier = null; }}>
+                <button type="button" class="cursor-pointer text-suspense-aurora text-xl font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber" on:click={() => { offcanvasRef.open(); identifier = null; }}>
                     Criar enquete
                 </button>
             </div>
@@ -136,9 +136,7 @@
                                     type="button"
                                     class="cursor-pointer"
                                     aria-label="Desativar"
-                                    on:click={()
-                                >
-                                        requestDeactivatePoll(item.uuid)}
+                                    on:click={requestDeactivatePoll(item.uuid)}
                                 >
                                     <img
                                         src="/svg/trash.svg"

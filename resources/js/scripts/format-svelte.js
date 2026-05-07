@@ -80,6 +80,39 @@ function getAttributes(attributes) {
     return parsed;
 }
 
+function hasBalancedAttributeSyntax(attributes) {
+    let quote = null;
+    let braceDepth = 0;
+
+    for (let index = 0; index < attributes.length; index += 1) {
+        const character = attributes[index];
+
+        if (quote) {
+            if (character === quote && attributes[index - 1] !== '\\') {
+                quote = null;
+            }
+
+            continue;
+        }
+
+        if (character === '"' || character === "'" || character === '`') {
+            quote = character;
+            continue;
+        }
+
+        if (character === '{') {
+            braceDepth += 1;
+            continue;
+        }
+
+        if (character === '}') {
+            braceDepth -= 1;
+        }
+    }
+
+    return quote === null && braceDepth === 0;
+}
+
 function repairSplitBracedAttributes(source) {
     const lines = source.split(/\r?\n/);
 
@@ -212,6 +245,11 @@ function splitTopLevelItems(source) {
 function normalizeClassCondition(condition) {
     const compact = condition.replace(/\s+/g, ' ').trim();
     const notEqualMatch = compact.match(/^(.+?)\s+!\s+(.+)$/);
+    const missingEqualityMatch = compact.match(/^(.+?\.type)\s+([A-Za-z][\w-]*)$/);
+
+    if (missingEqualityMatch && !/[=!<>]=?/.test(missingEqualityMatch[1])) {
+        return `${missingEqualityMatch[1]} === "${missingEqualityMatch[2]}"`;
+    }
 
     if (notEqualMatch) {
         const rightSide = ['light', 'akiba', 'night'].includes(notEqualMatch[2])
@@ -370,7 +408,7 @@ function formatOpeningTags(source) {
             while (cursor < lines.length) {
                 closingMatch = lines[cursor].match(new RegExp(`^${indent}(\\/?)>$`));
 
-                if (closingMatch) {
+                if (closingMatch && hasBalancedAttributeSyntax(attributeLines.join(' '))) {
                     break;
                 }
 
@@ -580,21 +618,27 @@ function hasVisibleText(content) {
         .trim().length > 0;
 }
 
-function addMissingButtonLabels(source) {
+function addMissingButtonAttributes(source) {
     return source.replace(
         /<button\b([^>]*)>([\s\S]*?)<\/button>/g,
         (button, attributes, content) => {
-            if (/\saria-label=/.test(attributes) || hasVisibleText(content)) {
-                return button;
+            let formatted = button;
+
+            if (!/\stype=/.test(attributes)) {
+                formatted = formatted.replace('<button', '<button type="button"');
             }
 
-            return button.replace('<button', '<button aria-label=""');
+            if (!/\saria-label=/.test(attributes) && !hasVisibleText(content)) {
+                formatted = formatted.replace('<button', '<button aria-label=""');
+            }
+
+            return formatted;
         },
     );
 }
 
 function formatSvelte(source) {
-    return formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingButtonLabels(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source)))))))).replace(
+    return formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source)))))))).replace(
         /^([^\S\r\n]*)<([A-Za-z][A-Za-z0-9:-]*)([^>]*)>([^\S\r\n]*\S(?:[^\r\n]*\S)?[^\S\r\n]*)<\/\2>[^\S\r\n]*\r?$/gm,
         (line, indent, tag, attributes, content) => {
             const childIndent = `${indent}    `;

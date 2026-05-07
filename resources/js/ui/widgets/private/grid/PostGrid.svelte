@@ -24,15 +24,15 @@
                     (can.own.update && item.author.uuid === user.uuid)}
                 <article class={["w-full h-56 rounded-lg p-4 relative",
                     { "bg-blue-skywave": item.type === "published" },
-                    { "bg-orange-amber": item.type revision },
-                    { "bg-green-mint": item.type draft },
+                    { "bg-orange-amber": item.type === "revision" },
+                    { "bg-green-mint": item.type === "draft" },
                 ]}>
                     <div class="font-noto-sans text-lg text-suspense-aurora line-clamp-5 uppercase">
                         {item.title}
                     </div>
                     <div class={["grid absolute bottom-2 left-4 w-[calc(100%-2rem)]",
                         { "grid-cols-3": item.type === "published" || item.type === "revision" },
-                        { "grid-cols-2": item.type draft },
+                        { "grid-cols-2": item.type === "draft" },
                     ]}>
                         <div class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-lg text-suspense-aurora truncate">
                             <img

@@ -72,7 +72,7 @@
                     o
                     horário!
                     </div>
-                    <button
+                    <button type="button"
                     on:click={() => redirectToDashboard()}
                     type="button"
                     class="mt-5 flex gap-2 justify-center items-center cursor-pointer w-full py-2 px-6 border-2 border-blue-ocean rounded-xl text-md text-blue-ocean font-bold font-noto-sans italic uppercase"

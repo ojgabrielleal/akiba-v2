@@ -89,8 +89,8 @@
                 </div>
                 <div class={["mt-[0.4rem] w-24 rounded-xl float-end text-center text-sm text-suspense-aurora font-noto-sans font-bold italic uppercase",
                     { "bg-neutral-gray": air.type === "automatic" },
-                    { "bg-green-mint": air.type live },
-                    { "bg-orange-citric": air.type scheduled },
+                    { "bg-green-mint": air.type === "live" },
+                    { "bg-orange-citric": air.type === "scheduled" },
                 ]}>
                     {#if air.type === "automatic"}
                         Robô
@@ -155,8 +155,8 @@
         <!-- Player Type Information-->
         <div class={["mx-4 mb-10 py-2 px-6 gap-2 flex justify-center items-center rounded-md",
             { "bg-neutral-gray": air.type === "automatic" },
-            { "bg-green-mint": air.type live },
-            { "bg-orange-citric": air.type scheduled },
+            { "bg-green-mint": air.type === "live" },
+            { "bg-orange-citric": air.type === "scheduled" },
         ]}>
             <div class="block">
                 {#if air.type === "automatic"}
@@ -209,7 +209,7 @@
                     {$player.playing ? "Pause" : "Play"}
                 </div>
             </div>
-            <button
+            <button type="button"
                 aria-label=""
                 class={["cursor-pointer shrink-0 w-14 h-14 rounded-full flex justify-center items-center", { "bg-blue-skywave": !$player.playing }, { "bg-orange-amber": $player.playing }, ]}
                 on:click={toggleAudio}
@@ -245,7 +245,7 @@
             />
         </div>
         <!-- Song Request Button-->
-        <button
+        <button type="button"
             aria-label="Faça seu pedido"
             class="cursor-pointer w-full py-2 px-1 border border-suspense-aurora rounded-full text-blue-skywave text-xl text-center font-noto-sans font-bold italic uppercase disabled:cursor-not-allowed"
             on:click={() => { modalRef.open(); }}

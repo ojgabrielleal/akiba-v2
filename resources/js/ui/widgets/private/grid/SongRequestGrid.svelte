@@ -55,18 +55,18 @@
     <Section {title}>
         <div id="requests" class="flex flex-col gap-5 lg:relative">
             {#if can.locution.finish}
-                <button class="cursor-pointer block lg:absolute right-0 w-full lg:w-auto py-2 px-6 border-4 border-solid border-red-crimson rounded-xl text-red-crimson text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestFinishlocution(); }}>
+                <button type="button" class="cursor-pointer block lg:absolute right-0 w-full lg:w-auto py-2 px-6 border-4 border-solid border-red-crimson rounded-xl text-red-crimson text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestFinishlocution(); }}>
                     Encerrar programa
                 </button>
             {/if}
             {#if can.toggle}
                 <div class="flex justify-center">
                     {#if onair.data.allows_song_requests}
-                        <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-suspense-honeycream rounded-xl text-suspense-honeycream text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestToggleSongRequest(); }}>
+                        <button type="button" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-suspense-honeycream rounded-xl text-suspense-honeycream text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestToggleSongRequest(); }}>
                             Parar de receber
                         </button>
                     {:else}
-                        <button class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-green-mint rounded-xl text-green-mint text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestToggleSongRequest(); }}>
+                        <button type="button" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-green-mint rounded-xl text-green-mint text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestToggleSongRequest(); }}>
                             Começar a receber
                         </button>
                     {/if}
@@ -195,12 +195,10 @@
                         <div class="flex gap-3">
                             {#if !item.was_reproduced && !item.was_canceled}
                                 {#if can.cancel}
-                                    <button
+                                    <button type="button"
                                         aria-label="Marcar como cancelado"
                                         class="cursor-pointer"
-                                        on:click={()
-                                    >
-                                            markToCanceled(item.uuid)}
+                                        on:click={() => markToCanceled(item.uuid)}
                                     >
                                         <img
                                             src="/svg/close.svg"
@@ -212,12 +210,10 @@
                                     </button>
                                 {/if}
                                 {#if can.reproduce}
-                                    <button
+                                    <button type="button"
                                         aria-label="Marcar como atendido"
                                         class="cursor-pointer"
-                                        on:click={()
-                                    >
-                                            markToReproduced(item.uuid)}
+                                        on:click={() => markToReproduced(item.uuid)}
                                     >
                                         <img
                                             src="/svg/like.svg"

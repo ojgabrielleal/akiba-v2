@@ -54,13 +54,13 @@
 {#if users}
     <div class="flex justify-center gap-5 mb-5">
         {#if can.create}
-            <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => { offCanvasUserRef.open(); }}>
+            <button type="button" class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => { offCanvasUserRef.open(); }}>
                 Cadastrar membro
             </button>
             <span class="border-l border-suspense-aurora/30"></span>
         {/if}
         {#if can.activity.create}
-            <button class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => { offCanvasActivityRef.open(); }}>
+            <button type="button" class="text-blue-skywave text-xl font-noto-sans font-bold italic uppercase cursor-pointer" on:click={() => { offCanvasActivityRef.open(); }}>
                 Criar Atividade e Avisos
             </button>
         {/if}
@@ -92,7 +92,7 @@
                         </dt>
                         <dd class="flex flex-wrap lg:flex-nowrap gap-2">
                             {#if !item.is_bot && can.authority.update}
-                                <button
+                                <button type="button"
                                     aria-label="Definir permissões"
                                     class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                     on:click={() => { identifier = item.uuid; offCanvasUserAccessRef.open(); }}
@@ -116,7 +116,7 @@
                                 />
                             </Link>
                             {#if can.deactivate}
-                                <button
+                                <button type="button"
                                     aria-label="Desativar perfil"
                                     class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                     on:click={()=> requestDeactivateUser(item.uuid)}

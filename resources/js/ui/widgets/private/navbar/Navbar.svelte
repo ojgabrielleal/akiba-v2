@@ -42,7 +42,7 @@
 
 <!-- Mobile Navbar -->
 <nav class="w-full h-16 bg-suspense-aurora flex items-center justify-between px-10 lg:hidden">
-    <button aria-label="Abrir menu" on:click={() => (mobilenavbar = !mobilenavbar)}>
+    <button type="button" aria-label="Abrir menu" on:click={() => (mobilenavbar = !mobilenavbar)}>
         <img
             src="/svg/menu.svg"
             alt=""
@@ -70,7 +70,7 @@
             class="w-8 h-8"
             loading="lazy"
         />
-        <button aria-label="Fechar menu" on:click={() => (mobilenavbar = false)}>
+        <button type="button" aria-label="Fechar menu" on:click={() => (mobilenavbar = false)}>
             <img
                 src="/svg/x.svg"
                 alt=""

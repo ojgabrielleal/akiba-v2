@@ -37,8 +37,8 @@
                 <div class="flex flex-wrap items-center gap-2 mt-2">
                     <span class={["text-[10px] px-2.5 py-1 rounded-lg text-suspense-aurora font-noto-sans font-bold uppercase italic",
                         { "bg-neutral-gray": air.type === "automatic" },
-                        { "bg-green-mint": air.type live },
-                        { "bg-orange-citric": air.type scheduled },
+                        { "bg-green-mint": air.type === "live" },
+                        { "bg-orange-citric": air.type === "scheduled" },
                     ]}>
                         {#if air.type === "automatic"}
                             Robô
@@ -72,7 +72,7 @@
 
     <div class="w-full relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
         <div class="md:col-span-3 flex justify-center">
-            <button
+            <button type="button"
                 aria-label=""
                 class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-blue-skywave flex items-center justify-center hover:scale-105 active:scale-95 transition-all group"
                 on:click={toggleAudio}
@@ -110,7 +110,7 @@
                 />
             </div>
 
-            <button class="group cursor-pointer w-full py-3 px-6 border-2 border-suspense-aurora/20 hover:border-orange-amber/50 rounded-full text-blue-skywave text-lg md:text-xl text-center font-noto-sans font-bold italic uppercase transition-all" on:click={() => modalRef.open()}>
+            <button type="button" class="group cursor-pointer w-full py-3 px-6 border-2 border-suspense-aurora/20 hover:border-orange-amber/50 rounded-full text-blue-skywave text-lg md:text-xl text-center font-noto-sans font-bold italic uppercase transition-all" on:click={() => modalRef.open()}>
                 & Faça seu <strong
                     class="text-orange-amber group-hover:underline"
                     >Pedido</strong

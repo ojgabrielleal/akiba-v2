@@ -72,7 +72,7 @@
                     </div>
                 {/if}
                 {#if can.set}
-                    <button class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold uppercase italic" on:click={() => { offcanvasRef.open(); }}>
+                    <button type="button" class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold uppercase italic" on:click={() => { offcanvasRef.open(); }}>
                         Atualizar ouvinte
                     </button>
                 {/if}
