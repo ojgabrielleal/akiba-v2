@@ -13,7 +13,12 @@
     <Section {title}>
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
             {#each posts.data as item}
-                <Link href={`review/${item.slug}`} class="flex flex-col sm:flex-row gap-4">
+                <Link
+                    title=""
+                    aria-label=""
+                    href={`review/${item.slug}`}
+                    class="flex flex-col sm:flex-row gap-4"
+                >
                     <img
                         src={item.cover}
                         alt={item.title}

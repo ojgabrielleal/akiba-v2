@@ -411,7 +411,7 @@ function formatOpeningTag(indent, tag, rawAttributes, selfClosing) {
         ].join('\n');
     }
 
-    if (['Link', 'a'].includes(tag) || attributes.length < 3) {
+    if (attributes.length < 3) {
         return `${indent}<${tag} ${attributes.join(' ')}${selfClosing ? ' /' : ''}>`;
     }
 
@@ -722,8 +722,70 @@ function addMissingButtonAttributes(source) {
     return formatted;
 }
 
+function addMissingLinkAttributes(source) {
+    let formatted = '';
+    let cursor = 0;
+    const linkPattern = /<(Link|a)\b/g;
+
+    while (cursor < source.length) {
+        linkPattern.lastIndex = cursor;
+        const match = linkPattern.exec(source);
+
+        if (!match) {
+            formatted += source.slice(cursor);
+            break;
+        }
+
+        const start = match.index;
+        const tag = match[1];
+        const tagEnd = findOpeningTagEnd(source, start);
+
+        if (tagEnd === -1) {
+            formatted += source.slice(cursor);
+            break;
+        }
+
+        const closeStart = source.indexOf(`</${tag}>`, tagEnd + 1);
+
+        if (closeStart === -1) {
+            formatted += source.slice(cursor, tagEnd + 1);
+            cursor = tagEnd + 1;
+            continue;
+        }
+
+        const opening = source.slice(start, tagEnd + 1);
+        const attributes = opening.match(new RegExp(`^<${tag}\\b([\\s\\S]*?)(\\/?)>$`))?.[1] ?? '';
+        let formattedOpening = opening;
+        const lineStart = source.lastIndexOf('\n', start) + 1;
+        const indent = source.slice(lineStart, start);
+
+        if (!hasVisibleText(source.slice(tagEnd + 1, closeStart))) {
+            if (!hasAttribute(attributes, 'aria-label')) {
+                formattedOpening = formattedOpening.replace(`<${tag}`, `<${tag} aria-label=""`);
+            }
+
+            if (!hasAttribute(attributes, 'title')) {
+                formattedOpening = formattedOpening.replace(`<${tag}`, `<${tag} title=""`);
+            }
+
+            const openingMatch = formattedOpening.match(new RegExp(`^<${tag}\\b([\\s\\S]*?)(\\/?)>$`));
+
+            if (openingMatch) {
+                formattedOpening = formatOpeningTag(indent, tag, openingMatch[1], openingMatch[2]) ?? formattedOpening;
+            }
+        }
+
+        formatted += source.slice(cursor, lineStart);
+        formatted += formattedOpening;
+        formatted += source.slice(tagEnd + 1, closeStart + `</${tag}>`.length);
+        cursor = closeStart + `</${tag}>`.length;
+    }
+
+    return formatted;
+}
+
 function formatSvelte(source) {
-    return formatInlineTextTernaries(formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source))))))))).replace(
+    return formatInlineTextTernaries(formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingLinkAttributes(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source)))))))))).replace(
         /^([^\S\r\n]*)<([A-Za-z][A-Za-z0-9:-]*)([^>]*)>([^\S\r\n]*\S(?:[^\r\n]*\S)?[^\S\r\n]*)<\/\2>[^\S\r\n]*\r?$/gm,
         (line, indent, tag, attributes, content) => {
             const childIndent = `${indent}    `;

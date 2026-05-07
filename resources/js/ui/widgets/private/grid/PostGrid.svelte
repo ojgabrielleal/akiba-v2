@@ -48,7 +48,13 @@
                             {item.author.nickname}
                         </div>
                         <div class="flex gap-3 justify-end mt-1">
-                            <a href={`/materia/${item.slug}`} target="_blank" aria-label="Visualizar" class="cursor-pointer">
+                            <a
+                                title=""
+                                href={`/materia/${item.slug}`}
+                                target="_blank"
+                                aria-label="Visualizar"
+                                class="cursor-pointer"
+                            >
                                 <img
                                     src="/svg/eye.svg"
                                     alt=""
@@ -58,7 +64,12 @@
                                 />
                             </a>
                             {#if canUpdate}
-                                <Link href={`/panel/post/${item.uuid}`} aria-label="Editar" class="cursor-pointer">
+                                <Link
+                                    title=""
+                                    href={`/panel/post/${item.uuid}`}
+                                    aria-label="Editar"
+                                    class="cursor-pointer"
+                                >
                                     <img
                                         src="/svg/edit.svg"
                                         alt=""

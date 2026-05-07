@@ -32,7 +32,12 @@
         <ul class="hidden xl:flex">
             {#each navbar.public as item}
                 <li class="pr-5 pl-5 first:pl-0 border-l first:border-none border-neutral-gray/50 h-6 flex items-center">
-                    <Link href={item.address} aria-label={item.name} class="relative flex items-center gap-1 text-lg font-noto-sans font-extrabold text-neutral-gray hover:text-orange-amber italic uppercase group/item">
+                    <Link
+                        title=""
+                        href={item.address}
+                        aria-label={item.name}
+                        class="relative flex items-center gap-1 text-lg font-noto-sans font-extrabold text-neutral-gray hover:text-orange-amber italic uppercase group/item"
+                    >
                         <img
                             src={item.icon}
                             alt=""
@@ -136,7 +141,13 @@
                 <ul class="space-y-5">
                     {#each navbar.public as item}
                         <li>
-                            <Link href={item.address} class="flex items-center gap-2 text-md font-noto-sans font-extrabold italic uppercase text-blue-night" on:click={() => (mobilenavbar = false)}>
+                            <Link
+                                title=""
+                                aria-label=""
+                                href={item.address}
+                                class="flex items-center gap-2 text-md font-noto-sans font-extrabold italic uppercase text-blue-night"
+                                on:click={() => (mobilenavbar = false)}
+                            >
                                 <img
                                     src={item.icon}
                                     alt=""

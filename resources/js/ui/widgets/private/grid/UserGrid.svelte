@@ -106,7 +106,12 @@
                                     />
                                 </button>
                             {/if}
-                            <Link href={`/panel/profile/${item.uuid}`} aria-label="Editar perfil" class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer">
+                            <Link
+                                title=""
+                                href={`/panel/profile/${item.uuid}`}
+                                aria-label="Editar perfil"
+                                class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
+                            >
                                 <img
                                     src="/svg/edit.svg"
                                     alt=""

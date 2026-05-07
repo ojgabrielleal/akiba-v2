@@ -46,7 +46,13 @@
                             {item.author.nickname}
                         </div>
                         <div class="flex gap-3 justify-end mt-1">
-                            <a href={`/materia/${item.slug}`} target="_blank" aria-label="Visualizar" class="cursor-pointer">
+                            <a
+                                title=""
+                                href={`/materia/${item.slug}`}
+                                target="_blank"
+                                aria-label="Visualizar"
+                                class="cursor-pointer"
+                            >
                                 <img
                                     src="/svg/eye.svg"
                                     alt=""
@@ -55,7 +61,12 @@
                                     loading="lazy"
                                 />
                             </a>
-                            <Link href={`/panel/post/${item.uuid}`} aria-label="Editar" class="cursor-pointer">
+                            <Link
+                                title=""
+                                href={`/panel/post/${item.uuid}`}
+                                aria-label="Editar"
+                                class="cursor-pointer"
+                            >
                                 <img
                                     src="/svg/edit.svg"
                                     alt=""
@@ -85,7 +96,13 @@
                             alt={`Evento ${item.title}`}
                         />
                         <div class="flex gap-4 absolute bottom-3 right-3">
-                            <Link href={`/event/${item.uuid}`} type="button" class="cursor-pointer" aria-label="Editar">
+                            <Link
+                                title=""
+                                href={`/event/${item.uuid}`}
+                                type="button"
+                                class="cursor-pointer"
+                                aria-label="Editar"
+                            >
                                 <img
                                     src="/svg/edit.svg"
                                     alt=""
