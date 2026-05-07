@@ -49,14 +49,14 @@
         </div>
     {/if}
     <div class="w-full overflow-x-auto pb-4">
-        <div class="w-full min-w-[1280px] grid gap-2 grid-cols-7 overflow-auto">
+        <div class="w-full min-w-7x1 grid gap-2 grid-cols-7 overflow-auto">
             {#each calendarTags as item}
                 <span class={`h-10 text-lg font-noto-sans font-bold uppercase italic rounded-lg flex justify-center items-center ${item.color} ${item.textcolor}`}>
                     {item.label}
                 </span>
             {/each}
         </div>
-        <div class="w-full min-w-[1280px] grid gap-2 mt-5 grid-cols-7 overflow-auto">
+        <div class="w-full min-w-7x1 grid gap-2 mt-5 grid-cols-7 overflow-auto">
             {#each week as day}
                 <div class="flex flex-col gap-2 w-full">
                     <div class="text-suspense-aurora text-lg font-noto-sans text-center font-bold uppercase italic">
