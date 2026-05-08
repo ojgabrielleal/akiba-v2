@@ -34,6 +34,14 @@
     /* Greens */
     --color-green-mint: #00a859;
     --color-green-forest: #009933;
+
+    /* Gradients */
+    --gradient-blue-primary: linear-gradient(
+        50deg,
+        rgba(0, 32, 128, 1) 10%, 
+        rgba(0, 0, 54, 0.05) 28%, 
+        rgba(0, 32, 128, 1) 100%
+    );
 }
 
 @theme {
@@ -68,12 +76,6 @@
     --font-noto-sans: "Noto Sans", sans-serif;
 }
 
-@layer base {
-    * {
-        transition: 0.3s ease-in-out;
-    }
-}
-
 @layer components {
     .container-page {
         width: min(100% - clamp(4rem, 5vw, 5rem), 85.375rem);
@@ -95,8 +97,16 @@
     .scroll-x::-webkit-scrollbar {
         display: none;
     }
-}
 
+    .bg-gradient-with-texture {
+        background: url('https://i.ibb.co/Tdhkkyg/3.png'), var(--gradient-blue-primary);
+        background-blend-mode: overlay;
+        background-size: contain;
+        background-position: right;
+        background-repeat: no-repeat;
+    
+    }
+}
 
 /*
     Filters generated to match the color palette of the project, based on the original image of the logo.

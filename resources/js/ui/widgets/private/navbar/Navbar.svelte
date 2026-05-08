@@ -36,17 +36,16 @@
     <ul class="hidden lg:flex flex-1 justify-center">
         {#each navbar.private as item}
             {#if hasPermission(item.permission)}
-                <li class="px-5 first:pl-0 border-l first:border-none border-neutral-gray/50">
+                <li class="px-5 first:pl-0 border-l first:border-none border-neutral-gray/50 group/item">
                     <Link
                         title=""
                         aria-label=""
                         href={item.address}
-                        class="group/item"
                     >
                         <img
                             src={item.icon}
                             alt={item.name}
-                            class="w-5 h-5 inline-block mr-1 filter-neutral-gray group-hover/item:filter-orange-amber"
+                            class="w-5 h-5 inline-block mr-1 filter-neutral-gray group-hover/item:filter-orange-citric"
                         />
                     </Link>
                 </li>
@@ -63,7 +62,7 @@
                 <button
                     type="button"
                     aria-label="Abrir menu do usuario"
-                    class="bg-neutral-white w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
+                    class="bg-neutral-white w-12 h-12 rounded-full flex items-center justify-center overflow-hidden"
                 >
                     <img
                         src={user.avatar}
@@ -102,8 +101,8 @@
             type="button"
             aria-label="Fechar menu de navegacao"
             class="absolute inset-0 bg-blue-night/40 backdrop-blur-sm"
-            on:click={() => (mobilenavbar = false)}
-        ></button>
+            on:click={() => (mobilenavbar = false)}>
+        </button>
         <aside class={["absolute top-0 right-0 h-screen w-[min(15rem,85vw)] bg-neutral-white shadow-xl transition-transform duration-300",
             { "translate-x-0": mobilenavbar },
             { "translate-x-full": !mobilenavbar },

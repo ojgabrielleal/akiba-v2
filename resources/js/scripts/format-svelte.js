@@ -403,6 +403,10 @@ function formatOpeningTag(indent, tag, rawAttributes, selfClosing) {
         ].join('\n');
     }
 
+    if (tag === 'Link' && attributes.length === 1) {
+        return `${indent}<${tag} ${attributes[0]}${selfClosing ? ' /' : ''}>`;
+    }
+
     if (['Link', 'a', 'input', 'select', 'textarea'].includes(tag)) {
         return [
             `${indent}<${tag}`,
