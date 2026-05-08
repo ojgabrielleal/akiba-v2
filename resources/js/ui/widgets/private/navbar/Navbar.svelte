@@ -9,15 +9,21 @@
 </script>
 
 <nav class="container-page flex items-center justify-between mt-5 lg:mt-0">
-    <div class="w-60">
+    <div class="w-8 lg:w-60">
         <img
             src="/img/default/logo.webp"
             alt="Logo"
+            class="hidden lg:block"
+        />
+        <img
+            src="/favicon.ico"
+            alt="Logo"
+            class="block lg:hidden rounded-sm"
         />
     </div>
     <button
         type="button"
-        aria-label="Abrir menu de navegacao"
+        aria-label=""
         class="w-6 lg:hidden"
         on:click={() => (mobilenavbar = !mobilenavbar)}
     >
@@ -48,38 +54,40 @@
         {/each}
     </ul>
     <div class="w-60 hidden lg:flex justify-end">
-        <div class="relative group/avatar flex items-center gap-4">
+        <div class="flex items-center gap-4">
             <span class="flex items-center gap-1 text-sm font-noto-sans text-green-500">
                 Online
                 <span class="w-3 h-3 rounded-full bg-green-500"></span>
             </span>
-            <button
-                type="button"
-                aria-label="Abrir menu do usuario"
-                class="bg-neutral-white w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
-            >
-                <img
-                    src={user.avatar}
-                    alt={user.nickname}
-                    class="w-full h-full object-cover object-top"
-                />
-            </button>
-            <div class="absolute right-0 top-full pt-3 invisible opacity-0 translate-y-1 group-hover/avatar:visible group-hover/avatar:opacity-100 group-hover/avatar:translate-y-0 group-focus-within/avatar:visible group-focus-within/avatar:opacity-100 group-focus-within/avatar:translate-y-0 transition-all duration-200 z-50">
-                <div class="w-40 rounded-lg bg-neutral-white shadow-xl border border-neutral-gray/20 py-2">
-                    <Link
-                        href={`/panel/profile/${user.uuid}`}
-                        class="block px-4 py-2 text-sm font-noto-sans font-medium text-neutral-gray hover:text-orange-amber hover:bg-neutral-gray/10"
-                    >
-                        Meu perfil
-                    </Link>
-                    <Link
-                        href="/panel/logout"
-                        method="post"
-                        as="button"
-                        class="cursor-pointer w-full text-left block px-4 py-2 text-sm font-noto-sans font-medium text-neutral-gray hover:text-orange-amber hover:bg-neutral-gray/10"
-                    >
-                        Desconectar
-                    </Link>
+            <div class="relative group/avatar">
+                <button
+                    type="button"
+                    aria-label="Abrir menu do usuario"
+                    class="bg-neutral-white w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
+                >
+                    <img
+                        src={user.avatar}
+                        alt={user.nickname}
+                        class="w-full h-full object-cover object-top"
+                    />
+                </button>
+                <div class="absolute right-0 top-full pt-3 invisible opacity-0 translate-y-1 group-hover/avatar:visible group-hover/avatar:opacity-100 group-hover/avatar:translate-y-0 group-focus-within/avatar:visible group-focus-within/avatar:opacity-100 group-focus-within/avatar:translate-y-0 transition-all duration-200 z-50">
+                    <div class="w-40 rounded-lg bg-neutral-white shadow-xl border border-neutral-gray/20 py-2">
+                        <Link
+                            href={`/panel/profile/${user.uuid}`}
+                            class="block px-4 py-2 text-sm font-noto-sans font-medium text-neutral-gray hover:text-orange-amber hover:bg-neutral-gray/10"
+                        >
+                            Meu perfil
+                        </Link>
+                        <Link
+                            href="/panel/logout"
+                            method="post"
+                            as="button"
+                            class="cursor-pointer w-full text-left block px-4 py-2 text-sm font-noto-sans font-medium text-neutral-gray hover:text-orange-amber hover:bg-neutral-gray/10"
+                        >
+                            Desconectar
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,30 +104,11 @@
             class="absolute inset-0 bg-blue-night/40 backdrop-blur-sm"
             on:click={() => (mobilenavbar = false)}
         ></button>
-        <aside class={["absolute top-0 right-0 h-screen w-[min(17rem,85vw)] bg-neutral-white shadow-xl transition-transform duration-300",
+        <aside class={["absolute top-0 right-0 h-screen w-[min(15rem,85vw)] bg-neutral-white shadow-xl transition-transform duration-300",
             { "translate-x-0": mobilenavbar },
             { "translate-x-full": !mobilenavbar },
         ]}>
             <div class="h-full flex flex-col">
-                <div class="p-6 border-b border-neutral-gray/20 flex items-center justify-between">
-                    <img
-                        src="/img/default/logo.webp"
-                        alt="Logo"
-                        class="w-34"
-                    />
-                    <button
-                        type="button"
-                        aria-label="Fechar menu"
-                        class="w-6 cursor-pointer"
-                        on:click={() => (mobilenavbar = false)}
-                    >
-                        <img
-                            src="/svg/x.svg"
-                            alt="Fechar"
-                            class="filter-neutral-gray"
-                        />
-                    </button>
-                </div>
                 <ul class="flex-1 overflow-y-auto p-6 flex flex-col gap-4">
                     {#each navbar.private as item}
                         {#if hasPermission(item.permission)}
@@ -149,7 +138,7 @@
                         class="min-w-0 flex items-center gap-3 group/profile"
                         on:click={() => (mobilenavbar = false)}
                     >
-                        <div class="bg-neutral-white w-10 h-10 rounded-full flex items-center justify-center overflow-hidden shadow shrink-0">
+                        <div class="bg-neutral-white w-7 h-7 rounded-full flex items-center justify-center overflow-hidden shadow shrink-0">
                             <img
                                 src={user.avatar}
                                 alt={user.nickname}
@@ -176,10 +165,10 @@
                         on:click={() => (mobilenavbar = false)}
                     >
                         <img
-                            src="/svg/return.svg"
+                            src="/svg/logout.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 h-5 filter-neutral-gray group-hover/logout:filter-orange-amber"
+                            class="w-5 h-5 filter-neutral-gray mr-1 group-hover/logout:filter-orange-amber"
                         />
                     </Link>
                 </div>
