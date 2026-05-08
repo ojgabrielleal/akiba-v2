@@ -1,5 +1,24 @@
 <script>
     import { page, Link } from "@inertiajs/svelte";
+    import { hasPermission } from "@/utils";
+
+    let can = {
+        activity: {
+            create: hasPermission("activity.create"),
+        },
+        post: {
+            create: hasPermission("post.create"),
+        },
+        repository: {
+            create: hasPermission("repository.create"),
+        },
+        locution: {
+            start: hasPermission("locution.start"),
+        },
+        event: {
+            create: hasPermission("event.create"),
+        },
+    };
 
     let chosenPhrase;
     const generatePhrases = () => {
@@ -36,51 +55,61 @@
             {chosenPhrase}
         </div>
         <div class="flex gap-2 absolute right-0">
-            <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
-                <img
-                    src="/svg/events.svg"
-                    alt=""
-                    aria-hidden="true"
-                    class="w-6 filter-orange-citric"
-                />
-                Criar evento
-            </Link>
-            <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
-                <img
-                    src="/svg/alerts.svg"
-                    alt=""
-                    aria-hidden="true"
-                    class="w-6 filter-orange-citric"
-                />
-                Adicionar avisos
-            </Link>
-            <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
-                <img
-                    src="/svg/download.svg"
-                    alt=""
-                    aria-hidden="true"
-                    class="w-6 filter-orange-citric"
-                />
-                Upar arquivos
-            </Link>
-            <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
-                <img
-                    src="/svg/locution.svg"
-                    alt=""
-                    aria-hidden="true"
-                    class="w-6 filter-orange-citric"
-                />
-                Locutar
-            </Link>
-            <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
-                <img
-                    src="/svg/materials.svg"
-                    alt=""
-                    aria-hidden="true"
-                    class="w-6 filter-orange-citric"
-                />
-                Criar matéria
-            </Link>
+            {#if can.event.create}
+                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                    <img
+                        src="/svg/events.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-6 filter-orange-citric"
+                    />
+                    Criar evento
+                </Link>
+            {/if}
+            {#if can.activity.create}
+                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                    <img
+                        src="/svg/alerts.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-6 filter-orange-citric"
+                    />
+                    Adicionar avisos
+                </Link>
+            {/if}
+            {#if can.repository.create}
+                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                    <img
+                        src="/svg/download.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-6 filter-orange-citric"
+                    />
+                    Upar arquivos
+                </Link>
+            {/if}
+            {#if can.locution.start}
+                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                    <img
+                        src="/svg/locution.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-6 filter-orange-citric"
+                    />
+                    Locutar
+                </Link>
+            {/if}
+            {#if can.post.create}
+                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                    <img
+                        src="/svg/materials.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-6 filter-orange-citric"
+                    />
+                    Criar matéria
+                </Link>
+            {/if}
         </div>
     </div>
 </section>
