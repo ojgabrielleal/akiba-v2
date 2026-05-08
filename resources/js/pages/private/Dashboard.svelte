@@ -3,7 +3,7 @@
     import { Meta } from "@/config";
     import { Layout } from "@/ui/layouts/private/";
     import {
-        GreatingHero,
+        WellcomeHero,
         ActivityCarrousel,
         TaskCarrousel,
         PostGrid,
@@ -16,7 +16,7 @@
 
 <Meta meta={{ title: "Dashboard" } } />
 <Layout>
-        <GreatingHero />
+        <WellcomeHero />
     <!--
         <RapidAccessGrid />
         <ActivityCarrousel title="Avisos e Atividades" />

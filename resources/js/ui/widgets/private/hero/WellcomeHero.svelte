@@ -44,7 +44,7 @@
     chosenPhrase = generatePhrases();
 </script>
 
-<section class="w-full bg-gradient-with-texture">
+<section class="w-full bg-gradient-with-texture hidden lg:block">
     <div class="h-30 container-page flex items-center gap-5 relative">
         <img
             src="/img/default/avatar.webp"
@@ -56,7 +56,10 @@
         </div>
         <div class="flex gap-2 absolute right-0">
             {#if can.event.create}
-                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                <Link
+                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    href="/panel/event"
+                >
                     <img
                         src="/svg/events.svg"
                         alt=""
@@ -67,7 +70,10 @@
                 </Link>
             {/if}
             {#if can.activity.create}
-                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                <Link
+                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    href="/panel/administration"
+                >
                     <img
                         src="/svg/alerts.svg"
                         alt=""
@@ -78,7 +84,10 @@
                 </Link>
             {/if}
             {#if can.repository.create}
-                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                <Link
+                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    href="/panel/repository"
+                >
                     <img
                         src="/svg/download.svg"
                         alt=""
@@ -89,7 +98,10 @@
                 </Link>
             {/if}
             {#if can.locution.start}
-                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                <Link
+                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    href="/panel/locution"
+                >
                     <img
                         src="/svg/locution.svg"
                         alt=""
@@ -100,7 +112,10 @@
                 </Link>
             {/if}
             {#if can.post.create}
-                <Link class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic" href="/post">
+                <Link
+                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    href="/panel/post"
+                >
                     <img
                         src="/svg/materials.svg"
                         alt=""
