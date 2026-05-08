@@ -30,7 +30,7 @@
         <img
             src="/svg/menu.svg"
             alt="Menu"
-            class="filter-orange-amber"
+            class="filter-orange-citric"
         />
     </button>
     <ul class="hidden lg:flex flex-1 justify-center">
@@ -74,7 +74,7 @@
                     <div class="w-40 rounded-lg bg-neutral-white shadow-xl border border-neutral-gray/20 py-2">
                         <Link
                             href={`/panel/profile/${user.uuid}`}
-                            class="block px-4 py-2 text-sm font-noto-sans font-medium text-neutral-gray hover:text-orange-amber hover:bg-neutral-gray/10"
+                            class="block px-4 py-2 text-sm font-noto-sans font-medium text-neutral-gray hover:text-orange-citric hover:bg-neutral-gray/10"
                         >
                             Meu perfil
                         </Link>
@@ -82,7 +82,7 @@
                             href="/panel/logout"
                             method="post"
                             as="button"
-                            class="cursor-pointer w-full text-left block px-4 py-2 text-sm font-noto-sans font-medium text-neutral-gray hover:text-orange-amber hover:bg-neutral-gray/10"
+                            class="cursor-pointer w-full text-left block px-4 py-2 text-sm font-noto-sans font-medium text-neutral-gray hover:text-orange-citric hover:bg-neutral-gray/10"
                         >
                             Desconectar
                         </Link>
@@ -116,14 +116,14 @@
                                     title=""
                                     aria-label={item.name}
                                     href={item.address}
-                                    class="group/item flex items-center gap-3 text-neutral-gray font-noto-sans font-bold italic uppercase hover:text-orange-amber"
+                                    class="group/item flex items-center gap-3 text-neutral-gray font-noto-sans font-bold italic uppercase hover:text-orange-citric"
                                     on:click={() => (mobilenavbar = false)}
                                 >
                                     <img
                                         src={item.icon}
                                         alt=""
                                         aria-hidden="true"
-                                        class="w-5 h-5 filter-neutral-gray group-hover/item:filter-orange-amber"
+                                        class="w-5 h-5 filter-neutral-gray group-hover/item:filter-orange-citric"
                                     />
                                     {item.name}
                                 </Link>
@@ -145,7 +145,7 @@
                             />
                         </div>
                         <div class="min-w-0">
-                            <span class="block truncate text-sm font-noto-sans font-bold text-neutral-gray group-hover/profile:text-orange-amber">
+                            <span class="block truncate text-sm font-noto-sans font-bold text-neutral-gray group-hover/profile:text-orange-citric">
                                 {user.nickname}
                             </span>
                             <span class="flex items-center gap-1 text-xs font-noto-sans text-green-500">
@@ -160,14 +160,14 @@
                         method="post"
                         as="button"
                         aria-label="Desconectar"
-                        class="cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-neutral-gray/10 hover:bg-orange-amber/10 group/logout shrink-0"
+                        class="cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-neutral-gray/10 hover:bg-orange-citric/10 group/logout shrink-0"
                         on:click={() => (mobilenavbar = false)}
                     >
                         <img
                             src="/svg/logout.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 h-5 filter-neutral-gray mr-1 group-hover/logout:filter-orange-amber"
+                            class="w-5 h-5 filter-neutral-gray mr-1 group-hover/logout:filter-orange-citric"
                         />
                     </Link>
                 </div>
