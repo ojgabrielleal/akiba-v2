@@ -12,7 +12,7 @@
 <nav class="container-page flex items-center justify-between">
     <div class="w-8 lg:w-60">
         <img
-            src="/img/default/logo.webp"
+            src="/img/brand/logo.webp"
             alt="Logo"
             class="hidden lg:block"
         />

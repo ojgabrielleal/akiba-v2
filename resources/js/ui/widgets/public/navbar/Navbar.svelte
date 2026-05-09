@@ -23,7 +23,7 @@
 
         <div class="ml-5">
             <img
-                src="/img/default/logo.webp"
+                src="/img/brand/logo.webp"
                 alt="Logo"
                 class="w-30 xl:w-35"
             />
@@ -119,7 +119,7 @@
         ]}>
             <div class="p-6 border-b border-blue-night/10 flex items-center justify-between">
                 <img
-                    src="/img/default/logo.webp"
+                    src="/img/brand/logo.webp"
                     alt="Logo"
                     class="w-30"
                 />

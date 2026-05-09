@@ -37,10 +37,10 @@
         on:click={close}
     >
         <div class="w-full lg:w-104 bg-suspense-aurora rounded-t-xl rounded-b-xl relative" on:click={block}>
-            <div class="w-full h-20 pt-8 px-5 lg:mb-2 bg-cover bg-center rounded-t-xl" style="background-image: url('/img/player/songsRequests.webp');">
+            <div class="w-full h-20 pt-8 px-5 lg:mb-2 bg-cover bg-center rounded-t-xl" style="background-image: url('/img/player/song-requests-bg.webp');">
                 <div class="w-36">
                     <img
-                        src="/img/default/logo.webp"
+                        src="/img/brand/logo.webp"
                         alt="logo"
                         loading="lazy"
                     />

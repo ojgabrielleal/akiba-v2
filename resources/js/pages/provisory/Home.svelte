@@ -37,7 +37,7 @@
     <div class="container-page mt-25">
         <div class="w-full flex justify-center">
             <img
-                src="/img/default/logoProvisory.webp"
+                src="/img/brand/logo.webp"
                 alt="Logo"
                 class="w-80 md:w-100 lg:w-110"
                 loading="lazy"

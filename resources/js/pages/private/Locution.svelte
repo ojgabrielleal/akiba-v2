@@ -26,7 +26,7 @@
         <div class="w-sm p-6 rounded-xl bg-suspense-aurora">
             <div class="flex justify-center">
                 <img
-                    src="/img/locution/default/blocked.gif"
+                    src="/img/locution/blocked.gif"
                     alt="Bloqueador de tela"
                     class="w-50 h-50 object-cover rounded-full"
                     loading="lazy"

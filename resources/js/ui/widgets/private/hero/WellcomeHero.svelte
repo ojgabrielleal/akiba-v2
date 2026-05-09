@@ -47,7 +47,7 @@
 <section class="w-full bg-gradient-blue-primary-with-texture hidden lg:block mb-15">
     <div class="h-30 container-page flex items-center gap-5 relative">
         <img
-            src="/img/default/avatar.webp"
+            src="/img/defaults/avatar.webp"
             alt="Avatar"
             class="w-40 h-40 absolute bottom-0"
         />
