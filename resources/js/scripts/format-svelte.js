@@ -678,6 +678,46 @@ function formatInlineTextTernaries(source) {
     return formatted.join('\n');
 }
 
+function formatInlineConstTags(source) {
+    return source.replace(
+        /^([^\S\r\n]*)\{@const\s+([\s\S]*?)\r?\n([^\S\r\n]+)([\s\S]*?)\r?\n([^\S\r\n]+)([\s\S]*?)\}$/gm,
+        (line, indent, start, secondIndent, middle, thirdIndent, end) => {
+            if (secondIndent.length <= indent.length || thirdIndent.length <= indent.length) {
+                return line;
+            }
+
+            return `${indent}{@const ${start.trim()} ${middle.trim()} ${end.trim()}}`;
+        },
+    );
+}
+
+function formatInlineRouterOptions(source) {
+    const formatted = source.replace(
+        /^([^\S\r\n]*)router\.(get|post|put|patch|delete)\(\r?\n([^\S\r\n]+)([^,\r\n]+),\r?\n\3([^,\r\n]+),\r?\n\3\{\r?\n([\s\S]*?)\r?\n\3\},\r?\n\1\);/gm,
+        (line, indent, method, argumentIndent, url, payload, options) => {
+            return [
+                `${indent}router.${method}(${url.trim()}, ${payload.trim()}, {`,
+                options,
+                `${argumentIndent}});`,
+            ].join('\n');
+        },
+    );
+
+    return formatted.replace(
+        /^([^\S\r\n]*)router\.(get|post|put|patch|delete)\(([^,\r\n]+),\s*([^,\r\n]+),\s*\{\r?\n([\s\S]*?)\r?\n([^\S\r\n]*)\}\);/gm,
+        (line, indent, method, url, payload, options, closingIndent) => {
+            const optionIndent = options.match(/^([^\S\r\n]*)\S/m)?.[1] ?? closingIndent;
+            const expectedClosingIndent = optionIndent.slice(0, Math.max(indent.length, optionIndent.length - 4));
+
+            return [
+                `${indent}router.${method}(${url.trim()}, ${payload.trim()}, {`,
+                options,
+                `${expectedClosingIndent}});`,
+            ].join('\n');
+        },
+    );
+}
+
 function addMissingButtonAttributes(source) {
     let formatted = '';
     let cursor = 0;
@@ -789,7 +829,7 @@ function addMissingLinkAttributes(source) {
 }
 
 function formatSvelte(source) {
-    return formatInlineTextTernaries(formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingLinkAttributes(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source)))))))))).replace(
+    return formatInlineRouterOptions(formatInlineConstTags(formatInlineTextTernaries(formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingLinkAttributes(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source)))))))))))).replace(
         /^([^\S\r\n]*)<([A-Za-z][A-Za-z0-9:-]*)([^>]*)>([^\S\r\n]*\S(?:[^\r\n]*\S)?[^\S\r\n]*)<\/\2>[^\S\r\n]*\r?$/gm,
         (line, indent, tag, attributes, content) => {
             const childIndent = `${indent}    `;

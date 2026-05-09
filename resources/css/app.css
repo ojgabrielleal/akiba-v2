@@ -38,9 +38,21 @@
     /* Gradients */
     --gradient-blue-primary: linear-gradient(
         50deg,
-        rgba(0, 32, 128, 1) 10%, 
-        rgba(0, 0, 54, 0.05) 28%, 
-        rgba(0, 32, 128, 1) 100%
+        var(--color-blue-ocean) 10%, 
+        rgba(0, 89, 192, 0.3) 28%, /* blue-cerulean */
+        var(--color-blue-cerulean) 100%
+    );
+
+    --gradient-blue-secondary: linear-gradient(
+        50deg,
+        rgba(0, 89, 192, 0.4) 2%, /* blue-cerulean */
+        var(--color-blue-cerulean) 100%
+    );
+
+    --gradient-orange-primary: linear-gradient(
+        50deg,
+        var(--color-orange-morning) 10%, 
+        var(--color-neutral-white) 100%
     );
 }
 
@@ -78,7 +90,7 @@
 
 @layer components {
     .container-page {
-        width: min(100% - clamp(4rem, 5vw, 5rem), 85.375rem);
+        width: min(100% - clamp(4rem, 5vw, 5rem), 81.25rem);
         margin-inline: auto;
     }
 
@@ -98,13 +110,20 @@
         display: none;
     }
 
-    .bg-gradient-with-texture {
+    .bg-gradient-blue-primary-with-texture {
         background: url('https://i.ibb.co/Tdhkkyg/3.png'), var(--gradient-blue-primary);
         background-blend-mode: overlay;
         background-size: contain;
         background-position: right;
         background-repeat: no-repeat;
-    
+    }
+
+    .bg-gradient-blue-secondary {
+        background: var(--gradient-blue-secondary);
+    }
+
+    .bg-gradient-orange-primary {
+        background: var(--gradient-orange-primary);
     }
 }
 

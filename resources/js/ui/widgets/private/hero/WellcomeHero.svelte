@@ -44,7 +44,7 @@
     chosenPhrase = generatePhrases();
 </script>
 
-<section class="w-full bg-gradient-with-texture hidden lg:block">
+<section class="w-full bg-gradient-blue-primary-with-texture hidden lg:block mb-15">
     <div class="h-30 container-page flex items-center gap-5 relative">
         <img
             src="/img/default/avatar.webp"

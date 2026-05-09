@@ -25,10 +25,7 @@
         const formData = new FormData(form);
         const option = formData.get("option");
 
-        router.post(
-            `/panel/media/poll/vote/${option}`,
-            {},
-            {
+        router.post(`/panel/media/poll/vote/${option}`, {}, {
                 preserveScroll: true,
                 onSuccess: () => {
                     localStorage.setItem(
@@ -38,18 +35,13 @@
                     storageVotedPolls.push(item.uuid);
                     storageVotedPolls = storageVotedPolls;
                 },
-            },
-        );
+            });
     };
 
     const requestDeactivatePoll = (poll) => {
-        router.delete(
-            `/panel/media/poll/${poll}`,
-            {},
-            {
+        router.delete(`/panel/media/poll/${poll}`, {}, {
                 preserveScroll: true,
-            },
-        );
+            });
     };
 </script>
 

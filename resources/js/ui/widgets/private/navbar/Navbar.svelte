@@ -2,13 +2,14 @@
     import { page, Link } from "@inertiajs/svelte";
     import { hasPermission } from "@/utils";
     import { navbar } from "@/data";
+    import { Tooltip } from "@/ui/components/private";
 
     $: ({ user } = $page.props);
 
     let mobilenavbar = false;
 </script>
 
-<nav class="container-page flex items-center justify-between mt-5 lg:mt-0">
+<nav class="container-page flex items-center justify-between">
     <div class="w-8 lg:w-60">
         <img
             src="/img/default/logo.webp"
@@ -37,17 +38,23 @@
         {#each navbar.private as item}
             {#if hasPermission(item.permission)}
                 <li class="px-5 first:pl-0 border-l first:border-none border-neutral-gray/50 group/item">
-                    <Link
-                        title=""
-                        aria-label=""
-                        href={item.address}
-                    >
-                        <img
-                            src={item.icon}
-                            alt={item.name}
-                            class="w-5 h-5 inline-block mr-1 filter-neutral-gray group-hover/item:filter-orange-citric"
-                        />
-                    </Link>
+                    <Tooltip position="bottom">
+                        <Link
+                            title=""
+                            aria-label={item.name}
+                            href={item.address}
+                        >
+                            <img
+                                src={item.icon}
+                                alt=""
+                                aria-hidden="true"
+                                class="w-5 h-5 inline-block mr-1 filter-neutral-gray group-hover/item:filter-orange-citric"
+                            />
+                        </Link>
+                        <span slot="content">
+                            {item.name}
+                        </span>
+                    </Tooltip>
                 </li>
             {/if}
         {/each}
@@ -67,7 +74,7 @@
                     <img
                         src={user.avatar}
                         alt={user.nickname}
-                        class="w-full h-full object-cover object-top"
+                        class="w-full h-full object-cover object-top scale-200 "
                     />
                 </button>
                 <div class="absolute right-0 top-full pt-3 invisible opacity-0 translate-y-1 group-hover/avatar:visible group-hover/avatar:opacity-100 group-hover/avatar:translate-y-0 group-focus-within/avatar:visible group-focus-within/avatar:opacity-100 group-focus-within/avatar:translate-y-0 transition-all duration-200 z-50">
@@ -141,7 +148,7 @@
                             <img
                                 src={user.avatar}
                                 alt={user.nickname}
-                                class="w-full h-full object-cover object-top"
+                                class="w-full h-full object-cover object-top scale-200"
                             />
                         </div>
                         <div class="min-w-0">

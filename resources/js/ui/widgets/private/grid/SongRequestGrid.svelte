@@ -17,33 +17,21 @@
     };
 
     const requestToggleSongRequest = () => {
-        router.patch(
-            "/panel/locution/songrequest/toggle",
-            {},
-            {
+        router.patch("/panel/locution/songrequest/toggle", {}, {
                 preserveScroll: true,
-            },
-        );
+            });
     };
 
     const markToReproduced = (songrequest) => {
-        router.patch(
-            `/panel/locution/songrequest/${songrequest}/played`,
-            {},
-            {
+        router.patch(`/panel/locution/songrequest/${songrequest}/played`, {}, {
                 preserveScroll: true,
-            },
-        );
+            });
     };
 
     const markToCanceled = (songrequest) => {
-        router.patch(
-            `/panel/locution/songrequest/${songrequest}/canceled`,
-            {},
-            {
+        router.patch(`/panel/locution/songrequest/${songrequest}/canceled`, {}, {
                 preserveScroll: true,
-            },
-        );
+            });
     };
 
     const requestFinishlocution = () => {

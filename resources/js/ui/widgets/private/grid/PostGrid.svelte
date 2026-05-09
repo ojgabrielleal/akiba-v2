@@ -19,9 +19,7 @@
     <Section {title}>
         <div class="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {#each posts.data as item}
-                {@const canUpdate =
-                    can.update ||
-                    (can.own.update && item.author.uuid === user.uuid)}
+                {@const canUpdate = can.update || (can.own.update && item.author.uuid === user.uuid)}
                 <article class={["w-full h-56 rounded-lg p-4 relative",
                     { "bg-blue-skywave": item.type === "published" },
                     { "bg-orange-amber": item.type === "revision" },

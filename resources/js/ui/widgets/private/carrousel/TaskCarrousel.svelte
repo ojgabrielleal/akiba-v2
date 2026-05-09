@@ -2,8 +2,8 @@
     export let title;
 
     import { page, router } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
-    import { scrollx, hasPermission } from "@/utils";
+    import { Carrousel, Section } from "@/ui/components/private/";
+    import { hasPermission } from "@/utils";
 
     $: ({ tasks } = $page.props);
 
@@ -12,24 +12,16 @@
     };
 
     const requestMarkTaskCompleted = (task) => {
-        router.post(
-            `/panel/dashboard/task/${task}/complete`,
-            {},
-            {
+        router.post(`/panel/dashboard/task/${task}/complete`, {}, {
                 preserveScroll: true,
                 preserveState: true,
-            },
-        );
+            });
     };
 </script>
 
 {#if tasks}
     <Section {title}>
-        <div
-            class="scroll-x flex gap-5 overflow-x-auto flex-nowrap"
-            role="group"
-            on:wheel={scrollx}
-        >
+        <Carrousel>
             {#each tasks.data as item}
                 <article class={["w-100 h-50 lg:w-160 lg:h-43 shrink-0 rounded-lg p-4 relative",
                     { "bg-orange-amber": item.is_due },
@@ -83,6 +75,6 @@
                     {/if}
                 </article>
             {/each}
-        </div>
+        </Carrousel>
     </Section>
 {/if}

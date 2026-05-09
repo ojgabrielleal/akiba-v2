@@ -25,13 +25,9 @@
     };
 
     const setRanking = () => {
-        router.post(
-            "/panel/radio/music-ranking",
-            {},
-            {
+        router.post("/panel/radio/music-ranking", {}, {
                 preserveScroll: true,
-            },
-        );
+            });
     };
 </script>
 

@@ -2,9 +2,9 @@
     export let title;
 
     import { router, page } from "@inertiajs/svelte";
-    import { Offcanvas, Section } from "@/ui/components/private/";
+    import { Carrousel, Offcanvas, Section } from "@/ui/components/private/";
     import { ProgramForm } from "@/ui/widgets/private";
-    import { scrollx, hasPermission } from "@/utils";
+    import { hasPermission } from "@/utils";
 
     $: ({ programs } = $page.props);
 
@@ -18,14 +18,10 @@
     let identifier;
 
     const requestDeactivateProgram = (program) => {
-        router.delete(
-            `/panel/radio/program/${program}`,
-            {},
-            {
+        router.delete(`/panel/radio/program/${program}`, {}, {
                 preserveScroll: true,
                 preserveState: true,
-            },
-        );
+            });
     };
 </script>
 
@@ -44,11 +40,7 @@
         </div>
     {/if}
     <Section {title} styles="mb-15">
-        <div
-            class="scroll-x overflow-x-auto flex gap-5 flex-nowrap mt-5"
-            role="group"
-            on:wheel|nonpassive={scrollx}
-        >
+        <Carrousel styles="mt-5">
             {#each programs.data as item}
                 <article class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0">
                     <div>
@@ -94,6 +86,6 @@
                     </div>
                 </article>
             {/each}
-        </div>
+        </Carrousel>
     </Section>
 {/if}
