@@ -37,7 +37,7 @@ Route::prefix('panel')->middleware(['inertia'])->group(function () {
                 Route::post('{activity:uuid}/confirm', 'confirmActivityParticipant');
             });
             Route::prefix('task')->group(function () {
-                Route::post('{task:uuid}/complete', 'markTaskCompleted');
+                Route::post('{task:uuid}/complete', 'markTaskToReview');
             });
         });
 

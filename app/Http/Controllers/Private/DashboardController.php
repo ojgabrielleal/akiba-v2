@@ -67,19 +67,20 @@ class DashboardController extends Controller
             Task::active()
                 ->incompleted()
                 ->mine()
+                ->where('status', '!=', 'completed')
                 ->with(['responsible'])
                 ->get()
         );
     }
 
-    public function markTaskCompleted(Task $task)
+    public function markTaskToReview(Task $task)
     {
         if (request()->user()->cannot('update', $task)) {
             return null;
         }
 
         $task->update([
-            'is_completed' => true,
+            'status' => 'in_review',
         ]);
 
         return $this->flashMessage('complete');

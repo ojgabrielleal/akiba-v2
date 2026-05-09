@@ -34,6 +34,7 @@
     /* Greens */
     --color-green-mint: #00a859;
     --color-green-forest: #009933;
+    --color-green-pine: #004100;
 
     /* Gradients */
     --gradient-blue-primary: linear-gradient(
@@ -53,6 +54,18 @@
         50deg,
         var(--color-orange-morning) 10%, 
         var(--color-neutral-white) 100%
+    );
+
+    --gradient-green-primary: linear-gradient(
+        270deg, 
+        var(--color-green-forest) 0%, 
+        var(--color-green-pine) 100%
+    );
+
+    --gradient-red-primary: linear-gradient(
+        270deg, 
+        #ED3237 0%, 
+        #570300 100%
     );
 }
 
@@ -82,6 +95,7 @@
 
     --color-green-mint: var(--color-green-mint);
     --color-green-forest: var(--color-green-forest);
+    --color-green-pine: var(--color-green-pine);
 }
 
 @theme {
@@ -124,6 +138,14 @@
 
     .bg-gradient-orange-primary {
         background: var(--gradient-orange-primary);
+    }
+
+    .bg-gradient-green-primary {
+        background: var(--gradient-green-primary);
+    }
+
+    .bg-gradient-red-primary {
+        background: var(--gradient-red-primary);
     }
 }
 

@@ -21,7 +21,7 @@ class Task extends Model
         'status',
         'title',
         'dead_line',
-        'content',
+        'description',
     ];
 
     protected $casts = [
@@ -33,23 +33,22 @@ class Task extends Model
         'user_id',
     ];
 
-    protected $appends = ['is_over', 'is_due'];
+    protected $appends = ['days_remaining', 'is_overdue'];
 
-    protected function isOver(): Attribute
+    protected function daysRemaining(): Attribute
     {
         return Attribute::make(
             get: function () {
                 if ($this->status === 'completed') {
-                    return false;
+                    return 0;
                 }
 
-                $dead_line = $this->dead_line;
-                return $dead_line->isPast();
+                return (int) max(0, today()->diffInDays($this->dead_line, false));
             }
         );
     }
 
-    protected function isDue(): Attribute
+    protected function isOverdue(): Attribute
     {
         return Attribute::make(
             get: function () {
@@ -57,8 +56,7 @@ class Task extends Model
                     return false;
                 }
 
-                $dead_line = $this->dead_line;
-                return $dead_line->between(today(), today()->addDays(7));
+                return $this->days_remaining === 0 && $this->dead_line->isPast();
             }
         );
     }

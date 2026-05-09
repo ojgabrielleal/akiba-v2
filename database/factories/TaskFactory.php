@@ -19,7 +19,7 @@ class TaskFactory extends Factory
         return [
             'dead_line' => fake()->date(),
             'title' => fake()->words(5, true),
-            'content' => fake()->paragraph(),
+            'description' => fake()->sentence(),
         ];
     }
 

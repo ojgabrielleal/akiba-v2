@@ -17,7 +17,7 @@
         user: null,
         title: null,
         dead_line: null,
-        content: null,
+        description: null,
     });
 
     if (identifier) {
@@ -29,7 +29,7 @@
                 $form.user = data.responsible.uuid;
                 $form.title = data.title;
                 $form.dead_line = data.dead_line;
-                $form.content = data.content;
+                $form.description = data.description;
             })
             .catch((err) => {
                 console.error("Error when find task selected", err);
@@ -99,17 +99,17 @@
         />
     </div>
     <div class="mb-4">
-        <label for="content" class="text-md text-gray-700 font-noto-sans block mb-1">
+        <label for="description" class="text-md text-gray-700 font-noto-sans block mb-1">
             Descrição
         </label>
-        <textarea
-            id="content"
-            name="content"
-            rows="5"
-            class="w-full bg-white font-noto-sans text-md rounded-lg outline-none py-2 px-4 border border-gray-400"
-            bind:value={$form.content}
+        <input
+            id="description"
+            type="text"
+            name="description"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+            bind:value={$form.description}
             required
-        ></textarea>
+        />
     </div>
     {#if can.create || can.update}
         <button
