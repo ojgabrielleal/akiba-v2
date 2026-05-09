@@ -91,14 +91,14 @@
                             <button
                                 type="button"
                                 aria-label="Atualizar"
-                                class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
+                                class="w-8 h-8 g-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                 on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
                             >
                                 <img
                                     src="/svg/edit.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-4"
+                                    class="w-5 filter-orange-citric"
                                     loading="lazy"
                                 />
                             </button>
@@ -107,14 +107,14 @@
                             <button
                                 type="button"
                                 aria-label="Confirmar"
-                                class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
+                                class="w-8 h-8 bg-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                 on:click={()=>requestConfirmActivityParticipant(item.uuid)}
                             >
                                 <img
                                     src="/svg/verify.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-5"
+                                    class="w-5 filter-orange-citric"
                                     loading="lazy"
                                 />
                             </button>
