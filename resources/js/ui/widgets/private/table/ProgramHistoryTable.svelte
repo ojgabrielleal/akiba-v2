@@ -2,7 +2,7 @@
     export let title;
 
     import { page } from "@inertiajs/svelte";
-    import { Section, Pagination } from "@/ui/components/private/";
+    import { Section, PageControls } from "@/ui/components/private/";
 
     $: ({ onair } = $page.props);
 </script>
@@ -52,7 +52,7 @@
                     {/each}
                 </tbody>
             </table>
-            <Pagination pages={onair} />
+            <PageControls pages={onair} />
         </div>
     {/if}
 </Section>

@@ -2,7 +2,7 @@
     export let title;
 
     import { page, Link } from "@inertiajs/svelte";
-    import { Section, Pagination } from "@/ui/components/private";
+    import { Section, PageControls } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
     $: ({ user, posts } = $page.props);
@@ -82,6 +82,6 @@
                 </article>
             {/each}
         </div>
-        <Pagination pages={posts} />
+        <PageControls pages={posts} />
     </Section>
 {/if}

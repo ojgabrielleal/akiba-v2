@@ -37,7 +37,7 @@
         <Carrousel>
             {#each activities.data as item}
                 {@const canParticipate = can.participate && !item.confirmations.some((conf) => conf.uuid === user.uuid)}
-                <article class={["w-100 h-50 lg:w-116 shrink-0 rounded-lg p-4 relative",
+                <article class={["w-100 h-55 lg:w-116 shrink-0 rounded-lg p-4 relative",
                     { "bg-gradient-orange-primary": item.allows_confirmations },
                     { "bg-gradient-blue-secondary": !item.allows_confirmations },
                 ]}>
@@ -47,7 +47,7 @@
                     ]}>
                         {item.allows_confirmations ? item.title : item.author.nickname}
                     </div>
-                    <div class={["font-noto-sans text-sm line-clamp-5 mt-1",
+                    <div class={["font-noto-sans text-md line-clamp-5 mt-1",
                         { "text-blue-marinho": item.allows_confirmations },
                         { "text-suspense-aurora": !item.allows_confirmations },
                     ]}>
@@ -78,7 +78,9 @@
                                     <div slot="content" class="px-1 py-1">
                                         <ul class="flex flex-col gap-1 text-left">
                                             {#each item.confirmations.slice(5) as conf}
-                                                <li>{conf.nickname}</li>
+                                                <li>
+                                                    {conf.nickname}
+                                                </li>
                                             {/each}
                                         </ul>
                                     </div>
@@ -91,7 +93,7 @@
                             <button
                                 type="button"
                                 aria-label="Atualizar"
-                                class="w-8 h-8 g-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
+                                class="w-10 h-10 g-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                 on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
                             >
                                 <img
@@ -107,7 +109,7 @@
                             <button
                                 type="button"
                                 aria-label="Confirmar"
-                                class="w-8 h-8 bg-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
+                                class="w-10 h-10 bg-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                 on:click={()=>requestConfirmActivityParticipant(item.uuid)}
                             >
                                 <img

@@ -50,7 +50,7 @@
                 class="pointer-events-auto cursor-pointer w-14 h-14 xl:w-18 xl:h-18 rounded-full border-8 xl:border-10 border-blue-marinho bg-orange-citric flex justify-center items-center"
                 on:click={() => moveCarrousel("left")}
             >
-                <img 
+                <img
                     src="/svg/chevron-left.svg"
                     alt=""
                     aria-hidden="true"
@@ -78,7 +78,7 @@
                 class="pointer-events-auto cursor-pointer w-14 h-14 xl:w-18 xl:h-18 rounded-full border-8 xl:border-10 border-blue-marinho bg-orange-citric flex justify-center items-center"
                 on:click={() => moveCarrousel("right")}
             >
-                <img 
+                <img
                     src="/svg/chevron-right.svg"
                     alt=""
                     aria-hidden="true"

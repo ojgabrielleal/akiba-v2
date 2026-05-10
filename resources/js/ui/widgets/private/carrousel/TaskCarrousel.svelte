@@ -2,7 +2,7 @@
     export let title;
 
     import { page, router } from "@inertiajs/svelte";
-    import { Section } from "@/ui/components/private/";
+    import { Section, PageControls } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
 
     $: ({ tasks } = $page.props);
@@ -24,31 +24,32 @@
     <Section {title}>
         <div class="flex flex-col gap-4">
             {#each tasks.data as task}
-                <article class={["w-full rounded-lg px-4 py-3", 
+                <article class={["w-full rounded-lg px-4 py-3",
                     { "bg-gradient-blue-secondary": task.status === 'pending' },
                     { "bg-gradient-green-primary": task.status === 'in_review' },
                     { "bg-gradient-red-primary": task.is_overdue && task.status === 'pending' },
                 ]}>
                     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div class="block min-w-0">
-                            <div class="truncate text-2xl font-bold uppercase italic text-neutral-white">
+                            <div class="text-xl lg:text-2xl text-neutral-white font-bold uppercase italic lg:truncate">
                                 {task.title}
                             </div>
-                            <div class="line-clamp-2 text-md text-neutral-white">
+                            <div class="text-md text-neutral-white lg:line-clamp-2">
                                 {task.description}
                             </div>
                         </div>
                         {#if task.status === 'pending'}
-                            <div class={["grid w-full h-15 shrink-0 grid-cols-[1fr_1fr] overflow-hidden rounded-2xl bg-blue-night",
-                                {"md:w-52": task.is_overdue},
-                                {"md:w-35": !task.is_overdue},
+                            <div class={["grid w-full h-15 shrink-0 overflow-hidden rounded-2xl bg-blue-night",
+                                task.is_overdue
+                                    ? "md:w-52 grid-cols-[1fr_1fr]"
+                                    : "md:w-40 grid-cols-[1fr_4rem]",
                             ]}>
-                                <div class="flex flex-col gap-1 justify-center bg-suspense-aurora px-4 font-noto-sans text-blue-night">
+                                <div class="flex min-w-0 flex-col gap-1 justify-center bg-suspense-aurora px-4 font-noto-sans text-blue-night">
                                     <span class="text-sm text-center font-bold uppercase leading-none">
                                         Faltam
                                     </span>
-                                    <div class="flex justify-center items-center gap-1">
-                                        <span class="text-4xl font-black leading-[0.85] text-blue-skywave">
+                                    <div class="flex justify-center items-center gap-1 min-w-0">
+                                        <span class="text-4xl font-black leading-[0.85] text-blue-skywave tabular-nums">
                                             {task.is_overdue ? '0' : task.days_remaining}
                                         </span>
                                         <span class="pb-1 text-sm font-medium uppercase leading-none">
@@ -73,7 +74,7 @@
                                                     src="/svg/verify.svg"
                                                     alt=""
                                                     aria-hidden="true"
-                                                    class="w-5 filter-orange-citric"
+                                                    class="w-10 filter-orange-citric"
                                                     loading="lazy"
                                                 />
                                             </button>
@@ -90,5 +91,12 @@
                 </article>
             {/each}
         </div>
+        <PageControls
+            pages={tasks}
+            mode="button"
+            only={["tasks"]}
+            pageName="tasks"
+            preserveUrl
+        />
     </Section>
 {/if}

@@ -2,6 +2,7 @@
     import { page } from "@inertiajs/svelte";
 
     $: ({ streaming } = $page.props);
+    $: cast = streaming ?? {};
 </script>
 
 <section class="container-page bg-blue-marinho">
@@ -15,7 +16,7 @@
                     class="w-8 filter-blue-skywave"
                     loading="lazy"
                 />
-                {streaming.bitrate || "N/A"}
+                {cast.bitrate ?? "N/A"}
             </div>
             <div class="hidden gap-2 items-end font-noto-sans text-orange-amber text-xl uppercase pl-6 pr-6 border-r border-r-[rgba(229,231,235,0.3)] lg:flex">
                 <img
@@ -25,7 +26,7 @@
                     class="w-8 filter-blue-skywave"
                     loading="lazy"
                 />
-                {streaming.status || "N/A"}
+                {cast.status ?? "N/A"}
             </div>
             <div class="flex gap-2 items-end font-noto-sans text-orange-amber text-xl uppercase lg:pl-6 lg:pr-6">
                 <img
@@ -35,7 +36,7 @@
                     class="w-8 filter-blue-skywave"
                     loading="lazy"
                 />
-                {streaming.listeners || "N/A"} Ouvintes
+                {cast.listeners ?? "N/A"} Ouvintes
             </div>
         </div>
     </div>

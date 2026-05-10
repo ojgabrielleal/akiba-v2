@@ -1,7 +1,7 @@
 export { default as Preview } from './Preview.svelte'
 export { default as Wysiwyg } from './Wysiwyg.svelte'
 export { default as Offcanvas } from './Offcanvas.svelte'
-export { default as Pagination } from './Pagination.svelte'
+export { default as PageControls } from './PageControls.svelte'
 export { default as Carrousel } from './Carrousel.svelte'
 export { default as Section } from './Section.svelte'
 export { default as Modal } from './Modal.svelte'

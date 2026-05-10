@@ -69,7 +69,9 @@ class DashboardController extends Controller
                 ->mine()
                 ->where('status', '!=', 'completed')
                 ->with(['responsible'])
-                ->get()
+                ->orderBy('dead_line')
+                ->orderBy('created_at', 'desc')
+                ->paginate(5)
         );
     }
 
