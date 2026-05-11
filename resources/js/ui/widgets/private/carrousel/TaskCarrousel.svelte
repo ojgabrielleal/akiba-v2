@@ -40,9 +40,8 @@
                         </div>
                         {#if task.status === 'pending'}
                             <div class={["grid w-full h-15 shrink-0 overflow-hidden rounded-2xl bg-blue-night",
-                                task.is_overdue
-                                    ? "md:w-52 grid-cols-[1fr_1fr]"
-                                    : "md:w-40 grid-cols-[1fr_4rem]",
+                                {"md:w-52 grid-cols-[1fr_1fr]": task.is_overdue},
+                                {"md:w-40 grid-cols-[1fr_4rem]": !task.is_overdue}
                             ]}>
                                 <div class="flex min-w-0 flex-col gap-1 justify-center bg-suspense-aurora px-4 font-noto-sans text-blue-night">
                                     <span class="text-sm text-center font-bold uppercase leading-none">
