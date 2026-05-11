@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Private;
 use App\Actions\Post\DeactivatePostAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivityResource;
-use App\Http\Resources\CalendarResource;
+use App\Http\Resources\CalendarWeekResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Activity;
@@ -135,7 +135,7 @@ class DashboardController extends Controller
             return null;
         }
 
-        return CalendarResource::collection(
+        return CalendarWeekResource::make(
             Calendar::valid()
                 ->with(['activity', 'responsible'])
                 ->get()

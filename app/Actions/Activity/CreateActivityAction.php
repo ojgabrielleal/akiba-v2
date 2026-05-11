@@ -26,8 +26,6 @@ class CreateActivityAction
             if ($mayHaveConfirmations) {
                 $activity->calendar()->create([
                     'user_id' => $user->id,
-                    'has_activity' => true,
-                    'type' => 'activity',
                     'content' => $data['title'],
                     'hour' => $data['hour'],
                     'date' => $data['date'],

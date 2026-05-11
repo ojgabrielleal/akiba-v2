@@ -15,11 +15,9 @@
 
 <Meta meta={{ title: "Dashboard" } } />
 <Layout>
-        <WellcomeHero />
-        <ActivityCarrousel title="Avisos e Atividades" />
-        <TaskCarrousel title="Minhas Tarefas" />
-        <PostGrid title="Minhas últimas matérias" />
-        <!--
-        <CalendarGrid title="Calendário" />
-    -->
+    <WellcomeHero />
+    <ActivityCarrousel title="Avisos e Atividades" />
+    <TaskCarrousel title="Minhas Tarefas" />
+    <PostGrid title="Minhas últimas matérias" />
+    <CalendarGrid title="Calendário" />
 </Layout>

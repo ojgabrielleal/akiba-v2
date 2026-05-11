@@ -20,15 +20,15 @@ class CalendarFactory extends Factory
             'hour' => fake()->time(),
             'day_of_week' => fake()->numberBetween(0, 6),
             'date' => fake()->dateTimeBetween(now()->startOfWeek(), now()->endOfWeek())->format('Y-m-d'),
-            'type' => fake()->randomElement(['show', 'live', 'video', 'podcast', 'activity']),
+            'type' => fake()->randomElement(['show', 'live', 'video', 'podcast']),
             'content' => fake()->word(),
         ];
     }
 
-    public function withHasActivity(): static
+    public function withActivity(): static
     {
         return $this->state(fn (array $attributes) => [
-            'has_activity' => true,
+            'type' => null,
         ]);
     }
 }

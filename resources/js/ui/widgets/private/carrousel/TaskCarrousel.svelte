@@ -39,25 +39,25 @@
                             </div>
                         </div>
                         {#if task.status === 'pending'}
-                            <div class={["grid w-full h-15 shrink-0 overflow-hidden rounded-2xl bg-blue-night",
+                            <div class={["grid w-full shrink-0 overflow-hidden rounded-lg bg-blue-night",
                                 { "md:w-52 grid-cols-[1fr_1fr]": task.is_overdue },
-                                { "md:w-40 grid-cols-[1fr_4rem]": !task.is_overdue },
+                                { "md:w-30 grid-cols-[1fr_2.5rem]": !task.is_overdue },
                             ]}>
-                                <div class="flex min-w-0 flex-col gap-1 justify-center bg-suspense-aurora px-4 font-noto-sans text-blue-night">
-                                    <span class="text-sm text-center font-bold uppercase leading-none">
+                                <div class="flex min-w-0 flex-col gap-1 justify-center bg-suspense-aurora p-1 font-noto-sans text-blue-night">
+                                    <span class="text-[0.8rem] text-center font-bold uppercase leading-none">
                                         Faltam
                                     </span>
                                     <div class="flex justify-center items-center gap-1 min-w-0">
-                                        <span class="text-4xl font-black leading-[0.85] text-blue-skywave tabular-nums">
+                                        <span class="text-lg font-black leading-[0.85] text-blue-skywave tabular-nums">
                                             {task.is_overdue ? '0' : task.days_remaining}
                                         </span>
-                                        <span class="pb-1 text-sm font-medium uppercase leading-none">
+                                        <span class="text-[0.8rem] font-medium uppercase leading-none">
                                             {task.days_remaining === 1 ? "dia" : "dias"}
                                         </span>
                                     </div>
                                 </div>
                                 {#if task.is_overdue}
-                                    <div class="bg-blue-night px-3 flex items-center font-noto-sans font-bold italic uppercase text-orange-amber text-center leading-5">
+                                    <div class="flex items-center justify-center bg-blue-night px-3 font-noto-sans font-bold italic uppercase text-orange-amber text-[0.8rem] text-center leading-5">
                                         Você tem 1 strike
                                     </div>
                                 {:else}
@@ -73,7 +73,7 @@
                                                     src="/svg/verify.svg"
                                                     alt=""
                                                     aria-hidden="true"
-                                                    class="w-10 filter-orange-citric"
+                                                    class="w-5 filter-orange-citric"
                                                     loading="lazy"
                                                 />
                                             </button>
@@ -82,8 +82,8 @@
                                 {/if}
                             </div>
                         {:else if task.status === 'in_review'}
-                            <div class="flex w-full md:w-35 h-15 shrink-0 items-center justify-center rounded-2xl bg-blue-marinho px-4 font-noto-sans font-bold italic uppercase text-center text-neutral-white">
-                                Em avaliação
+                            <div class="flex w-full md:w-35 h-12 p-1 shrink-0 items-center justify-center rounded-lg bg-blue-marinho px-4 font-noto-sans font-bold italic uppercase text-[0.8rem] text-center text-neutral-white">
+                               Em avaliação
                             </div>
                         {/if}
                     </div>

@@ -29,7 +29,7 @@
                 {@const canUpdate = can.update || (can.own.update && item.author?.uuid === user?.uuid)}
                 <article class="w-full h-60 bg-blue-ocean rounded-lg overflow-hidden relative">
                     <div class="p-4">
-                          <div class="font-noto-sans text-lg text-suspense-aurora line-clamp-5 uppercase">
+                          <div class="font-noto-sans text-xl text-suspense-aurora line-clamp-5 uppercase">
                             {item.title}
                         </div>
                     </div>

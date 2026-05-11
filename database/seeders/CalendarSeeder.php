@@ -33,7 +33,7 @@ class CalendarSeeder extends Seeder
             Calendar::factory()
                 ->for($user, 'responsible')
                 ->for($activity, 'activity')
-                ->hasActivity()
+                ->withActivity()
                 ->create();
         }
     }
@@ -42,7 +42,6 @@ class CalendarSeeder extends Seeder
     {
         Calendar::factory(5)
             ->for($user, 'responsible')
-            ->withHasActivity()
             ->create();
     }
 }
