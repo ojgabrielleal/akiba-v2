@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Private;
 
+use App\Actions\Post\DeactivatePostAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\CalendarResource;
@@ -103,11 +104,23 @@ class DashboardController extends Controller
         return PostResource::collection(
             Post::active()
                 ->published()
+                ->mine()
                 ->latest()
                 ->with(['author'])
-                ->limit(5)
+                ->limit(4)
                 ->get()
         );
+    }
+
+    public function deactivatePost(Post $post, DeactivatePostAction $deactivatePostAction)
+    {
+        if (request()->user()->cannot('delete', $post)) {
+            return null;
+        }
+
+        $deactivatePostAction->execute($post);
+
+        return $this->flashMessage('deactivate');
     }
 
     /*

@@ -2,7 +2,7 @@
     export let title;
 
     import { page, router } from "@inertiajs/svelte";
-    import { Section, PageControls } from "@/ui/components/private/";
+    import { Section, Pagination } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
 
     $: ({ tasks } = $page.props);
@@ -25,9 +25,9 @@
         <div class="flex flex-col gap-4">
             {#each tasks.data as task}
                 <article class={["w-full rounded-lg px-4 py-3",
-                    { "bg-gradient-blue-secondary": task.status === 'pending' },
-                    { "bg-gradient-green-primary": task.status === 'in_review' },
-                    { "bg-gradient-red-primary": task.is_overdue && task.status === 'pending' },
+                    { "bg-gradient-blue-cerulean-glow": task.status === 'pending' },
+                    { "bg-gradient-green-forest-pine": task.status === 'in_review' },
+                    { "bg-gradient-red-crimson-blood": task.is_overdue && task.status === 'pending' },
                 ]}>
                     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div class="block min-w-0">
@@ -90,7 +90,7 @@
                 </article>
             {/each}
         </div>
-        <PageControls
+        <Pagination
             pages={tasks}
             mode="button"
             only={["tasks"]}

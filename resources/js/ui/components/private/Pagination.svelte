@@ -120,7 +120,7 @@
                             src="/svg/chevron-up.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-15 filter-orange-citric"
+                            class="w-10 filter-orange-citric pagination-less-arrow"
                             loading="lazy"
                         />
                     </button>
@@ -142,7 +142,7 @@
                             src="/svg/chevron-down.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-15 filter-orange-citric"
+                            class="w-10 filter-orange-citric pagination-more-arrow"
                             loading="lazy"
                         />
                     </button>
@@ -203,3 +203,35 @@
         </div>
     </div>
 {/if}
+
+<style>
+    .pagination-more-arrow {
+        animation: pagination-more-arrow-bounce 1.8s ease-in-out infinite;
+    }
+
+    .pagination-less-arrow {
+        animation: pagination-less-arrow-bounce 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pagination-more-arrow-bounce {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(0.2rem);
+        }
+    }
+
+    @keyframes pagination-less-arrow-bounce {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-0.2rem);
+        }
+    }
+</style>

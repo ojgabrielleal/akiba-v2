@@ -39,6 +39,9 @@ Route::prefix('panel')->middleware(['inertia'])->group(function () {
             Route::prefix('task')->group(function () {
                 Route::post('{task:uuid}/complete', 'markTaskToReview');
             });
+            Route::prefix('post')->group(function () {
+                Route::delete('{post:uuid}', 'deactivatePost');
+            });
         });
 
         Route::prefix('post')->controller(PostController::class)->group(function () {

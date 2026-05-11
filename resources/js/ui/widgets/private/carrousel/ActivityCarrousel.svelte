@@ -38,8 +38,8 @@
             {#each activities.data as item}
                 {@const canParticipate = can.participate && !item.confirmations.some((conf) => conf.uuid === user.uuid)}
                 <article class={["w-100 h-55 lg:w-116 shrink-0 rounded-lg p-4 relative",
-                    { "bg-gradient-orange-primary": item.allows_confirmations },
-                    { "bg-gradient-blue-secondary": !item.allows_confirmations },
+                    { "bg-gradient-orange-morning-aurora": item.allows_confirmations },
+                    { "bg-gradient-blue-cerulean-glow": !item.allows_confirmations },
                 ]}>
                     <div class={["font-noto-sans font-black italic uppercase text-xl flex items-center gap-1",
                         { "text-blue-marinho": item.allows_confirmations },

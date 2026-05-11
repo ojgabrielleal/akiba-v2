@@ -18,8 +18,8 @@
         <WellcomeHero />
         <ActivityCarrousel title="Avisos e Atividades" />
         <TaskCarrousel title="Minhas Tarefas" />
+        <PostGrid title="Minhas últimas matérias" />
         <!--
-        <PostGrid title="Últimas Matérias" />
         <CalendarGrid title="Calendário" />
     -->
 </Layout>

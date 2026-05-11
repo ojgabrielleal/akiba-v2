@@ -11,17 +11,20 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-Cclogj7N.css",
+    "file": "assets/app-BoekEUpa.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-CFPVwUpj.js",
+    "file": "assets/app-D6EQdYGM.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
       "_vendor-CrYJGD68.js"
+    ],
+    "css": [
+      "assets/app-C7FZKYPI.css"
     ]
   }
 }

@@ -54,7 +54,7 @@
                     src="/svg/chevron-left.svg"
                     alt=""
                     aria-hidden="true"
-                    class="w-8 xl:w-10 pr-[0.2rem] filter-blue-marinho"
+                    class="w-8 xl:w-auto pr-[0.1rem] filter-blue-marinho"
                     loading="lazy"
                 />
             </button>
@@ -63,7 +63,7 @@
 
     <div
         bind:this={container}
-        class="scroll-x overflow-x-auto flex gap-5 flex-nowrap scroll-smooth"
+        class="carrousel-scroll overflow-x-auto flex gap-5 flex-nowrap scroll-smooth"
         role="group"
         on:scroll={updateCarrouselState}
     >
@@ -82,7 +82,7 @@
                     src="/svg/chevron-right.svg"
                     alt=""
                     aria-hidden="true"
-                    class="w-8 xl:w-10 pl-[0.2rem] filter-blue-marinho"
+                    class="w-8 xl:w-auto pl-[0.1rem] filter-blue-marinho"
                     loading="lazy"
                 />
             </button>

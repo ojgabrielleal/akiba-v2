@@ -13,6 +13,7 @@
 
     /* Reds */
     --color-red-crimson: #ed3237;
+    --color-red-blood: #570300;
 
     /* Oranges */
     --color-orange-morning: #ffc171;
@@ -37,35 +38,35 @@
     --color-green-pine: #004100;
 
     /* Gradients */
-    --gradient-blue-primary: linear-gradient(
+    --gradient-blue-ocean-cerulean: linear-gradient(
         50deg,
         var(--color-blue-ocean) 10%, 
-        rgba(0, 89, 192, 0.3) 28%, /* blue-cerulean */
+        color-mix(in srgb, var(--color-blue-cerulean) 30%, transparent) 28%,
         var(--color-blue-cerulean) 100%
     );
 
-    --gradient-blue-secondary: linear-gradient(
+    --gradient-blue-cerulean-glow: linear-gradient(
         50deg,
-        rgba(0, 89, 192, 0.4) 2%, /* blue-cerulean */
+        color-mix(in srgb, var(--color-blue-cerulean) 40%, transparent) 2%,
         var(--color-blue-cerulean) 100%
     );
 
-    --gradient-orange-primary: linear-gradient(
+    --gradient-orange-morning-aurora: linear-gradient(
         50deg,
         var(--color-orange-morning) 10%, 
         var(--color-neutral-white) 100%
     );
 
-    --gradient-green-primary: linear-gradient(
+    --gradient-green-forest-pine: linear-gradient(
         270deg, 
         var(--color-green-forest) 0%, 
         var(--color-green-pine) 100%
     );
 
-    --gradient-red-primary: linear-gradient(
+    --gradient-red-crimson-blood: linear-gradient(
         270deg, 
-        #ED3237 0%, 
-        #570300 100%
+        var(--color-red-crimson) 0%, 
+        var(--color-red-blood) 100%
     );
 }
 
@@ -78,6 +79,7 @@
     --color-suspense-honeycream: var(--color-suspense-honeycream);
 
     --color-red-crimson: var(--color-red-crimson);
+    --color-red-blood: var(--color-red-blood);
 
     --color-orange-morning: var(--color-orange-morning);
     --color-orange-citric: var(--color-orange-citric);
@@ -115,38 +117,33 @@
 }
 
 @layer utilities {
-    .scroll-x {
+    .carrousel-scroll {
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
 
-    .scroll-x::-webkit-scrollbar {
+    .carrousel-scroll::-webkit-scrollbar {
         display: none;
     }
+}
 
-    .bg-gradient-blue-primary-with-texture {
-        background: url('https://i.ibb.co/Tdhkkyg/3.png'), var(--gradient-blue-primary);
-        background-blend-mode: overlay;
-        background-size: contain;
-        background-position: right;
-        background-repeat: no-repeat;
-    }
+/*
+    Gradient utilities based on the project color palette.
+*/
+@utility bg-gradient-blue-cerulean-glow {
+    background: var(--gradient-blue-cerulean-glow);
+}
 
-    .bg-gradient-blue-secondary {
-        background: var(--gradient-blue-secondary);
-    }
+@utility bg-gradient-orange-morning-aurora {
+    background: var(--gradient-orange-morning-aurora);
+}
 
-    .bg-gradient-orange-primary {
-        background: var(--gradient-orange-primary);
-    }
+@utility bg-gradient-green-forest-pine {
+    background: var(--gradient-green-forest-pine);
+}
 
-    .bg-gradient-green-primary {
-        background: var(--gradient-green-primary);
-    }
-
-    .bg-gradient-red-primary {
-        background: var(--gradient-red-primary);
-    }
+@utility bg-gradient-red-crimson-blood {
+    background: var(--gradient-red-crimson-blood);
 }
 
 /*
