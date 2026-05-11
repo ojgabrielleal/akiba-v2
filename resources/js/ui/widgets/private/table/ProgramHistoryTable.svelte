@@ -52,7 +52,7 @@
                     {/each}
                 </tbody>
             </table>
-            <Pagination pages={onair} />
+            <Pagination pages={onair} only={["onair"]} />
         </div>
     {/if}
 </Section>

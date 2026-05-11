@@ -1,6 +1,6 @@
 <script>
     export let pages;
-    export let mode = "pagination";
+    export let mode = "infinite";
     export let loadingLabel = "Carregando...";
     export let rootMargin = "240px";
     export let only = [];
@@ -14,10 +14,11 @@
     let sentinel;
     let observer;
     let isLoading = false;
+    let loadingAction = null;
     let pageHistory = [];
+    const resetDelay = 900;
 
     $: nextUrl = pages?.links?.next ?? pages?.next_page_url ?? null;
-    $: previousUrl = pages?.links?.prev ?? pages?.prev_page_url ?? null;
     $: hasNextPage = Boolean(nextUrl) || (
         pages?.meta?.current_page &&
         pages?.meta?.last_page &&
@@ -28,12 +29,13 @@
         pageHistory = [pages];
     }
 
-    const visit = (url, data = {}) => {
+    const visit = (url, data = {}, action = "next") => {
         if (isLoading) return;
 
         const previousData = pages?.data ?? [];
 
         isLoading = true;
+        loadingAction = action;
 
         router.visit(url, {
             data,
@@ -57,30 +59,39 @@
             },
             onFinish: () => {
                 isLoading = false;
+                loadingAction = null;
             },
         });
     };
 
     const loadNextPage = () => {
         if (nextUrl) {
-            visit(nextUrl);
+            visit(nextUrl, {}, "next");
             return;
         }
 
         if (pages?.meta?.current_page && pages?.meta?.current_page < pages?.meta?.last_page) {
-            visit("", { [pageName]: pages.meta.current_page + 1 });
+            visit("", { [pageName]: pages.meta.current_page + 1 }, "next");
         }
     };
 
     const resetPages = () => {
-        if (only.length !== 1 || pageHistory.length <= 1) return;
+        if (isLoading || only.length !== 1 || pageHistory.length <= 1) return;
 
-        pageHistory = pageHistory.slice(0, -1);
+        isLoading = true;
+        loadingAction = "previous";
 
-        router.replaceProp(only[0], {
-            ...pageHistory.at(-1),
-            data: pageHistory.flatMap((page) => page?.data ?? []),
-        });
+        setTimeout(() => {
+            pageHistory = pageHistory.slice(0, -1);
+
+            router.replaceProp(only[0], {
+                ...pageHistory.at(-1),
+                data: pageHistory.flatMap((page) => page?.data ?? []),
+            });
+
+            isLoading = false;
+            loadingAction = null;
+        }, resetDelay);
     };
 
     const observeSentinel = () => {
@@ -106,101 +117,66 @@
 
 {#if mode === "button" && (hasNextPage || pageHistory.length > 1)}
     <div class="flex justify-center mt-2">
-        <div class="flex items-center justify-center gap-4">
+        <div class="flex items-center justify-center gap-4 min-h-12">
             {#if pageHistory.length > 1}
-                <Tooltip>
-                    <button
-                        aria-label="Mostrar menos"
-                        type="button"
-                        class="cursor-pointer flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-50"
-                        disabled={isLoading}
-                        on:click={resetPages}
-                    >
-                        <img
-                            src="/svg/chevron-up.svg"
-                            alt=""
-                            aria-hidden="true"
-                            class="w-10 filter-orange-citric pagination-less-arrow"
-                            loading="lazy"
-                        />
-                    </button>
-                    <span slot="content">
-                        Mostrar menos
-                    </span>
-                </Tooltip>
+                {#if isLoading && loadingAction === "previous"}
+                    <span class="pagination-spinner" aria-label={loadingLabel}></span>
+                {:else}
+                    <Tooltip>
+                        <button
+                            aria-label="Mostrar menos"
+                            type="button"
+                            class="cursor-pointer flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-50"
+                            disabled={isLoading}
+                            on:click={resetPages}
+                        >
+                            <img
+                                src="/svg/chevron-up.svg"
+                                alt=""
+                                aria-hidden="true"
+                                class="w-10 filter-orange-citric pagination-less-arrow"
+                                loading="lazy"
+                            />
+                        </button>
+                        <span slot="content">
+                            Mostrar menos
+                        </span>
+                    </Tooltip>
+                {/if}
             {/if}
             {#if hasNextPage}
-                <Tooltip>
-                    <button
-                        aria-label="Mostrar mais"
-                        type="button"
-                        class="cursor-pointer flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-50"
-                        disabled={isLoading}
-                        on:click={loadNextPage}
-                    >
-                        <img
-                            src="/svg/chevron-down.svg"
-                            alt=""
-                            aria-hidden="true"
-                            class="w-10 filter-orange-citric pagination-more-arrow"
-                            loading="lazy"
-                        />
-                    </button>
-                    <span slot="content">
-                        Mostrar mais
-                    </span>
-                </Tooltip>
+                {#if isLoading && loadingAction === "next"}
+                    <span class="pagination-spinner" aria-label={loadingLabel}></span>
+                {:else}
+                    <Tooltip>
+                        <button
+                            aria-label="Mostrar mais"
+                            type="button"
+                            class="cursor-pointer flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-50"
+                            disabled={isLoading}
+                            on:click={loadNextPage}
+                        >
+                            <img
+                                src="/svg/chevron-down.svg"
+                                alt=""
+                                aria-hidden="true"
+                                class="w-10 filter-orange-citric pagination-more-arrow"
+                                loading="lazy"
+                            />
+                        </button>
+                        <span slot="content">
+                            Mostrar mais
+                        </span>
+                    </Tooltip>
+                {/if}
             {/if}
         </div>
     </div>
 {:else if mode === "infinite" && hasNextPage}
     <div bind:this={sentinel} class="flex justify-center mt-10 min-h-12">
         {#if isLoading}
-            <span class="font-noto-sans text-orange-citric text-xl italic uppercase font-bold">
-                {loadingLabel}
-            </span>
+            <span class="pagination-spinner" aria-label={loadingLabel}></span>
         {/if}
-    </div>
-{:else if mode === "pagination" && pages?.meta?.last_page > 1}
-    <div class="flex justify-center mt-5">
-        <div class="flex gap-5">
-            {#if previousUrl || pages.meta.current_page > 1}
-                <button
-                    type="button"
-                    class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-citric rounded-xl text-orange-citric text-xl italic uppercase font-noto-sans font-bold"
-                    on:click={() => { previousUrl ? visit(previousUrl) : visit("", { [pageName]: pages.meta.current_page - 1 }); }}
-                >
-                    <span class="flex items-center justify-center gap-2">
-                        <img
-                            src="/svg/chevron-left.svg"
-                            alt=""
-                            aria-hidden="true"
-                            class="w-5 filter-orange-citric"
-                            loading="lazy"
-                        />
-                        Voltar uma pagina
-                    </span>
-                </button>
-            {/if}
-            {#if nextUrl || pages.meta.current_page < pages.meta.last_page}
-                <button
-                    type="button"
-                    class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-citric/90 rounded-xl text-orange-citric/90 text-xl italic uppercase font-noto-sans font-bold hover:border-orange-citric hover:text-orange-citric"
-                    on:click={() => { nextUrl ? visit(nextUrl) : visit("", { [pageName]: pages.meta.current_page + 1 }); }}
-                >
-                    <span class="flex items-center justify-center gap-2">
-                        Proxima pagina
-                        <img
-                            src="/svg/chevron-right.svg"
-                            alt=""
-                            aria-hidden="true"
-                            class="w-5 filter-orange-citric"
-                            loading="lazy"
-                        />
-                    </span>
-                </button>
-            {/if}
-        </div>
     </div>
 {/if}
 
@@ -211,6 +187,15 @@
 
     .pagination-less-arrow {
         animation: pagination-less-arrow-bounce 1.8s ease-in-out infinite;
+    }
+
+    .pagination-spinner {
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 0.2rem solid rgb(255 143 0 / 0.25);
+        border-top-color: rgb(255 143 0);
+        border-radius: 9999px;
+        animation: pagination-spinner-spin 0.75s linear infinite;
     }
 
     @keyframes pagination-more-arrow-bounce {
@@ -231,7 +216,13 @@
         }
 
         50% {
-            transform: translateY(-0.2rem);
+            transform: translateY(-0.15rem);
+        }
+    }
+
+    @keyframes pagination-spinner-spin {
+        to {
+            transform: rotate(360deg);
         }
     }
 </style>

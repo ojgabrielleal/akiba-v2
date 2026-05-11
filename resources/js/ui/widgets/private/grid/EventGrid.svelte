@@ -77,7 +77,7 @@
             {/each}
         </div>
     </Section>
-    <Pagination pages={events} />
+    <Pagination pages={events} only={["events"]} />
 {/if}
 
 {#if events && variant === "detailed"}
@@ -135,5 +135,5 @@
             {/each}
         </div>
     </Section>
-    <Pagination pages={events} />
+    <Pagination pages={events} only={["events"]} />
 {/if}

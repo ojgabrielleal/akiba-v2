@@ -61,6 +61,6 @@
                 </article>
             {/each}
         </div>
-        <Pagination pages={reviews} />
+        <Pagination pages={reviews} only={["reviews"]} />
     </Section>
 {/if}
