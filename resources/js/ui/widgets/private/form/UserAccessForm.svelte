@@ -18,8 +18,7 @@
     });
 
     if (identifier) {
-        axios
-            .get(`/panel/administration/user/${identifier}`)
+        axios.get(`/panel/administration/user/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
                 $form.roles = data.roles.map((role) => role.name);

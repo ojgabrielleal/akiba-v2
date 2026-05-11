@@ -22,8 +22,7 @@
     });
 
     $: if (identifier) {
-        axios
-            .get(`/panel/administration/calendar/${identifier}`)
+        axios.get(`/panel/administration/calendar/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
 

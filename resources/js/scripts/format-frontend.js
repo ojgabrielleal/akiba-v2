@@ -300,14 +300,14 @@ function normalizeClassArrayItem(item) {
     }
 
     const content = trimmed.slice(1, -1).trim().replace(/,$/, '').trim();
-    const colonIndex = content.indexOf(':');
+    const quotedKeyMatch = content.match(/^(['"])(.*?)\1\s*:\s*([\s\S]+)$/);
 
-    if (colonIndex === -1) {
+    if (!quotedKeyMatch) {
         return trimmed;
     }
 
-    const className = content.slice(0, colonIndex).trim().replace(/^["']|["']$/g, '').replace(/\s+/g, ' ');
-    const condition = normalizeClassCondition(content.slice(colonIndex + 1));
+    const className = quotedKeyMatch[2].replace(/\s+/g, ' ');
+    const condition = normalizeClassCondition(quotedKeyMatch[3]);
 
     return `{ "${className}": ${condition} }`;
 }
@@ -718,6 +718,13 @@ function formatInlineRouterOptions(source) {
     );
 }
 
+function formatInlineAxiosCalls(source) {
+    return source.replace(
+        /^([^\S\r\n]*)axios\r?\n\1 {4}\.(get|post|put|patch|delete)\(([^)\r\n]+)\)/gm,
+        (line, indent, method, argument) => `${indent}axios.${method}(${argument})`,
+    );
+}
+
 function addMissingButtonAttributes(source) {
     let formatted = '';
     let cursor = 0;
@@ -829,7 +836,7 @@ function addMissingLinkAttributes(source) {
 }
 
 function formatSvelte(source) {
-    return formatInlineRouterOptions(formatInlineConstTags(formatInlineTextTernaries(formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingLinkAttributes(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source)))))))))))).replace(
+    return formatInlineAxiosCalls(formatInlineRouterOptions(formatInlineConstTags(formatInlineTextTernaries(formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingLinkAttributes(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source))))))))))))).replace(
         /^([^\S\r\n]*)<([A-Za-z][A-Za-z0-9:-]*)([^>]*)>([^\S\r\n]*\S(?:[^\r\n]*\S)?[^\S\r\n]*)<\/\2>[^\S\r\n]*\r?$/gm,
         (line, indent, tag, attributes, content) => {
             const childIndent = `${indent}    `;
