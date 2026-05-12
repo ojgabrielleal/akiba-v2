@@ -37,7 +37,11 @@
                         </dt>
                         <dd class="flex items-center gap-3">
                             {#if can.update}
-                                <Link href={`/podcast/${item.uuid}`} aria-label="Editar">
+                                <Link
+                                    title=""
+                                    href={`/podcast/${item.uuid}`}
+                                    aria-label="Editar"
+                                >
                                     <img
                                         src="/svg/edit.svg"
                                         alt=""
@@ -63,6 +67,6 @@
                 </article>
             {/each}
         </div>
-        <Pagination pages={podcasts} />
+        <Pagination pages={podcasts} only={["podcasts"]} />
     </Section>
 {/if}

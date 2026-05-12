@@ -7,7 +7,7 @@
 </script>
 
 <nav class="w-full relative">
-    <div class="cont h-24 xl:h-[2.57rem] relative xl:top-15 flex xl:justify-between items-center">
+    <div class="container-page h-24 xl:h-[2.57rem] relative xl:top-15 flex xl:justify-between items-center">
         <button type="button"
             aria-label="Abrir menu"
             class="xl:hidden p-1 filter invert"
@@ -23,7 +23,7 @@
 
         <div class="ml-5">
             <img
-                src="/img/default/logo.webp"
+                src="/img/brand/logo.webp"
                 alt="Logo"
                 class="w-30 xl:w-35"
             />
@@ -32,7 +32,12 @@
         <ul class="hidden xl:flex">
             {#each navbar.public as item}
                 <li class="pr-5 pl-5 first:pl-0 border-l first:border-none border-neutral-gray/50 h-6 flex items-center">
-                    <Link href={item.address} aria-label={item.name} class="relative flex items-center gap-1 text-lg font-noto-sans font-extrabold text-neutral-gray hover:text-orange-amber italic uppercase group/item">
+                    <Link
+                        title=""
+                        href={item.address}
+                        aria-label={item.name}
+                        class="relative flex items-center gap-1 text-lg font-noto-sans font-extrabold text-neutral-gray hover:text-orange-amber italic uppercase group/item"
+                    >
                         <img
                             src={item.icon}
                             alt=""
@@ -51,7 +56,9 @@
             <div class="hidden xl:flex justify-center items-center w-22 h-8 gap-1 bg-blue-skywave rounded-full">
                 <button type="button"
                     aria-label="Modo Claro"
-                    class={["cursor-pointer shrink-0 p-1", { "bg-orange-morning rounded-full": theme === "light" }, ]}
+                    class={["cursor-pointer shrink-0 p-1",
+                        { "bg-orange-morning rounded-full": theme === "light" },
+                    ]}
                     on:click={() => (theme = "light")}
                 >
                     <img
@@ -63,7 +70,9 @@
                 </button>
                 <button type="button"
                     aria-label="Modo Akiba"
-                    class={["cursor-pointer shrink-0 p-1", { "bg-blue-night rounded-full": theme === "akiba" }, ]}
+                    class={["cursor-pointer shrink-0 p-1",
+                        { "bg-blue-night rounded-full": theme === "akiba" },
+                    ]}
                     on:click={() => (theme = "akiba")}
                 >
                     <img
@@ -75,7 +84,9 @@
                 </button>
                 <button type="button"
                     aria-label="Modo Ecuro"
-                    class={["cursor-pointer shrink-0 p-1", { "bg-blue-night rounded-full": theme === "night" }, ]}
+                    class={["cursor-pointer shrink-0 p-1",
+                        { "bg-blue-night rounded-full": theme === "night" },
+                    ]}
                     on:click={() => (theme = "night")}
                 >
                     <img
@@ -108,7 +119,7 @@
         ]}>
             <div class="p-6 border-b border-blue-night/10 flex items-center justify-between">
                 <img
-                    src="/img/default/logo.webp"
+                    src="/img/brand/logo.webp"
                     alt="Logo"
                     class="w-30"
                 />
@@ -130,7 +141,13 @@
                 <ul class="space-y-5">
                     {#each navbar.public as item}
                         <li>
-                            <Link href={item.address} class="flex items-center gap-2 text-md font-noto-sans font-extrabold italic uppercase text-blue-night" on:click={() => (mobilenavbar = false)}>
+                            <Link
+                                title=""
+                                aria-label=""
+                                href={item.address}
+                                class="flex items-center gap-2 text-md font-noto-sans font-extrabold italic uppercase text-blue-night"
+                                on:click={() => (mobilenavbar = false)}
+                            >
                                 <img
                                     src={item.icon}
                                     alt=""
@@ -149,7 +166,7 @@
                     Temas da Akiba
                 </span>
                 <div class="w-25 h-8 mx-auto flex justify-center items-center gap-1 bg-blue-skywave p-1 rounded-full">
-                    <button type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
+                    <button aria-label="" type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
                         { "bg-orange-morning rounded-full": theme === "light" },
                     ]} on:click={() => (theme = "light")}>
                         <img
@@ -158,7 +175,7 @@
                             class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter invert": theme !== "light" }, ]}
                         />
                     </button>
-                    <button type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
+                    <button aria-label="" type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
                         { "bg-blue-night rounded-full": theme === "akiba" },
                     ]} on:click={() => (theme = "akiba")}>
                         <img
@@ -167,7 +184,7 @@
                             class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter invert": theme !== "akiba" }, ]}
                         />
                     </button>
-                    <button type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
+                    <button aria-label="" type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
                         { "bg-blue-night rounded-full": theme === "night" },
                     ]} on:click={() => (theme = "night")}>
                         <img

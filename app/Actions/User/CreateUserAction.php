@@ -16,8 +16,8 @@ class CreateUserAction
                 ->toArray();
 
             $avatar = ($data['gender']) === 'male' 
-                ? '/img/users/avatarMale.webp' 
-                : '/img/users/avatarFemale.webp';
+                ? '/img/defaults/user-male.webp' 
+                : '/img/defaults/user-female.webp';
 
             $user = User::create([
                 'username' => $data['username'],

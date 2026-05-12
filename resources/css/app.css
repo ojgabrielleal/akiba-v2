@@ -13,6 +13,7 @@
 
     /* Reds */
     --color-red-crimson: #ed3237;
+    --color-red-blood: #570300;
 
     /* Oranges */
     --color-orange-morning: #ffc171;
@@ -34,6 +35,39 @@
     /* Greens */
     --color-green-mint: #00a859;
     --color-green-forest: #009933;
+    --color-green-pine: #004100;
+
+    /* Gradients */
+    --gradient-blue-ocean-cerulean: linear-gradient(
+        50deg,
+        var(--color-blue-ocean) 10%, 
+        color-mix(in srgb, var(--color-blue-cerulean) 30%, transparent) 28%,
+        var(--color-blue-cerulean) 100%
+    );
+
+    --gradient-blue-cerulean-glow: linear-gradient(
+        50deg,
+        color-mix(in srgb, var(--color-blue-cerulean) 40%, transparent) 2%,
+        var(--color-blue-cerulean) 100%
+    );
+
+    --gradient-orange-morning-aurora: linear-gradient(
+        50deg,
+        var(--color-orange-morning) 10%, 
+        var(--color-neutral-white) 100%
+    );
+
+    --gradient-green-forest-pine: linear-gradient(
+        270deg, 
+        var(--color-green-forest) 0%, 
+        var(--color-green-pine) 100%
+    );
+
+    --gradient-red-crimson-blood: linear-gradient(
+        270deg, 
+        var(--color-red-crimson) 0%, 
+        var(--color-red-blood) 100%
+    );
 }
 
 @theme {
@@ -45,6 +79,7 @@
     --color-suspense-honeycream: var(--color-suspense-honeycream);
 
     --color-red-crimson: var(--color-red-crimson);
+    --color-red-blood: var(--color-red-blood);
 
     --color-orange-morning: var(--color-orange-morning);
     --color-orange-citric: var(--color-orange-citric);
@@ -62,109 +97,59 @@
 
     --color-green-mint: var(--color-green-mint);
     --color-green-forest: var(--color-green-forest);
+    --color-green-pine: var(--color-green-pine);
 }
 
 @theme {
     --font-noto-sans: "Noto Sans", sans-serif;
 }
 
-@keyframes marquee {
-    from {
-        transform: translateX(100%);
-    }
-
-    to {
-        transform: translateX(-100%);
-    }
-}
-
-@layer base {
-    * {
-        transition: 0.3s ease-in-out;
-    }
-
-    button:disabled {
-        cursor: default !important;
-        filter: opacity(50%);
-    }
-
-    select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        width: 16.25rem;
-        font-size: 1rem;
-        color: #333;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 1rem center;
-        background-size: 1rem;
-    }
-
-    select:focus {
-        outline: none;
-    }
-
-    select:disabled {
-        background-color: #f3f4f6;
-        color: #9ca3af;
-        cursor: not-allowed;
-    }
-
-    .ql-editor {
-        font-family: var(--font-noto-sans);
-    }
-}
-
 @layer components {
-    .cont {
-        @apply w-full max-w-[1100px] md:max-w-[1200px] xl:max-w-[1280px] 2xl:max-w-[1366px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-0;
+    .container-page {
+        width: min(100% - clamp(4rem, 5vw, 5rem), 81.25rem);
+        margin-inline: auto;
     }
 
-    .cont-player-main {
-        @apply w-full max-w-[1000px] xl:max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-0;
+    .container-player {
+        width: min(100% - clamp(1rem, 5vw, 4rem), 68.75rem);
+        margin-inline: auto;
     }
 }
 
 @layer utilities {
-    .scroll-x {
+    .carrousel-scroll {
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
 
-    .scroll-x::-webkit-scrollbar {
+    .carrousel-scroll::-webkit-scrollbar {
         display: none;
     }
-
-    .marquee-cont {
-        z-index: 0;
-    }
-
-    .marquee-cont::before,
-    .marquee-cont::after {
-        content: "";
-        position: absolute;
-        inset: 0 auto 0 auto;
-        width: 5rem;
-        z-index: 2;
-    }
-
-    .marquee-cont::before {
-        left: 0;
-        background: linear-gradient(to right,
-                var(--color-blue-ocean),
-                transparent);
-    }
-
-    .marquee-cont::after {
-        right: 0;
-        background: linear-gradient(to left, var(--color-blue-ocean), transparent);
-    }
-
 }
 
+/*
+    Gradient utilities based on the project color palette.
+*/
+@utility bg-gradient-blue-cerulean-glow {
+    background: var(--gradient-blue-cerulean-glow);
+}
+
+@utility bg-gradient-orange-morning-aurora {
+    background: var(--gradient-orange-morning-aurora);
+}
+
+@utility bg-gradient-green-forest-pine {
+    background: var(--gradient-green-forest-pine);
+}
+
+@utility bg-gradient-red-crimson-blood {
+    background: var(--gradient-red-crimson-blood);
+}
+
+/*
+    Filters generated to match the color palette of the project, based on the original image of the logo.
+    Filter Generator: https://codepen.io/sosuke/pen/Pjoqqp
+*/
 @utility filter-neutral-gray {
     filter: invert(54%) sepia(12%) saturate(23%) hue-rotate(46deg) brightness(92%) contrast(88%);
 }

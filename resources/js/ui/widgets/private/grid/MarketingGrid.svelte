@@ -48,7 +48,12 @@
         <div class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {#each tutorials as item}
                 <article class="w-full bg-blue-skywave relative">
-                    <a href={item.url} target="_blank">
+                    <a
+                        title=""
+                        aria-label=""
+                        href={item.url}
+                        target="_blank"
+                    >
                         <img
                             src={item.image}
                             alt={item.name}
@@ -68,7 +73,12 @@
         <div class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {#each softwares as item}
                 <article class="w-full bg-blue-skywave relative">
-                    <a href={item.url} target="_blank">
+                    <a
+                        title=""
+                        aria-label=""
+                        href={item.url}
+                        target="_blank"
+                    >
                         <img
                             src={item.image}
                             alt={item.name}
@@ -88,7 +98,12 @@
         <div class="mb-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {#each packages as item}
                 <article class="w-full bg-blue-skywave relative">
-                    <a href={item.url} target="_blank">
+                    <a
+                        title=""
+                        aria-label=""
+                        href={item.url}
+                        target="_blank"
+                    >
                         <img
                             src={item.image}
                             alt={item.name}
@@ -117,7 +132,12 @@
         <div class="mb-20 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-x-4 gap-y-20">
             {#each repositories.data as item}
                 <article class="w-full bg-blue-skywave relative">
-                    <a href={item.url} target="_blank">
+                    <a
+                        title=""
+                        aria-label=""
+                        href={item.url}
+                        target="_blank"
+                    >
                         <img
                             src={item.image}
                             alt={item.name}

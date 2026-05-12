@@ -31,8 +31,6 @@ class UpdateActivityAction
                     ['activity_id' => $activity->id],
                     [
                         'user_id' => $user->id,
-                        'has_activity' => true,
-                        'type' => 'activity',
                         'content' => $data['title'],
                         'hour' => $data['hour'],
                         'date' => $data['date'],

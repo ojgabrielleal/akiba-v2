@@ -79,13 +79,25 @@
 
 <Section title={review ? "Atualizar review" : "Criar review"}>
     <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
-        <Link preserveState={false} href="/panel/post" class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+<Link
+            preserveState={false}
+            href="/panel/post"
+            class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
+        >
             Matérias
         </Link>
-        <Link preserveState={false} href="/panel/review" class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+<Link
+            preserveState={false}
+            href="/panel/review"
+            class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
+        >
             Reviews
         </Link>
-        <Link preserveState={false} href="/panel/event" class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6">
+<Link
+            preserveState={false}
+            href="/panel/event"
+            class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
+        >
             Eventos
         </Link>
     </div>
@@ -171,9 +183,12 @@
                         <div class="flex gap-2 mb-4">
                             {#each reviews() as item}
                                 <div class="relative">
-                                    <button
+                                    <button aria-label=""
                                         type="button"
-                                        class={["py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer", { "bg-orange-amber text-suspense-aurora": item.uuid === $form.review.uuid }, { "bg-suspense-aurora text-orange-amber": item.uuid !== $form.review.uuid }, ]}
+                                        class={["py-2 px-6 rounded-md uppercase flex justify-center items-center font-noto-sans italic font-bold cursor-pointer",
+                                            { "bg-orange-amber text-suspense-aurora": item.uuid === $form.review.uuid },
+                                            { "bg-suspense-aurora text-orange-amber": item.uuid !== $form.review.uuid },
+                                        ]}
                                         on:click={() => { $form.review.uuid = item.uuid; $form.review.content = item.content; }}
                                     >
                                         {item.author.nickname}

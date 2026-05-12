@@ -31,12 +31,29 @@ function getAttributes(attributes) {
     let current = '';
     let quote = null;
     let braceDepth = 0;
+    let templateExpressionDepth = 0;
 
-    for (const character of normalized) {
+    for (let index = 0; index < normalized.length; index += 1) {
+        const character = normalized[index];
+        const nextCharacter = normalized[index + 1];
+
         if (quote) {
+            if (quote === '`' && character === '$' && nextCharacter === '{') {
+                templateExpressionDepth += 1;
+                current += '${';
+                index += 1;
+                continue;
+            }
+
+            if (quote === '`' && character === '}' && templateExpressionDepth > 0) {
+                templateExpressionDepth -= 1;
+                current += character;
+                continue;
+            }
+
             current += character;
 
-            if (character === quote) {
+            if (character === quote && templateExpressionDepth === 0) {
                 quote = null;
             }
 
@@ -83,12 +100,25 @@ function getAttributes(attributes) {
 function hasBalancedAttributeSyntax(attributes) {
     let quote = null;
     let braceDepth = 0;
+    let templateExpressionDepth = 0;
 
     for (let index = 0; index < attributes.length; index += 1) {
         const character = attributes[index];
+        const nextCharacter = attributes[index + 1];
 
         if (quote) {
-            if (character === quote && attributes[index - 1] !== '\\') {
+            if (quote === '`' && character === '$' && nextCharacter === '{') {
+                templateExpressionDepth += 1;
+                index += 1;
+                continue;
+            }
+
+            if (quote === '`' && character === '}' && templateExpressionDepth > 0) {
+                templateExpressionDepth -= 1;
+                continue;
+            }
+
+            if (character === quote && attributes[index - 1] !== '\\' && templateExpressionDepth === 0) {
                 quote = null;
             }
 
@@ -270,14 +300,14 @@ function normalizeClassArrayItem(item) {
     }
 
     const content = trimmed.slice(1, -1).trim().replace(/,$/, '').trim();
-    const colonIndex = content.indexOf(':');
+    const quotedKeyMatch = content.match(/^(['"])(.*?)\1\s*:\s*([\s\S]+)$/);
 
-    if (colonIndex === -1) {
+    if (!quotedKeyMatch) {
         return trimmed;
     }
 
-    const className = content.slice(0, colonIndex).trim().replace(/^["']|["']$/g, '').replace(/\s+/g, ' ');
-    const condition = normalizeClassCondition(content.slice(colonIndex + 1));
+    const className = quotedKeyMatch[2].replace(/\s+/g, ' ');
+    const condition = normalizeClassCondition(quotedKeyMatch[3]);
 
     return `{ "${className}": ${condition} }`;
 }
@@ -373,7 +403,11 @@ function formatOpeningTag(indent, tag, rawAttributes, selfClosing) {
         ].join('\n');
     }
 
-    if (['input', 'select', 'textarea'].includes(tag)) {
+    if (tag === 'Link' && attributes.length === 1) {
+        return `${indent}<${tag} ${attributes[0]}${selfClosing ? ' /' : ''}>`;
+    }
+
+    if (['Link', 'a', 'input', 'select', 'textarea'].includes(tag)) {
         return [
             `${indent}<${tag}`,
             ...attributes.map((attribute) => `${indent}    ${attribute}`),
@@ -381,7 +415,7 @@ function formatOpeningTag(indent, tag, rawAttributes, selfClosing) {
         ].join('\n');
     }
 
-    if (['Link', 'a'].includes(tag) || attributes.length < 3) {
+    if (attributes.length < 3) {
         return `${indent}<${tag} ${attributes.join(' ')}${selfClosing ? ' /' : ''}>`;
     }
 
@@ -618,27 +652,191 @@ function hasVisibleText(content) {
         .trim().length > 0;
 }
 
-function addMissingButtonAttributes(source) {
+function hasAttribute(attributes, name) {
+    return new RegExp(`(?:^|\\s)${name}(?:\\s*=|\\s|$)`).test(attributes);
+}
+
+function formatInlineTextTernaries(source) {
+    const lines = source.split(/\r?\n/);
+    const formatted = [];
+
+    for (let index = 0; index < lines.length; index += 1) {
+        const conditionMatch = lines[index].match(/^([^\S\r\n]*)(.+\{.+)$/);
+        const truthyMatch = lines[index + 1]?.match(/^[^\S\r\n]*\?\s+(.+)$/);
+        const falsyMatch = lines[index + 2]?.match(/^[^\S\r\n]*:\s+(.+\})$/);
+
+        if (conditionMatch && truthyMatch && falsyMatch) {
+            const [, indent, start] = conditionMatch;
+            formatted.push(`${indent}${start} ? ${truthyMatch[1].trim()} : ${falsyMatch[1].trim()}`);
+            index += 2;
+            continue;
+        }
+
+        formatted.push(lines[index]);
+    }
+
+    return formatted.join('\n');
+}
+
+function formatInlineConstTags(source) {
     return source.replace(
-        /<button\b([^>]*)>([\s\S]*?)<\/button>/g,
-        (button, attributes, content) => {
-            let formatted = button;
-
-            if (!/\stype=/.test(attributes)) {
-                formatted = formatted.replace('<button', '<button type="button"');
+        /^([^\S\r\n]*)\{@const\s+([\s\S]*?)\r?\n([^\S\r\n]+)([\s\S]*?)\r?\n([^\S\r\n]+)([\s\S]*?)\}$/gm,
+        (line, indent, start, secondIndent, middle, thirdIndent, end) => {
+            if (secondIndent.length <= indent.length || thirdIndent.length <= indent.length) {
+                return line;
             }
 
-            if (!/\saria-label=/.test(attributes) && !hasVisibleText(content)) {
-                formatted = formatted.replace('<button', '<button aria-label=""');
-            }
-
-            return formatted;
+            return `${indent}{@const ${start.trim()} ${middle.trim()} ${end.trim()}}`;
         },
     );
 }
 
+function formatInlineRouterOptions(source) {
+    const formatted = source.replace(
+        /^([^\S\r\n]*)router\.(get|post|put|patch|delete)\(\r?\n([^\S\r\n]+)([^,\r\n]+),\r?\n\3([^,\r\n]+),\r?\n\3\{\r?\n([\s\S]*?)\r?\n\3\},\r?\n\1\);/gm,
+        (line, indent, method, argumentIndent, url, payload, options) => {
+            return [
+                `${indent}router.${method}(${url.trim()}, ${payload.trim()}, {`,
+                options,
+                `${argumentIndent}});`,
+            ].join('\n');
+        },
+    );
+
+    return formatted.replace(
+        /^([^\S\r\n]*)router\.(get|post|put|patch|delete)\(([^,\r\n]+),\s*([^,\r\n]+),\s*\{\r?\n([\s\S]*?)\r?\n([^\S\r\n]*)\}\);/gm,
+        (line, indent, method, url, payload, options, closingIndent) => {
+            const optionIndent = options.match(/^([^\S\r\n]*)\S/m)?.[1] ?? closingIndent;
+            const expectedClosingIndent = optionIndent.slice(0, Math.max(indent.length, optionIndent.length - 4));
+
+            return [
+                `${indent}router.${method}(${url.trim()}, ${payload.trim()}, {`,
+                options,
+                `${expectedClosingIndent}});`,
+            ].join('\n');
+        },
+    );
+}
+
+function formatInlineAxiosCalls(source) {
+    return source.replace(
+        /^([^\S\r\n]*)axios\r?\n\1 {4}\.(get|post|put|patch|delete)\(([^)\r\n]+)\)/gm,
+        (line, indent, method, argument) => `${indent}axios.${method}(${argument})`,
+    );
+}
+
+function addMissingButtonAttributes(source) {
+    let formatted = '';
+    let cursor = 0;
+
+    while (cursor < source.length) {
+        const start = source.indexOf('<button', cursor);
+
+        if (start === -1) {
+            formatted += source.slice(cursor);
+            break;
+        }
+
+        const tagEnd = findOpeningTagEnd(source, start);
+
+        if (tagEnd === -1) {
+            formatted += source.slice(cursor);
+            break;
+        }
+
+        const closeStart = source.indexOf('</button>', tagEnd + 1);
+
+        if (closeStart === -1) {
+            formatted += source.slice(cursor, tagEnd + 1);
+            cursor = tagEnd + 1;
+            continue;
+        }
+
+        const opening = source.slice(start, tagEnd + 1);
+        const attributes = opening.match(/^<button\b([\s\S]*?)(\/?)>$/)?.[1] ?? '';
+        let formattedOpening = opening;
+
+        if (!hasAttribute(attributes, 'type')) {
+            formattedOpening = formattedOpening.replace('<button', '<button type="button"');
+        }
+
+        if (!hasAttribute(attributes, 'aria-label') && !hasVisibleText(source.slice(tagEnd + 1, closeStart))) {
+            formattedOpening = formattedOpening.replace('<button', '<button aria-label=""');
+        }
+
+        formatted += source.slice(cursor, start);
+        formatted += formattedOpening;
+        formatted += source.slice(tagEnd + 1, closeStart + '</button>'.length);
+        cursor = closeStart + '</button>'.length;
+    }
+
+    return formatted;
+}
+
+function addMissingLinkAttributes(source) {
+    let formatted = '';
+    let cursor = 0;
+    const linkPattern = /<(Link|a)\b/g;
+
+    while (cursor < source.length) {
+        linkPattern.lastIndex = cursor;
+        const match = linkPattern.exec(source);
+
+        if (!match) {
+            formatted += source.slice(cursor);
+            break;
+        }
+
+        const start = match.index;
+        const tag = match[1];
+        const tagEnd = findOpeningTagEnd(source, start);
+
+        if (tagEnd === -1) {
+            formatted += source.slice(cursor);
+            break;
+        }
+
+        const closeStart = source.indexOf(`</${tag}>`, tagEnd + 1);
+
+        if (closeStart === -1) {
+            formatted += source.slice(cursor, tagEnd + 1);
+            cursor = tagEnd + 1;
+            continue;
+        }
+
+        const opening = source.slice(start, tagEnd + 1);
+        const attributes = opening.match(new RegExp(`^<${tag}\\b([\\s\\S]*?)(\\/?)>$`))?.[1] ?? '';
+        let formattedOpening = opening;
+        const lineStart = source.lastIndexOf('\n', start) + 1;
+        const indent = source.slice(lineStart, start);
+
+        if (!hasVisibleText(source.slice(tagEnd + 1, closeStart))) {
+            if (!hasAttribute(attributes, 'aria-label')) {
+                formattedOpening = formattedOpening.replace(`<${tag}`, `<${tag} aria-label=""`);
+            }
+
+            if (!hasAttribute(attributes, 'title')) {
+                formattedOpening = formattedOpening.replace(`<${tag}`, `<${tag} title=""`);
+            }
+
+            const openingMatch = formattedOpening.match(new RegExp(`^<${tag}\\b([\\s\\S]*?)(\\/?)>$`));
+
+            if (openingMatch) {
+                formattedOpening = formatOpeningTag(indent, tag, openingMatch[1], openingMatch[2]) ?? formattedOpening;
+            }
+        }
+
+        formatted += source.slice(cursor, formattedOpening.startsWith(indent) ? lineStart : start);
+        formatted += formattedOpening;
+        formatted += source.slice(tagEnd + 1, closeStart + `</${tag}>`.length);
+        cursor = closeStart + `</${tag}>`.length;
+    }
+
+    return formatted;
+}
+
 function formatSvelte(source) {
-    return formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source)))))))).replace(
+    return formatInlineAxiosCalls(formatInlineRouterOptions(formatInlineConstTags(formatInlineTextTernaries(formatEmptyElementTags(formatEmptyFormTags(formatInlineOpeningTags(formatOpeningTags(addMissingLinkAttributes(addMissingButtonAttributes(formatOpeningTags(normalizeClassArrays(repairSplitBracedAttributes(source))))))))))))).replace(
         /^([^\S\r\n]*)<([A-Za-z][A-Za-z0-9:-]*)([^>]*)>([^\S\r\n]*\S(?:[^\r\n]*\S)?[^\S\r\n]*)<\/\2>[^\S\r\n]*\r?$/gm,
         (line, indent, tag, attributes, content) => {
             const childIndent = `${indent}    `;
@@ -649,7 +847,7 @@ function formatSvelte(source) {
                 `${indent}</${tag}>`,
             ].join('\n');
         },
-    );
+    ).replace(/[^\S\r\n]+$/gm, '');
 }
 
 async function formatFile(filePath) {

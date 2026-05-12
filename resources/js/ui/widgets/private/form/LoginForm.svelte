@@ -14,8 +14,8 @@
 <div>
     <div class="flex justify-center mb-4">
         <img
-            class="w-40"
-            src="/img/default/logo.webp"
+            class="w-60"
+            src="/img/brand/logo.webp"
             alt="logo"
         />
     </div>

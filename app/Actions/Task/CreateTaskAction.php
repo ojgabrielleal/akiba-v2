@@ -12,7 +12,7 @@ class CreateTaskAction
         return Task::create([
             'user_id' => $user->id,
             'title' => $data['title'],
-            'content' => $data['content'],
+            'description' => $data['description'],
             'dead_line' => $data['dead_line'],
         ]);
     }

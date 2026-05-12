@@ -41,7 +41,7 @@ export { default as CastMetricsGrid } from './grid/CastMetricsGrid.svelte';
 export { default as TaskGrid } from "./grid/TaskGrid.svelte";
 
 // Hero
-export { default as GreatingHero } from './hero/GreatingHero.svelte';	
+export { default as WellcomeHero } from './hero/WellcomeHero.svelte';	
 
 // Navbar 
 export { default as Navbar } from './navbar/Navbar.svelte';

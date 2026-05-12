@@ -11,7 +11,12 @@
     <Section {title}>
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-10 xl:gap-5">
             {#each featureds.data as item}
-                <Link href={`materia/${item.slug}`} class="aspect-square sm:aspect-auto sm:h-50 sm:p-4 bg-blue-skywave rounded-md relative overflow-hidden sm:overflow-visible flex flex-col sm:flex-row">
+                <Link
+                    title=""
+                    aria-label=""
+                    href={`materia/${item.slug}`}
+                    class="aspect-square sm:aspect-auto sm:h-50 sm:p-4 bg-blue-skywave rounded-md relative overflow-hidden sm:overflow-visible flex flex-col sm:flex-row"
+                >
                     <img
                         src={item.cover}
                         alt={item.title}

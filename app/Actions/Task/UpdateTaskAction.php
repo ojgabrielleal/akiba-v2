@@ -13,7 +13,7 @@ class UpdateTaskAction
             'user_id' => $user->id,
             'title' => $data['title'],
             'dead_line' => $data['dead_line'],
-            'content' => $data['content'],
+            'description' => $data['description'],
         ]);
 
         if ($task->isDirty()) {

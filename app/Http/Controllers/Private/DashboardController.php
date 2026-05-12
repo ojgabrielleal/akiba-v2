@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Private;
 
+use App\Actions\Post\DeactivatePostAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivityResource;
-use App\Http\Resources\CalendarResource;
+use App\Http\Resources\CalendarWeekResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\TaskResource;
 use App\Models\Activity;
@@ -67,19 +68,22 @@ class DashboardController extends Controller
             Task::active()
                 ->incompleted()
                 ->mine()
+                ->where('status', '!=', 'completed')
                 ->with(['responsible'])
-                ->get()
+                ->orderBy('dead_line')
+                ->orderBy('created_at', 'desc')
+                ->paginate(5)
         );
     }
 
-    public function markTaskCompleted(Task $task)
+    public function markTaskToReview(Task $task)
     {
         if (request()->user()->cannot('update', $task)) {
             return null;
         }
 
         $task->update([
-            'is_completed' => true,
+            'status' => 'in_review',
         ]);
 
         return $this->flashMessage('complete');
@@ -100,11 +104,23 @@ class DashboardController extends Controller
         return PostResource::collection(
             Post::active()
                 ->published()
+                ->mine()
                 ->latest()
                 ->with(['author'])
-                ->limit(5)
+                ->limit(4)
                 ->get()
         );
+    }
+
+    public function deactivatePost(Post $post, DeactivatePostAction $deactivatePostAction)
+    {
+        if (request()->user()->cannot('delete', $post)) {
+            return null;
+        }
+
+        $deactivatePostAction->execute($post);
+
+        return $this->flashMessage('deactivate');
     }
 
     /*
@@ -119,7 +135,7 @@ class DashboardController extends Controller
             return null;
         }
 
-        return CalendarResource::collection(
+        return CalendarWeekResource::make(
             Calendar::valid()
                 ->with(['activity', 'responsible'])
                 ->get()

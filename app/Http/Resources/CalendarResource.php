@@ -11,7 +11,6 @@ class CalendarResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'has_activity' => $this->has_activity,
             'title' => $this->title,
             'formated_hour' => $this->hour->format('H\hi'),
             'formated_date' => $this->date->format('d/m/Y'),
@@ -21,7 +20,7 @@ class CalendarResource extends JsonResource
             'type' => $this->type,
             'day_of_week' => $this->day_of_week,
             'responsible' => UserResource::make($this->responsible),
-            'activity' => $this->has_activity ? ActivityResource::make($this->activity) : null,
+            'activity' => ActivityResource::make($this->whenLoaded('activity')),
         ];
     }
 }

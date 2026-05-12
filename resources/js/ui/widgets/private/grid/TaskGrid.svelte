@@ -35,8 +35,9 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
             {#each tasks.data as task}
                 <div class={["flex items-center justify-between p-3 rounded-lg",
-                    { "bg-orange-amber": task.is_due },
-                    { "bg-blue-skywave": !task.is_due },
+                    { "bg-red-crimson": task.is_overdue },
+                    { "bg-orange-amber": !task.is_overdue && task.days_remaining <= 7 },
+                    { "bg-blue-skywave": !task.is_overdue && task.days_remaining > 7 },
                 ]}>
                     <div class="text-suspense-aurora font-noto-sans">
                         {task.title}

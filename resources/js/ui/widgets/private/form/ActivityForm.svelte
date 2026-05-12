@@ -21,8 +21,7 @@
     });
 
     if (identifier) {
-        axios
-            .get(`/panel/administration/activity/${identifier}`)
+        axios.get(`/panel/administration/activity/${identifier}`)
             .then((response) => {
                 const data = response.data.data;
 

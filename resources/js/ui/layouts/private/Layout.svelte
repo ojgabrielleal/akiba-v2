@@ -22,10 +22,10 @@
 </script>
 
 <Toaster />
-<header class="mb-15 lg:pt-10">
+<header class="mb-8 lg:mb-20 mt-5 lg:mt-10">
     <Navbar />
 </header>
-<main class="cont">
+<main>
     <slot />
 </main>
 <footer>
