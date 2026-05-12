@@ -31,7 +31,7 @@
                 ]}>
                     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div class="block min-w-0">
-                            <div class="text-xl lg:text-2xl text-neutral-white font-bold uppercase italic lg:truncate">
+                            <div class="text-xl text-neutral-white font-bold uppercase italic lg:truncate">
                                 {task.title}
                             </div>
                             <div class="text-md text-neutral-white lg:line-clamp-2">

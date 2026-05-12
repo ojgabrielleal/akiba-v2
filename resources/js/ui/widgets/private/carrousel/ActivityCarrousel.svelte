@@ -47,7 +47,7 @@
                     ]}>
                         {item.allows_confirmations ? item.title : item.author.nickname}
                     </div>
-                    <div class={["font-noto-sans text-md line-clamp-3 mt-1",
+                    <div class={["font-noto-sans text-sm line-clamp-3 mt-1",
                         { "text-blue-marinho": item.allows_confirmations },
                         { "text-suspense-aurora": !item.allows_confirmations },
                     ]}>

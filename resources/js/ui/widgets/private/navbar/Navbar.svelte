@@ -69,7 +69,7 @@
                 <button
                     type="button"
                     aria-label="Abrir menu do usuario"
-                    class="bg-neutral-white w-12 h-12 rounded-full flex items-center justify-center overflow-hidden"
+                    class="bg-neutral-white w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
                 >
                     <img
                         src={user.avatar}
