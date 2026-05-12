@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\OnairResource;
+use App\Http\Resources\CastResource;
 use App\Models\Onair;
 use App\Services\External\CastService;
 
@@ -40,9 +40,9 @@ class CastController extends Controller
         $onair = Onair::live()->with('program.host')->get();
 
         $onair->each(function ($item) use ($cast) {
-            $item->current_song = $cast['current_song'] ?? null;
+            $item->streaming_data = $cast ?? [];
         });
 
-        return OnairResource::collection($onair);
+        return CastResource::collection($onair);
     }
 }

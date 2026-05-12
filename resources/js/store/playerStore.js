@@ -16,12 +16,12 @@ const updateMetadata = async () => {
 
         if (info) {
             navigator.mediaSession.metadata = new MediaMetadata({
-                title: info.current_song.music,
-                artist: info.program.name + " - " + info.program.host.name,
+                title: info.current_song?.music,
+                artist: info.program.name + " - " + info.host.name,
                 album: "Rede Akiba - O Paraíso dos Otakus",
                 artwork: [
-                    { src: info.current_song.cover, sizes: '192x192', type: 'image/png' },
-                    { src: info.current_song.cover, sizes: '512x512', type: 'image/png' }
+                    { src: info.current_song?.cover, sizes: '192x192', type: 'image/png' },
+                    { src: info.current_song?.cover, sizes: '512x512', type: 'image/png' }
                 ]
             });
         }
