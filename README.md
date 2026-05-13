@@ -12,7 +12,7 @@ Rede Akiba ( Akiba V2 ) é uma aplicação Laravel para gerenciar uma plataforma
 ## Stack
 
 - **Backend:** PHP 8.2, Laravel 12
-- **Frontend:** Javascriot, Inertia, Svelte, Tailwind
+- **Frontend:** JavaScript, Inertia, Svelte, Tailwind
 - **Banco de dados:** MySQL
 
 ## Principais Recursos
@@ -28,29 +28,73 @@ Rede Akiba ( Akiba V2 ) é uma aplicação Laravel para gerenciar uma plataforma
 - Endpoints de cast para redirecionamento de stream e metadados
 - Integração com webhook do Discord para eventos da stream
 
-## Requisitos
+## Configuração obrigatória
 
-- Docker
+Antes de rodar, copie o arquivo `.env.example` e renomeie a cópia para `.env`.
 
-## Instalação
+Depois, preencha as variáveis de conexão com o banco de dados no `.env`:
 
-Clone o repositório e rode a instalação usando Docker
+```env
+DB_DATABASE=akiba
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
+
+Após isso, preencha as variáveis com as informações da sua stream:
+
+```env
+CAST_URL=null
+CAST_METADATA=null
+```
+
+- `CAST_URL`: URL usada para redirecionar ou conectar o player ao stream da rádio.
+- `CAST_METADATA`: URL usada para buscar os metadados da stream, como música atual e informações da transmissão.
+
+## Instalação com Docker
+
+Clone o repositório e rode a instalação usando Docker. O `install.sh` irá montar todo o ambiente pronto para execução.
 
 ```bash
 ./scripts/install.sh
 ```
 
-## Variáveis de ambiente
+## Instalação sem Docker
 
-O projeto inclui variáveis de ambiente extras para integrações com stream e Discord:
+Para rodar o projeto sem Docker, instale previamente:
 
-```env
-CAST_URL=null
-CAST_METADATA=null
-DISCORD_STREAM_WEBHOOK=null
+- PHP 8
+- Composer
+- Node.js
+- MySQL
+
+Caso deseje acessar o MySQL por uma interface gráfica, você pode usar o DBeaver ou outra ferramenta de sua preferência.
+
+Depois clone o repositório e crie um banco de dados MySQL chamado `akiba`.
+
+Em seguida, rode os comandos:
+
+```bash
+composer install
+npm install
+php artisan key:generate
+php artisan migrate
+php artisan db:seed
 ```
 
-Defina esses valores quando quiser conectar o app local a metadados reais da stream ou notificações por webhook.
+Para levantar o ambiente de desenvolvimento, use o comando:
+
+```bash
+php artisan dev
+```
+
+## Integrações externas
+
+O projeto inclui variáveis de ambiente extras para integrações com Discord:
+
+```env
+DISCORD_STREAM_WEBHOOK=null
+```
+- `DISCORD_STREAM_WEBHOOK`: Defina esse valor quando quiser enviar notificações da stream por webhook.
 
 ## Estrutura do Projeto
 
