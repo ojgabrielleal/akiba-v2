@@ -5,7 +5,7 @@
 
 Language: [Português BR](README.md) | [English US](README.en-US.md)
 
-Second version (2026) of Rede Akiba's news and web radio portal, bringing a renewed experience to fans of Japanese culture since 2016.
+Rede Akiba's news and web radio portal, bringing a renewed experience to fans of Japanese culture since 2016.
 
 ## About
 

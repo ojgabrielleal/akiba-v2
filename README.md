@@ -5,7 +5,7 @@
 
 Language: [Português BR](README.md) | [English US](README.en-US.md)
 
-Segunda versão (2026) do portal de notícias e web rádio da Rede Akiba, trazendo uma experiência renovada para fãs da cultura japonesa desde 2016.
+Portal de notícias e web rádio da Rede Akiba, trazendo uma experiência renovada para fãs da cultura japonesa desde 2016.
 
 ## Sobre
 
