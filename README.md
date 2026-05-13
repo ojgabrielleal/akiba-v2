@@ -40,6 +40,10 @@ DB_USERNAME=seu_usuario
 DB_PASSWORD=sua_senha
 ```
 
+- `DB_DATABASE`: nome do banco de dados usado pela aplicação.
+- `DB_USERNAME`: usuário usado para conectar no banco de dados.
+- `DB_PASSWORD`: senha do usuário usado para conectar no banco de dados.
+
 Após isso, preencha as variáveis com as informações da sua stream:
 
 ```env
@@ -67,7 +71,7 @@ Para rodar o projeto sem Docker, instale previamente:
 - Node.js
 - MySQL
 
-Caso deseje acessar o MySQL por uma interface gráfica, você pode usar o DBeaver ou outra ferramenta de sua preferência.
+Caso deseje acessar o MySQL por uma interface gráfica, você pode usar o `DBeaver` ou outra ferramenta de sua preferência.
 
 Depois clone o repositório e crie um banco de dados MySQL chamado `akiba`.
 
