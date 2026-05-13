@@ -4,8 +4,7 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "format:frontend": "node resources/js/scripts/format-frontend.js",
-        "format:svelte": "node resources/js/scripts/format-frontend.js"
+        "format:frontend": "node resources/js/scripts/format-frontend.js"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
