@@ -34,58 +34,22 @@ Rede Akiba ( Akiba V2 ) é uma aplicação Laravel para gerenciar uma plataforma
 
 ## Requisitos
 
-- PHP 8.2+
-- Composer
-- Node.js e npm
-- MySQL
-- Redis é opcional, dependendo da configuração local de cache/sessão
+- Docker
+- Docker Compose
 
 ## Instalação
 
-Clone o repositório e instale as dependências PHP e JavaScript:
+Clone o repositório e rode o script de instalação:
 
 ```bash
-composer install
-npm install
+git clone <repository-url>
+cd akiba-v2
+./scripts/install.sh
 ```
 
-Crie o arquivo de ambiente e gere a chave da aplicação Laravel:
+O script prepara o ambiente Docker, cria o `.env` quando necessário, instala as dependências PHP e JavaScript, gera a chave da aplicação, executa as migrations e popula o banco com os seeders.
 
-```bash
-cp .env.example .env
-php artisan key:generate
-```
-
-Configure o banco de dados no `.env`:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=akiba
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-Depois execute as migrations:
-
-```bash
-php artisan migrate
-```
-
-Para preparar o banco com dados iniciais, execute os seeders:
-
-```bash
-php artisan db:seed
-```
-
-Para um ambiente local novo, você pode recriar o banco e popular os dados em um único comando:
-
-```bash
-php artisan migrate:fresh --seed
-```
-
-Os seeders criam permissões, funções, usuários, atividades, programas, conteúdos, podcasts, dados da rádio, enquetes, pedidos de músicas e outros registros de desenvolvimento. O usuário administrador local criado pelo seeder é:
+O usuário administrador local criado pelo seeder é:
 
 ```text
 Username: admin
@@ -94,36 +58,49 @@ Password: admin
 
 ## Desenvolvimento
 
-Execute toda a stack local de desenvolvimento pelo comando Artisan customizado:
+Inicie o projeto com:
 
 ```bash
-php artisan dev
+./scripts/server.sh up
 ```
 
-Esse comando inicia o servidor Laravel, o listener de filas, os logs do Laravel Pail e o servidor de desenvolvimento do Vite juntos.
+O script sobe os containers e inicia o Laravel e o Vite com as flags necessárias para acesso pelo host.
 
-Você também pode executar cada serviço separadamente:
+Links locais:
 
-```bash
-php artisan serve
-npm run dev
-php artisan queue:listen
+```text
+Site:       http://localhost:8000
+Painel:     http://localhost:8000/panel
+phpMyAdmin: http://localhost:8080
 ```
 
-## Build
-
-Crie o build de frontend para produção:
+Para parar o projeto:
 
 ```bash
-npm run build
+./scripts/server.sh down
 ```
 
-## Testes
-
-Execute a suíte de testes:
+Para reiniciar:
 
 ```bash
-php artisan test
+./scripts/server.sh restart
+```
+
+## Scripts Úteis
+
+Os scripts em `./scripts` evitam digitar `docker compose exec` manualmente:
+
+```bash
+./scripts/install.sh
+./scripts/server.sh up
+./scripts/server.sh down
+./scripts/laravel.sh php artisan migrate
+./scripts/laravel.sh php artisan test
+./scripts/node.sh npm install
+./scripts/node.sh npm run build
+./scripts/composer.sh require vendor/package
+./scripts/shell.sh
+./scripts/shell.sh node
 ```
 
 ## Rotas Úteis
@@ -140,15 +117,15 @@ php artisan test
 
 ## Notas de Ambiente
 
-O projeto inclui variáveis de ambiente extras para integrações com stream e Discord:
+Depois da instalação, revise o arquivo `.env` para configurar as integrações da rádio. O projeto inclui variáveis de ambiente para URL do streaming, metadados da rádio e webhook do Discord:
 
 ```env
 CAST_URL=null
 CAST_METADATA=null
-DISCORD_STREAM_WEBHOOK=null
+DISCORD_LOCUTION_WEBHOOK=null
 ```
 
-Defina esses valores quando quiser conectar o app local a metadados reais da stream ou notificações por webhook.
+Defina `CAST_URL` e `CAST_METADATA` para conectar o app ao streaming real da rádio e aos metadados exibidos pelo player. Defina `DISCORD_LOCUTION_WEBHOOK` para ativar o suporte a notificações via webhook do Discord quando um locutor entrar ao vivo.
 
 ## Estrutura do Projeto
 

@@ -38,6 +38,6 @@ return [
     ],
 
     'discord' => [
-        'webhook' => env('DISCORD_STREAM_WEBHOOK'),
+        'webhook' => env('DISCORD_LOCUTION_WEBHOOK'),
     ],
 ];
