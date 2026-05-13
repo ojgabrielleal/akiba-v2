@@ -33,6 +33,7 @@ print_success() {
 if [ ! -f .env ]; then
     step "Preparing Akiba environment file"
     cp .env.example .env
+    sed -i 's|^VITE_HOST=.*|VITE_HOST=0.0.0.0|' .env
 fi
 
 step "Building and starting Akiba containers"
