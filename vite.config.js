@@ -4,7 +4,6 @@ import path from 'path'
 import laravel from "laravel-vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 
-
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd(), '');
 
