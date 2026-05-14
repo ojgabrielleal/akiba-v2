@@ -1,5 +1,5 @@
 <script>
-    import { useForm, page, Link } from "@inertiajs/svelte";
+    import { useForm, page } from "@inertiajs/svelte";
     import { Section, Preview, Wysiwyg } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
     import { postTags } from "@/data";
@@ -17,6 +17,26 @@
             create: hasPermission("event.create"),
         },
     };
+
+    $: sectionActions = [
+        can.create && {
+            label: "Matéria",
+            href: "/panel/post",
+            icon: "/svg/materials.svg",
+        },
+        can.review.create && {
+            label: "Review",
+            href: "/panel/review",
+            icon: "/svg/reviews.svg",
+            theme: "muted",
+        },
+        can.event.create && {
+            label: "Evento",
+            href: "/panel/event",
+            icon: "/svg/events.svg",
+            theme: "muted",
+        },
+    ].filter(Boolean);
 
     let form = useForm({
         _method: "POST",
@@ -71,36 +91,6 @@
     };
 </script>
 
-<Section title={post ? `Atualizar matéria` : "Criar matéria"}>
-    <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
-        {#if can.create}
-<Link
-                preserveState={false}
-                href="/panel/post"
-                class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-            >
-                Matérias
-            </Link>
-        {/if}
-        {#if can.review.create}
-<Link
-                preserveState={false}
-                href="/panel/review"
-                class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-            >
-                Reviews
-            </Link>
-        {/if}
-        {#if can.event.create}
-<Link
-                preserveState={false}
-                href="/panel/event"
-                class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-            >
-                Eventos
-            </Link>
-        {/if}
-    </div>
     <form class="mt-10 lg:mt-15" on:submit|preventDefault={submit}>
         <div class="grid grid-cols-1 lg:grid-cols-[20rem_1fr] gap-5">
             <div class="mb-3">
@@ -294,4 +284,3 @@
             </div>
         {/if}
     </form>
-</Section>

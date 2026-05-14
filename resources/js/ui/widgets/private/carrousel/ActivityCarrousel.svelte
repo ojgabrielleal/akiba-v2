@@ -9,7 +9,6 @@
 
     $: ({ user, activities } = $page.props);
 
-
     let can = {
         participate: hasPermission("activity.participate"),
         update: hasPermission("activity.update"),

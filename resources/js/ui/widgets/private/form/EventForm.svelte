@@ -1,5 +1,5 @@
 <script>
-    import { useForm, page, Link } from "@inertiajs/svelte";
+    import { useForm, page } from "@inertiajs/svelte";
     import { Section, Preview, Wysiwyg } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
@@ -9,6 +9,26 @@
         create: hasPermission("event.create"),
         update: hasPermission("event.update"),
     };
+
+    let sectionActions = [
+        {
+            label: "Matéria",
+            href: "/panel/post",
+            icon: "/svg/materials.svg",
+            theme: "muted",
+        },
+        {
+            label: "Review",
+            href: "/panel/review",
+            icon: "/svg/reviews.svg",
+            theme: "muted",
+        },
+        {
+            label: "Evento",
+            href: "/panel/event",
+            icon: "/svg/events.svg",
+        },
+    ];
 
     let form = useForm({
         _method: null,
@@ -41,30 +61,7 @@
     };
 </script>
 
-<Section title={event ? "Atualizar evento" : "Criar evento"}>
-    <div class="flex flex-wrap gap-4 justify-center lg:flex-nowrap">
-<Link
-            preserveState={false}
-            href="/panel/post"
-            class="cursor-pointer border-4 border-solid border-blue-skywave rounded-xl text-blue-skywave text-center text-xl uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-        >
-            Matérias
-        </Link>
-<Link
-            preserveState={false}
-            href="/panel/review"
-            class="cursor-pointer border-4 border-solid border-purple-mystic rounded-xl text-purple-mystic text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-        >
-            Reviews
-        </Link>
-<Link
-            preserveState={false}
-            href="/panel/event"
-            class="cursor-pointer border-4 border-solid border-orange-copper rounded-xl text-orange-copper text-xl text-center uppercase italic font-noto-sans font-bold w-full lg:w-auto py-2 px-6"
-        >
-            Eventos
-        </Link>
-    </div>
+<Section title={event ? "Atualizar evento" : "Criar evento"} actions={sectionActions}>
     <form class="mt-10 lg:mt-25" on:submit|preventDefault={submit}>
         <div class="grid grid-cols-1 lg:grid-cols-[20rem_1fr]gap-5">
             <div class="mb-3">
