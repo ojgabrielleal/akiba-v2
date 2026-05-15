@@ -22,9 +22,10 @@ class Event extends Model
         'image',
         'slug',
         'title',
+        'type',
         'content',
         'dates',
-        'address'
+        'address',
     ];
 
     protected $casts = [

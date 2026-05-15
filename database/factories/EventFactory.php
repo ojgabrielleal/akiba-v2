@@ -20,6 +20,7 @@ class EventFactory extends Factory
             'cover' => fake()->imageUrl(),
             'image' => fake()->imageUrl(),
             'title' => fake()->word(),
+            'type' => fake()->randomElement(['published', 'revision', 'draft']),
             'content' => fake()->paragraph(),
             'dates' => fake()->date(),
             'address' => fake()->address(),

@@ -18,6 +18,7 @@ class ReviewContentFactory extends Factory
     {
         return [
             'content' => fake()->paragraph(),
+            'type' => fake()->randomElement(['published', 'revision', 'draft']),
         ];
     }
 }

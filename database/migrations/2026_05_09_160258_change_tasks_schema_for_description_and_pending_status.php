@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('tasks', function (Blueprint $table) {
             $table->renameColumn('content', 'description');
             $table->string('description')->change();
-            $table->enum('status', ['pending', 'in_review', 'completed'])->default('pending')->change();
+            $table->enum('status', ['pending', 'in_review', 'completed'])->change();
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->enum('status', ['in_progress', 'in_review', 'completed', 'late'])->default('in_progress')->change();
+            $table->enum('status', ['in_progress', 'in_review', 'completed', 'late'])->change();
             $table->renameColumn('description', 'content');
             $table->longText('description')->change();
         });

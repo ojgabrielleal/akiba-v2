@@ -16,6 +16,7 @@ class ReviewContent extends Model
         'uuid',
         'user_id',
         'review_id',
+        'type',
         'content',
     ];
 
