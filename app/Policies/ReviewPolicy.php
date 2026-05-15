@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Review;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ReviewPolicy
 {
@@ -13,7 +12,7 @@ class ReviewPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermission('review.list');
+        return $user->hasAnyPermission(['publication.list', 'publication.list.own']);
     }
 
     /**
@@ -21,7 +20,7 @@ class ReviewPolicy
      */
     public function view(User $user, Review $review): bool
     {
-        return $user->hasPermission('review.view');
+        return $user->hasPermission('publication.view');
     }
 
     /**
@@ -29,7 +28,7 @@ class ReviewPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermission('review.create');
+        return $user->hasPermission('publication.create');
     }
 
     /**
@@ -37,7 +36,12 @@ class ReviewPolicy
      */
     public function update(User $user, Review $review): bool
     {
-        return $user->hasPermission('review.update');
+        if ($user->hasPermission('publication.update')) {
+            return true;
+        }
+
+        return $user->hasPermission('publication.update.own')
+            && $review->reviews()->where('user_id', $user->id)->exists();
     }
 
     /**
@@ -45,6 +49,31 @@ class ReviewPolicy
      */
     public function delete(User $user, Review $review): bool
     {
-        return $user->hasPermission('review.deactivate');
+        return $user->hasPermission('publication.deactivate');
+    }
+
+    /**
+     * Determine whether the user can create an opinion for a review.
+     */
+    public function createOpinion(User $user, Review $review): bool
+    {
+        return $user->hasPermission('review.opinion.create');
+    }
+
+    /**
+     * Determine whether the user can update their own opinion for a review.
+     */
+    public function updateOwnOpinion(User $user, Review $review): bool
+    {
+        return $user->hasPermission('review.opinion.update.own')
+            && $review->reviews()->where('user_id', $user->id)->exists();
+    }
+
+    /**
+     * Determine whether the user can approve review opinions.
+     */
+    public function approveOpinion(User $user, Review $review): bool
+    {
+        return $user->hasPermission('review.opinion.approve');
     }
 }

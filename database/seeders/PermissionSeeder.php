@@ -73,39 +73,26 @@ class PermissionSeeder extends Seeder
 
             /*
             |--------------------------------------------------------------------------
-            | Posts
+            | Publication
             |--------------------------------------------------------------------------
             */
-            ['name' => 'post.list', 'label' => '[Matérias] Listar'],
-            ['name' => 'post.view', 'label' => '[Matérias] Visualizar'],
-            ['name' => 'post.create', 'label' => '[Matérias] Criar'],
-            ['name' => 'post.update', 'label' => '[Matérias] Atualizar'],
-            ['name' => 'post.deactivate', 'label' => '[Matérias] Desativar'],
-            ['name' => 'post.list.own', 'label' => '[Matérias] Listar matérias próprias'],
-            ['name' => 'post.update.own', 'label' => '[Matérias] Atualizar matérias próprias'],
+            ['name' => 'publication.list', 'label' => '[Publicações] Listar'],
+            ['name' => 'publication.view', 'label' => '[Publicações] Visualizar'],
+            ['name' => 'publication.create', 'label' => '[Publicações] Criar'],
+            ['name' => 'publication.update', 'label' => '[Publicações] Atualizar'],
+            ['name' => 'publication.deactivate', 'label' => '[Publicações] Desativar'],
+            ['name' => 'publication.list.own', 'label' => '[Publicações] Listar publicações próprias'],
+            ['name' => 'publication.update.own', 'label' => '[Publicações] Atualizar publicações próprias'],
+            ['name' => 'publication.approve', 'label' => '[Publicações] Aprovar publicações em revisão'],
 
             /*
             |--------------------------------------------------------------------------
-            | Reviews
+            | Review opinions
             |--------------------------------------------------------------------------
             */
-            ['name' => 'review.list', 'label' => '[Reviews] Listar'],
-            ['name' => 'review.view', 'label' => '[Reviews] Visualizar'],
-            ['name' => 'review.create', 'label' => '[Reviews] Criar'],
-            ['name' => 'review.update', 'label' => '[Reviews] Atualizar'],
-            ['name' => 'review.deactivate', 'label' => '[Reviews] Desativar'],
-
-            /*
-            |--------------------------------------------------------------------------
-            | Eventos
-            |--------------------------------------------------------------------------
-            */
-            ['name' => 'event.list', 'label' => '[Eventos] Listar'],
-            ['name' => 'event.view', 'label' => '[Eventos] Visualizar'],
-            ['name' => 'event.create', 'label' => '[Eventos] Criar'],
-            ['name' => 'event.update', 'label' => '[Eventos] Atualizar'],
-            ['name' => 'event.deactivate', 'label' => '[Eventos] Desativar'],
-
+            ['name' => 'review.opinion.create', 'label' => '[Reviews] Criar opinião'],
+            ['name' => 'review.opinion.update.own', 'label' => '[Reviews] Atualizar opinião própria'],
+            ['name' => 'review.opinion.approve', 'label' => '[Reviews] Aprovar opiniões em revisão'],
 
             /*
             |--------------------------------------------------------------------------

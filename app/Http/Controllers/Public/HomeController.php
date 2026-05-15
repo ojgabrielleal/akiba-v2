@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\FeaturedResource;
 use App\Http\Resources\OnairResource;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\PublicationResource;
 use App\Http\Resources\ReviewResource;
 use App\Models\Event;
 use App\Models\Music;
@@ -31,16 +31,16 @@ class HomeController extends Controller
     {
         $posts = Post::published()->featured()->take(15)->get();
         $events = Event::featured()->take(15)->get();
-        $reviews = Review::featured()->take(15)->get();
+        $reviews = Review::with('reviews.author')->featured()->take(15)->get();
 
         $feed = $posts
             ->concat($events)
             ->concat($reviews)
-            ->sortByDesc('views')
+            ->sortByDesc('views_count')
             ->take(3)
             ->values();
 
-        return FeaturedResource::collection($feed);
+        return PublicationResource::collection($feed);
     }
 
     public function indexReview()

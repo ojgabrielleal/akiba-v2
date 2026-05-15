@@ -6,7 +6,7 @@
         WellcomeHero,
         ActivityCarrousel,
         TaskCarrousel,
-        PostGrid,
+        PublicationsGrid,
         CalendarGrid,
     } from "@/ui/widgets/private";
 
@@ -18,6 +18,6 @@
     <WellcomeHero />
     <ActivityCarrousel title="Avisos e Atividades" />
     <TaskCarrousel title="Minhas Tarefas" />
-    <PostGrid title="Minhas últimas matérias" />
+    <PublicationsGrid title="Minhas últimas matérias" />
     <CalendarGrid title="Calendário" />
 </Layout>

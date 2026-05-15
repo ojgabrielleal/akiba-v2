@@ -16,6 +16,7 @@ class ReviewContentResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
+            'type' => $this->type,
             'content' => $this->content,
             'author' => UserResource::make($this->author),
         ];

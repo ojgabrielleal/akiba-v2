@@ -81,8 +81,7 @@ class Post extends Model
 
     public function scopeFeatured($query)
     {
-        return $query->withCount('views')
-        ->orderByDesc('views_count');
+        return $query->withCount('views');
     }
     
     /**

@@ -65,6 +65,7 @@ trait HasFlashMessages
         $final =  $base['message'];
 
         return redirect()->back()->with('flash', [
+            'id' => uniqid('flash_', true),
             'icon' => $base['icon'],
             'message' => $final,
         ]);

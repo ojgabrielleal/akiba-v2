@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
@@ -72,10 +73,14 @@ class Event extends Model
 
     public function scopeFeatured($query)
     {
-        return $query->withCount('views')
-        ->orderByDesc('views_count');
+        return $query->withCount('views');
     }
 
+    public function scopeMine($query)
+    {
+        return $query->where('user_id', Auth::id());
+    }
+    
     /**
      * Define the relationships between this model and other models.
      *

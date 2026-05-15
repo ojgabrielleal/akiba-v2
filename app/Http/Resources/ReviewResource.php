@@ -27,13 +27,13 @@ class ReviewResource extends JsonResource
         $user = $request->user();
         $reviews = ReviewContentResource::collection($this->reviews)->resolve();
 
-        $currentUserReview = collect($reviews)->first(
+        $userReviewFound = collect($reviews)->first(
             fn ($review) => $review['author']['uuid'] === $user->uuid
         );
 
-        if ($currentUserReview) {
+        if ($userReviewFound) {
             return [
-                $currentUserReview,
+                $userReviewFound,
                 ...collect($reviews)
                     ->reject(fn ($review) => $review['author']['uuid'] === $user->uuid)
                     ->values()

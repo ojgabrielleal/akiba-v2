@@ -5,28 +5,28 @@
     import { Section, Pagination } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
-    $: ({ user, posts } = $page.props);
+    $: ({ publications } = $page.props);
 
     let can = {
-        update: hasPermission("post.update"),
-        deactivate: hasPermission("post.deactivate"),
-        own: {
-            update: hasPermission("post.update.own"),
-        },
+        update: hasPermission("publication.update"),
+        deactivate: hasPermission("publication.deactivate"),
     };
 
-    const requestDeactivatePost = (post) => {
-        router.delete(`/panel/dashboard/post/${post}`, {}, {
+    const requestDeactivatePublication = (publication) => {
+        router.delete(`/panel/publication/`, {
+            data: {
+                model: publication.publication_type ?? "post",
+                uuid: publication.uuid,
+            },
             preserveScroll: true,
         });
     };
 </script>
 
-{#if posts}
+{#if publications}
     <Section {title}>
         <div class="gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {#each posts.data as item}
-                {@const canUpdate = can.update || (can.own.update && item.author?.uuid === user?.uuid)}
+            {#each publications.data as item}
                 <article class="w-full h-53 bg-blue-ocean rounded-lg overflow-hidden relative ">
                     <div class="p-4">
                           <div class="font-noto-sans text-lg text-suspense-aurora line-clamp-4 uppercase">
@@ -57,7 +57,7 @@
                                     type="button"
                                     aria-label="Remover"
                                     class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
-                                    on:click={() => requestDeactivatePost(item.uuid)}
+                                    on:click={() => requestDeactivatePublication(item)}
                                 >
                                     <img
                                         src="/svg/trash.svg"
@@ -68,10 +68,10 @@
                                     />
                                 </button>
                             {/if}
-                            {#if canUpdate}
+                            {#if can.update}
                                 <Link
                                     title=""
-                                    href={`/panel/post/${item.uuid}`}
+                                    href={`/panel/${item.publication_type}/${item.uuid}`}
                                     aria-label="Editar"
                                     class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
                                 >
@@ -89,6 +89,6 @@
                 </article>
             {/each}
         </div>
-        <Pagination pages={posts} only={["posts"]} />
+        <Pagination pages={publications} only={["publications"]} mode="infinite" />
     </Section>
 {/if}

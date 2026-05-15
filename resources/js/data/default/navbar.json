@@ -10,7 +10,7 @@
       "name": "Matérias",
       "icon": "/svg/materials.svg",
       "permission": "post.module.view",
-      "address": "/panel/post"
+      "address": "/panel/publication"
     },
     {
       "name": "Locução",

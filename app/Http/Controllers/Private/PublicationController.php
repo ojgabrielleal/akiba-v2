@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Private;
 
+use App\Actions\Publication\DeactivatePublicationAction;
+use App\Actions\Publication\IndexPublicationAction;
 use App\Actions\Post\CreatePostAction;
 use App\Actions\Post\UpdatePostAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePostRequest;
+use App\Http\Resources\PublicationResource;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Traits\HasFlashMessages;
@@ -13,11 +16,11 @@ use App\Traits\ResolvesUserLogged;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class PostController extends Controller
+class PublicationController extends Controller
 {
     use HasFlashMessages, ResolvesUserLogged;
 
-    private $render = 'private/Post';
+    private $render = 'private/Publication';
 
     /*
      * ======================
@@ -25,25 +28,10 @@ class PostController extends Controller
      * ======================
      */
 
-    public function indexPosts()
+    public function indexPublications()
     {
-        if (request()->user()->cannot('viewAny', Post::class)) {
-            return null;
-        }
-
-        if (! request()->user()->hasPermission('post.list')) {
-            return PostResource::collection(
-                Post::mine()
-                    ->with(['author', 'views'])
-                    ->latest()
-                    ->paginate(10)
-            );
-        }
-
-        return PostResource::collection(
-            Post::with(['author', 'views'])
-                ->latest()
-                ->paginate(10)
+        return PublicationResource::collection(
+            app(IndexPublicationAction::class)->execute(request()->user())
         );
     }
 
@@ -57,7 +45,7 @@ class PostController extends Controller
             'post' => new PostResource(
                 $post->load(['categories', 'references', 'author'])
             ),
-            'posts' => $this->indexPosts(),
+            'publications' => $this->indexPublications(),
         ]);
     }
 
@@ -93,6 +81,20 @@ class PostController extends Controller
         return $this->flashMessage('update');
     }
 
+    public function deactivatePublication(Request $request, DeactivatePublicationAction $deactivatePublicationAction)
+    {
+        if (! $request->user()->hasPermission('publication.deactivate')) {
+            return null;
+        }
+
+        $deactivatePublicationAction->execute(
+            $request->input('model'),
+            $request->input('uuid')
+        );
+
+        return $this->flashMessage('deactivate');
+    }
+
     /*
      * ======================
      * RENDER
@@ -102,7 +104,7 @@ class PostController extends Controller
     public function render()
     {
         return Inertia::render($this->render, [
-            'posts' => $this->indexPosts(),
+            'publications' => $this->indexPublications(),
         ]);
     }
 }

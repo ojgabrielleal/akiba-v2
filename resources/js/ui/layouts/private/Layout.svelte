@@ -6,16 +6,24 @@
 
     $: ({ flash } = $page.props);
 
-    $: if (flash?.message) {
+    // Toasts configurations ( Flash Message )
+    let lastToast = null;
+    $: toastId = flash?.id ?? flash?.message;
+
+    $: if (flash?.message && toastId !== lastToast) {
+        lastToast = toastId;
+
         toast(flash.message, {
             icon: flash.icon,
         });
     }
 
+    // Polling for updates in audience, song requests and streaming status every 60 seconds
     usePoll(60 * 1000, {
         only: ["songRequests", "audience", "streaming"],
     });
 
+    // Set background color on mount
     onMount(() => {
         document.body.style.backgroundColor = "var(--color-blue-marinho)";
     });

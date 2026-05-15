@@ -29,6 +29,7 @@ class ReviewSeeder extends Seeder
             ->for($admin, 'author');
 
         Review::factory(5)
+            ->for($admin, 'author')
             ->has($adminContent, 'reviews')
             ->create();
     }
@@ -39,6 +40,7 @@ class ReviewSeeder extends Seeder
             ->for($user, 'author');
 
         Review::factory(5)
+            ->for($user, 'author')
             ->has($userContent, 'reviews')
             ->create();
     }

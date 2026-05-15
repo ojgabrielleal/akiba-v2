@@ -16,6 +16,7 @@ class Review extends Model
 
     protected $fillable = [
         'uuid',
+        'user_id',
         'is_active',
         'slug',
         'cover',
@@ -23,6 +24,10 @@ class Review extends Model
         'year_of_release',
         'title',
         'sinopse',
+    ];
+
+    protected $hidden = [
+        'user_id',
     ];
 
     protected $casts = [
@@ -65,8 +70,7 @@ class Review extends Model
 
     public function scopeFeatured($query)
     {
-        return $query->withCount('views')
-        ->orderByDesc('views_count');
+        return $query->withCount('views');
     }
 
     /**
@@ -83,5 +87,10 @@ class Review extends Model
     public function reviews()
     {
         return $this->hasMany(ReviewContent::class, 'review_id');
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

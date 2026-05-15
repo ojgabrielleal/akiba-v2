@@ -7,7 +7,7 @@
     export let pageName = "page";
     export let preserveUrl = false;
 
-    import { afterUpdate, onDestroy } from "svelte";
+    import { afterUpdate, onDestroy, onMount } from "svelte";
     import { router } from "@inertiajs/svelte";
     import Tooltip from "./Tooltip.svelte";
 
@@ -16,18 +16,41 @@
     let isLoading = false;
     let loadingAction = null;
     let pageHistory = [];
+    let currentPage = 1;
     const resetDelay = 900;
+    const storageKey = `akiba_pagination:${pageName}:${only.join("-") || "default"}`;
 
-    $: nextUrl = pages?.links?.next ?? pages?.next_page_url ?? null;
+    $: currentPages = mode === "button" && pageHistory.length > 0
+        ? pageHistory.at(-1)
+        : pages;
+    $: nextUrl = currentPages?.links?.next ?? currentPages?.next_page_url ?? null;
     $: hasNextPage = Boolean(nextUrl) || (
-        pages?.meta?.current_page &&
-        pages?.meta?.last_page &&
-        pages.meta.current_page < pages.meta.last_page
+        currentPages?.meta?.current_page &&
+        currentPages?.meta?.last_page &&
+        currentPages.meta.current_page < currentPages.meta.last_page
     );
 
-    $: if ((mode === "button" || mode === "infinite") && pages?.meta?.current_page === 1) {
+    $: shouldResetHistory = (mode === "button" || mode === "infinite")
+        && pages?.meta?.current_page === 1
+        && (pages?.data?.length ?? 0) <= (pages?.meta?.per_page ?? pages?.data?.length ?? 0);
+
+    $: if (shouldResetHistory) {
         pageHistory = [pages];
     }
+
+    const storeCurrentPage = (page) => {
+        currentPage = page;
+
+        if (typeof sessionStorage !== "undefined") {
+            sessionStorage.setItem(storageKey, String(page));
+        }
+    };
+
+    onMount(() => {
+        if (typeof sessionStorage === "undefined") return;
+
+        currentPage = Number(sessionStorage.getItem(storageKey)) || pages?.meta?.current_page || 1;
+    });
 
     const visit = (url, data = {}, action = "next") => {
         if (isLoading) return;
@@ -41,7 +64,7 @@
             data,
             preserveScroll: true,
             preserveState: true,
-            preserveUrl,
+            preserveUrl: true,
             only,
             onSuccess: (page) => {
                 if ((mode === "button" || mode === "infinite") && only.length === 1) {
@@ -55,6 +78,7 @@
                     });
 
                     pageHistory = nextHistory;
+                    storeCurrentPage(nextPage?.meta?.current_page ?? currentPage);
                 }
             },
             onFinish: () => {
@@ -65,13 +89,8 @@
     };
 
     const loadNextPage = () => {
-        if (nextUrl) {
-            visit(nextUrl, {}, "next");
-            return;
-        }
-
-        if (pages?.meta?.current_page && pages?.meta?.current_page < pages?.meta?.last_page) {
-            visit("", { [pageName]: pages.meta.current_page + 1 }, "next");
+        if (currentPages?.meta?.current_page && currentPages?.meta?.current_page < currentPages?.meta?.last_page) {
+            visit("", { [pageName]: currentPages.meta.current_page + 1 }, "next");
         }
     };
 
@@ -82,7 +101,8 @@
         loadingAction = "previous";
 
         setTimeout(() => {
-            pageHistory = pageHistory.slice(0, -1);
+            pageHistory = pageHistory.slice(0, 1);
+            storeCurrentPage(1);
 
             router.replaceProp(only[0], {
                 ...pageHistory.at(-1),
@@ -112,13 +132,17 @@
 
     onDestroy(() => {
         observer?.disconnect();
+
+        if (typeof sessionStorage !== "undefined") {
+            sessionStorage.removeItem(storageKey);
+        }
     });
 </script>
 
 {#if mode === "button" && (hasNextPage || pageHistory.length > 1)}
     <div class="flex justify-center mt-2">
         <div class="flex items-center justify-center gap-4 min-h-12">
-            {#if pageHistory.length > 1}
+            {#if pageHistory.length > 1 && !hasNextPage}
                 {#if isLoading && loadingAction === "previous"}
                     <span class="pagination-spinner" aria-label={loadingLabel}></span>
                 {:else}

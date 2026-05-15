@@ -39,10 +39,7 @@ class HandleInertiaRequestsMiddleware extends Middleware
             'user' => $this->getUserLogged(),
             'streaming' => (new CastService())->data(),
             'csrf_token' => csrf_token(),
-            'flash' => [
-                'icon' => session('flash.icon'),
-                'message' => session('flash.message'),
-            ],
+            'flash' => session('flash'),
         ]);
     }
 

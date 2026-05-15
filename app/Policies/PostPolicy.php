@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class PostPolicy
 {
@@ -13,7 +12,7 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyPermission(['post.list', 'post.list.own']);
+        return $user->hasAnyPermission(['publication.list', 'publication.list.own']);
     }
 
     /**
@@ -21,7 +20,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        return $user->hasPermission('post.view');
+        return $user->hasPermission('publication.view');
     }
 
     /**
@@ -29,7 +28,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermission('post.create');
+        return $user->hasPermission('publication.create');
     }
 
     /**
@@ -37,11 +36,11 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        if ($user->hasPermission('post.update')) {
+        if ($user->hasPermission('publication.update')) {
             return true;
         }
 
-        return $user->hasPermission('post.update.own') && $user->id === $post->user_id;
+        return $user->hasPermission('publication.update.own') && $user->id === $post->user_id;
     }
 
     /**
@@ -49,6 +48,6 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return $user->hasPermission('post.deactivate');
+        return $user->hasPermission('publication.deactivate');
     }
 }
