@@ -62,25 +62,25 @@
         });
     };
 
-    const reviews = () => {
-        let verifyExistReview = review?.data.reviews.some(
+    const opinions = () => {
+        let verifyExistOpinion = review?.data.opinions.some(
             (item) => item.author.uuid === user.uuid,
         );
 
-        if (verifyExistReview) {
-            let reviewExisting = review.data.reviews.find(
+        if (verifyExistOpinion) {
+            let opinionExisting = review.data.opinions.find(
                 (item) => item.author.uuid === user.uuid,
             );
-            let reviewRest = review.data.reviews.filter(
+            let opinionRest = review.data.opinions.filter(
                 (item) => item.author.uuid !== user.uuid,
             );
 
-            $form.review.uuid = reviewExisting.uuid;
-            $form.review.content = reviewExisting.content;
-            return [reviewExisting, ...reviewRest];
+            $form.review.uuid = opinionExisting.uuid;
+            $form.review.content = opinionExisting.content;
+            return [opinionExisting, ...opinionRest];
         }
 
-        let reviewGhost = {
+        let opinionGhost = {
             uuid: null,
             content: "Escreva o seu primeiro review",
             author: {
@@ -91,9 +91,9 @@
             },
         };
 
-        $form.review.uuid = reviewGhost.uuid;
-        $form.review.content = reviewGhost.content;
-        return [reviewGhost, ...review?.data.reviews];
+        $form.review.uuid = opinionGhost.uuid;
+        $form.review.content = opinionGhost.content;
+        return [opinionGhost, ...review?.data.opinions];
     };
 </script>
 
@@ -176,9 +176,9 @@
                     <label for="content" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-2">
                         Escreva sobre o anime
                     </label>
-                    {#if review && reviews()}
+                    {#if review && opinions()}
                         <div class="flex gap-2 mb-4">
-                            {#each reviews() as item}
+                            {#each opinions() as item}
                                 <div class="relative">
                                     <button aria-label=""
                                         type="button"

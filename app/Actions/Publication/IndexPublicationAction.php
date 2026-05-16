@@ -69,7 +69,7 @@ class IndexPublicationAction
     private function reviews(int $limit): Collection
     {
         $query = Review::active()
-            ->with('reviews.author')
+            ->with('opinions.author')
             ->featured()
             ->latest();
 

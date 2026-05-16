@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostCategoryResource extends JsonResource
+class OpinionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +16,9 @@ class PostCategoryResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'name' => $this->name,
+            'type' => $this->type,
+            'content' => $this->content,
+            'author' => UserResource::make($this->author),
         ];
     }
 }

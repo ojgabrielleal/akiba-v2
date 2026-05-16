@@ -41,7 +41,7 @@ class ReviewPolicy
         }
 
         return $user->hasPermission('publication.update.own')
-            && $review->reviews()->where('user_id', $user->id)->exists();
+            && $review->opinions()->where('user_id', $user->id)->exists();
     }
 
     /**
@@ -66,7 +66,7 @@ class ReviewPolicy
     public function updateOwnOpinion(User $user, Review $review): bool
     {
         return $user->hasPermission('review.opinion.update.own')
-            && $review->reviews()->where('user_id', $user->id)->exists();
+            && $review->opinions()->where('user_id', $user->id)->exists();
     }
 
     /**

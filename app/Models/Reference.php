@@ -6,23 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class UserSocial extends Model
+class Reference extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'users_socials';
-    
+    protected $table = 'references';
+
     protected $fillable = [
         'uuid',
-        'user_id',
+        'post_id',
         'name',
         'url',
     ];
 
     protected $hidden = [
-        'user_id'
+        'post_id'
     ];
-    
+
     /**
      * Determine the columns that should receive a unique identifier.
      *
@@ -35,8 +35,8 @@ class UserSocial extends Model
         return ['uuid'];
     }
 
-    public function user()
+    public function post()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Post::class, 'post_id');
     }
 }

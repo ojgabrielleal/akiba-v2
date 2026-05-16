@@ -6,23 +6,28 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 use App\Models\User;
-use App\Models\UserSocial;
+use App\Models\Favority;
 
-class UserSocialTest extends TestCase
+class FavorityTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function testUsesFavoritiesTable(): void
+    {
+        $this->assertSame('favorities', (new Favority())->getTable());
+    }
+
     /**
-     * Tests from UserSocial model relationships.
+     * Tests from Favority model relationships.
      */
     public function testUserRelationship(): void
     {
         $user = User::factory()->create();
 
-        $social = UserSocial::factory()
+        $favorite = Favority::factory()
             ->for($user, 'user')
             ->create();
 
-        $this->assertTrue($social->user->is($user));
+        $this->assertTrue($favorite->user->is($user));
     }
 }

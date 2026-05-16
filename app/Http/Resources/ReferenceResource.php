@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ReviewContentResource extends JsonResource
+class ReferenceResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,8 @@ class ReviewContentResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'type' => $this->type,
-            'content' => $this->content,
-            'author' => UserResource::make($this->author),
+            'name' => $this->name,
+            'url' => $this->url,
         ];
     }
 }

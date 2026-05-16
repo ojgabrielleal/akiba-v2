@@ -87,12 +87,12 @@ class PermissionSeeder extends Seeder
 
             /*
             |--------------------------------------------------------------------------
-            | Review opinions
+            | Opinioes de reviews
             |--------------------------------------------------------------------------
             */
-            ['name' => 'review.opinion.create', 'label' => '[Reviews] Criar opinião'],
-            ['name' => 'review.opinion.update.own', 'label' => '[Reviews] Atualizar opinião própria'],
-            ['name' => 'review.opinion.approve', 'label' => '[Reviews] Aprovar opiniões em revisão'],
+            ['name' => 'review.opinion.create', 'label' => '[Opinioes] Criar opiniao em review'],
+            ['name' => 'review.opinion.update.own', 'label' => '[Opinioes] Atualizar opiniao propria em review'],
+            ['name' => 'review.opinion.approve', 'label' => '[Opinioes] Aprovar opinioes em revisao'],
 
             /*
             |--------------------------------------------------------------------------

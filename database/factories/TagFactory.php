@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserSocial>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
  */
-class UserSocialFactory extends Factory
+class TagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,7 @@ class UserSocialFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->sentence(),
-            'url' => fake()->url(),
+            'name' => fake()->randomElement(['news', 'updates', 'anime', 'events', 'manga', 'light-novel', 'lists', 'curiosities', 'tops', 'first-impression']),
         ];
     }
 }

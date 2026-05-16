@@ -18,9 +18,9 @@ class PostResource extends JsonResource
             'cover' => $this->cover,
             'content' => $this->content,
             'author' => UserResource::make($this->author),
-            'references' => PostReferenceResource::collection($this->references),
-            'reactions' => PostReactionResource::collection($this->reactions),
-            'categories' => PostCategoryResource::collection($this->categories),
+            'references' => ReferenceResource::collection($this->references),
+            'reactions' => ReactionResource::collection($this->reactions),
+            'tags' => TagResource::collection($this->tags),
             'views' => $this->views_count,
         ];
     }

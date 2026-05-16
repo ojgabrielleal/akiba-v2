@@ -8,9 +8,11 @@ use Tests\TestCase;
 
 use App\Models\User;
 use App\Models\Post;
-use App\Models\PostReference;
-use App\Models\PostReaction;
-use App\Models\PostCategory;
+use App\Models\Reference;
+use App\Models\Reaction;
+use App\Models\Tag;
+use App\Models\Event;
+use App\Models\Review;
 
 class PostTest extends TestCase
 {
@@ -19,6 +21,13 @@ class PostTest extends TestCase
     /**
      * Tests from Post model relationships.
      */
+    public function testPostRelationModelsUseRenamedTables(): void
+    {
+        $this->assertSame('references', (new Reference())->getTable());
+        $this->assertSame('reactions', (new Reaction())->getTable());
+        $this->assertSame('tags', (new Tag())->getTable());
+    }
+
     public function testAuthorRelationship(): void
     {
         $user = User::factory()->create();
@@ -33,7 +42,7 @@ class PostTest extends TestCase
     public function testReferencesRelationship(): void
     {
         $user = User::factory()->create();
-        $reference = PostReference::factory(2);
+        $reference = Reference::factory(2);
 
         $post = Post::factory()
             ->for($user, 'author')
@@ -43,7 +52,7 @@ class PostTest extends TestCase
         $firstReference = $post->references->first();
 
         $this->assertCount(2, $post->references);
-        $this->assertContainsOnlyInstancesOf(PostReference::class, $post->references);
+        $this->assertContainsOnlyInstancesOf(Reference::class, $post->references);
         $this->assertNotNull($firstReference);
         $this->assertTrue($firstReference->post->is($post));
     }
@@ -51,7 +60,7 @@ class PostTest extends TestCase
     public function testReactionsRelationship(): void
     {
         $user = User::factory()->create();
-        $reaction = PostReaction::factory(2);
+        $reaction = Reaction::factory(2);
 
         $post = Post::factory()
             ->for($user, 'author')
@@ -61,27 +70,53 @@ class PostTest extends TestCase
         $firstReaction = $post->reactions->first();
 
         $this->assertCount(2, $post->reactions);
-        $this->assertContainsOnlyInstancesOf(PostReaction::class, $post->reactions);
+        $this->assertContainsOnlyInstancesOf(Reaction::class, $post->reactions);
         $this->assertNotNull($firstReaction);
         $this->assertTrue($firstReaction->post->is($post));
     }
 
-    public function testCategoriesRelationship(): void
+    public function testTagsRelationship(): void
     {
         $user = User::factory()->create();
-        $category = PostCategory::factory(2);
+        $tag = Tag::factory(2);
 
         $post = Post::factory()
             ->for($user, 'author')
-            ->has($category, 'categories')
+            ->has($tag, 'tags')
             ->create();
 
-        $firstCategory = $post->categories->first();
+        $firstTag = $post->tags->first();
 
-        $this->assertCount(2, $post->categories);
-        $this->assertContainsOnlyInstancesOf(PostCategory::class, $post->categories);
-        $this->assertNotNull($firstCategory);
-        $this->assertTrue($firstCategory->post->is($post));
+        $this->assertCount(2, $post->tags);
+        $this->assertContainsOnlyInstancesOf(Tag::class, $post->tags);
+        $this->assertNotNull($firstTag);
+        $this->assertTrue($firstTag->post->is($post));
+    }
+
+    public function testEventRelationship(): void
+    {
+        $user = User::factory()->create();
+        $event = Event::factory();
+
+        $post = Post::factory()
+            ->for($user, 'author')
+            ->has($event, 'event')
+            ->create();
+
+        $this->assertTrue($post->event->post->is($post));
+    }
+
+    public function testReviewRelationship(): void
+    {
+        $user = User::factory()->create();
+        $review = Review::factory();
+
+        $post = Post::factory()
+            ->for($user, 'author')
+            ->has($review, 'review')
+            ->create();
+
+        $this->assertTrue($post->review->post->is($post));
     }
 
     /**

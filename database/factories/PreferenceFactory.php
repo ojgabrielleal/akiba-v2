@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Preference>
  */
-class ReviewFactory extends Factory
+class PreferenceFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,8 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'year_of_release' => fake()->year(),
-            'sinopse' => fake()->paragraph(),
+            'is_like' => fake()->boolean(),
+            'content' => fake()->sentence(),
         ];
     }
 }

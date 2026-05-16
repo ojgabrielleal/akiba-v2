@@ -29,8 +29,8 @@ class CreatePostAction
                 'cover' => $this->image->store('posts', $data['cover'], 'public'),
             ]);
 
-            if (!empty($data['categories'])) {
-                $post->categories()->createMany($data['categories']);
+            if (!empty($data['tags'])) {
+                $post->tags()->createMany($data['tags']);
             }
 
             if (!empty($data['references'])) {

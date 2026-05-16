@@ -37,7 +37,7 @@ class ReviewController extends Controller
         }
 
         return ReviewResource::collection(
-            Review::with(['reviews', 'views'])->paginate(10)
+            Review::with(['opinions', 'views'])->paginate(10)
         );
     }
 
@@ -50,7 +50,7 @@ class ReviewController extends Controller
         return Inertia::render($this->render, [
             'reviews' => $this->indexReviews(),
             'review' => new ReviewResource(
-                $review->load('reviews.author')
+                $review->load('opinions.author')
             ),
         ]);
     }
@@ -69,7 +69,7 @@ class ReviewController extends Controller
             'cover' => $this->image->store('reviews', $request->file('cover'), 'public'),
         ]);
 
-        $review->reviews()->create([
+        $review->opinions()->create([
             'user_id' => request()->user()->id,
             'content' => $request->input('review.content'),
         ]);
@@ -95,7 +95,7 @@ class ReviewController extends Controller
             $review->save();
         }
 
-        $review->reviews()->updateOrCreate(
+        $review->opinions()->updateOrCreate(
             ['uuid' => $request->input('review.uuid')],
             [
                 'user_id' => $request->user()->id,

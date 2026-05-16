@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserPreference>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Opinion>
  */
-class UserPreferenceFactory extends Factory
+class OpinionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,8 @@ class UserPreferenceFactory extends Factory
     public function definition(): array
     {
         return [
-            'is_like' => fake()->boolean(),
-            'content' => fake()->sentence(),
+            'content' => fake()->paragraph(),
+            'type' => fake()->randomElement(['published', 'revision', 'draft']),
         ];
     }
 }

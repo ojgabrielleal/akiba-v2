@@ -7,9 +7,9 @@ use Illuminate\Database\Seeder;
 
 use App\Models\User;
 use App\Models\Post;
-use App\Models\PostReference;
-use App\Models\PostReaction;
-use App\Models\PostCategory;
+use App\Models\Reference;
+use App\Models\Reaction;
+use App\Models\Tag;
 
 class PostSeeder extends Seeder
 {
@@ -29,9 +29,9 @@ class PostSeeder extends Seeder
     {
         Post::factory(5)
             ->for($admin, 'author')
-            ->has(PostReference::factory(2), 'references')
-            ->has(PostCategory::factory(2), 'categories')
-            ->has(PostReaction::factory(5), 'reactions')
+            ->has(Reference::factory(2), 'references')
+            ->has(Tag::factory(2), 'tags')
+            ->has(Reaction::factory(5), 'reactions')
             ->create();
     }
 
@@ -39,9 +39,9 @@ class PostSeeder extends Seeder
     {
         Post::factory(15)
             ->for($user, 'author')
-            ->has(PostReference::factory(2), 'references')
-            ->has(PostCategory::factory(2), 'categories')
-            ->has(PostReaction::factory(5), 'reactions')
+            ->has(Reference::factory(2), 'references')
+            ->has(Tag::factory(2), 'tags')
+            ->has(Reaction::factory(5), 'reactions')
             ->create();
     }
 }

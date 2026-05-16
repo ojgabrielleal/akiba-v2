@@ -31,7 +31,7 @@ class HomeController extends Controller
     {
         $posts = Post::published()->featured()->take(15)->get();
         $events = Event::featured()->take(15)->get();
-        $reviews = Review::with('reviews.author')->featured()->take(15)->get();
+        $reviews = Review::with('opinions.author')->featured()->take(15)->get();
 
         $feed = $posts
             ->concat($events)

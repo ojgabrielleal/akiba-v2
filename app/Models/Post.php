@@ -97,17 +97,27 @@ class Post extends Model
 
     public function references()
     {
-        return $this->hasMany(PostReference::class, 'post_id');
+        return $this->hasMany(Reference::class, 'post_id');
     }
 
     public function reactions()
     {
-        return $this->hasMany(PostReaction::class, 'post_id');
+        return $this->hasMany(Reaction::class, 'post_id');
     }
 
-    public function categories()
+    public function tags()
     {
-        return $this->hasMany(PostCategory::class, 'post_id');
+        return $this->hasMany(Tag::class, 'post_id');
+    }
+
+    public function event()
+    {
+        return $this->hasOne(Event::class, 'post_id');
+    }
+
+    public function review()
+    {
+        return $this->hasOne(Review::class, 'post_id');
     }
 
     public function author()

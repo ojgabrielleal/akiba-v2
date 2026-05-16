@@ -37,11 +37,11 @@ class PublicationResource extends JsonResource
     private function publicationStatus(): ?string
     {
         if ($this->resource instanceof Review) {
-            if (! $this->resource->relationLoaded('reviews')) {
+            if (! $this->resource->relationLoaded('opinions')) {
                 return null;
             }
 
-            $types = $this->reviews
+            $types = $this->opinions
                 ->pluck('type')
                 ->filter()
                 ->unique()

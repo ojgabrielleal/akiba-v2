@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 use App\Models\User;
-use App\Models\UserPreference;
-use App\Models\UserSocial;
+use App\Models\Preference;
+use App\Models\Social;
 use App\Models\Role;
 use App\Models\Activity;
 use App\Models\Calendar;
@@ -17,7 +17,7 @@ use App\Models\Program;
 use App\Models\Podcast;
 use App\Models\Post;
 use App\Models\Review;
-use App\Models\ReviewContent;
+use App\Models\Opinion;
 use App\Models\Task;
 
 class UserTest extends TestCase
@@ -29,24 +29,24 @@ class UserTest extends TestCase
      */
     public function testPreferencesRelationship(): void
     {
-        $preference = UserPreference::factory();
+        $preference = Preference::factory();
 
         $user = User::factory()
             ->has($preference, 'preferences')
             ->create();
 
-        $this->assertContainsOnlyInstancesOf(UserPreference::class, $user->preferences);
+        $this->assertContainsOnlyInstancesOf(Preference::class, $user->preferences);
     }
 
     public function testSocialsRelationship(): void
     {
-        $social = UserSocial::factory();
+        $social = Social::factory();
 
         $user = User::factory()
             ->has($social, 'socials')
             ->create();
 
-        $this->assertContainsOnlyInstancesOf(UserSocial::class, $user->socials);
+        $this->assertContainsOnlyInstancesOf(Social::class, $user->socials);
     }
 
     public function testRolesRelationship(): void
@@ -84,10 +84,14 @@ class UserTest extends TestCase
 
     public function testEventsRelationship(): void
     {
-        $event = Event::factory();
+        $user = User::factory()->create();
 
-        $user = User::factory()
-            ->has($event, 'events')
+        $post = Post::factory()
+            ->for($user, 'author')
+            ->create();
+
+        Event::factory()
+            ->for($post, 'post')
             ->create();
 
         $this->assertContainsOnlyInstancesOf(Event::class, $user->events);
@@ -128,15 +132,21 @@ class UserTest extends TestCase
 
     public function testReviewsRelationship(): void
     {
-        $review = Review::factory()->create();
         $user = User::factory()->create();
+        $post = Post::factory()
+            ->for($user, 'author')
+            ->create();
 
-        $reviewContent = ReviewContent::factory()
+        $review = Review::factory()
+            ->for($post, 'post')
+            ->create();
+
+        $opinion = Opinion::factory()
             ->for($review, 'review')
             ->for($user, 'author')
             ->create();
 
-        $this->assertContainsOnlyInstancesOf(ReviewContent::class, $user->reviews);
+        $this->assertContainsOnlyInstancesOf(Opinion::class, $user->opinions);
     }
 
     public function testTasksRelationship(): void

@@ -42,10 +42,7 @@ class PublicationController extends Controller
         }
 
         return Inertia::render($this->render, [
-            'post' => new PostResource(
-                $post->load(['categories', 'references', 'author'])
-            ),
-            'publications' => $this->indexPublications(),
+            'post' => new PostResource($post->load(['tags', 'references', 'author'])),
         ]);
     }
 

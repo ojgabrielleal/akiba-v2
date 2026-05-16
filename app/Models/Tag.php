@@ -6,25 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class UserPreference extends Model
+class Tag extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'users_preferences';
+    protected $table = 'tags';
 
     protected $fillable = [
         'uuid',
-        'user_id',
-        'is_like',
-        'content'
-    ];
-
-    protected $casts = [
-        'is_like' => 'boolean'
+        'post_id',
+        'name',
     ];
 
     protected $hidden = [
-        'user_id'
+        'post_id'
     ];
 
     /**
@@ -39,8 +34,8 @@ class UserPreference extends Model
         return ['uuid'];
     }
 
-    public function user()
+    public function post()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Post::class, 'post_id');
     }
 }

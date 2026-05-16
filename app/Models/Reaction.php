@@ -6,23 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class ReviewContent extends Model
+class Reaction extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'reviews_contents';
+    protected $table = 'reactions';
 
     protected $fillable = [
         'uuid',
-        'user_id',
-        'review_id',
-        'type',
-        'content',
+        'post_id',
+        'name',
     ];
 
     protected $hidden = [
-        'user_id',
-        'review_id'
+        'post_id'
     ];
 
     /**
@@ -37,19 +34,8 @@ class ReviewContent extends Model
         return ['uuid'];
     }
 
-    /**
-     * Define the relationships between this model and other models.
-     *
-     * Use these methods to access related data via Eloquent relationships
-     * (hasOne, hasMany, belongsTo, belongsToMany, etc.).
-     */
-    public function review()
+    public function post()
     {
-        return $this->belongsTo(Review::class, 'review_id');
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Post::class, 'post_id');
     }
 }

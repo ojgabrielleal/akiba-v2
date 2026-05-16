@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostReferenceResource extends JsonResource
+class TagResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,6 @@ class PostReferenceResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
-            'url' => $this->url,
         ];
     }
 }

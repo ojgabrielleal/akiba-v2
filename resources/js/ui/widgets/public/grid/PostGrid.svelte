@@ -29,10 +29,10 @@
                             {item.title}
                         </h1>
                         <div class="flex gap-3 mt-2 sm:mt-0 sm:absolute sm:bottom-0">
-                            {#each item.categories as category}
+                            {#each item.tags as tag}
                                 <img
-                                    src={postTags[category.name]?.icon}
-                                    alt={category.name}
+                                    src={postTags[tag.name]?.icon}
+                                    alt={tag.name}
                                     class="w-5 h-5 sm:w-6 sm:h-6 filter invert"
                                 />
                             {/each}

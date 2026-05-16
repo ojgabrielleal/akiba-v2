@@ -18,24 +18,24 @@ class ReviewResource extends JsonResource
             'year_of_release' => $this->year_of_release,
             'sinopse' => $this->sinopse,
             'views' => $this->views_count,
-            'reviews' => $this->reviewsCurrentWithUser($request),
+            'opinions' => $this->opinionsCurrentWithUser($request),
         ];
     }
 
-    private function reviewsCurrentWithUser(Request $request): array
+    private function opinionsCurrentWithUser(Request $request): array
     {
         $user = $request->user();
-        $reviews = ReviewContentResource::collection($this->reviews)->resolve();
+        $opinions = OpinionResource::collection($this->opinions)->resolve();
 
-        $userReviewFound = collect($reviews)->first(
-            fn ($review) => $review['author']['uuid'] === $user->uuid
+        $userOpinionFound = collect($opinions)->first(
+            fn ($opinion) => $opinion['author']['uuid'] === $user->uuid
         );
 
-        if ($userReviewFound) {
+        if ($userOpinionFound) {
             return [
-                $userReviewFound,
-                ...collect($reviews)
-                    ->reject(fn ($review) => $review['author']['uuid'] === $user->uuid)
+                $userOpinionFound,
+                ...collect($opinions)
+                    ->reject(fn ($opinion) => $opinion['author']['uuid'] === $user->uuid)
                     ->values()
                     ->all(),
             ];
@@ -52,7 +52,7 @@ class ReviewResource extends JsonResource
                     'avatar' => $user->avatar,
                 ],
             ],
-            ...$reviews,
+            ...$opinions,
         ];
     }
 }

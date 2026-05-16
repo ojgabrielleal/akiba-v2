@@ -31,10 +31,10 @@ class UpdatePostAction
                 $post->save();
             }
 
-            if (!empty($data['categories'])) {
-                foreach($data['categories'] as $category) {
-                    $post->categories()->where('uuid', $category['uuid'])->update(
-                        ['name' => $category['name']]
+            if (!empty($data['tags'])) {
+                foreach($data['tags'] as $tag) {
+                    $post->tags()->where('uuid', $tag['uuid'])->update(
+                        ['name' => $tag['name']]
                     );
                 }
             }

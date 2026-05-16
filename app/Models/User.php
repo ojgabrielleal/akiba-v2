@@ -96,17 +96,17 @@ class User extends Authenticatable
      */
     public function favorites()
     {
-        return $this->hasMany(UserFavorite::class, 'user_id');
+        return $this->hasMany(Favority::class, 'user_id');
     }
 
     public function socials()
     {
-        return $this->hasMany(UserSocial::class, 'user_id');
+        return $this->hasMany(Social::class, 'user_id');
     }
 
     public function preferences()
     {
-        return $this->hasMany(UserPreference::class, 'user_id');
+        return $this->hasMany(Preference::class, 'user_id');
     }
 
     public function roles()
@@ -126,7 +126,7 @@ class User extends Authenticatable
 
     public function events()
     {
-        return $this->hasMany(Event::class, 'user_id');
+        return $this->hasManyThrough(Event::class, Post::class, 'user_id', 'post_id');
     }
 
     public function programs()
@@ -144,9 +144,9 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'user_id');
     }
 
-    public function reviews()
+    public function opinions()
     {
-        return $this->hasMany(ReviewContent::class, 'user_id');
+        return $this->hasMany(Opinion::class, 'user_id');
     }
 
     public function tasks()
