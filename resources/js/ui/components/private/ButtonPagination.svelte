@@ -1,28 +1,17 @@
 <script>
     export let pages;
-    export let mode = "infinite";
     export let loadingLabel = "Carregando...";
-    export let rootMargin = "240px";
     export let only = [];
-    export let pageName = "page";
-    export let preserveUrl = false;
 
-    import { afterUpdate, onDestroy, onMount } from "svelte";
     import { router } from "@inertiajs/svelte";
     import Tooltip from "./Tooltip.svelte";
 
-    let sentinel;
-    let observer;
     let isLoading = false;
     let loadingAction = null;
     let pageHistory = [];
-    let currentPage = 1;
     const resetDelay = 900;
-    const storageKey = `akiba_pagination:${pageName}:${only.join("-") || "default"}`;
 
-    $: currentPages = mode === "button" && pageHistory.length > 0
-        ? pageHistory.at(-1)
-        : pages;
+    $: currentPages = pageHistory.length > 0 ? pageHistory.at(-1) : pages;
     $: nextUrl = currentPages?.links?.next ?? currentPages?.next_page_url ?? null;
     $: hasNextPage = Boolean(nextUrl) || (
         currentPages?.meta?.current_page &&
@@ -30,27 +19,26 @@
         currentPages.meta.current_page < currentPages.meta.last_page
     );
 
-    $: shouldResetHistory = (mode === "button" || mode === "infinite")
-        && pages?.meta?.current_page === 1
+    $: shouldResetHistory = pages?.meta?.current_page === 1
         && (pages?.data?.length ?? 0) <= (pages?.meta?.per_page ?? pages?.data?.length ?? 0);
 
     $: if (shouldResetHistory) {
         pageHistory = [pages];
     }
 
-    const storeCurrentPage = (page) => {
-        currentPage = page;
+    const updatePageUrl = (page) => {
+        if (typeof window === "undefined") return;
 
-        if (typeof sessionStorage !== "undefined") {
-            sessionStorage.setItem(storageKey, String(page));
+        const url = new URL(window.location.href);
+
+        if (page <= 1) {
+            url.searchParams.delete("page");
+        } else {
+            url.searchParams.set("page", String(page));
         }
+
+        window.history.replaceState(window.history.state, "", url);
     };
-
-    onMount(() => {
-        if (typeof sessionStorage === "undefined") return;
-
-        currentPage = Number(sessionStorage.getItem(storageKey)) || pages?.meta?.current_page || 1;
-    });
 
     const visit = (url, data = {}, action = "next") => {
         if (isLoading) return;
@@ -64,10 +52,9 @@
             data,
             preserveScroll: true,
             preserveState: true,
-            preserveUrl: true,
             only,
             onSuccess: (page) => {
-                if ((mode === "button" || mode === "infinite") && only.length === 1) {
+                if (only.length === 1) {
                     const appendProp = only[0];
                     const nextPage = page.props[appendProp];
                     const nextHistory = [...pageHistory, nextPage];
@@ -78,7 +65,6 @@
                     });
 
                     pageHistory = nextHistory;
-                    storeCurrentPage(nextPage?.meta?.current_page ?? currentPage);
                 }
             },
             onFinish: () => {
@@ -90,7 +76,7 @@
 
     const loadNextPage = () => {
         if (currentPages?.meta?.current_page && currentPages?.meta?.current_page < currentPages?.meta?.last_page) {
-            visit("", { [pageName]: currentPages.meta.current_page + 1 }, "next");
+            visit("", { page: currentPages.meta.current_page + 1 }, "next");
         }
     };
 
@@ -102,7 +88,7 @@
 
         setTimeout(() => {
             pageHistory = pageHistory.slice(0, 1);
-            storeCurrentPage(1);
+            updatePageUrl(1);
 
             router.replaceProp(only[0], {
                 ...pageHistory.at(-1),
@@ -113,33 +99,9 @@
             loadingAction = null;
         }, resetDelay);
     };
-
-    const observeSentinel = () => {
-        observer?.disconnect();
-
-        if (mode !== "infinite" || !hasNextPage || !sentinel) return;
-
-        observer = new IntersectionObserver((entries) => {
-            if (entries.some((entry) => entry.isIntersecting)) {
-                loadNextPage();
-            }
-        }, { rootMargin });
-
-        observer.observe(sentinel);
-    };
-
-    afterUpdate(observeSentinel);
-
-    onDestroy(() => {
-        observer?.disconnect();
-
-        if (typeof sessionStorage !== "undefined") {
-            sessionStorage.removeItem(storageKey);
-        }
-    });
 </script>
 
-{#if mode === "button" && (hasNextPage || pageHistory.length > 1)}
+{#if hasNextPage || pageHistory.length > 1}
     <div class="flex justify-center mt-2">
         <div class="flex items-center justify-center gap-4 min-h-12">
             {#if pageHistory.length > 1 && !hasNextPage}
@@ -195,12 +157,6 @@
                 {/if}
             {/if}
         </div>
-    </div>
-{:else if mode === "infinite" && hasNextPage}
-    <div bind:this={sentinel} class="flex justify-center mt-10 min-h-12">
-        {#if isLoading}
-            <span class="pagination-spinner" aria-label={loadingLabel}></span>
-        {/if}
     </div>
 {/if}
 

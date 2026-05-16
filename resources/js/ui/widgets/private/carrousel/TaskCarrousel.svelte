@@ -2,7 +2,7 @@
     export let title;
 
     import { page, router } from "@inertiajs/svelte";
-    import { Section, Pagination } from "@/ui/components/private/";
+    import { Section, ButtonPagination } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
 
     $: ({ tasks } = $page.props);
@@ -90,12 +90,9 @@
                 </article>
             {/each}
         </div>
-        <Pagination
+        <ButtonPagination
             pages={tasks}
-            mode="button"
             only={["tasks"]}
-            pageName="tasks"
-            preserveUrl
         />
     </Section>
 {/if}

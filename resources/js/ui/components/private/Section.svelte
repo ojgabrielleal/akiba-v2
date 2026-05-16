@@ -28,7 +28,7 @@
                                 type="button"
                                 title={action.title}
                                 aria-label={action.title}
-                                class="bg-orange-citric flex h-7 min-w-23 items-center justify-center gap-1.5 rounded-sm px-3 text-sm font-black uppercase italic leading-none text-blue-night font-noto-sans"
+                                class="cursor-pointer bg-orange-citric flex h-7 min-w-23 items-center justify-center gap-1.5 rounded-sm px-3 text-sm font-black uppercase italic leading-none text-blue-night font-noto-sans"
                                 on:click={action.onClick}
                             >
                                 {#if action.icon}
@@ -38,7 +38,7 @@
                                         class="h-4 w-4 shrink-0 brightness-0"
                                     />
                                 {/if}
-                                <span>{action.label}</span>
+                                <span>{action.title}</span>
                             </button>
                         {:else}
                             <Link
@@ -46,7 +46,7 @@
                                 href={action.href}
                                 title={action.title}
                                 aria-label={action.title}
-                                class="bg-orange-citric flex h-7 min-w-23 items-center justify-center gap-1.5 rounded-sm px-3 text-sm font-black uppercase italic leading-none text-blue-night font-noto-sans"
+                                class="cursor-pointer bg-orange-citric flex h-7 min-w-23 items-center justify-center gap-1.5 rounded-sm px-3 text-sm font-black uppercase italic leading-none text-blue-night font-noto-sans"
                             >
                                 {#if action.icon}
                                     <img
@@ -55,7 +55,7 @@
                                         class="h-4 w-4 shrink-0 brightness-0"
                                     />
                                 {/if}
-                                <span>{action.label}</span>
+                                <span>{action.title}</span>
                             </Link>
                         {/if}
                     {/each}

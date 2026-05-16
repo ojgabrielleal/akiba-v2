@@ -17,7 +17,7 @@ class PollResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'question' => $this->question,
-            'options' => PollOptionResource::collection($this->options),
+            'options' => OptionResource::collection($this->options),
         ];
     }
 }

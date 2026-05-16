@@ -8,8 +8,8 @@ use App\Http\Requests\Media\UpdatePollRequest;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\PollResource;
 use App\Models\Event;
+use App\Models\Option;
 use App\Models\Poll;
-use App\Models\PollOption;
 use App\Traits\HasFlashMessages;
 use Inertia\Inertia;
 
@@ -101,13 +101,13 @@ class MediaController extends Controller
         return $this->flashMessage('update');
     }
 
-    public function createVote(PollOption $pollOption)
+    public function createVote(Option $option)
     {
-        if (request()->user()->cannot('update', $pollOption->poll)) {
+        if (request()->user()->cannot('update', $option->poll)) {
             return null;
         }
 
-        $pollOption->increment('votes');
+        $option->increment('votes');
 
         return $this->flashMessage('save');
     }

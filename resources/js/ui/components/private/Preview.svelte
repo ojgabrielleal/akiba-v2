@@ -1,8 +1,7 @@
 <script>
     export let name = null;
-    export let standard = "w-full h-[19rem] rounded-lg";
-    export let view =
-        "w-full max-h-[19rem] object-cover object-center rounded-lg bg-suspense-aurora";
+    export let standard = "h-[19rem] rounded-lg";
+    export let view = "max-h-[19rem]";
     export let src = null;
     export let oninput = null;
     export let required = false;
@@ -31,11 +30,11 @@
             src={imageToShow}
             alt=""
             aria-hidden="true"
-            class={`${view}`}
+            class={`${view} object-cover object-center rounded-lg bg-blue-ocean`}
             loading="lazy"
         />
     {:else}
-        <div class={`${standard} bg-suspense-aurora flex items-center justify-center overflow-hidden font-noto-sans text-blue-skywave text-7xl font-bold italic uppercase`}>
+        <div class={`${standard} w-full bg-blue-ocean border border-blue-skywave flex items-center justify-center overflow-hidden font-noto-sans text-orange-citric text-7xl font-bold italic uppercase`}>
             +
         </div>
     {/if}

@@ -2,7 +2,7 @@
     export let title;
 
     import { page, Link } from "@inertiajs/svelte";
-    import { Section, Pagination } from "@/ui/components/private";
+    import { Section, ButtonPagination } from "@/ui/components/private";
 
     $: ({ reviews } = $page.props);
 </script>
@@ -61,6 +61,6 @@
                 </article>
             {/each}
         </div>
-        <Pagination pages={reviews} only={["reviews"]} />
+        <ButtonPagination pages={reviews} only={["reviews"]} />
     </Section>
 {/if}

@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class PollOption extends Model
+class Option extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'polls_options';
+    protected $table = 'options';
 
     protected $fillable = [
         'uuid',

@@ -1,8 +1,10 @@
 <script>
     export let title;
+    export let show;
+    export let model;
 
     import { page, router, Link } from "@inertiajs/svelte";
-    import { Section, Pagination } from "@/ui/components/private";
+    import { Section, ButtonPagination } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
     $: ({ publications } = $page.props);
@@ -69,11 +71,14 @@
                                 </button>
                             {/if}
                             {#if can.update}
-                                <Link
+                                <button
                                     title=""
-                                    href={`/panel/${item.publication_type}/${item.uuid}`}
                                     aria-label="Editar"
                                     class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
+                                    on:click={() => {
+                                        show = true;
+                                        model = item.publication_type;
+                                    }}
                                 >
                                     <img
                                         src="/svg/edit.svg"
@@ -82,13 +87,13 @@
                                         class="w-4 filter-orange-citric"
                                         loading="lazy"
                                     />
-                                </Link>
+                                </button>
                             {/if}
                         </div>
                     </div>
                 </article>
             {/each}
         </div>
-        <Pagination pages={publications} only={["publications"]} mode="infinite" />
+        <ButtonPagination pages={publications} only={["publications"]} />
     </Section>
 {/if}
