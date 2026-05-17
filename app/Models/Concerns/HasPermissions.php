@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
 
 trait HasPermissions
 {
     /**
      * Check if the user has a specific permission through their roles.
-     *
-     * @param string $permission
-     * @return bool
      */
     public function hasPermission(string $permission): bool
     {
@@ -19,9 +16,6 @@ trait HasPermissions
 
     /**
      * Check if the user has a specific role.
-     *
-     * @param string $role
-     * @return bool
      */
     public function hasRole(string $role): bool
     {
@@ -30,9 +24,6 @@ trait HasPermissions
 
     /**
      * Check if the user has any of the given permissions.
-     *
-     * @param array $permissions
-     * @return bool
      */
     public function hasAnyPermission(array $permissions): bool
     {

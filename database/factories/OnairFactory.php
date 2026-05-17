@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Database\Factories\Concerns\HasFakeImages;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OnairFactory extends Factory
 {
+    use HasFakeImages;
+
     /**
      * Define the model's default state.
      *
@@ -20,11 +23,11 @@ class OnairFactory extends Factory
             'in_air' => true,
             'phrase' => [
                 'text' => fake()->sentence(),
-                'icon' => fake()->imageUrl(),
+                'icon' => $this->fakeImageUrl(),
                 'decoration' => 'default',
             ],
             'type' => fake()->randomElement(['automatic', 'live', 'scheduled']),
-            'icon' => fake()->imageUrl(),
+            'icon' => $this->fakeImageUrl(),
             'allows_song_requests' => true,
             'song_requests_total' => fake()->randomNumber(),
         ];

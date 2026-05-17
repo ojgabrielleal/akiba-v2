@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Private;
 
+use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\CalendarWeekResource;
@@ -11,8 +12,6 @@ use App\Models\Activity;
 use App\Models\Calendar;
 use App\Models\Post;
 use App\Models\Task;
-use App\Traits\HasFlashMessages;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class DashboardController extends Controller

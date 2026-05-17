@@ -47,7 +47,6 @@
         let url = post ? `/panel/post/${post.data.uuid}` : "/panel/post";
 
         $form.type = event.submitter.value;
-
         $form.post(url, {
             onSuccess: () => {
                 post ? null : $form.reset();
@@ -222,7 +221,7 @@
                 </div>
             </div>
             {#if can.create || can.update}
-                <div class="w-full flex flex-wrap gap-4 justify-center">
+                <div class="w-full flex flex-wrap gap-4 justify-start">
                     <button
                         type="submit"
                         value="draft"

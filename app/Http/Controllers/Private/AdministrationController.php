@@ -13,6 +13,7 @@ use App\Actions\Administration\Task\UpdateTaskAction;
 use App\Actions\Administration\User\CreateUserAction;
 use App\Actions\Administration\User\UpdateUserAccessAction;
 use App\Exceptions\RoleHasMembersException;
+use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Administration\CreateActivityRequest;
 use App\Http\Requests\Administration\UpdateActivityRequest;
@@ -32,7 +33,6 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Task;
 use App\Models\User;
-use App\Traits\HasFlashMessages;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

@@ -30,7 +30,7 @@
             src={imageToShow}
             alt=""
             aria-hidden="true"
-            class={`${view} object-cover object-center rounded-lg bg-blue-ocean`}
+            class={`${view} w-full object-cover object-center rounded-lg bg-blue-ocean`}
             loading="lazy"
         />
     {:else}

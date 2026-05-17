@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Private;
 
+use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Repository\CreateRepositoryRequest;
 use App\Http\Resources\RepositoryResource;
 use App\Models\Repository;
 use App\Services\Process\ImageProcessService;
-use App\Traits\HasFlashMessages;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

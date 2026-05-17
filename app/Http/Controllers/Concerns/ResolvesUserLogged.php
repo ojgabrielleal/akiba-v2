@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Http\Controllers\Concerns;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +11,7 @@ trait ResolvesUserLogged
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        if (!$user) {
+        if (! $user) {
             return null;
         }
 
@@ -26,7 +26,7 @@ trait ResolvesUserLogged
             'avatar' => $user->avatar,
             'roles' => $user->roles,
             'permissions' => $user->roles
-                ->flatMap(fn($role) => $role->permissions)
+                ->flatMap(fn ($role) => $role->permissions)
                 ->pluck('name')
                 ->unique()
                 ->values(),

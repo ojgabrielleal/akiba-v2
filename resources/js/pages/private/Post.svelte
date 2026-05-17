@@ -1,12 +1,14 @@
 <script>
     import Cookies from "js-cookie";
-    import { router } from "@inertiajs/svelte";
+    import { router, page } from "@inertiajs/svelte";
     import { Meta } from "@/config";
     import { Layout } from "@/ui/layouts/private";
     import { Section } from "@/ui/components/private";
     import { PostForm, PostGrid } from "@/ui/widgets/private";
 
-    let showEditor = Cookies.get("akiba_show_post_editor");
+    $: ({ post } = $page.props);
+    
+    let showEditor = post ?? Cookies.get("akiba_show_post_editor");
 
     let actions = [
         {

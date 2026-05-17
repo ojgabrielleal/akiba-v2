@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Private;
 
+use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OnairResource;
 use App\Models\Onair;
 use App\Services\External\AudienceService;
-use App\Traits\HasFlashMessages;
 use Inertia\Inertia;
 
 class LogsController extends Controller

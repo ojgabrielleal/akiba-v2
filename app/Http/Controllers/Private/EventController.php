@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Private;
 
 use App\Actions\Event\CreateEventAction;
 use App\Actions\Event\UpdateEventAction;
+use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Event\CreateEventRequest;
 use App\Http\Requests\Event\UpdateEventRequest;
 use App\Http\Resources\EventResource;
 use App\Models\Event;
-use App\Traits\HasFlashMessages;
 use Inertia\Inertia;
 
 class EventController extends Controller

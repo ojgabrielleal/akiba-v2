@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Private;
 use App\Actions\Post\CreatePostAction;
 use App\Actions\Post\PostListAction;
 use App\Actions\Post\UpdatePostAction;
+use App\Http\Controllers\Concerns\HasFlashMessages;
+use App\Http\Controllers\Concerns\ResolvesUserLogged;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePostRequest;
-use App\Http\Resources\PublicationResource;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\PublicationResource;
 use App\Models\Post;
-use App\Traits\HasFlashMessages;
-use App\Traits\ResolvesUserLogged;
 use Inertia\Inertia;
 
 class PostController extends Controller
@@ -41,6 +41,7 @@ class PostController extends Controller
 
         return Inertia::render($this->render, [
             'post' => new PostResource($post->load(['tags', 'references', 'author'])),
+            'posts' => $this->indexPosts(),
         ]);
     }
 

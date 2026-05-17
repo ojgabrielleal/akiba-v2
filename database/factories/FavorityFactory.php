@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Database\Factories\Concerns\HasFakeImages;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class FavorityFactory extends Factory
 {
+    use HasFakeImages;
+
     /**
      * Define the model's default state.
      *
@@ -18,7 +21,7 @@ class FavorityFactory extends Factory
     {
         return [
             'name' => fake()->sentence(),
-            'image' => fake()->imageUrl(),
+            'image' => $this->fakeImageUrl(),
         ];
     }
 }
