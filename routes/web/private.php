@@ -7,7 +7,7 @@ use App\Http\Controllers\Private\LoginController;
 use App\Http\Controllers\Private\AdministrationController;
 use App\Http\Controllers\Private\LocutionController;
 use App\Http\Controllers\Private\DashboardController;
-use App\Http\Controllers\Private\PublicationController;
+use App\Http\Controllers\Private\PostController;
 use App\Http\Controllers\Private\RadioController;
 use App\Http\Controllers\Private\PodcastController;
 use App\Http\Controllers\Private\RepositoryController;
@@ -37,23 +37,17 @@ Route::prefix('panel')->middleware(['inertia'])->group(function () {
             Route::prefix('task')->group(function () {
                 Route::post('{task:uuid}/complete', 'markTaskToReview');
             });
+            Route::prefix('post')->group(function () {
+                Route::delete('{post:uuid}', 'deactivatePost');
+            });
         });
 
-        Route::prefix('publication')->controller(PublicationController::class)->group(function () {
-            Route::get('', 'render')->name('panel.publication');
-            Route::delete('', 'deactivatePublication');
-            Route::prefix('post')->group(function () {
-                Route::post('', 'createPost');
-                Route::get('{post:uuid}', 'showPost');
-            });
-            Route::prefix('review')->group(function () {
-                Route::post('', 'createReview');
-                Route::get('{review:uuid}', 'showReview');
-            });
-            Route::prefix('event')->group(function () {
-                Route::post('', 'createEvent');
-                Route::get('{event:uuid}', 'showEvent');
-            });
+        Route::prefix('post')->controller(PostController::class)->group(function () {
+            Route::get('', 'render')->name('panel.post');
+            Route::post('', 'createPost');
+            Route::patch('{post:uuid}', 'updatePost');
+            Route::get('{post:uuid}', 'showPost');
+            Route::delete('{post:uuid}', 'deactivatePost');
         });
 
         Route::prefix('locution')->controller(LocutionController::class)->group(function () {

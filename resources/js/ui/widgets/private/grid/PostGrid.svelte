@@ -1,34 +1,29 @@
 <script>
     export let title;
-    export let show;
-    export let model;
 
+    import Cookies from "js-cookie";
     import { page, router, Link } from "@inertiajs/svelte";
     import { Section, ButtonPagination } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
-    $: ({ publications } = $page.props);
+    $: ({ posts } = $page.props);
 
     let can = {
-        update: hasPermission("publication.update"),
-        deactivate: hasPermission("publication.deactivate"),
+        update: hasPermission("post.update"),
+        deactivate: hasPermission("post.deactivate"),
     };
 
-    const requestDeactivatePublication = (publication) => {
-        router.delete(`/panel/publication/`, {
-            data: {
-                model: publication.publication_type ?? "post",
-                uuid: publication.uuid,
-            },
+    const requestDeactivate = (post) => {
+        router.delete(`/panel/post/${post.uuid}`, {
             preserveScroll: true,
         });
     };
 </script>
 
-{#if publications}
+{#if posts}
     <Section {title}>
         <div class="gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {#each publications.data as item}
+            {#each posts.data as item}
                 <article class="w-full h-53 bg-blue-ocean rounded-lg overflow-hidden relative ">
                     <div class="p-4">
                           <div class="font-noto-sans text-lg text-suspense-aurora line-clamp-4 uppercase">
@@ -59,7 +54,7 @@
                                     type="button"
                                     aria-label="Remover"
                                     class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
-                                    on:click={() => requestDeactivatePublication(item)}
+                                    on:click={() => requestDeactivate(item)}
                                 >
                                     <img
                                         src="/svg/trash.svg"
@@ -71,14 +66,11 @@
                                 </button>
                             {/if}
                             {#if can.update}
-                                <button
-                                    title=""
+                                <Link
+                                    href={`/panel/post/${item.uuid}`}
                                     aria-label="Editar"
                                     class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
-                                    on:click={() => {
-                                        show = true;
-                                        model = item.publication_type;
-                                    }}
+                                    on:click={() => Cookies.set("akiba_show_post_editor", true)}
                                 >
                                     <img
                                         src="/svg/edit.svg"
@@ -87,13 +79,13 @@
                                         class="w-4 filter-orange-citric"
                                         loading="lazy"
                                     />
-                                </button>
+                                </Link>
                             {/if}
                         </div>
                     </div>
                 </article>
             {/each}
         </div>
-        <ButtonPagination pages={publications} only={["publications"]} />
+        <ButtonPagination pages={posts} only={["posts"]} />
     </Section>
 {/if}

@@ -8,19 +8,11 @@ use App\Models\User;
 class PostPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return $user->hasAnyPermission(['publication.list', 'publication.list.own']);
-    }
-
-    /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Post $post): bool
     {
-        return $user->hasPermission('publication.view');
+        return $user->hasPermission('post.view');
     }
 
     /**
@@ -28,7 +20,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermission('publication.create');
+        return $user->hasPermission('post.create');
     }
 
     /**
@@ -36,11 +28,11 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        if ($user->hasPermission('publication.update')) {
+        if ($user->hasPermission('post.update')) {
             return true;
         }
 
-        return $user->hasPermission('publication.update.own') && $user->id === $post->user_id;
+        return $user->hasPermission('post.update.own') && $user->id === $post->user_id;
     }
 
     /**
@@ -48,6 +40,6 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return $user->hasPermission('publication.deactivate');
+        return $user->hasPermission('post.deactivate');
     }
 }

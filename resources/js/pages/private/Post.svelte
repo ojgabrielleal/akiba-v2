@@ -1,36 +1,31 @@
 <script>
+    import Cookies from "js-cookie";
+    import { router } from "@inertiajs/svelte";
     import { Meta } from "@/config";
     import { Layout } from "@/ui/layouts/private";
     import { Section } from "@/ui/components/private";
-    import { PostForm, PublicationsGrid } from "@/ui/widgets/private";
+    import { PostForm, PostGrid } from "@/ui/widgets/private";
 
-    $: show = false;
-    $: model = "post";
+    let showEditor = Cookies.get("akiba_show_post_editor");
 
     let actions = [
         {
             title: "Matéria",
             icon: "/svg/materials.svg",
             onClick: () => {
-                show = true;
-                model = "post";
+                Cookies.set("akiba_show_post_editor", true);
+                showEditor = true;
             }
         },
         {
             title: "Review",
             icon: "/svg/reviews.svg",
-            onClick: () => {
-                show = true;
-                model = "review";
-            }
+            onClick: () => { router.visit("/panel/review") }
         },
         {
             title: "Evento",
             icon: "/svg/events.svg",
-            onClick: () => {
-                show = true;    
-                model = "event";
-            }
+            onClick: () => { router.visit("/panel/event") }
         }
     ];
 </script>
@@ -38,9 +33,9 @@
 <Meta meta={{ title: "Matérias" } } />
 <Layout>
     <Section title="Criar" {actions} />
-        {#if show && model === "post"}
+        {#if showEditor}
             <PostForm />
         {/if}
-        <PublicationsGrid title="Todas as matérias, reviews e eventos" {show} {model} />
+        <PostGrid title="Todas as matérias, reviews e eventos"/>
     <Section/>
 </Layout>

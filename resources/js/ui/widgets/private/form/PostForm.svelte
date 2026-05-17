@@ -7,8 +7,8 @@
     $: ({ post } = $page.props);
 
     let can = {
-        create: hasPermission("publication.create"),
-        update: hasPermission("publication.update") && hasPermission("publication.update.own"),
+        create: hasPermission("post.create"),
+        update: hasPermission("post.update") || hasPermission("post.update.own"),
     };
 
     let form = useForm({

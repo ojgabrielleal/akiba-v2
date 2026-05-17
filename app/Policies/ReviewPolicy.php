@@ -12,7 +12,7 @@ class ReviewPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyPermission(['publication.list', 'publication.list.own']);
+        return $user->hasAnyPermission(['post.list', 'post.list.own']);
     }
 
     /**
@@ -20,7 +20,7 @@ class ReviewPolicy
      */
     public function view(User $user, Review $review): bool
     {
-        return $user->hasPermission('publication.view');
+        return $user->hasPermission('post.view');
     }
 
     /**
@@ -28,7 +28,7 @@ class ReviewPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermission('publication.create');
+        return $user->hasPermission('post.create');
     }
 
     /**
@@ -36,11 +36,11 @@ class ReviewPolicy
      */
     public function update(User $user, Review $review): bool
     {
-        if ($user->hasPermission('publication.update')) {
+        if ($user->hasPermission('post.update')) {
             return true;
         }
 
-        return $user->hasPermission('publication.update.own')
+        return $user->hasPermission('post.update.own')
             && $review->opinions()->where('user_id', $user->id)->exists();
     }
 
@@ -49,7 +49,7 @@ class ReviewPolicy
      */
     public function delete(User $user, Review $review): bool
     {
-        return $user->hasPermission('publication.deactivate');
+        return $user->hasPermission('post.deactivate');
     }
 
     /**

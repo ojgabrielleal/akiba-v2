@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Actions\Publication\DeactivatePublicationAction;
-use App\Actions\Publication\IndexPublicationAction;
 use App\Actions\Post\CreatePostAction;
+use App\Actions\Post\PostListAction;
 use App\Actions\Post\UpdatePostAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePostRequest;
@@ -13,14 +12,13 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Traits\HasFlashMessages;
 use App\Traits\ResolvesUserLogged;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class PublicationController extends Controller
+class PostController extends Controller
 {
     use HasFlashMessages, ResolvesUserLogged;
 
-    private $render = 'private/Publication';
+    private $render = 'private/Post';
 
     /*
      * ======================
@@ -28,10 +26,10 @@ class PublicationController extends Controller
      * ======================
      */
 
-    public function indexPublications()
+    public function indexPosts()
     {
         return PublicationResource::collection(
-            app(IndexPublicationAction::class)->execute(request()->user())
+            app(PostListAction::class)->execute(request()->user())
         );
     }
 
@@ -62,7 +60,7 @@ class PublicationController extends Controller
         return $this->flashMessage('save');
     }
 
-    public function updatePost(Request $request, Post $post, UpdatePostAction $updatePostAction)
+    public function updatePost(CreatePostRequest $request, Post $post, UpdatePostAction $updatePostAction)
     {
         if ($request->user()->cannot('update', $post)) {
             return null;
@@ -78,16 +76,15 @@ class PublicationController extends Controller
         return $this->flashMessage('update');
     }
 
-    public function deactivatePublication(Request $request, DeactivatePublicationAction $deactivatePublicationAction)
+    public function deactivatePost(Post $post)
     {
-        if (! $request->user()->hasPermission('publication.deactivate')) {
+        if (request()->user()->cannot('delete', $post)) {
             return null;
         }
 
-        $deactivatePublicationAction->execute(
-            $request->input('model'),
-            $request->input('uuid')
-        );
+        $post->update([
+            'is_active' => false,
+        ]);
 
         return $this->flashMessage('deactivate');
     }
@@ -101,7 +98,7 @@ class PublicationController extends Controller
     public function render()
     {
         return Inertia::render($this->render, [
-            'publications' => $this->indexPublications(),
+            'posts' => $this->indexPosts(),
         ]);
     }
 }

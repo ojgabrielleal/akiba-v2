@@ -12,7 +12,7 @@ class EventPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyPermission(['publication.list', 'publication.list.own']);
+        return $user->hasAnyPermission(['post.list', 'post.list.own']);
     }
 
     /**
@@ -20,7 +20,7 @@ class EventPolicy
      */
     public function view(User $user, Event $event): bool
     {
-        return $user->hasPermission('publication.view');
+        return $user->hasPermission('post.view');
     }
 
     /**
@@ -28,7 +28,7 @@ class EventPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermission('publication.create');
+        return $user->hasPermission('post.create');
     }
 
     /**
@@ -36,11 +36,11 @@ class EventPolicy
      */
     public function update(User $user, Event $event): bool
     {
-        if ($user->hasPermission('publication.update')) {
+        if ($user->hasPermission('post.update')) {
             return true;
         }
 
-        return $user->hasPermission('publication.update.own') && $user->id === $event->user_id;
+        return $user->hasPermission('post.update.own') && $user->id === $event->user_id;
     }
 
     /**
@@ -48,6 +48,6 @@ class EventPolicy
      */
     public function delete(User $user, Event $event): bool
     {
-        return $user->hasPermission('publication.deactivate');
+        return $user->hasPermission('post.deactivate');
     }
 }

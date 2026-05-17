@@ -103,11 +103,25 @@ class DashboardController extends Controller
 
         return PostResource::collection(
             Post::active()
-                ->with(['author'])
+                ->published()
                 ->mine()
+                ->with(['author'])
                 ->limit(5)
                 ->get()
         );
+    }
+
+    public function deactivatePost(Post $post)
+    {
+        if (request()->user()->cannot('delete', $post)) {
+            return null;
+        }
+
+        $post->update([
+            'active' => false,
+        ]);
+
+        return $this->flashMessage('deactivate');
     }
 
     /*
