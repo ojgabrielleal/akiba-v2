@@ -48,6 +48,7 @@
 
         $form.type = event.submitter.value;
         $form.post(url, {
+            preserveState: false,
             onSuccess: () => {
                 post ? null : $form.reset();
             },
@@ -56,7 +57,7 @@
 </script>
 
 <form class="container-page mb-20" on:submit|preventDefault={submit}>
-    <div class="px-40">
+    <div class="lg:px-40">
         <div class="mb-3">
             <div class="mb-8">
                 <label for="title" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
@@ -67,6 +68,7 @@
                     type="text"
                     name="title"
                     class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-neutral-white rounded-lg outline-none pl-4"
+                    required={!post}
                     bind:value={$form.title}
                 />
             </div>
@@ -87,8 +89,8 @@
                 </label>
                 <Wysiwyg
                     name="content"
-                    bind:value={$form.content}
                     required
+                    bind:value={$form.content}
                 />
             </div>
         </div>
@@ -103,8 +105,8 @@
                 view="h-[18rem] rounded-lg"
                 standard="h-[18rem] rounded-lg"
                 src={$form.image}
-                oninput={(event) => ($form.image = event.target.files[0])}
                 required={!post}
+                oninput={(event) => ($form.image = event.target.files[0])}
             />
             <ul class="mt-4 ml-5 list-disc font-noto-sans font-light text-orange-citric">
                 <li>
@@ -116,19 +118,20 @@
             </ul>
         </div>
         <div class="block">
-            <div class="grid grid-cols-[0.4fr_1fr] gap-5 mb-15">
+            <div class="grid grid-cols-1 lg:grid-cols-[0.4fr_1fr] gap-5 mb-15">
                 <div>
                     <div class="text-center text-orange-amber font-bold italic text-lg uppercase font-noto-sans mb-5">
                         Tags
                     </div>
                     <div class="mb-6">
-                        <label for="tags" class="text-blue-skywave font-bold italic text-md uppercase font-noto-sans block mb-1">
+                        <label for="tags" class="text-blue-skywave font-bold italic text-md uppercase font-noto-sans block mb-1 ml-3">
                             Primeira Tag
                         </label>
                         <select
                             id="tags"
                             name="tags"
                             class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4"
+                            required={!post}
                             bind:value={$form.tags[0].name}
                         >
                             {#each Object.values(postTags) as item}
@@ -139,13 +142,14 @@
                         </select>
                     </div>
                     <div>
-                        <label for="tags" class="text-blue-skywave font-bold italic text-md uppercase font-noto-sans block mb-1">
+                        <label for="tags" class="text-blue-skywave font-bold italic text-md uppercase font-noto-sans block mb-1 ml-3">
                             Segunda Tag
                         </label>
                         <select
                             id="tags"
                             name="tags"
                             class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4"
+                            required={!post}
                             bind:value={$form.tags[1].name}
                         >
                             {#each Object.values(postTags) as item}
@@ -165,7 +169,7 @@
                     </div>
                     <div class="w-full flex mb-6">
                         <div class="flex-1">
-                            <label for="references" class="text-blue-skywave font-bold italic text-md uppercase font-noto-sans block mb-1">
+                            <label for="references" class="text-blue-skywave font-bold italic text-md uppercase font-noto-sans block mb-1 ml-3">
                                 Nome:
                             </label>
                             <input
@@ -173,6 +177,7 @@
                                 type="text"
                                 name="references"
                                 class="w-full h-12 bg-neutral-white border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
+                                required={!post}
                                 bind:value={$form.references[0].name}
                             />
                         </div>
@@ -182,16 +187,17 @@
                             </label>
                             <input
                                 id="references"
-                                type="text"
+                                type="url"
                                 name="references"
                                 class="w-full h-12 bg-neutral-white font-noto-sans rounded-r-full pl-4"
+                                required={!post}
                                 bind:value={$form.references[0].url}
                             />
                         </div>
                     </div>
                     <div class="w-full flex">
                         <div class="flex-1">
-                            <label for="references" class="text-blue-skywave font-bold italic text-md uppercase font-noto-sans block mb-1">
+                            <label for="references" class="text-blue-skywave font-bold italic text-md uppercase font-noto-sans block mb-1 ml-3">
                                 Nome:
                             </label>
                             <input
@@ -199,6 +205,7 @@
                                 type="text"
                                 name="references"
                                 class="w-full h-12 bg-neutral-white border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
+                                required={!post}
                                 bind:value={$form.references[1].name}
                             />
                         </div>
@@ -208,9 +215,10 @@
                             </label>
                             <input
                                 id="references"
-                                type="text"
+                                type="url"
                                 name="references"
                                 class="w-full h-12 bg-neutral-white font-noto-sans rounded-r-full pl-4"
+                                required={!post}
                                 bind:value={$form.references[1].url}
                             />
                         </div>

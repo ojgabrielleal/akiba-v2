@@ -4,10 +4,6 @@
 
     $: ({ streaming } = $page.props);
     $: cast = streaming ?? {};
-
-    const onVolumeInput = (event) => {
-        setVolume(Number(event.currentTarget.value));
-    };
 </script>
 
 <section class="container-page bg-blue-marinho">
@@ -86,7 +82,7 @@
                                 step="0.01"
                                 value={$player.volume}
                                 aria-label="Volume do player"
-                                on:input={onVolumeInput}
+                                on:input={(event) => setVolume(Number(event.currentTarget.value))}
                             />
                         </div>
                     </div>

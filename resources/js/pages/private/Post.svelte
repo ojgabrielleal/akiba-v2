@@ -15,6 +15,10 @@
             title: "Matéria",
             icon: "/svg/materials.svg",
             onClick: () => {
+                if(showEditor){
+                    router.visit("/panel/post");
+                }
+
                 Cookies.set("akiba_show_post_editor", true);
                 showEditor = true;
             }

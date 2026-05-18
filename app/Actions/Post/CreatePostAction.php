@@ -2,6 +2,7 @@
 
 namespace App\Actions\Post;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use App\Services\Process\ImageProcessService;
 
@@ -17,16 +18,16 @@ class CreatePostAction
         $this->image = $image;
     }
 
-    public function execute(User $user, array $data): Post
+    public function execute(User $user, array $data, ?UploadedFile $image = null, ?UploadedFile $cover = null): Post
     {
-        return DB::transaction(function () use ($user, $data) {
+        return DB::transaction(function () use ($user, $data, $image, $cover) {
             $post = Post::create([
                 'user_id' => $user->id,
                 'type' => $data['type'],
                 'title' => $data['title'],
                 'content' => $data['content'],
-                'image' => $this->image->store('posts', $data['image'], 'public'),
-                'cover' => $this->image->store('posts', $data['cover'], 'public'),
+                'image' => $this->image->store('posts', $image, 'public'),
+                'cover' => $this->image->store('posts', $cover, 'public'),
             ]);
 
             if (!empty($data['tags'])) {

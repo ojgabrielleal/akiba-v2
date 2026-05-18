@@ -52,7 +52,7 @@ class PostController extends Controller
         }
 
         $createPostAction->execute(
-            $request->user()->id,
+            $request->user(),
             $request->all(),
             $request->file('image'),
             $request->file('cover')
@@ -61,7 +61,7 @@ class PostController extends Controller
         return $this->flashMessage('save');
     }
 
-    public function updatePost(CreatePostRequest $request, Post $post, UpdatePostAction $updatePostAction)
+    public function updatePost(CreatePostRequest $request, UpdatePostAction $updatePostAction, Post $post)
     {
         if ($request->user()->cannot('update', $post)) {
             return null;
@@ -71,7 +71,7 @@ class PostController extends Controller
             $post,
             $request->all(),
             $request->file('image'),
-            $request->file('cover')
+            $request->file('cover'),
         );
 
         return $this->flashMessage('update');

@@ -2,7 +2,7 @@
     export let title;
 
     import { page, router } from "@inertiajs/svelte";
-    import { Section, ButtonPagination } from "@/ui/components/private/";
+    import { Section, ButtonPagination, Tooltip } from "@/ui/components/private/";
     import { hasPermission } from "@/utils";
 
     $: ({ tasks } = $page.props);

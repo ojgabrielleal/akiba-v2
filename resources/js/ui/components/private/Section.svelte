@@ -8,8 +8,8 @@
 
 <section class={styles}>
     {#if title}
-        <div class="flex items-center gap-4 mb-3">
-            <h1 class={["uppercase font-black italic whitespace-nowrap text-[1.3rem] font-noto-sans",
+        <div class="flex flex-wrap items-center gap-4 mb-3">
+            <h1 class={["uppercase font-black italic text-[1.3rem] font-noto-sans",
                 {"text-orange-citric": actions.length > 0}, 
                 {"text-orange-amber": actions.length === 0}
             ]}>
@@ -21,7 +21,7 @@
             ]}>
             </div>
             {#if actions.length > 0}
-                <div class="flex flex-wrap justify-end gap-2">
+                <div class="flex w-full justify-start gap-2 sm:w-auto sm:justify-end">
                     {#each actions as action}
                         {#if action.onClick}
                             <button

@@ -12,7 +12,8 @@ class PostListAction
     {
         $query = Post::active()
             ->featured()
-            ->with(['author', 'review.opinions']);
+            ->with(['author', 'review.opinions'])
+            ->orderBy('created_at','desc');
 
         if ($user->hasPermission('post.list')) {
             return $query->paginate(10);

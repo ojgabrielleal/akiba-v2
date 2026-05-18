@@ -3,7 +3,7 @@
 
     import Cookies from "js-cookie";
     import { page, router, Link } from "@inertiajs/svelte";
-    import { Section, ButtonPagination } from "@/ui/components/private";
+    import { Section, ButtonPagination, Tooltip } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
     $: ({ posts } = $page.props);
@@ -50,36 +50,46 @@
                         </div>
                         <div class="flex gap-1 justify-end mt-1">
                             {#if can.deactivate}
-                                <button
-                                    type="button"
-                                    aria-label="Remover"
-                                    class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
-                                    on:click={() => requestDeactivate(item)}
-                                >
-                                    <img
-                                        src="/svg/trash.svg"
-                                        alt=""
-                                        aria-hidden="true"
-                                        class="w-4 filter-red-crimson"
-                                        loading="lazy"
-                                    />
-                                </button>
+                                <Tooltip>
+                                    <button
+                                        type="button"
+                                        aria-label="Remover"
+                                        class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
+                                        on:click={() => requestDeactivate(item)}
+                                    >
+                                        <img
+                                            src="/svg/trash.svg"
+                                            alt=""
+                                            aria-hidden="true"
+                                            class="w-4 filter-red-crimson"
+                                            loading="lazy"
+                                        />
+                                    </button>
+                                    <div slot="content">
+                                        Desativar
+                                    </div>
+                                </Tooltip>
                             {/if}
                             {#if can.update}
-                                <Link
-                                    href={`/panel/post/${item.uuid}`}
-                                    aria-label="Editar"
-                                    class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
-                                    on:click={() => Cookies.set("akiba_show_post_editor", true)}
-                                >
-                                    <img
-                                        src="/svg/edit.svg"
-                                        alt=""
-                                        aria-hidden="true"
-                                        class="w-4 filter-orange-citric"
-                                        loading="lazy"
-                                    />
-                                </Link>
+                                <Tooltip>
+                                    <Link
+                                        href={`/panel/post/${item.uuid}`}
+                                        aria-label="Editar"
+                                        class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
+                                        on:click={() => Cookies.set("akiba_show_post_editor", true)}
+                                    >
+                                        <img
+                                            src="/svg/edit.svg"
+                                            alt=""
+                                            aria-hidden="true"
+                                            class="w-4 filter-orange-citric"
+                                            loading="lazy"
+                                        />
+                                    </Link>
+                                    <div slot="content">
+                                        Atualizar
+                                    </div>
+                                </Tooltip>
                             {/if}
                         </div>
                     </div>
