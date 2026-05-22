@@ -57,4 +57,13 @@ class OpinionTest extends TestCase
     {
         $this->assertSame('opinions', (new Opinion())->getTable());
     }
+
+    public function testFactoryUsesStatus(): void
+    {
+        $opinion = Opinion::factory()->make([
+            'status' => 'published',
+        ]);
+
+        $this->assertSame('published', $opinion->status);
+    }
 }

@@ -11,7 +11,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,17 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'module' => 'nullable|in:post,review',
+            'status' => 'required_if:module,post,event',
+            'title' => 'required',
+            'image' => 'nullable',
+            'cover' => 'nullable',
+            'references' => 'required',
+            'tags' => 'required',
+            'content' => 'required_if:module,post',
+            'sinopse' => 'required_if:module,review',
+            'year_of_release' => 'required_if:module,review',
+            'review.content' => 'required_if:module,review',
         ];
     }
 }

@@ -25,7 +25,7 @@ class PostFactory extends Factory
             'title' => fake()->text(),
             'content' => fake()->paragraph(),
             'cover' => $this->fakeImageUrl(),
-            'type' => fake()->randomElement(['published', 'revision', 'draft']),
+            'status' => fake()->randomElement(['published', 'revision', 'draft']),
         ];
     }
 }

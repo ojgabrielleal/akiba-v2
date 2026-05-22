@@ -45,11 +45,12 @@ Route::prefix('panel')->middleware(['inertia'])->group(function () {
         Route::prefix('post')->controller(PostController::class)->group(function () {
             Route::get('', 'render')->name('panel.post');
             Route::post('', 'createPost');
+            Route::post('review', 'createReview');
             Route::patch('{post:uuid}', 'updatePost');
             Route::get('{post:uuid}', 'showPost');
             Route::delete('{post:uuid}', 'deactivatePost');
         });
-
+        
         Route::prefix('locution')->controller(LocutionController::class)->group(function () {
             Route::prefix('locution')->group(function () {
                 Route::post('start/{program:uuid}', 'startLocution');

@@ -19,7 +19,7 @@ class Post extends Model
         'uuid',
         'user_id',
         'is_active',
-        'type',
+        'status',
         'image',
         'slug',
         'title',
@@ -71,7 +71,7 @@ class Post extends Model
 
     public function scopePublished($query)
     {
-        return $query->where('type', 'published');
+        return $query->where('status', 'published');
     }
 
     public function scopeMine($query)

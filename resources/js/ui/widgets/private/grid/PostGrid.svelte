@@ -13,6 +13,11 @@
         deactivate: hasPermission("post.deactivate"),
     };
 
+    const operation = (type) => {
+        Cookies.set("akiba_post_show_editor", true)
+        Cookies.set("akiba_post_type", type);
+    }
+
     const requestDeactivate = (post) => {
         router.delete(`/panel/post/${post.uuid}`, {
             preserveScroll: true,
@@ -31,9 +36,9 @@
                         </div>
                     </div>
                     <div class={["grid grid-cols-[0.4fr_1fr_0.6fr] items-center absolute bottom-0 w-full py-1 px-4",
-                        { "bg-orange-amber": item.type === "draft" },
-                        { "bg-blue-cerulean": item.type === "published" },
-                        { "bg-green-mint": item.type === "revision" },
+                        { "bg-orange-amber": item.status === "draft" },
+                        { "bg-blue-cerulean": item.status === "published" },
+                        { "bg-green-mint": item.status === "revision" },
                     ]}>
                         <div class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-md text-suspense-aurora truncate">
                             <img
@@ -45,8 +50,16 @@
                             />
                             {item.views ?? 0}
                         </div>
-                        <div class="mt-[0.1rem] w-full font-noto-sans font-bold italic uppercase text-sm text-suspense-aurora text-center truncate">
-                            {item.author.nickname}
+                        <div class="mt-[0.1rem] w-full text-center truncate">
+                            {#if item.type === "review"}
+                                <span class="font-noto-sans text-sm font-black uppercase tracking-wider text-suspense-aurora/80">
+                                    Review
+                                </span>
+                            {:else}
+                                <span class="font-noto-sans font-bold italic uppercase text-sm text-suspense-aurora">
+                                    {item.author.nickname}
+                                </span>
+                            {/if}
                         </div>
                         <div class="flex gap-1 justify-end mt-1">
                             {#if can.deactivate}
@@ -76,7 +89,7 @@
                                         href={`/panel/post/${item.uuid}`}
                                         aria-label="Editar"
                                         class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
-                                        on:click={() => Cookies.set("akiba_show_post_editor", true)}
+                                        on:click={() => operation(item.type)}
                                     >
                                         <img
                                             src="/svg/edit.svg"

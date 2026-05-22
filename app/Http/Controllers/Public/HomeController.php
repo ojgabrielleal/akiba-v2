@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OnairResource;
 use App\Http\Resources\PostResource;
-use App\Http\Resources\PublicationResource;
+use App\Http\Resources\PostIndexResource;
 use App\Http\Resources\ReviewResource;
 use App\Models\Event;
 use App\Models\Music;
@@ -40,7 +40,7 @@ class HomeController extends Controller
             ->take(3)
             ->values();
 
-        return PublicationResource::collection($feed);
+        return PostIndexResource::collection($feed);
     }
 
     public function indexReview()

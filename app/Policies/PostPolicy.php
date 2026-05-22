@@ -28,11 +28,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        if ($user->hasPermission('post.update')) {
-            return true;
-        }
-
-        return $user->hasPermission('post.update.own') && $user->id === $post->user_id;
+        return $user->hasPermission('post.update');
     }
 
     /**
@@ -41,5 +37,13 @@ class PostPolicy
     public function delete(User $user, Post $post): bool
     {
         return $user->hasPermission('post.deactivate');
+    }
+
+    /**
+     * Determine whether the user can approve a post in revision.
+     */
+    public function approve(User $user, Post $post): bool
+    {
+        return $user->hasPermission('post.approve');
     }
 }

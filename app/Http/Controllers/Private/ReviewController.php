@@ -71,6 +71,7 @@ class ReviewController extends Controller
 
         $review->opinions()->create([
             'user_id' => request()->user()->id,
+            'status' => 'published',
             'content' => $request->input('review.content'),
         ]);
 
@@ -99,6 +100,7 @@ class ReviewController extends Controller
             ['uuid' => $request->input('review.uuid')],
             [
                 'user_id' => $request->user()->id,
+                'status' => 'published',
                 'content' => $request->input('review.content'),
             ]
         );

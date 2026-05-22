@@ -83,17 +83,9 @@ class PermissionSeeder extends Seeder
             ['name' => 'post.update', 'label' => '[Posts] Atualizar'],
             ['name' => 'post.deactivate', 'label' => '[Posts] Desativar'],
             ['name' => 'post.list.own', 'label' => '[Posts] Listar posts próprios'],
-            ['name' => 'post.update.own', 'label' => '[Posts] Atualizar posts próprios'],
-            ['name' => 'post.approve', 'label' => '[Posts] Aprovar post em revisão'],
-
-            /*
-            |--------------------------------------------------------------------------
-            | Opinioes de reviews
-            |--------------------------------------------------------------------------
-            */
-            ['name' => 'review.opinion.create', 'label' => '[Opinioes] Criar opinião em review'],
-            ['name' => 'review.opinion.update', 'label' => '[Opinioes] Atualizar opinião em review'],
-            ['name' => 'review.opinion.approve', 'label' => '[Opinioes] Aprovar opinião em revisão'],
+            ['name' => 'post.review.opinion.list', 'label' => '[Posts] Listar opiniões de reviews'],
+            ['name' => 'post.publish', 'label' => '[Posts] Publicar post (imediatamente)'],
+            ['name' => 'post.approve', 'label' => '[Posts] Aprovar post'],
 
             /*
             |--------------------------------------------------------------------------
@@ -226,7 +218,6 @@ class PermissionSeeder extends Seeder
         $renamedPermissions = [
             'publication.list' => 'post.list',
             'publication.view' => 'post.view',
-            'publication.create' => 'post.create',
             'publication.update' => 'post.update',
             'publication.deactivate' => 'post.deactivate',
             'publication.list.own' => 'post.list.own',

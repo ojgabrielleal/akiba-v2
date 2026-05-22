@@ -53,27 +53,10 @@ class ReviewPolicy
     }
 
     /**
-     * Determine whether the user can create an opinion for a review.
+     * Determine whether the user can approve a review post in revision.
      */
-    public function createOpinion(User $user, Review $review): bool
+    public function approve(User $user, Review $review): bool
     {
-        return $user->hasPermission('review.opinion.create');
-    }
-
-    /**
-     * Determine whether the user can update their own opinion for a review.
-     */
-    public function updateOwnOpinion(User $user, Review $review): bool
-    {
-        return $user->hasPermission('review.opinion.update.own')
-            && $review->opinions()->where('user_id', $user->id)->exists();
-    }
-
-    /**
-     * Determine whether the user can approve review opinions.
-     */
-    public function approveOpinion(User $user, Review $review): bool
-    {
-        return $user->hasPermission('review.opinion.approve');
+        return $user->hasPermission('post.approve');
     }
 }

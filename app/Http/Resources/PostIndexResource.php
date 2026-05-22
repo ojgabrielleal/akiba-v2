@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PublicationResource extends JsonResource
+class PostIndexResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
@@ -15,17 +15,31 @@ class PublicationResource extends JsonResource
             'title' => $this->title,
             'cover' => $this->cover,
             'views' => $this->views_count,
+            'status' => $this->status(),
             'type' => $this->type(),
             'author' => UserResource::make($this->author),
         ];
     }
 
-    private function type(): string
+    public function type(): string 
     {
-        if($this->review && $this->review->opinions->contains('type', 'revision')){
+        if($this->review){
+            return 'review';
+        }
+
+        if($this->event){
+            return 'event';
+        }
+
+        return 'post';
+    }
+
+    private function status(): string
+    {
+        if($this->review && $this->review->opinions->contains('status', 'revision')){
             return 'revision';
         }
 
-        return $this->type;
+        return $this->status;
     }
 }

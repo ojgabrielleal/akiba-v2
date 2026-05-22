@@ -148,12 +148,12 @@ class PostTest extends TestCase
 
         $publishedPost = Post::factory()
             ->for($user, 'author')
-            ->state(['type' => 'published'])
+            ->state(['status' => 'published'])
             ->create();
 
         $draftPost = Post::factory()
             ->for($user, 'author')
-            ->state(['type' => 'draft'])
+            ->state(['status' => 'draft'])
             ->create();
 
         $publishedPosts = Post::published()->get();

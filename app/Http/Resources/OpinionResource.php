@@ -16,7 +16,7 @@ class OpinionResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'type' => $this->type,
+            'status' => $this->status,
             'content' => $this->content,
             'author' => UserResource::make($this->author),
         ];
