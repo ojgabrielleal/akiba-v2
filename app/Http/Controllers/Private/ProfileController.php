@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Private;
 
 use App\Actions\Profile\UpdateProfileAction;
+use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Traits\HasFlashMessages;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

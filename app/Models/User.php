@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Concerns\HasFlashMessages;
+use App\Models\Concerns\HasPermissions;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use App\Traits\HasPermissions;
-use App\Traits\HasFlashMessages;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasUuids, HasPermissions, HasFlashMessages, HasApiTokens;
+    use HasApiTokens, HasFactory, HasFlashMessages, HasPermissions, HasUuids, Notifiable;
 
     protected $table = 'users';
 
@@ -51,14 +51,14 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn(?string $value) => filled($value) ? Hash::make($value) : null,
+            set: fn (?string $value) => filled($value) ? Hash::make($value) : null,
         );
     }
 
     protected function nickname(): Attribute
     {
         return Attribute::make(
-            set: fn(string $value) => [
+            set: fn (string $value) => [
                 'nickname' => $value,
                 'slug' => Str::slug($value),
             ],
@@ -68,9 +68,8 @@ class User extends Authenticatable
     /**
      * Determine the columns that should receive a unique identifier.
      *
-     * This method specifies that the 'uuid' column should be automatically 
+     * This method specifies that the 'uuid' column should be automatically
      * generated as a sortable, unique identifier when the model is created.
-     *
      */
     public function uniqueIds(): array
     {
@@ -96,17 +95,17 @@ class User extends Authenticatable
      */
     public function favorites()
     {
-        return $this->hasMany(UserFavorite::class, 'user_id');
+        return $this->hasMany(Favority::class, 'user_id');
     }
 
     public function socials()
     {
-        return $this->hasMany(UserSocial::class, 'user_id');
+        return $this->hasMany(Social::class, 'user_id');
     }
 
     public function preferences()
     {
-        return $this->hasMany(UserPreference::class, 'user_id');
+        return $this->hasMany(Preference::class, 'user_id');
     }
 
     public function roles()
@@ -126,7 +125,7 @@ class User extends Authenticatable
 
     public function events()
     {
-        return $this->hasMany(Event::class, 'user_id');
+        return $this->hasManyThrough(Event::class, Post::class, 'user_id', 'post_id');
     }
 
     public function programs()
@@ -144,9 +143,9 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'user_id');
     }
 
-    public function reviews()
+    public function opinions()
     {
-        return $this->hasMany(ReviewContent::class, 'user_id');
+        return $this->hasMany(Opinion::class, 'user_id');
     }
 
     public function tasks()

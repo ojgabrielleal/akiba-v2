@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Database\Factories\Concerns\HasFakeImages;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProgramFactory extends Factory
 {
+    use HasFakeImages;
+
     /**
      * Define the model's default state.
      *
@@ -20,7 +23,7 @@ class ProgramFactory extends Factory
             'is_active' => true,
             'is_default' => false,
             'name' => fake()->name(),
-            'image' => fake()->imageUrl(),
+            'image' => $this->fakeImageUrl(),
             'type' => 'free',
             'phrases' => null,
         ];
@@ -40,17 +43,17 @@ class ProgramFactory extends Factory
             'phrases' => [
                 [
                     'text' => fake()->sentence(),
-                    'icon' => fake()->imageUrl(),
+                    'icon' => $this->fakeImageUrl(),
                     'decoration' => 'default',
                 ],
                 [
                     'text' => fake()->sentence(),
-                    'icon' => fake()->imageUrl(),
+                    'icon' => $this->fakeImageUrl(),
                     'decoration' => 'default',
                 ],
                 [
                     'text' => fake()->sentence(),
-                    'icon' => fake()->imageUrl(),
+                    'icon' => $this->fakeImageUrl(),
                     'decoration' => 'default',
                 ],
             ],

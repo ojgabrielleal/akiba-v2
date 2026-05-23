@@ -17,10 +17,6 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'is_active' => true,
-            'cover' => fake()->imageUrl(),
-            'image' => fake()->imageUrl(),
-            'title' => fake()->word(),
             'year_of_release' => fake()->year(),
             'sinopse' => fake()->paragraph(),
         ];

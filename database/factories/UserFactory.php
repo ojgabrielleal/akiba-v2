@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Favority;
+use App\Models\Preference;
 use App\Models\Role;
+use App\Models\Social;
 use App\Models\User;
-use App\Models\UserFavorite;
-use App\Models\UserPreference;
-use App\Models\UserSocial;
+use Database\Factories\Concerns\HasFakeImages;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,6 +15,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class UserFactory extends Factory
 {
+    use HasFakeImages;
+
     /**
      * Define the model's default state.
      *
@@ -32,7 +35,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'nickname' => fake()->userName(),
             'gender' => $gender,
-            'avatar' => fake()->imageUrl(),
+            'avatar' => $this->fakeImageUrl(),
             'birthday' => fake()->date(),
             'city' => fake()->city(),
             'state' => fake()->state(),
@@ -76,21 +79,21 @@ class UserFactory extends Factory
     public function withDefaults(): static
     {
         return $this->afterCreating(function (User $user) {
-            if (!$user->socials()->exists()) {
+            if (! $user->socials()->exists()) {
                 foreach ($this->socials() as $social) {
-                    $user->socials()->save(UserSocial::factory()->make($social));
+                    $user->socials()->save(Social::factory()->make($social));
                 }
             }
 
-            if (!$user->preferences()->exists()) {
+            if (! $user->preferences()->exists()) {
                 foreach ($this->preferences() as $preference) {
-                    $user->preferences()->save(UserPreference::factory()->make($preference));
+                    $user->preferences()->save(Preference::factory()->make($preference));
                 }
             }
 
-            if (!$user->favorites()->exists()) {
+            if (! $user->favorites()->exists()) {
                 foreach ($this->favorites() as $favorite) {
-                    $user->favorites()->save(UserFavorite::factory()->make($favorite));
+                    $user->favorites()->save(Favority::factory()->make($favorite));
                 }
             }
         });

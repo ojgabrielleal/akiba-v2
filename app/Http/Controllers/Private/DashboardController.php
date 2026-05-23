@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Actions\Post\DeactivatePostAction;
+use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\CalendarWeekResource;
@@ -12,7 +12,6 @@ use App\Models\Activity;
 use App\Models\Calendar;
 use App\Models\Post;
 use App\Models\Task;
-use App\Traits\HasFlashMessages;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -105,20 +104,21 @@ class DashboardController extends Controller
             Post::active()
                 ->published()
                 ->mine()
-                ->latest()
                 ->with(['author'])
-                ->limit(4)
+                ->limit(5)
                 ->get()
         );
     }
 
-    public function deactivatePost(Post $post, DeactivatePostAction $deactivatePostAction)
+    public function deactivatePost(Post $post)
     {
         if (request()->user()->cannot('delete', $post)) {
             return null;
         }
 
-        $deactivatePostAction->execute($post);
+        $post->update([
+            'active' => false,
+        ]);
 
         return $this->flashMessage('deactivate');
     }
@@ -153,7 +153,7 @@ class DashboardController extends Controller
         return Inertia::render($this->render, [
             'activities' => $this->indexActivities(),
             'tasks' => $this->indexTasks(),
-            'posts' => $this->indexPosts(),
+            'publications' => $this->indexPosts(),
             'calendar' => $this->indexCalendar(),
         ]);
     }

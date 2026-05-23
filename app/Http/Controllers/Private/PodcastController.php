@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Private;
 
 use App\Actions\Podcast\CreatePodcastAction;
 use App\Actions\Podcast\UpdatePodcastAction;
+use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Podcast\CreatePodcastRequest;
 use App\Http\Resources\PodcastResource;
 use App\Models\Podcast;
-use App\Traits\HasFlashMessages;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

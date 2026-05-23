@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use App\Models\User;
-use App\Models\ReviewContent;
+use App\Models\Opinion;
 use App\Models\Review;
+use App\Models\Post;
 
 class ReviewSeeder extends Seeder
 {
@@ -25,21 +25,31 @@ class ReviewSeeder extends Seeder
 
     private function seedAdministration(User $admin): void
     {
-        $adminContent = ReviewContent::factory(5)
+        $adminOpinions = Opinion::factory(5)
             ->for($admin, 'author');
 
-        Review::factory(5)
-            ->has($adminContent, 'reviews')
+        Post::factory(5)
+            ->for($admin, 'author')
+            ->has(
+                Review::factory()
+                    ->has($adminOpinions, 'opinions'),
+                'review'
+            )
             ->create();
     }
 
     private function seedNonAdministrationContent(User $user): void
     {
-        $userContent = ReviewContent::factory(5)
+        $userOpinions = Opinion::factory(5)
             ->for($user, 'author');
 
-        Review::factory(5)
-            ->has($userContent, 'reviews')
+        Post::factory(5)
+            ->for($user, 'author')
+            ->has(
+                Review::factory()
+                    ->has($userOpinions, 'opinions'),
+                'review'
+            )
             ->create();
     }
 }

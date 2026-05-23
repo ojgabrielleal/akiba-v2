@@ -25,7 +25,6 @@ export { default as TaskForm } from "./form/TaskForm.svelte"
 
 // Grids
 export { default as PostGrid } from "./grid/PostGrid.svelte"
-export { default as ReviewGrid } from "./grid/ReviewGrid.svelte"
 export { default as CalendarGrid } from "./grid/CalendarGrid.svelte"
 export { default as SongRequestGrid } from "./grid/SongRequestGrid.svelte"
 export { default as ProgramScheduleGrid } from "./grid/ProgramScheduleGrid.svelte"

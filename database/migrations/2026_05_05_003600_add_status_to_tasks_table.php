@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->enum('status', ['in_progress', 'in_review', 'completed', 'late'])
-                ->default('in_progress')
-                ->after('user_id');
+            $table->enum('status', ['in_progress', 'in_review', 'completed', 'late'])->default('in_progress')->after('user_id');
         });
     }
 

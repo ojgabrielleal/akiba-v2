@@ -9,7 +9,6 @@
 
     $: ({ user, activities } = $page.props);
 
-
     let can = {
         participate: hasPermission("activity.participate"),
         update: hasPermission("activity.update"),
@@ -90,36 +89,46 @@
                     {/if}
                     <div class="flex gap-2 absolute bottom-3 right-4">
                         {#if can.update && variant === "administration"}
-                            <button
-                                type="button"
-                                aria-label="Atualizar"
-                                class="w-9 h-9 g-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                                on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
-                            >
-                                <img
-                                    src="/svg/edit.svg"
-                                    alt=""
-                                    aria-hidden="true"
-                                    class="w-5 filter-orange-citric"
-                                    loading="lazy"
-                                />
-                            </button>
+                            <Tooltip>
+                                <button
+                                    type="button"
+                                    aria-label="Atualizar"
+                                    class="w-9 h-9 g-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
+                                    on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
+                                >
+                                    <img
+                                        src="/svg/edit.svg"
+                                        alt=""
+                                        aria-hidden="true"
+                                        class="w-5 filter-orange-citric"
+                                        loading="lazy"
+                                    />
+                                </button>
+                                <div slot="content">
+                                    Atualizar
+                                </div>
+                            </Tooltip>
                         {/if}
                         {#if canParticipate && item.allows_confirmations}
-                            <button
-                                type="button"
-                                aria-label="Confirmar"
-                                class="w-9 h-9 bg-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
-                                on:click={()=>requestConfirmActivityParticipant(item.uuid)}
-                            >
-                                <img
-                                    src="/svg/verify.svg"
-                                    alt=""
-                                    aria-hidden="true"
-                                    class="w-5 filter-orange-citric"
-                                    loading="lazy"
-                                />
-                            </button>
+                            <Tooltip>
+                                <button
+                                    type="button"
+                                    aria-label="Confirmar"
+                                    class="w-9 h-9 bg-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
+                                    on:click={()=>requestConfirmActivityParticipant(item.uuid)}
+                                >
+                                    <img
+                                        src="/svg/verify.svg"
+                                        alt=""
+                                        aria-hidden="true"
+                                        class="w-5 filter-orange-citric"
+                                        loading="lazy"
+                                    />
+                                </button>
+                                <div slot="content">
+                                    Participar
+                                </div>
+                            </Tooltip>
                         {/if}
                     </div>
                 </article>

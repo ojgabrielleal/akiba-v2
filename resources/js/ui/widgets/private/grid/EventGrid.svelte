@@ -3,7 +3,7 @@
     export let variant = "default";
 
     import { router, page, Link } from "@inertiajs/svelte";
-    import { Section, Pagination } from "@/ui/components/private";
+    import { Section, ButtonPagination } from "@/ui/components/private";
     import { hasPermission } from "@/utils";
 
     $: ({ events } = $page.props);
@@ -77,7 +77,7 @@
             {/each}
         </div>
     </Section>
-    <Pagination pages={events} only={["events"]} />
+    <ButtonPagination pages={events} only={["events"]} />
 {/if}
 
 {#if events && variant === "detailed"}
@@ -135,5 +135,5 @@
             {/each}
         </div>
     </Section>
-    <Pagination pages={events} only={["events"]} />
+    <ButtonPagination pages={events} only={["events"]} />
 {/if}
