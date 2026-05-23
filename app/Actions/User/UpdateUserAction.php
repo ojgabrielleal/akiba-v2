@@ -21,7 +21,7 @@ class UpdateUserAction
         return DB::transaction(function () use ($user, $data,) {
             $user->fill([
                 'avatar' => $this->image->store('users', $data['avatar'], 'public', $user->avatar),
-                'is_bot' => $data['is_bot'],
+                'is_virtual' => $data['is_virtual'],
                 'name' => $data['name'],
                 'nickname' => $data['nickname'],
                 'gender' => $data['gender'],

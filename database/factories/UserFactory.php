@@ -28,14 +28,14 @@ class UserFactory extends Factory
 
         return [
             'is_active' => true,
-            'is_bot' => fake()->boolean(),
+            'is_virtual' => false,
             'slug' => fake()->slug(),
             'username' => fake()->userName(),
             'password' => fake()->password(),
             'name' => fake()->name(),
             'nickname' => fake()->userName(),
             'gender' => $gender,
-            'avatar' => $this->fakeImageUrl(),
+            'avatar' => $this->avatarForGender($gender),
             'birthday' => fake()->date(),
             'city' => fake()->city(),
             'state' => fake()->state(),
@@ -53,6 +53,7 @@ class UserFactory extends Factory
                 'name' => 'Yagami Kou',
                 'nickname' => 'Yagami',
                 'gender' => 'female',
+                'avatar' => $this->avatarForGender('female'),
             ])
             ->afterCreating(function (User $user) {
                 $administrator = Role::where('name', 'administrator')->first();
@@ -61,6 +62,15 @@ class UserFactory extends Factory
                     $user->roles()->syncWithoutDetaching([$administrator->id]);
                 }
             });
+    }
+
+    public function withVirtual(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_virtual' => true,
+            'username' => null,
+            'password' => null,
+        ]);
     }
 
     public function withRole(): static
@@ -131,5 +141,12 @@ class UserFactory extends Factory
             ['name' => null, 'image' => null],
             ['name' => null, 'image' => null],
         ];
+    }
+
+    private function avatarForGender(string $gender): string
+    {
+        return $gender === 'male'
+            ? '/img/defaults/user-male.webp'
+            : '/img/defaults/user-female.webp';
     }
 }

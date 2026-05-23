@@ -23,7 +23,7 @@ class ProgramFactory extends Factory
             'is_active' => true,
             'is_default' => false,
             'name' => fake()->name(),
-            'image' => $this->fakeImageUrl(),
+            'image' => '/img/locution/program.webp',
             'type' => 'free',
             'phrases' => null,
         ];

@@ -21,5 +21,15 @@ class UserSeeder extends Seeder
             ->withRole()
             ->withDefaults()
             ->create();
+
+        User::factory()
+            ->withVirtual()
+            ->withDefaults()
+            ->create([
+                'name' => 'Auto DJ',
+                'nickname' => 'Auto DJ',
+                'gender' => 'female',
+                'avatar' => '/img/defaults/user-female.webp',
+            ]);
     }
 }

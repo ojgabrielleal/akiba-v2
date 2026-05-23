@@ -14,10 +14,11 @@ class ProgramSeeder extends Seeder
     public function run(): void
     {
         $admin = User::find(1);
-        $user = User::where('id', '!=', 1)->inRandomOrder()->first();
+        $user = User::where('id', '!=', 1)->where('is_virtual', false)->inRandomOrder()->first();
+        $virtualUser = User::where('is_virtual', true)->inRandomOrder()->first();
 
         $this->seedAdministrator($admin);
-        $this->seedAutoDJ($user);
+        $this->seedAutoDJ($virtualUser);
         $this->seedPrograms($user);
     }
 

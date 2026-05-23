@@ -11,7 +11,7 @@
     };
 
     let form = useForm({
-        is_bot: null,
+        is_virtual: false,
         username: null,
         password: null,
         name: null,
@@ -32,36 +32,36 @@
     <div class="mb-10">
         <div class="mb-4">
             <div class="text-md text-gray-700 font-noto-sans mb-2">
-                Esse usuário é humano ou um bot?
+                Esse usuário é humano ou virtual?
             </div>
             <div class="flex items-center gap-2 mb-1">
                 <input
                     id="human"
                     type="radio"
-                    name="human"
+                    name="is_virtual"
                     value={false}
                     class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                    bind:group={$form.is_bot}
+                    bind:group={$form.is_virtual}
                 />
-                <label for="free" class="cursor-pointer text-md text-gray-700 font-noto-sans">
+                <label for="human" class="cursor-pointer text-md text-gray-700 font-noto-sans">
                     Humano
                 </label>
             </div>
             <div class="flex items-center gap-2">
                 <input
-                    id="bot"
+                    id="virtual"
                     type="radio"
-                    name="human"
+                    name="is_virtual"
                     value={true}
                     class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                    bind:group={$form.is_bot}
+                    bind:group={$form.is_virtual}
                 />
-                <label for="private" class="cursor-pointer text-md text-gray-700 font-noto-sans">
-                    Bot
+                <label for="virtual" class="cursor-pointer text-md text-gray-700 font-noto-sans">
+                    Virtual
                 </label>
             </div>
         </div>
-        {#if $form.is_bot}
+        {#if !$form.is_virtual}
             <div class="mb-4">
                 <label for="username" class="text-md font-noto-sans mb-1 block text-gray-700">
                     Login
