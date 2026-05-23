@@ -16,7 +16,7 @@ class PostIndexResource extends JsonResource
             'cover' => $this->cover,
             'views' => $this->views_count,
             'status' => $this->status(),
-            'type' => $this->type(),
+            'module' => $this->type(),
             'author' => UserResource::make($this->author),
         ];
     }

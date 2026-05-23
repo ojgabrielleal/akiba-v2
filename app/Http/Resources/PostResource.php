@@ -25,6 +25,7 @@ class PostResource extends JsonResource
         $postData = array_merge(
             $postData,
             $this->post(),
+            $this->event(),
             $this->review($request),
         );
 
@@ -35,9 +36,23 @@ class PostResource extends JsonResource
     {
         if(!$this->review && !$this->event){
             return [
-                'type' => 'post',
+                'module' => 'post',
                 'content' => $this->content,
                 'reactions' => ReactionResource::collection($this->reactions)
+            ];
+        }
+
+        return [];
+    }
+
+    public function event(): array
+    {
+        if($this->event){
+            return [
+                'module' => 'event',
+                'content'=> $this->content,
+                'dates' => $this->event->dates,
+                'address' => $this->event->address,
             ];
         }
 
@@ -48,7 +63,7 @@ class PostResource extends JsonResource
     {
         if($this->review){
             return [
-                'type' => 'review',
+                'module' => 'review',
                 'year_of_release' => $this->review->year_of_release,
                 'sinopse' => $this->review->sinopse,
                 'opinions' => $this->reviewListOpinions($request),
@@ -106,7 +121,7 @@ class PostResource extends JsonResource
     {
         return [
             'uuid' => null,
-            'status' => null,
+            'status' => 'not_created',
             'content' => null,
             'author' => UserResource::make($user),
         ];

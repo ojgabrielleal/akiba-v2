@@ -13,9 +13,9 @@
         deactivate: hasPermission("post.deactivate"),
     };
 
-    const operation = (type) => {
+    const operation = (module) => {
         Cookies.set("akiba_post_show_editor", true)
-        Cookies.set("akiba_post_type", type);
+        Cookies.set("akiba_post_module", module);
     }
 
     const requestDeactivate = (post) => {
@@ -50,16 +50,8 @@
                             />
                             {item.views ?? 0}
                         </div>
-                        <div class="mt-[0.1rem] w-full text-center truncate">
-                            {#if item.type === "review"}
-                                <span class="font-noto-sans text-sm font-black uppercase tracking-wider text-suspense-aurora/80">
-                                    Review
-                                </span>
-                            {:else}
-                                <span class="font-noto-sans font-bold italic uppercase text-sm text-suspense-aurora">
-                                    {item.author.nickname}
-                                </span>
-                            {/if}
+                        <div class="mt-[0.1rem] w-full font-noto-sans font-bold text-sm text-center text-neutral-white italic uppercase truncate">
+                            {item.module === "review" ? "Review" : item.author.nickname}
                         </div>
                         <div class="flex gap-1 justify-end mt-1">
                             {#if can.deactivate}
@@ -89,7 +81,7 @@
                                         href={`/panel/post/${item.uuid}`}
                                         aria-label="Editar"
                                         class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
-                                        on:click={() => operation(item.type)}
+                                        on:click={() => operation(item.module)}
                                     >
                                         <img
                                             src="/svg/edit.svg"

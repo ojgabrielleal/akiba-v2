@@ -14,6 +14,16 @@
         approve: hasPermission("post.approve"),
     };
 
+    const normalizeTags = (tags = []) => [
+        { uuid: null, name: null, ...tags[0] },
+        { uuid: null, name: null, ...tags[1] },
+    ];
+
+    const normalizeReferences = (references = []) => [
+        { uuid: null, name: null, url: null, ...references[0] },
+        { uuid: null, name: null, url: null, ...references[1] },
+    ];
+
     let form = useForm({
         _method: "POST",
         module: "post",
@@ -22,35 +32,20 @@
         title: null,
         cover: null,
         content: null,
-        tags: [
-            { uuid: null, name: null },
-            { uuid: null, name: null },
-        ],
-        references: [
-            { uuid: null, name: null, url: null },
-            { uuid: null, name: null, url: null },
-        ],
+        tags: normalizeTags(),
+        references: normalizeReferences(),
     });
-
 
     onMount(() => {
         if(post){
-            const tags = post.data.tags.map(
-                ({ uuid, name }) => ({ uuid, name }),
-            );
-
-            const references = post.data.references.map(
-                ({ uuid, name, url }) => ({ uuid, name, url }),
-            );
-
             $form._method = "PATCH";
             $form.status = post.data.status;
             $form.image = post.data.image;
             $form.title = post.data.title;
             $form.cover = post.data.cover;
             $form.content = post.data.content;
-            $form.tags = tags;
-            $form.references = references;
+            $form.tags = normalizeTags(post.data.tags);
+            $form.references = normalizeReferences(post.data.references);
         }
     });
 

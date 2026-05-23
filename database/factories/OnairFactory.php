@@ -40,6 +40,11 @@ class OnairFactory extends Factory
         ]);
     }
 
+    public function automatic(): static
+    {
+        return $this->withAutomatic();
+    }
+
     public function live(): static
     {
         return $this->state(fn (array $attributes) => [

@@ -30,6 +30,9 @@ class CreatePostAction
                 case 'review':
                     $post = $this->createReview($user, $data, $image, $cover);
                     break;
+                case 'event':
+                    $post = $this->createEvent($user, $data, $image, $cover);
+                    break;
                 default:
                     throw new InvalidArgumentException("Invalid post create type [{$module}].");
             }
@@ -66,7 +69,7 @@ class CreatePostAction
             $user,
             $data,
             $image,
-            $cover,
+            $cover
         ));
 
         $review = $post->review()->create([
@@ -78,6 +81,25 @@ class CreatePostAction
             'user_id' => $user->id,
             'status' => $data['review']['status'],
             'content' => $data['review']['content'],
+        ]);
+
+        return $post;
+    }
+
+    public function createEvent(User $user, array $data, ?UploadedFile $image, ?UploadedFile $cover): Post
+    {
+        $post = Post::create($this->postData(
+            $user,
+            $data,
+            $image,
+            $cover,
+            $data['status'],
+            $data['content']
+        ));
+
+        $post->event()->create([
+            'dates' => $data['dates'],
+            'address' => $data['address'],
         ]);
 
         return $post;

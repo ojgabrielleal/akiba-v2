@@ -4,24 +4,21 @@
     import { Meta } from "@/config";
     import { Layout } from "@/ui/layouts/private";
     import { Section } from "@/ui/components/private";
-    import { PostForm, ReviewForm, PostGrid } from "@/ui/widgets/private";
+    import { PostForm, ReviewForm, EventForm, PostGrid } from "@/ui/widgets/private";
 
     $: ({ post } = $page.props);
     
-    let showEditor = post ?? Cookies.get("akiba_post_show_editor");
-    let postType = post?.data.type ?? Cookies.get("akiba_post_type");
+    let show = post ?? Cookies.get("akiba_post_show_editor");
+    let form = post?.data.module ?? Cookies.get("akiba_post_module");
 
-    let operation = (type) => {
-        showEditor ? router.visit("/panel/post") : showEditor = true
-    
+    let operation = (module) => {
+        form = module;
+        show ? router.visit("/panel/post") : show = true;
+
+        Cookies.set("akiba_post_module", module);
         if(!Cookies.get("akiba_post_show_editor")){
             Cookies.set("akiba_post_show_editor", true);
-            Cookies.set("akiba_post_type", type);
         }
-
-        Cookies.set("akiba_post_type", type);
-        postType = type;
-
     }
 
     let actions = [
@@ -41,16 +38,24 @@
             onClick: () => operation('event')
         }
     ];
+
+    let pageName = {
+        'post': 'Matéria',
+        'review': 'Review',
+        'event': 'Evento'
+    };
 </script>
 
-<Meta meta={{ title: "Matérias" } } />
+<Meta meta={{ title: pageName[form]}} />
 <Layout>
     <Section title="Criar" {actions} />
-        {#if showEditor}
-            {#if postType === 'post'}
+        {#if show}
+            {#if form === 'post'}
                 <PostForm />
-            {:else if postType === 'review'}
+            {:else if form === 'review'}
                 <ReviewForm />
+            {:else if form === 'event'}
+                <EventForm />
             {/if}
         {/if}
         <PostGrid title="Todas as matérias, reviews e eventos"/>

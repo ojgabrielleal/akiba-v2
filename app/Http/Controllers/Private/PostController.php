@@ -85,7 +85,6 @@ class PostController extends Controller
         }
 
         $updatePostAction->execute(
-            $request->user(),
             $post,
             $request->all(),
             $request->file('image'),

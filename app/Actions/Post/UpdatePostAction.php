@@ -5,7 +5,6 @@ namespace App\Actions\Post;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use App\Services\Process\ImageProcessService;
-
 use InvalidArgumentException;
 
 use App\Models\Post;
@@ -20,36 +19,38 @@ class UpdatePostAction
         $this->image = $image;
     }
 
-    public function execute(User $user, Post $post, array $data, ?UploadedFile $image = null, ?UploadedFile $cover = null, string $module = 'post', bool $updateMetadata = true): Post
+    public function execute(Post $post, array $data, ?UploadedFile $image = null, ?UploadedFile $cover = null, string $module = 'post'): Post
     {
-        return DB::transaction(function () use ($user, $post, $data, $image, $cover, $module, $updateMetadata) {
+        return DB::transaction(function () use ($post, $data, $image, $cover, $module) {
              switch ($module) {
                 case 'post':
                     $post = $this->updatePost($post, $data, $image, $cover);
                     break;
                 case 'review':
-                    $post = $updateMetadata
-                        ? $this->updateReview($user, $post, $data, $image, $cover)
-                        : $this->updateReviewOpinion($user, $post, $data);
-                    break;
+                    $post = $this->updateReview($post, $data, $image, $cover);
+                break;
+                case 'event':
+                    $post = $this->updateEvent($post, $data, $image, $cover);
+                break;
                 default:
                     throw new InvalidArgumentException("Invalid post update type [{$module}].");
             }
         
-            if ($updateMetadata && !empty($data['tags'])) {
+            if (!empty($data['tags'])) {
                 foreach($data['tags'] as $tag) {
-                    $post->tags()->where('uuid', $tag['uuid'])->update(
+                    $post->tags()->updateOrCreate(
+                        ['uuid' => $tag['uuid']],
                         ['name' => $tag['name']]
                     );
                 }
             }
 
-            if ($updateMetadata && !empty($data['references'])) {
+            if (!empty($data['references'])) {
                 foreach($data['references'] as $reference) {
-                    $post->references()->where('uuid', $reference['uuid'])->update([
-                        'name' => $reference['name'], 
-                        'url' => $reference['url']
-                    ]);
+                    $post->references()->updateOrCreate(
+                        ['uuid' => $reference['uuid']],
+                        ['name' => $reference['name'], 'url' => $reference['url']]
+                    );
                 }
             }
 
@@ -75,13 +76,26 @@ class UpdatePostAction
         return $post;
     }
 
-    public function updateReviewOpinion(User $user, Post $post, array $data): Post
+    public function updateReview(Post $post, array $data, ?UploadedFile $image, ?UploadedFile $cover): Post
     {
+        $post->fill($this->postData($post, $data, $image, $cover));
+
+        if ($post->isDirty()){
+            $post->save();
+        }
+
+        $user = User::where('uuid', $data['review']['author']['uuid'])->first();
         $review = $post->review()->first();
 
+        $review->update([
+            'year_of_release' => $data['year_of_release'],
+            'sinopse' => $data['sinopse'],
+        ]);
+
         $review->opinions()->updateOrCreate(
-            ['user_id' => $user->id],
+            ['uuid' => $data['review']['uuid']],
             [
+                'user_id' => $user->id,
                 'status' => $data['review']['status'],
                 'content' => $data['review']['content'],
             ]
@@ -90,28 +104,26 @@ class UpdatePostAction
         return $post;
     }
 
-    public function updateReview(User $user, Post $post, array $data, ?UploadedFile $image, ?UploadedFile $cover): Post
+    public function updateEvent(Post $post, array $data, ?UploadedFile $image, ?UploadedFile $cover): Post
     {
-        $post->fill($this->postData($post, $data, $image, $cover));
+        $post->fill($this->postData(
+            $post,
+            $data,
+            $image,
+            $cover,
+            $data['status'],
+            $data['content']
+        ));
 
         if ($post->isDirty()){
             $post->save();
         }
 
-        $review = $post->review()->firstOrFail();
-
-        $review->update([
-            'year_of_release' => $data['year_of_release'],
-            'sinopse' => $data['sinopse'],
+        $event = $post->event()->first();
+        $event->update([
+            'dates' => $data['dates'],
+            'address' => $data['address'],
         ]);
-
-        $review->opinions()->updateOrCreate(
-            ['user_id' => $user->id],
-            [
-                'status' => $data['review']['status'],
-                'content' => $data['review']['content'],
-            ]
-        );
 
         return $post;
     }

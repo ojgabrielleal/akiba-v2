@@ -22,17 +22,18 @@ class CreatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'module' => 'required|in:post,review',
             'status' => 'required_if:module,post,event',
             'title' => 'required',
             'image' => 'required',
             'cover' => 'required',
             'references' => 'required',
             'tags' => 'required',
-            'content' => 'required_if:module,post',
+            'content' => 'required_if:module,post,event',
             'sinopse' => 'required_if:module,review',
             'year_of_release' => 'required_if:module,review',
-            'review.content' => 'required_if:module,review',
+            'review' => 'required_if:module,review',
+            'dates' => 'required_if:module,event',
+            'address' => 'required_if:module,event',
         ];
     }
 }

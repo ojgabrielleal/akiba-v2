@@ -13,6 +13,16 @@
         approve: hasPermission("post.approve"),
     };
 
+    const normalizeTags = (tags = []) => [
+        { uuid: null, name: "reviews", ...tags[0] },
+        { uuid: null, name: "anime", ...tags[1] },
+    ];
+
+    const normalizeReferences = (references = []) => [
+        { uuid: null, name: null, url: null, ...references[0] },
+        { uuid: null, name: null, url: null, ...references[1] },
+    ];
+
     let form = useForm({
         _method: "POST",
         module: "review",
@@ -22,26 +32,12 @@
         cover: null,
         year_of_release: null,
         review: { uuid: null, content: null, status: null, author: null },
-        tags: [
-            { uuid: null, name: "reviews" },
-            { uuid: null, name: "anime" },
-        ],
-        references: [
-            { uuid: null, name: null, url: null },
-            { uuid: null, name: null, url: null },
-        ],
+        tags: normalizeTags(),
+        references: normalizeReferences(),
     });
 
     onMount(() => {
         if(post){
-            const tags = post.data.tags.map(
-                ({ uuid, name }) => ({ uuid, name }),
-            );
-
-            const references = post.data.references.map(
-                ({ uuid, name, url }) => ({ uuid, name, url }),
-            );
-
             $form._method = "PATCH";
             $form.image = post.data.image;
             $form.title = post.data.title;
@@ -49,8 +45,8 @@
             $form.cover = post.data.cover;
             $form.year_of_release = post.data.year_of_release;
             $form.review = post.data.review;
-            $form.tags = tags;
-            $form.references = references;
+            $form.tags = normalizeTags(post.data.tags);
+            $form.references = normalizeReferences(post.data.references);
         }
     });
 
@@ -65,14 +61,13 @@
             },
         });
     };
-
 </script>
 
 <form class="container-page mb-20" on:submit|preventDefault={submit}>
     <div class="lg:px-40">
         <div class="mb-8">
-            <div class="grid grid-cols-[1fr_13rem] gap-5">
-                <div class="mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_13rem] lg:gap-5">
+                <div class="mb-8 lg:mb-0">
                     <label for="title" class="text-orange-amber font-bold italic text-lg uppercase font-noto-sans block mb-1">
                         Nome do anime
                     </label>
@@ -133,12 +128,13 @@
                                     type="button"
                                     aria-label={`Review de ${opinion.author.nickname}`}
                                     class={["py-1 px-4 rounded-md font-noto-sans font-bold italic uppercase cursor-pointer",
-                                        {"bg-blue-ocean text-neutral-white": opinion.status === 'published' && $form.review.uuid !== opinion.uuid},
-                                        {"bg-green-forest text-blue-marinho": opinion.status === 'draft' && $form.review.uuid !== opinion.uuid},
-                                        {"bg-orange-citric text-blue-marinho": opinion.status === 'revision' && $form.review.uuid !== opinion.uuid},
-                                        {"bg-orange-amber text-neutral-white": $form.review.uuid === opinion.uuid},
+                                        {"bg-neutral-gray text-blue-marinho": opinion.status === 'not_created'},
+                                        {"bg-blue-ocean text-neutral-white": opinion.status === 'published'},
+                                        {"bg-green-forest text-blue-marinho": opinion.status === 'draft'},
+                                        {"bg-orange-citric text-blue-marinho": opinion.status === 'revision'},
+                                        {"text-neutral-white": $form.review.uuid === opinion.uuid},
                                     ]}
-                                    on:click={() => $form.review = opinion}
+                                    on:click={() => $form.review = normalizeReview(opinion)}
                                 >
                                     {opinion.author.nickname}
                                 </button>
@@ -151,7 +147,7 @@
                 {/if}
                 <Wysiwyg
                     name="content"
-                    required={!post}
+                    required
                     bind:value={$form.review.content}
                 />
             </div>
@@ -286,7 +282,7 @@
             </div>
             <PostActions
                 label="review"
-                status={$form.review.status}
+                status={$form.review?.status}
                 can={can}
             />
         </div>

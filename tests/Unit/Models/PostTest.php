@@ -13,6 +13,7 @@ use App\Models\Reaction;
 use App\Models\Tag;
 use App\Models\Event;
 use App\Models\Review;
+use App\Models\PageView;
 
 class PostTest extends TestCase
 {
@@ -119,6 +120,22 @@ class PostTest extends TestCase
         $this->assertTrue($post->review->post->is($post));
     }
 
+    public function testViewsRelationship(): void
+    {
+        $post = Post::factory()->create();
+
+        PageView::factory(3)
+            ->for($post, 'viewable')
+            ->create();
+
+        $firstView = $post->views->first();
+
+        $this->assertCount(3, $post->views);
+        $this->assertContainsOnlyInstancesOf(PageView::class, $post->views);
+        $this->assertNotNull($firstView);
+        $this->assertTrue($firstView->viewable->is($post));
+    }
+
     /**
      * Tests from Post model scopes.
      */
@@ -182,6 +199,25 @@ class PostTest extends TestCase
 
         $this->assertTrue($myPosts->contains($myPost));
         $this->assertFalse($myPosts->contains($otherPost));
+    }
+
+    public function testFeaturedScope(): void
+    {
+        $featuredPost = Post::factory()->create();
+        $regularPost = Post::factory()->create();
+
+        PageView::factory(3)
+            ->for($featuredPost, 'viewable')
+            ->create();
+
+        PageView::factory()
+            ->for($regularPost, 'viewable')
+            ->create();
+
+        $posts = Post::featured()->get()->keyBy('id');
+
+        $this->assertSame(3, $posts[$featuredPost->id]->views_count);
+        $this->assertSame(1, $posts[$regularPost->id]->views_count);
     }
 
 

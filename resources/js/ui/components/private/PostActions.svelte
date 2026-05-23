@@ -5,7 +5,7 @@
 </script>
 
 {#if can.create || can.update}
-    <div class="w-full flex flex-wrap gap-4 justify-start">
+    <div class="w-full flex flex-col lg:flex-row lg:flex-wrap gap-4 justify-start">
         <button
             aria-label="salvar como rascunho"
             type="submit"

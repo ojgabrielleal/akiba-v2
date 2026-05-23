@@ -19,6 +19,8 @@ use App\Models\Post;
 use App\Models\Review;
 use App\Models\Opinion;
 use App\Models\Task;
+use App\Models\Favority;
+use App\Models\Permission;
 
 class UserTest extends TestCase
 {
@@ -47,6 +49,17 @@ class UserTest extends TestCase
             ->create();
 
         $this->assertContainsOnlyInstancesOf(Social::class, $user->socials);
+    }
+
+    public function testFavoritesRelationship(): void
+    {
+        $favority = Favority::factory();
+
+        $user = User::factory()
+            ->has($favority, 'favorites')
+            ->create();
+
+        $this->assertContainsOnlyInstancesOf(Favority::class, $user->favorites);
     }
 
     public function testRolesRelationship(): void
@@ -130,7 +143,7 @@ class UserTest extends TestCase
         $this->assertContainsOnlyInstancesOf(Post::class, $user->posts);
     }
 
-    public function testReviewsRelationship(): void
+    public function testOpinionsRelationship(): void
     {
         $user = User::factory()->create();
         $post = Post::factory()
@@ -179,6 +192,26 @@ class UserTest extends TestCase
 
         $this->assertTrue($users->contains($activeUser));
         $this->assertFalse($users->contains($inactiveUser));
+    }
+
+    public function testPermissionHelpers(): void
+    {
+        $permission = Permission::factory()->create(['name' => 'posts.create']);
+        $otherPermission = Permission::factory()->create(['name' => 'posts.delete']);
+        $role = Role::factory()
+            ->hasAttached($permission, [], 'permissions')
+            ->create(['name' => 'editor']);
+
+        $user = User::factory()
+            ->hasAttached($role, [], 'roles')
+            ->create();
+
+        $this->assertTrue($user->hasPermission('posts.create'));
+        $this->assertFalse($user->hasPermission('posts.update'));
+        $this->assertTrue($user->hasRole('editor'));
+        $this->assertFalse($user->hasRole('administrator'));
+        $this->assertTrue($user->hasAnyPermission(['posts.update', 'posts.create']));
+        $this->assertFalse($user->hasAnyPermission([$otherPermission->name]));
     }
 
     /**
