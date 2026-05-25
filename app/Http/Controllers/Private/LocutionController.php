@@ -56,7 +56,7 @@ class LocutionController extends Controller
         );
     }
 
-    public function startLocution(StartLocutionRequest $request, Program $program, StartLocutionAction $startLocutionAction)
+    public function startLocution(StartLocutionRequest $request, StartLocutionAction $startLocutionAction, Program $program)
     {
         if ($request->user()->cannot('locution.start')) {
             return null;

@@ -75,7 +75,7 @@
                         id="title"
                         type="text"
                         name="title"
-                        class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-neutral-white rounded-lg outline-none pl-4 disabled:opacity-50"
+                        class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-neutral-white rounded-lg outline-none pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
                         required={!post}
                         bind:value={$form.title}
                     />
@@ -88,7 +88,7 @@
                         id="year_of_release"
                         type="number"
                         name="year_of_release"
-                        class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-neutral-white rounded-lg outline-none pl-4 disabled:opacity-50"
+                        class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-neutral-white rounded-lg outline-none pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
                         required={!post}
                         bind:value={$form.year_of_release}
                     />
@@ -186,7 +186,7 @@
                         <select
                             id="tags"
                             name="tags"
-                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4 disabled:opacity-50"
+                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled
                             bind:value={$form.tags[0].name}
                         >
@@ -202,7 +202,7 @@
                         <select
                             id="tags"
                             name="tags"
-                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4 disabled:opacity-50"
+                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled
                             bind:value={$form.tags[1].name}
                         >

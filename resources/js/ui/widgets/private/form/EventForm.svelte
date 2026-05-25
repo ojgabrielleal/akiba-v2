@@ -172,7 +172,7 @@
                         <select
                             id="tags"
                             name="tags"
-                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4 disabled:opacity-50"
+                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4 disabled:cursor-not-allowed disabled:opacity-50"
                             disabled
                             bind:value={$form.tags[0].name}
                         >

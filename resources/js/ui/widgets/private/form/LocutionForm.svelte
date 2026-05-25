@@ -27,6 +27,9 @@
     const submit = () => {
         $form.post(`/panel/locution/locution/start/${$form.program}`, {
             preserveScroll: true,
+            onSuccess: () => {
+                $form.reset();
+            },
         });
     };
 </script>
@@ -47,9 +50,9 @@
                             alt=""
                             aria-hidden="true"
                             loading="lazy"
-                            class={["w-70 transition duration-300 ease-in-out", 
-                                { "opacity-50 scale-90": $form.program === item.uuid }, 
-                                { "opacity-100": $form.program !== item.uuid }
+                            class={["w-60 transition duration-300 ease-in-out", 
+                                { "opacity-100 scale-100 drop-shadow-[0_0_20px_rgba(0,255,200,0.3)]": $form.program === item.uuid }, 
+                                { "opacity-50 scale-90": $form.program !== item.uuid }
                             ]}
                         />
                     </button>
@@ -69,14 +72,14 @@
                 />
                 <input 
                     type="text"
-                    class="w-9/13 h-15 ml-24 bg-blue-ocean/50 border border-blue-skywave font-noto-sans font-bold italic uppercase text-xl text-orange-citric rounded-lg outline-none pl-4"
+                    class="w-9/13 h-15 ml-23 bg-blue-ocean/50 border border-blue-skywave font-noto-sans font-bold italic uppercase text-xl text-orange-citric rounded-lg outline-none pl-4"
                     placeholder="Digite a frase de locução"
                     bind:value={$form.phrase.text}
                 >
                 <img
                     src={$form.phrase.icon}
                     alt="Icone da locução"
-                    class="w-40 h-40 absolute bottom-0 right-2"
+                    class="w-35 h-35 absolute bottom-0 right-0 "
                 />
                 <img
                     src={$form.phrase.decoration?.right}
@@ -87,12 +90,21 @@
                 />
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-10 mt-12">
-            <div class="grid grid-cols-10 gap-2">
+        <input 
+            type="text"
+            class="w-full block lg:hidden h-15 bg-blue-ocean/50 border border-blue-skywave font-noto-sans font-bold italic uppercase text-xl text-orange-citric rounded-lg outline-none pl-4"
+            placeholder="Digite a frase de locução"
+            bind:value={$form.phrase.text}
+        >
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-10 mt-5 lg:mt-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2">
                 {#each locutionDecorations as item}
                     <button
                         type="button"
-                        class="cursor-pointer h-15 border-2 border-blue-ocean rounded-lg disabled:cursor-not-allowed disabled:opacity-50"
+                        class={["cursor-pointer h-15 border-2 border-blue-ocean rounded-lg disabled:cursor-not-allowed disabled:opacity-50", 
+                            { "border-blue-skywave drop-shadow-[0_0_20px_rgba(0,255,200,0.3)]": $form.phrase.decoration?.left === item.left && $form.phrase.decoration?.right === item.right },
+                            { "border-blue-ocean": !($form.phrase.decoration?.left === item.left && $form.phrase.decoration?.right === item.right) }
+                        ]}
                         disabled={item.disabled}
                         on:click={() => { $form.phrase.decoration = { left: item.left, right: item.right } }}
                     >
@@ -108,11 +120,14 @@
                     </button>
                 {/each}
             </div>
-            <div class="grid grid-cols-2 gap-2">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
                 {#each locutionTextures as item}
                     <button
                         type="button"
-                        class="cursor-pointer h-15 border-2 border-blue-ocean rounded-lg"
+                        class={["cursor-pointer h-15 border-2 border-blue-ocean rounded-lg disabled:cursor-not-allowed disabled:opacity-50", 
+                            { "border-blue-skywave drop-shadow-[0_0_20px_rgba(0,255,200,0.3)]": $form.phrase.texture === item.url },
+                            { "border-blue-ocean": $form.phrase.texture !== item.url }
+                        ]}
                         disabled={item.disabled}
                         on:click={() => { $form.phrase.texture = item.url}}
                     >
@@ -129,12 +144,15 @@
                 {/each}
             </div>
         </div>
-        <div class="grid grid-cols-9 gap-3 gap-y-18 mt-23">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-3 gap-y-18 mt-23">
             {#each locutionIcons as item, index}
                 <button
                     type="button"
                     aria-label={`Icon ${index}`}
-                    class="cursor-pointer w-full h-7 flex justify-end items-end rounded-sm bg-blue-ocean"
+                    class={["cursor-pointer w-full h-7 flex justify-end items-end rounded-sm", 
+                        { "bg-blue-skywave drop-shadow-[0_0_20px_rgba(0,255,200,0.3)]": $form.phrase.icon === item.url },
+                        { "bg-blue-ocean": $form.phrase.icon !== item.url }
+                    ]}
                     on:click={() => { $form.phrase.icon = item.url; }}
                 >
                     <img
@@ -147,13 +165,15 @@
                 </button>
             {/each}
         </div>
-        <div class="flex justify-end mt-10">
-            <button 
-                type="submit"
-                class="cursor-pointer font-noto-sans font-extrabold italic uppercase text-blue-marinho py-2 px-6 rounded-full bg-orange-citric"
-            >
-                Iniciar
-            </button>
-        </div>
+        {#if can.start}
+            <div class="flex justify-end mt-10">
+                <button 
+                    type="submit"
+                    class="cursor-pointer font-noto-sans font-extrabold italic uppercase text-blue-marinho py-2 px-6 rounded-full bg-orange-citric"
+                >
+                    Iniciar
+                </button>
+            </div>
+        {/if}
     </Section>
 </form>

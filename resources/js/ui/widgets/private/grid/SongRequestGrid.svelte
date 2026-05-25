@@ -61,9 +61,9 @@
                 </div>
             {/if}
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-2 mt-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-3 mt-10">
             {#each songRequests.data as item}
-                <article class={["w-full 2xl:w-[23.6rem] rounded-lg p-3",
+                <article class={["w-full rounded-lg p-3",
                     { "bg-green-mint": item.was_reproduced },
                     { "bg-red-crimson": item.was_canceled },
                     { "bg-blue-skywave": !item.was_reproduced && !item.was_canceled },

@@ -37,6 +37,7 @@ class StartLocutionAction
                     'text' => $data['phrase']['text'],
                     'icon' => $data['phrase']['icon'],
                     'decoration' => $data['phrase']['decoration'],
+                    'texture' => $data['phrase']['texture'],
                 ],
                 'allows_song_requests' => true,
             ]);
