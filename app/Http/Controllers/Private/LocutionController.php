@@ -142,7 +142,7 @@ class LocutionController extends Controller
         $onair = Onair::live()->first();
 
         $onair->update([
-            'allows_song_requests' => ! $onair->allows_song_requests,
+            'allows_song_requests' => !$onair->allows_song_requests,
         ]);
 
         return $this->flashMessage('save');

@@ -43,18 +43,30 @@
     <Section {title}>
         <div id="requests" class="flex flex-col gap-5 lg:relative">
             {#if can.locution.finish}
-                <button type="button" class="cursor-pointer block lg:absolute right-0 w-full lg:w-auto py-2 px-6 border-4 border-solid border-red-crimson rounded-xl text-red-crimson text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestFinishlocution(); }}>
+                <button 
+                    type="button" 
+                    class="cursor-pointer block lg:absolute left-0 w-full lg:w-auto py-2 px-6 bg-red-crimson rounded-full text-blue-marinho font-noto-sans font-extrabold italic uppercase" 
+                    on:click={() => requestFinishlocution()}
+                >
                     Encerrar programa
                 </button>
             {/if}
-            {#if can.toggle}
+             {#if can.toggle}
                 <div class="flex justify-center">
                     {#if onair.data.allows_song_requests}
-                        <button type="button" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-suspense-honeycream rounded-xl text-suspense-honeycream text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestToggleSongRequest(); }}>
+                        <button 
+                            type="button" 
+                            class="cursor-pointer w-full lg:w-auto py-2 px-6 bg-suspense-honeycream rounded-full text-blue-marinho font-noto-sans font-extrabold italic uppercase" 
+                            on:click={() => requestToggleSongRequest()}
+                        >
                             Parar de receber
                         </button>
                     {:else}
-                        <button type="button" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-green-mint rounded-xl text-green-mint text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestToggleSongRequest(); }}>
+                        <button 
+                            type="button" 
+                            class="cursor-pointer w-full lg:w-auto py-2 px-6 bg-green-mint rounded-full text-blue-marinho font-bold font-noto-sans italic uppercase" 
+                            on:click={() => requestToggleSongRequest()}
+                        >
                             Começar a receber
                         </button>
                     {/if}
@@ -100,7 +112,7 @@
                             class="w-5 filter invert"
                             loading="lazy"
                         />
-                        {item.ip}
+                        {item.ip_address}
                     </div>
                     <div class="flex items-center justify-center w-full mt-5 mb-5">
                         <div class="relative w-full">

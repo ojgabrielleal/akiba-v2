@@ -18,7 +18,7 @@ class SongRequestResource extends JsonResource
             'uuid' => $this->uuid,
             'was_reproduced' => $this->was_reproduced,
             'was_canceled' => $this->was_canceled,
-            'ip' => $this->ip,
+            'ip_address' => $this->ip_address,
             'name' => $this->name,
             'address' => $this->address,
             'message' => $this->message,
