@@ -73,7 +73,7 @@
                 </div>
             {/if}
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-3 mt-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-10">
             {#each songRequests.data as item}
                 <article class={["w-full rounded-lg p-3",
                     { "bg-green-mint": item.was_reproduced },
