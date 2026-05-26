@@ -74,8 +74,8 @@
                                     type="button"
                                     aria-label="Editar evento"
                                     class={["w-full cursor-pointer ", 
-                                        { "filter invert": !item.activity }, 
-                                        { "filter invert-0": item.activity }, 
+                                        { "filter-suspense-aurora": !item.activity }, 
+                                        { "filter-suspense-aurora-0": item.activity }, 
                                     ]}
                                 >
                                     <img

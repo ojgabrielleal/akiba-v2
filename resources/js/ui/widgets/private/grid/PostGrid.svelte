@@ -45,12 +45,12 @@
                                 src="/svg/eye.svg"
                                 alt=""
                                 aria-hidden="true"
-                                class="w-4 filter invert"
+                                class="w-4 filter-suspense-aurora"
                                 loading="lazy"
                             />
                             {item.views ?? 0}
                         </div>
-                        <div class="mt-[0.1rem] w-full font-noto-sans font-bold text-sm text-center text-neutral-white italic uppercase truncate">
+                        <div class="mt-[0.1rem] w-full font-noto-sans font-bold text-sm text-center text-suspense-aurora italic uppercase truncate">
                             {item.module === "review" ? "Review" : item.author.nickname}
                         </div>
                         <div class="flex gap-1 justify-end mt-1">

@@ -53,7 +53,7 @@
                                 alt=""
                                 aria-hidden="true"
                                 loading="lazy"
-                                class="w-5 h-5 filter invert"
+                                class="w-5 h-5 filter-suspense-aurora"
                             />
                         </button>
                     {/if}

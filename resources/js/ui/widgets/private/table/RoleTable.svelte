@@ -80,7 +80,7 @@
                                                 src="/svg/edit.svg"
                                                 alt=""
                                                 aria-hidden="true"
-                                                class="w-[1.2rem] filter invert"
+                                                class="w-[1.2rem] filter-suspense-aurora"
                                                 loading="lazy"
                                             />
                                         </button>
@@ -95,7 +95,7 @@
                                                 src="/svg/trash.svg"
                                                 alt=""
                                                 aria-hidden="true"
-                                                class="w-[1.2rem] filter invert"
+                                                class="w-[1.2rem] filter-suspense-aurora"
                                                 loading="lazy"
                                             />
                                         </button>

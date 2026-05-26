@@ -85,7 +85,7 @@
                             src="/svg/profile.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 filter invert"
+                            class="w-5 filter-suspense-aurora"
                             loading="lazy"
                         />
                         <span class="truncate">
@@ -94,10 +94,10 @@
                     </div>
                     <div class="w-full mt-1 flex gap-1.5 text-suspense-aurora text-[1rem] font-noto-sans">
                         <img
-                            src="/svg/gps.svg"
+                            src="/svg/location.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 filter invert"
+                            class="w-5 filter-suspense-aurora"
                             loading="lazy"
                         />
                         <span class="truncate">
@@ -109,24 +109,24 @@
                             src="/svg/ip.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 filter invert"
+                            class="w-5 filter-suspense-aurora"
                             loading="lazy"
                         />
                         {item.ip_address}
                     </div>
                     <div class="flex items-center justify-center w-full mt-5 mb-5">
                         <div class="relative w-full">
-                            <div class="absolute left-0 w-2/5 h-[0.1rem] bg-white rounded-full top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute left-0 w-2/5 h-[0.1rem] bg-suspense-aurora rounded-full top-1/2 -translate-y-1/2"></div>
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <img
                                     src="/svg/music.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-6 filter invert"
+                                    class="w-6 filter-suspense-aurora"
                                     loading="lazy"
                                 />
                             </div>
-                            <div class="absolute right-0 w-2/5 h-[0.1rem] bg-white rounded-full top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute right-0 w-2/5 h-[0.1rem] bg-suspense-aurora rounded-full top-1/2 -translate-y-1/2"></div>
                         </div>
                     </div>
                     {#if item.music}
@@ -165,13 +165,13 @@
                     {/if}
                     <div class="flex items-center justify-center w-full mt-5 mb-5">
                         <div class="relative w-full">
-                            <div class="absolute left-0 w-2/5 h-[0.1rem] bg-white rounded-full top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute left-0 w-2/5 h-[0.1rem] bg-suspense-aurora rounded-full top-1/2 -translate-y-1/2"></div>
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <img
                                     src="/svg/telegram.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-7 filter invert"
+                                    class="w-7 filter-suspense-aurora"
                                     loading="lazy"
                                 />
                             </div>
@@ -187,24 +187,24 @@
                                 src="/svg/clock.svg"
                                 alt=""
                                 aria-hidden="true"
-                                class="w-5 filter invert"
+                                class="w-4 filter-suspense-aurora"
                                 loading="lazy"
                             />
                             {item.created_at}
                         </div>
-                        <div class="flex gap-3">
+                        <div class="flex gap-1">
                             {#if !item.was_reproduced && !item.was_canceled}
                                 {#if can.cancel}
                                     <button type="button"
                                         aria-label="Marcar como cancelado"
-                                        class="cursor-pointer"
+                                        class="w-7 h-7 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                         on:click={() => markToCanceled(item.uuid)}
                                     >
                                         <img
                                             src="/svg/close.svg"
                                             alt=""
                                             aria-hidden="true"
-                                            class="w-6 filter invert"
+                                            class="w-5 filter-blue-marinho"
                                             loading="lazy"
                                         />
                                     </button>
@@ -212,14 +212,14 @@
                                 {#if can.reproduce}
                                     <button type="button"
                                         aria-label="Marcar como atendido"
-                                        class="cursor-pointer"
+                                        class="w-7 h-7 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                         on:click={() => markToReproduced(item.uuid)}
                                     >
                                         <img
-                                            src="/svg/like.svg"
+                                            src="/svg/verify.svg"
                                             alt=""
                                             aria-hidden="true"
-                                            class="w-6 filter invert"
+                                            class="w-5 filter-blue-marinho"
                                             loading="lazy"
                                         />
                                     </button>

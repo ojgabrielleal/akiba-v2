@@ -10,7 +10,7 @@
     <div class="container-page h-24 xl:h-[2.57rem] relative xl:top-15 flex xl:justify-between items-center">
         <button type="button"
             aria-label="Abrir menu"
-            class="xl:hidden p-1 filter invert"
+            class="xl:hidden p-1 filter-suspense-aurora"
             on:click={() => (mobilenavbar = !mobilenavbar)}
         >
             <img
@@ -65,7 +65,7 @@
                         src="/svg/dawn.svg"
                         alt=""
                         aria-hidden="true"
-                        class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter invert": theme !== "light" }, ]}
+                        class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter-suspense-aurora": theme !== "light" }, ]}
                     />
                 </button>
                 <button type="button"
@@ -79,7 +79,7 @@
                         src="/svg/akiba.svg"
                         alt=""
                         aria-hidden="true"
-                        class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter invert": theme !== "akiba" }, ]}
+                        class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter-suspense-aurora": theme !== "akiba" }, ]}
                     />
                 </button>
                 <button type="button"
@@ -93,7 +93,7 @@
                         src="/svg/night.svg"
                         alt=""
                         aria-hidden="true"
-                        class={["w-4 h-4", { "filter-orange-morning": theme === "night" }, { "filter invert": theme !== "night" }, ]}
+                        class={["w-4 h-4", { "filter-orange-morning": theme === "night" }, { "filter-suspense-aurora": theme !== "night" }, ]}
                     />
                 </button>
             </div>
@@ -172,7 +172,7 @@
                         <img
                             src="/svg/dawn.svg"
                             alt="Claro"
-                            class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter invert": theme !== "light" }, ]}
+                            class={["w-4 h-4", { "filter-orange-amber": theme === "light" }, { "filter-suspense-aurora": theme !== "light" }, ]}
                         />
                     </button>
                     <button aria-label="" type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
@@ -181,7 +181,7 @@
                         <img
                             src="/svg/akiba.svg"
                             alt="Akiba"
-                            class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter invert": theme !== "akiba" }, ]}
+                            class={["w-4 h-4", { "filter-orange-amber": theme === "akiba" }, { "filter-suspense-aurora": theme !== "akiba" }, ]}
                         />
                     </button>
                     <button aria-label="" type="button" class={["flex-1 flex justify-center items-center transition-all h-full",
@@ -190,7 +190,7 @@
                         <img
                             src="/svg/night.svg"
                             alt="Escuro"
-                            class={["w-4 h-4", { "filter-orange-morning": theme === "night" }, { "filter invert": theme !== "night" }, ]}
+                            class={["w-4 h-4", { "filter-orange-morning": theme === "night" }, { "filter-suspense-aurora": theme !== "night" }, ]}
                         />
                     </button>
                 </div>

@@ -69,7 +69,7 @@
                 <button
                     type="button"
                     aria-label="Abrir menu do usuario"
-                    class="bg-neutral-white w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
+                    class="bg-suspense-aurora w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
                 >
                     <img
                         src={user.avatar}
@@ -78,7 +78,7 @@
                     />
                 </button>
                 <div class="absolute right-0 top-full pt-3 invisible opacity-0 translate-y-1 group-hover/avatar:visible group-hover/avatar:opacity-100 group-hover/avatar:translate-y-0 group-focus-within/avatar:visible group-focus-within/avatar:opacity-100 group-focus-within/avatar:translate-y-0 transition-all duration-200 z-50">
-                    <div class="w-40 rounded-lg bg-neutral-white shadow-xl border border-neutral-gray/20 py-2">
+                    <div class="w-40 rounded-lg bg-suspense-aurora shadow-xl border border-neutral-gray/20 py-2">
                         <Link
                             href={`/panel/profile/${user.uuid}`}
                             class="block px-4 py-2 text-sm font-noto-sans font-medium text-neutral-gray hover:text-orange-citric hover:bg-neutral-gray/10"
@@ -110,7 +110,7 @@
             class="absolute inset-0 bg-blue-night/40 backdrop-blur-sm"
             on:click={() => (mobilenavbar = false)}>
         </button>
-        <aside class={["absolute top-0 right-0 h-screen w-[min(15rem,85vw)] bg-neutral-white shadow-xl transition-transform duration-300",
+        <aside class={["absolute top-0 right-0 h-screen w-[min(15rem,85vw)] bg-suspense-aurora shadow-xl transition-transform duration-300",
             { "translate-x-0": mobilenavbar },
             { "translate-x-full": !mobilenavbar },
         ]}>
@@ -144,7 +144,7 @@
                         class="min-w-0 flex items-center gap-3 group/profile"
                         on:click={() => (mobilenavbar = false)}
                     >
-                        <div class="bg-neutral-white w-7 h-7 rounded-full flex items-center justify-center overflow-hidden shadow shrink-0">
+                        <div class="bg-suspense-aurora w-7 h-7 rounded-full flex items-center justify-center overflow-hidden shadow shrink-0">
                             <img
                                 src={user.avatar}
                                 alt={user.nickname}

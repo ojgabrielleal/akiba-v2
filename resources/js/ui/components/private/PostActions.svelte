@@ -29,7 +29,7 @@
                 aria-label="aprovar"
                 type="submit"
                 value="published"
-                class="cursor-pointer font-noto-sans font-extrabold italic uppercase text-neutral-white py-2 px-6 rounded-full bg-purple-mystic"
+                class="cursor-pointer font-noto-sans font-extrabold italic uppercase text-suspense-aurora py-2 px-6 rounded-full bg-purple-mystic"
             >
                 Aprovar {label}
             </button>
@@ -38,7 +38,7 @@
                 aria-label="atualizar"
                 type="submit"
                 value="published"
-                class="cursor-pointer font-noto-sans font-extrabold italic uppercase text-neutral-white py-2 px-6 rounded-full bg-blue-ocean"
+                class="cursor-pointer font-noto-sans font-extrabold italic uppercase text-suspense-aurora py-2 px-6 rounded-full bg-blue-ocean"
             >
                 Atualizar {label}
             </button>
@@ -47,7 +47,7 @@
                 aria-label="publicar"
                 type="submit"
                 value="published"
-                class="cursor-pointer font-noto-sans font-extrabold italic uppercase text-neutral-white py-2 px-6 rounded-full bg-blue-ocean"
+                class="cursor-pointer font-noto-sans font-extrabold italic uppercase text-suspense-aurora py-2 px-6 rounded-full bg-blue-ocean"
             >
                 Publicar {label}
             </button>

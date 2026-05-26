@@ -51,7 +51,7 @@
             alt="Avatar"
             class="w-40 h-40 absolute bottom-0"
         />
-        <div class="font-noto-sans font-bold uppercase italic text-3xl text-neutral-white ml-50">
+        <div class="font-noto-sans font-bold uppercase italic text-3xl text-suspense-aurora ml-50">
             {chosenPhrase}
         </div>
         <div class="flex gap-2 absolute right-0">

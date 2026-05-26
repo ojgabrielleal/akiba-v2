@@ -75,7 +75,7 @@
                         id="title"
                         type="text"
                         name="title"
-                        class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-neutral-white rounded-lg outline-none pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-suspense-aurora rounded-lg outline-none pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
                         required={!post}
                         bind:value={$form.title}
                     />
@@ -88,7 +88,7 @@
                         id="year_of_release"
                         type="number"
                         name="year_of_release"
-                        class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-neutral-white rounded-lg outline-none pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-suspense-aurora rounded-lg outline-none pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
                         required={!post}
                         bind:value={$form.year_of_release}
                     />
@@ -129,10 +129,10 @@
                                     aria-label={`Review de ${opinion.author.nickname}`}
                                     class={["py-1 px-4 rounded-md font-noto-sans font-bold italic uppercase cursor-pointer",
                                         {"bg-neutral-gray text-blue-marinho": opinion.status === 'not_created'},
-                                        {"bg-blue-ocean text-neutral-white": opinion.status === 'published'},
+                                        {"bg-blue-ocean text-suspense-aurora": opinion.status === 'published'},
                                         {"bg-green-forest text-blue-marinho": opinion.status === 'draft'},
                                         {"bg-orange-citric text-blue-marinho": opinion.status === 'revision'},
-                                        {"text-neutral-white": $form.review.uuid === opinion.uuid},
+                                        {"text-suspense-aurora": $form.review.uuid === opinion.uuid},
                                     ]}
                                     on:click={() => $form.review = normalizeReview(opinion)}
                                 >
@@ -186,7 +186,7 @@
                         <select
                             id="tags"
                             name="tags"
-                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-full pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled
                             bind:value={$form.tags[0].name}
                         >
@@ -202,7 +202,7 @@
                         <select
                             id="tags"
                             name="tags"
-                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-full pl-4 disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled
                             bind:value={$form.tags[1].name}
                         >
@@ -228,7 +228,7 @@
                                 id="references"
                                 type="text"
                                 name="references"
-                                class="w-full h-12 bg-neutral-white border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
+                                class="w-full h-12 bg-suspense-aurora border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
                                 required={!post}
                                 bind:value={$form.references[0].name}
                             />
@@ -241,7 +241,7 @@
                                 id="references"
                                 type="url"
                                 name="references"
-                                class="w-full h-12 bg-neutral-white font-noto-sans rounded-r-full pl-4"
+                                class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-r-full pl-4"
                                 required={!post}
                                 bind:value={$form.references[0].url}
                             />
@@ -256,7 +256,7 @@
                                 id="references"
                                 type="text"
                                 name="references"
-                                class="w-full h-12 bg-neutral-white border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
+                                class="w-full h-12 bg-suspense-aurora border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
                                 required={!post}
                                 bind:value={$form.references[1].name}
                             />
@@ -269,7 +269,7 @@
                                 id="references"
                                 type="url"
                                 name="references"
-                                class="w-full h-12 bg-neutral-white font-noto-sans rounded-r-full pl-4"
+                                class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-r-full pl-4"
                                 required={!post}
                                 bind:value={$form.references[1].url}
                             />
