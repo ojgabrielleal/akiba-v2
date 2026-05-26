@@ -13,7 +13,10 @@
 
 <Meta meta={{ title: "Locução" }} />
 <Layout>
-    <div class:opacity-50={onair.data.type !== "automatic"} class:pointer-events-none={onair.data.type !== "automatic"}>
+    <div 
+        class:opacity-50={onair.data.type === "automatic" && onair.data.type === "scheduled"} 
+        class:pointer-events-none={onair.data.type === "automatic" && onair.data.type === "scheduled"} 
+    >
         <LocutionForm />
     </div>
     {#if onair.data.type === "live"}
@@ -22,78 +25,58 @@
 </Layout>
 
 {#if onair.data.type === "live" && onair.data.program.host.uuid !== user.uuid}
-    <section transition:fade={{ duration: 500 }} class="fixed inset-0 flex items-center justify-center p-2 lg:p-0 z-50 bg-black/20 backdrop-blur-lg">
-        <div class="w-sm p-6 rounded-xl bg-suspense-aurora">
+    <section transition:fade={{ duration: 300 }} class="fixed inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-lg font-noto-sans">
+        <div class="w-full max-w-sm px-6 py-7 rounded-2xl bg-suspense-aurora shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
             <div class="flex justify-center">
-                <img
-                    src="/img/locution/blocked.gif"
-                    alt="Bloqueador de tela"
-                    class="w-50 h-50 object-cover rounded-full"
-                    loading="lazy"
-                />
-            </div>
-            <div class="mt-6 mb-4 bg-red-crimson p-3 rounded-xl text-center text-suspense-aurora font-noto-sans font-bold uppercase">
-                PARE! Tem gente ao vivo!
-            </div>
-            <div class="font-noto-sans mb-3">
-                Opa! quer tirar {onair.data.program.host.gender === "male" ? "o" : "a"}
-                {onair.data.program.host.nickname} do ar? Segura ai! Antes deixa
-                {onair.data.program.host.gender === "male" ? "ele" : "ela"} terminar
-                o programa. Aqui ninguém sabe uma mágica milagrosa de passagem de
-                microfone, então respeite o horário!
-            </div>
-            <button
-                type="button"
-                class="mt-5 flex gap-2 justify-center items-center cursor-pointer w-full py-2 px-6 border-2 border-blue-ocean rounded-xl text-md text-blue-ocean font-bold font-noto-sans italic uppercase"
-                on:click={() => redirectToDashboard()}
-            >
-                <img
-                    src="/svg/return.svg"
-                    alt=""
-                    aria-hidden="true"
-                    class="w-5 filter-blue-ocean"
-                    loading="lazy"
-                />
-                Dashboard
-            </button>
-        </div>
-    </section>
-{/if}
+                <div class="relative">
+                    <div class="w-28 h-28 rounded-full overflow-hidden shadow-lg">
+                        <img
+                            src={onair.data.program.host.avatar}
+                            alt=""
+                            class="w-28 h-28 object-cover object-top scale-200"
+                        />
+                    </div>
 
-{#if onair.data.type === "scheduled"}
-    <section transition:fade={{ duration: 500 }} class="fixed inset-0 flex items-center justify-center p-2 lg:p-0 z-50 bg-black/20 backdrop-blur-lg">
-        <div class="w-sm p-6 rounded-xl bg-suspense-aurora">
-            <div class="flex justify-center">
-                <img
-                    src="https://i2.wp.com/drunkenanimeblog.com/wp-content/uploads/2019/05/cute-girl-anime-headphones.gif?fit=500%2C287"
-                    alt="Bloqueador de tela"
-                    class="w-50 h-50 object-cover rounded-full"
-                    loading="lazy"
-                />
+                    <!-- Badge -->
+                    <div class="absolute bottom-0 right-0 bg-red-500 text-white text-[11px] px-2 py-0.5 rounded-full font-bold shadow">
+                        ● AO VIVO
+                    </div>
+                </div>
             </div>
-            <div class="mt-6 mb-4 bg-neutral-gray p-3 rounded-xl text-center text-suspense-aurora font-noto-sans font-bold uppercase">
-                Programa agendado no ar!
+            <h2 class="mt-5 text-center text-[20px] font-noto-sans font-bold text-[#2B2B2B] leading-tight">
+            Programa ao vivo<br />em andamento
+            </h2>
+            <p class="mt-4 text-center text-[14px] text-[#5A5A5A] leading-relaxed">
+                Não é possível iniciar um novo programa enquanto
+                {onair.data.program.host.gender === "male" ? "o" : "a"}
+                <span class="font-bold text-[#2B2B2B]">
+                    {onair.data.program.host.nickname}
+                </span>
+                    está ao vivo.
+                <br /><br />
+                Aguarde o término do programa para iniciar um novo programa ao vivo.
+            </p>
+            <div class="mt-4 flex items-center justify-between bg-[#E9E6E1] px-3 py-3 rounded-lg text-[13px] text-[#5A5A5A]">
+                <span>
+                    💡 Qualquer problema, contate a administração
+                </span>
             </div>
-            <div class="font-noto-sans mb-3">
-                Opa! Um programa agendado por um dos admininistradores já está no ar!
-                Não tem como adiantar, pular ou cancelar na marra, aqui ninguém sabe
-                como mudar o tempo! Respeite o horário e espere ele terminar para poder
-                entrar ao vivo!
+            <div class="mt-6 flex gap-3">
+                <button
+                    class="cursor-pointer w-full py-2.5 rounded-xl bg-[#2F5BFF] text-white font-semibold flex items-center justify-center gap-2 hover:brightness-110 transition"
+                    on:click={() => redirectToDashboard()}
+                >
+                    <img
+                        src="/svg/return.svg"
+                        class="w-4 brightness-0 invert"
+                        alt=""
+                    />
+                    Dashboard
+                </button>
             </div>
-            <button
-                type="button"
-                class="mt-5 flex gap-2 justify-center items-center cursor-pointer w-full py-2 px-6 border-2 border-blue-ocean rounded-xl text-md text-blue-ocean font-bold font-noto-sans italic uppercase"
-                on:click={() => redirectToDashboard()}
-            >
-                <img
-                    src="/svg/return.svg"
-                    alt=""
-                    aria-hidden="true"
-                    class="w-5 filter-blue-ocean"
-                    loading="lazy"
-                />
-                Dashboard
-            </button>
+            <p class="mt-4 text-center text-[12px] text-[#8A8A8A]">
+                🔒 Ação bloqueada para proteger a transmissão
+            </p>
         </div>
     </section>
 {/if}
