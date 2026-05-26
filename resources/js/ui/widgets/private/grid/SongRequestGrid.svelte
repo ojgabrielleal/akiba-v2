@@ -18,20 +18,20 @@
 
     const requestToggleSongRequest = () => {
         router.patch("/panel/locution/songrequest/toggle", {}, {
-                preserveScroll: true,
-            });
+            preserveScroll: true,
+        });
     };
 
     const markToReproduced = (songrequest) => {
         router.patch(`/panel/locution/songrequest/${songrequest}/played`, {}, {
-                preserveScroll: true,
-            });
+            preserveScroll: true,
+        });
     };
 
     const markToCanceled = (songrequest) => {
         router.patch(`/panel/locution/songrequest/${songrequest}/canceled`, {}, {
-                preserveScroll: true,
-            });
+            preserveScroll: true,
+        });
     };
 
     const requestFinishlocution = () => {
