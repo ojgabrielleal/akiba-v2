@@ -24,10 +24,10 @@ class OnairFactory extends Factory
             'phrase' => [
                 'text' => fake()->sentence(),
                 'icon' => $this->fakeImageUrl(),
-                'decoration' => 'default',
+                'decoration' => null,
+                 'texture' => null,
             ],
             'type' => fake()->randomElement(['automatic', 'live', 'scheduled']),
-            'icon' => $this->fakeImageUrl(),
             'allows_song_requests' => true,
             'song_requests_total' => fake()->randomNumber(),
         ];

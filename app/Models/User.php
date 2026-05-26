@@ -22,7 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'uuid',
         'is_active',
-        'is_bot',
+        'is_virtual',
         'slug',
         'username',
         'password',
@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'is_active' => 'boolean',
-        'is_bot' => 'boolean',
+        'is_virtual' => 'boolean',
         'birthday' => 'date:Y-m-d',
     ];
 

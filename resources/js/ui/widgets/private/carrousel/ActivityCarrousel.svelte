@@ -93,7 +93,7 @@
                                 <button
                                     type="button"
                                     aria-label="Atualizar"
-                                    class="w-9 h-9 g-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
+                                    class="w-9 h-9 bg-blue-marinho rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                     on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
                                 >
                                     <img

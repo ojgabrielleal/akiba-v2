@@ -56,7 +56,7 @@ class LocutionController extends Controller
         );
     }
 
-    public function startLocution(StartLocutionRequest $request, Program $program, StartLocutionAction $startLocutionAction)
+    public function startLocution(StartLocutionRequest $request, StartLocutionAction $startLocutionAction, Program $program)
     {
         if ($request->user()->cannot('locution.start')) {
             return null;
@@ -142,7 +142,7 @@ class LocutionController extends Controller
         $onair = Onair::live()->first();
 
         $onair->update([
-            'allows_song_requests' => ! $onair->allows_song_requests,
+            'allows_song_requests' => !$onair->allows_song_requests,
         ]);
 
         return $this->flashMessage('save');

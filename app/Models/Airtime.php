@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class ProgramSchedule extends Model
+class Airtime extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'programs_schedules';
+    protected $table = 'airtimes';
     
     protected $fillable = [
         'uuid',

@@ -20,7 +20,7 @@ class ProgramResource extends JsonResource
             'image' => $this->image,
             'type' => $this->type,
             'host' => UserResource::make($this->host),
-            'schedules' => ProgramScheduleResource::collection($this->schedules),
+            'schedules' => AirtimeResource::collection($this->schedules),
         ];
     }
 }

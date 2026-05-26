@@ -9,7 +9,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Onair;
 use App\Models\Program;
-use App\Models\ProgramSchedule;
+use App\Models\Airtime;
 
 class ProgramTest extends TestCase
 {
@@ -32,7 +32,7 @@ class ProgramTest extends TestCase
     public function testSchedulesRelationship(): void
     {
         $user = User::factory()->create();
-        $schedules = ProgramSchedule::factory(3);
+        $schedules = Airtime::factory(3);
 
         $program = Program::factory()
             ->for($user, 'host')
@@ -40,7 +40,7 @@ class ProgramTest extends TestCase
             ->create();
 
         $this->assertCount(3, $program->schedules);
-        $this->assertContainsOnlyInstancesOf(ProgramSchedule::class, $program->schedules);
+        $this->assertContainsOnlyInstancesOf(Airtime::class, $program->schedules);
     }
 
     public function testOnairRelationship(): void

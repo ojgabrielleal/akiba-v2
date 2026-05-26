@@ -33,7 +33,7 @@
                                 src="/svg/statistics.svg"
                                 alt=""
                                 aria-hidden="true"
-                                class="w-5 filter invert"
+                                class="w-5 filter-suspense-aurora"
                                 loading="lazy"
                             />
                             {item.views ?? 0}
@@ -53,7 +53,7 @@
                                     src="/svg/eye.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-5 filter invert"
+                                    class="w-5 filter-suspense-aurora"
                                     loading="lazy"
                                 />
                             </a>
@@ -67,7 +67,7 @@
                                     src="/svg/edit.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-4 filter invert"
+                                    class="w-4 filter-suspense-aurora"
                                     loading="lazy"
                                 />
                             </Link>
@@ -103,7 +103,7 @@
                                     src="/svg/edit.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-5 filter invert"
+                                    class="w-5 filter-suspense-aurora"
                                     loading="lazy"
                                 />
                             </Link>
@@ -118,7 +118,7 @@
                                         src="/svg/trash.svg"
                                         alt=""
                                         aria-hidden="true"
-                                        class="w-5 filter invert"
+                                        class="w-5 filter-suspense-aurora"
                                         loading="lazy"
                                     />
                                 </button>

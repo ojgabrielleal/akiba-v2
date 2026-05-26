@@ -26,7 +26,7 @@ class CreateUserAction
                 'avatar' => $avatar,
                 'nickname' => $data['nickname'],
                 'gender' => $data['gender'],
-                'is_bot' => $data['is_bot'],
+                'is_virtual' => $data['is_virtual'],
             ]);
 
             $socials = [

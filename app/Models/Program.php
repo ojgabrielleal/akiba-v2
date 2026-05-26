@@ -74,6 +74,6 @@ class Program extends Model
 
     public function schedules()
     {
-        return $this->hasMany(ProgramSchedule::class, 'program_id');
+        return $this->hasMany(Airtime::class, 'program_id');
     }
 }

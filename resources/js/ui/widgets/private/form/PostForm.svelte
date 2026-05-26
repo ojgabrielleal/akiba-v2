@@ -73,7 +73,7 @@
                     id="title"
                     type="text"
                     name="title"
-                    class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-neutral-white rounded-lg outline-none pl-4"
+                    class="w-full h-12 bg-blue-ocean border border-blue-skywave font-noto-sans text-suspense-aurora rounded-lg outline-none pl-4"
                     required={!post}
                     bind:value={$form.title}
                 />
@@ -136,7 +136,7 @@
                         <select
                             id="tags"
                             name="tags"
-                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-full pl-4"
                             required={!post}
                             bind:value={$form.tags[0].name}
                         >
@@ -154,7 +154,7 @@
                         <select
                             id="tags"
                             name="tags"
-                            class="w-full h-12 bg-neutral-white font-noto-sans rounded-full pl-4"
+                            class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-full pl-4"
                             required={!post}
                             bind:value={$form.tags[1].name}
                         >
@@ -182,7 +182,7 @@
                                 id="references"
                                 type="text"
                                 name="references"
-                                class="w-full h-12 bg-neutral-white border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
+                                class="w-full h-12 bg-suspense-aurora border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
                                 required={!post}
                                 bind:value={$form.references[0].name}
                             />
@@ -195,7 +195,7 @@
                                 id="references"
                                 type="url"
                                 name="references"
-                                class="w-full h-12 bg-neutral-white font-noto-sans rounded-r-full pl-4"
+                                class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-r-full pl-4"
                                 required={!post}
                                 bind:value={$form.references[0].url}
                             />
@@ -210,7 +210,7 @@
                                 id="references"
                                 type="text"
                                 name="references"
-                                class="w-full h-12 bg-neutral-white border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
+                                class="w-full h-12 bg-suspense-aurora border-r border-blue-marinho font-noto-sans rounded-l-full pl-4"
                                 required={!post}
                                 bind:value={$form.references[1].name}
                             />
@@ -223,7 +223,7 @@
                                 id="references"
                                 type="url"
                                 name="references"
-                                class="w-full h-12 bg-neutral-white font-noto-sans rounded-r-full pl-4"
+                                class="w-full h-12 bg-suspense-aurora font-noto-sans rounded-r-full pl-4"
                                 required={!post}
                                 bind:value={$form.references[1].url}
                             />

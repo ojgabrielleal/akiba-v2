@@ -100,7 +100,7 @@
                         {#if can.vote.create}
                             <button
                                 type="submit"
-                                class="cursor-pointer text-suspense-aurora text-md font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber disabled:opacity-50"
+                                class="cursor-pointer text-suspense-aurora text-md font-noto-sans font-bold uppercase italic rounded-sm py-1 px-3 bg-orange-amber disabled:opacity-50 disabled:cursor-not-allowed"
                                 disabled={alreadyVoted}
                             >
                                 Votar
@@ -118,7 +118,7 @@
                                         src="/svg/edit.svg"
                                         alt=""
                                         aria-hidden="true"
-                                        class="w-5 filter invert"
+                                        class="w-5 filter-suspense-aurora"
                                         loading="lazy"
                                     />
                                 </button>
@@ -134,7 +134,7 @@
                                         src="/svg/trash.svg"
                                         alt=""
                                         aria-hidden="true"
-                                        class="w-5 filter invert"
+                                        class="w-5 filter-suspense-aurora"
                                         loading="lazy"
                                     />
                                 </button>

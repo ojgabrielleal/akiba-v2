@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProgramScheduleResource extends JsonResource
+class AirtimeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

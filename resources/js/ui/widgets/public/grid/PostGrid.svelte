@@ -33,7 +33,7 @@
                                 <img
                                     src={postTags[tag.name]?.icon}
                                     alt={tag.name}
-                                    class="w-5 h-5 sm:w-6 sm:h-6 filter invert"
+                                    class="w-5 h-5 sm:w-6 sm:h-6 filter-suspense-aurora"
                                 />
                             {/each}
                         </div>

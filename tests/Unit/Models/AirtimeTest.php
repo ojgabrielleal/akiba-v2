@@ -5,16 +5,16 @@ namespace Tests\Unit\Models;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-use App\Models\ProgramSchedule;
+use App\Models\Airtime;
 use App\Models\Program;
 use App\Models\User;
 
-class ProgramScheduleTest extends TestCase
+class AirtimeTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * Tests from ProgramSchedule model relationships.
+     * Tests from Airtime model relationships.
      */
     public function testProgramRelationship(): void
     {
@@ -24,7 +24,7 @@ class ProgramScheduleTest extends TestCase
             ->for($user, 'host')
             ->create();
 
-        $schedule = ProgramSchedule::factory()
+        $schedule = Airtime::factory()
             ->for($program, 'program')
             ->create();
 

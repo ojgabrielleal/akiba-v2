@@ -28,7 +28,7 @@
                         <img
                             src="/svg/listeners.svg"
                             alt="Ouvintes"
-                            class="w-5 h-5 shrink-0 filter invert"
+                            class="w-5 h-5 shrink-0 filter-suspense-aurora"
                         />
                         <span>
                             {#if item.listeners === "offline"}

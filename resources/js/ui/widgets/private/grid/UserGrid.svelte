@@ -91,7 +91,7 @@
                             {highestRole.label}
                         </dt>
                         <dd class="flex flex-wrap lg:flex-nowrap gap-2">
-                            {#if !item.is_bot && can.authority.update}
+                            {#if !item.is_virtual && can.authority.update}
                                 <button type="button"
                                     aria-label="Definir permissões"
                                     class="w-8 h-8 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"

@@ -31,10 +31,10 @@
                 ]}>
                     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div class="block min-w-0">
-                            <div class="text-xl text-neutral-white font-bold uppercase italic lg:truncate">
+                            <div class="text-xl text-suspense-aurora font-bold uppercase italic lg:truncate">
                                 {task.title}
                             </div>
-                            <div class="text-md text-neutral-white lg:line-clamp-2">
+                            <div class="text-md text-suspense-aurora lg:line-clamp-2">
                                 {task.description}
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                 {/if}
                             </div>
                         {:else if task.status === 'in_review'}
-                            <div class="flex w-full md:w-35 h-12 p-1 shrink-0 items-center justify-center rounded-lg bg-blue-marinho px-4 font-noto-sans font-bold italic uppercase text-[0.8rem] text-center text-neutral-white">
+                            <div class="flex w-full md:w-35 h-12 p-1 shrink-0 items-center justify-center rounded-lg bg-blue-marinho px-4 font-noto-sans font-bold italic uppercase text-[0.8rem] text-center text-suspense-aurora">
                                Em avaliação
                             </div>
                         {/if}

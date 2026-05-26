@@ -44,14 +44,14 @@
     chosenPhrase = generatePhrases();
 </script>
 
-<section class="w-full hidden lg:block mb-15 bg-[url('https://i.ibb.co/Tdhkkyg/3.png'),var(--gradient-blue-ocean-cerulean)] bg-blend-overlay bg-contain bg-right bg-no-repeat">
+<section class="w-full hidden lg:block mb-15 bg-[url('https://i.ibb.co/Tdhkkyg/3.png'),var(--gradient-blue-ocean-cerulean)] bg-contain bg-right bg-no-repeat">
     <div class="h-30 container-page flex items-center gap-5 relative">
         <img
             src="/img/defaults/avatar.webp"
             alt="Avatar"
             class="w-40 h-40 absolute bottom-0"
         />
-        <div class="font-noto-sans font-bold uppercase italic text-3xl text-neutral-white ml-50">
+        <div class="font-noto-sans font-bold uppercase italic text-3xl text-suspense-aurora ml-50">
             {chosenPhrase}
         </div>
         <div class="flex gap-2 absolute right-0">

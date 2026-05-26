@@ -194,6 +194,15 @@ class UserTest extends TestCase
         $this->assertFalse($users->contains($inactiveUser));
     }
 
+    public function testVirtualAttributeCastsToBoolean(): void
+    {
+        $user = User::factory()->create([
+            'is_virtual' => 1,
+        ]);
+
+        $this->assertTrue($user->is_virtual);
+    }
+
     public function testPermissionHelpers(): void
     {
         $permission = Permission::factory()->create(['name' => 'posts.create']);

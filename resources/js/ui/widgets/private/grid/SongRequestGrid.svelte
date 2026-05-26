@@ -18,20 +18,20 @@
 
     const requestToggleSongRequest = () => {
         router.patch("/panel/locution/songrequest/toggle", {}, {
-                preserveScroll: true,
-            });
+            preserveScroll: true,
+        });
     };
 
     const markToReproduced = (songrequest) => {
         router.patch(`/panel/locution/songrequest/${songrequest}/played`, {}, {
-                preserveScroll: true,
-            });
+            preserveScroll: true,
+        });
     };
 
     const markToCanceled = (songrequest) => {
         router.patch(`/panel/locution/songrequest/${songrequest}/canceled`, {}, {
-                preserveScroll: true,
-            });
+            preserveScroll: true,
+        });
     };
 
     const requestFinishlocution = () => {
@@ -43,27 +43,39 @@
     <Section {title}>
         <div id="requests" class="flex flex-col gap-5 lg:relative">
             {#if can.locution.finish}
-                <button type="button" class="cursor-pointer block lg:absolute right-0 w-full lg:w-auto py-2 px-6 border-4 border-solid border-red-crimson rounded-xl text-red-crimson text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestFinishlocution(); }}>
+                <button 
+                    type="button" 
+                    class="cursor-pointer block lg:absolute left-0 w-full lg:w-auto py-2 px-6 bg-red-crimson rounded-full text-blue-marinho font-noto-sans font-extrabold italic uppercase" 
+                    on:click={() => requestFinishlocution()}
+                >
                     Encerrar programa
                 </button>
             {/if}
-            {#if can.toggle}
+             {#if can.toggle}
                 <div class="flex justify-center">
                     {#if onair.data.allows_song_requests}
-                        <button type="button" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-suspense-honeycream rounded-xl text-suspense-honeycream text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestToggleSongRequest(); }}>
+                        <button 
+                            type="button" 
+                            class="cursor-pointer w-full lg:w-auto py-2 px-6 bg-suspense-honeycream rounded-full text-blue-marinho font-noto-sans font-extrabold italic uppercase" 
+                            on:click={() => requestToggleSongRequest()}
+                        >
                             Parar de receber
                         </button>
                     {:else}
-                        <button type="button" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-green-mint rounded-xl text-green-mint text-xl font-bold font-noto-sans italic uppercase" on:click={() => { requestToggleSongRequest(); }}>
+                        <button 
+                            type="button" 
+                            class="cursor-pointer w-full lg:w-auto py-2 px-6 bg-green-mint rounded-full text-blue-marinho font-bold font-noto-sans italic uppercase" 
+                            on:click={() => requestToggleSongRequest()}
+                        >
                             Começar a receber
                         </button>
                     {/if}
                 </div>
             {/if}
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-2 mt-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-10">
             {#each songRequests.data as item}
-                <article class={["w-full 2xl:w-[23.6rem] rounded-lg p-3",
+                <article class={["w-full rounded-lg p-3",
                     { "bg-green-mint": item.was_reproduced },
                     { "bg-red-crimson": item.was_canceled },
                     { "bg-blue-skywave": !item.was_reproduced && !item.was_canceled },
@@ -73,7 +85,7 @@
                             src="/svg/profile.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 filter invert"
+                            class="w-5 filter-suspense-aurora"
                             loading="lazy"
                         />
                         <span class="truncate">
@@ -82,10 +94,10 @@
                     </div>
                     <div class="w-full mt-1 flex gap-1.5 text-suspense-aurora text-[1rem] font-noto-sans">
                         <img
-                            src="/svg/gps.svg"
+                            src="/svg/location.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 filter invert"
+                            class="w-5 filter-suspense-aurora"
                             loading="lazy"
                         />
                         <span class="truncate">
@@ -97,24 +109,24 @@
                             src="/svg/ip.svg"
                             alt=""
                             aria-hidden="true"
-                            class="w-5 filter invert"
+                            class="w-5 filter-suspense-aurora"
                             loading="lazy"
                         />
-                        {item.ip}
+                        {item.ip_address}
                     </div>
                     <div class="flex items-center justify-center w-full mt-5 mb-5">
                         <div class="relative w-full">
-                            <div class="absolute left-0 w-2/5 h-[0.1rem] bg-white rounded-full top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute left-0 w-2/5 h-[0.1rem] bg-suspense-aurora rounded-full top-1/2 -translate-y-1/2"></div>
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <img
                                     src="/svg/music.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-6 filter invert"
+                                    class="w-6 filter-suspense-aurora"
                                     loading="lazy"
                                 />
                             </div>
-                            <div class="absolute right-0 w-2/5 h-[0.1rem] bg-white rounded-full top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute right-0 w-2/5 h-[0.1rem] bg-suspense-aurora rounded-full top-1/2 -translate-y-1/2"></div>
                         </div>
                     </div>
                     {#if item.music}
@@ -153,13 +165,13 @@
                     {/if}
                     <div class="flex items-center justify-center w-full mt-5 mb-5">
                         <div class="relative w-full">
-                            <div class="absolute left-0 w-2/5 h-[0.1rem] bg-white rounded-full top-1/2 -translate-y-1/2"></div>
+                            <div class="absolute left-0 w-2/5 h-[0.1rem] bg-suspense-aurora rounded-full top-1/2 -translate-y-1/2"></div>
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <img
                                     src="/svg/telegram.svg"
                                     alt=""
                                     aria-hidden="true"
-                                    class="w-7 filter invert"
+                                    class="w-7 filter-suspense-aurora"
                                     loading="lazy"
                                 />
                             </div>
@@ -175,24 +187,24 @@
                                 src="/svg/clock.svg"
                                 alt=""
                                 aria-hidden="true"
-                                class="w-5 filter invert"
+                                class="w-4 filter-suspense-aurora"
                                 loading="lazy"
                             />
                             {item.created_at}
                         </div>
-                        <div class="flex gap-3">
+                        <div class="flex gap-1">
                             {#if !item.was_reproduced && !item.was_canceled}
                                 {#if can.cancel}
                                     <button type="button"
                                         aria-label="Marcar como cancelado"
-                                        class="cursor-pointer"
+                                        class="w-7 h-7 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                         on:click={() => markToCanceled(item.uuid)}
                                     >
                                         <img
                                             src="/svg/close.svg"
                                             alt=""
                                             aria-hidden="true"
-                                            class="w-6 filter invert"
+                                            class="w-5 filter-blue-marinho"
                                             loading="lazy"
                                         />
                                     </button>
@@ -200,14 +212,14 @@
                                 {#if can.reproduce}
                                     <button type="button"
                                         aria-label="Marcar como atendido"
-                                        class="cursor-pointer"
+                                        class="w-7 h-7 bg-suspense-aurora rounded-md flex justify-center items-center font-noto-sans italic font-bold cursor-pointer"
                                         on:click={() => markToReproduced(item.uuid)}
                                     >
                                         <img
-                                            src="/svg/like.svg"
+                                            src="/svg/verify.svg"
                                             alt=""
                                             aria-hidden="true"
-                                            class="w-6 filter invert"
+                                            class="w-5 filter-blue-marinho"
                                             loading="lazy"
                                         />
                                     </button>

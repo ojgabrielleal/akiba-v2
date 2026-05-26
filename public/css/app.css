@@ -154,6 +154,10 @@
     filter: invert(54%) sepia(12%) saturate(23%) hue-rotate(46deg) brightness(92%) contrast(88%);
 }
 
+@utility filter-suspense-aurora {
+    filter: invert(93%) sepia(32%) saturate(268%) hue-rotate(331deg) brightness(115%) contrast(104%);
+}
+
 @utility filter-suspense-honeycream {
     filter: invert(92%) sepia(5%) saturate(2300%) hue-rotate(327deg) brightness(104%) contrast(101%);
 }
