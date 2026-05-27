@@ -96,7 +96,7 @@ class DashboardController extends Controller
 
     public function indexPosts()
     {
-        if (request()->user()->cannot('viewAny', Post::class)) {
+        if (request()->user()->cannot('list', Post::class)) {
             return null;
         }
 
@@ -153,7 +153,7 @@ class DashboardController extends Controller
         return Inertia::render($this->render, [
             'activities' => $this->indexActivities(),
             'tasks' => $this->indexTasks(),
-            'publications' => $this->indexPosts(),
+            'posts' => $this->indexPosts(),
             'calendar' => $this->indexCalendar(),
         ]);
     }
