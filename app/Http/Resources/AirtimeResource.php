@@ -18,8 +18,23 @@ class AirtimeResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'hour' => $this->formatHour($this->hour),
-            'day' => $this->day,
+            'day' => $this->formatDay($this->day),
         ];
+    }
+
+    private function formatDay(int $day): string
+    {
+        $days = [
+            0 => "Domingo",
+            1 => "Segunda",
+            2 => "Terça",
+            3 => "Quarta",
+            4 => "Quinta",
+            5 => "Sexta",
+            6 => "Sábado",
+        ];
+
+        return $days[$day] ?? "Day not found";
     }
 
     private function formatHour($datetime): string

@@ -62,15 +62,6 @@ class RadioController extends Controller
         );
     }
 
-    public function showProgram(Program $program)
-    {
-        if (request()->user()->cannot('view', $program)) {
-            return null;
-        }
-
-        return new ProgramResource($program->load('host', 'schedules'));
-    }
-
     public function createProgram(CreateProgramRequest $request, CreateProgramAction $createProgramAction)
     {
         if ($request->user()->cannot('create', Program::class)) {

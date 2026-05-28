@@ -2,11 +2,13 @@
     export let title;
 
     import { router, page } from "@inertiajs/svelte";
-    import { Carrousel, Offcanvas, Section } from "@/ui/components/private/";
+    import { Offcanvas, Section } from "@/ui/components/private/";
     import { ProgramForm } from "@/ui/widgets/private";
     import { hasPermission } from "@/utils";
 
     $: ({ programs } = $page.props);
+
+    $:console.log(programs)
 
     let can = {
         create: hasPermission("program.create"),
@@ -32,60 +34,46 @@
 </Offcanvas>
 
 {#if programs}
-    {#if can.create}
-        <div class="flex justify-center mb-5">
-            <button type="button" class="cursor-pointer bg-blue-skywave px-4 py-2 rounded-sm font-noto-sans font-bold italic uppercase text-suspense-aurora" on:click={() => { identifier = null; offcanvasRef.open(); }}>
-                Cadastrar programa
-            </button>
-        </div>
-    {/if}
-    <Section {title} styles="mb-15">
-        <Carrousel styles="mt-5">
-            {#each programs.data as item}
-                <article class="shrink-0 flex justify-center gap-5 px-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0">
-                    <div>
-                        <img
-                            src={item.image}
-                            alt=""
-                            aria-hidden="true"
-                            loading="lazy"
-                            class="w-60 transition duration-300 ease-in-out"
-                        />
-                    </div>
-                    <div class="flex flex-col gap-5">
-                        {#if can.update}
-                            <button type="button"
-                                class="cursor-pointer"
-                                aria-label="atualizar programa"
-                                on:click={() => { identifier = item.uuid; offcanvasRef.open(); }}
-                            >
+    <Section {title}>
+       <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-5 mt-10">
+            {#each programs.data as program}
+                {#if program.type === "private"}
+                    <article class="w-full">
+                        <div>
+                            <img
+                                class="w-40 mb-3"
+                                src={program.image}
+                                alt={program.name}
+                                loading="lazy"
+                            />
+                            <div class="w-full h-15 flex items-center rounded-md px-4 bg-suspense-aurora relative mb-2">
+                                <div class="text-blue-ocean text-sm font-noto-sans font-extrabold italic uppercase">
+                                    <strong class="font-semibold">
+                                        Com:
+                                    </strong>
+                                    {program.host.nickname}
+                                </div>
                                 <img
-                                    src="/svg/edit.svg"
-                                    alt=""
-                                    aria-hidden="true"
-                                    class="w-[1.2rem] filter-blue-skywave"
+                                    class="w-36 aspect-square absolute right-0 bottom-0 object-cover object-top"
+                                    src={program.host.avatar}
+                                    alt={program.host.nickname}
                                     loading="lazy"
                                 />
-                            </button>
-                        {/if}
-                        {#if can.deactivate}
-                            <button type="button"
-                                class="cursor-pointer"
-                                aria-label="desativar programa"
-                                on:click={() => requestDeactivateProgram(item.uuid)}
-                            >
-                                <img
-                                    src="/svg/trash.svg"
-                                    alt=""
-                                    aria-hidden="true"
-                                    class="w-[1.2rem] filter-red-crimson"
-                                    loading="lazy"
-                                />
-                            </button>
-                        {/if}
-                    </div>
-                </article>
+                            </div>
+                            {#each program.schedules as schedule}
+                                <dl class="w-full rounded-md py-2 px-4 bg-suspense-aurora flex justify-between mb-2">
+                                    <dt class="block text-black text-md font-noto-sans italic uppercase font-bold">
+                                        {schedule.day}
+                                    </dt>
+                                    <dd class="block text-black font-noto-sans uppercase">
+                                        {schedule.hour}
+                                    </dd>
+                                </dl>
+                            {/each}
+                        </div>
+                    </article>
+                {/if}
             {/each}
-        </Carrousel>
+        </div>
     </Section>
 {/if}
