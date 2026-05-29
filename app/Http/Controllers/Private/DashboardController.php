@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ActivityResource;
-use App\Http\Resources\CalendarWeekResource;
-use App\Http\Resources\PostResource;
-use App\Http\Resources\TaskResource;
+use Inertia\Inertia;
+
+use App\Http\Controllers\Concerns\HasFlashMessages;
+
 use App\Models\Activity;
 use App\Models\Calendar;
 use App\Models\Post;
 use App\Models\Task;
-use Inertia\Inertia;
+
+use App\Http\Resources\ActivityResource;
+use App\Http\Resources\CalendarWeekResource;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\TaskResource;
 
 class DashboardController extends Controller
 {

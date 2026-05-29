@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Actions\Locution\FinishLocutionAction;
-use App\Actions\Locution\StartLocutionAction;
-use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Locution\StartLocutionRequest;
-use App\Http\Resources\OnairResource;
-use App\Http\Resources\ProgramResource;
-use App\Http\Resources\SongRequestResource;
+use Inertia\Inertia;
+
+use App\Http\Controllers\Concerns\HasFlashMessages;
+
 use App\Models\Onair;
 use App\Models\Program;
 use App\Models\SongRequest;
-use Inertia\Inertia;
+
+use App\Http\Resources\OnairResource;
+use App\Http\Resources\ProgramResource;
+use App\Http\Resources\SongRequestResource;
+
+use App\Actions\Locution\FinishLocutionAction;
+use App\Actions\Locution\StartLocutionAction;
+
+use App\Http\Requests\Locution\StartLocutionRequest;
 
 class LocutionController extends Controller
 {

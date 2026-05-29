@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Actions\Post\CreatePostAction;
-use App\Actions\Post\UpdatePostAction;
+use App\Http\Controllers\Controller;
+use Inertia\Inertia;
+
 use App\Http\Controllers\Concerns\HasFlashMessages;
 use App\Http\Controllers\Concerns\ResolvesUserLogged;
-use App\Http\Controllers\Controller;
+
+use App\Models\Post;
+
+use App\Http\Resources\PostResource;
+
+use App\Actions\Post\CreatePostAction;
+use App\Actions\Post\UpdatePostAction;
+
 use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
-use App\Http\Resources\PostResource;
-use App\Models\Post;
-use Inertia\Inertia;
 
 class PostController extends Controller
 {
