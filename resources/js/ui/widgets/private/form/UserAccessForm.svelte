@@ -46,7 +46,7 @@
             id="password"
             type="password"
             name="password"
-            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-md outline-none pl-4 border border-gray-400"
             placeholder="∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗"
             bind:value={$form.password}
         />
@@ -57,7 +57,7 @@
     <div class="flex items-center justify-center w-full mt-8 mb-5">
         <div class="relative w-full">
             <div class="absolute left-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
-            <span class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-bold uppercase italic">
+            <span class="absolute inset-0 flex items-center justify-center text-blue-skywave font-noto-sans font-extrabold uppercase italic">
                 Cargos
             </span>
             <div class="absolute right-0 w-1/3 h-[0.1rem] bg-blue-skywave rounded-full top-1/2 -translate-y-1/2"></div>
@@ -89,7 +89,7 @@
         </div>
     </div>
     {#if can.update}
-        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase">
+        <button type="submit" class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-extrabold italic uppercase">
             Atualizar
         </button>
     {/if}

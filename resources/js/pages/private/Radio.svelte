@@ -6,7 +6,7 @@
 
 <Meta meta={{ title: "Rádio" } } />
 <Layout>
-    <ProgramGrid title="Programas cadastrados" />
+    <ProgramGrid title="Programas & Programação" />
     <!--
     <ProgramScheduleGrid title="Grade de programação" />
     <MusicRankingGrid title="Ranking de música" />

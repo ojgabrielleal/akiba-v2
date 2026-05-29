@@ -58,7 +58,7 @@
             type="text"
             name="label"
             id="label"
-            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-md outline-none pl-4 border border-gray-400"
             bind:value={$form.label}
             required
         />
@@ -71,7 +71,7 @@
             type="number"
             name="weight"
             id="weight"
-            class="w-full h-10 bg-white font-noto-sans text-md rounded-lg outline-none pl-4 border border-gray-400"
+            class="w-full h-10 bg-white font-noto-sans text-md rounded-md outline-none pl-4 border border-gray-400"
             bind:value={$form.weight}
             required
         />
@@ -88,7 +88,7 @@
             name="description"
             id="description"
             rows="3"
-            class="w-full bg-white font-noto-sans text-md rounded-lg outline-none py-2 px-4 border border-gray-400"
+            class="w-full bg-white font-noto-sans text-md rounded-md outline-none py-2 px-4 border border-gray-400"
             bind:value={$form.description}
         ></textarea>
     </div>
@@ -99,7 +99,7 @@
         <select
             id="permissions"
             name="permissions"
-            class="w-full h-60 bg-white font-noto-sans text-md rounded-lg outline-none py-2 px-4 border border-gray-400"
+            class="w-full h-60 bg-white font-noto-sans text-md rounded-md outline-none py-2 px-4 border border-gray-400"
             bind:value={$form.permissions}
             multiple
         >
@@ -117,7 +117,7 @@
         <button
             aria-label=""
             type="submit"
-            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-bold italic uppercase"
+            class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-extrabold italic uppercase"
         >
             {identifier ? "Atualizar" : "Cadastrar"}
         </button>

@@ -51,13 +51,13 @@
             alt="Avatar"
             class="w-40 h-40 absolute bottom-0"
         />
-        <div class="font-noto-sans font-bold uppercase italic text-3xl text-suspense-aurora ml-50">
+        <div class="font-noto-sans font-extrabold uppercase italic text-3xl text-suspense-aurora ml-50">
             {chosenPhrase}
         </div>
         <div class="flex gap-2 absolute right-0">
             {#if can.event.create}
                 <Link
-                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    class="w-30 bg-blue-marinho p-2 rounded-md flex justify-center items-center flex-col gap-2 font-noto-sans font-extrabold text-[0.7rem] text-orange-citric text-center uppercase italic"
                     href="/panel/event"
                 >
                     <img
@@ -71,7 +71,7 @@
             {/if}
             {#if can.activity.create}
                 <Link
-                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    class="w-30 bg-blue-marinho p-2 rounded-md flex justify-center items-center flex-col gap-2 font-noto-sans font-extrabold text-[0.7rem] text-orange-citric text-center uppercase italic"
                     href="/panel/administration"
                 >
                     <img
@@ -85,7 +85,7 @@
             {/if}
             {#if can.repository.create}
                 <Link
-                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    class="w-30 bg-blue-marinho p-2 rounded-md flex justify-center items-center flex-col gap-2 font-noto-sans font-extrabold text-[0.7rem] text-orange-citric text-center uppercase italic"
                     href="/panel/repository"
                 >
                     <img
@@ -99,7 +99,7 @@
             {/if}
             {#if can.locution.start}
                 <Link
-                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    class="w-30 bg-blue-marinho p-2 rounded-md flex justify-center items-center flex-col gap-2 font-noto-sans font-extrabold text-[0.7rem] text-orange-citric text-center uppercase italic"
                     href="/panel/locution"
                 >
                     <img
@@ -113,7 +113,7 @@
             {/if}
             {#if can.post.create}
                 <Link
-                    class="w-30 bg-blue-marinho p-2 rounded-lg flex justify-center items-center flex-col gap-2 font-noto-sans font-bold text-[0.7rem] text-orange-citric text-center uppercase italic"
+                    class="w-30 bg-blue-marinho p-2 rounded-md flex justify-center items-center flex-col gap-2 font-noto-sans font-extrabold text-[0.7rem] text-orange-citric text-center uppercase italic"
                     href="/panel/post"
                 >
                     <img

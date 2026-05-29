@@ -32,7 +32,7 @@
                             />
                             <div class="w-full rounded-md py-3 px-4 bg-suspense-aurora relative mb-2">
                                 <div class="text-blue-skywave text-md font-noto-sans uppercase">
-                                    <strong class="font-bold">
+                                    <strong class="font-extrabold">
                                         Com:
                                     </strong>
                                     {program.host.nickname}
@@ -46,7 +46,7 @@
                             </div>
                             {#each program.schedules as schedule}
                                 <dl class="w-full rounded-md py-2 px-4 bg-suspense-aurora flex justify-between mb-2">
-                                    <dt class="block text-black text-md font-noto-sans italic uppercase font-bold">
+                                    <dt class="block text-black text-md font-noto-sans italic uppercase font-extrabold">
                                         {days[schedule.day]}
                                     </dt>
                                     <dd class="block text-black font-noto-sans uppercase">

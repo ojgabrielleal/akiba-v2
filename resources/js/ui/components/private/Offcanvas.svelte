@@ -38,7 +38,7 @@
         on:click={close}
     >
         <div class="max-w-sm min-w-sm h-screen float-right bg-suspense-aurora" on:click={block}>
-            <div class="bg-blue-skywave p-4 text-suspense-aurora font-bold italic uppercase">
+            <div class="bg-blue-skywave p-4 text-suspense-aurora font-extrabold italic uppercase">
                 {title}
             </div>
             <div class="pl-5 pr-8 pt-8 h-[calc(100vh-6rem)] overflow-y-auto">

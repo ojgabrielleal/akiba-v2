@@ -1,6 +1,6 @@
 <script>
     export let name = null;
-    export let standard = "h-[18rem] rounded-lg";
+    export let standard = "h-[18rem] rounded-md";
     export let view = "max-h-[18rem]";
     export let src = null;
     export let oninput = null;
@@ -38,11 +38,11 @@
             src={imageToShow}
             alt=""
             aria-hidden="true"
-            class={`${view} w-full object-cover object-center rounded-lg bg-blue-ocean`}
+            class={`${view} w-full object-cover object-center rounded-md bg-blue-ocean`}
             loading="lazy"
         />
     {:else}
-        <div class={`${standard} w-full bg-blue-ocean border border-blue-skywave flex items-center justify-center overflow-hidden font-noto-sans text-orange-citric text-7xl font-bold italic uppercase`}>
+        <div class={`${standard} w-full bg-blue-ocean border border-blue-skywave flex items-center justify-center overflow-hidden font-noto-sans text-orange-citric text-7xl font-extrabold italic uppercase`}>
             +
         </div>
     {/if}

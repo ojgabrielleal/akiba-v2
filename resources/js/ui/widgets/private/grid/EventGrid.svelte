@@ -23,12 +23,12 @@
     <Section {title}>
         <div class="gap-6 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5">
             {#each events.data as item}
-                <article class="w-full h-56 rounded-lg p-4 relative bg-blue-skywave">
+                <article class="w-full h-56 rounded-md p-4 relative bg-blue-skywave">
                     <div class="font-noto-sans text-lg text-suspense-aurora line-clamp-5 uppercase">
                         {item.title}
                     </div>
                     <div class="grid grid-cols-3 absolute bottom-2 left-4 w-[calc(100%-2rem)]">
-                        <div class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-lg text-suspense-aurora truncate">
+                        <div class="flex items-center gap-2 font-noto-sans font-extrabold italic uppercase text-lg text-suspense-aurora truncate">
                             <img
                                 src="/svg/statistics.svg"
                                 alt=""
@@ -38,7 +38,7 @@
                             />
                             {item.views ?? 0}
                         </div>
-                        <div class="font-noto-sans font-bold italic uppercase text-lg text-suspense-aurora text-center truncate">
+                        <div class="font-noto-sans font-extrabold italic uppercase text-lg text-suspense-aurora text-center truncate">
                             {item.author.nickname}
                         </div>
                         <div class="flex gap-3 justify-end mt-1">

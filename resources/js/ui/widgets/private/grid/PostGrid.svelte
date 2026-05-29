@@ -31,7 +31,7 @@
     <Section {title}>
         <div class="gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {#each posts.data as item}
-                <article class="w-full h-53 bg-blue-ocean rounded-lg overflow-hidden relative ">
+                <article class="w-full h-53 bg-blue-ocean rounded-md overflow-hidden relative ">
                     <div class="p-4">
                           <div class="font-noto-sans text-lg text-suspense-aurora line-clamp-4 uppercase">
                             {item.title}
@@ -42,7 +42,7 @@
                         { "bg-blue-cerulean": item.status === "published" },
                         { "bg-green-mint": item.status === "revision" },
                     ]}>
-                        <div class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-md text-suspense-aurora truncate">
+                        <div class="flex items-center gap-2 font-noto-sans font-extrabold italic uppercase text-md text-suspense-aurora truncate">
                             <img
                                 src="/svg/eye.svg"
                                 alt=""
@@ -52,7 +52,7 @@
                             />
                             {item.views ?? 0}
                         </div>
-                        <div class="mt-[0.1rem] w-full font-noto-sans font-bold text-sm text-center text-suspense-aurora italic uppercase truncate">
+                        <div class="mt-[0.1rem] w-full font-noto-sans font-extrabold text-sm text-center text-suspense-aurora italic uppercase truncate">
                             {item.module === "review" ? "Review" : item.author.nickname}
                         </div>
                         <div class="flex gap-1 justify-end mt-1">
@@ -61,7 +61,7 @@
                                     <button
                                         type="button"
                                         aria-label="Remover"
-                                        class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
+                                        class="w-7 h-7 bg-blue-night rounded-md flex items-center justify-center cursor-pointer"
                                         on:click={() => requestDeactivate(item)}
                                     >
                                         <img
@@ -82,7 +82,7 @@
                                     <Link
                                         href={`/panel/post/${item.uuid}`}
                                         aria-label="Editar"
-                                        class="w-7 h-7 bg-blue-night rounded-lg flex items-center justify-center cursor-pointer"
+                                        class="w-7 h-7 bg-blue-night rounded-md flex items-center justify-center cursor-pointer"
                                         on:click={() => operation(item.module)}
                                     >
                                         <img

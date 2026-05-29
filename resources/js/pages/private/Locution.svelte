@@ -38,25 +38,25 @@
                     </div>
 
                     <!-- Badge -->
-                    <div class="absolute bottom-0 right-0 bg-red-500 text-white text-[11px] px-2 py-0.5 rounded-full font-bold shadow">
+                    <div class="absolute bottom-0 right-0 bg-red-500 text-white text-[11px] px-2 py-0.5 rounded-full font-extrabold shadow">
                         ● AO VIVO
                     </div>
                 </div>
             </div>
-            <h2 class="mt-5 text-center text-[20px] font-noto-sans font-bold text-[#2B2B2B] leading-tight">
+            <h2 class="mt-5 text-center text-[20px] font-noto-sans font-extrabold text-[#2B2B2B] leading-tight">
             Programa ao vivo<br />em andamento
             </h2>
             <p class="mt-4 text-center text-[14px] text-[#5A5A5A] leading-relaxed">
                 Não é possível iniciar um novo programa enquanto
                 {onair.data.program.host.gender === "male" ? "o" : "a"}
-                <span class="font-bold text-[#2B2B2B]">
+                <span class="filter-suspense-aurora text-[#2B2B2B]">
                     {onair.data.program.host.nickname}
                 </span>
                     está ao vivo.
                 <br /><br />
                 Aguarde o término do programa para iniciar um novo programa ao vivo.
             </p>
-            <div class="mt-4 flex items-center justify-between bg-[#E9E6E1] px-3 py-3 rounded-lg text-[13px] text-[#5A5A5A]">
+            <div class="mt-4 flex items-center justify-between bg-[#E9E6E1] px-3 py-3 rounded-md text-[13px] text-[#5A5A5A]">
                 <span>
                     💡 Qualquer problema, contate a administração
                 </span>

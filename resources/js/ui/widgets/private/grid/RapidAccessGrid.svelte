@@ -26,7 +26,7 @@
         {#if can.post.create}
 <Link
     href="/post"
-    class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
+    class="flex items-center gap-2 font-noto-sans font-extrabold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
 >
                 <img
                     src="/svg/materials.svg"
@@ -40,7 +40,7 @@
         {#if can.activity.create}
 <Link
     href="/administration"
-    class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
+    class="flex items-center gap-2 font-noto-sans font-extrabold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
 >
                 <img
                     src="/svg/alerts.svg"
@@ -54,7 +54,7 @@
         {#if can.repository.create}
 <Link
     href="/marketing"
-    class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
+    class="flex items-center gap-2 font-noto-sans font-extrabold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
 >
                 <img
                     src="/svg/download.svg"
@@ -68,7 +68,7 @@
         {#if can.locution.start}
 <Link
     href="/locution"
-    class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
+    class="flex items-center gap-2 font-noto-sans font-extrabold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
 >
                 <img
                     src="/svg/locution.svg"
@@ -82,7 +82,7 @@
         {#if can.event.create}
 <Link
     href="/event"
-    class="flex items-center gap-2 font-noto-sans font-bold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
+    class="flex items-center gap-2 font-noto-sans font-extrabold italic uppercase text-blue-skywave text-lg pr-5 lg:first:pl-0 lg:border-r-2 lg:border-suspense-aurora/10 lg:last:border-0"
 >
                 <img
                     src="/svg/events.svg"

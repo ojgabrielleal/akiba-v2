@@ -123,7 +123,7 @@
 <Section title="Todos os conteúdos">
     {#if can.create}
         <div class="flex justify-center mt-5 mb-10">
-            <button type="button" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-bold font-noto-sans italic uppercase" onclick={() => { offCanvasRef.open(); identifier = null; }}>
+            <button type="button" class="cursor-pointer w-full lg:w-auto py-2 px-6 border-4 border-solid border-orange-amber rounded-xl text-orange-amber text-xl font-extrabold font-noto-sans italic uppercase" onclick={() => { offCanvasRef.open(); identifier = null; }}>
                 Upar conteúdo
             </button>
         </div>
