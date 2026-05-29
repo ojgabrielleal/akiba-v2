@@ -36,11 +36,11 @@
                 </h3>
                 <div class="flex flex-wrap items-center gap-2 mt-2">
                     <span class={["text-[10px] px-2.5 py-1 rounded-md text-suspense-aurora font-noto-sans font-extrabold uppercase italic",
-                        { "bg-neutral-gray": air.type === "automatic" },
+                        { "bg-neutral-gray": air.type === "auto_dj" || air.type === "playlist" },
                         { "bg-green-mint": air.type === "live" },
                         { "bg-orange-citric": air.type === "scheduled" },
                     ]}>
-                        {#if air.type === "automatic"}
+                        {#if air.type === "auto_dj" || air.type === "playlist"}
                             Robô
                         {:else if air.type === "live"}
                             Human{air.program.host.gender === "male" ? "o" : "a"}

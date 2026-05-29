@@ -15,7 +15,7 @@ class Program extends Model
     protected $fillable = [
         'uuid',
         'is_active',
-        'is_default',
+        'is_auto_dj',
         'user_id',
         'name',
         'image',
@@ -25,7 +25,7 @@ class Program extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'is_default' => 'boolean',
+        'is_auto_dj' => 'boolean',
         'phrases' => 'array',
     ];
 

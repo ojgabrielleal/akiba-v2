@@ -14,14 +14,14 @@ class OnairSeeder extends Seeder
     public function run(): void
     {
         $auto = Program::where('type', 'automatic')
-            ->where('is_default', true)
+            ->where('is_auto_dj', true)
             ->first();
 
         if (!$auto) return;
 
         Onair::factory()
             ->for($auto, 'program')
-            ->withAutomatic()
+            ->withAutoDj()
             ->create(['in_air' => true]);    
     }
 }

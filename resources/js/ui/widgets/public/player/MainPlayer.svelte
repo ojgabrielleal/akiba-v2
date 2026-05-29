@@ -88,11 +88,11 @@
                     {air.program.host.nickname}
                 </div>
                 <div class={["mt-[0.4rem] w-24 rounded-xl float-end text-center text-sm text-suspense-aurora font-noto-sans font-extrabold italic uppercase",
-                    { "bg-neutral-gray": air.type === "automatic" },
+                    { "bg-neutral-gray": air.type === "auto_dj" || air.type === "playlist" },
                     { "bg-green-mint": air.type === "live" },
                     { "bg-orange-citric": air.type === "scheduled" },
                 ]}>
-                    {#if air.type === "automatic"}
+                    {#if air.type === "auto_dj" || air.type === "playlist"}
                         Robô
                     {:else if air.type === "live"}
                         Human{air.program.host.gender === "male" ? "o" : "a"}
@@ -154,12 +154,12 @@
     <div class="block">
         <!-- Player Type Information-->
         <div class={["mx-4 mb-10 py-2 px-6 gap-2 flex justify-center items-center rounded-md",
-            { "bg-neutral-gray": air.type === "automatic" },
+            { "bg-neutral-gray": air.type === "auto_dj" || air.type === "playlist" },
             { "bg-green-mint": air.type === "live" },
             { "bg-orange-citric": air.type === "scheduled" },
         ]}>
             <div class="block">
-                {#if air.type === "automatic"}
+                {#if air.type === "auto_dj" || air.type === "playlist"}
                     <img
                         src="/svg/playlist.svg"
                         alt=""
@@ -186,7 +186,7 @@
                 {/if}
             </div>
             <div class="shrink-0 font-noto-sans font-extrabold italic uppercase text-center text-md text-blue-night leading-4">
-                {#if air.type === "automatic"}
+                {#if air.type === "auto_dj" || air.type === "playlist"}
                     Playlist <br />automática
                 {:else if air.type === "live"}
                     Locut{air.program.host.gender === "male" ? "or" : "ora"}

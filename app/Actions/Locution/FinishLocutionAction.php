@@ -16,7 +16,7 @@ class FinishLocutionAction
             $onair = Onair::live()
                 ->first();
             $auto = Program::where('type', 'automatic')
-                ->where('is_default', true)
+                ->where('is_auto_dj', true)
                 ->first();
 
             if($onair) {
@@ -41,7 +41,7 @@ class FinishLocutionAction
                 ];
 
                 $auto->onair()->create([
-                    'type' => 'automatic',
+                    'type' => 'auto_dj',
                     'phrase' => $phrase,
                 ]);
             }

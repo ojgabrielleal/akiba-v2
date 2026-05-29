@@ -53,7 +53,7 @@ class ProgramSeeder extends Seeder
 
         Program::factory()
             ->withAutomatic()
-            ->isDefault()
+            ->isAutoDj()
             ->for($user, 'host')
             ->create();
     }

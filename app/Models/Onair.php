@@ -19,6 +19,8 @@ class Onair extends Model
         'phrase',
         'type',
         'icon',
+        'start_at',
+        'finish_at',
         'allows_song_requests',
         'song_requests_total'
     ];
@@ -27,6 +29,8 @@ class Onair extends Model
         'allows_song_requests' => 'boolean',
         'in_air' => 'boolean',
         'phrase' => 'array',
+        'start_at' => 'datetime',
+        'finish_at' => 'datetime',
         'song_requests_total' => 'integer',
     ];
 

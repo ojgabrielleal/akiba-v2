@@ -21,19 +21,12 @@ class ProgramFactory extends Factory
     {
         return [
             'is_active' => true,
-            'is_default' => false,
+            'is_auto_dj' => false,
             'name' => fake()->name(),
             'image' => '/img/locution/program.webp',
             'type' => 'free',
             'phrases' => null,
         ];
-    }
-
-    public function isDefault(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'is_default' => true,
-        ]);
     }
 
     public function withAutomatic(): static
@@ -65,7 +58,7 @@ class ProgramFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'type' => 'free',
             'phrases' => null,
-            'is_default' => false,
+            'is_auto_dj' => false,
         ]);
     }
 
@@ -74,7 +67,15 @@ class ProgramFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'type' => 'private',
             'phrases' => null,
-            'is_default' => false,
+            'is_auto_dj' => false,
         ]);
     }
+
+    public function isAutoDj(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_auto_dj' => true,
+        ]);
+    }
+
 }

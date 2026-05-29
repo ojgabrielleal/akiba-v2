@@ -93,9 +93,9 @@ class OnairTest extends TestCase
             ->for($user, 'host')
             ->create();
 
-        $automatic = Onair::factory()
+        $autoDj = Onair::factory()
             ->for($program, 'program')
-            ->automatic()
+            ->autoDj()
             ->create();
 
         $live = Onair::factory()
@@ -108,8 +108,14 @@ class OnairTest extends TestCase
             ->scheduled()
             ->create();
 
-        $this->assertSame('automatic', $automatic->type);
+        $playlist = Onair::factory()
+            ->for($program, 'program')
+            ->playlist()
+            ->create();
+
+        $this->assertSame('auto_dj', $autoDj->type);
         $this->assertSame('live', $live->type);
         $this->assertSame('scheduled', $scheduled->type);
+        $this->assertSame('playlist', $playlist->type);
     }
 }

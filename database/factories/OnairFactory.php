@@ -27,22 +27,31 @@ class OnairFactory extends Factory
                 'decoration' => null,
                  'texture' => null,
             ],
-            'type' => fake()->randomElement(['automatic', 'live', 'scheduled']),
+            'type' => fake()->randomElement(['auto_dj', 'live', 'scheduled', 'playlist']),
+            'start_at' => null,
+            'finish_at' => null,
             'allows_song_requests' => true,
             'song_requests_total' => fake()->randomNumber(),
         ];
     }
 
-    public function withAutomatic(): static
+    public function withAutoDj(): static
     {
         return $this->state(fn (array $attributes) => [
-            'type' => 'automatic',
+            'type' => 'auto_dj',
         ]);
     }
 
-    public function automatic(): static
+    public function autoDj(): static
     {
-        return $this->withAutomatic();
+        return $this->withAutoDj();
+    }
+
+    public function playlist(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'type' => 'playlist',
+        ]);
     }
 
     public function live(): static
