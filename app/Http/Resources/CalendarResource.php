@@ -19,7 +19,7 @@ class CalendarResource extends JsonResource
             'content' => $this->content,
             'type' => $this->type,
             'day_of_week' => $this->day_of_week,
-            'responsible' => UserResource::make($this->responsible),
+            'responsible' => UserResource::make($this->responsible)->format('compact'),
             'activity' => ActivityResource::make($this->whenLoaded('activity')),
         ];
     }

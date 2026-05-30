@@ -40,7 +40,7 @@ class PostController extends Controller
             ->orderBy('created_at','desc');
 
         if ($user->hasPermission('post.list')) {
-            return PostResource::collection($query->paginate(10));
+            return PostResource::collection($query->paginate(10))->format('summary');
         }
 
         if ($user->hasPermission('post.list.own')) {
@@ -50,7 +50,7 @@ class PostController extends Controller
             });
         }
 
-        return PostResource::collection($query->paginate(10));
+        return PostResource::collection($query->paginate(10))->format('summary');
     }
 
     public function showPost(Post $post)

@@ -11,11 +11,13 @@ use App\Http\Controllers\Concerns\HasFlashMessages;
 
 use App\Models\ListenerMonth;
 use App\Models\Music;
+use App\Models\Onair;
 use App\Models\Program;
 use App\Models\User;
 
 use App\Http\Resources\ListenerMonthResource;
 use App\Http\Resources\MusicResource;
+use App\Http\Resources\OnairResource;
 use App\Http\Resources\ProgramResource;
 use App\Http\Resources\UserResource;
 
@@ -56,7 +58,7 @@ class RadioController extends Controller
 
     public function indexPrograms()
     {
-        if (request()->user()->cannot('viewAny', Program::class)) {
+        if (request()->user()->cannot('list', Program::class)) {
             return null;
         }
 
@@ -66,6 +68,23 @@ class RadioController extends Controller
                 ->get()
         );
     }
+
+    public function indexOnairScheduled()
+    {
+        if (request()->user()->cannot('list', Program::class)) {
+            return null;
+        }
+
+        return OnairResource::collection(
+            Onair::with('program.host')
+                ->whereIn('type', ['scheduled', 'playlist'])
+                ->where('start_at', '<=', now())
+                ->where('finish_at', '>=', now())
+                ->orderBy('start_at')
+                ->get()
+        );
+    }
+
 
     public function createProgram(CreateProgramRequest $request, CreateProgramAction $createProgramAction)
     {
@@ -206,6 +225,7 @@ class RadioController extends Controller
         return Inertia::render($this->render, [
             'users' => $this->indexUsers(),
             'programs' => $this->indexPrograms(),
+            'schedules' => $this->indexOnairScheduled(),
             'musicRanking' => $this->indexMusicRanking(),
             'listenerMonth' => $this->showListenerMonth(),
         ]);

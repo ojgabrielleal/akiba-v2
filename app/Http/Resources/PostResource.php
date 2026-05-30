@@ -7,6 +7,20 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
 {
+    private ?string $format = null;
+
+    public static function collection($resource): PostResourceCollection
+    {
+        return new PostResourceCollection($resource);
+    }
+
+    public function format(?string $format): static
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
     public function toArray(Request $request): array
     {
         $postData = [
@@ -16,11 +30,22 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'image' => $this->image,
             'cover' => $this->cover,
-            'author' => UserResource::make($this->author),
+            'author' => UserResource::make($this->author)->format('compact'),
             'references' => ReferenceResource::collection($this->references),
             'tags' => TagResource::collection($this->tags),
             'views' => $this->views_count,
         ];
+
+        if ($this->format === 'summary') {
+            return [
+                'uuid' => $this->uuid,
+                'slug' => $this->slug,
+                'status' => $this->status,
+                'title' => $this->title,
+                'module' => $this->module(),
+                'author' => UserResource::make($this->author)->format('compact'),
+            ];
+        }
 
         $postData = array_merge(
             $postData,
@@ -32,11 +57,23 @@ class PostResource extends JsonResource
         return $postData;
     }
 
+    private function module(): string
+    {
+        if ($this->review) {
+            return 'review';
+        }
+
+        if ($this->event) {
+            return 'event';
+        }
+
+        return 'post';
+    }
+
     public function post(): array 
     {
         if(!$this->review && !$this->event){
             return [
-                'module' => 'post',
                 'content' => $this->content,
                 'reactions' => ReactionResource::collection($this->reactions)
             ];
@@ -49,7 +86,6 @@ class PostResource extends JsonResource
     {
         if($this->event){
             return [
-                'module' => 'event',
                 'content'=> $this->content,
                 'dates' => $this->event->dates,
                 'address' => $this->event->address,
@@ -63,7 +99,6 @@ class PostResource extends JsonResource
     {
         if($this->review){
             return [
-                'module' => 'review',
                 'year_of_release' => $this->review->year_of_release,
                 'sinopse' => $this->review->sinopse,
                 'opinions' => $this->reviewListOpinions($request),
@@ -123,7 +158,7 @@ class PostResource extends JsonResource
             'uuid' => null,
             'status' => 'not_created',
             'content' => null,
-            'author' => UserResource::make($user),
+            'author' => UserResource::make($user)->format('compact'),
         ];
     }
 }

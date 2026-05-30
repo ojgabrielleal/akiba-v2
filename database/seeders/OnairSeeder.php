@@ -22,6 +22,28 @@ class OnairSeeder extends Seeder
         Onair::factory()
             ->for($auto, 'program')
             ->withAutoDj()
-            ->create(['in_air' => true]);    
+            ->create(['in_air' => true]);
+
+        $programs = Program::where('type', '!=', 'automatic')
+            ->take(2)
+            ->get();
+
+        $scheduled = $programs->first();
+
+        if ($scheduled) {
+            Onair::factory()
+                ->for($scheduled, 'program')
+                ->scheduled()
+                ->create(['in_air' => false]);
+        }
+
+        $playlist = $programs->skip(1)->first() ?? $scheduled;
+
+        if ($playlist) {
+            Onair::factory()
+                ->for($playlist, 'program')
+                ->playlist()
+                ->create(['in_air' => false]);
+        }
     }
 }

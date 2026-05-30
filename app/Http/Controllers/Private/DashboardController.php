@@ -110,7 +110,7 @@ class DashboardController extends Controller
                 ->with(['author'])
                 ->limit(5)
                 ->get()
-        );
+        )->format('summary');
     }
 
     public function deactivatePost(Post $post)

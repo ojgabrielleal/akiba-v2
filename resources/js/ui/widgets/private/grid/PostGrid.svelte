@@ -8,8 +8,6 @@
 
     $: ({ posts } = $page.props);
 
-    $:console.log(posts)
-
     let can = {
         update: hasPermission("post.update"),
         deactivate: hasPermission("post.deactivate"),

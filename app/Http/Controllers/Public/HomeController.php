@@ -61,7 +61,7 @@ class HomeController extends Controller
                 ->latest()
                 ->limit(6)
                 ->get()
-        );
+        )->format('summary');
     }
 
     public function showOnair()
