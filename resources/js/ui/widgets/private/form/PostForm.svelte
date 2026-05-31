@@ -2,17 +2,12 @@
     import { useForm, page } from "@inertiajs/svelte";
     import { onMount } from "svelte";
     import { PostActions, Preview, Wysiwyg } from "@/ui/components/private";
-    import { hasPermission } from "@/utils";
+    import { postPermissions } from "@/utils";
     import { postTags } from "@/data";
 
     $: ({ post } = $page.props);
 
-    let can = {
-        create: hasPermission("post.create"),
-        update: hasPermission("post.update"),
-        publish: hasPermission("post.publish"),
-        approve: hasPermission("post.approve"),
-    };
+    let can = postPermissions();
 
     const normalizeTags = (tags = []) => [
         { uuid: null, name: null, ...tags[0] },

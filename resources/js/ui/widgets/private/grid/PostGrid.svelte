@@ -4,14 +4,11 @@
     import Cookies from "js-cookie";
     import { page, router, Link } from "@inertiajs/svelte";
     import { Section, ButtonPagination, Tooltip } from "@/ui/components/private";
-    import { hasPermission } from "@/utils";
+    import { postPermissions } from "@/utils";
 
     $: ({ posts } = $page.props);
 
-    let can = {
-        update: hasPermission("post.update"),
-        deactivate: hasPermission("post.deactivate"),
-    };
+    let can = postPermissions();
 
     const operation = (module) => {
         Cookies.set("akiba_post_show_editor", true)

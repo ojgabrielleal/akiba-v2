@@ -2,24 +2,13 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Concerns\HasFormats;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
 {
-    private ?string $format = null;
-
-    public static function collection($resource): PostResourceCollection
-    {
-        return new PostResourceCollection($resource);
-    }
-
-    public function format(?string $format): static
-    {
-        $this->format = $format;
-
-        return $this;
-    }
+    use HasFormats;
 
     public function toArray(Request $request): array
     {
@@ -30,9 +19,10 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'image' => $this->image,
             'cover' => $this->cover,
-            'author' => UserResource::make($this->author)->format('compact'),
+            'author' => UserResource::make($this->author)->format('summary'),
             'references' => ReferenceResource::collection($this->references),
             'tags' => TagResource::collection($this->tags),
+            'module' => $this->module(),
             'views' => $this->views_count,
         ];
 
@@ -43,18 +33,16 @@ class PostResource extends JsonResource
                 'status' => $this->status,
                 'title' => $this->title,
                 'module' => $this->module(),
-                'author' => UserResource::make($this->author)->format('compact'),
+                'author' => UserResource::make($this->author)->format('summary'),
             ];
         }
 
-        $postData = array_merge(
+        return array_merge(
             $postData,
             $this->post(),
             $this->event(),
             $this->review($request),
         );
-
-        return $postData;
     }
 
     private function module(): string
@@ -158,7 +146,7 @@ class PostResource extends JsonResource
             'uuid' => null,
             'status' => 'not_created',
             'content' => null,
-            'author' => UserResource::make($user)->format('compact'),
+            'author' => UserResource::make($user)->format('summary'),
         ];
     }
 }

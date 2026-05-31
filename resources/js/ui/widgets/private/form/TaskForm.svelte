@@ -4,14 +4,11 @@
 
     import axios from "axios";
     import { useForm, page } from "@inertiajs/svelte";
-    import { hasPermission } from "@/utils";
+    import { taskPermissions } from "@/utils";
 
     $: ({ users } = $page.props);
 
-    let can = {
-        create: hasPermission("task.create"),
-        update: hasPermission("task.update"),
-    };
+    let can = taskPermissions();
 
     let form = useForm({
         user: null,

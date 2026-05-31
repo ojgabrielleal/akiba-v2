@@ -2,14 +2,11 @@
     import { page, router } from "@inertiajs/svelte";
     import { Section, Offcanvas } from "@/ui/components/private";
     import { MarketingForm } from "@/ui/widgets/private";
-    import { hasPermission } from "@/utils";
+    import { repositoryPermissions } from "@/utils";
 
     $: ({ repositories } = $page.props);
 
-    let can = {
-        create: hasPermission("repository.create"),
-        deactivate: hasPermission("repository.deactivate"),
-    };
+    let can = repositoryPermissions();
 
     let offCanvasRef;
     let identifier;

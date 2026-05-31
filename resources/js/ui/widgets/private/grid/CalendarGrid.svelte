@@ -5,15 +5,12 @@
     import { page } from "@inertiajs/svelte";
     import { Offcanvas, Section } from "@/ui/components/private/";
     import { CalendarForm } from "@/ui/widgets/private";
-    import { hasPermission } from "@/utils";
+    import { calendarPermissions } from "@/utils";
     import { calendarTags } from "@/data";
 
     $: ({ calendar } = $page.props);
 
-    let can = {
-        create: hasPermission("calendar.create"),
-        update: hasPermission("calendar.update"),
-    };
+    let can = calendarPermissions();
 
     let offcanvasRef;
     let identifier;

@@ -3,14 +3,11 @@
 
     import { page, router } from "@inertiajs/svelte";
     import { Section, Preview } from "@/ui/components/private";
-    import { hasPermission } from "@/utils";
+    import { musicPermissions } from "@/utils";
 
     $: ({ musicRanking } = $page.props);
 
-    let can = {
-        update: hasPermission("music.update"),
-        set: hasPermission("music.set.ranking"),
-    };
+    let can = musicPermissions();
 
     const submit = (event, uuid) => {
         const formData = new FormData();

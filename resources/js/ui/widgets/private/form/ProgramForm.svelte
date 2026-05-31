@@ -5,14 +5,11 @@
     import axios from "axios";
     import { useForm, page } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
-    import { hasPermission } from "@/utils";
+    import { programFormPermissions } from "@/utils";
 
     $: ({ users } = $page.props);
 
-    let can = {
-        create: hasPermission("program.tete"),
-        update: hasPermission("program.update"),
-    };
+    let can = programFormPermissions();
 
     let form = useForm({
         _method: "POST",

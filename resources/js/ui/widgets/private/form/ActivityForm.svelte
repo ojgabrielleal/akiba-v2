@@ -4,12 +4,9 @@
 
     import axios from "axios";
     import { useForm } from "@inertiajs/svelte";
-    import { hasPermission } from "@/utils";
+    import { activityPermissions } from "@/utils";
 
-    let can = {
-        create: hasPermission("activity.create"),
-        update: hasPermission("activity.update"),
-    };
+    let can = activityPermissions();
 
     let form = useForm({
         title: null,
@@ -26,9 +23,7 @@
                 const data = response.data.data;
 
                 $form.title = data.title;
-                $form.purpose = data.allows_confirmations
-                    ? "activity"
-                    : "notice";
+                $form.purpose = data.allows_confirmations ? "activity" : "notice";
                 $form.limit = data.limit;
                 $form.hour = data.hour;
                 $form.date = data.date;

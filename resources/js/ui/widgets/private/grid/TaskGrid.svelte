@@ -4,14 +4,11 @@
     import { page } from "@inertiajs/svelte";
     import { Offcanvas, Section } from "@/ui/components/private/";
     import { TaskForm } from "@/ui/widgets/private/";
-    import { hasPermission } from "@/utils";
+    import { taskPermissions } from "@/utils";
 
     $: ({ tasks } = $page.props);
 
-    let can = {
-        create: hasPermission("task.create"),
-        update: hasPermission("task.update"),
-    };
+    let can = taskPermissions();
 
     let offcanvasRef;
     let identifier;

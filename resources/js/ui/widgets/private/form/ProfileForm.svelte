@@ -1,14 +1,12 @@
 <script>
     import { useForm, page } from "@inertiajs/svelte";
     import { Section, Preview } from "@/ui/components/private/";
-    import { hasPermission } from "@/utils";
+    import { userPermissions } from "@/utils";
     import { userPreferences } from "@/data";
 
     $: ({ profile } = $page.props);
 
-    let can = {
-        update: hasPermission("user.update"),
-    };
+    let can = userPermissions();
 
     $: form = useForm({
         _method: "PATCH",

@@ -3,14 +3,11 @@
 
     import { router, page, Link } from "@inertiajs/svelte";
     import { Section, ButtonPagination } from "@/ui/components/private/";
-    import { hasPermission } from "@/utils";
+    import { podcastPermissions } from "@/utils";
 
     $: ({ podcasts } = $page.props);
 
-    let can = {
-        update: hasPermission("podcast.update"),
-        deactivate: hasPermission("podcast.deactivate"),
-    };
+    let can = podcastPermissions();
 
     const requestDeactivatePodcast = (podcast) => {
         router.delete(`/panel/podcast/${podcast}`, {},

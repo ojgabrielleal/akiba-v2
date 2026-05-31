@@ -4,15 +4,11 @@
     import { router, page } from "@inertiajs/svelte";
     import { Section, Offcanvas } from "@/ui/components/private";
     import { RoleForm } from "@/ui/widgets/private";
-    import { hasPermission } from "@/utils";
+    import { rolePermissions } from "@/utils";
 
     $: ({ roles } = $page.props);
 
-    let can = {
-        create: hasPermission("role.create"),
-        update: hasPermission("role.update"),
-        remove: hasPermission("role.remove"),
-    };
+    let can = rolePermissions();
 
     let offCanvasRef;
     let identifier;

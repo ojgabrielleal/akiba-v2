@@ -1,14 +1,12 @@
 <script>
     import { useForm, page } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
-    import { hasPermission } from "@/utils";
+    import { locutionPermissions } from "@/utils";
     import { locutionIcons, locutionTextures, locutionDecorations } from "@/data";
 
     $: ({ programs } = $page.props);
 
-    let can = {
-        start: hasPermission("locution.start"),
-    };
+    let can = locutionPermissions();
 
     let form = useForm({
         program: null,

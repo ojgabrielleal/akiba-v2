@@ -1,14 +1,11 @@
 <script>
     import { useForm, page } from "@inertiajs/svelte";
     import { Section, Preview, Wysiwyg } from "@/ui/components/private";
-    import { hasPermission } from "@/utils";
+    import { podcastPermissions } from "@/utils";
 
     $: ({ podcast } = $page.props);
 
-    let can = {
-        create: hasPermission("podcast.create"),
-        update: hasPermission("podcast.update"),
-    };
+    let can = podcastPermissions();
 
     let form = useForm({
         _method: null,

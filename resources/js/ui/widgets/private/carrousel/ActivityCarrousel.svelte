@@ -5,14 +5,11 @@
     import { page, router } from "@inertiajs/svelte";
     import { Carrousel, Offcanvas, Section, Tooltip } from "@/ui/components/private/";
     import { ActivityForm } from "@/ui/widgets/private";
-    import { hasPermission } from "@/utils";
+    import { activityPermissions } from "@/utils";
 
     $: ({ user, activities } = $page.props);
 
-    let can = {
-        participate: hasPermission("activity.participate"),
-        update: hasPermission("activity.update"),
-    };
+    let can = activityPermissions();
 
     let offcanvasRef;
     let identifier;

@@ -47,7 +47,7 @@ class RadioController extends Controller
             return null;
         }
 
-        return UserResource::collection(User::get());
+        return UserResource::collection(User::get())->format('compact');
     }
 
     /*
@@ -69,7 +69,7 @@ class RadioController extends Controller
         );
     }
 
-    public function indexOnairScheduled()
+    public function indexOnairProgrammed()
     {
         if (request()->user()->cannot('list', Program::class)) {
             return null;
@@ -82,7 +82,7 @@ class RadioController extends Controller
                 ->where('finish_at', '>=', now())
                 ->orderBy('start_at')
                 ->get()
-        );
+        )->format('grouped_by_type');
     }
 
 
@@ -225,7 +225,7 @@ class RadioController extends Controller
         return Inertia::render($this->render, [
             'users' => $this->indexUsers(),
             'programs' => $this->indexPrograms(),
-            'schedules' => $this->indexOnairScheduled(),
+            'programmed' => $this->indexOnairProgrammed(),
             'musicRanking' => $this->indexMusicRanking(),
             'listenerMonth' => $this->showListenerMonth(),
         ]);

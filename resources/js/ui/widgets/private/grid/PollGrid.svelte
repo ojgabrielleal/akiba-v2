@@ -2,18 +2,11 @@
     import { router, page } from "@inertiajs/svelte";
     import { Section, Offcanvas } from "@/ui/components/private";
     import { PollForm } from "@/ui/widgets/private";
-    import { hasPermission } from "@/utils";
+    import { pollPermissions } from "@/utils";
 
     $: ({ polls } = $page.props);
 
-    let can = {
-        create: hasPermission("poll.create"),
-        update: hasPermission("poll.update"),
-        deactivate: hasPermission("poll.deactivate"),
-        vote: {
-            create: hasPermission("poll.create.vote"),
-        },
-    };
+    let can = pollPermissions();
 
     let offcanvasRef;
     let identifier;

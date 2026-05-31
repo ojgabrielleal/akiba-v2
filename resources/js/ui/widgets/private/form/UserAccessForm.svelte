@@ -4,13 +4,11 @@
 
     import { useForm, page } from "@inertiajs/svelte";
     import axios from "axios";
-    import { hasPermission } from "@/utils";
+    import { userPermissions } from "@/utils";
 
     $: ({ roles } = $page.props);
 
-    let can = {
-        update: hasPermission("user.access.update"),
-    };
+    let can = userPermissions().access;
 
     let form = useForm({
         password: null,

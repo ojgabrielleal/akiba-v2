@@ -4,14 +4,11 @@
 
     import axios from "axios";
     import { useForm, page } from "@inertiajs/svelte";
-    import { hasPermission } from "@/utils";
+    import { calendarPermissions } from "@/utils";
 
     let { users } = $page.props;
 
-    let can = {
-        create: hasPermission("calendar.create"),
-        update: hasPermission("calendar.update"),
-    };
+    let can = calendarPermissions();
 
     let form = useForm({
         user: null,

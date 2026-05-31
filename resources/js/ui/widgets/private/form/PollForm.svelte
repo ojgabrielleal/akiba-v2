@@ -4,12 +4,9 @@
 
     import axios from "axios";
     import { useForm } from "@inertiajs/svelte";
-    import { hasPermission } from "@/utils";
+    import { pollPermissions } from "@/utils";
 
-    let can = {
-        create: hasPermission("poll.create"),
-        update: hasPermission("poll.update"),
-    };
+    let can = pollPermissions();
 
     let form = useForm({
         question: null,

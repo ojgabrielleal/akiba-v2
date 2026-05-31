@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('onair', function (Blueprint $table) {
             $table->enum('type', ['auto_dj', 'live', 'scheduled', 'playlist'])->change();
-            $table->timestamp('start_at')->nullable()->after('type');
-            $table->timestamp('finish_at')->nullable()->after('start_at');
+            $table->datetime('start_at')->nullable()->after('type');
+            $table->datetime('finish_at')->nullable()->after('start_at');
         });
     }
 

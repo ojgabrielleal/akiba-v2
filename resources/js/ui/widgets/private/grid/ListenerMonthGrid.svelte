@@ -4,13 +4,11 @@
     import { page } from "@inertiajs/svelte";
     import { Section, Offcanvas } from "@/ui/components/private";
     import { ListenerMonthForm } from "@/ui/widgets/private";
-    import { hasPermission } from "@/utils";
+    import { listenerMonthPermissions } from "@/utils";
 
     $: ({ listenerMonth } = $page.props);
 
-    let can = {
-        set: hasPermission("listener.month.set"),
-    };
+    let can = listenerMonthPermissions();
 
     let offcanvasRef;
 </script>

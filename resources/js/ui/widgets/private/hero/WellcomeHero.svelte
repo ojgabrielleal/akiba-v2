@@ -1,24 +1,8 @@
 <script>
     import { page, Link } from "@inertiajs/svelte";
-    import { hasPermission } from "@/utils";
+    import { quickAccessPermissions } from "@/utils";
 
-    let can = {
-        activity: {
-            create: hasPermission("activity.create"),
-        },
-        post: {
-            create: hasPermission("post.create"),
-        },
-        repository: {
-            create: hasPermission("repository.create"),
-        },
-        locution: {
-            start: hasPermission("locution.start"),
-        },
-        event: {
-            create: hasPermission("event.create"),
-        },
-    };
+    let can = quickAccessPermissions();
 
     let chosenPhrase;
     const generatePhrases = () => {

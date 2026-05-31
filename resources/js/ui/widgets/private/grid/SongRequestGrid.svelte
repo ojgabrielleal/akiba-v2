@@ -3,18 +3,11 @@
 
     import { page, router } from "@inertiajs/svelte";
     import { Section } from "@/ui/components/private/";
-    import { hasPermission } from "@/utils";
+    import { songRequestPermissions } from "@/utils";
 
     $: ({ onair, songRequests } = $page.props);
 
-    let can = {
-        toggle: hasPermission("songrequest.toggle"),
-        reproduce: hasPermission("songrequest.reproduce"),
-        cancel: hasPermission("songrequest.cancel"),
-        locution: {
-            finish: hasPermission("locution.finish"),
-        },
-    };
+    let can = songRequestPermissions();
 
     const requestToggleSongRequest = () => {
         router.patch("/panel/locution/songrequest/toggle", {}, {
@@ -39,7 +32,7 @@
     };
 </script>
 
-{#if hasPermission("songrequest.list")}
+{#if can.list}
     <Section {title}>
         <div id="requests" class="flex flex-col gap-5 lg:relative">
             {#if can.locution.finish}

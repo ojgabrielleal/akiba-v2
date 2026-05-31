@@ -2,13 +2,11 @@
     export let close = () => {};
 
     import { useForm, page } from "@inertiajs/svelte";
-    import { hasPermission } from "@/utils";
+    import { userPermissions } from "@/utils";
 
     $: ({ roles } = $page.props);
 
-    let can = {
-        create: hasPermission("user.create"),
-    };
+    let can = userPermissions();
 
     let form = useForm({
         is_virtual: false,

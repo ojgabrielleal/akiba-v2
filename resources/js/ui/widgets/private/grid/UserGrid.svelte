@@ -8,20 +8,11 @@
         UserAccessForm,
         ActivityForm,
     } from "@/ui/widgets/private";
-    import { hasPermission } from "@/utils";
+    import { userGridPermissions } from "@/utils";
 
     $: ({ users } = $page.props);
 
-    let can = {
-        create: hasPermission("user.create"),
-        deactivate: hasPermission("user.deactivate"),
-        authority: {
-            update: hasPermission("user.update.authority"),
-        },
-        activity: {
-            create: hasPermission("activity.create"),
-        },
-    };
+    let can = userGridPermissions();
 
     let offCanvasUserRef;
     let offCanvasUserAccessRef;

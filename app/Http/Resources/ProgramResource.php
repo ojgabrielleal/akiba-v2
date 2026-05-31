@@ -19,7 +19,7 @@ class ProgramResource extends JsonResource
             'name' => $this->name,
             'image' => $this->image,
             'type' => $this->type,
-            'host' => UserResource::make($this->host)->format('compact'),
+            'host' => UserResource::make($this->host)->format('summary'),
             'schedules' => AirtimeResource::collection($this->schedules),
         ];
     }

@@ -3,13 +3,11 @@
 
     import { page, router } from "@inertiajs/svelte";
     import { Section, ButtonPagination, Tooltip } from "@/ui/components/private/";
-    import { hasPermission } from "@/utils";
+    import { taskPermissions } from "@/utils";
 
     $: ({ tasks } = $page.props);
 
-    let can = {
-        completed: hasPermission("task.complete"),
-    };
+    let can = taskPermissions();
 
     const requestmarkTaskToReview = (task) => {
         router.post(`/panel/dashboard/task/${task}/complete`, {}, {

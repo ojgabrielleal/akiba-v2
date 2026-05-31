@@ -4,13 +4,11 @@
 
     import { router, page, Link } from "@inertiajs/svelte";
     import { Section, ButtonPagination } from "@/ui/components/private";
-    import { hasPermission } from "@/utils";
+    import { eventPermissions } from "@/utils";
 
     $: ({ events } = $page.props);
 
-    let can = {
-        deactivate: hasPermission("event.deactivate"),
-    };
+    let can = eventPermissions();
 
     const requestDeactivateEvent = (event) => {
         router.delete(`/panel/media/event/${event}`, {}, {

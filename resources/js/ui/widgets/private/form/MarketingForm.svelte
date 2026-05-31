@@ -4,12 +4,9 @@
 
     import { useForm } from "@inertiajs/svelte";
     import { Preview } from "@/ui/components/private";
-    import { hasPermission } from "@/utils";
+    import { repositoryPermissions } from "@/utils";
 
-    let can = {
-        create: hasPermission("repository.create"),
-        update: hasPermission("repository.update"),
-    };
+    let can = repositoryPermissions();
 
     let form = useForm({
         _method: null,

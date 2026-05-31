@@ -201,7 +201,7 @@ class AdministrationController extends Controller
             return null;
         }
 
-        return UserResource::collection(User::active()->with(['roles'])->get());
+        return UserResource::collection(User::active()->with(['roles'])->get())->format('summary');
     }
 
     public function showUser(User $user)
