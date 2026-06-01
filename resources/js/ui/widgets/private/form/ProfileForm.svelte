@@ -50,8 +50,9 @@
             <div class="mb-3 relative">
                 <Preview
                     name="image"
-                    standard="w-full h-[15rem] rounded-md"
-                    view="w-full h-[15rem] object-cover object-top bg-suspense-aurora rounded-md"
+                    size="profile"
+                    tone="muted"
+                    position="top"
                     src={$form.avatar}
                     oninput={(event) => ($form.avatar = event.target.files[0])}
                     required={!profile}

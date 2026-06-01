@@ -64,7 +64,9 @@
 <form on:submit|preventDefault={submit}>
     <div class="mb-4">
         <Preview
-            standard="w-full h-[10rem] rounded-md"
+            size="compact"
+            tone="muted"
+            color="muted"
             name="image"
             src={$form.image}
             oninput={(event) => ($form.image = event.target.files[0])}

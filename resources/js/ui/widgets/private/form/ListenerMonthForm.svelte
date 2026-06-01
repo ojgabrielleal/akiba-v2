@@ -43,7 +43,7 @@
 <form on:submit|preventDefault={submit}>
     <div class="mb-4">
         <Preview
-            standard="w-full h-[10rem] rounded-md"
+            size="compact"
             name="avatar"
             oninput={(event) => ($form.avatar = event.target.files[0])}
             required

@@ -139,8 +139,7 @@
             </div>
             <Preview
                 name="image"
-                view="h-[18rem] rounded-md"
-                standard="h-[18rem] rounded-md"
+                size="featured"
                 src={$form.image}
                 required={!post}
                 oninput={(event) => ($form.image = event.target.files[0])}

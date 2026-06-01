@@ -1,4 +1,4 @@
-<script>
+﻿<script>
     export let title;
 
     import { router, page } from "@inertiajs/svelte";
@@ -23,19 +23,19 @@
             title: "Ao vivo",
             type: "live",
             icon: "/svg/onair.svg",
-            object: programs?.data ?? [],
+            object: programs.data,
         },
         {
             title: "Gravados",
             type: "scheduled",
             icon: "/svg/bestAvaliable.svg",
-            object: programmed?.data?.scheduled ?? []
+            object: programmed.data.scheduled
         },
         {
             title: "Playlist",
             type: "playlist",
             icon: "/svg/disc.svg",
-            object: programmed?.data?.playlist ?? []
+            object: programmed.data.playlist
         },
     ];
 
@@ -105,11 +105,13 @@
                             loading="lazy"
                         />
                         <div class="w-full h-13 flex items-center rounded-md px-3 bg-suspense-aurora relative mb-2">
-                            <div class="flex items-center gap-1 text-blue-ocean text-sm font-noto-sans font-extrabold italic uppercase">
-                                <strong class="not-italic font-normal text-[0.7rem]">
+                            <div class="w-36 min-w-0 flex items-center gap-1 text-blue-ocean text-sm font-noto-sans font-extrabold italic uppercase">
+                                <span class="shrink-0 not-italic font-normal text-[0.7rem]">
                                     Com:
-                                </strong>
-                                {resolveHost(item).nickname}
+                                </span>
+                                <span class="block min-w-0 flex-1 truncate">
+                                    {resolveHost(item).nickname}
+                                </span>
                             </div>
                             <div class={["z-10 absolute bottom-2 right-22 px-2 rounded-xl float-end text-center text-[0.6rem] text-suspense-aurora font-noto-sans font-extrabold italic uppercase",
                                 {'bg-neutral-gray': resolveHost(item).is_virtual},
@@ -170,7 +172,7 @@
                         {#if isProgrammed(item)}
                             <dl class="w-full rounded-md py-2 px-4 bg-suspense-aurora flex justify-between mb-2">
                                 <dt class="block text-blue-marinho text-sm font-noto-sans italic uppercase font-extrabold">
-                                    Início
+                                    Começa em:
                                 </dt>
                                 <dd class="block text-blue-marinho text-sm font-noto-sans italic uppercase font-extrabold">
                                     {item.start_at}
@@ -178,7 +180,7 @@
                             </dl>
                             <dl class="w-full rounded-md py-2 px-4 bg-suspense-aurora flex justify-between mb-2">
                                 <dt class="block text-blue-marinho text-sm font-noto-sans italic uppercase font-extrabold">
-                                    Fim
+                                    Termina em:
                                 </dt>
                                 <dd class="block text-blue-marinho text-sm font-noto-sans italic uppercase font-extrabold">
                                     {item.finish_at}

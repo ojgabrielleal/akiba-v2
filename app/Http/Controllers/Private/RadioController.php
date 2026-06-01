@@ -78,7 +78,6 @@ class RadioController extends Controller
         return OnairResource::collection(
             Onair::with('program.host')
                 ->whereIn('type', ['scheduled', 'playlist'])
-                ->where('start_at', '<=', now())
                 ->where('finish_at', '>=', now())
                 ->orderBy('start_at')
                 ->get()

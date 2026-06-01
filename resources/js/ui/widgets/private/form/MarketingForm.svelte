@@ -49,7 +49,7 @@
     <div class="mb-4">
         <Preview
             name="image"
-            standard="w-full h-[10rem] rounded-md"
+            size="compact"
             src={$form.image}
             oninput={(event) => ($form.image = event.target.files[0])}
             required={!identifier}

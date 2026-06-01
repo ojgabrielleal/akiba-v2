@@ -37,12 +37,10 @@
                         <div class="flex items-center gap-5">
                             {#if can.update}
                                 <Preview
-                                    standard="w-24 h-24 rounded-md"
-                                    view="w-24 h-24 rounded-md"
+                                    name="image_ranking"
+                                    size="thumb"
                                     src={item.ranking.image || "https://placehold.co/500x500?text=Rede+Akiba"}
-                                    oninput={(event)
-                                >
-                                        submit(event, item.uuid)}
+                                    oninput={(event) => submit(event, item.uuid)}
                                 />
                             {:else}
                                 <img
