@@ -2,18 +2,12 @@
     export let name = null;
     export let size = "default";
     export let tone = "default";
-    export let fit = "cover";
-    export let position = "center";
     export let color = "default";
-    export let colorClass = "";
-    export let frameClass = "";
-    export let imageClass = "";
+
     export let src = null;
     export let oninput = null;
     export let required = false;
     export let disabled = false;
-
-    let preview = null;
 
     const sizes = {
         default: {
@@ -49,24 +43,14 @@
         light: "text-suspense-aurora",
     };
 
-    const fits = {
-        cover: "object-cover",
-        contain: "object-contain",
-    };
-
-    const positions = {
-        center: "object-center",
-        top: "object-top",
-    };
+    let preview = null;
 
     $: imageToShow = preview ?? (src && src !== "#" ? src : null);
     $: selectedSize = sizes[size] ?? sizes.default;
     $: selectedTone = tones[tone] ?? tones.default;
-    $: selectedFit = fits[fit] ?? fits.cover;
-    $: selectedPosition = positions[position] ?? positions.center;
     $: selectedColor = colors[color] ?? colors.default;
-    $: placeholderClass = `${selectedSize.frame} ${selectedTone} ${frameClass} ${selectedColor} ${colorClass} w-full flex items-center justify-center overflow-hidden font-noto-sans text-7xl font-extrabold italic uppercase`;
-    $: previewClass = `${selectedSize.image} ${selectedTone} ${frameClass} ${selectedFit} ${selectedPosition} ${imageClass} w-full`;
+    $: placeholderCSS = `${selectedSize.frame} ${selectedTone} ${selectedColor} w-full flex items-center justify-center overflow-hidden font-noto-sans text-7xl font-extrabold italic uppercase`;
+    $: previewCSS = `${selectedSize.image} ${selectedTone} w-full object-top object-cover`;
 
     const previewImage = (event) => {
         if (disabled) {
@@ -95,11 +79,11 @@
             src={imageToShow}
             alt=""
             aria-hidden="true"
-            class={previewClass}
+            class={previewCSS}
             loading="lazy"
         />
     {:else}
-        <div class={placeholderClass}>
+        <div class={placeholderCSS}>
             +
         </div>
     {/if}

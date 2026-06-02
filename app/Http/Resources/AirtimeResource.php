@@ -41,6 +41,14 @@ class AirtimeResource extends JsonResource
     {
         $hour = Carbon::parse($datetime)->hour;
 
+        if ($hour === 0) {
+            return 'meia noite';
+        }
+
+        if ($hour === 12) {
+            return 'meio dia';
+        }
+
         $period = match (true) {
             $hour < 12 => 'da manhã',
             $hour < 18 => 'da tarde',

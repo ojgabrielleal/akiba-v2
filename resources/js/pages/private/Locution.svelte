@@ -7,7 +7,7 @@
 
     $: ({ user, onair } = $page.props);
 
-    $: isLocutionFormBlocked = ["live", "playlist", "scheduled"].includes(onair.data.type);
+    $: isLocutionFormBlocked = ["live", "playlist", "scheduled"].includes(onair.data.execution_mode);
 
     const redirectToDashboard = () => {
         router.get("/panel/dashboard/", {}, { preserveScroll: true });
@@ -22,12 +22,12 @@
     >
         <LocutionForm />
     </div>
-    {#if onair.data.type === "live"}
+    {#if onair.data.execution_mode === "live"}
         <SongRequestGrid title="Pedidos musicais" />
     {/if}
 </Layout>
 
-{#if onair.data.type === "live" && onair.data.program.host.uuid !== user.uuid}
+{#if onair.data.execution_mode === "live" && onair.data.program.host.uuid !== user.uuid}
     <div transition:fade={{ duration: 300 }} class="fixed inset-0 z-50 flex items-center justify-center bg-blue-marinho/85 px-5 font-noto-sans backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="live-lock-title" tabindex="-1">
         <div class="w-full max-w-md overflow-hidden rounded-md bg-blue-ocean shadow-[0_1.25rem_4rem_rgba(0,0,0,0.35)]">
             <div class="flex items-center gap-4 px-5 py-5">
@@ -86,7 +86,7 @@
     </div>
 {/if}
 
-{#if onair.data.type === "scheduled"}
+{#if onair.data.execution_mode === "scheduled"}
     <div transition:fade={{ duration: 300 }} class="fixed inset-0 z-50 flex items-center justify-center bg-blue-marinho/85 px-5 font-noto-sans backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="scheduled-lock-title" tabindex="-1">
         <div class="w-full max-w-md overflow-hidden rounded-md bg-blue-ocean shadow-[0_1.25rem_4rem_rgba(0,0,0,0.35)]">
             <div class="flex items-center gap-4 px-5 py-5">

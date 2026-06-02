@@ -19,8 +19,7 @@ class OnairFactory extends Factory
      */
     public function definition(): array
     {
-        $type = fake()->randomElement(['auto_dj', 'live', 'scheduled', 'playlist']);
-        $startsAt = now()->subMinutes(fake()->numberBetween(5, 30));
+        $executionMode = fake()->randomElement(['auto_dj', 'live', 'scheduled', 'playlist']);
 
         return [
             'in_air' => true,
@@ -30,11 +29,7 @@ class OnairFactory extends Factory
                 'decoration' => null,
                  'texture' => null,
             ],
-            'type' => $type,
-            'start_at' => in_array($type, ['scheduled', 'playlist']) ? $startsAt : null,
-            'finish_at' => in_array($type, ['scheduled', 'playlist'])
-                ? $startsAt->copy()->addMinutes(fake()->numberBetween(60, 180))
-                : null,
+            'execution_mode' => $executionMode,
             'allows_song_requests' => true,
             'song_requests_total' => fake()->randomNumber(),
         ];
@@ -43,7 +38,7 @@ class OnairFactory extends Factory
     public function withAutoDj(): static
     {
         return $this->state(fn (array $attributes) => [
-            'type' => 'auto_dj',
+            'execution_mode' => 'auto_dj',
         ]);
     }
 
@@ -54,30 +49,22 @@ class OnairFactory extends Factory
 
     public function playlist(): static
     {
-        $startsAt = now()->subMinutes(fake()->numberBetween(5, 30));
-
         return $this->state(fn (array $attributes) => [
-            'type' => 'playlist',
-            'start_at' => $startsAt,
-            'finish_at' => $startsAt->copy()->addMinutes(fake()->numberBetween(60, 180)),
+            'execution_mode' => 'playlist',
         ]);
     }
 
     public function live(): static
     {
         return $this->state(fn (array $attributes) => [
-            'type' => 'live',
+            'execution_mode' => 'live',
         ]);
     }
 
     public function scheduled(): static
     {
-        $startsAt = now()->subMinutes(fake()->numberBetween(5, 30));
-
         return $this->state(fn (array $attributes) => [
-            'type' => 'scheduled',
-            'start_at' => $startsAt,
-            'finish_at' => $startsAt->copy()->addMinutes(fake()->numberBetween(60, 180)),
+            'execution_mode' => 'scheduled',
         ]);
     }
 }

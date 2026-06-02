@@ -4,28 +4,25 @@ namespace App\Http\Controllers\Private;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 use App\Http\Controllers\Concerns\HasFlashMessages;
 
 use App\Models\ListenerMonth;
 use App\Models\Music;
-use App\Models\Onair;
 use App\Models\Program;
 use App\Models\User;
 
 use App\Http\Resources\ListenerMonthResource;
 use App\Http\Resources\MusicResource;
-use App\Http\Resources\OnairResource;
 use App\Http\Resources\ProgramResource;
 use App\Http\Resources\UserResource;
 
 use App\Actions\Radio\CreateListenerMonthAction;
-use App\Actions\Radio\CreateProgramAction;
+use App\Actions\Program\CreateProgramAction;
 use App\Actions\Radio\GenerateMusicRankingAction;
 use App\Actions\Radio\UpdateMusicRankingAction;
-use App\Actions\Radio\UpdateProgramAction;
+use App\Actions\Program\UpdateProgramAction;
 
 use App\Http\Requests\Radio\CreateProgramRequest;
 
@@ -55,7 +52,6 @@ class RadioController extends Controller
      * PROGRAMS
      * ======================
      */
-
     public function indexPrograms()
     {
         if (request()->user()->cannot('list', Program::class)) {
@@ -63,35 +59,38 @@ class RadioController extends Controller
         }
 
         return ProgramResource::collection(
-            Program::with(['host', 'schedules'])
+            Program::with([
+                    'host', 
+                    'schedules', 
+                    'plans' => fn ($query) => $query->unexecuted()->orderBy('scheduled_at')
+                ])
                 ->active()
                 ->get()
-        );
+        )->format('grouped_by_execution_mode');
     }
 
-    public function indexOnairProgrammed()
+    public function showProgram(Program $program)
     {
-        if (request()->user()->cannot('list', Program::class)) {
+        if (request()->user()->cannot('view', $program)) {
             return null;
         }
 
-        return OnairResource::collection(
-            Onair::with('program.host')
-                ->whereIn('type', ['scheduled', 'playlist'])
-                ->where('finish_at', '>=', now())
-                ->orderBy('start_at')
-                ->get()
-        )->format('grouped_by_type');
+        return new ProgramResource(
+            $program->load([
+                'host',
+                'schedules',
+                'plans' => fn ($query) => $query->unexecuted()->orderBy('scheduled_at'),
+                'plans.user',
+                'plans.root',
+            ])
+        );
     }
-
 
     public function createProgram(CreateProgramRequest $request, CreateProgramAction $createProgramAction)
     {
         if ($request->user()->cannot('create', Program::class)) {
             return null;
         }
-
-        Log::info($request->all());
 
         $createProgramAction->execute(
             $request->user(),
@@ -102,7 +101,7 @@ class RadioController extends Controller
         return $this->flashMessage('save');
     }
 
-    public function updateProgram(Request $request, Program $program, UpdateProgramAction $updateProgramAction)
+    public function updateProgram(Request $request, UpdateProgramAction $updateProgramAction, Program $program)
     {
         if ($request->user()->cannot('update', $program)) {
             return null;
@@ -110,6 +109,7 @@ class RadioController extends Controller
 
         $updateProgramAction->execute(
             $program,
+            $request->user(),
             $request->all(),
             $request->file('image')
         );
@@ -224,7 +224,6 @@ class RadioController extends Controller
         return Inertia::render($this->render, [
             'users' => $this->indexUsers(),
             'programs' => $this->indexPrograms(),
-            'programmed' => $this->indexOnairProgrammed(),
             'musicRanking' => $this->indexMusicRanking(),
             'listenerMonth' => $this->showListenerMonth(),
         ]);

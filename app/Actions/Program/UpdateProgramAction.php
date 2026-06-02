@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Actions\Radio;
+namespace App\Actions\Program;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\UploadedFile;
 use App\Services\Process\ImageProcessService;
 
 use App\Models\User;
@@ -17,14 +18,15 @@ class UpdateProgramAction
         $this->image = $image;
     }
 
-    public function execute(Program $program, User $user, array $data): Program
+    public function execute(Program $program, User $user, array $data, ?UploadedFile $image = null): Program
     {
-        return DB::transaction(function () use ($program, $user, $data) {
+        return DB::transaction(function () use ($program, $user, $data, $image) {
             $program->fill([
                 'user_id' => $user->id,
                 'name' => $data['name'],
-                'image' => $this->image->store('programs', $data['image'], 'public', $program->image),
-                'type' => $data['type'],
+                'image' => $this->image->store('programs', $image, 'public', $program->image),
+                'access_type' => $data['access_type'],
+                'execution_mode' => $data['execution_mode'],
             ]);
 
             if ($program->isDirty()){
@@ -32,7 +34,7 @@ class UpdateProgramAction
             }
 
             if (!empty($data['schedules'])){
-                $uuids = $data['schedules']->pluck('uuid')->filter()->toArray();
+                $uuids = collect($data['schedules'])->pluck('uuid')->filter()->toArray();
                 $program->schedules()->whereNotIn('uuid', $uuids)->delete();
 
                 foreach ($data['schedules'] as $schedule) {

@@ -15,17 +15,16 @@ class Program extends Model
     protected $fillable = [
         'uuid',
         'is_active',
-        'is_auto_dj',
         'user_id',
         'name',
         'image',
-        'type',
+        'access_type',
+        'execution_mode',
         'phrases',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
-        'is_auto_dj' => 'boolean',
         'phrases' => 'array',
     ];
 
@@ -75,5 +74,10 @@ class Program extends Model
     public function schedules()
     {
         return $this->hasMany(Airtime::class, 'program_id');
+    }
+
+    public function plans()
+    {
+        return $this->morphMany(Plan::class, 'plannable');
     }
 }

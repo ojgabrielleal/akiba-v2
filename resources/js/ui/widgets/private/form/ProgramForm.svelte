@@ -1,6 +1,6 @@
 <script>
     export let close = () => {};
-    export let identifier;
+    export let programUuid;
 
     import axios from "axios";
     import { useForm, page } from "@inertiajs/svelte";
@@ -16,12 +16,13 @@
         user: null,
         name: null,
         image: null,
-        type: null,
+        access_type: null,
+        execution_mode: "live",
         schedules: [],
     });
 
-    if (identifier) {
-        axios.get(`/panel/radio/program/${identifier}`)
+    if (programUuid) {
+        axios.get(`/panel/radio/program/${programUuid}`)
             .then((response) => {
                 const data = response.data.data;
 
@@ -29,7 +30,8 @@
                 $form.user = data.host.uuid;
                 $form.name = data.name;
                 $form.image = data.image;
-                $form.type = data.type;
+                $form.access_type = data.access_type;
+                $form.execution_mode = data.execution_mode;
                 $form.schedules = data.schedules;
             })
             .catch(() => {
@@ -39,8 +41,8 @@
     }
 
     const submit = () => {
-        let url = identifier
-            ? `/panel/radio/program/${identifier}`
+        let url = programUuid
+            ? `/panel/radio/program/${programUuid}`
             : "/panel/radio/program";
 
         $form.post(url, {
@@ -70,7 +72,7 @@
             name="image"
             src={$form.image}
             oninput={(event) => ($form.image = event.target.files[0])}
-            required={!identifier}
+            required={!programUuid}
         />
     </div>
     <div class="mb-4">
@@ -97,7 +99,7 @@
                 name="free"
                 value="free"
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                bind:group={$form.type}
+                bind:group={$form.access_type}
             />
             <label for="free" class="cursor-pointer text-md text-gray-700 font-noto-sans">
                 Sim
@@ -110,14 +112,14 @@
                 name="private"
                 value="private"
                 class="cursor-pointer w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                bind:group={$form.type}
+                bind:group={$form.access_type}
             />
             <label for="private" class="cursor-pointer text-md text-gray-700 font-noto-sans">
                 Não
             </label>
         </div>
     </div>
-    {#if $form.type === "private"}
+    {#if $form.access_type === "private"}
         <div class="mb-4">
             <label for="user" class="text-md text-gray-700 font-noto-sans block mb-1">
                 Locutor
@@ -231,7 +233,7 @@
             type="submit"
             class="cursor-pointer bg-blue-skywave px-8 py-2 rounded-md text-suspense-aurora font-noto-sans font-extrabold italic uppercase"
         >
-            {identifier ? "Atualizar" : "Cadastrar"}
+            {programUuid ? "Atualizar" : "Cadastrar"}
         </button>
     {/if}
 </form>

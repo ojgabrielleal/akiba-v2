@@ -13,8 +13,7 @@ class OnairSeeder extends Seeder
      */
     public function run(): void
     {
-        $auto = Program::where('type', 'automatic')
-            ->where('is_auto_dj', true)
+        $auto = Program::where('execution_mode', 'playlist')
             ->first();
 
         if (!$auto) return;
@@ -24,7 +23,7 @@ class OnairSeeder extends Seeder
             ->withAutoDj()
             ->create(['in_air' => true]);
 
-        $programs = Program::where('type', '!=', 'automatic')
+        $programs = Program::where('execution_mode', '!=', 'playlist')
             ->take(2)
             ->get();
 

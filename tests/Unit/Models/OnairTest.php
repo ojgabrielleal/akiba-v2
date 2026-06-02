@@ -85,7 +85,7 @@ class OnairTest extends TestCase
         $this->assertFalse($onairs->contains($notLiveOnair));
     }
 
-    public function testFactoryTypeStates(): void
+    public function testFactoryExecutionModeStates(): void
     {
         $user = User::factory()->create();
 
@@ -113,9 +113,9 @@ class OnairTest extends TestCase
             ->playlist()
             ->create();
 
-        $this->assertSame('auto_dj', $autoDj->type);
-        $this->assertSame('live', $live->type);
-        $this->assertSame('scheduled', $scheduled->type);
-        $this->assertSame('playlist', $playlist->type);
+        $this->assertSame('auto_dj', $autoDj->execution_mode);
+        $this->assertSame('live', $live->execution_mode);
+        $this->assertSame('scheduled', $scheduled->execution_mode);
+        $this->assertSame('playlist', $playlist->execution_mode);
     }
 }

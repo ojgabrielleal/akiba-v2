@@ -34,8 +34,8 @@ class LogsController extends Controller
     public function indexOnair()
     {
         return OnairResource::collection(
-            Onair::where('type', 'live')
-                ->orWhere('type', 'schedule')
+            Onair::where('execution_mode', 'live')
+                ->orWhere('execution_mode', 'scheduled')
                 ->with(['program.host'])
                 ->latest()
                 ->paginate(10)

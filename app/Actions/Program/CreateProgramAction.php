@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Radio;
+namespace App\Actions\Program;
 
 use Illuminate\Support\Facades\DB;
 use App\Services\Process\ImageProcessService;
@@ -25,10 +25,11 @@ class CreateProgramAction
                 'name' => $data['name'],
                 'description' => $data['description'],
                 'image' => $this->image->store('programs', $data['image'], 'public'),
-                'type' => $data['type'],
+                'access_type' => $data['access_type'],
+                'execution_mode' => $data['execution_mode'],
             ]);
 
-            if (!empty($data['schedules']) && $data['type'] === 'private') {
+            if (!empty($data['schedules']) && $data['access_type'] === 'private') {
                 $program->schedules()->createMany($data['schedules']);
             }
 

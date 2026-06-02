@@ -42,7 +42,7 @@ class LocutionController extends Controller
             Program::active()
                 ->where(function ($q) {
                     $q->where('user_id', request()->user()->id)
-                        ->orWhere('type', 'free');
+                        ->orWhere('access_type', 'free');
                 })
                 ->get()
         );

@@ -25,14 +25,14 @@ class StartLocutionAction
                 'in_air' => false,
             ]);
 
-            if($program->type === 'free') {
+            if($program->access_type === 'free') {
                 $program->update([
                     'user_id' => $user->id,
                 ]);
             }
 
             $program->onair()->create([
-                'type' => 'live',
+                'execution_mode' => 'live',
                 'phrase' => [
                     'text' => $data['phrase']['text'],
                     'icon' => $data['phrase']['icon'],

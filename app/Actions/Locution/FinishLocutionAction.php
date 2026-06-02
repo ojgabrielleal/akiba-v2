@@ -15,8 +15,7 @@ class FinishLocutionAction
         DB::transaction(function () {
             $onair = Onair::live()
                 ->first();
-            $auto = Program::where('type', 'automatic')
-                ->where('is_auto_dj', true)
+            $auto = Program::where('execution_mode', 'playlist')
                 ->first();
 
             if($onair) {
@@ -31,7 +30,7 @@ class FinishLocutionAction
                     ->update(['was_canceled' => true]);
             }
                     
-            if (!empty($auto->phrases) && $auto) {
+            if ($auto && !empty($auto->phrases)) {
                 $selected = collect($auto->phrases)->random();
 
                 $phrase = [
@@ -41,7 +40,7 @@ class FinishLocutionAction
                 ];
 
                 $auto->onair()->create([
-                    'type' => 'auto_dj',
+                    'execution_mode' => 'auto_dj',
                     'phrase' => $phrase,
                 ]);
             }

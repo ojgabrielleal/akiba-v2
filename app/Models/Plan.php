@@ -6,38 +6,38 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class Onair extends Model
+class Plan extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'onair';
+    protected $table = 'plans';
 
     protected $fillable = [
         'uuid',
-        'in_air',
-        'program_id',
-        'phrase',
-        'execution_mode',
-        'icon',
-        'allows_song_requests',
-        'song_requests_total'
+        'user_id',
+        'root_id',
+        'plannable_type',
+        'plannable_id',
+        'action',
+        'scheduled_at',
+        'status',
     ];
 
     protected $casts = [
-        'allows_song_requests' => 'boolean',
-        'in_air' => 'boolean',
-        'phrase' => 'array',
-        'song_requests_total' => 'integer',
+        'scheduled_at' => 'datetime',
     ];
 
     protected $hidden = [
-        'show_id'
+        'user_id',
+        'root_id',
+        'plannable_type',
+        'plannable_id',
     ];
 
     /**
      * Determine the columns that should receive a unique identifier.
      *
-     * This method specifies that the 'uuid' column should be automatically 
+     * This method specifies that the 'uuid' column should be automatically
      * generated as a sortable, unique identifier when the model is created.
      *
      */
@@ -50,11 +50,11 @@ class Onair extends Model
      * Query scopes for this model.
      *
      * These methods define reusable query filters that can be
-     * applied to Eloquent queries (e.g., active()).
+     * applied to Eloquent queries (e.g., unexecuted()).
      */
-    public function scopeLive($query)
+    public function scopeUnexecuted($query)
     {
-        return $query->where('in_air', true);
+        return $query->whereIn('status', ['pending', 'running', 'paused']);
     }
 
     /**
@@ -63,13 +63,23 @@ class Onair extends Model
      * Use these methods to access related data via Eloquent relationships
      * (hasOne, hasMany, belongsTo, belongsToMany, etc.).
      */
-    public function program()
+    public function user()
     {
-        return $this->belongsTo(Program::class, 'program_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function songRequests()
+    public function plannable()
     {
-        return $this->hasMany(SongRequest::class, 'onair_id');
+        return $this->morphTo();
+    }
+
+    public function root()
+    {
+        return $this->belongsTo(self::class, 'root_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'root_id');
     }
 }
